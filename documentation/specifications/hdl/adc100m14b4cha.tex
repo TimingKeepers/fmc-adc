@@ -1,0 +1,107 @@
+% This document specifies how our ADCs should be implemented
+% using FMC cards and blocks of HDL in our PCIe and VME64x carriers.
+\documentclass{article}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[colorlinks=true, linkcolor=webgreen, urlcolor=webgreen]{hyperref}
+\usepackage{color}
+\usepackage{tabularx}
+
+\definecolor{webgreen}{rgb}{0,.5,0}
+
+\title{FMCADC100M14b4cha HDL specification}
+\author{J.Serrano}
+
+
+\begin{document}
+\maketitle
+
+%\tableofcontents{}
+
+\section{Introduction}
+This document gives information needed by HDL and driver/library developers to support the FMCADC100M14b4cha FPGA Mezzanine Cards\footnote{See \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}.} in the PCIe FMC carrier\footnote{See \href{http://www.ohwr.org/projects/fmc-pci-carrier}{http://www.ohwr.org/projects/fmc-pci-carrier}.} designed by BE-CO-HT at CERN. The support for this module must be as generic as possible in order to benefit from this effort for other ADC FMC cards and carriers. In particular, the sample width, number of channels and sampling rate should all be configurable parameters in the design. Another important aspect is to preserve insofar as possible the resusability of developments between PCIe and VME64x uses, knowing that the VME64x carrier can host two mezzanines whereas the PCIe carrier has only one FMC site.
+
+This HDL specification is deliberately informal and placed halfway between a functional and a technical specification. A functional specification would be rather thin since the mezzanine and the carrier to be used have already been specified. A technical specification is almost a contract of how things must be done, leaving no room for surprises or improvements. Since this is the first project using the two boards, it seems better to suggest how a complete ADC system could be done from the available building blocks, with enough information for an HDL designer to start a design but also with as little rigidity as possible.
+
+The PCIe carrier board has a Spartan 6 XC6SLX150T FPGA at its heart, surrounded by a host of peripherals for different applications. In particular, there is a fair amount of SRAM, DDR3 RAM, a PLL chip, a DDS and Flash ROM. The FPGA is connected to a VITA 57 FPGA Mezzanine Card (FMC) slot, covering all pins of the Low Pin Count (LPC) connector. The purpose of this document is to specify how this carrier and the FMCADC100M14b4cha 4-channel 100 MS/s ADC mezzanine card can be used to build a complete ADC solution through appropriate configuration of the FPGA in the carrier. An important aspect to bear in mind is that this proposal takes the fastest path to get a fully working system to cover immediate needs in the accelerators, while trying to preserve the investments made in HDL development. The design will no doubt evolve in the future, once the short term needs are covered.
+
+The proposed internal structure of the FPGA design can be seen in figure~\ref{fig:block_diagram}. It consists of a set of Wishbone cores, namely one Wishbone master and a set of slaves. Each slave deals with one or more external peripherals, with the exception of the interrupt controller. The PLL, DDS and SRAM chips are not used in this design. In the following sections, we go through all blocks, specifying their function and their internal registers.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{block_diagram.pdf}
+  \caption{FPGA design internal structure.}
+  \label{fig:block_diagram}
+\end{figure}
+
+\section{FPGA blocks}
+For each internal block, we give a summary description of its function along with internal registers which can be read of written from the Wishbone master. Registers are presented in tables with their name, description, access mode and address offset (in 32-bit long words).
+
+\subsection{GN4124 to Wishbone bridge}
+This block is a slave of the external GN4124 local bus and a master of the internal Wishbone bus. The GN4124 from Gennum is a PCIe to local bus bridge, capable of using 4 PCIe lanes for fast communication with the host and with DMA capability as well. In addition, the GN4124 can be used to reprogram the on-board FPGA. 
+
+In our case, for the reasons exposed above, we will not use the DMA engine and stick to normal PCIe access from the host. PCIe bursts will be converted in this block to Wishbone bursts. A one-tick-long positive pulse from the interrupt controller will trigger generation of a message-based PCIe interrupt.
+
+\subsection{Board control and status}
+This block contains all control and status registers related to the carrier board independently of the application. Table~\ref{tab:stat_control} shows the list of registers in this block.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|r|l|X|}
+    \hline
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{DESCRIPTION} \\
+    \hline
+    \hline
+    CARRTYPER & & RO & Carrier Type and PCB version\\
+    \hline
+    SIIDLR & & RO & Carrier Silicon ID Low \\
+    \hline
+    SIIDHR & & RO & Carrier Silicon ID High \\
+    \hline
+    BSTREAMTR & & RO & Bit stream type and version \\
+    \hline
+    BSTREAMDR & & RO & Bit stream date \\
+    \hline
+    CARRTEMPR & & RO & Carrier temperature \\
+    \hline
+    STATUSR & & RO & Carrier status \\
+    \hline
+    CONTROLR & & R/W & Carrier control \\
+    \hline
+  \end{tabularx}
+  \caption{Register set for the board control and status block.}
+  \label{tab:stat_control}
+\end{table}
+
+The CARRTYPER register uses bits [31..16] for a carrier type identifier and bits [15..0] for the PCB version, typically signalled to the FPGA through optional pull-up resistors in the PCB. The SIIDLR and SIIDHR registers contain respectively the low and high parts of the 64-bit Silicon ID read from the Maxim DS18B20 1-Wire digital thermometer after system reset. BSTREAMTR uses bits [31..16] for defining an FPGA bit stream type and [15..0] for a sequential number indicating the bit stream version. BSTREAMDR contains the 32-bit UTC time when the bit stream was generated. CARRTEMPR contains the carrier temperature as read from the DS18B20 every second. The Board control and status block will set a bit to '1' for one clock tick after every reading if the temperature exceeds 60$^\circ$ Celsius. This bit will be connected to the interrupt controller so that the user can get a temperature interrupt if enabled. STATUSR contains the carrier status, and in particular the status of power supplies and the detection of presence of a card in the FMC slot. CONTROLR will allow control operations on the carrier, such as setting the Vadj supply voltage for the FMC slot through bits [31..16] and setting the system clock frequency through bits [15..0].
+
+\subsection{Interrupt controller}
+The interrupt controller receives interrupt requests from different blocks, combines them and sends an interrupt request to the GN4124/Wishbone bridge. For each interrupt input, it sets a bit in the IRQSRCR register upon detection of a rising edge. These bits are cleared on read. Care must be taken at design time to avoid race conditions in which a rising edge does not result in setting a bit because of the overriding effect of a concurrent read. Detection of a rising edge in any of the bits can result in the generation of an interrupt if the associated bit in the IRQENR register is set. The interrupt sent to the GN4124/Wishbone bridge is a one-tick-long positive pulse.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|r|l|X|}
+    \hline
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{DESCRIPTION} \\
+    \hline
+    \hline
+    IRQSRCR & & RO, clear on read & Interrupt sources\\
+    \hline
+    IRQENR & & R/W & Interrupt enable mask\\
+    \hline
+  \end{tabularx}
+  \caption{Register set for the interrupt controller block.}
+  \label{tab:irq_control}
+\end{table}
+
+\subsection{Dual port DDR RAM controller}
+This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily and taking into account that the largest Transaction Layer Protocol (TLP) packet in PCIe is 4096 bytes, only a selectable 4096-byte window will be exposed to the Wishbone bus at any time. The pointer to this window can be set from the Wishbone master or pre-programmed to auto-increment after every read. Another important aspect is to avoid collisions between Wishbone read requests (going to port 2 of the core) and ADC write requests (going to port 1). Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. 
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{state_machine.pdf}
+  \caption{Sampling process state machine.}
+  \label{fig:state_machine}
+\end{figure}
+% The DDR3 RAM can hold 32Msamples per channel, writing at 500 MHz (4x system clock).
+\end{document}
