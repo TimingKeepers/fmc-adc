@@ -19,9 +19,9 @@
 %\tableofcontents{}
 
 \section{Introduction}
-This document gives information needed by HDL and driver/library developers to support the FMCADC100M14b4cha FPGA Mezzanine Cards\footnote{See \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}.} in the PCIe FMC carrier\footnote{See \href{http://www.ohwr.org/projects/fmc-pci-carrier}{http://www.ohwr.org/projects/fmc-pci-carrier}.} designed by BE-CO-HT at CERN. The support for this module must be as generic as possible in order to benefit from this effort for other ADC FMC cards and carriers. In particular, the sample width, number of channels and sampling rate should all be configurable parameters in the design. Another important aspect is to preserve insofar as possible the resusability of developments between PCIe and VME64x uses, knowing that the VME64x carrier can host two mezzanines whereas the PCIe carrier has only one FMC site.
+This document gives information needed by HDL and driver/library developers to support the FMCADC100M14b4cha FPGA Mezzanine Cards\footnote{See \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}.} in the PCIe FMC carrier\footnote{See \href{http://www.ohwr.org/projects/fmc-pci-carrier}{http://www.ohwr.org/projects/fmc-pci-carrier}.} designed by BE-CO-HT at CERN. The support for this module must be as generic as possible in order to benefit from this effort for other ADC FMC cards and carriers. In particular, the sample width, number of channels and sampling rate should all be configurable parameters in the design. Another important aspect is to preserve insofar as possible the re-usability of developments between PCIe and VME64x uses, knowing that the VME64x carrier can host two mezzanines whereas the PCIe carrier has only one FMC site.
 
-This HDL specification is deliberately informal and placed halfway between a functional and a technical specification. A functional specification would be rather thin since the mezzanine and the carrier to be used have already been specified. A technical specification is almost a contract of how things must be done, leaving no room for surprises or improvements. Since this is the first project using the two boards, it seems better to suggest how a complete ADC system could be done from the available building blocks, with enough information for an HDL designer to start a design but also with as little rigidity as possible.
+This HDL specification is deliberately informal and placed halfway between a functional and a technical specification. A functional specification would be rather thin since the mezzanine and the carrier to be used have already been specified. A technical specification is almost a contract of how things must be done, leaving no room for surprises or improvements. Since this is the first project using the two boards, it seems better to suggest how a complete ADC system could be done from the available building blocks, with enough information for an HDL designer to start a design but also with as little rigidity as possible. So some definitions of registers are deliberately let loose without compromising functionality.
 
 The PCIe carrier board has a Spartan 6 XC6SLX150T FPGA at its heart, surrounded by a host of peripherals for different applications. In particular, there is a fair amount of SRAM, DDR3 RAM, a PLL chip, a DDS and Flash ROM. The FPGA is connected to a VITA 57 FPGA Mezzanine Card (FMC) slot, covering all pins of the Low Pin Count (LPC) connector. The purpose of this document is to specify how this carrier and the FMCADC100M14b4cha 4-channel 100 MS/s ADC mezzanine card can be used to build a complete ADC solution through appropriate configuration of the FPGA in the carrier. An important aspect to bear in mind is that this proposal takes the fastest path to get a fully working system to cover immediate needs in the accelerators, while trying to preserve the investments made in HDL development. The design will no doubt evolve in the future, once the short term needs are covered.
 
@@ -35,7 +35,7 @@ The proposed internal structure of the FPGA design can be seen in figure~\ref{fi
 \end{figure}
 
 \section{FPGA blocks}
-For each internal block, we give a summary description of its function along with internal registers which can be read of written from the Wishbone master. Registers are presented in tables with their name, description, access mode and address offset (in 32-bit long words).
+For each internal block, we give a summary description of its function along with internal registers which can be read of written from the Wishbone master. Registers are presented in tables with their name, address offset (in 32-bit long words), access mode and description. The address offset is the offset of a given register with respect to the beginning of the memory area pointed to by a given Base Address Register (BAR). In this card, we will use two BARs, one for registers and one for sample memory.
 
 \subsection{GN4124 to Wishbone bridge}
 This block is a slave of the external GN4124 local bus and a master of the internal Wishbone bus. The GN4124 from Gennum is a PCIe to local bus bridge, capable of using 4 PCIe lanes for fast communication with the host and with DMA capability as well. In addition, the GN4124 can be used to reprogram the on-board FPGA. 
@@ -73,7 +73,7 @@ This block contains all control and status registers related to the carrier boar
   \label{tab:stat_control}
 \end{table}
 
-The CARRTYPER register uses bits [31..16] for a carrier type identifier and bits [15..0] for the PCB version, typically signalled to the FPGA through optional pull-up resistors in the PCB. The SIIDLR and SIIDHR registers contain respectively the low and high parts of the 64-bit Silicon ID read from the Maxim DS18B20 1-Wire digital thermometer after system reset. BSTREAMTR uses bits [31..16] for defining an FPGA bit stream type and [15..0] for a sequential number indicating the bit stream version. BSTREAMDR contains the 32-bit UTC time when the bit stream was generated. CARRTEMPR contains the carrier temperature as read from the DS18B20 every second. The Board control and status block will set a bit to '1' for one clock tick after every reading if the temperature exceeds 60$^\circ$ Celsius. This bit will be connected to the interrupt controller so that the user can get a temperature interrupt if enabled. STATUSR contains the carrier status, and in particular the status of power supplies and the detection of presence of a card in the FMC slot. CONTROLR will allow control operations on the carrier, such as setting the Vadj supply voltage for the FMC slot through bits [31..16] and setting the system clock frequency through bits [15..0].
+The CARRTYPER register uses bits [31..16] for a carrier type identifier and bits [15..0] for the PCB version, typically signaled to the FPGA through optional pull-up resistors in the PCB. The SIIDLR and SIIDHR registers contain respectively the low and high parts of the 64-bit Silicon ID read from the Maxim DS18B20 1-Wire digital thermometer after system reset. BSTREAMTR uses bits [31..16] for defining an FPGA bit stream type and [15..0] for a sequential number indicating the bit stream version. BSTREAMDR contains the 32-bit UTC time when the bit stream was generated. CARRTEMPR contains the carrier temperature as read from the DS18B20 every second. The Board control and status block will set a bit to '1' for one clock tick after every reading if the temperature exceeds 60$^\circ$ Celsius. This bit will be connected to the interrupt controller so that the user can get a temperature interrupt if enabled. STATUSR contains the carrier status, and in particular the status of power supplies and the detection of presence of a card in the FMC slot. CONTROLR will allow control operations on the carrier, such as setting the Vadj supply voltage for the FMC slot through bits [31..16] and setting the system clock frequency through bits [15..0].
 
 \subsection{Interrupt controller}
 The interrupt controller receives interrupt requests from different blocks, combines them and sends an interrupt request to the GN4124/Wishbone bridge. For each interrupt input, it sets a bit in the IRQSRCR register upon detection of a rising edge. These bits are cleared on read. Care must be taken at design time to avoid race conditions in which a rising edge does not result in setting a bit because of the overriding effect of a concurrent read. Detection of a rising edge in any of the bits can result in the generation of an interrupt if the associated bit in the IRQENR register is set. The interrupt sent to the GN4124/Wishbone bridge is a one-tick-long positive pulse.
@@ -95,7 +95,24 @@ The interrupt controller receives interrupt requests from different blocks, comb
 \end{table}
 
 \subsection{Dual port DDR RAM controller}
-This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily and taking into account that the largest Transaction Layer Protocol (TLP) packet in PCIe is 4096 bytes, only a selectable 4096-byte window will be exposed to the Wishbone bus at any time. The pointer to this window can be set from the Wishbone master or pre-programmed to auto-increment after every read. Another important aspect is to avoid collisions between Wishbone read requests (going to port 2 of the core) and ADC write requests (going to port 1). Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. 
+This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily, only a selectable 8MB window will be exposed to the Wishbone bus at any time. The pointer to this window can be set from the Wishbone master. Another important aspect is to avoid collisions between Wishbone read requests (going to port 2 of the core) and ADC write requests (going to port 1). Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. An attempt to read while the ADC is in any other state will result in a bus error.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|r|l|X|}
+    \hline
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{DESCRIPTION} \\
+    \hline
+    \hline
+    BANKSELR & & R/W & Sample memory bank select\\
+    \hline
+  \end{tabularx}
+  \caption{Register set for the DDR RAM controller block.}
+  \label{tab:ddr_control}
+\end{table}
+
+\subsection{ADC controller}
+The ADC controller handles all communication with the ADC FMC. It has a Wishbone slave for configuration registers and a dedicated output connection to the DDR RAM controller for samples. It can also drive interrupt requests into the interrupt controller. These interrupts are all one-tick-long positive pulses. The sampling state machine is depicted in figure~\ref{fig:state_machine}. 
 
 \begin{figure}[htbp]
   \centering
@@ -103,5 +120,95 @@ This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. Th
   \caption{Sampling process state machine.}
   \label{fig:state_machine}
 \end{figure}
-% The DDR3 RAM can hold 32Msamples per channel, writing at 500 MHz (4x system clock).
+
+The START, STOP, and SOFT\_TRIG commands can be used to provoke transitions in the state machine from the PCIe bus, by writing appropriate patterns into the ADCCTRLR register. A STOP command will always take the state machine to the Idle state, regardless of what its current state is. 
+
+The TRIGGER condition in the figure is to be interpreted as an 'OR' of hardware and software (SOFT\_TRIG) triggers. Trigger configuration is handled through the TRIGCFGR register. Bits [31:16] are used for a threshold in case of internal trigger, bit 0 selects between internal and external trigger and bit 1 selects positive or negative slope. Hardware and software triggers can be enabled using bits 2 and 3 respectively. A trigger applies to all 4 channels. Bits 4 and 5 in TRICFGR select a channel to use for the case of internal hardware trigger.  
+
+The state machine will drive two pulse-like signals into the IRQ controller. One will be a trigger interrupt and the other an end of shot interrupt, generated once the state machine reaches the Idle state after an acquisition. Both of these interrupts can be enabled/disabled in the interrupt controller block.
+
+Controlling the offset and gain of each ADC we have the ADCxOFFSR and ADCxGAINR registers, where x ranges from 1 to 4. The ADCxOFFSR registers are used to load a 16-bit DAC in the mezzanine, so only bits [15..0] are used. ADCxGAINR are in fact bit mask registers, with each bit controlling an independent switch. These switches are used in normal operation to set gains, but can also be used for disconnecting the input signal from the ADC for automatic calibration purposes.
+
+The ADC FMC card has two I2C busses connected to it from the carrier FPGA through the FMC connector. The first one grants access to an identification EEPROM on the mezzanine. It is read and written using registers ADCIDADDR and ADCIDDATR. The FPGA puts the address plus a R/W flag into the ADCIDADDR register and then reads or writes from/to the ADCIDDATR. A read to ADCIDDATR must only be performed after the I2C controller has had time to get the data from the EEPROM. A write also has to be performed carefully, only after the previous write has succeeded. The I2C controller inside the ADC controller signals read and write completion through an interrupt request to the IRQ controller block. There is a separate I2C bus for controlling the Si570 clock generator in the mezzanine. Our application assumes it will be programmed to provide a constant 100 MHz frequency. Registers ADCCLKADDR and ADCCLKDATR are used in the same way as the EEPROM ones to read and write from/to the Si570 clock generator. Effective sampling rate is obtained by dividing the nominal 100 MHz from the Si570 by a variable amount, i.e. the FPGA will get data constantly at 100MS/s and will decimate it before writing into RAM. The decimation factor will be stored in bits [15..0] of SRATER.
+
+The number of samples to be acquired before and after the trigger are common to all channels and stored in the ADCxPRER and ADCxPOSTR registers respectively, with x ranging from 1 to 4.  
+
+For diagnostics and time-correlation purposes, the ADC controller hosts a 32-bit free-running counter which gets reset at power up and optionally following a command. This clearing uses a bit in the ADCCTRLR register, so it can be used in combination with any command. The value of the counter is incremented at the effective sampling rate, i.e. after decimation, and can be read in the ADCCNTR register.   
+
+Another counter running at the same rate counts the number of samples for a given shot. It is reset on START, counts up to the number of pre-trigger samples, waits for a trigger and continues counting up to pre-trigger + post-trigger samples. Its value can be accessed in the ADCSHOTCNTR register.
+
+The current ADC output value can also be read from a dedicated register for each channel. This value is accessible in the ADCxVALR registers.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|r|l|X|}
+    \hline
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{DESCRIPTION} \\
+    \hline
+    \hline
+    ADCCTRLR & & R/W & ADC state machine control\\
+    \hline
+    TRIGCFGR & & R/W & Trigger configuration \\
+    \hline
+    ADC1OFFSR & & R/W & ADC1 offset \\
+    \hline
+    ADC1GAINR & & R/W & ADC1 gain \\
+    \hline
+    ADC2OFFSR & & R/W & ADC2 offset \\
+    \hline
+    ADC2GAINR & & R/W & ADC2 gain \\
+    \hline
+    ADC3OFFSR & & R/W & ADC3 offset \\
+    \hline
+    ADC3GAINR & & R/W & ADC3 gain \\
+    \hline
+    ADC4OFFSR & & R/W & ADC4 offset \\
+    \hline
+    ADC4GAINR & & R/W & ADC4 gain \\
+    \hline
+    ADCIDADDR & & R/W & ADC ID I2C Address \\
+    \hline
+    ADCIDDATR & & R/W & ADC ID I2C Data \\
+    \hline
+    ADCCLKADDR & & R/W & ADC Si570 Address \\
+    \hline
+    ADCCLKDATR & & R/W & ADC Si570 Data \\
+    \hline
+    SRATER & & R/W & Sample rate decimation \\
+    \hline
+    ADC1PRER & & R/W & ADC 1 pre-trigger samples requested \\
+    \hline
+    ADC1POSTR & & R/W & ADC 1 post-trigger samples requested \\
+    \hline
+    ADC2PRER & & R/W & ADC 2 pre-trigger samples requested \\
+    \hline
+    ADC2POSTR & & R/W & ADC 2 post-trigger samples requested \\
+    \hline
+    ADC3PRER & & R/W & ADC 3 pre-trigger samples requested \\
+    \hline
+    ADC3POSTR & & R/W & ADC 3 post-trigger samples requested \\
+    \hline
+    ADC4PRER & & R/W & ADC 4 pre-trigger samples requested \\
+    \hline
+    ADC4POSTR & & R/W & ADC 4 post-trigger samples requested \\
+    \hline
+    ADCCNTR & & RO & ADC global sample counter \\
+    \hline
+    ADCSHOTCNTR & & RO & ADC shot sample counter \\
+    \hline
+    ADC1VALR & & RO & ADC 1 current value \\
+    \hline
+    ADC2VALR & & RO & ADC 2 current value \\
+    \hline
+    ADC3VALR & & RO & ADC 3 current value \\
+    \hline
+    ADC4VALR & & RO & ADC 4 current value \\
+    \hline
+  \end{tabularx}
+  \caption{Register set for the ADC controller block.}
+  \label{tab:adc_control}
+\end{table}
+
+The ADC controller is also in charge of controlling two LEDs: power good and trigger (100 ms width).
+
 \end{document}
