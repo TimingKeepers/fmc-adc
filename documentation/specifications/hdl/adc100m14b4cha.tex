@@ -1,18 +1,5 @@
 % This document specifies how our ADCs should be implemented
 % using FMC cards and blocks of HDL in our PCIe and VME64x carriers.
-% History:
-%  26 April 2010: 
-%   First release submitted bor comments
-%  27 April 2010:
-%   Added ADCSTATR for state machine monitoring 
-%   Added TRIGPOSR for circular buffer support
-%   Added endianness support in BANKSELR
-%  28 April 2010:
-%   Using subsubsections for each register to improve clarity.
-%   Added power good, shutdown and current & voltage aqn for supplies.
-%   Added Vadj control: 0 for 1V, 0xffff for 3.3V
-%   Added DMA, filling host buffers in a non-interleaved way.
-%   Added IQR sources list in IRQ controller subsection.
 
 \documentclass{article}
 
@@ -20,17 +7,53 @@
 \usepackage[colorlinks=true, linkcolor=webgreen, urlcolor=webgreen]{hyperref}
 \usepackage{color}
 \usepackage{tabularx}
+\usepackage{longtable}
 
 \definecolor{webgreen}{rgb}{0,.5,0}
 
-\title{FMCADC100M14b4cha HDL specification}
+\title{FMCADC100M14b4cha PCIe HDL specification}
 \author{J.Serrano}
 
 
 \begin{document}
 \maketitle
+\pagebreak
 
-%\tableofcontents{}
+\section*{Document History}
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \textbf{DATE} & \textbf{CHANGES} \\
+    \hline
+    \hline
+    26 April 2010 & First release submitted for comments.\\
+    \hline
+    27 April 2010 & Added ADCSTATR for state machine monitoring. Added TRIGPOSR for circular buffer support. Added endianness support in BANKSELR.\\
+    \hline
+    28 April 2010 & Using subsubsections for each register to improve clarity. Added power good, shutdown and current and voltage aqn for supplies. Added Vadj control: 0 for 1V, 0xffff for 3.3V. Added DMA, filling host buffers in a non-interleaved way. Added IQR sources list in IRQ controller subsection.\\
+    \hline
+    3 May 2010 & Added TOC and Document History. More detailed figure 1. General conventions for unused bits in registers. \\ 
+    \hline
+    4 may 2010 & Added space holders for VME case in SUPCTRLR. Added reset column to register map tables. Added two new interrupts: FMC input over-load and FMC over-heating.\\
+    \hline
+    9 May 2010 & Re-wrote DMA chapter.\\
+    \hline
+  \end{tabularx}
+\end{table}
+
+TODO: 
+\begin{itemize}
+\item Beautification: tables for register bits.
+\item Fill in address offsets and reset states in register map.
+\item Fill in conversion table~\ref{tab:conv_fact}.
+\item Perfect DMA chapter. Control: start, abort. Status: Busy, done, error, aborted.
+\end{itemize}
+
+\pagebreak
+
+\tableofcontents{}
+\pagebreak
 
 \section{Introduction}
 This document gives information needed by HDL and driver/library developers to support the FMCADC100M14b4cha FPGA Mezzanine Cards\footnote{See \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}.} in the PCIe FMC carrier\footnote{See \href{http://www.ohwr.org/projects/fmc-pci-carrier}{http://www.ohwr.org/projects/fmc-pci-carrier}.} designed by BE-CO-HT at CERN. The support for this module must be as generic as possible in order to benefit from this effort for other ADC FMC cards and carriers. In particular, the sample width, number of channels and sampling rate should all be configurable parameters in the design. Another important aspect is to preserve insofar as possible the re-usability of developments between PCIe and VME64x uses, knowing that the VME64x carrier can host two mezzanines whereas the PCIe carrier has only one FMC site.
@@ -49,7 +72,7 @@ The proposed internal structure of the FPGA design can be seen in figure~\ref{fi
 \end{figure}
 
 \section{FPGA blocks}
-For each internal block, we give a summary description of its function along with internal registers which can be read of written from the Wishbone master. Registers are presented in tables with their name, address offset (in 32-bit long words), access mode and description. The address offset is the offset of a given register with respect to the beginning of the memory area pointed to by a given PCIe Base Address Register (BAR). This design only supports full 32-bit reads and writes. Even if some of the registers described below use different bits for different things, that does not mean they can be written to independently from the rest of the word, so care should be taken in each write to affect all bits in an appropriate way.
+For each internal block, we give a summary description of its function along with internal registers which can be read of written from the Wishbone master. Registers are presented in tables with their name, address offset (in 32-bit long words), access mode, value after reset and description. The address offset is the offset of a given register with respect to the beginning of the memory area pointed to by a given PCIe Base Address Register (BAR). This design only supports full 32-bit reads and writes. Even if some of the registers described below use different bits for different things, that does not mean they can be written to independently from the rest of the word, so care should be taken in each write to affect all bits in an appropriate way. In general, unused bits should be ignored on read and written to with a '0'. For status registers, bits read as '0' represent a normal state of affairs, while those set to '1' signal some departure from nominal operation.
 
 \subsection{GN4124 to Wishbone bridge}
 This block is a slave of the external GN4124 local bus and a master of the internal Wishbone bus. The GN4124 from Gennum is a PCIe to local bus bridge, capable of using 4 PCIe lanes for fast communication with the host and with DMA capability as well. In addition, the GN4124 can be used to reprogram the on-board FPGA. 
@@ -61,30 +84,30 @@ This block contains all control and status registers related to the carrier boar
 
 \begin{table}[htbp]
   \centering
-  \begin{tabularx}{\textwidth}{|l|r|l|X|}
+  \begin{tabularx}{\textwidth}{|l|r|l|l|X|}
     \hline
-    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{DESCRIPTION} \\
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{ON RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    CARRTYPER & & RO & Carrier Type and PCB version\\
+    CARRTYPER & & RO & & Carrier Type and PCB version\\
     \hline
-    SIIDLR & & RO & Carrier Silicon ID Low \\
+    SIIDLR & & RO & & Carrier Silicon ID Low \\
     \hline
-    SIIDHR & & RO & Carrier Silicon ID High \\
+    SIIDHR & & RO & & Carrier Silicon ID High \\
     \hline
-    BSTREAMTR & & RO & Bit stream type and version \\
+    BSTREAMTR & & RO & & Bit stream type and version \\
     \hline
-    BSTREAMDR & & RO & Bit stream date \\
+    BSTREAMDR & & RO & & Bit stream date \\
     \hline
-    CARRTEMPR & & RO & Carrier temperature \\
+    CARRTEMPR & & RO & & Carrier temperature \\
     \hline
-    STATUSR & & RO & Carrier and power supply status \\
+    STATUSR & & RO & & Carrier and power supply status \\
     \hline
-    SUPCTRLR & & R/W & Power supply control \\
+    SUPCTRLR & & R/W & & Power supply control \\
     \hline
-    SUPAQNR & & RO & Power supply voltage and current \\
+    SUPAQNR & & RO & & Power supply voltage and current \\
     \hline
-    CONTROLR & & R/W & Carrier control \\
+    CONTROLR & & R/W & & Carrier control \\
     \hline
   \end{tabularx}
   \caption{Register set for the board control and status block.}
@@ -105,18 +128,20 @@ CARRTEMPR contains the carrier temperature as read from the DS18B20 every second
 
 \subsubsection{STATUSR}
 STATUSR contains the carrier status, and in particular the status of power supplies and the detection of presence of a card in the FMC slot. Power supplies in the carrier are extensively monitored, and most of them provide a Power Good (G) signal. The internal structure of the STATUSR register is as follows:
-\begin{enumerate}
+\begin{itemize}
 \item Bits [31..11] are unused.
-\item Bits [10..0] are (starting from bit 10): FMC\_PRESENT, 3V3\_FMC\_G,  VADJ\_G, 1V8\_G,  1V5\_G,  CLEAN\_1V8\_G, CLEAN\_3V3\_G, 5V\_G, M2V\_G, M5V2\_G and M12V\_G.
-\end{enumerate}
+\item Bits [10..0] are (starting from bit 10): FMC\_PRESENT, $\overline{3V3\_FMC\_G}$,  $\overline{VADJ\_G}$, $\overline{1V8\_G}$,  $\overline{1V5\_G}$,  $\overline{CLEAN\_1V8\_G}$, $\overline{CLEAN\_3V3\_G}$, $\overline{5V\_G}$, \linebreak$\overline{M2V\_G}$, $\overline{M5V2\_G}$ and $\overline{M12V\_G}$.
+\end{itemize}
 
 \subsubsection{SUPCTRLR}
 The carrier has several power supplies that can be enabled or disabled individually from the FPGA. They are controlled from the SUPCTRLR register, which is a bit field made of individual Enable (E) bits. In addition, some bits in this register are used to select which power supply voltage and current are monitored through the SUPAQNR register.
-\begin{enumerate}
-\item Bits [31..8] are unused.
-\item Bits [7..4] contain an unsigned 4-bit number which selects a power supply for voltage and current monitoring. Starting at 0: 3V3\_PCIe, 12V\_PCIe, 3V3\_FMC, VADJ, 1V8, 1V5, VTTDDR, 1V2\_CORE, 1V2\_GTP,\linebreak CLEAN\_1V8, CLEAN\_3V3, 5V, M2V, M5V2 and M12V.
+\begin{itemize}
+\item Bits [31..16] are unused.
+\item Bits [15..12] are unused.
+\item Bits [11..8] contain an unsigned 4-bit number which selects a power supply for voltage and current monitoring. Starting at 0: 3V3\_PCIe, 12V\_PCIe, 3V3\_FMC, VADJ, 1V8, 1V5, VTTDDR, 1V2\_CORE, 1V2\_GTP,\linebreak CLEAN\_1V8, CLEAN\_3V3, 5V, M2V, M5V2 and M12V.
+\item Bits [7..4] are unused.
 \item Bits [3..0] are (starting from bit 3): VADJ\_E, M2V\_E, M5V2\_E, M12V\_E.
-\end{enumerate}
+\end{itemize}
 
 \subsubsection{SUPAQNR}
 The SUPAQNR register holds a voltage and current consumption value resulting from on-board measurements using 16-bit ADCs. The selection of power supply to monitor is done in SUPCTRLR. Bits [31..16] hold an unsigned word representing voltage, while bits [15..0] are used for current consumption. To get Volts and Amperes from the raw measurements, different conversion factors must be used for each supply, as described in table~\ref{tab:conv_fact}.
@@ -159,26 +184,26 @@ The SUPAQNR register holds a voltage and current consumption value resulting fro
     M12V & & \\
     \hline
   \end{tabularx}
-  \caption{Conversion factors for voltage and current consumption.}
+  \caption{Conversion factors for voltage and current consumption measurements.}
   \label{tab:conv_fact}
 \end{table}
 
 \subsubsection{CONTROLR}
-CONTROLR will allow control operations on the carrier, such as setting the Vadj supply voltage for the FMC slot through bits [31..16] and setting the system clock frequency through bits [15..0]. Vadj will change from 1V (0x0000) to 3.3V (0xFFFF). The frequency control word will drive a 16-bit DAC connected to a VCXO with 25 MHz center frequency and a span of 10 ppm. It is anticipated that any fixed value will do for our application, and that an internal PLL multiplying this 25 MHz by 5 will generate a 125 MHz system clock which will guarantee an absence of FIFO overflows from the 100 MS/s ADC chip.
+CONTROLR will allow control operations on the carrier, such as setting the Vadj supply voltage for the FMC slot through bits [31..16] and setting the system clock frequency through bits [15..0]. Vadj will change from 1V (0x0000) to 3.5V (0xFFFF). The frequency control word will drive a 16-bit DAC connected to a VCXO with 25 MHz center frequency and a span of 10 ppm. It is anticipated that any fixed value will do for our application, and that an internal PLL multiplying this 25 MHz by 5 will generate a 125 MHz system clock which will guarantee an absence of FIFO overflows from the 100 MS/s ADC chip.
 
 \subsection{Interrupt controller}
-The interrupt controller receives interrupt requests from different blocks, combines them and sends an interrupt request to the GN4124/Wishbone bridge. For each interrupt input, it sets a bit in the IRQSRCR register upon detection of a rising edge. These bits are cleared on read. Care must be taken at design time to avoid race conditions in which a rising edge does not result in setting a bit because of the overriding effect of a concurrent read. Detection of a rising edge in any of the bits can result in the generation of an interrupt if the associated bit in the IRQENR register is set. The interrupt sent to the GN4124/Wishbone bridge is a one-tick-long positive pulse.
+The interrupt controller receives interrupt requests from different blocks, combines them and sends an interrupt request to the GN4124/Wishbone bridge. For each interrupt input, it sets a bit in the IRQSRCR register upon synchronous detection of a rising edge. These bits are cleared on read. Care must be taken at design time to avoid race conditions in which a rising edge does not result in setting a bit because of the overriding effect of a concurrent read. Detection of a rising edge in any of the bits can result in the generation of an interrupt if the associated bit in the IRQENR register is set. The interrupt sent to the GN4124/Wishbone bridge is a one-tick-long positive pulse.
 
 \begin{table}[htbp]
   \centering
-  \begin{tabularx}{\textwidth}{|l|r|l|X|}
+  \begin{tabularx}{\textwidth}{|l|r|X|l|l|}
     \hline
-    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{DESCRIPTION} \\
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{ON RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    IRQSRCR & & RO, clear on read & Interrupt sources\\
+    IRQSRCR & & RO, clear on read & & Interrupt sources\\
     \hline
-    IRQENR & & R/W & Interrupt enable mask\\
+    IRQENR & & R/W & & Interrupt enable mask\\
     \hline
   \end{tabularx}
   \caption{Register set for the interrupt controller block.}
@@ -186,39 +211,61 @@ The interrupt controller receives interrupt requests from different blocks, comb
 \end{table}
 
 \subsubsection{IRQSRCR and IRQENR}
-The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Lower bits, staring at 0, include: DMA completion, carrier over-heating, ADC trigger, ADC shot taken, FMC ID I2C R/W completion and FMC Si570 I2C R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
+The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [8..0] are: DMA completion, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC config R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
 
 \subsection{Dual port DDR RAM controller}
 This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily, and unload the host for reading, the core also implements a DMA engine. Another important aspect is to avoid collisions between Wishbone read requests and ADC write requests. Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. An attempt to read while the ADC is in any other state will result in a bus error.
 
+Memory will be organized internally as a circular buffer, with all 4 channels being logged in an interleaved way, starting with channel 1 at offset 0. After a shot, the host can read the address in DDR RAM of the sample corresponding to the trigger moment for channel 1 in the TRIGPOSR register of the ADC Controller block (see table~\ref{tab:adc_control}). All addresses are byte addresses, i.e. DDR RAM addresses get incremented by 2 for each sample, and one needs to jump by 8 byte locations to go from one sample to the next for the same channel, because of the interleaving. By convention, the complete sample buffer for an acquisition contains ADCPRER+ADCPOSTR samples, and the TRIGPOSR register points to the last sample in the ADCPRER part. 
+
+The DMA engine works with a linked list so that DMAs can be chained. The first item in the list is loaded by the host on the carrier and contains a pointer to the next one, which is in host memory. The DMA engine will fetch items from host memory and perform the corresponding DMAs until one of the items is recognized as the last one though the contents of the DMASETUPR register (see table~\ref{tab:ddr_control}). 
+
 \begin{table}[htbp]
   \centering
-  \begin{tabularx}{\textwidth}{|l|r|l|X|}
+  \begin{tabularx}{\textwidth}{|l|r|l|l|X|}
     \hline
-    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{DESCRIPTION} \\
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    DMACSTARTR & & R/W & DMA start address in the carrier\\
+    DMACSTARTR & & R/W & & DMA start address in the carrier\\
     \hline
-    DMAHSTARTR & & R/W & DMA start address in the host\\
+    DMAHSTARTLR & & R/W & & DMA start address (low) in the host\\
     \hline
-    DMALENR & & R/W & DMA read length in 32-bit long words\\
+    DMAHSTARTHR & & R/W & & DMA start address (high) in the host\\
+    \hline
+    DMALENR & & R/W & & DMA read length in bytes\\
+    \hline
+    DMANEXTLR & & R/W & & Pointer (low) to next item in list\\
+    \hline
+    DMANEXTHR & & R/W & & Pointer (high) to next item in list\\
+    \hline
+    DMASETUPR & & R/W & & DMA endianness and control\\
     \hline
   \end{tabularx}
   \caption{Register set for the DDR RAM controller block.}
   \label{tab:ddr_control}
 \end{table}
 
-Memory will be organized as a circular buffer, with all 4 channels being logged in an interleaved way, starting with channel 1 at offset 0. When the host receives the end of shot interrupt, it can get the address of the channel 1 sample corresponding to the trigger moment in the TRIGPOSR register of the ADC controller. 
-
 \subsubsection{DMACSTARTR}
-The DMACSTARTR register uses bits [30..0] as a start address in the carrier for the DMA transfer. Bit 31 selects the endianness of the readings, either little ('0') or big ('1'). Setting DMACSTARTR triggers the DMA operation as well, so DMAHSTARTR and DMALENR should be set before. The DMA engine will send samples to the host for a given channel, i.e. it will jump by 4 locations in the DDR for every read. The initial address set in DMACSTARTR will therefore select the channel to be read as well. DMACSTARTR, as well as other registers referencing a location in the DDR (such as TRIGPOSR), should use an address offset (from the begining of the DDR) pointing to a 16-bit word, i.e. an address which increments by 1 for every sample in the DDR.
+The DMACSTARTR register holds a byte address pointing to a location inside the DDR RAM, at which the DMA access should start. Taking into account that the DDR is a 16-bit device, only even values are allowed in DMACSTARTR.
 
-\subsubsection{DMAHSTARTR}
-Register DMAHSTARTR selects the start address for the DMA access in the host. 
+\subsubsection{DMAHSTARTLR and DMAHSTARTHR}
+Registers DMAHSTARTLR and DMAHSTARTHR select the low and high parts of the 64-bit start address for the DMA access in the host. 
 
 \subsubsection{DMALENR}
-Register DMALENR selects the length of the reading in 32-bit words, i.e. two samples per word. How the samples are arranged inside the word depends on the endianness setting. 
+Register DMALENR selects the length of the reading in bytes, i.e. twice the number of samples to be read by the host.
+
+\subsubsection{DMANEXTLR and DMANEXTHR}
+These two registers contain the low and high parts of the 64-bit address of the next item in the linked list, in host memory.
+
+\subsubsection{DMASETUPR}
+This register contains several control features for the DMA engine:
+\begin{itemize}
+\item Bits [31..3] are reserved.
+\item Bit 2 is set to '0' for little-endian accesses and '1' for big-endian. This affects the way in which 16-bit samples can be stored in a 32-bit long word.
+\item Bit 1 is set to '1' to signal this is the last item in the linked list, '0' otherwise.
+\item Bit 0 is set to '1' to initiate the DMA transfer.
+\end{itemize}
 
 The end of a DMA access generates an interrupt request towards the interrupt controller.
 
@@ -232,19 +279,82 @@ The ADC controller handles all communication with the ADC FMC. It has a Wishbone
   \label{fig:state_machine}
 \end{figure}
 
-The state machine will drive two pulse-like signals into the IRQ controller. One will be a trigger interrupt and the other an end of shot interrupt, generated once the state machine reaches the Idle state after an acquisition. Both of these interrupts can be enabled/disabled in the interrupt controller block. The ADC controller is also in charge of controlling two LEDs: power good and trigger (100 ms width).
+The state machine will drive two pulse-like signals into the IRQ controller. One will be a trigger interrupt and the other an end of shot interrupt, generated once the state machine reaches the Idle state after an acquisition. In addition, the ADC controller will produce interrupts in case of FMC over-heating and input over-load (to protect the optional 50 Ohm termination). All of these interrupts can be enabled/disabled in the interrupt controller block. The ADC controller is also in charge of controlling two LEDs: power good and trigger (100 ms width).
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|r|l|l|X|}
+    \hline
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
+    \hline
+    \hline
+    ADCCTRLR & & R/W & & ADC state machine control\\
+    \hline
+    ADCSTATR & & RO & & ADC status \\
+    \hline
+    TRIGCFGR & & R/W & & Trigger configuration \\
+    \hline
+    ADC1OFFSR & & R/W & & ADC1 offset \\
+    \hline
+    ADC1GAINR & & R/W & & ADC1 gain \\
+    \hline
+    ADC2OFFSR & & R/W & & ADC2 offset \\
+    \hline
+    ADC2GAINR & & R/W & & ADC2 gain \\
+    \hline
+    ADC3OFFSR & & R/W & & ADC3 offset \\
+    \hline
+    ADC3GAINR & & R/W & & ADC3 gain \\
+    \hline
+    ADC4OFFSR & & R/W & & ADC4 offset \\
+    \hline
+    ADC4GAINR & & R/W & & ADC4 gain \\
+    \hline
+    ADCIDADDR & & R/W & & ADC ID I2C address \\
+    \hline
+    ADCIDDATR & & R/W & & ADC ID I2C data \\
+    \hline
+    ADCCLKADDR & & R/W & & ADC Si570 address \\
+    \hline
+    ADCCLKDATR & & R/W & & ADC Si570 data \\
+    \hline
+    ADCADDR & & R/W & & ADC config address \\
+    \hline
+    ADCDATR & & R/W & & ADC config data \\
+    \hline
+    SRATER & & R/W & & Sample rate decimation \\
+    \hline
+    ADCPRER & & R/W & & Pre-trigger samples requested \\
+    \hline
+    ADCPOSTR & & R/W & & Post-trigger samples requested \\
+    \hline
+    TRIGPOSR & & RO & & Trigger position in DDR RAM\\
+    \hline
+    ADCCNTR & & RO & & ADC global sample counter \\
+    \hline
+    ADCSHOTCNTR & & RO & & ADC shot sample counter \\
+    \hline
+    ADC1VALR & & RO & & ADC 1 current value \\
+    \hline
+    ADC2VALR & & RO & & ADC 2 current value \\
+    \hline
+    ADC3VALR & & RO & & ADC 3 current value \\
+    \hline
+    ADC4VALR & & RO & & ADC 4 current value \\
+    \hline
+  \end{tabularx}
+  \caption{Register set for the ADC controller block.}
+  \label{tab:adc_control}
+\end{table}
 
 \subsubsection{ADCCTRLR}
-The START, STOP, and SOFT\_TRIG commands can be used to provoke transitions in the state machine from the PCIe bus, by writing appropriate patterns (1, 2 and 3 respectively) into the least signisicant byte of the ADCCTRLR register. A STOP command will always take the state machine to the Idle state, regardless of what its current state is. A write of '1' to bit 31 of ADCCTRLR will reset the sample counter in ADCCNTR (see below).
+The START, STOP, and SOFT\_TRIG commands can be used to provoke transitions in the state machine from the PCIe bus, by writing appropriate patterns (1, 2 and 3 respectively) into the least significant byte of the ADCCTRLR register. A STOP command will always take the state machine to the Idle state, regardless of what its current state is. A write of '1' to bit 31 of ADCCTRLR will reset the sample counter in ADCCNTR (see \ref{sssec:adccntr}).
 
 \subsubsection{ADCSTATR}
 The current state in the state machine can be read from the ADCSTATR register. Idle~=~0, Pre-trigger Count~=~1, Wait Trigger~=~2 and Wait End of Shot~=~3.
 
 \subsubsection{TRIGCFGR}
-The TRIGGER condition in the figure is to be interpreted as an 'OR' of hardware and software (SOFT\_TRIG) triggers. Trigger configuration is handled through the TRIGCFGR register. Bits [31:16] are used for a threshold (treated as 2's complement and compared to the raw ADC data) in case of internal trigger, bit 0 selects between internal ('0') and external ('1') trigger and bit 1 selects positive ('0') or negative ('1') slope. Hardware and software triggers can be enabled using bits 2 and 3 respectively. A trigger applies to all 4 channels. Bits 4 and 5 in TRIGCFGR select a channel to use for the case of internal hardware trigger.  
-
-\subsubsection{TRIGPOSR}
-This register contains the trigger position in DDR RAM (using the same address offset convention as DMACSTARTR) for the sample in channel 1 corresponding to the trigger instant.
+The TRIGGER condition in figure \ref{fig:state_machine} is to be interpreted as an 'OR' of hardware and software (SOFT\_TRIG) triggers. Trigger configuration is handled through the TRIGCFGR register. Bits [31:16] are used for a threshold (treated as 2's complement and compared to the raw ADC data) in case of internal trigger, bit 0 selects between internal ('0') and external ('1') trigger and bit 1 selects positive ('0') or negative ('1') slope. Hardware and software triggers can be enabled using bits 2 and 3 respectively. A trigger applies to all 4 channels. Bits 4 and 5 in TRIGCFGR select a channel to use for the case of internal hardware trigger.  
 
 \subsubsection{ADCxOFFSR and ADCxGAINR}
 Controlling the offset and gain of each ADC we have the ADCxOFFSR and ADCxGAINR registers, where x ranges from 1 to 4. The ADCxOFFSR registers are used to load a 16-bit DAC in the mezzanine, so only bits [15..0] are used. ADCxGAINR are in fact bit field registers, with each bit controlling an independent switch. These switches are used in normal operation to set gains, but can also be used for disconnecting the input signal from the ADC for automatic calibration purposes. More information can be found in \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}. For the purpose of this specification, it is enough to say that there are seven switches per analog input channel and they will be mapped to the least significant bits of the ADCxGAINR registers, starting with SW1 in bit 0 and ending with SW7 in bit 6.
@@ -255,6 +365,9 @@ The ADC FMC card has two I2C busses connected to it from the carrier FPGA throug
 \subsubsection{ADCCLKADDR and ADCCLKDATR}
 There is a separate I2C bus for controlling the Si570 clock generator in the mezzanine. Our application assumes it will be programmed to provide a constant 100 MHz frequency. Registers ADCCLKADDR and ADCCLKDATR are used in the same way as the EEPROM ones to read and write from/to the Si570 clock generator. 
 
+\subsubsection{ADCADDR and ADCDATR}
+The ADC chip itself can be controlled through an SPI bus granting read and write access to its internal configuration registers. SPI reads and writes use the same mechanism as the other two serial busses in the mezzanine. The ADCADDR register is used for addresses and the ADCDATR register holds the data.
+
 \subsubsection{SRATER}
 Effective sampling rate is obtained by dividing the nominal 100 MHz from the Si570 by a variable amount, i.e. the FPGA will get data constantly at 100MS/s and will decimate it before writing into RAM. The decimation factor will be stored in bits [15..0] of SRATER.
 
@@ -262,74 +375,14 @@ Effective sampling rate is obtained by dividing the nominal 100 MHz from the Si5
 The number of samples to be acquired before and after the trigger are common to all channels and stored in the ADCPRER and ADCPOSTR registers respectively.
 
 \subsubsection{ADCCNTR}
+\label{sssec:adccntr}
 For diagnostics and time-correlation purposes, the ADC controller hosts a 32-bit free-running counter which gets reset at power up and optionally following a command. This clearing uses bit 31 in the ADCCTRLR register, so it can be used in combination with any command. The value of the counter is incremented at the effective sampling rate, i.e. after decimation, and can be read in the ADCCNTR register.   
 
 \subsubsection{ADCSHOTCNTR}
-Another counter running at the same rate counts the number of samples for a given shot. It is reset on START, counts up to the number of pre-trigger samples, waits for a trigger and continues counting up to pre-trigger + post-trigger samples. Its value can be accessed in the ADCSHOTCNTR register.
+Another counter running at the sampling rate counts the number of samples for a given shot. It is reset on START, counts up to the number of pre-trigger samples, waits for a trigger and continues counting up to pre-trigger + post-trigger samples. Its value can be accessed in the ADCSHOTCNTR register.
 
 \subsubsection{ADCxVALR}
 The current ADC output value can also be read from a dedicated register for each channel. This value is accessible in the ADCxVALR registers.
 
-\begin{table}[htbp]
-  \centering
-  \begin{tabularx}{\textwidth}{|l|r|l|X|}
-    \hline
-    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{DESCRIPTION} \\
-    \hline
-    \hline
-    ADCCTRLR & & R/W & ADC state machine control\\
-    \hline
-    ADCSTATR & & RO & ADC status \\
-    \hline
-    TRIGCFGR & & R/W & Trigger configuration \\
-    \hline
-    TRIGPOSR & & RO & Trigger position in memory \\
-    \hline
-    ADC1OFFSR & & R/W & ADC1 offset \\
-    \hline
-    ADC1GAINR & & R/W & ADC1 gain \\
-    \hline
-    ADC2OFFSR & & R/W & ADC2 offset \\
-    \hline
-    ADC2GAINR & & R/W & ADC2 gain \\
-    \hline
-    ADC3OFFSR & & R/W & ADC3 offset \\
-    \hline
-    ADC3GAINR & & R/W & ADC3 gain \\
-    \hline
-    ADC4OFFSR & & R/W & ADC4 offset \\
-    \hline
-    ADC4GAINR & & R/W & ADC4 gain \\
-    \hline
-    ADCIDADDR & & R/W & ADC ID I2C Address \\
-    \hline
-    ADCIDDATR & & R/W & ADC ID I2C Data \\
-    \hline
-    ADCCLKADDR & & R/W & ADC Si570 Address \\
-    \hline
-    ADCCLKDATR & & R/W & ADC Si570 Data \\
-    \hline
-    SRATER & & R/W & Sample rate decimation \\
-    \hline
-    ADCPRER & & R/W & ADC 1 pre-trigger samples requested \\
-    \hline
-    ADCPOSTR & & R/W & ADC 4 post-trigger samples requested \\
-    \hline
-    ADCCNTR & & RO & ADC global sample counter \\
-    \hline
-    ADCSHOTCNTR & & RO & ADC shot sample counter \\
-    \hline
-    ADC1VALR & & RO & ADC 1 current value \\
-    \hline
-    ADC2VALR & & RO & ADC 2 current value \\
-    \hline
-    ADC3VALR & & RO & ADC 3 current value \\
-    \hline
-    ADC4VALR & & RO & ADC 4 current value \\
-    \hline
-  \end{tabularx}
-  \caption{Register set for the ADC controller block.}
-  \label{tab:adc_control}
-\end{table}
 
 \end{document}
