@@ -9,6 +9,13 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 
+\newenvironment{packed_item}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
 \definecolor{webgreen}{rgb}{0,.5,0}
 
 \title{FMCADC100M14b4cha PCIe HDL specification}
@@ -43,12 +50,11 @@
 \end{table}
 
 TODO: 
-\begin{itemize}
+\begin{packed_item}
 \item Beautification: tables for register bits.
 \item Fill in address offsets and reset states in register map.
 \item Fill in conversion table~\ref{tab:conv_fact}.
-\item Perfect DMA chapter. Control: start, abort. Status: Busy, done, error, aborted.
-\end{itemize}
+\end{packed_item}
 
 \pagebreak
 
@@ -123,25 +129,25 @@ The SIIDLR and SIIDHR registers contain respectively the low and high parts of t
 \subsubsection{BSTREAMTR and BSTREAMDR}
 BSTREAMTR uses bits [31..16] for defining an FPGA bit stream type and [15..0] for a sequential number indicating the bit stream version. BSTREAMDR contains the 32-bit UTC time when the bit stream was generated. 
 
-\subsubsection{CARRTEMP}
+\subsubsection{CARRTEMPR}
 CARRTEMPR contains the carrier temperature as read from the DS18B20 every second. The Board control and status block will set a bit to '1' for one clock tick after every reading if the temperature exceeds 60$^\circ$ Celsius. This bit will be connected to the interrupt controller so that the user can get a temperature interrupt if enabled. 
 
 \subsubsection{STATUSR}
 STATUSR contains the carrier status, and in particular the status of power supplies and the detection of presence of a card in the FMC slot. Power supplies in the carrier are extensively monitored, and most of them provide a Power Good (G) signal. The internal structure of the STATUSR register is as follows:
-\begin{itemize}
+\begin{packed_item}
 \item Bits [31..11] are unused.
 \item Bits [10..0] are (starting from bit 10): FMC\_PRESENT, $\overline{3V3\_FMC\_G}$,  $\overline{VADJ\_G}$, $\overline{1V8\_G}$,  $\overline{1V5\_G}$,  $\overline{CLEAN\_1V8\_G}$, $\overline{CLEAN\_3V3\_G}$, $\overline{5V\_G}$, \linebreak$\overline{M2V\_G}$, $\overline{M5V2\_G}$ and $\overline{M12V\_G}$.
-\end{itemize}
+\end{packed_item}
 
 \subsubsection{SUPCTRLR}
 The carrier has several power supplies that can be enabled or disabled individually from the FPGA. They are controlled from the SUPCTRLR register, which is a bit field made of individual Enable (E) bits. In addition, some bits in this register are used to select which power supply voltage and current are monitored through the SUPAQNR register.
-\begin{itemize}
+\begin{packed_item}
 \item Bits [31..16] are unused.
 \item Bits [15..12] are unused.
 \item Bits [11..8] contain an unsigned 4-bit number which selects a power supply for voltage and current monitoring. Starting at 0: 3V3\_PCIe, 12V\_PCIe, 3V3\_FMC, VADJ, 1V8, 1V5, VTTDDR, 1V2\_CORE, 1V2\_GTP,\linebreak CLEAN\_1V8, CLEAN\_3V3, 5V, M2V, M5V2 and M12V.
 \item Bits [7..4] are unused.
 \item Bits [3..0] are (starting from bit 3): VADJ\_E, M2V\_E, M5V2\_E, M12V\_E.
-\end{itemize}
+\end{packed_item}
 
 \subsubsection{SUPAQNR}
 The SUPAQNR register holds a voltage and current consumption value resulting from on-board measurements using 16-bit ADCs. The selection of power supply to monitor is done in SUPCTRLR. Bits [31..16] hold an unsigned word representing voltage, while bits [15..0] are used for current consumption. To get Volts and Amperes from the raw measurements, different conversion factors must be used for each supply, as described in table~\ref{tab:conv_fact}.
@@ -211,14 +217,14 @@ The interrupt controller receives interrupt requests from different blocks, comb
 \end{table}
 
 \subsubsection{IRQSRCR and IRQENR}
-The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [8..0] are: DMA completion, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC config R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
+The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [8..0] are: DMA completion, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC configuration R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
 
 \subsection{Dual port DDR RAM controller}
-This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily, and unload the host for reading, the core also implements a DMA engine. Another important aspect is to avoid collisions between Wishbone read requests and ADC write requests. Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. An attempt to read while the ADC is in any other state will result in a bus error.
+This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily, and to unload the host for reading, the core also implements a DMA engine. Another important aspect is to avoid collisions between Wishbone read requests and ADC write requests. Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. An attempt to read while the ADC is in any other state will result in a bus error.
 
 Memory will be organized internally as a circular buffer, with all 4 channels being logged in an interleaved way, starting with channel 1 at offset 0. After a shot, the host can read the address in DDR RAM of the sample corresponding to the trigger moment for channel 1 in the TRIGPOSR register of the ADC Controller block (see table~\ref{tab:adc_control}). All addresses are byte addresses, i.e. DDR RAM addresses get incremented by 2 for each sample, and one needs to jump by 8 byte locations to go from one sample to the next for the same channel, because of the interleaving. By convention, the complete sample buffer for an acquisition contains ADCPRER+ADCPOSTR samples, and the TRIGPOSR register points to the last sample in the ADCPRER part. 
 
-The DMA engine works with a linked list so that DMAs can be chained. The first item in the list is loaded by the host on the carrier and contains a pointer to the next one, which is in host memory. The DMA engine will fetch items from host memory and perform the corresponding DMAs until one of the items is recognized as the last one though the contents of the DMASETUPR register (see table~\ref{tab:ddr_control}). 
+The DMA engine works with a linked list so that DMAs can be chained. The first item in the list is loaded by the host on the carrier and contains a pointer to the next one, which is in host memory. The DMA engine will fetch items from host memory and perform the corresponding DMAs until one of the items is recognized as the last one though the contents of the DMAATTRIBR register (see table~\ref{tab:ddr_control}). Each item in the list is made of the following registers: DMACSTARTR, DMAHSTARTLR, DMAHSTARTHR, DMALENR, DMANEXTLR, DMANEXTHR and DMAATTRIBR. In addition, the DMA controller provides global DMA control and status registers. 
 
 \begin{table}[htbp]
   \centering
@@ -226,6 +232,10 @@ The DMA engine works with a linked list so that DMAs can be chained. The first i
     \hline
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
+    \hline
+    DMACTRLR & & R/W & & DMA start address in the carrier\\
+    \hline
+    DMASTATR & & R/W & & DMA start address (low) in the host\\
     \hline
     DMACSTARTR & & R/W & & DMA start address in the carrier\\
     \hline
@@ -239,12 +249,25 @@ The DMA engine works with a linked list so that DMAs can be chained. The first i
     \hline
     DMANEXTHR & & R/W & & Pointer (high) to next item in list\\
     \hline
-    DMASETUPR & & R/W & & DMA endianness and control\\
+    DMAATTRIBR & & R/W & & DMA endianness and control\\
     \hline
   \end{tabularx}
   \caption{Register set for the DDR RAM controller block.}
   \label{tab:ddr_control}
 \end{table}
+
+\subsubsection{DMACTRLR}
+Writing 1 to this register starts a DMA transfer. Writing 2 aborts the ongoing transfer.
+
+\subsubsection{DMASTATR}
+This is a status register for the DMA engine. Possible contents are:
+\begin{packed_item}
+\item 0: Idle (before any DMA transfer takes place).
+\item 1: Done (after successful DMA).
+\item 2: Busy.
+\item 3: Error (following a memory access error, either on the host or on the carrier).
+\item 4: Aborted (after receiving an abort command in DMACTRLR).
+\end{packed_item}
 
 \subsubsection{DMACSTARTR}
 The DMACSTARTR register holds a byte address pointing to a location inside the DDR RAM, at which the DMA access should start. Taking into account that the DDR is a 16-bit device, only even values are allowed in DMACSTARTR.
@@ -258,14 +281,13 @@ Register DMALENR selects the length of the reading in bytes, i.e. twice the numb
 \subsubsection{DMANEXTLR and DMANEXTHR}
 These two registers contain the low and high parts of the 64-bit address of the next item in the linked list, in host memory.
 
-\subsubsection{DMASETUPR}
+\subsubsection{DMAATTRIBR}
 This register contains several control features for the DMA engine:
-\begin{itemize}
-\item Bits [31..3] are reserved.
-\item Bit 2 is set to '0' for little-endian accesses and '1' for big-endian. This affects the way in which 16-bit samples can be stored in a 32-bit long word.
-\item Bit 1 is set to '1' to signal this is the last item in the linked list, '0' otherwise.
-\item Bit 0 is set to '1' to initiate the DMA transfer.
-\end{itemize}
+\begin{packed_item}
+\item Bits [31..2] are reserved.
+\item Bit 1 is set to '0' for little-endian accesses and '1' for big-endian. This affects the way in which 16-bit samples can be stored in a 32-bit long word.
+\item Bit 0 is set to '1' to signal this is the last item in the linked list, '0' otherwise.
+\end{packed_item}
 
 The end of a DMA access generates an interrupt request towards the interrupt controller.
 
@@ -386,3 +408,5 @@ The current ADC output value can also be read from a dedicated register for each
 
 
 \end{document}
+
+% LocalWords:  CARRTEMP
