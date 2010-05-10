@@ -48,6 +48,8 @@
     \hline
     10 May 2010 & Added address jump configuration in DMA engine. Added TRIGPOSR description.\\
     \hline
+    11 May 2010 & Added DMA Error interrupt.\\
+    \hline
   \end{tabularx}
 \end{table}
 
@@ -221,14 +223,14 @@ The interrupt controller receives interrupt requests from different blocks, comb
 \end{table}
 
 \subsubsection{IRQSRCR and IRQENR}
-The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [8..0] are: DMA completion, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC configuration R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
+The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [9..0] are: DMA completion, DMA error, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC configuration R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
 
 \subsection{Dual port DDR RAM controller}
 This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily, and to unload the host for reading, the core also implements a DMA engine. Another important aspect is to avoid collisions between Wishbone read requests and ADC write requests. Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. The DMA engine will therefore only work during that state. If a DMA operation is fired during any other state, the DMA engine will just wait until the ADC state machine goes to Idle in order to start the transfer.
 
 Memory will be organized internally as a circular buffer, with all 4 channels being logged in an interleaved way, starting with channel 1 at offset 0. After a shot, the host can read the address in DDR RAM of the sample corresponding to the trigger moment for channel 1 in the TRIGPOSR register of the ADC Controller block (see table~\ref{tab:adc_control}). All addresses are byte addresses, i.e. DDR RAM addresses get incremented by 2 for each sample, and one needs to jump by 8 byte locations to go from one sample to the next for the same channel, because of the interleaving. By convention, the complete sample buffer for an acquisition contains ADCPRER+ADCPOSTR samples, and the TRIGPOSR register points to the last sample in the ADCPRER part. 
 
-The DMA engine works with a linked list so that DMAs can be chained. The first item in the list is loaded by the host on the carrier and contains a pointer to the next one, which is in host memory. The DMA engine will fetch items from host memory and perform the corresponding DMAs until one of the items is recognized as the last one though the contents of the DMAATTRIBR register (see table~\ref{tab:ddr_control}). Each item in the list is made of the following registers: DMACSTARTR, DMAHSTARTLR, DMAHSTARTHR, DMALENR, DMANEXTLR, DMANEXTHR and DMAATTRIBR. In addition, the DMA controller provides global DMA control and status registers. 
+The DMA engine works with a linked list so that DMAs can be chained. The first item in the list is loaded by the host on the carrier and contains a pointer to the next one, which is in host memory. The DMA engine will fetch items from host memory and perform the corresponding DMAs until one of the items is recognized as the last one though the contents of the DMAATTRIBR register (see table~\ref{tab:ddr_control}). Each item in the list is made of the following registers: DMACSTARTR, DMAHSTARTLR, DMAHSTARTHR, DMALENR, DMANEXTLR, DMANEXTHR and DMAATTRIBR. When reading these items from the host, the DMA engine assumes a little-endian host. Big-endian hosts should shuffle data accordingly so that it is found in the same order as in a little-endian host. In addition, the DMA controller provides global DMA control and status registers. 
 
 \begin{table}[htbp]
   \centering
@@ -237,9 +239,9 @@ The DMA engine works with a linked list so that DMAs can be chained. The first i
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    DMACTRLR & & R/W & & DMA start address in the carrier\\
+    DMACTRLR & & R/W & & DMA engine control\\
     \hline
-    DMASTATR & & RO & & DMA start address (low) in the host\\
+    DMASTATR & & RO & & DMA engine status\\
     \hline
     DMACSTARTR & & R/W & & DMA start address in the carrier\\
     \hline
@@ -269,9 +271,10 @@ This is a status register for the DMA engine. Possible contents are:
 \item 0: Idle (before any DMA transfer takes place).
 \item 1: Done (after successful DMA).
 \item 2: Busy.
-\item 3: Error (following a memory access error, either on the host or on the carrier).
+\item 3: Error (following a memory access error, either on the host or on the carrier). This also produces an interrupt.
 \item 4: Aborted (after receiving an abort command in DMACTRLR).
 \end{packed_item}
+A DMA start command written into the DMACTRLR register takes this status out of Idle, Done, Error or Aborted into the Busy state.
 
 \subsubsection{DMACSTARTR}
 The DMACSTARTR register holds a byte address pointing to a location inside the DDR RAM, at which the DMA access should start. Taking into account that the DDR is a 16-bit device, only even values are allowed in DMACSTARTR.
@@ -280,7 +283,7 @@ The DMACSTARTR register holds a byte address pointing to a location inside the D
 Registers DMAHSTARTLR and DMAHSTARTHR select the low and high parts of the 64-bit start address for the DMA access in the host. 
 
 \subsubsection{DMALENR}
-Register DMALENR selects the length of the reading in bytes, i.e. twice the number of samples to be read by the host.
+Register DMALENR selects the length of the reading in bytes, i.e. twice the number of samples to be read by the host. This means DMALENR has to hold an even number.
 
 \subsubsection{DMANEXTLR and DMANEXTHR}
 These two registers contain the low and high parts of the 64-bit address of the next item in the linked list, in host memory.
