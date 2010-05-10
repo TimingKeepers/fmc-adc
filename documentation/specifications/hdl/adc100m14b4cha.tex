@@ -38,13 +38,15 @@
     \hline
     27 April 2010 & Added ADCSTATR for state machine monitoring. Added TRIGPOSR for circular buffer support. Added endianness support in BANKSELR.\\
     \hline
-    28 April 2010 & Using subsubsections for each register to improve clarity. Added power good, shutdown and current and voltage aqn for supplies. Added Vadj control: 0 for 1V, 0xffff for 3.3V. Added DMA, filling host buffers in a non-interleaved way. Added IQR sources list in IRQ controller subsection.\\
+    28 April 2010 & Using subsubsections for each register to improve clarity. Added power good, shutdown and current and voltage aqn for supplies. Added Vadj control: 0 for 1V, 0xFFFF for 3.3V. Added DMA, filling host buffers in a non-interleaved way. Added IQR sources list in IRQ controller subsection.\\
     \hline
     3 May 2010 & Added TOC and Document History. More detailed figure 1. General conventions for unused bits in registers. \\ 
     \hline
     4 may 2010 & Added space holders for VME case in SUPCTRLR. Added reset column to register map tables. Added two new interrupts: FMC input over-load and FMC over-heating.\\
     \hline
     9 May 2010 & Re-wrote DMA chapter.\\
+    \hline
+    10 May 2010 & Added address jump configuration in DMA engine. Added TRIGPOSR description.\\
     \hline
   \end{tabularx}
 \end{table}
@@ -54,6 +56,9 @@ TODO:
 \item Beautification: tables for register bits.
 \item Fill in address offsets and reset states in register map.
 \item Fill in conversion table~\ref{tab:conv_fact}.
+\item Add details on gain, offset and calibration configuration of switches in \ref{sssec:gain_offs}.
+\item Decide whether PCIe bursts get translated into WB bursts or not (see \ref{ssec:GN4124_WB}).
+\item Decide on levels vs. edges for interrupts.
 \end{packed_item}
 
 \pagebreak
@@ -63,8 +68,6 @@ TODO:
 
 \section{Introduction}
 This document gives information needed by HDL and driver/library developers to support the FMCADC100M14b4cha FPGA Mezzanine Cards\footnote{See \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}.} in the PCIe FMC carrier\footnote{See \href{http://www.ohwr.org/projects/fmc-pci-carrier}{http://www.ohwr.org/projects/fmc-pci-carrier}.} designed by BE-CO-HT at CERN. The support for this module must be as generic as possible in order to benefit from this effort for other ADC FMC cards and carriers. In particular, the sample width, number of channels and sampling rate should all be configurable parameters in the design. Another important aspect is to preserve insofar as possible the re-usability of developments between PCIe and VME64x uses, knowing that the VME64x carrier can host two mezzanines whereas the PCIe carrier has only one FMC site.
-
-This design will jump over the functional specification phase to gain some time. This document should be read as a functional and technical specification in one. Users are of course welcome to challenge both functional and technical aspects before approval.
 
 The PCIe carrier board has a Spartan 6 XC6SLX150T FPGA at its heart, surrounded by a host of peripherals for different applications. In particular, there is a fair amount of SRAM, DDR3 RAM, a PLL chip, a DDS and Flash ROM. The FPGA is connected to a VITA 57 FPGA Mezzanine Card (FMC) slot, covering all pins of the Low Pin Count (LPC) connector. The purpose of this document is to specify how this carrier and the FMCADC100M14b4cha 4-channel 100 MS/s ADC mezzanine card can be used to build a complete ADC solution through appropriate configuration of the FPGA in the carrier. An important aspect to bear in mind is that this proposal takes the fastest path to get a fully working system to cover immediate needs in the accelerators, while trying to preserve the investments made in HDL development. The design will no doubt evolve in the future, once the short term needs are covered.
 
@@ -81,6 +84,7 @@ The proposed internal structure of the FPGA design can be seen in figure~\ref{fi
 For each internal block, we give a summary description of its function along with internal registers which can be read of written from the Wishbone master. Registers are presented in tables with their name, address offset (in 32-bit long words), access mode, value after reset and description. The address offset is the offset of a given register with respect to the beginning of the memory area pointed to by a given PCIe Base Address Register (BAR). This design only supports full 32-bit reads and writes. Even if some of the registers described below use different bits for different things, that does not mean they can be written to independently from the rest of the word, so care should be taken in each write to affect all bits in an appropriate way. In general, unused bits should be ignored on read and written to with a '0'. For status registers, bits read as '0' represent a normal state of affairs, while those set to '1' signal some departure from nominal operation.
 
 \subsection{GN4124 to Wishbone bridge}
+\label{ssec:GN4124_WB}
 This block is a slave of the external GN4124 local bus and a master of the internal Wishbone bus. The GN4124 from Gennum is a PCIe to local bus bridge, capable of using 4 PCIe lanes for fast communication with the host and with DMA capability as well. In addition, the GN4124 can be used to reprogram the on-board FPGA. 
 
 PCIe bursts will be converted in this block to Wishbone bursts. A one-tick-long positive pulse from the interrupt controller will trigger generation of a message-based PCIe interrupt.
@@ -121,7 +125,7 @@ This block contains all control and status registers related to the carrier boar
 \end{table}
 
 \subsubsection{CARRTYPER}
-The CARRTYPER register uses bits [31..16] for a carrier type identifier and bits [7..0] for the PCB version, signaled to the FPGA through optional pull-up resistors in the PCB. 
+The CARRTYPER register uses bits [31..16] for a carrier type identifier and bits [7..0] for the PCB version. Bits [15..8] are reserved. 
 
 \subsubsection{SIIDLR and SIIDHR}
 The SIIDLR and SIIDHR registers contain respectively the low and high parts of the 64-bit Silicon ID read from the Maxim DS18B20 1-Wire digital thermometer after system reset. 
@@ -150,7 +154,7 @@ The carrier has several power supplies that can be enabled or disabled individua
 \end{packed_item}
 
 \subsubsection{SUPAQNR}
-The SUPAQNR register holds a voltage and current consumption value resulting from on-board measurements using 16-bit ADCs. The selection of power supply to monitor is done in SUPCTRLR. Bits [31..16] hold an unsigned word representing voltage, while bits [15..0] are used for current consumption. To get Volts and Amperes from the raw measurements, different conversion factors must be used for each supply, as described in table~\ref{tab:conv_fact}.
+The SUPAQNR register holds a voltage and current consumption value resulting from on-board measurements using 16-bit ADCs. The selection of power supply to monitor is done in SUPCTRLR. Bits [31..16] hold an unsigned word representing voltage magnitude, while bits [15..0] are used for current consumption. To get Volts and Amperes from the raw measurements, different conversion factors must be used for each supply, as described in table~\ref{tab:conv_fact}.
 
 \begin{table}[htbp]
   \centering
@@ -220,7 +224,7 @@ The interrupt controller receives interrupt requests from different blocks, comb
 The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [8..0] are: DMA completion, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC configuration R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
 
 \subsection{Dual port DDR RAM controller}
-This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily, and to unload the host for reading, the core also implements a DMA engine. Another important aspect is to avoid collisions between Wishbone read requests and ADC write requests. Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. An attempt to read while the ADC is in any other state will result in a bus error.
+This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. To avoid mapping a large memory into the host address space unnecessarily, and to unload the host for reading, the core also implements a DMA engine. Another important aspect is to avoid collisions between Wishbone read requests and ADC write requests. Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. The DMA engine will therefore only work during that state. If a DMA operation is fired during any other state, the DMA engine will just wait until the ADC state machine goes to Idle in order to start the transfer.
 
 Memory will be organized internally as a circular buffer, with all 4 channels being logged in an interleaved way, starting with channel 1 at offset 0. After a shot, the host can read the address in DDR RAM of the sample corresponding to the trigger moment for channel 1 in the TRIGPOSR register of the ADC Controller block (see table~\ref{tab:adc_control}). All addresses are byte addresses, i.e. DDR RAM addresses get incremented by 2 for each sample, and one needs to jump by 8 byte locations to go from one sample to the next for the same channel, because of the interleaving. By convention, the complete sample buffer for an acquisition contains ADCPRER+ADCPOSTR samples, and the TRIGPOSR register points to the last sample in the ADCPRER part. 
 
@@ -235,7 +239,7 @@ The DMA engine works with a linked list so that DMAs can be chained. The first i
     \hline
     DMACTRLR & & R/W & & DMA start address in the carrier\\
     \hline
-    DMASTATR & & R/W & & DMA start address (low) in the host\\
+    DMASTATR & & RO & & DMA start address (low) in the host\\
     \hline
     DMACSTARTR & & R/W & & DMA start address in the carrier\\
     \hline
@@ -284,12 +288,14 @@ These two registers contain the low and high parts of the 64-bit address of the 
 \subsubsection{DMAATTRIBR}
 This register contains several control features for the DMA engine:
 \begin{packed_item}
-\item Bits [31..2] are reserved.
+\item Bits [31..16] are reserved.
+\item Bits [15..8] are used to select how many bytes the DDR controller jumps after every RAM access. A value of 2 will give interleaved samples. A value of 8 will give samples corresponding to a given channel.
+\item Bits [7..2] are reserved.
 \item Bit 1 is set to '0' for little-endian accesses and '1' for big-endian. This affects the way in which 16-bit samples can be stored in a 32-bit long word.
 \item Bit 0 is set to '1' to signal this is the last item in the linked list, '0' otherwise.
 \end{packed_item}
 
-The end of a DMA access generates an interrupt request towards the interrupt controller.
+The end of a chained DMA access generates an interrupt request towards the interrupt controller.
 
 \subsection{ADC controller}
 The ADC controller handles all communication with the ADC FMC. It has a Wishbone slave for configuration registers and a dedicated output connection to the DDR RAM controller for samples. It can also drive interrupt requests into the interrupt controller. These interrupts are all one-tick-long positive pulses. The sampling state machine is depicted in figure~\ref{fig:state_machine}. 
@@ -379,7 +385,8 @@ The current state in the state machine can be read from the ADCSTATR register. I
 The TRIGGER condition in figure \ref{fig:state_machine} is to be interpreted as an 'OR' of hardware and software (SOFT\_TRIG) triggers. Trigger configuration is handled through the TRIGCFGR register. Bits [31:16] are used for a threshold (treated as 2's complement and compared to the raw ADC data) in case of internal trigger, bit 0 selects between internal ('0') and external ('1') trigger and bit 1 selects positive ('0') or negative ('1') slope. Hardware and software triggers can be enabled using bits 2 and 3 respectively. A trigger applies to all 4 channels. Bits 4 and 5 in TRIGCFGR select a channel to use for the case of internal hardware trigger.  
 
 \subsubsection{ADCxOFFSR and ADCxGAINR}
-Controlling the offset and gain of each ADC we have the ADCxOFFSR and ADCxGAINR registers, where x ranges from 1 to 4. The ADCxOFFSR registers are used to load a 16-bit DAC in the mezzanine, so only bits [15..0] are used. ADCxGAINR are in fact bit field registers, with each bit controlling an independent switch. These switches are used in normal operation to set gains, but can also be used for disconnecting the input signal from the ADC for automatic calibration purposes. More information can be found in \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}. For the purpose of this specification, it is enough to say that there are seven switches per analog input channel and they will be mapped to the least significant bits of the ADCxGAINR registers, starting with SW1 in bit 0 and ending with SW7 in bit 6.
+\label{sssec:gain_offs}
+Controlling the offset and gain of each ADC we have the ADCxOFFSR and ADCxGAINR registers, where x ranges from 1 to 4. The ADCxOFFSR registers are used to load a 16-bit DAC in the mezzanine, so only bits [15..0] are used. ADCxGAINR are in fact bit field registers, with each bit controlling an independent switch. These switches are used in normal operation to set gains, but can also be used for disconnecting the input signal from the ADC for automatic calibration purposes. More information can be found in \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}. For the purpose of this specification, it is enough to say that there are seven switches per analog input channel and they will be mapped to the least significant bits of the ADCxGAINR registers, starting with SW1 in bit 0 and ending with SW7 in bit 6. Switches get turned on by writing a '1' to their associated control bit. The default state after reset is '0' for all control bits.
 
 \subsubsection{ADCIDADDR and ADCIDDATR}
 The ADC FMC card has two I2C busses connected to it from the carrier FPGA through the FMC connector. The first one grants access to an FMC identification EEPROM on the mezzanine, which can be used to read/write the type of mezzanine, in agreement with the FMC standard. It is read and written using registers ADCIDADDR and ADCIDDATR. The FPGA puts the address plus a R/W flag into the ADCIDADDR register and then reads or writes from/to the ADCIDDATR. The location used for the read ('0') or write ('1') flag is bit 31. A read to ADCIDDATR must only be performed after the I2C controller has had time to get the data from the EEPROM. A write also has to be performed carefully, only after the previous write has succeeded. The I2C controller inside the ADC controller signals read and write completion through an interrupt request to the IRQ controller block. 
@@ -395,6 +402,9 @@ Effective sampling rate is obtained by dividing the nominal 100 MHz from the Si5
 
 \subsubsection{ADCPRER and ADCPOSTR}
 The number of samples to be acquired before and after the trigger are common to all channels and stored in the ADCPRER and ADCPOSTR registers respectively.
+
+\subsubsection{TRIGPOSR}
+This registed holds a byte address inside the DDR RAM, pointing to the channel 1 sample corresponding to the trigger moment. Since samples are 16-bit wide, TRIGPOSR is always an even unsigned number.
 
 \subsubsection{ADCCNTR}
 \label{sssec:adccntr}
