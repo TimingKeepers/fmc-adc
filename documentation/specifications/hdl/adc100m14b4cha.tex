@@ -54,18 +54,27 @@
     \hline
     6 September 2010 & Added RELTAGR 256-byte area. Split CONTROLR in two registers: one for frequency and one for VADJ. Filled current and voltage measurement table.\\
     \hline
+    7 September 2010 & Re-ordered subsections so document can be split in two (carrier + the rest) in the future. Filled in tables with addresses and reset states.\\
+    \hline
   \end{tabularx}
 \end{table}
 
-TODO: 
-\begin{packed_item}
-\item Fill in address offsets and reset states in register map.
-\item Add details on gain, offset and calibration configuration of switches in \ref{sssec:gain_offs}.
-\end{packed_item}
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|X|}
+    \hline
+    \textbf{DATE} & \textbf{CHANGES} \\
+    \hline
+    \hline
+    9 September 2010 & Added internal reset command to SUPCTRLR register (bit 31).\\
+    \hline
+  \end{tabularx}
+\end{table}
 
 \pagebreak
 
 \tableofcontents{}
+
 \pagebreak
 
 \section{Introduction}
@@ -90,36 +99,36 @@ This block contains all control and status registers related to the carrier boar
 
 \begin{table}[htbp]
   \centering
-  \begin{tabularx}{\textwidth}{|l|r|l|l|X|}
+  \begin{tabular}{|l|p{1.5cm}|c|p{2cm}|p{3cm}|}
     \hline
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{ON RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    CARRTYPER & & RO & & Carrier Type and PCB version\\
+    CARRTYPER & 0x0000 & RO & 0x00010001 & Carrier Type and PCB version\\
     \hline
-    SIIDLR & & RO & & Carrier Silicon ID Low \\
+    SIIDLR & 0x0001 & RO & From SID chip & Carrier Silicon ID Low \\
     \hline
-    SIIDHR & & RO & & Carrier Silicon ID High \\
+    SIIDHR & 0x0002 & RO & From SID chip & Carrier Silicon ID High \\
     \hline
-    BSTREAMTR & & RO & & Bit stream type \\
+    BSTREAMTR & 0x0003 & RO & 0x00000001 & Bit stream type \\
     \hline
-    BSTREAMDR & & RO & & Bit stream date \\
+    BSTREAMDR & 0x0004 & RO & From UTC & Bit stream date \\
     \hline
-    CARRTEMPR & & RO & & Carrier temperature \\
+    CARRTEMPR & 0x0005 & RO & From DS18B20 & Carrier temperature \\
     \hline
-    STATUSR & & RO & & Carrier and power supply status \\
+    STATUSR & 0x0006 & RO & From external signals & Carrier and power supply status \\
     \hline
-    SUPCTRLR & & R/W & & Power supply control \\
+    SUPCTRLR & 0x0007 & R/W & 0x00000000 & Power supply control \\
     \hline
-    SUPAQNR & & RO & & Power supply voltage and current \\
+    SUPAQNR & 0x0008 & RO & From external signals & Power supply voltage and current \\
     \hline
-    FREQCTLR & & R/W & & Carrier frequency control \\
+    FREQCTLR & 0x0009 & R/W & 0x00000000 & Carrier frequency control \\
     \hline
-    VADJCTLR & & R/W & & VADJ supply control \\
+    VADJCTLR & 0x000A & R/W & 0x00000000 & VADJ supply control \\
     \hline
-    RELTAGR & & RO & & Release tag \\
+    RELTAGR & 0x0040 - 0x007F & RO & From versioning tool & Release tag \\
     \hline
-  \end{tabularx}
+  \end{tabular}
   \caption{Register set for the board control and status block.}
   \label{tab:stat_control}
 \end{table}
@@ -146,7 +155,8 @@ STATUSR contains the carrier status, and in particular the status of power suppl
 \subsubsection{SUPCTRLR}
 The carrier has several power supplies that can be enabled or disabled individually from the FPGA. They are controlled from the SUPCTRLR register, which is a bit field made of individual Enable (E) bits. In addition, some bits in this register are used to select which power supply voltage and current are monitored through the SUPAQNR register.
 \begin{packed_item}
-\item Bits [31..16] are unused.
+\item A write of '1' to bit 31 will generate a 1-tick-long internal reset pulse for all registers in the FPGA. 
+\item Bits [30..16] are unused.
 \item Bits [15..12] are unused.
 \item Bits [11..8] contain an unsigned 4-bit number which selects a power supply for voltage and current monitoring. Starting at 0: 12V\_PCIe, 3V3\_FMC, VADJ, 1V8.
 \item Bits [7..4] are unused.
@@ -195,16 +205,38 @@ The UTC block counts the 125 MHz system clock (sysclk) in order to generate 64-b
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    UTCSETR & & R/W & & UTC seconds setting\\
+    UTCSETR & 0x0080 & R/W & 0 & UTC seconds setting\\
     \hline
-    UTCLR & & RO & & UTC sysclk ticks within second\\
+    UTCLR & 0x0081 & RO & 0 & UTC sysclk ticks within second\\
     \hline
-    UTCHR & & RO & & UTC seconds\\
+    UTCHR & 0x0082 & RO & 0 & UTC seconds\\
     \hline
   \end{tabularx}
   \caption{Register set for the GN4124 core.}
   \label{tab:utc_core}
 \end{table}
+
+\subsection{Interrupt controller}
+The interrupt controller receives interrupt requests from different blocks, combines them and sends an interrupt request to the GN4124/Wishbone bridge. For each interrupt input, it sets a bit in the IRQSRCR register upon synchronous detection of a rising edge. These bits are cleared on read. Care must be taken at design time to avoid race conditions in which a rising edge does not result in setting a bit because of the overriding effect of a concurrent read. Detection of a rising edge in any of the bits can result in the generation of an interrupt if the associated bit in the IRQENR register is set. The interrupt sent to the GN4124/Wishbone bridge is a one-tick-long positive pulse.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabularx}{\textwidth}{|l|r|X|l|l|}
+    \hline
+    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{ON RESET} & \textbf{DESCRIPTION} \\
+    \hline
+    \hline
+    IRQSRCR & 0x0083 & RO, clear on read & 0 & Interrupt sources\\
+    \hline
+    IRQENR & 0x0084 & R/W & 0 & Interrupt enable mask\\
+    \hline
+  \end{tabularx}
+  \caption{Register set for the interrupt controller block.}
+  \label{tab:irq_control}
+\end{table}
+
+\subsubsection{IRQSRCR and IRQENR}
+The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [9..0] are: DMA completion, DMA error, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC configuration R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
 
 \subsection{GN4124 to Wishbone bridge}
 \label{ssec:GN4124_WB}
@@ -219,50 +251,28 @@ A one-tick-long positive pulse from the interrupt controller will trigger genera
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    DMACTRLR & & R/W & & DMA engine control\\
+    DMACTRLR & 0x0100 & R/W & 0 & DMA engine control\\
     \hline
-    DMASTATR & & RO & & DMA engine status\\
+    DMASTATR & 0x0101 & RO & 0 & DMA engine status\\
     \hline
-    DMACSTARTR & & R/W & & DMA start address in the carrier\\
+    DMACSTARTR & 0x0102 & R/W & 0 & DMA start address in the carrier\\
     \hline
-    DMAHSTARTLR & & R/W & & DMA start address (low) in the host\\
+    DMAHSTARTLR & 0x0103 & R/W & 0 & DMA start address (low) in the host\\
     \hline
-    DMAHSTARTHR & & R/W & & DMA start address (high) in the host\\
+    DMAHSTARTHR & 0x0104 & R/W & 0 & DMA start address (high) in the host\\
     \hline
-    DMALENR & & R/W & & DMA read length in bytes\\
+    DMALENR & 0x0105 & R/W & 0 & DMA read length in bytes\\
     \hline
-    DMANEXTLR & & R/W & & Pointer (low) to next item in list\\
+    DMANEXTLR & 0x0106 & R/W & 0 & Pointer (low) to next item in list\\
     \hline
-    DMANEXTHR & & R/W & & Pointer (high) to next item in list\\
+    DMANEXTHR & 0x0107 & R/W & 0 & Pointer (high) to next item in list\\
     \hline
-    DMAATTRIBR & & R/W & & DMA endianness and control\\
+    DMAATTRIBR & 0x0108 & R/W & 0 & DMA endianness and control\\
     \hline
   \end{tabularx}
   \caption{Register set for the GN4124 core.}
   \label{tab:gn4124_core}
 \end{table}
-
-\subsection{Interrupt controller}
-The interrupt controller receives interrupt requests from different blocks, combines them and sends an interrupt request to the GN4124/Wishbone bridge. For each interrupt input, it sets a bit in the IRQSRCR register upon synchronous detection of a rising edge. These bits are cleared on read. Care must be taken at design time to avoid race conditions in which a rising edge does not result in setting a bit because of the overriding effect of a concurrent read. Detection of a rising edge in any of the bits can result in the generation of an interrupt if the associated bit in the IRQENR register is set. The interrupt sent to the GN4124/Wishbone bridge is a one-tick-long positive pulse.
-
-\begin{table}[htbp]
-  \centering
-  \begin{tabularx}{\textwidth}{|l|r|X|l|l|}
-    \hline
-    \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{ON RESET} & \textbf{DESCRIPTION} \\
-    \hline
-    \hline
-    IRQSRCR & & RO, clear on read & & Interrupt sources\\
-    \hline
-    IRQENR & & R/W & & Interrupt enable mask\\
-    \hline
-  \end{tabularx}
-  \caption{Register set for the interrupt controller block.}
-  \label{tab:irq_control}
-\end{table}
-
-\subsubsection{IRQSRCR and IRQENR}
-The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [9..0] are: DMA completion, DMA error, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC configuration R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
 
 \subsection{Dual port DDR RAM controller}
 This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. The DDR controller handles access to the DDR RAM from two dedicated Wishbone busses, one writing from the ADC controller (port 1) and one reading from the DMA engine (port 2). Port 1 accesses have priority over prt 2 accesses if there is a clash.
@@ -294,47 +304,47 @@ The state machine will drive two pulse-like signals into the IRQ controller. One
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    ADCCTRLR & & R/W & & ADC state machine control\\
+    ADCCTRLR & 0x0200 & R/W & 0 & ADC state machine control\\
     \hline
-    ADCSTATR & & RO & & ADC status \\
+    ADCSTATR & 0x0201 & RO & 0 & ADC status \\
     \hline
-    TRIGCFGR & & R/W & & Trigger configuration \\
+    TRIGCFGR & 0x0202 & R/W & 0 & Trigger configuration \\
     \hline
-    TRIGDLYR & & R/W & & Trigger delay \\
+    TRIGDLYR & 0x0203 & R/W & 0 & Trigger delay \\
     \hline
-    TRIGHOFFR & & R/W & & Trigger hold-off \\
+    TRIGHOFFR & 0x0204 & R/W & 0 & Trigger hold-off \\
     \hline
-    ADCSHOTSR & & R/W & & Number of shots \\
+    ADCSHOTSR & 0x0205 & R/W & 0 & Number of shots \\
     \hline
-    TRIGUTCLR & & RO & & UTC low of last trigger \\
+    TRIGUTCLR & 0x0206 & RO & 0 & UTC low of last trigger \\
     \hline
-    TRIGUTCHR & & RO & & UTC high of last trigger \\
+    TRIGUTCHR & 0x0207 & RO & 0 & UTC high of last trigger \\
     \hline
-    STARTUTCLR & & RO & & UTC low of last start \\
+    STARTUTCLR & 0x0208 & RO & 0 & UTC low of last start \\
     \hline
-    STARTUTCHR & & RO & & UTC high of last start \\
+    STARTUTCHR & 0x0209 & RO & 0 & UTC high of last start \\
     \hline
-    STOPUTCLR & & RO & & UTC low of last stop \\
+    STOPUTCLR & 0x020A & RO & 0 & UTC low of last stop \\
     \hline
-    STOPUTCHR & & RO & & UTC high of last stop \\
+    STOPUTCHR & 0x020B & RO & 0 & UTC high of last stop \\
     \hline
-    ADC1OFFSR & & R/W & & ADC1 offset \\
+    ADC1OFFSR & 0x020C & R/W & 0 & ADC1 offset \\
     \hline
-    ADC1GAINR & & R/W & & ADC1 gain \\
+    ADC1GAINR & 0x020D & R/W & 0 & ADC1 gain \\
     \hline
-    ADC1VALR & & RO & & ADC 1 current value \\
+    ADC1VALR & 0x020E & RO & 0 & ADC 1 current value \\
     \hline
-    ADC2OFFSR & & R/W & & ADC2 offset \\
+    ADC2OFFSR & 0x020F & R/W & 0 & ADC2 offset \\
     \hline
-    ADC2GAINR & & R/W & & ADC2 gain \\
+    ADC2GAINR & 0x0210 & R/W & 0 & ADC2 gain \\
     \hline
-    ADC2VALR & & RO & & ADC 2 current value \\
+    ADC2VALR & 0x0211 & RO & 0 & ADC 2 current value \\
     \hline
-    ADC3OFFSR & & R/W & & ADC3 offset \\
+    ADC3OFFSR & 0x0212 & R/W & 0 & ADC3 offset \\
     \hline
-    ADC3GAINR & & R/W & & ADC3 gain \\
+    ADC3GAINR & 0x0213 & R/W & 0 & ADC3 gain \\
     \hline
-    ADC3VALR & & RO & & ADC 3 current value \\
+    ADC3VALR & 0x0214 & RO & 0 & ADC 3 current value \\
     \hline
   \end{tabularx}
   \caption{Register set for the ADC controller block (1/2).}
@@ -348,35 +358,35 @@ The state machine will drive two pulse-like signals into the IRQ controller. One
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    ADC4OFFSR & & R/W & & ADC4 offset \\
+    ADC4OFFSR & 0x0215 & R/W & 0 & ADC4 offset \\
     \hline
-    ADC4GAINR & & R/W & & ADC4 gain \\
+    ADC4GAINR & 0x0216 & R/W & 0 & ADC4 gain \\
     \hline
-    ADC4VALR & & RO & & ADC 4 current value \\
+    ADC4VALR & 0x0217 & RO & 0 & ADC 4 current value \\
     \hline
-    ADCIDADDR & & R/W & & ADC ID I2C address \\
+    ADCIDADDR & 0x0218 & R/W & 0 & ADC ID I2C address \\
     \hline
-    ADCIDDATR & & R/W & & ADC ID I2C data \\
+    ADCIDDATR & 0x0219 & R/W & 0 & ADC ID I2C data \\
     \hline
-    ADCCLKLR & & R/W & & ADC Clock frequency low \\
+    ADCCLKLR & 0x021A & R/W & 0 & ADC Clock frequency low \\
     \hline
-    ADCCLKHR & & R/W & & ADC Clock frequency high \\
+    ADCCLKHR & 0x021B & R/W & 0 & ADC Clock frequency high \\
     \hline
-    ADCADDR & & R/W & & ADC config address \\
+    ADCADDR & 0x021C & R/W & 0 & ADC config address \\
     \hline
-    ADCDATR & & R/W & & ADC config data \\
+    ADCDATR & 0x021D & R/W & 0 & ADC config data \\
     \hline
-    SRATER & & R/W & & Sample rate decimation \\
+    SRATER & 0x021E & R/W & 1 & Sample rate decimation \\
     \hline
-    ADCPRER & & R/W & & Pre-trigger samples requested \\
+    ADCPRER & 0x021F & R/W & 0 & Pre-trigger samples requested \\
     \hline
-    ADCPOSTR & & R/W & & Post-trigger samples requested \\
+    ADCPOSTR & 0x0220 & R/W & 0 & Post-trigger samples requested \\
     \hline
-    LASTPOSR & & RO & & Last sample position in DDR RAM\\
+    LASTPOSR & 0x0221 & RO & 0 & Last sample position in DDR RAM\\
     \hline
-    ADCCNTR & & RO & & ADC global sample counter \\
+    ADCCNTR & 0x0222 & RO & 0 & ADC global sample counter \\
     \hline
-    ADCSHOTCNTR & & RO & & ADC shot sample counter \\
+    ADCSHOTCNTR & 0x0223 & RO & 0 & ADC shot sample counter \\
     \hline
   \end{tabularx}
   \caption{Register set for the ADC controller block (2/2).}
