@@ -68,6 +68,8 @@
     \hline
     9 September 2010 & Added internal reset command to SUPCTRLR register (bit 31).\\
     \hline
+    10 September 2010 & Si570 interrupt taken out of IRQSRCR. Renamed ADCxGAINR to ADCxSWITCHR. Eliminated hold-off and ADCCNTR registers. Added Future Improvements section.\\
+    \hline
   \end{tabularx}
 \end{table}
 
@@ -236,13 +238,13 @@ The interrupt controller receives interrupt requests from different blocks, comb
 \end{table}
 
 \subsubsection{IRQSRCR and IRQENR}
-The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [9..0] are: DMA completion, DMA error, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC shot taken, FMC ID I2C R/W completion, FMC Si570 I2C R/W completion and FMC ADC configuration R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
+The IRQSRCR and IRQENR are both bit fields with the same internal structure. The upper bits (except bit 31 of IRQSRCR, see below) are reserved for future use. Bits [8..0] are: DMA completion, DMA error, carrier over-heating, FMC over-heating, FMC input over-load, ADC trigger, ADC end of acquisition, FMC ID I2C R/W completion and FMC ADC configuration R/W completion. If an interrupt fires more than once before IRQSRCR is read, bit 31 of IRQSRCR will be set, for debugging purposes. This bit is also cleared on read.   
 
 \subsection{GN4124 to Wishbone bridge}
 \label{ssec:GN4124_WB}
 This block is a slave of the external GN4124 local bus and a master of the internal Wishbone bus. The GN4124 from Gennum is a PCIe to local bus bridge, capable of using 4 PCIe lanes for fast communication with the host and with DMA capability as well. In addition, the GN4124 can be used to reprogram the on-board FPGA. 
 
-A one-tick-long positive pulse from the interrupt controller will trigger generation of a message-based PCIe interrupt. More details about this core can be found in \href{http://www.ohwr.org/projects/gn4124-core/wiki}. We reproduce in table~\ref{tab:gn4124_core} the registers associated to this core. 
+A one-tick-long positive pulse from the interrupt controller will trigger generation of a message-based PCIe interrupt. More details about this core can be found in \href{http://www.ohwr.org/projects/gn4124-core/wiki}{http://www.ohwr.org/projects/gn4124-core/wiki}. We reproduce in table~\ref{tab:gn4124_core} the registers associated to this core. 
 
 \begin{table}[htbp]
   \centering
@@ -283,7 +285,7 @@ Memory will be organized internally as a circular buffer, with all 4 channels be
 
 A memory layout with two channel-1 samples at offset 0, two channel-2 samples at offset 1, etc. is not convenient for the host. Therefore, an address converter block between the DDR controller and the GN4124 core will ensure that the hosts sees this memory as four blocks, each dedicated to a channel. This block simply needs to take the two higher-order bits from the host side and place them instead in the lower side of the address bus for the DDR controller\footnote{Thanks Emilio!}.
  
-After a shot, the host can read the address in the DDR RAM (in non-interleaved space) of the last acquired sample for channel 1 in the LASTPOSR register of the ADC Controller block (see table~\ref{tab:adc_control}). All addresses are byte addresses, i.e. DDR RAM addresses get incremented by 4 for each two-sample word. A consequence of the grouping in two-samples is that only an even sumber of samples should be requested. Applications where the user wants an odd number of samples can be dealt with by the driver requesting one more sample and discarding it. 
+After an acquisition, the host can read the address in the DDR RAM (in non-interleaved space) of the last acquired sample for channel 1 in the LASTPOSR register of the ADC Controller block (see table~\ref{tab:adc_control2}). All addresses are byte addresses, i.e. DDR RAM addresses get incremented by 4 for each two-sample word. A consequence of the grouping in two-samples is that only an even sumber of samples should be requested. Applications where the user wants an odd number of samples can be dealt with by the driver requesting one more sample and discarding it. 
 
 \subsection{ADC controller}
 The ADC controller handles all communication with the ADC FMC. It has a Wishbone slave for configuration registers and a dedicated output connection to the DDR RAM controller for samples. It can also drive interrupt requests into the interrupt controller. These interrupts are all one-tick-long positive pulses. The sampling state machine is depicted in figure~\ref{fig:state_machine}. 
@@ -295,7 +297,7 @@ The ADC controller handles all communication with the ADC FMC. It has a Wishbone
   \label{fig:state_machine}
 \end{figure}
 
-The state machine will drive two pulse-like signals into the IRQ controller. One will be a trigger interrupt and the other an end of shot interrupt, generated once the state machine reaches the Idle state after an acquisition. In addition, the ADC controller will produce interrupts in case of FMC over-heating and input over-load (to protect the optional 50 Ohm termination). All of these interrupts can be enabled/disabled in the interrupt controller block. The ADC controller is also in charge of controlling two LEDs: power good and trigger (100 ms width).
+The state machine will drive two pulse-like signals into the IRQ controller. One will be a trigger interrupt and the other an end of acquisition interrupt, generated once the state machine reaches the Idle state after an acquisition. In addition, the ADC controller will produce interrupts in case of FMC over-heating and input over-load (to protect the optional 50 Ohm termination). All of these interrupts can be enabled/disabled in the interrupt controller block. The ADC controller is also in charge of controlling two LEDs: power good and trigger (100 ms width).
 
 \begin{table}[htbp]
   \centering
@@ -312,39 +314,37 @@ The state machine will drive two pulse-like signals into the IRQ controller. One
     \hline
     TRIGDLYR & 0x0203 & R/W & 0 & Trigger delay \\
     \hline
-    TRIGHOFFR & 0x0204 & R/W & 0 & Trigger hold-off \\
+    ADCSHOTSR & 0x0204 & R/W & 0 & Number of shots \\
     \hline
-    ADCSHOTSR & 0x0205 & R/W & 0 & Number of shots \\
+    TRIGUTCLR & 0x0205 & RO & 0 & UTC low of last trigger \\
     \hline
-    TRIGUTCLR & 0x0206 & RO & 0 & UTC low of last trigger \\
+    TRIGUTCHR & 0x0206 & RO & 0 & UTC high of last trigger \\
     \hline
-    TRIGUTCHR & 0x0207 & RO & 0 & UTC high of last trigger \\
+    STARTUTCLR & 0x0207 & RO & 0 & UTC low of last start \\
     \hline
-    STARTUTCLR & 0x0208 & RO & 0 & UTC low of last start \\
+    STARTUTCHR & 0x0208 & RO & 0 & UTC high of last start \\
     \hline
-    STARTUTCHR & 0x0209 & RO & 0 & UTC high of last start \\
+    STOPUTCLR & 0x0209 & RO & 0 & UTC low of last stop \\
     \hline
-    STOPUTCLR & 0x020A & RO & 0 & UTC low of last stop \\
+    STOPUTCHR & 0x020A & RO & 0 & UTC high of last stop \\
     \hline
-    STOPUTCHR & 0x020B & RO & 0 & UTC high of last stop \\
+    ADC1OFFSR & 0x020B & R/W & 0 & ADC1 offset \\
     \hline
-    ADC1OFFSR & 0x020C & R/W & 0 & ADC1 offset \\
+    ADC1SWITCHR & 0x020C & R/W & 0 & ADC1 gain \\
     \hline
-    ADC1GAINR & 0x020D & R/W & 0 & ADC1 gain \\
+    ADC1VALR & 0x020D & RO & 0 & ADC 1 current value \\
     \hline
-    ADC1VALR & 0x020E & RO & 0 & ADC 1 current value \\
+    ADC2OFFSR & 0x020E & R/W & 0 & ADC2 offset \\
     \hline
-    ADC2OFFSR & 0x020F & R/W & 0 & ADC2 offset \\
+    ADC2SWITCHR & 0x020F & R/W & 0 & ADC2 gain \\
     \hline
-    ADC2GAINR & 0x0210 & R/W & 0 & ADC2 gain \\
+    ADC2VALR & 0x0210 & RO & 0 & ADC 2 current value \\
     \hline
-    ADC2VALR & 0x0211 & RO & 0 & ADC 2 current value \\
+    ADC3OFFSR & 0x0211 & R/W & 0 & ADC3 offset \\
     \hline
-    ADC3OFFSR & 0x0212 & R/W & 0 & ADC3 offset \\
+    ADC3SWITCHR & 0x0212 & R/W & 0 & ADC3 gain \\
     \hline
-    ADC3GAINR & 0x0213 & R/W & 0 & ADC3 gain \\
-    \hline
-    ADC3VALR & 0x0214 & RO & 0 & ADC 3 current value \\
+    ADC3VALR & 0x0213 & RO & 0 & ADC 3 current value \\
     \hline
   \end{tabularx}
   \caption{Register set for the ADC controller block (1/2).}
@@ -358,35 +358,33 @@ The state machine will drive two pulse-like signals into the IRQ controller. One
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    ADC4OFFSR & 0x0215 & R/W & 0 & ADC4 offset \\
+    ADC4OFFSR & 0x0214 & R/W & 0 & ADC4 offset \\
     \hline
-    ADC4GAINR & 0x0216 & R/W & 0 & ADC4 gain \\
+    ADC4SWITCHR & 0x0215 & R/W & 0 & ADC4 gain \\
     \hline
-    ADC4VALR & 0x0217 & RO & 0 & ADC 4 current value \\
+    ADC4VALR & 0x0216 & RO & 0 & ADC 4 current value \\
     \hline
-    ADCIDADDR & 0x0218 & R/W & 0 & ADC ID I2C address \\
+    ADCIDADDR & 0x0217 & R/W & 0 & ADC ID I2C address \\
     \hline
-    ADCIDDATR & 0x0219 & R/W & 0 & ADC ID I2C data \\
+    ADCIDDATR & 0x0218 & R/W & 0 & ADC ID I2C data \\
     \hline
-    ADCCLKLR & 0x021A & R/W & 0 & ADC Clock frequency low \\
+    ADCCLKLR & 0x0219 & R/W & 0 & ADC Clock frequency low \\
     \hline
-    ADCCLKHR & 0x021B & R/W & 0 & ADC Clock frequency high \\
+    ADCCLKHR & 0x021A & R/W & 0 & ADC Clock frequency high \\
     \hline
-    ADCADDR & 0x021C & R/W & 0 & ADC config address \\
+    ADCADDR & 0x021B & R/W & 0 & ADC config address \\
     \hline
-    ADCDATR & 0x021D & R/W & 0 & ADC config data \\
+    ADCDATR & 0x021C & R/W & 0 & ADC config data \\
     \hline
-    SRATER & 0x021E & R/W & 1 & Sample rate decimation \\
+    SRATER & 0x021D & R/W & 1 & Sample rate decimation \\
     \hline
-    ADCPRER & 0x021F & R/W & 0 & Pre-trigger samples requested \\
+    ADCPRER & 0x021E & R/W & 0 & Pre-trigger samples requested \\
     \hline
-    ADCPOSTR & 0x0220 & R/W & 0 & Post-trigger samples requested \\
+    ADCPOSTR & 0x021F & R/W & 0 & Post-trigger samples requested \\
     \hline
-    LASTPOSR & 0x0221 & RO & 0 & Last sample position in DDR RAM\\
+    LASTPOSR & 0x0220 & RO & 0 & Last sample position in DDR RAM\\
     \hline
-    ADCCNTR & 0x0222 & RO & 0 & ADC global sample counter \\
-    \hline
-    ADCSHOTCNTR & 0x0223 & RO & 0 & ADC shot sample counter \\
+    ADCSHOTCNTR & 0x0221 & RO & 0 & ADC shot sample counter \\
     \hline
   \end{tabularx}
   \caption{Register set for the ADC controller block (2/2).}
@@ -394,18 +392,16 @@ The state machine will drive two pulse-like signals into the IRQ controller. One
 \end{table}
 
 \subsubsection{ADCCTRLR}
-The START, STOP, and SOFT\_TRIG commands can be used to provoke transitions in the state machine from the PCIe bus, by writing appropriate patterns (1, 2 and 3 respectively) into the least significant byte of the ADCCTRLR register. A STOP command will always take the state machine to the Idle state, regardless of what its current state is. A write of '1' to bit 31 of ADCCTRLR will reset the sample counter in ADCCNTR (see \ref{sssec:adccntr}).
+The START, STOP, and SOFT\_TRIG commands can be used to provoke transitions in the state machine from the PCIe bus, by writing appropriate patterns (1, 2 and 3 respectively) into the least significant byte of the ADCCTRLR register. A STOP command will always take the state machine to the Idle state, regardless of what its current state is.
 
 \subsubsection{ADCSTATR}
 The current state in the state machine can be read from the ADCSTATR register. Idle~=~0, Pre-trigger Count~=~1, Wait Trigger~=~2, Wait End of Shot~=~3 and Decrement Shot Count~=~4.
 
 \subsubsection{TRIGCFGR}
-The TRIGGER condition in figure \ref{fig:state_machine} is to be interpreted as an 'OR' of hardware and software (SOFT\_TRIG) triggers. Trigger configuration is handled through the TRIGCFGR register. Bits [31:16] are used for a threshold (treated as 2's complement and compared to the raw ADC data) in case of internal trigger, bit 0 selects between internal ('0') and external ('1') trigger and bit 1 selects positive ('0') or negative ('1') slope. Hardware and software triggers can be enabled using bits 2 and 3 respectively. A trigger applies to all 4 channels. Bits 4 and 5 in TRIGCFGR select a channel to use for the case of internal hardware trigger.  
+The TRIGGER condition in figure \ref{fig:state_machine} is to be interpreted as an 'OR' of hardware and software (SOFT\_TRIG) triggers, followed by a delay specified in the TRIGDLYR register. Trigger configuration is handled through the TRIGCFGR register. Bits [31:16] are used for a threshold (treated as 2's complement and compared to the raw ADC data) in case of internal trigger, bit 0 selects between internal ('0') and external ('1') trigger and bit 1 selects positive ('0') or negative ('1') slope. Hardware and software triggers can be enabled using bits 2 and 3 respectively. A trigger applies to all 4 channels. Bits 4 and 5 in TRIGCFGR select a channel to use for the case of internal hardware trigger.  
 
-\subsubsection{TRIGDLYR and TRIGHOFFR}
+\subsubsection{TRIGDLYR}
 The TRIGDLY register contains the number of adcclk 100 MHz (see \ref{ss:adcclk}) ticks to count between the occurrence of the trigger condition as expressed in TRIGCFGR and its taking into account in the ADC state machine. 
-
-TRIGHOFFR contains the trigger hold-off time, i.e. the time during which trigger detection will be inactive after each detected trigger, also in adcclk 100 MHz ticks.
 
 \subsubsection{ADCSHOTSR}
 The lower 16 bits are used to set the number of shots required in multi-shot applications. The upper 16 bits are ignored on write, and when read return the current value of the shot down-counter.
@@ -413,9 +409,9 @@ The lower 16 bits are used to set the number of shots required in multi-shot app
 \subsubsection{TRIGUTCLR, TRIGUTCHR, STARTUTCLR, \\STARTUTCHR, STOPUTCLR and STOPUTCHR}
 UTC time tags of last trigger (including trigger delay), last start comand and last stop command.
 
-\subsubsection{ADCxOFFSR and ADCxGAINR}
+\subsubsection{ADCxOFFSR and ADCxSWITCHR}
 \label{sssec:gain_offs}
-Controlling the offset and gain of each ADC we have the ADCxOFFSR and ADCxGAINR registers, where x ranges from 1 to 4. The ADCxOFFSR registers are used to load a 16-bit DAC in the mezzanine, so only bits [15..0] are used. ADCxGAINR are in fact bit field registers, with each bit controlling an independent switch. These switches are used in normal operation to set gains, but can also be used for disconnecting the input signal from the ADC for automatic calibration purposes. More information can be found in \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}. For the purpose of this specification, it is enough to say that there are seven switches per analog input channel and they will be mapped to the least significant bits of the ADCxGAINR registers, starting with SW1 in bit 0 and ending with SW7 in bit 6. Switches get turned on by writing a '1' to their associated control bit. The default state after reset is '0' for all control bits.
+Controlling the offset and gain of each ADC we have the ADCxOFFSR and ADCxSWITCHR registers, where x ranges from 1 to 4. The ADCxOFFSR registers are used to load a 16-bit DAC in the mezzanine, so only bits [15..0] are used. ADCxSWITCHR are in fact bit field registers, with each bit controlling an independent switch. These switches are used in normal operation to set gains, but can also be used for disconnecting the input signal from the ADC for automatic calibration purposes, and to switch between low and high impedance modes. More information can be found in \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}. For the purpose of this specification, it is enough to say that there are seven switches per analog input channel and they will be mapped to the least significant bits of the ADCxSWITCHR registers, starting with SW1 in bit 0 and ending with SW7 in bit 6. Switches get turned on by writing a '1' to their associated control bit. The default state after reset is '0' for all control bits.
 
 \subsubsection{ADCxVALR}
 The current ADC output value can also be read from a dedicated register for each channel. This value is accessible in the ADCxVALR registers.
@@ -439,13 +435,16 @@ The number of samples to be acquired before and after the trigger are common to 
 \subsubsection{LASTPOSR}
 This registed holds a byte address inside the DDR RAM, pointing to the last acquired sample for channel 1. Since samples are 16-bit wide and grouped by 2 in 32-bit words, LASTPOSR is always a number of the type 4n-1 with n unsigned.
 
-\subsubsection{ADCCNTR}
-\label{sssec:adccntr}
-For diagnostics and time-correlation purposes, the ADC controller hosts a 32-bit free-running counter which gets reset at power up and optionally following a command. This clearing uses bit 31 in the ADCCTRLR register, so it can be used in combination with any command. The value of the counter is incremented at the effective sampling rate, i.e. after decimation, and can be read in the ADCCNTR register.   
-
 \subsubsection{ADCSHOTCNTR}
 Another counter running at the sampling rate counts the number of samples for a given shot. It is reset on START, counts up to the number of pre-trigger samples, waits for a trigger and continues counting up to pre-trigger + post-trigger samples. Its value can be accessed in the ADCSHOTCNTR register.
 
+\section{Future improvements}
+\begin{packed_item}
+\item White Rabbit support in the UTC core.
+\item Time-tags for all shot triggers in a multi-shot acquisition, maybe embedded in the DDR data.
+\end{packed_item}
+
 \end{document}
+
 
 % LocalWords:  CARRTEMP
