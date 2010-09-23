@@ -1,7 +1,7 @@
 % This document specifies how our ADCs should be implemented
 % using FMC cards and blocks of HDL in our PCIe carriers.
 
-\documentclass{article}
+\documentclass[a4paper]{article}
 
 \usepackage[pdftex]{graphicx}
 \usepackage[colorlinks=true, linkcolor=webgreen, urlcolor=webgreen]{hyperref}
@@ -24,7 +24,7 @@
 
 \begin{document}
 \maketitle
-\pagebreak
+\newpage
 
 \section*{Document History}
 \begin{table}[htbp]
@@ -38,7 +38,7 @@
     \hline
     27 April 2010 & Added ADCSTATR for state machine monitoring. Added TRIGPOSR for circular buffer support. Added endianness support in BANKSELR.\\
     \hline
-    28 April 2010 & Using subsubsections for each register to improve clarity. Added power good, shutdown and current and voltage aqn for supplies. Added Vadj control: 0 for 1V, 0xFFFF for 3.3V. Added DMA, filling host buffers in a non-interleaved way. Added IQR sources list in IRQ controller subsection.\\
+    28 April 2010 & Added power good, shutdown and current and voltage aqn for supplies. Added Vadj control. Added DMA. Added IQR sources list in IRQ controller subsection.\\
     \hline
     3 May 2010 & Added TOC and Document History. More detailed figure 1. General conventions for unused bits in registers. \\ 
     \hline
@@ -54,37 +54,29 @@
     \hline
     6 September 2010 & Added RELTAGR 256-byte area. Split CONTROLR in two registers: one for frequency and one for VADJ. Filled current and voltage measurement table.\\
     \hline
-    7 September 2010 & Re-ordered subsections so document can be split in two (carrier + the rest) in the future. Filled in tables with addresses and reset states.\\
-    \hline
-  \end{tabularx}
-\end{table}
-
-\begin{table}[htbp]
-  \centering
-  \begin{tabularx}{\textwidth}{|l|X|}
-    \hline
-    \textbf{DATE} & \textbf{CHANGES} \\
-    \hline
+    7 September 2010 & Re-ordered subsections. Filled in tables with addresses and reset states.\\
     \hline
     9 September 2010 & Added internal reset command to SUPCTRLR register (bit 31).\\
     \hline
     10 September 2010 & Si570 interrupt taken out of IRQSRCR. Renamed ADCxGAINR to ADCxSWITCHR. Eliminated hold-off and ADCCNTR registers. Added Future Improvements section.\\
     \hline
+    23 September 2010 & Various cosmetic changes. Suppressed UTCSETR. Changed switch register default settings.\\
+    \hline
   \end{tabularx}
 \end{table}
 
-\pagebreak
+\newpage
 
 \tableofcontents{}
 
-\pagebreak
+\newpage
 
 \section{Introduction}
 This document gives information needed by HDL and driver/library developers to support the FMCADC100M14b4cha FPGA Mezzanine Cards\footnote{See \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}.} in the PCIe FMC carrier\footnote{See \href{http://www.ohwr.org/projects/fmc-pci-carrier}{http://www.ohwr.org/projects/fmc-pci-carrier}.} designed by BE-CO-HT at CERN. The support for this module must be as generic as possible in order to benefit from this effort for other ADC FMC cards and carriers. In particular, the sample width, number of channels and sampling rate should all be configurable parameters in the design. Another important aspect is to preserve insofar as possible the re-usability of developments between PCIe and VME64x uses, knowing that the VME64x carrier can host two mezzanines whereas the PCIe carrier has only one FMC site.
 
-The PCIe carrier board has a Spartan 6 XC6SLX150T FPGA at its heart, surrounded by a host of peripherals for different applications. In particular, there is a fair amount of SRAM, DDR3 RAM, a PLL chip, a DDS and Flash ROM. The FPGA is connected to a VITA 57 FPGA Mezzanine Card (FMC) slot, covering all pins of the Low Pin Count (LPC) connector. The purpose of this document is to specify how this carrier and the FMCADC100M14b4cha 4-channel 100 MS/s ADC mezzanine card can be used to build a complete ADC solution through appropriate configuration of the FPGA in the carrier. An important aspect to bear in mind is that this proposal takes the fastest path to get a fully working system to cover immediate needs in the accelerators, while trying to preserve the investments made in HDL development. The design will no doubt evolve in the future, once the short term needs are covered.
+The PCIe carrier board has a Spartan 6 XC6SLX150T FPGA at its heart, surrounded by a host of peripherals for different applications. In particular, there is a fair amount of DDR3 RAM, a PLL chip, a DDS and Flash ROM. The FPGA is connected to a VITA 57 FPGA Mezzanine Card (FMC) slot, covering all pins of the Low Pin Count (LPC) connector. The purpose of this document is to specify how this carrier and the FMCADC100M14b4cha 4-channel 100 MS/s ADC mezzanine card can be used to build a complete ADC solution through appropriate configuration of the FPGA in the carrier. 
 
-The proposed internal structure of the FPGA design can be seen in figure~\ref{fig:block_diagram}. It consists of a set of Wishbone cores, namely one Wishbone master and a set of slaves. Each slave deals with one or more external peripherals, with the exception of the interrupt controller. The PLL, DDS and SRAM chips are not used in this design. In the following sections, we go through all blocks, specifying their function and their internal registers.
+The internal structure of the FPGA design can be seen in figure~\ref{fig:block_diagram}. It consists of a set of Wishbone cores, namely one Wishbone master and a set of slaves. Each slave deals with one or more external peripherals, with the exception of the interrupt controller. The PLL, DDS and SRAM chips are not used in this design. In the following sections, we go through all blocks, specifying their function and their internal registers.
 
 \begin{figure}[htbp]
   \centering
@@ -93,8 +85,10 @@ The proposed internal structure of the FPGA design can be seen in figure~\ref{fi
   \label{fig:block_diagram}
 \end{figure}
 
+\newpage
+
 \section{FPGA blocks}
-For each internal block, we give a summary description of its function along with internal registers which can be read of written from the Wishbone master. Registers are presented in tables with their name, address offset (in 32-bit long words), access mode, value after reset and description. The address offset is the offset of a given register with respect to the beginning of the memory area pointed to by a given PCIe Base Address Register (BAR). This design only supports full 32-bit reads and writes for control and status registers. Even if some of the registers described below use different bits for different things, that does not mean they can be written to independently from the rest of the word, so care should be taken in each write to affect all bits in an appropriate way. In general, unused bits should be ignored on read and written to with a '0'. For status registers, bits read as '0' represent a normal state of affairs, while those set to '1' signal some departure from nominal operation.
+For each internal block, we give a summary description of its function along with internal registers which can be read or written from the Wishbone master. Registers are presented in tables with their name, address offset (in 32-bit long words), access mode, value after reset and description. The address offset is the offset of a given register with respect to the beginning of the memory area pointed to by a given PCIe Base Address Register (BAR). This design only supports full 32-bit reads and writes for control and status registers. In general, unused bits should be ignored on read and written to with a '0'. For status registers, bits read as '0' represent a normal state of affairs, while those set to '1' signal some departure from nominal operation.
 
 \subsection{Board control and status}
 This block contains all control and status registers related to the carrier board independently of the application. Other applications can include it as is. Table~\ref{tab:stat_control} shows the list of registers in this block.
@@ -139,7 +133,7 @@ This block contains all control and status registers related to the carrier boar
 The CARRTYPER register uses bits [31..16] for a carrier type identifier and bits [7..0] for the PCB version. Bits [15..8] are reserved. 
 
 \subsubsection{SIIDLR and SIIDHR}
-The SIIDLR and SIIDHR registers contain respectively the low and high parts of the 64-bit Silicon ID read from the Maxim DS18B20 1-Wire digital thermometer after system reset. 
+The SIIDLR and SIIDHR registers contain respectively the low and high parts of the 64-bit Silicon ID read from the Maxim DS18B20 1-Wire digital thermometer after system reset (see \ref{sssec:supctrlr}). 
 
 \subsubsection{BSTREAMTR and BSTREAMDR}
 BSTREAMTR uses an unsigned 32-bit number to define the bit stream type. BSTREAMDR contains the 32-bit unsigned UTC time when the bit stream was generated. 
@@ -155,9 +149,10 @@ STATUSR contains the carrier status, and in particular the status of power suppl
 \end{packed_item}
 
 \subsubsection{SUPCTRLR}
+\label{sssec:supctrlr}
 The carrier has several power supplies that can be enabled or disabled individually from the FPGA. They are controlled from the SUPCTRLR register, which is a bit field made of individual Enable (E) bits. In addition, some bits in this register are used to select which power supply voltage and current are monitored through the SUPAQNR register.
 \begin{packed_item}
-\item A write of '1' to bit 31 will generate a 1-tick-long internal reset pulse for all registers in the FPGA. 
+\item A write of '1' to bit 31 will generate a 1-tick-long internal system reset pulse for all registers in the FPGA. 
 \item Bits [30..16] are unused.
 \item Bits [15..12] are unused.
 \item Bits [11..8] contain an unsigned 4-bit number which selects a power supply for voltage and current monitoring. Starting at 0: 12V\_PCIe, 3V3\_FMC, VADJ, 1V8.
@@ -189,7 +184,8 @@ The SUPAQNR register holds a voltage and current consumption value resulting fro
 \end{table}
 
 \subsubsection{FREQCTLR}
-FREQCTLR will allow setting the system clock frequency. The 16 lower bits of the frequency control word will drive a 16-bit DAC connected to a VCXO with 25 MHz center frequency and a span of 10 ppm. It is anticipated that any fixed value will do for our application, and that an internal PLL multiplying this 25 MHz by 5 will generate a 125 MHz system clock (sysclk) which will guarantee an absence of FIFO overflows from the 100 MS/s ADC chip.
+\label{sssec:freqctlr}
+FREQCTLR will allow setting the system clock frequency. The 16 lower bits of the frequency control word will drive a 16-bit DAC connected to a VCXO with 25 MHz center frequency and a span of 10 ppm. 
 
 \subsubsection{VADJCTLR}
 VADJCTLR will allow setting the Vadj supply voltage for the FMC slot. Vadj will change from 1V (0x00000000) to 3.5V (0x0000FFFF). 
@@ -198,7 +194,7 @@ VADJCTLR will allow setting the Vadj supply voltage for the FMC slot. Vadj will 
 This is a 256-byte ASCII area for text automatically generated by versioning tools for a tagged HDL release. Its role is to facilitate correlation of the contents of the FPGA with a tagged release in a repository. It can also contain a URL of the repository.
 
 \subsection{UTC core}
-The UTC block counts the 125 MHz system clock (sysclk) in order to generate 64-bit UTC time for time-stampling purposes. Writing to UTCSETR (see table~\ref{tab:utc_core}) transfers this value also to UTCHR, clears UTCLR and starts counting at 125 MHz in UTCLR. When UTCLR reaches 125 million, it is cleared and the value of UTCHR is incremented by one.
+The UTC block counts the 125 MHz system clock (sysclk) in order to generate 64-bit UTC time for time-stampling purposes. Writing to UTCHR (see table~\ref{tab:utc_core}) clears UTCLR and starts counting at 125 MHz in UTCLR. When UTCLR reaches 125 million, it is cleared and the value of UTCHR is incremented by one.
 
 \begin{table}[htbp]
   \centering
@@ -207,14 +203,12 @@ The UTC block counts the 125 MHz system clock (sysclk) in order to generate 64-b
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    UTCSETR & 0x0080 & R/W & 0 & UTC seconds setting\\
+    UTCLR & 0x0080 & RO & 0 & UTC sysclk ticks within second\\
     \hline
-    UTCLR & 0x0081 & RO & 0 & UTC sysclk ticks within second\\
-    \hline
-    UTCHR & 0x0082 & RO & 0 & UTC seconds\\
+    UTCHR & 0x0081 & R/W & 0 & UTC seconds\\
     \hline
   \end{tabularx}
-  \caption{Register set for the GN4124 core.}
+  \caption{Register set for the UTC block.}
   \label{tab:utc_core}
 \end{table}
 
@@ -228,9 +222,9 @@ The interrupt controller receives interrupt requests from different blocks, comb
     \textbf{NAME} & \textbf{OFFSET} & \textbf{MODE} & \textbf{ON RESET} & \textbf{DESCRIPTION} \\
     \hline
     \hline
-    IRQSRCR & 0x0083 & RO, clear on read & 0 & Interrupt sources\\
+    IRQSRCR & 0x0082 & RO, clear on read & 0 & Interrupt sources\\
     \hline
-    IRQENR & 0x0084 & R/W & 0 & Interrupt enable mask\\
+    IRQENR & 0x0083 & R/W & 0 & Interrupt enable mask\\
     \hline
   \end{tabularx}
   \caption{Register set for the interrupt controller block.}
@@ -277,18 +271,18 @@ A one-tick-long positive pulse from the interrupt controller will trigger genera
 \end{table}
 
 \subsection{Dual port DDR RAM controller}
-This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs, and this should be no problem. The DDR controller handles access to the DDR RAM from two dedicated Wishbone busses, one writing from the ADC controller (port 1) and one reading from the DMA engine (port 2). Port 1 accesses have priority over prt 2 accesses if there is a clash.
+This block handles access to the MT41J128M16HA-15E DDR3 RAM chip from Micron. This chip has a data width of 16 bits and can hold 32 MSamples per channel in our application. The fact that only one sample can be written at a time means that the RAM must work at least four times faster than the ADCs. The DDR controller handles access to the DDR RAM from two dedicated Wishbone busses, one writing from the ADC controller (port 1) and one reading from the DMA engine (port 2). Port 1 accesses have priority over port 2 accesses if there is a clash.
 
-It is important to avoid collisions between Wishbone read requests and ADC write requests. Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. The software controlling the card must ensure that memory readout only happens in this state. Access at any other time will result in unpredictable behaviour. 
+It is important to avoid collisions between Wishbone read requests and ADC write requests. Taking into account that continuous read applications are not typical for such high-speed sampling systems, we will just allow reading while the state machine of the ADC core (see figure~\ref{fig:state_machine}) is in the Idle state. The software controlling the card must ensure that memory readout only happens in this state. Access at any other time will result in a bus error. 
 
 Memory will be organized internally as a circular buffer, with all 4 channels being logged in an interleaved way, starting with channel 1 at offset 0. The ADC controller block will group samples by two (per channel) in a little-endian way so as to have a 32-bit data access path to the DDR controller. Even if the DDR is a 16-bit device it will be seen as a 32-bit one, thanks to the grouping of accesses to DDR in the DDR controller.
 
-A memory layout with two channel-1 samples at offset 0, two channel-2 samples at offset 1, etc. is not convenient for the host. Therefore, an address converter block between the DDR controller and the GN4124 core will ensure that the hosts sees this memory as four blocks, each dedicated to a channel. This block simply needs to take the two higher-order bits from the host side and place them instead in the lower side of the address bus for the DDR controller\footnote{Thanks Emilio!}.
+A memory layout with two channel-1 samples at offset 0, two channel-2 samples at offset 1, etc. is not convenient for the host. Therefore, an address converter block between the DDR controller and the GN4124 core will ensure that the hosts sees this memory as four blocks, each dedicated to a channel. This block simply needs to take the two higher-order bits from the host side and place them instead in the lower side of the address bus for the DDR controller.
  
 After an acquisition, the host can read the address in the DDR RAM (in non-interleaved space) of the last acquired sample for channel 1 in the LASTPOSR register of the ADC Controller block (see table~\ref{tab:adc_control2}). All addresses are byte addresses, i.e. DDR RAM addresses get incremented by 4 for each two-sample word. A consequence of the grouping in two-samples is that only an even sumber of samples should be requested. Applications where the user wants an odd number of samples can be dealt with by the driver requesting one more sample and discarding it. 
 
 \subsection{ADC controller}
-The ADC controller handles all communication with the ADC FMC. It has a Wishbone slave for configuration registers and a dedicated output connection to the DDR RAM controller for samples. It can also drive interrupt requests into the interrupt controller. These interrupts are all one-tick-long positive pulses. The sampling state machine is depicted in figure~\ref{fig:state_machine}. 
+The ADC controller handles all communication with the ADC FMC. For this application, a 125 MHz system clock (sysclk) is required; it is anticipated that any fixed value of the FREQCTLR register (see \ref{sssec:freqctlr}) will do, and that an internal PLL multiplying this 25 MHz by 5 will generate a 125 MHz sysclk which will guarantee an absence of FIFO overflows from the 100 MS/s ADC chip. The ADC controller block has a Wishbone slave for configuration registers and a dedicated output connection to the DDR RAM controller for samples. It can also drive interrupt requests into the interrupt controller. These interrupts are all one-tick-long positive pulses. The sampling state machine is depicted in figure~\ref{fig:state_machine}. 
 
 \begin{figure}[htbp]
   \centering
@@ -330,19 +324,19 @@ The state machine will drive two pulse-like signals into the IRQ controller. One
     \hline
     ADC1OFFSR & 0x020B & R/W & 0 & ADC1 offset \\
     \hline
-    ADC1SWITCHR & 0x020C & R/W & 0 & ADC1 gain \\
+    ADC1SWITCHR & 0x020C & R/W & 0x30 & ADC1 switches \\
     \hline
     ADC1VALR & 0x020D & RO & 0 & ADC 1 current value \\
     \hline
     ADC2OFFSR & 0x020E & R/W & 0 & ADC2 offset \\
     \hline
-    ADC2SWITCHR & 0x020F & R/W & 0 & ADC2 gain \\
+    ADC2SWITCHR & 0x020F & R/W & 0x30 & ADC2 switches \\
     \hline
     ADC2VALR & 0x0210 & RO & 0 & ADC 2 current value \\
     \hline
     ADC3OFFSR & 0x0211 & R/W & 0 & ADC3 offset \\
     \hline
-    ADC3SWITCHR & 0x0212 & R/W & 0 & ADC3 gain \\
+    ADC3SWITCHR & 0x0212 & R/W & 0x30 & ADC3 switches \\
     \hline
     ADC3VALR & 0x0213 & RO & 0 & ADC 3 current value \\
     \hline
@@ -360,7 +354,7 @@ The state machine will drive two pulse-like signals into the IRQ controller. One
     \hline
     ADC4OFFSR & 0x0214 & R/W & 0 & ADC4 offset \\
     \hline
-    ADC4SWITCHR & 0x0215 & R/W & 0 & ADC4 gain \\
+    ADC4SWITCHR & 0x0215 & R/W & 0x30 & ADC4 switches \\
     \hline
     ADC4VALR & 0x0216 & RO & 0 & ADC 4 current value \\
     \hline
@@ -392,7 +386,7 @@ The state machine will drive two pulse-like signals into the IRQ controller. One
 \end{table}
 
 \subsubsection{ADCCTRLR}
-The START, STOP, and SOFT\_TRIG commands can be used to provoke transitions in the state machine from the PCIe bus, by writing appropriate patterns (1, 2 and 3 respectively) into the least significant byte of the ADCCTRLR register. A STOP command will always take the state machine to the Idle state, regardless of what its current state is.
+The START, STOP, and SOFT\_TRIG commands can be used to provoke transitions in the state machine from the PCIe bus, by writing an appropriate value (1, 2 and 3 respectively) into the least significant byte of the ADCCTRLR register. A STOP command will always take the state machine to the Idle state, regardless of what its current state is.
 
 \subsubsection{ADCSTATR}
 The current state in the state machine can be read from the ADCSTATR register. Idle~=~0, Pre-trigger Count~=~1, Wait Trigger~=~2, Wait End of Shot~=~3 and Decrement Shot Count~=~4.
@@ -411,7 +405,7 @@ UTC time tags of last trigger (including trigger delay), last start comand and l
 
 \subsubsection{ADCxOFFSR and ADCxSWITCHR}
 \label{sssec:gain_offs}
-Controlling the offset and gain of each ADC we have the ADCxOFFSR and ADCxSWITCHR registers, where x ranges from 1 to 4. The ADCxOFFSR registers are used to load a 16-bit DAC in the mezzanine, so only bits [15..0] are used. ADCxSWITCHR are in fact bit field registers, with each bit controlling an independent switch. These switches are used in normal operation to set gains, but can also be used for disconnecting the input signal from the ADC for automatic calibration purposes, and to switch between low and high impedance modes. More information can be found in \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}. For the purpose of this specification, it is enough to say that there are seven switches per analog input channel and they will be mapped to the least significant bits of the ADCxSWITCHR registers, starting with SW1 in bit 0 and ending with SW7 in bit 6. Switches get turned on by writing a '1' to their associated control bit. The default state after reset is '0' for all control bits.
+Controlling the offset and gain of each ADC we have the ADCxOFFSR and ADCxSWITCHR registers, where x ranges from 1 to 4. The ADCxOFFSR registers are used to load a 16-bit DAC in the mezzanine, so only bits [15..0] are used. ADCxSWITCHR are in fact bit field registers, with each bit controlling an independent switch. These switches are used in normal operation to set gains, but can also be used for disconnecting the input signal from the ADC for automatic calibration purposes, and to switch between low and high impedance modes. More information can be found in \href{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}. For the purpose of this specification, it is enough to say that there are seven switches per analog input channel and they will be mapped to the least significant bits of the ADCxSWITCHR registers, starting with SW1 in bit 0 and ending with SW7 in bit 6. Switches get turned on by writing a '1' to their associated control bit. The default state after reset is 0x30, which means all input amplifiers disconnected and an input full scale range of 10V.
 
 \subsubsection{ADCxVALR}
 The current ADC output value can also be read from a dedicated register for each channel. This value is accessible in the ADCxVALR registers.
@@ -437,6 +431,8 @@ This registed holds a byte address inside the DDR RAM, pointing to the last acqu
 
 \subsubsection{ADCSHOTCNTR}
 Another counter running at the sampling rate counts the number of samples for a given shot. It is reset on START, counts up to the number of pre-trigger samples, waits for a trigger and continues counting up to pre-trigger + post-trigger samples. Its value can be accessed in the ADCSHOTCNTR register.
+
+\newpage
 
 \section{Future improvements}
 \begin{packed_item}
