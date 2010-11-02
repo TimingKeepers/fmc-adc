@@ -413,7 +413,7 @@ The current ADC output value can also be read from a dedicated register for each
 \subsubsection{ADCIDADDR and ADCIDDATR}
 The ADC FMC card has two I2C busses connected to it from the carrier FPGA through the FMC connector. The first one grants access to an FMC identification EEPROM on the mezzanine, which can be used to read/write the type of mezzanine, in agreement with the FMC standard. It is read and written using registers ADCIDADDR and ADCIDDATR. The FPGA puts the address plus a R/W flag into the ADCIDADDR register and then reads or writes from/to the ADCIDDATR. The location used for the read ('0') or write ('1') flag is bit 31. A read to ADCIDDATR must only be performed after the I2C controller has had time to get the data from the EEPROM. A write also has to be performed carefully, only after the previous write has succeeded. The I2C controller inside the ADC controller signals read and write completion through an interrupt request to the IRQ controller block. 
 
-\subsubsection{ADCCLKADDR and ADCCLKDATR}
+\subsubsection{ADCCLKLR and ADCCLKHR}
 \label{ss:adcclk}
 There is a separate I2C bus for controlling the Si570 clock generator in the mezzanine. Our application assumes it will be programmed to provide a constant 100 MHz frequency (adcclk). Registers ADCCLKLR and ADCCLKHR contain the low and high parts of the frequency to be programmed into the Si570. Only the lower 16 bits of ADCCLKHR are used, for a total of 48 bits of frequency setting. Bit 31 of ADCCLKHR can be set to go into PLL mode, where the Si570 tracks the system clock (which can itself be derived from a White Rabbit link). In this PLL tracking mode, the other frequency-setting bits are ignored.
 
