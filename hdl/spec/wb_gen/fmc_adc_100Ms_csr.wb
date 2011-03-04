@@ -282,6 +282,7 @@ peripheral {
       size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
+      clock = "fs_clk_i";
     };
   };
 
