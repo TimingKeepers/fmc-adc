@@ -1,0 +1,442 @@
+peripheral {
+  name = "FMC ADC 100MS/s core registers";
+  description = "Wishbone slave for FMC ADC 100MS/s core";
+  hdl_entity = "fmc_adc_100Ms_csr";
+
+  prefix = "fmc_adc_core";
+
+  reg {
+    name = "Control register";
+    prefix = "ctl";
+
+    field {
+      name = "State machine commands";
+      description = "1: start\n2: stop";
+      prefix = "fsm_cmd";
+      type = PASS_THROUGH;
+      size = 2;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "FMC Si750 output enable";
+      prefix = "fmc_clk_oe";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Offset DACs clear (active low)";
+      prefix = "offset_dac_clr_n";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Status register";
+    prefix = "sta";
+
+    field {
+      name = "State machine status";
+      prefix = "fsm";
+      type = SLV;
+      size = 3;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "SerDes PLL status";
+      prefix = "serdes_pll";
+      type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "SerDes synchronization status";
+      description = "0: bitslip in progress\n1: serdes synchronized";
+      prefix = "serdes_synced";
+      type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Trigger configuration";
+    prefix = "trig_cfg";
+
+    field {
+      name = "Hardware trigger selection";
+      description = "0: internal (data threshold)\n1: external (front panel trigger input)";
+      prefix = "hw_trig_sel";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk_i";
+    };
+
+    field {
+      name = "External hardware trigger polarity";
+      description = "0: positive edge\n1: negative edge";
+      prefix = "ext_trig_pol";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk_i";
+    };
+
+    field {
+      name = "Hardware trigger enable";
+      description = "0: disable\n1: enable";
+      prefix = "hw_trig_en";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk_i";
+    };
+
+    field {
+      name = "Software trigger enable";
+      description = "0: disable\n1: enable";
+      prefix = "sw_trig_en";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk_i";
+    };
+
+    field {
+      name = "Channel selection for internal trigger";
+      description = "00: channel 1\n01: channel 2\n10: channel 3\n11: channel 4";
+      prefix = "int_trig_sel";
+      type = SLV;
+      size = 2;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk_i";
+    };
+
+    field {
+      name = "Dummy";
+      description = "Ignore on read, write with 0's";
+      prefix = "dummy";
+      type = SLV;
+      size = 10;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Threshold for internal trigger";
+      description = "Treated as two's complement and compared to raw ADC data";
+      prefix = "int_trig_thres";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk_i";
+    };
+  };
+
+  reg {
+    name = "Trigger delay";
+    prefix = "trig_dly";
+
+    field {
+      name = "Trigger delay value";
+      description = "Delay to apply on the trigger in sampling clock ticks";
+      type = SLV;
+      size = 32;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Software trigger";
+    description = "Writing (anything) to this register generates a software trigger";
+
+    prefix = "sw_trig";
+    field {
+      name = "Software trigger";
+      type = PASS_THROUGH;
+      size = 32;
+      clock = "fs_clk_i";
+    };
+   };
+
+  reg {
+    name = "Number of shots";
+    prefix = "shots";
+
+    field {
+      name = "Number of shots";
+      description = "Number of shots required in multi-shot mode";
+      prefix = "nb";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Trigger UTC tag (LSBs)";
+    prefix = "trig_utc_l";
+
+    field {
+      name = "Trigger UTC tag (LSBs)";
+      description = "UTC time tag (LSBs) of the last trigger, inlcuding the trigger delay";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Trigger UTC tag (MSBs)";
+    prefix = "trig_utc_h";
+
+    field {
+      name = "Trigger UTC tag (MSBs)";
+      description = "UTC time tag (MSBs) of the last trigger, inlcuding the trigger delay";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Start UTC tag (LSBs)";
+    prefix = "start_utc_l";
+
+    field {
+      name = "Start UTC tag (LSBs)";
+      description = "UTC time tag (LSBs) of the last start";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Start UTC tag (MSBs)";
+    prefix = "start_utc_h";
+
+    field {
+      name = "Start UTC tag (MSBs)";
+      description = "UTC time tag (MSBs) of the last start";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Stop UTC tag (LSBs)";
+    prefix = "stop_utc_l";
+
+    field {
+      name = "Stop UTC tag (LSBs)";
+      description = "UTC time tag (LSBs) of the last stop";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Stop UTC tag (MSBs)";
+    prefix = "stop_utc_h";
+
+    field {
+      name = "Stop UTC tag (MSBs)";
+      description = "UTC time tag (MSBs) of the last stop";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Sample rate";
+    prefix = "sr";
+
+    field {
+      name = "Sample rate decimation";
+      description = "Decimation factor";
+      prefix = "deci";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Pre-trigger samples";
+    prefix = "pre_samples";
+
+    field {
+      name = "Pre-trigger samples";
+      description = "Number of requested pre-trigger samples";
+      type = SLV;
+      size = 32;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Post-trigger samples";
+    prefix = "post_samples";
+
+    field {
+      name = "Post-trigger samples";
+      description = "Number of requested post-trigger samples";
+      type = SLV;
+      size = 32;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Sample counter";
+    prefix = "samp_cnt";
+
+    field {
+      name = "Sample counter";
+      description = "Counts the number of sample.\n It is reset on START and then counts the number of pre-trigger + post-trigger samples";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Solid state relays control for channel 1";
+    prefix = "ch1_ssr";
+
+    field {
+      name = "Solid state relays control for channel 1";
+      description = "Controls input voltage range, termination and DC offset error calibration";
+      type = SLV;
+      size = 7;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 1 current value";
+    prefix = "ch1_val";
+
+    field {
+      name = "Channel 1 current value";
+      description = "Current ADC raw value";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Solid state relays control for channel 2";
+    prefix = "ch2_ssr";
+
+    field {
+      name = "Solid state relays control for channel 2";
+      description = "Controls input voltage range, termination and DC offset error calibration";
+      type = SLV;
+      size = 7;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 2 current value";
+    prefix = "ch2_val";
+
+    field {
+      name = "Channel 2 current value";
+      description = "Current ADC raw value";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Solid state relays control for channel 3";
+    prefix = "ch3_ssr";
+
+    field {
+      name = "Solid state relays control for channel 3";
+      description = "Controls input voltage range, termination and DC offset error calibration";
+      type = SLV;
+      size = 7;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 3 current value";
+    prefix = "ch3_val";
+
+    field {
+      name = "Channel 3 current value";
+      description = "Current ADC raw value";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Solid state relays control for channel 4";
+    prefix = "ch4_ssr";
+
+    field {
+      name = "Solid state relays control for channel 4";
+      description = "Controls input voltage range, termination and DC offset error calibration";
+      type = SLV;
+      size = 7;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 4 current value";
+    prefix = "ch4_val";
+
+    field {
+      name = "Channel 4 current value";
+      description = "Current ADC raw value";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+};

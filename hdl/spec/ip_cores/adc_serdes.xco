@@ -1,0 +1,77 @@
+##############################################################
+#
+# Xilinx Core Generator version 12.2
+# Date: Tue Mar  1 09:29:12 2011
+#
+##############################################################
+#
+#  This file contains the customisation parameters for a
+#  Xilinx CORE Generator IP GUI. It is strongly recommended
+#  that you do not manually alter this file as it may cause
+#  unexpected and unsupported behavior.
+#
+##############################################################
+#
+# BEGIN Project Options
+SET addpads = false
+SET asysymbol = true
+SET busformat = BusFormatAngleBracketNotRipped
+SET createndf = false
+SET designentry = VHDL
+SET device = xc6slx45t
+SET devicefamily = spartan6
+SET flowvendor = Foundation_ISE
+SET formalverification = false
+SET foundationsym = false
+SET implementationfiletype = Ngc
+SET package = fgg484
+SET removerpms = false
+SET simulationfiles = Behavioral
+SET speedgrade = -3
+SET verilogsim = false
+SET vhdlsim = true
+# END Project Options
+# BEGIN Select
+SELECT SelectIO_Interface_Wizard family Xilinx,_Inc. 1.4
+# END Select
+# BEGIN Parameters
+CSET active_edge=RISING
+CSET bus_dir=INPUTS
+CSET bus_in_delay=NONE
+CSET bus_in_tap=0
+CSET bus_io_std=LVDS_25
+CSET bus_out_delay=NONE
+CSET bus_out_tap=0
+CSET bus_sig_type=DIFF
+CSET bus_tap_reset=NOT_APP
+CSET bus_tap_wrap=NOT_APP
+CSET clk_buf=BUFPLL
+CSET clk_delay=NONE
+CSET clk_io_std=LVCMOS25
+CSET clk_sig_type=SINGLE
+CSET clk_tap=0
+CSET component_name=adc_serdes
+CSET ddr_alignment=C0
+CSET enable_bitslip=true
+CSET enable_train=false
+CSET interface_type=RETIMED
+CSET notes=None
+CSET serialization_factor=8
+CSET system_data_width=9
+CSET train_constant=0
+CSET use_phase_detector=false
+CSET use_serialization=true
+CSET v6_active_edge=SDR
+CSET v6_bus_in_delay=NONE
+CSET v6_bus_in_tap=0
+CSET v6_bus_out_delay=NONE
+CSET v6_bus_out_tap=0
+CSET v6_clk_buf=BUFIO
+CSET v6_clk_io_std=LVCMOS18
+CSET v6_clk_sig_type=DIFF
+CSET v6_ddr_alignment=SAME_EDGE_PIPELINED
+CSET v6_interface_type=NETWORKING
+CSET v6_oddr_alignment=SAME_EDGE
+# END Parameters
+GENERATE
+# CRC: 1002624d

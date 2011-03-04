@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2011-02-24T10:24:35</DateModified>
+  <DateModified>2011-03-04T09:29:20</DateModified>
   <ModuleName>spec_top</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/mcattin/projects/spec/hdl/fmc_adc_100MHz/ise_project/iseconfig/spec_top.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/mcattin/projects/spec/hdl/fmc_adc_100MHz/ise_project</ImplementationReportsDirectory>
+  <SavedFilePath>/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ise_project/iseconfig/spec_top.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ise_project/</ImplementationReportsDirectory>
   <DateInitialized>2011-02-24T10:24:34</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
