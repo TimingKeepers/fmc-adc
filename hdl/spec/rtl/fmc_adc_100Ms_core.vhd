@@ -32,58 +32,55 @@ use UNISIM.vcomponents.all;
 
 
 entity fmc_adc_100Ms_core is
-  generic();
-  port
-    (
-      -- Clock, reset
-      sys_clk_i   : std_logic;
-      sys_rst_n_i : std_logic;
+  port (
+    -- Clock, reset
+    sys_clk_i   : std_logic;
+    sys_rst_n_i : std_logic;
 
-      -- CSR wishbone interface
-      wb_csr_clk_i : in  std_logic;
-      wb_csr_adr_i : in  std_logic_vector(4 downto 0);
-      wb_csr_dat_i : in  std_logic_vector(31 downto 0);
-      wb_csr_dat_o : out std_logic_vector(31 downto 0);
-      wb_csr_cyc_i : in  std_logic;
-      wb_csr_sel_i : in  std_logic_vector(3 downto 0);
-      wb_csr_stb_i : in  std_logic;
-      wb_csr_we_i  : in  std_logic;
-      wb_csr_ack_o : out std_logic;
+    -- CSR wishbone interface
+    wb_csr_adr_i : in  std_logic_vector(4 downto 0);
+    wb_csr_dat_i : in  std_logic_vector(31 downto 0);
+    wb_csr_dat_o : out std_logic_vector(31 downto 0);
+    wb_csr_cyc_i : in  std_logic;
+    wb_csr_sel_i : in  std_logic_vector(3 downto 0);
+    wb_csr_stb_i : in  std_logic;
+    wb_csr_we_i  : in  std_logic;
+    wb_csr_ack_o : out std_logic;
 
-      -- DMA wishbone interface
-      wb_dma_clk_i   : in  std_logic;
-      wb_dma_adr_o   : out std_logic_vector(31 downto 0);
-      wb_dma_dat_o   : out std_logic_vector(31 downto 0);
-      wb_dma_sel_o   : out std_logic_vector(3 downto 0);
-      wb_dma_stb_o   : out std_logic;
-      wb_dma_we_o    : out std_logic;
-      wb_dma_cyc_o   : out std_logic;
-      wb_dma_dat_i   : in  std_logic_vector(31 downto 0);
-      wb_dma_ack_i   : in  std_logic;
-      wb_dma_stall_i : in  std_logic;
+    -- DDR wishbone interface
+    wb_ddr_clk_i   : in  std_logic;
+    wb_ddr_adr_o   : out std_logic_vector(31 downto 0);
+    wb_ddr_dat_o   : out std_logic_vector(31 downto 0);
+    wb_ddr_sel_o   : out std_logic_vector(3 downto 0);
+    wb_ddr_stb_o   : out std_logic;
+    wb_ddr_we_o    : out std_logic;
+    wb_ddr_cyc_o   : out std_logic;
+    wb_ddr_dat_i   : in  std_logic_vector(31 downto 0);
+    wb_ddr_ack_i   : in  std_logic;
+    wb_ddr_stall_i : in  std_logic;
 
-      -- FMC interface
-      ext_trigger_p_i : in std_logic;   -- External trigger
-      ext_trigger_n_i : in std_logic;
+    -- FMC interface
+    ext_trigger_p_i : in std_logic;     -- External trigger
+    ext_trigger_n_i : in std_logic;
 
-      adc_dco_p_i  : in std_logic;                     -- ADC data clock
-      adc_dco_n_i  : in std_logic;
-      adc_fr_p_i   : in std_logic;                     -- ADC frame start
-      adc_fr_n_i   : in std_logic;
-      adc_outa_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (odd bits)
-      adc_outa_n_i : in std_logic_vector(3 downto 0);
-      adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
-      adc_outb_n_i : in std_logic_vector(3 downto 0);
+    adc_dco_p_i  : in std_logic;                     -- ADC data clock
+    adc_dco_n_i  : in std_logic;
+    adc_fr_p_i   : in std_logic;                     -- ADC frame start
+    adc_fr_n_i   : in std_logic;
+    adc_outa_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (odd bits)
+    adc_outa_n_i : in std_logic_vector(3 downto 0);
+    adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
+    adc_outb_n_i : in std_logic_vector(3 downto 0);
 
-      gpio_dac_clr_n_o   : out std_logic;                     -- offset DACs clear (active low)
-      gpio_led_power_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
-      gpio_led_trigger_o : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
-      gpio_ssr_ch1_o     : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
-      gpio_ssr_ch2_o     : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
-      gpio_ssr_ch3_o     : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
-      gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-      gpio_si750_oe_o    : out std_logic                      -- Si750 (programmable oscillator) output enable
-      );
+    gpio_dac_clr_n_o   : out std_logic;                     -- offset DACs clear (active low)
+    gpio_led_power_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
+    gpio_led_trigger_o : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
+    gpio_ssr_ch1_o     : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
+    gpio_ssr_ch2_o     : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
+    gpio_ssr_ch3_o     : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
+    gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
+    gpio_si750_oe_o    : out std_logic                      -- Si750 (programmable oscillator) output enable
+    );
 end fmc_adc_100Ms_core;
 
 
@@ -204,6 +201,20 @@ architecture rtl of fmc_adc_100Ms_core is
       );
   end component adc_sync_fifo;
 
+  component wb_sync_fifo
+    port (
+      rst    : in  std_logic;
+      wr_clk : in  std_logic;
+      rd_clk : in  std_logic;
+      din    : in  std_logic_vector(63 downto 0);
+      wr_en  : in  std_logic;
+      rd_en  : in  std_logic;
+      dout   : out std_logic_vector(31 downto 0);
+      full   : out std_logic;
+      empty  : out std_logic;
+      valid  : out std_logic);
+  end component wb_sync_fifo;
+
   ------------------------------------------------------------------------------
   -- Constants declaration
   ------------------------------------------------------------------------------
@@ -259,8 +270,14 @@ architecture rtl of fmc_adc_100Ms_core is
   signal trig_delay     : std_logic_vector(31 downto 0);
   signal trig_delay_cnt : unsigned(31 downto 0);
   signal trig_d         : std_logic;
+  signal trig_align     : std_logic;
 
-  -- Sync FIFO
+  -- Decimation
+  signal decim_factor : std_logic_vector(15 downto 0);
+  signal decim_cnt    : unsigned(15 downto 0);
+  signal decim_en     : std_logic;
+
+  -- Sync FIFO (from fs_clk to sys_clk_i)
   signal sync_fifo_din   : std_logic_vector(64 downto 0);
   signal sync_fifo_dout  : std_logic_vector(64 downto 0);
   signal sync_fifo_empty : std_logic;
@@ -268,6 +285,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal sync_fifo_wr    : std_logic;
   signal sync_fifo_rd    : std_logic;
   signal sync_fifo_valid : std_logic;
+  signal sync_fifo_dreq  : std_logic;
 
   -- Acquisition FSM
   signal acq_fsm_current_state : t_acq_fsm_state;
@@ -277,14 +295,49 @@ architecture rtl of fmc_adc_100Ms_core is
   signal acq_fsm_start         : std_logic;
   signal acq_fsm_stop          : std_logic;
   signal acq_fsm_trig          : std_logic;
+  signal acq_fsm_in_pre_trig   : std_logic;
+  signal acq_fsm_in_post_trig  : std_logic;
+
+  -- pre/post trigger and shots counters
+  signal pre_trig_value  : std_logic_vector(31 downto 0);
+  signal pre_trig_cnt    : unsigned(31 downto 0);
+  signal pre_trig_done   : std_logic;
+  signal post_trig_value : std_logic_vector(31 downto 0);
+  signal post_trig_cnt   : unsigned(31 downto 0);
+  signal post_trig_done  : std_logic;
+  signal shots_value     : std_logic_vector(15 downto 0);
+  signal shots_cnt       : unsigned(15 downto 0);
+  signal shots_done      : std_logic;
+  signal shots_decr      : std_logic;
+
+  -- Sync FIFO (from sys_clk_i to wb_ddr_clk)
+  signal wb_sync_fifo_din   : std_logic_vector(63 downto 0);
+  signal wb_sync_fifo_dout  : std_logic_vector(31 downto 0);
+  signal wb_sync_fifo_empty : std_logic;
+  signal wb_sync_fifo_full  : std_logic;
+  signal wb_sync_fifo_wr    : std_logic;
+  signal wb_sync_fifo_rd    : std_logic;
+  signal wb_sync_fifo_valid : std_logic;
+  signal wb_sync_fifo_dreq  : std_logic;
+  signal wb_sync_fifo_wr_en : std_logic;
+
+  -- START sync
+  signal acq_fsm_start_sync_t : std_logic;
+  signal acq_fsm_start_sync   : std_logic;
+
+  -- RAM address counter
+  signal ram_addr_cnt : unsigned(25 downto 0);
+  signal ram_wr_en    : std_logic;
 
 begin
 
 
   ------------------------------------------------------------------------------
-  -- Active high reset
+  -- Resets
   ------------------------------------------------------------------------------
-  sys_rst <= not(sys_rst_n_i);
+  sys_rst  <= not(sys_rst_n_i);
+  fs_rst_n <= sys_rst_n_i;
+  fs_rst   <= not(sys_rst_n_i);
 
   ------------------------------------------------------------------------------
   -- ADC data clock buffer
@@ -403,29 +456,28 @@ begin
   -- serdes bitslip generation
   p_bitslip : process (serdes_clk, sys_rst_n_i)
   begin
-    if rising_edge(serdes_clk) then
-      if sys_rst_n_i = '0' then
-        bitslip_sreg   <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
-        serdes_bitslip <= '0';
-        serdes_synced  <= '0';
-      else
-        -- Shift register to generate bitslip enable (serdes_clk/8)
-        bitfsip_sreg <= bitslip_sreg(0) & bitslip_sreg(bitslip_sreg'length-1 downto 1);
+    if sys_rst_n_i = '0' then
+      bitslip_sreg   <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
+      serdes_bitslip <= '0';
+      serdes_synced  <= '0';
+    elsif rising_edge(serdes_clk) then
 
-        -- Generate bitslip and synced signal
-        if(bitslip_sreg(bitslip_sreg'left) = '1') then
-          if(serdes_out_fr /= "11110000") then
-            serdes_bitslip <= '1';
-            serdes_synced  <= '0';
-          else
-            serdes_bitslip <= '0';
-            serdes_synced  <= '1';
-          end if;
+      -- Shift register to generate bitslip enable (serdes_clk/8)
+      bitslip_sreg <= bitslip_sreg(0) & bitslip_sreg(bitslip_sreg'length-1 downto 1);
+
+      -- Generate bitslip and synced signal
+      if(bitslip_sreg(bitslip_sreg'left) = '1') then
+        if(serdes_out_fr /= "11110000") then
+          serdes_bitslip <= '1';
+          serdes_synced  <= '0';
         else
           serdes_bitslip <= '0';
+          serdes_synced  <= '1';
         end if;
-
+      else
+        serdes_bitslip <= '0';
       end if;
+
     end if;
   end process;
 
@@ -435,7 +487,7 @@ begin
   cmp_fmc_adc_100Ms_csr : fmc_adc_100Ms_csr
     port map(
       rst_n_i                                => sys_rst_n_i,
-      wb_clk_i                               => wb_csr_clk_i,
+      wb_clk_i                               => sys_clk_i,
       wb_addr_i                              => wb_csr_adr_i,
       wb_data_i                              => wb_csr_dat_i,
       wb_data_o                              => wb_csr_dat_o,
@@ -462,16 +514,16 @@ begin
       fmc_adc_core_trig_dly_o                => trig_delay,
       fmc_adc_core_sw_trig_o                 => open,
       fmc_adc_core_sw_trig_wr_o              => sw_trig_t,
-      fmc_adc_core_shots_nb_o                => open,
+      fmc_adc_core_shots_nb_o                => shots_value,
       fmc_adc_core_trig_utc_l_i              => X"00000000",
       fmc_adc_core_trig_utc_h_i              => X"00000000",
       fmc_adc_core_start_utc_l_i             => X"00000000",
       fmc_adc_core_start_utc_h_i             => X"00000000",
       fmc_adc_core_stop_utc_l_i              => X"00000000",
       fmc_adc_core_stop_utc_h_i              => X"00000000",
-      fmc_adc_core_sr_deci_o                 => open,
-      fmc_adc_core_pre_samples_o             => open,
-      fmc_adc_core_post_samples_o            => open,
+      fmc_adc_core_sr_deci_o                 => decim_factor,
+      fmc_adc_core_pre_samples_o             => pre_trig_value,
+      fmc_adc_core_post_samples_o            => post_trig_value,
       fmc_adc_core_samp_cnt_i                => X"00000000",
       fmc_adc_core_ch1_ssr_o                 => gpio_ssr_ch1_o,
       fmc_adc_core_ch1_val_i                 => X"0000",
@@ -498,9 +550,9 @@ begin
   -- External hardware trigger synchronization
   cmp_trig_sync : ext_pulse_sync
     generic map(
-      g_MIN_PULSE_WIDTH => ,            -- clk_i ticks
+      g_MIN_PULSE_WIDTH => 5,           -- clk_i ticks
       g_CLK_FREQUENCY   => 100,         -- MHz
-      g_OUTPUT_POLARITY => 0,           -- positive pulse
+      g_OUTPUT_POLARITY => '0',         -- positive pulse
       g_OUTPUT_RETRIG   => false,
       g_OUTPUT_LENGTH   => 1            -- clk_i tick
       )
@@ -534,7 +586,7 @@ begin
   begin
     if rising_edge(fs_clk) then
       if trig = '1' then
-        trig_delay_cnt <= trig_delay;
+        trig_delay_cnt <= unsigned(trig_delay);
       elsif trig_delay_cnt = 0 then
         trig_delay_cnt <= trig_delay_cnt - 1;
       end if;
@@ -563,11 +615,45 @@ begin
   end process p_trig_delay;
 
   ------------------------------------------------------------------------------
+  -- Samples decimation and trigger alignment
+  --    When the decimantion is enabled, if the trigger occurs between two
+  --    samples it will be realigned to the next sample
+  ------------------------------------------------------------------------------
+  p_deci_cnt : process (fs_clk)
+  begin
+    if fs_rst_n = '0' then
+      decim_cnt <= (others => '0');
+      decim_en  <= '0';
+    elsif rising_edge(fs_clk) then
+      if decim_cnt = to_unsigned(0, decim_cnt'length) then
+        decim_cnt <= unsigned(decim_factor) - 1;
+        decim_en  <= '1';
+      else
+        decim_cnt <= decim_cnt - 1;
+        decim_en  <= '0';
+      end if;
+    end if;
+  end process p_deci_cnt;
+
+  p_trig_align : process (fs_clk)
+  begin
+    if fs_rst_n = '0' then
+      trig_align <= '0';
+    elsif rising_edge(fs_clk) then
+      if trig_d = '1' then
+        trig_align <= '1';
+      elsif decim_en = '1' then
+        trig_align <= '0';
+      end if;
+    end if;
+  end process p_trig_align;
+
+  ------------------------------------------------------------------------------
   -- Synchronisation FIFO to system clock domain
   ------------------------------------------------------------------------------
   cmp_adc_sync_fifo : adc_sync_fifo
-    port (
-      rst    => sys_rst,                -- must be at least 3 wr_clk and rd_clk cycles
+    port map(
+      rst    => fs_rst,                 -- must be at least 3 wr_clk and rd_clk cycles
       wr_clk => fs_clk,
       rd_clk => sys_clk_i,
       din    => sync_fifo_din,
@@ -579,10 +665,76 @@ begin
       valid  => sync_fifo_valid
       );
 
-  sync_fifo_din <= trig_d & serdes_out_data;
+  sync_fifo_din <= trig_align & serdes_out_data;
 
-  sync_fifo_wr <= serdes_synced and not(sync_fifo_full);
-  sync_fifo_rd <= and not(sync_fifo_empty);
+  sync_fifo_wr <= decim_en and serdes_synced and not(sync_fifo_full);
+  sync_fifo_rd <= sync_fifo_dreq and not(sync_fifo_empty);
+
+  ------------------------------------------------------------------------------
+  -- Shots counter
+  ------------------------------------------------------------------------------
+  p_shots_cnt : process (sys_clk_i)
+  begin
+    if rising_edge(sys_clk_i) then
+      if sys_rst_n_i = '0' then
+        shots_cnt  <= (others => '0');
+        shots_done <= '0';
+      else
+        if acq_fsm_start = '1' then
+          shots_cnt  <= unsigned(shots_value);
+          shots_done <= '0';
+        elsif shots_cnt = to_unsigned(0, shots_cnt'length) then
+          shots_done <= '1';
+        elsif (acq_fsm_trig = '1') then
+          shots_cnt <= shots_cnt - 1;
+        end if;
+      end if;
+    end if;
+  end process p_shots_cnt;
+
+  ------------------------------------------------------------------------------
+  -- Pre-trigger counter
+  ------------------------------------------------------------------------------
+  p_pre_trig_cnt : process (sys_clk_i)
+  begin
+    if rising_edge(sys_clk_i) then
+      if sys_rst_n_i = '0' then
+        pre_trig_cnt  <= (others => '0');
+        pre_trig_done <= '0';
+      else
+        if acq_fsm_start = '1' then
+          pre_trig_cnt  <= unsigned(pre_trig_value);
+          pre_trig_done <= '0';
+        elsif pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) then
+          pre_trig_done <= '1';
+        elsif acq_fsm_in_pre_trig = '1' then
+          pre_trig_cnt <= pre_trig_cnt - 1;
+        end if;
+      end if;
+    end if;
+  end process p_pre_trig_cnt;
+
+  ------------------------------------------------------------------------------
+  -- Post-trigger counter
+  ------------------------------------------------------------------------------
+  p_post_trig_cnt : process (sys_clk_i)
+  begin
+    if rising_edge(sys_clk_i) then
+      if sys_rst_n_i = '0' then
+        post_trig_cnt  <= (others => '0');
+        post_trig_done <= '0';
+      else
+        if acq_fsm_start = '1' then
+          post_trig_cnt  <= unsigned(post_trig_value);
+          post_trig_done <= '0';
+        elsif post_trig_cnt = to_unsigned(0, post_trig_cnt'length) then
+          post_trig_done <= '1';
+        elsif acq_fsm_in_post_trig = '1' then
+          post_trig_cnt <= post_trig_cnt - 1;
+        end if;
+      end if;
+    end if;
+  end process p_post_trig_cnt;
 
   ------------------------------------------------------------------------------
   -- Aqcuisition FSM
@@ -609,7 +761,10 @@ begin
   p_acq_fsm_transitions : process(acq_fsm_current_state,
                                   acq_fsm_start,
                                   acq_fsm_stop,
-                                  acq_fsm_trig)
+                                  acq_fsm_trig,
+                                  pre_trig_done,
+                                  post_trig_done,
+                                  shots_done)
   begin
     case acq_fsm_current_state is
 
@@ -619,19 +774,39 @@ begin
         end if;
 
       when PRE_TRIG =>
-;
+        if acq_fsm_stop = '1' then
+          acq_fsm_next_state <= IDLE;
+        elsif pre_trig_done = '1' then
+          acq_fsm_next_state <= WAIT_TRIG;
+        end if;
 
       when WAIT_TRIG =>
-;
+        if acq_fsm_stop = '1' then
+          acq_fsm_next_state <= IDLE;
+        elsif acq_fsm_trig = '1' then
+          acq_fsm_next_state <= POST_TRIG;
+        end if;
 
       when POST_TRIG =>
-;
+        if acq_fsm_stop = '1' then
+          acq_fsm_next_state <= IDLE;
+        elsif post_trig_done = '1' then
+          if shots_done = '1' then
+            acq_fsm_next_state <= IDLE;
+          else
+            acq_fsm_next_state <= DECR_SHOT;
+          end if;
+        end if;
 
       when DECR_SHOT =>
-;
+        if acq_fsm_stop = '1' then
+          acq_fsm_next_state <= IDLE;
+        else
+          acq_fsm_next_state <= PRE_TRIG;
+        end if;
 
       when others =>
-        null;
+        acq_fsm_next_state <= IDLE;
 
     end case;
   end process p_acq_fsm_transitions;
@@ -639,27 +814,116 @@ begin
   -- FSM outputs
   p_acq_fsm_outputs : process(acq_fsm_current_state)
   begin
+
+    shots_decr           <= '0';
+    sync_fifo_dreq       <= '1';
+    acq_fsm_in_pre_trig  <= '0';
+    acq_fsm_in_post_trig <= '0';
+    wb_sync_fifo_wr_en   <= '0';
+
     case acq_fsm_current_state is
 
       when IDLE =>
-;
+
 
       when PRE_TRIG =>
-;
+        wb_sync_fifo_wr_en  <= '1';
+        acq_fsm_in_pre_trig <= '1';
 
       when WAIT_TRIG =>
-;
+        wb_sync_fifo_wr_en <= '1';
 
       when POST_TRIG =>
-;
+        wb_sync_fifo_wr_en   <= '1';
+        acq_fsm_in_post_trig <= '1';
 
       when DECR_SHOT =>
-;
+        shots_decr <= '1';
 
       when others =>
-        null;
 
     end case;
   end process p_acq_fsm_outputs;
+
+  ------------------------------------------------------------------------------
+  -- Synchronisation FIFO to wishbone DDR clock domain
+  ------------------------------------------------------------------------------
+  cmp_wb_sync_fifo : wb_sync_fifo
+    port map(
+      rst    => sys_rst,                -- must be at least 3 wr_clk and rd_clk cycles
+      wr_clk => sys_clk_i,
+      rd_clk => wb_ddr_clk_i,
+      din    => wb_sync_fifo_din,
+      wr_en  => wb_sync_fifo_wr,
+      rd_en  => wb_sync_fifo_rd,
+      dout   => wb_sync_fifo_dout,
+      full   => wb_sync_fifo_full,
+      empty  => wb_sync_fifo_empty,
+      valid  => wb_sync_fifo_valid
+      );
+
+  wb_sync_fifo_din <= sync_fifo_dout(63 downto 0);
+  wb_sync_fifo_wr  <= wb_sync_fifo_wr_en and not(wb_sync_fifo_full);
+
+  wb_sync_fifo_rd   <= wb_sync_fifo_dreq and not(wb_sync_fifo_empty);
+  wb_sync_fifo_dreq <= '1';
+
+  ------------------------------------------------------------------------------
+  -- START synchronization to wishbone DDR clock domain
+  ------------------------------------------------------------------------------
+  p_start_sync : process (wb_ddr_clk_i, sys_rst_n_i)
+  begin
+    if sys_rst_n_i = '0' then
+      acq_fsm_start_sync   <= '0';
+      acq_fsm_start_sync_t <= '0';
+    elsif rising_edge(wb_ddr_clk_i) then
+      acq_fsm_start_sync_t <= acq_fsm_start;
+      acq_fsm_start_sync   <= acq_fsm_start_sync_t;
+    end if;
+  end process p_start_sync;
+
+  ------------------------------------------------------------------------------
+  -- RAM address counter (32-bit word address)
+  ------------------------------------------------------------------------------
+  p_ram_addr_cnt : process (wb_ddr_clk_i, sys_rst_n_i)
+  begin
+    if sys_rst_n_i = '0' then
+      ram_addr_cnt <= (others => '0');
+    elsif rising_edge(wb_ddr_clk_i) then
+      if acq_fsm_start_sync = '1' then
+        ram_addr_cnt <= (others => '0');
+      elsif wb_sync_fifo_valid = '1' then
+        ram_addr_cnt <= ram_addr_cnt + 1;
+      end if;
+    end if;
+  end process p_ram_addr_cnt;
+
+  ------------------------------------------------------------------------------
+  -- Wishbone master (to DDR)
+  ------------------------------------------------------------------------------
+  p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
+  begin
+    if sys_rst_n_i = '0' then
+      wb_ddr_cyc_o <= '0';
+      wb_ddr_we_o  <= '0';
+      wb_ddr_stb_o <= '0';
+      wb_ddr_adr_o <= (others => '0');
+      wb_ddr_dat_o <= (others => '0');
+    elsif rising_edge(wb_ddr_clk_i) then
+      if (wb_sync_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
+        wb_ddr_cyc_o <= '1';
+        wb_ddr_we_o  <= '1';
+        wb_ddr_stb_o <= '1';
+        wb_ddr_adr_o <= "000000" & std_logic_vector(ram_addr_cnt);
+        wb_ddr_dat_o <= wb_sync_fifo_dout;
+      else
+        wb_ddr_cyc_o <= '0';
+        wb_ddr_we_o  <= '0';
+        wb_ddr_stb_o <= '0';
+      end if;
+    end if;
+  end process p_wb_master;
+
+  wb_ddr_sel_o <= "1111";
 
 end rtl;

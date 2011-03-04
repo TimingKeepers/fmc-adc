@@ -18,6 +18,8 @@ XST: HDL Elaboration
 XST: HDL Synthesis
 XST: Advanced HDL Synthesis
 XST: Low Level Synthesis
+XST: Partition Report
+XST: Design Summary
 Generating Implementation files.
 Generating ISE symbol file...
 Generating NGC file.
@@ -40,5 +42,4 @@ Launched readme viewer.
 Moving files to output directory...
 Finished moving files to output directory
 Saved options for project 'coregen'.
-View Data SheetLaunching datasheet viewer...
-WARNING:sim:254 - Unable to launch pdf viewerERROR:sim - Failed to launch datasheet viewer.
+Closed project file.

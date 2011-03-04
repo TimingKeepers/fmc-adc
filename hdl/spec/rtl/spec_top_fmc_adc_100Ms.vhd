@@ -381,6 +381,58 @@ architecture rtl of spec_top is
       );
   end component monostable;
 
+  component fmc_adc_100Ms_core
+    port (
+        -- Clock, reset
+        sys_clk_i   : std_logic;
+        sys_rst_n_i : std_logic;
+
+        -- CSR wishbone interface
+        wb_csr_adr_i : in  std_logic_vector(4 downto 0);
+        wb_csr_dat_i : in  std_logic_vector(31 downto 0);
+        wb_csr_dat_o : out std_logic_vector(31 downto 0);
+        wb_csr_cyc_i : in  std_logic;
+        wb_csr_sel_i : in  std_logic_vector(3 downto 0);
+        wb_csr_stb_i : in  std_logic;
+        wb_csr_we_i  : in  std_logic;
+        wb_csr_ack_o : out std_logic;
+
+        -- DDR wishbone interface
+        wb_ddr_clk_i   : in  std_logic;
+        wb_ddr_adr_o   : out std_logic_vector(31 downto 0);
+        wb_ddr_dat_o   : out std_logic_vector(31 downto 0);
+        wb_ddr_sel_o   : out std_logic_vector(3 downto 0);
+        wb_ddr_stb_o   : out std_logic;
+        wb_ddr_we_o    : out std_logic;
+        wb_ddr_cyc_o   : out std_logic;
+        wb_ddr_dat_i   : in  std_logic_vector(31 downto 0);
+        wb_ddr_ack_i   : in  std_logic;
+        wb_ddr_stall_i : in  std_logic;
+
+        -- FMC interface
+        ext_trigger_p_i : in std_logic;  -- External trigger
+        ext_trigger_n_i : in std_logic;
+
+        adc_dco_p_i  : in std_logic;                     -- ADC data clock
+        adc_dco_n_i  : in std_logic;
+        adc_fr_p_i   : in std_logic;                     -- ADC frame start
+        adc_fr_n_i   : in std_logic;
+        adc_outa_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (odd bits)
+        adc_outa_n_i : in std_logic_vector(3 downto 0);
+        adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
+        adc_outb_n_i : in std_logic_vector(3 downto 0);
+
+        gpio_dac_clr_n_o   : out std_logic;                     -- offset DACs clear (active low)
+        gpio_led_power_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
+        gpio_led_trigger_o : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
+        gpio_ssr_ch1_o     : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
+        gpio_ssr_ch2_o     : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
+        gpio_ssr_ch3_o     : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
+        gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
+        gpio_si750_oe_o    : out std_logic                      -- Si750 (programmable oscillator) output enable
+        );
+  end component fmc_adc_100Ms_core;
+
   ------------------------------------------------------------------------------
   -- Constants declaration
   ------------------------------------------------------------------------------
@@ -399,10 +451,10 @@ architecture rtl of spec_top is
 
   -- System clock
   signal sys_clk_in         : std_logic;
-  signal sys_clk_50_buf     : std_logic;
-  signal sys_clk_200_buf    : std_logic;
-  signal sys_clk_50         : std_logic;
-  signal sys_clk_200        : std_logic;
+  signal sys_clk_125_buf    : std_logic;
+  signal sys_clk_250_buf    : std_logic;
+  signal sys_clk_125        : std_logic;
+  signal sys_clk_250        : std_logic;
   signal sys_clk_fb         : std_logic;
   signal sys_clk_pll_locked : std_logic;
 
@@ -466,18 +518,28 @@ architecture rtl of spec_top is
   signal wb_adr_fmc_i2c      : std_logic_vector(2 downto 0);
   signal wb_adr_fmc_adc_core : std_logic_vector(4 downto 0);
 
-  -- DMA wishbone bus
-  signal dma_adr     : std_logic_vector(31 downto 0);
-  signal dma_dat_i   : std_logic_vector((32*c_DMA_WB_SLAVES_NB)-1 downto 0);
-  signal dma_dat_o   : std_logic_vector(31 downto 0);
-  signal dma_sel     : std_logic_vector(3 downto 0);
-  signal dma_cyc     : std_logic;       --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
-  signal dma_stb     : std_logic;
-  signal dma_we      : std_logic;
-  signal dma_ack     : std_logic;       --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
-  signal dma_stall   : std_logic;       --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
-  signal ram_we      : std_logic_vector(0 downto 0);
-  signal ddr_dma_adr : std_logic_vector(29 downto 0);
+  -- GN4124 DMA to DDR wishbone bus
+  signal wb_dma_adr     : std_logic_vector(31 downto 0);
+  signal wb_dma_dat_i   : std_logic_vector((32*c_DMA_WB_SLAVES_NB)-1 downto 0);
+  signal wb_dma_dat_o   : std_logic_vector(31 downto 0);
+  signal wb_dma_sel     : std_logic_vector(3 downto 0);
+  signal wb_dma_cyc     : std_logic;       --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
+  signal wb_dma_stb     : std_logic;
+  signal wb_dma_we      : std_logic;
+  signal wb_dma_ack     : std_logic;       --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
+  signal wb_dma_stall   : std_logic;       --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
+  signal wb_dma_adr_ddr : std_logic_vector(29 downto 0);
+
+  -- FMC ADC core to DDR wishbone bus
+  signal wb_ddr_adr     : std_logic_vector(31 downto 0);
+  signal wb_ddr_dat_i   : std_logic_vector((32*c_WB_DDR_WB_SLAVES_NB)-1 downto 0);
+  signal wb_ddr_dat_o   : std_logic_vector(31 downto 0);
+  signal wb_ddr_sel     : std_logic_vector(3 downto 0);
+  signal wb_ddr_cyc     : std_logic;
+  signal wb_ddr_stb     : std_logic;
+  signal wb_ddr_we      : std_logic;
+  signal wb_ddr_ack     : std_logic;
+  signal wb_ddr_stall   : std_logic;
 
   -- Interrupts stuff
   signal irq_sources       : std_logic_vector(1 downto 0);
@@ -512,8 +574,8 @@ begin
 
   ------------------------------------------------------------------------------
   -- Clocks distribution from 20MHz TCXO
-  --  50.000 MHz system clock
-  -- 200.000 MHz fast system clock
+  -- 125.000 MHz system clock
+  -- 250.000 MHz fast system clock
   -- 333.333 MHz DDR3 clock
   ------------------------------------------------------------------------------
   cmp_sys_clk_buf : IBUFG
@@ -529,10 +591,10 @@ begin
       DIVCLK_DIVIDE      => 1,
       CLKFBOUT_MULT      => 50,
       CLKFBOUT_PHASE     => 0.000,
-      CLKOUT0_DIVIDE     => 20,
+      CLKOUT0_DIVIDE     => 8,
       CLKOUT0_PHASE      => 0.000,
       CLKOUT0_DUTY_CYCLE => 0.500,
-      CLKOUT1_DIVIDE     => 5,
+      CLKOUT1_DIVIDE     => 4,
       CLKOUT1_PHASE      => 0.000,
       CLKOUT1_DUTY_CYCLE => 0.500,
       CLKOUT2_DIVIDE     => 3,
@@ -542,8 +604,8 @@ begin
       REF_JITTER         => 0.016)
     port map (
       CLKFBOUT => sys_clk_fb,
-      CLKOUT0  => sys_clk_50_buf,
-      CLKOUT1  => sys_clk_200_buf,
+      CLKOUT0  => sys_clk_125_buf,
+      CLKOUT1  => sys_clk_250_buf,
       CLKOUT2  => ddr_clk_buf,
       CLKOUT3  => open,
       CLKOUT4  => open,
@@ -553,15 +615,15 @@ begin
       CLKFBIN  => sys_clk_fb,
       CLKIN    => sys_clk_in);
 
-  cmp_clk_50_buf : BUFG
+  cmp_clk_125_buf : BUFG
     port map (
-      O => sys_clk_50,
-      I => sys_clk_50_buf);
+      O => sys_clk_125,
+      I => sys_clk_125_buf);
 
-  cmp_clk_200_buf : BUFG
+  cmp_clk_250_buf : BUFG
     port map (
-      O => sys_clk_200,
-      I => sys_clk_200_buf);
+      O => sys_clk_250,
+      I => sys_clk_250_buf);
 
   cmp_ddr_clk_buf : BUFG
     port map (
@@ -630,7 +692,7 @@ begin
       irq_p_i        => irq_to_gn4124,
       irq_p_o        => GPIO(0),
       -- CSR wishbone interface
-      wb_clk_i       => sys_clk_50,
+      wb_clk_i       => sys_clk_125,
       wb_dat_o       => wb_dat_o,
       wb_sel_o       => wb_sel,
       wb_stb_o       => wb_stb,
@@ -668,16 +730,16 @@ begin
       wb_dat_i(8 * 32 + 31 downto 8 * 32) => wb_dat_fmc_adc_core,
 
       -- DMA wishbone interface (pipelined)
-      dma_clk_i   => sys_clk_50,
-      dma_adr_o   => dma_adr,
-      dma_dat_o   => dma_dat_o,
-      dma_sel_o   => dma_sel,
-      dma_stb_o   => dma_stb,
-      dma_we_o    => dma_we,
-      dma_cyc_o   => dma_cyc,
-      dma_dat_i   => dma_dat_i,
-      dma_ack_i   => dma_ack,
-      dma_stall_i => dma_stall
+      dma_clk_i   => sys_clk_250,
+      dma_adr_o   => wb_dma_adr,
+      dma_dat_o   => wb_dma_dat_o,
+      dma_sel_o   => wb_dma_sel,
+      dma_stb_o   => wb_dma_stb,
+      dma_we_o    => wb_dma_we,
+      dma_cyc_o   => wb_dma_cyc,
+      dma_dat_i   => wb_dma_dat_i,
+      dma_ack_i   => wb_dma_ack,
+      dma_stall_i => wb_dma_stall
       );
 
   ------------------------------------------------------------------------------
@@ -715,7 +777,7 @@ begin
   cmp_carrier_csr : carrier_csr
     port map(
       rst_n_i                          => sys_rst_n,
-      wb_clk_i                         => sys_clk_50,
+      wb_clk_i                         => sys_clk_125,
       wb_addr_i                        => wb_adr_carrier_csr,
       wb_data_i                        => wb_data_0,
       wb_data_o                        => wb_dat_carrier_csr,
@@ -749,7 +811,7 @@ begin
         g_OUTPUT_LENGTH   => 5000000)
       port map(
         rst_n_i   => L_RST_N,
-        clk_i     => sys_clk_50,
+        clk_i     => sys_clk_125,
         trigger_i => irq_sources(I),
         pulse_o   => irq_sources_2_led(I));
   end generate gen_irq_led;
@@ -780,7 +842,7 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc_spi : wb_spi_master
     port map (
-      wb_clk_i    => sys_clk_50,
+      wb_clk_i    => sys_clk_125,
       wb_rst_i    => sys_rst,
       wb_adr_i    => wb_adr_fmc_spi,
       wb_dat_i    => wb_dat_o,
@@ -816,7 +878,7 @@ begin
     generic map (
       ARST_LVL => '0')
     port map (
-      wb_clk_i     => sys_clk_50,
+      wb_clk_i     => sys_clk_125,
       wb_rst_i     => sys_rst_n,
       arst_i       => '1',
       wb_adr_i     => wb_adr_fmc_i2c(2 downto 0),
@@ -851,7 +913,52 @@ begin
   --    Offset DACs control (CLR_N)
   --    ADC core control and status
   ------------------------------------------------------------------------------
+  cmp_fmc_adc_100Ms_core : fmc_adc_100Ms_core
+    port map(
+        sys_clk_i   => sys_clk_125,
+        sys_rst_n_i => sys_rst_n,
 
+        wb_csr_adr_i => wb_adr(4 downto 0),
+        wb_csr_dat_i => wb_dat_o,
+        wb_csr_dat_o => wb_dat_fmc_adc_core,
+        wb_csr_cyc_i => wb_cyc_fmc_adc_core,
+        wb_csr_sel_i => wb_sel,
+        wb_csr_stb_i => wb_stb,
+        wb_csr_we_i  => wb_we,
+        wb_csr_ack_o => wb_ack_fmc_adc_core,
+
+        wb_ddr_clk_i   => sys_clk_250,
+        wb_ddr_adr_o   => wb_ddr_adr,
+        wb_ddr_dat_o   => wb_ddr_dat_o,
+        wb_ddr_sel_o   => wb_ddr_sel,
+        wb_ddr_stb_o   => wb_ddr_stb,
+        wb_ddr_we_o    => wb_ddr_we,
+        wb_ddr_cyc_o   => wb_ddr_cyc,
+        wb_ddr_dat_i   => wb_ddr_dat_i,
+        wb_ddr_ack_i   => wb_ddr_ack,
+        wb_ddr_stall_i => wb_ddr_stall,
+
+        ext_trigger_p_i => ext_trigger_p_i,
+        ext_trigger_n_i => ext_trigger_n_i,
+
+        adc_dco_p_i  => adc_dco_p_i,
+        adc_dco_n_i  => adc_dco_n_i,
+        adc_fr_p_i   => adc_fr_p_i,
+        adc_fr_n_i   => adc_fr_n_i,
+        adc_outa_p_i => adc_outa_p_i,
+        adc_outa_n_i => adc_outa_n_i,
+        adc_outb_p_i => adc_outb_p_i,
+        adc_outb_n_i => adc_outb_n_i,
+
+        gpio_dac_clr_n_o   => gpio_dac_clr_n_o,
+        gpio_led_power_o   => gpio_led_power_o,
+        gpio_led_trigger_o => gpio_led_trigger_o,
+        gpio_ssr_ch1_o     => gpio_ssr_ch1_o,
+        gpio_ssr_ch2_o     => gpio_ssr_ch2_o,
+        gpio_ssr_ch3_o     => gpio_ssr_ch3_o,
+        gpio_ssr_ch4_o     => gpio_ssr_ch4_o,
+        gpio_si750_oe_o    => gpio_si750_oe_o
+        );
 
   ------------------------------------------------------------------------------
   -- Interrupt stuff
@@ -894,33 +1001,30 @@ begin
       ddr3_rzq_b    => DDR3_RZQ,
       ddr3_zio_b    => DDR3_ZIO,
 
-      wb0_clk_i   => sys_clk_50,              --'0',
-      wb0_sel_i   => "1111",
-      wb0_cyc_i   => wb_cyc(2),               --'0',
-      wb0_stb_i   => wb_stb,                  --'0',
-      wb0_we_i    => wb_we,                   --'0',
-      wb0_addr_i  => ddr_wb_adr,              --X"0000000" & "00",
-      wb0_data_i  => wb_dat_o,                --X"00000000",
-      wb0_data_o  => wb_dat_i(95 downto 64),  --open,
-      wb0_ack_o   => wb_ack(2),               --open,
-      wb0_stall_o => open,
+      wb0_clk_i   => sys_clk_250,
+      wb0_sel_i   => wb_ddr_sel,
+      wb0_cyc_i   => wb_ddr_cyc,
+      wb0_stb_i   => wb_ddr_stb,
+      wb0_we_i    => wb_we,
+      wb0_addr_i  => wb_ddr_adr,
+      wb0_data_i  => wb_ddr_dat_o,
+      wb0_data_o  => wb_ddr_ack_i,
+      wb0_ack_o   => wb_ddr_ack,
+      wb0_stall_o => wb_ddr_stall,
 
-      wb1_clk_i   => sys_clk_50,
+      wb1_clk_i   => sys_clk_125,
       wb1_sel_i   => "1111",
-      wb1_cyc_i   => dma_cyc,
-      wb1_stb_i   => dma_stb,
-      wb1_we_i    => dma_we,
-      wb1_addr_i  => ddr_dma_adr,
-      wb1_data_i  => dma_dat_o,
-      wb1_data_o  => dma_dat_i,
-      wb1_ack_o   => dma_ack,
-      wb1_stall_o => dma_stall);
+      wb1_cyc_i   => wb_dma_cyc,
+      wb1_stb_i   => wb_dma_stb,
+      wb1_we_i    => wb_dma_we,
+      wb1_addr_i  => wb_dma_adr_ddr,
+      wb1_data_i  => wb_dma_dat_o,
+      wb1_data_o  => wb_dma_dat_i,
+      wb1_ack_o   => wb_dma_ack,
+      wb1_stall_o => wb_dma_stall);
 
   -- 32-bit word to byte address
-  ddr_wb_adr <= "0000000000" & wb_adr & "00";
-
-  -- 32-bit word to byte address
-  ddr_dma_adr <= dma_adr(27 downto 0) & "00";
+  wb_dma_adr_ddr <= wb_dma_adr(27 downto 0) & "00";
 
   ------------------------------------------------------------------------------
   -- Assign unused outputs

@@ -8,7 +8,7 @@
 <!-- Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ip_cores/tmp/_cg/adc_sync_fifo.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ip_cores/tmp/_cg/wb_sync_fifo.vhd&quot; into library work</arg>
 </msg>
 
 </messages>

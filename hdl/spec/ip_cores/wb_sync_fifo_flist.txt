@@ -1,0 +1,14 @@
+# Output products list for <wb_sync_fifo>
+_xmsgs/pn_parser.xmsgs
+fifo_generator_readme.txt
+fifo_generator_ug175.pdf
+wb_sync_fifo.asy
+wb_sync_fifo.gise
+wb_sync_fifo.ngc
+wb_sync_fifo.sym
+wb_sync_fifo.vhd
+wb_sync_fifo.vho
+wb_sync_fifo.xco
+wb_sync_fifo.xise
+wb_sync_fifo_flist.txt
+wb_sync_fifo_xmdf.tcl
