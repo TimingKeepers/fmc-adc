@@ -197,9 +197,9 @@ NET "GPIO[1]" IOSTANDARD = "LVCMOS25";
 # FMC slot
 #----------------------------------------
 NET "ext_trigger_n_i" LOC = AB13; # LA17_N
-NET "ext_trigger_n_i" IOSTANDARD = "LVCMOS25";
+NET "ext_trigger_n_i" IOSTANDARD = "LVDS_25";
 NET "ext_trigger_p_i" LOC = Y13; # LA17_P
-NET "ext_trigger_p_i" IOSTANDARD = "LVCMOS25";
+NET "ext_trigger_p_i" IOSTANDARD = "LVDS_25";
 
 # dco_p and dco_n are swapped compared to the FMC ADC schematics
 # this is to be coherent in the hdl design
@@ -208,9 +208,9 @@ NET "adc_dco_n_i" IOSTANDARD = "LVDS_25";
 NET "adc_dco_p_i" LOC = Y11; # LA00_P
 NET "adc_dco_p_i" IOSTANDARD = "LVDS_25";
 
-NET "adc_fr_p_i" LOC = AB12; # LA01_N
+NET "adc_fr_p_i" LOC = AA12; # LA01_N
 NET "adc_fr_p_i" IOSTANDARD = "LVDS_25";
-NET "adc_fr_n_i" LOC = AA12; # LA01_P
+NET "adc_fr_n_i" LOC = AB12; # LA01_P
 NET "adc_fr_n_i" IOSTANDARD = "LVDS_25";
 
 NET "adc_outa_n_i[0]" LOC = AB4; # LA14_N
@@ -334,10 +334,10 @@ NET "gpio_ssr_ch4_o[6]" IOSTANDARD = "LVCMOS25";
 NET "gpio_si570_oe_o" LOC = AB5; # LA06_N
 NET "gpio_si570_oe_o" IOSTANDARD = "LVCMOS25";
 
-NET "si750_thermo_scl_b" LOC = U12; # LA18_N
-NET "si750_thermo_scl_b" IOSTANDARD = "LVCMOS25";
-NET "si750_thermo_sda_b" LOC = T12; # LA18_P
-NET "si750_thermo_sda_b" IOSTANDARD = "LVCMOS25";
+NET "si570_thermo_scl_b" LOC = U12; # LA18_N
+NET "si570_thermo_scl_b" IOSTANDARD = "LVCMOS25";
+NET "si570_thermo_sda_b" LOC = T12; # LA18_P
+NET "si570_thermo_sda_b" IOSTANDARD = "LVCMOS25";
 
 NET "prsnt_m2c_n_i" LOC = A2; # PRSNT_M2C_L
 NET "prsnt_m2c_n_i" IOSTANDARD = "LVCMOS25";
@@ -530,6 +530,9 @@ NET "DDR3_DQ[15]" IOSTANDARD = "SSTL15_II";
 #===============================================================================
 INST "cmp_gn4124_core/l2p_rdy_t" IOB=FALSE;
 INST "cmp_gn4124_core/l_wr_rdy_t*" IOB=FALSE;
+
+INST "cmp_fmc_spi/shift/s_out" IOB=FALSE;
+INST "cmp_fmc_spi/clgen/clk_out" IOB=FALSE;
 
 
 #===============================================================================

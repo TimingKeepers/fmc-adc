@@ -79,7 +79,7 @@ entity fmc_adc_100Ms_core is
     gpio_ssr_ch2_o     : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
     gpio_ssr_ch3_o     : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
     gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-    gpio_si750_oe_o    : out std_logic                      -- Si750 (programmable oscillator) output enable
+    gpio_si570_oe_o    : out std_logic                      -- Si570 (programmable oscillator) output enable
     );
 end fmc_adc_100Ms_core;
 
@@ -215,6 +215,23 @@ architecture rtl of fmc_adc_100Ms_core is
       valid  : out std_logic);
   end component wb_sync_fifo;
 
+  component monostable
+    generic(
+      g_INPUT_POLARITY  : std_logic := '1';    --! trigger_i polarity
+                                               --! ('0'=negative, 1=positive)
+      g_OUTPUT_POLARITY : std_logic := '1';    --! pulse_o polarity
+                                               --! ('0'=negative, 1=positive)
+      g_OUTPUT_RETRIG   : boolean   := false;  --! Retriggerable output monostable
+      g_OUTPUT_LENGTH   : natural   := 1       --! pulse_o lenght (in clk_i ticks)
+      );
+    port (
+      rst_n_i   : in  std_logic;               --! Reset (active low)
+      clk_i     : in  std_logic;               --! Clock
+      trigger_i : in  std_logic;               --! Trigger input pulse
+      pulse_o   : out std_logic                --! Monostable output pulse
+      );
+  end component monostable;
+
   ------------------------------------------------------------------------------
   -- Constants declaration
   ------------------------------------------------------------------------------
@@ -331,6 +348,25 @@ architecture rtl of fmc_adc_100Ms_core is
 
 begin
 
+
+  ------------------------------------------------------------------------------
+  -- LEDs
+  ------------------------------------------------------------------------------
+  gpio_led_power_o <= serdes_synced;
+
+  cmp_trig_led_monostable : monostable
+  generic map(
+    g_INPUT_POLARITY  => '1',
+    g_OUTPUT_POLARITY => '1',
+    g_OUTPUT_RETRIG   => true,
+    g_OUTPUT_LENGTH   => 12500000
+    )
+  port map(
+    rst_n_i   => sys_rst_n_i,
+    clk_i     => sys_clk_i,
+    trigger_i => acq_fsm_trig,
+    pulse_o   => gpio_led_trigger_o
+    );
 
   ------------------------------------------------------------------------------
   -- Resets
@@ -454,13 +490,13 @@ begin
 
 
   -- serdes bitslip generation
-  p_bitslip : process (serdes_clk, sys_rst_n_i)
+  p_bitslip : process (fs_clk, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
       bitslip_sreg   <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
       serdes_bitslip <= '0';
       serdes_synced  <= '0';
-    elsif rising_edge(serdes_clk) then
+    elsif rising_edge(fs_clk) then
 
       -- Shift register to generate bitslip enable (serdes_clk/8)
       bitslip_sreg <= bitslip_sreg(0) & bitslip_sreg(bitslip_sreg'length-1 downto 1);
@@ -499,7 +535,7 @@ begin
       fs_clk_i                               => fs_clk,
       fmc_adc_core_ctl_fsm_cmd_o             => fsm_cmd,
       fmc_adc_core_ctl_fsm_cmd_wr_o          => fsm_cmd_wr,
-      fmc_adc_core_ctl_fmc_clk_oe_o          => gpio_si750_oe_o,
+      fmc_adc_core_ctl_fmc_clk_oe_o          => gpio_si570_oe_o,
       fmc_adc_core_ctl_offset_dac_clr_n_o    => gpio_dac_clr_n_o,
       fmc_adc_core_sta_fsm_i                 => "000",
       fmc_adc_core_sta_serdes_pll_i          => locked_out,
@@ -865,7 +901,7 @@ begin
   wb_sync_fifo_din <= sync_fifo_dout(63 downto 0);
   wb_sync_fifo_wr  <= wb_sync_fifo_wr_en and not(wb_sync_fifo_full);
 
-  wb_sync_fifo_rd   <= wb_sync_fifo_dreq and not(wb_sync_fifo_empty);
+  wb_sync_fifo_rd   <= wb_sync_fifo_dreq and not(wb_sync_fifo_empty);  -- and not(wb_ddr_stall_i)
   wb_sync_fifo_dreq <= '1';
 
   ------------------------------------------------------------------------------
@@ -910,7 +946,7 @@ begin
       wb_ddr_adr_o <= (others => '0');
       wb_ddr_dat_o <= (others => '0');
     elsif rising_edge(wb_ddr_clk_i) then
-      if (wb_sync_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
+      if wb_sync_fifo_valid = '1' then  --if (wb_sync_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
         wb_ddr_cyc_o <= '1';
         wb_ddr_we_o  <= '1';
         wb_ddr_stb_o <= '1';
