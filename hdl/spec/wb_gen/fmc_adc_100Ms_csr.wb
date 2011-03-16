@@ -38,9 +38,8 @@ peripheral {
     field {
       name = "Manual serdes bitslip";
       prefix = "man_bitslip";
-      type = BIT;
-      access_bus = READ_WRITE;
-      access_dev = READ_ONLY;
+      type = MONOSTABLE;
+      clock = "fs_clk_i"
     };
   };
 
@@ -361,6 +360,7 @@ peripheral {
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
     };
   };
 
@@ -389,6 +389,7 @@ peripheral {
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
     };
   };
 
@@ -417,6 +418,7 @@ peripheral {
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
     };
   };
 
@@ -445,6 +447,7 @@ peripheral {
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
     };
   };
 

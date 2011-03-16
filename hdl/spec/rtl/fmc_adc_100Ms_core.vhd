@@ -571,13 +571,13 @@ begin
       fmc_adc_core_post_samples_o            => post_trig_value,
       fmc_adc_core_samp_cnt_i                => X"00000000",
       fmc_adc_core_ch1_ssr_o                 => gpio_ssr_ch1_o,
-      fmc_adc_core_ch1_val_i                 => sync_fifo_dout(15 downto 0),
+      fmc_adc_core_ch1_val_i                 => serdes_out_data(15 downto 0),
       fmc_adc_core_ch2_ssr_o                 => gpio_ssr_ch2_o,
-      fmc_adc_core_ch2_val_i                 => sync_fifo_dout(31 downto 16),
+      fmc_adc_core_ch2_val_i                 => serdes_out_data(31 downto 16),
       fmc_adc_core_ch3_ssr_o                 => gpio_ssr_ch3_o,
-      fmc_adc_core_ch3_val_i                 => sync_fifo_dout(47 downto 32),
+      fmc_adc_core_ch3_val_i                 => serdes_out_data(47 downto 32),
       fmc_adc_core_ch4_ssr_o                 => gpio_ssr_ch4_o,
-      fmc_adc_core_ch4_val_i                 => sync_fifo_dout(63 downto 48)
+      fmc_adc_core_ch4_val_i                 => serdes_out_data(63 downto 48)
       );
 
   ------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2011-03-16T07:57:36</DateModified>
+  <DateModified>2011-03-16T12:13:39</DateModified>
   <ModuleName>spec_top_fmc_adc_100Ms</ModuleName>
   <SummaryTimeStamp>2011-03-09T11:19:20</SummaryTimeStamp>
   <SavedFilePath>/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ise_project/iseconfig/spec_top.xreport</SavedFilePath>
