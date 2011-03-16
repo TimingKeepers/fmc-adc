@@ -31,7 +31,7 @@ library UNISIM;
 use UNISIM.vcomponents.all;
 
 
-entity spec_top is
+entity spec_top_fmc_adc_100Ms is
   generic(
     g_SIMULATION    : string := "FALSE";
     g_CALIB_SOFT_IP : string := "TRUE");
@@ -130,10 +130,10 @@ entity spec_top is
 
       prsnt_m2c_n_i : in std_logic      -- Mezzanine present (active low)
       );
-end spec_top;
+end spec_top_fmc_adc_100Ms;
 
 
-architecture rtl of spec_top is
+architecture rtl of spec_top_fmc_adc_100Ms is
 
   ------------------------------------------------------------------------------
   -- Components declaration
@@ -574,6 +574,7 @@ architecture rtl of spec_top is
   signal spi_sck_t  : std_logic_vector(2 downto 0);
   signal spi_din_t  : std_logic_vector(2 downto 0);
   signal spi_dout_t : std_logic_vector(2 downto 0);
+  signal spi_ss_t   : std_logic_vector(7 downto 0);
 
 
 begin
@@ -751,15 +752,16 @@ begin
 
   ------------------------------------------------------------------------------
   -- CSR wishbone bus slaves
-  --    0 -> Carrier SPI master
-  --    1 -> Carrier I2C master
-  --    2 -> Carrier CSR
-  --    3 -> UTC core
-  --    4 -> Interrupt controller
-  --    5 -> Mezzanine system managment I2C master
-  --    6 -> Mezzanine SPI master
-  --    7 -> Mezzanine I2C master
-  --    8 -> Mezzanine ADC core
+  --    (0x00000 -> DMA configuration)
+  --     0x10000 -> Carrier SPI master
+  --     0x20000 -> Carrier I2C master
+  --     0x30000 -> Carrier CSR
+  --     0x40000 -> UTC core
+  --     0x50000 -> Interrupt controller
+  --     0x60000 -> Mezzanine system managment I2C master
+  --     0x70000 -> Mezzanine SPI master
+  --     0x80000 -> Mezzanine I2C master
+  --     0x90000 -> Mezzanine ADC core
   ------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------------
@@ -861,14 +863,7 @@ begin
       wb_ack_o    => wb_ack_fmc_spi,
       wb_err_o    => open,
       wb_int_o    => open,
-      ss_pad_o(0) => spi_cs_adc_n_o,
-      ss_pad_o(1) => spi_cs_dac1_n_o,
-      ss_pad_o(2) => spi_cs_dac2_n_o,
-      ss_pad_o(3) => spi_cs_dac3_n_o,
-      ss_pad_o(4) => spi_cs_dac4_n_o,
-      ss_pad_o(5) => open,
-      ss_pad_o(6) => open,
-      ss_pad_o(7) => open,
+      ss_pad_o    => spi_ss_t,
       sclk_pad_o  => spi_sck_o,
       mosi_pad_o  => spi_dout_o,
       miso_pad_i  => spi_din_t(2)
@@ -877,8 +872,15 @@ begin
   -- 32-bit word to byte address
   wb_adr_fmc_spi <= wb_adr(2 downto 0) & "00";
 
+  -- Assign slave select lines
+  spi_cs_adc_n_o  <= spi_ss_t(0);
+  spi_cs_dac1_n_o <= spi_ss_t(1);
+  spi_cs_dac2_n_o <= spi_ss_t(2);
+  spi_cs_dac3_n_o <= spi_ss_t(3);
+  spi_cs_dac4_n_o <= spi_ss_t(4);
+
   -- Add some FF after the input pin to solve timing problem
-  p_fmc_spi: process (sys_clk_125)
+  p_fmc_spi : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
       if sys_rst_n = '0' then
@@ -899,7 +901,7 @@ begin
       ARST_LVL => '0')
     port map (
       wb_clk_i     => sys_clk_125,
-      wb_rst_i     => sys_rst_n,
+      wb_rst_i     => sys_rst,
       arst_i       => '1',
       wb_adr_i     => wb_adr_fmc_i2c(2 downto 0),
       wb_dat_i     => wb_dat_o(7 downto 0),

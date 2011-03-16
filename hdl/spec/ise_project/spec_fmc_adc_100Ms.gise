@@ -43,35 +43,65 @@
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGC" xil_pn:name="spec_top.ngc"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGD" xil_pn:name="spec_top.ngd"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGR" xil_pn:name="spec_top.ngr"/>
-    <file xil_pn:fileType="FILE_PAD_MISC" xil_pn:name="spec_top.pad"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAR_REPORT" xil_pn:name="spec_top.par" xil_pn:subbranch="Par"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PCF" xil_pn:name="spec_top.pcf" xil_pn:subbranch="Map"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="spec_top.prj"/>
-    <file xil_pn:fileType="FILE_TRCE_MISC" xil_pn:name="spec_top.ptwx"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="spec_top.stx"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="spec_top.syr"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_TIMING_TXT_REPORT" xil_pn:name="spec_top.twr" xil_pn:subbranch="Par"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_TIMING_XML_REPORT" xil_pn:name="spec_top.twx" xil_pn:subbranch="Par"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_UNROUTES" xil_pn:name="spec_top.unroutes" xil_pn:subbranch="Par"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_REPORT" xil_pn:name="spec_top.ut" xil_pn:subbranch="FPGAConfiguration"/>
-    <file xil_pn:fileType="FILE_XPI" xil_pn:name="spec_top.xpi"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="spec_top.xst"/>
     <file xil_pn:fileType="FILE_HTML" xil_pn:name="spec_top_envsettings.html"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms.bgn" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:fileType="FILE_BIN" xil_pn:name="spec_top_fmc_adc_100Ms.bin"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BIT" xil_pn:name="spec_top_fmc_adc_100Ms.bit" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="spec_top_fmc_adc_100Ms.bld"/>
+    <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="spec_top_fmc_adc_100Ms.cmd_log"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_DRC" xil_pn:name="spec_top_fmc_adc_100Ms.drc" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="spec_top_fmc_adc_100Ms.lso"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NCD" xil_pn:name="spec_top_fmc_adc_100Ms.ncd" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGC" xil_pn:name="spec_top_fmc_adc_100Ms.ngc"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGD" xil_pn:name="spec_top_fmc_adc_100Ms.ngd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGR" xil_pn:name="spec_top_fmc_adc_100Ms.ngr"/>
+    <file xil_pn:fileType="FILE_PAD_MISC" xil_pn:name="spec_top_fmc_adc_100Ms.pad"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAR_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms.par" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PCF" xil_pn:name="spec_top_fmc_adc_100Ms.pcf" xil_pn:subbranch="Map"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="spec_top_fmc_adc_100Ms.prj"/>
+    <file xil_pn:fileType="FILE_TRCE_MISC" xil_pn:name="spec_top_fmc_adc_100Ms.ptwx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="spec_top_fmc_adc_100Ms.stx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms.syr"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_TIMING_TXT_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms.twr" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_TIMING_XML_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms.twx" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_UNROUTES" xil_pn:name="spec_top_fmc_adc_100Ms.unroutes" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_BITGEN_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms.ut" xil_pn:subbranch="FPGAConfiguration"/>
+    <file xil_pn:fileType="FILE_XPI" xil_pn:name="spec_top_fmc_adc_100Ms.xpi"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="spec_top_fmc_adc_100Ms.xst"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="spec_top_fmc_adc_100Ms_envsettings.html"/>
+    <file xil_pn:fileType="FILE_NCD" xil_pn:name="spec_top_fmc_adc_100Ms_guide.ncd" xil_pn:origination="imported"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms_map.map" xil_pn:subbranch="Map"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms_map.mrp" xil_pn:subbranch="Map"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NCD" xil_pn:name="spec_top_fmc_adc_100Ms_map.ncd" xil_pn:subbranch="Map"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGM" xil_pn:name="spec_top_fmc_adc_100Ms_map.ngm" xil_pn:subbranch="Map"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="spec_top_fmc_adc_100Ms_map.xrpt"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="spec_top_fmc_adc_100Ms_ngdbuild.xrpt"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAD_EXCEL_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms_pad.csv" xil_pn:subbranch="Par"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAD_TXT_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms_pad.txt" xil_pn:subbranch="Par"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="spec_top_fmc_adc_100Ms_par.xrpt"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="spec_top_fmc_adc_100Ms_summary.html"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="spec_top_fmc_adc_100Ms_summary.xml"/>
+    <file xil_pn:fileType="FILE_WEBTALK" xil_pn:name="spec_top_fmc_adc_100Ms_usage.xml"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="spec_top_fmc_adc_100Ms_xst.xrpt"/>
     <file xil_pn:fileType="FILE_LOG" xil_pn:name="spec_top_fpga_editor.log"/>
     <file xil_pn:fileType="FILE_NCD" xil_pn:name="spec_top_guide.ncd" xil_pn:origination="imported"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="spec_top_map.map" xil_pn:subbranch="Map"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MAP_REPORT" xil_pn:name="spec_top_map.mrp" xil_pn:subbranch="Map"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NCD" xil_pn:name="spec_top_map.ncd" xil_pn:subbranch="Map"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGM" xil_pn:name="spec_top_map.ngm" xil_pn:subbranch="Map"/>
-    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="spec_top_map.xrpt"/>
-    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="spec_top_ngdbuild.xrpt"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAD_EXCEL_REPORT" xil_pn:name="spec_top_pad.csv" xil_pn:subbranch="Par"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PAD_TXT_REPORT" xil_pn:name="spec_top_pad.txt" xil_pn:subbranch="Par"/>
-    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="spec_top_par.xrpt"/>
     <file xil_pn:fileType="FILE_HTML" xil_pn:name="spec_top_summary.html"/>
-    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="spec_top_summary.xml"/>
-    <file xil_pn:fileType="FILE_WEBTALK" xil_pn:name="spec_top_usage.xml"/>
-    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="spec_top_xst.xrpt"/>
     <file xil_pn:fileType="FILE_LOG" xil_pn:name="webtalk.log"/>
     <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xlnx_auto_0_xdb"/>
@@ -83,11 +113,11 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1299483117" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="-4655097310102199149" xil_pn:start_ts="1299483117">
+    <transform xil_pn:end_ts="1299776202" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="-5336720412813903745" xil_pn:start_ts="1299776202">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1299483117" xil_pn:name="TRAN_regenerateCores" xil_pn:prop_ck="2099650482794156374" xil_pn:start_ts="1299483117">
+    <transform xil_pn:end_ts="1299776202" xil_pn:name="TRAN_regenerateCores" xil_pn:prop_ck="-6573690209299584574" xil_pn:start_ts="1299776202">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
@@ -95,7 +125,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1299483117" xil_pn:name="TRAN_xawsTohdl" xil_pn:prop_ck="7611406935666307157" xil_pn:start_ts="1299483117">
+    <transform xil_pn:end_ts="1299776202" xil_pn:name="TRAN_xawsTohdl" xil_pn:prop_ck="-972982594196377663" xil_pn:start_ts="1299776202">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
@@ -103,90 +133,90 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1299483117" xil_pn:name="TRAN_platgen" xil_pn:prop_ck="-7096291744251652000" xil_pn:start_ts="1299483117">
+    <transform xil_pn:end_ts="1299776202" xil_pn:name="TRAN_platgen" xil_pn:prop_ck="3375361665759590988" xil_pn:start_ts="1299776202">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1299665078" xil_pn:in_ck="-6698355625770614420" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="-4700144962104088910" xil_pn:start_ts="1299664867">
+    <transform xil_pn:end_ts="1300213822" xil_pn:in_ck="-6698355625770614420" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="8197382171204319838" xil_pn:start_ts="1300213598">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
-      <outfile xil_pn:name="spec_top.lso"/>
-      <outfile xil_pn:name="spec_top.ngc"/>
-      <outfile xil_pn:name="spec_top.ngr"/>
-      <outfile xil_pn:name="spec_top.prj"/>
-      <outfile xil_pn:name="spec_top.stx"/>
-      <outfile xil_pn:name="spec_top.syr"/>
-      <outfile xil_pn:name="spec_top.xst"/>
-      <outfile xil_pn:name="spec_top_xst.xrpt"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.lso"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.ngc"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.ngr"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.prj"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.stx"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.syr"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.xst"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_xst.xrpt"/>
       <outfile xil_pn:name="webtalk_pn.xml"/>
       <outfile xil_pn:name="xst"/>
     </transform>
-    <transform xil_pn:end_ts="1299665078" xil_pn:in_ck="2162529744943951648" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="-3143274269413541142" xil_pn:start_ts="1299665078">
+    <transform xil_pn:end_ts="1299776415" xil_pn:in_ck="2162529744943951648" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="-4337831395208791850" xil_pn:start_ts="1299776415">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1299665105" xil_pn:in_ck="-5205591137091154823" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="-8659698654136953279" xil_pn:start_ts="1299665078">
+    <transform xil_pn:end_ts="1300213850" xil_pn:in_ck="6806541686375937701" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="7643830140109020653" xil_pn:start_ts="1300213822">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_ngo"/>
       <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
-      <outfile xil_pn:name="spec_top.bld"/>
-      <outfile xil_pn:name="spec_top.ngd"/>
-      <outfile xil_pn:name="spec_top_ngdbuild.xrpt"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.bld"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.ngd"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_ngdbuild.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1299665495" xil_pn:in_ck="-4758618940946871356" xil_pn:name="TRANEXT_map_spartan6" xil_pn:prop_ck="-525288356180264082" xil_pn:start_ts="1299665105">
+    <transform xil_pn:end_ts="1300214231" xil_pn:in_ck="8313289856678850416" xil_pn:name="TRANEXT_map_spartan6" xil_pn:prop_ck="-525288356180264082" xil_pn:start_ts="1300213850">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
-      <outfile xil_pn:name="spec_top.pcf"/>
-      <outfile xil_pn:name="spec_top_map.map"/>
-      <outfile xil_pn:name="spec_top_map.mrp"/>
-      <outfile xil_pn:name="spec_top_map.ncd"/>
-      <outfile xil_pn:name="spec_top_map.ngm"/>
-      <outfile xil_pn:name="spec_top_map.xrpt"/>
-      <outfile xil_pn:name="spec_top_summary.xml"/>
-      <outfile xil_pn:name="spec_top_usage.xml"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.pcf"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_map.map"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_map.mrp"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_map.ncd"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_map.ngm"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_map.xrpt"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_summary.xml"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_usage.xml"/>
     </transform>
-    <transform xil_pn:end_ts="1299665735" xil_pn:in_ck="-7505570899544269603" xil_pn:name="TRANEXT_par_spartan6" xil_pn:prop_ck="5879947102106257248" xil_pn:start_ts="1299665495">
+    <transform xil_pn:end_ts="1300214481" xil_pn:in_ck="-1808195220703275450" xil_pn:name="TRANEXT_par_spartan6" xil_pn:prop_ck="5879947102106257248" xil_pn:start_ts="1300214231">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
-      <outfile xil_pn:name="spec_top.ncd"/>
-      <outfile xil_pn:name="spec_top.pad"/>
-      <outfile xil_pn:name="spec_top.par"/>
-      <outfile xil_pn:name="spec_top.ptwx"/>
-      <outfile xil_pn:name="spec_top.unroutes"/>
-      <outfile xil_pn:name="spec_top.xpi"/>
-      <outfile xil_pn:name="spec_top_pad.csv"/>
-      <outfile xil_pn:name="spec_top_pad.txt"/>
-      <outfile xil_pn:name="spec_top_par.xrpt"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.ncd"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.pad"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.par"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.ptwx"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.unroutes"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.xpi"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_pad.csv"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_pad.txt"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_par.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1299665960" xil_pn:in_ck="5988710092847000608" xil_pn:name="TRANEXT_bitFile_spartan6" xil_pn:prop_ck="1554780821134721645" xil_pn:start_ts="1299665892">
+    <transform xil_pn:end_ts="1300214546" xil_pn:in_ck="1401670161614903244" xil_pn:name="TRANEXT_bitFile_spartan6" xil_pn:prop_ck="1554780821134721645" xil_pn:start_ts="1300214481">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/bitgen.xmsgs"/>
-      <outfile xil_pn:name="spec_top.bgn"/>
-      <outfile xil_pn:name="spec_top.bin"/>
-      <outfile xil_pn:name="spec_top.bit"/>
-      <outfile xil_pn:name="spec_top.drc"/>
-      <outfile xil_pn:name="spec_top.ut"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.bgn"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.bin"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.bit"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.drc"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.ut"/>
       <outfile xil_pn:name="webtalk.log"/>
       <outfile xil_pn:name="webtalk_pn.xml"/>
     </transform>
-    <transform xil_pn:end_ts="1299665735" xil_pn:in_ck="-4758618940946871488" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="4435602129065547965" xil_pn:start_ts="1299665694">
+    <transform xil_pn:end_ts="1300214481" xil_pn:in_ck="8313289856678850284" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="4435602129065547965" xil_pn:start_ts="1300214439">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>
-      <outfile xil_pn:name="spec_top.twr"/>
-      <outfile xil_pn:name="spec_top.twx"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.twr"/>
+      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.twx"/>
     </transform>
   </transforms>
 

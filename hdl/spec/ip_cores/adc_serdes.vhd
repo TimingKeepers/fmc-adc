@@ -232,12 +232,12 @@ begin
 
      in_slices: for slice_count in 0 to num_serial_bits-1 generate begin
         -- This places the first data in time on the right
-        DATA_IN_TO_DEVICE(slice_count*sys_w+sys_w-1 downto slice_count*sys_w) <=
-          iserdes_q(num_serial_bits-slice_count-1);
+        --DATA_IN_TO_DEVICE(slice_count*sys_w+sys_w-1 downto slice_count*sys_w) <=
+        --  iserdes_q(num_serial_bits-slice_count-1);
         -- To place the first data in time on the left, use the
         --   following code, instead
-        -- DATA_IN_TO_DEVICE(slice_count*sys_w+sys_w-1 downto sys_w) <=
-        --   iserdes_q(slice_count);
+         DATA_IN_TO_DEVICE(slice_count*sys_w+sys_w-1 downto slice_count*sys_w) <=
+           iserdes_q(slice_count);
      end generate in_slices;
 
 

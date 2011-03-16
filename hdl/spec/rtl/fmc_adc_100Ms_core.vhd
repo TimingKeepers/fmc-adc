@@ -132,6 +132,7 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_ctl_fsm_cmd_wr_o          : out std_logic;
       fmc_adc_core_ctl_fmc_clk_oe_o          : out std_logic;
       fmc_adc_core_ctl_offset_dac_clr_n_o    : out std_logic;
+      fmc_adc_core_ctl_man_bitslip_o         : out std_logic;
       fmc_adc_core_sta_fsm_i                 : in  std_logic_vector(2 downto 0);
       fmc_adc_core_sta_serdes_pll_i          : in  std_logic;
       fmc_adc_core_sta_serdes_synced_i       : in  std_logic;
@@ -260,14 +261,16 @@ architecture rtl of fmc_adc_100Ms_core is
   signal fs_clk_buf : std_logic;
 
   -- SerDes
-  signal serdes_in_p     : std_logic_vector(8 downto 0);
-  signal serdes_in_n     : std_logic_vector(8 downto 0);
-  signal serdes_out_raw  : std_logic_vector(71 downto 0);
-  signal serdes_out_data : std_logic_vector(63 downto 0);
-  signal serdes_out_fr   : std_logic_vector(7 downto 0);
-  signal serdes_bitslip  : std_logic;
-  signal serdes_synced   : std_logic;
-  signal bitslip_sreg    : std_logic_vector(7 downto 0);
+  signal serdes_in_p         : std_logic_vector(8 downto 0);
+  signal serdes_in_n         : std_logic_vector(8 downto 0);
+  signal serdes_out_raw      : std_logic_vector(71 downto 0);
+  signal serdes_out_data     : std_logic_vector(63 downto 0);
+  signal serdes_out_fr       : std_logic_vector(7 downto 0);
+  signal serdes_auto_bitslip : std_logic;
+  signal serdes_man_bitslip  : std_logic;
+  signal serdes_bitslip      : std_logic;
+  signal serdes_synced       : std_logic;
+  signal bitslip_sreg        : std_logic_vector(7 downto 0);
 
   -- Trigger
   signal ext_trig_a     : std_logic;
@@ -355,18 +358,18 @@ begin
   gpio_led_power_o <= serdes_synced;
 
   cmp_trig_led_monostable : monostable
-  generic map(
-    g_INPUT_POLARITY  => '1',
-    g_OUTPUT_POLARITY => '1',
-    g_OUTPUT_RETRIG   => true,
-    g_OUTPUT_LENGTH   => 12500000
-    )
-  port map(
-    rst_n_i   => sys_rst_n_i,
-    clk_i     => sys_clk_i,
-    trigger_i => acq_fsm_trig,
-    pulse_o   => gpio_led_trigger_o
-    );
+    generic map(
+      g_INPUT_POLARITY  => '1',
+      g_OUTPUT_POLARITY => '1',
+      g_OUTPUT_RETRIG   => true,
+      g_OUTPUT_LENGTH   => 12500000
+      )
+    port map(
+      rst_n_i   => sys_rst_n_i,
+      clk_i     => sys_clk_i,
+      trigger_i => acq_fsm_trig,
+      pulse_o   => gpio_led_trigger_o
+      );
 
   ------------------------------------------------------------------------------
   -- Resets
@@ -460,16 +463,19 @@ begin
                  & adc_outa_n_i(1) & adc_outb_n_i(1)
                  & adc_outa_n_i(0) & adc_outb_n_i(0);
 
-  -- serdes outputs re-ordering
-  --    out_raw(7:0)   = CH1D12 CH1D10 CH1D8 CH1D6 CH1D4 CH1D2 CH1D0 0   = CH1_B
-  --    out_raw(15:8)  = CH1D13 CH1D11 CH1D9 CH1D7 CH1D5 CH1D3 CH1D1 0   = CH1_A
-  --    out_raw(23:16) = CH2D12 CH2D10 CH2D8 CH2D6 CH2D4 CH2D2 CH2D0 0   = CH2_B
-  --    out_raw(31:24) = CH2D13 CH2D11 CH2D9 CH2D7 CH2D5 CH2D3 CH2D1 0   = CH2_A
-  --    out_raw(39:32) = CH3D12 CH3D10 CH3D8 CH3D6 CH3D4 CH3D2 CH3D0 0   = CH3_B
-  --    out_raw(47:40) = CH3D13 CH3D11 CH3D9 CH3D7 CH3D5 CH3D3 CH3D1 0   = CH3_A
-  --    out_raw(55:48) = CH4D12 CH4D10 CH4D8 CH4D6 CH4D4 CH4D2 CH4D0 0   = CH4_B
-  --    out_raw(63:56) = CH4D13 CH4D11 CH4D9 CH4D7 CH4D5 CH4D3 CH4D1 0   = CH4_A
-  --    out_raw(71:64) = FR7    FR6    FR5   FR4   FR3   FR2   FR1   FR0 = FR
+  -- serdes outputs re-ordering (time slices -> channel)
+  --    out_raw :(71:63)(62:54)(53:45)(44:36)(35:27)(26:18)(17:9)(8:0)
+  --                |      |      |      |      |      |      |    |
+  --                V      V      V      V      V      V      V    V
+  --              CH1D12 CH1D10 CH1D8  CH1D6  CH1D4  CH1D2  CH1D0  0   = CH1_B
+  --              CH1D13 CH1D11 CH1D9  CH1D7  CH1D5  CH1D3  CH1D1  0   = CH1_A
+  --              CH2D12 CH2D10 CH2D8  CH2D6  CH2D4  CH2D2  CH2D0  0   = CH2_B
+  --              CH2D13 CH2D11 CH2D9  CH2D7  CH2D5  CH2D3  CH2D1  0   = CH2_A
+  --              CH3D12 CH3D10 CH3D8  CH3D6  CH3D4  CH3D2  CH3D0  0   = CH3_B
+  --              CH3D13 CH3D11 CH3D9  CH3D7  CH3D5  CH3D3  CH3D1  0   = CH3_A
+  --              CH4D12 CH4D10 CH4D8  CH4D6  CH4D4  CH4D2  CH4D0  0   = CH4_B
+  --              CH4D13 CH4D11 CH4D9  CH4D7  CH4D5  CH4D3  CH4D1  0   = CH4_A
+  --              FR7    FR6    FR5    FR4    FR3    FR2    FR1    FR0 = FR
   --
   --    out_data(15:0)  = CH1
   --    out_data(31:16) = CH2
@@ -477,24 +483,24 @@ begin
   --    out_data(63:48) = CH4
   --    Note: The two LSBs of each channel are always '0' => 14-bit ADC
   gen_serdes_dout_reorder : for I in 0 to 7 generate
-    serdes_out_data(0*16 + 2*i)   <= serdes_out_raw(i + 0*8);  -- CH1 even bits
-    serdes_out_data(0*16 + 2*i+1) <= serdes_out_raw(i + 1*8);  -- CH1 odd bits
-    serdes_out_data(1*16 + 2*i)   <= serdes_out_raw(i + 2*8);  -- CH2 even bits
-    serdes_out_data(1*16 + 2*i+1) <= serdes_out_raw(i + 3*8);  -- CH2 odd bits
-    serdes_out_data(2*16 + 2*i)   <= serdes_out_raw(i + 4*8);  -- CH3 even bits
-    serdes_out_data(2*16 + 2*i+1) <= serdes_out_raw(i + 5*8);  -- CH3 odd bits
-    serdes_out_data(3*16 + 2*i)   <= serdes_out_raw(i + 6*8);  -- CH4 even bits
-    serdes_out_data(3*16 + 2*i+1) <= serdes_out_raw(i + 7*8);  -- CH4 odd bits
-    serdes_out_fr(i)              <= serdes_out_raw(i + 8*8);  -- FR
+    serdes_out_data(0*16 + 2*i)   <= serdes_out_raw(0 + i*9);  -- CH1 even bits
+    serdes_out_data(0*16 + 2*i+1) <= serdes_out_raw(1 + i*9);  -- CH1 odd bits
+    serdes_out_data(1*16 + 2*i)   <= serdes_out_raw(2 + i*9);  -- CH2 even bits
+    serdes_out_data(1*16 + 2*i+1) <= serdes_out_raw(3 + i*9);  -- CH2 odd bits
+    serdes_out_data(2*16 + 2*i)   <= serdes_out_raw(4 + i*9);  -- CH3 even bits
+    serdes_out_data(2*16 + 2*i+1) <= serdes_out_raw(5 + i*9);  -- CH3 odd bits
+    serdes_out_data(3*16 + 2*i)   <= serdes_out_raw(6 + i*9);  -- CH4 even bits
+    serdes_out_data(3*16 + 2*i+1) <= serdes_out_raw(7 + i*9);  -- CH4 odd bits
+    serdes_out_fr(i)              <= serdes_out_raw(8 + i*9);  -- FR
   end generate gen_serdes_dout_reorder;
 
 
   -- serdes bitslip generation
-  p_bitslip : process (fs_clk, sys_rst_n_i)
+  p_auto_bitslip : process (fs_clk, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
       bitslip_sreg   <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
-      serdes_bitslip <= '0';
+      serdes_auto_bitslip <= '0';
       serdes_synced  <= '0';
     elsif rising_edge(fs_clk) then
 
@@ -504,18 +510,20 @@ begin
       -- Generate bitslip and synced signal
       if(bitslip_sreg(bitslip_sreg'left) = '1') then
         if(serdes_out_fr /= "11110000") then
-          serdes_bitslip <= '1';
+          serdes_auto_bitslip <= '1';
           serdes_synced  <= '0';
         else
-          serdes_bitslip <= '0';
+          serdes_auto_bitslip <= '0';
           serdes_synced  <= '1';
         end if;
       else
-        serdes_bitslip <= '0';
+        serdes_auto_bitslip <= '0';
       end if;
 
     end if;
   end process;
+
+  serdes_bitslip <= serdes_auto_bitslip or serdes_man_bitslip;
 
   ------------------------------------------------------------------------------
   -- ADC core control and status registers (CSR)
@@ -537,6 +545,7 @@ begin
       fmc_adc_core_ctl_fsm_cmd_wr_o          => fsm_cmd_wr,
       fmc_adc_core_ctl_fmc_clk_oe_o          => gpio_si570_oe_o,
       fmc_adc_core_ctl_offset_dac_clr_n_o    => gpio_dac_clr_n_o,
+      fmc_adc_core_ctl_man_bitslip_o         => serdes_man_bitslip,
       fmc_adc_core_sta_fsm_i                 => "000",
       fmc_adc_core_sta_serdes_pll_i          => locked_out,
       fmc_adc_core_sta_serdes_synced_i       => serdes_synced,
@@ -562,13 +571,13 @@ begin
       fmc_adc_core_post_samples_o            => post_trig_value,
       fmc_adc_core_samp_cnt_i                => X"00000000",
       fmc_adc_core_ch1_ssr_o                 => gpio_ssr_ch1_o,
-      fmc_adc_core_ch1_val_i                 => X"0000",
+      fmc_adc_core_ch1_val_i                 => sync_fifo_dout(15 downto 0),
       fmc_adc_core_ch2_ssr_o                 => gpio_ssr_ch2_o,
-      fmc_adc_core_ch2_val_i                 => X"0000",
+      fmc_adc_core_ch2_val_i                 => sync_fifo_dout(31 downto 16),
       fmc_adc_core_ch3_ssr_o                 => gpio_ssr_ch3_o,
-      fmc_adc_core_ch3_val_i                 => X"0000",
+      fmc_adc_core_ch3_val_i                 => sync_fifo_dout(47 downto 32),
       fmc_adc_core_ch4_ssr_o                 => gpio_ssr_ch4_o,
-      fmc_adc_core_ch4_val_i                 => X"0000"
+      fmc_adc_core_ch4_val_i                 => sync_fifo_dout(63 downto 48)
       );
 
   ------------------------------------------------------------------------------
