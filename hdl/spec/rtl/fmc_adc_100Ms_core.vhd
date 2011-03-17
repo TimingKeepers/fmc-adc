@@ -309,7 +309,7 @@ architecture rtl of fmc_adc_100Ms_core is
 
   -- Acquisition FSM
   signal acq_fsm_current_state : t_acq_fsm_state;
-  signal acq_fsm_next_state    : t_acq_fsm_state;
+  signal acq_fsm_state         : std_logic_vector(2 downto 0);
   signal fsm_cmd               : std_logic_vector(1 downto 0);
   signal fsm_cmd_wr            : std_logic;
   signal acq_fsm_start         : std_logic;
@@ -499,9 +499,9 @@ begin
   p_auto_bitslip : process (fs_clk, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
-      bitslip_sreg   <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
+      bitslip_sreg        <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
       serdes_auto_bitslip <= '0';
-      serdes_synced  <= '0';
+      serdes_synced       <= '0';
     elsif rising_edge(fs_clk) then
 
       -- Shift register to generate bitslip enable (serdes_clk/8)
@@ -511,10 +511,10 @@ begin
       if(bitslip_sreg(bitslip_sreg'left) = '1') then
         if(serdes_out_fr /= "11110000") then
           serdes_auto_bitslip <= '1';
-          serdes_synced  <= '0';
+          serdes_synced       <= '0';
         else
           serdes_auto_bitslip <= '0';
-          serdes_synced  <= '1';
+          serdes_synced       <= '1';
         end if;
       else
         serdes_auto_bitslip <= '0';
@@ -546,7 +546,7 @@ begin
       fmc_adc_core_ctl_fmc_clk_oe_o          => gpio_si570_oe_o,
       fmc_adc_core_ctl_offset_dac_clr_n_o    => gpio_dac_clr_n_o,
       fmc_adc_core_ctl_man_bitslip_o         => serdes_man_bitslip,
-      fmc_adc_core_sta_fsm_i                 => "000",
+      fmc_adc_core_sta_fsm_i                 => acq_fsm_state,
       fmc_adc_core_sta_serdes_pll_i          => locked_out,
       fmc_adc_core_sta_serdes_synced_i       => serdes_synced,
       fmc_adc_core_trig_cfg_hw_trig_sel_o    => hw_trig_sel,
@@ -790,102 +790,112 @@ begin
   acq_fsm_stop  <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "10" else '0';
   acq_fsm_trig  <= sync_fifo_dout(64);
 
-  -- FSM current state register
-  p_acq_fsm_state : process (sys_clk_i)
-  begin
-    if rising_edge(sys_clk_i) then
-      if sys_rst_n_i = '0' then
-        acq_fsm_current_state <= IDLE;
-      else
-        acq_fsm_current_state <= acq_fsm_next_state;
-      end if;
-    end if;
-  end process p_acq_fsm_state;
-
   -- FSM transitions
-  p_acq_fsm_transitions : process(acq_fsm_current_state,
-                                  acq_fsm_start,
-                                  acq_fsm_stop,
-                                  acq_fsm_trig,
-                                  pre_trig_done,
-                                  post_trig_done,
-                                  shots_done)
+  p_acq_fsm_transitions : process(sys_clk_i, sys_rst_n_i)
   begin
-    case acq_fsm_current_state is
+    if sys_rst_n_i = '0' then
+      acq_fsm_current_state <= IDLE;
+    elsif rising_edge(sys_clk_i) then
 
-      when IDLE =>
-        if acq_fsm_start = '1' then
-          acq_fsm_next_state <= PRE_TRIG;
-        end if;
+      case acq_fsm_current_state is
 
-      when PRE_TRIG =>
-        if acq_fsm_stop = '1' then
-          acq_fsm_next_state <= IDLE;
-        elsif pre_trig_done = '1' then
-          acq_fsm_next_state <= WAIT_TRIG;
-        end if;
-
-      when WAIT_TRIG =>
-        if acq_fsm_stop = '1' then
-          acq_fsm_next_state <= IDLE;
-        elsif acq_fsm_trig = '1' then
-          acq_fsm_next_state <= POST_TRIG;
-        end if;
-
-      when POST_TRIG =>
-        if acq_fsm_stop = '1' then
-          acq_fsm_next_state <= IDLE;
-        elsif post_trig_done = '1' then
-          if shots_done = '1' then
-            acq_fsm_next_state <= IDLE;
-          else
-            acq_fsm_next_state <= DECR_SHOT;
+        when IDLE =>
+          if acq_fsm_start = '1' then
+            acq_fsm_current_state <= PRE_TRIG;
           end if;
-        end if;
 
-      when DECR_SHOT =>
-        if acq_fsm_stop = '1' then
-          acq_fsm_next_state <= IDLE;
-        else
-          acq_fsm_next_state <= PRE_TRIG;
-        end if;
+        when PRE_TRIG =>
+          if acq_fsm_stop = '1' then
+            acq_fsm_current_state <= IDLE;
+          elsif pre_trig_done = '1' then
+            acq_fsm_current_state <= WAIT_TRIG;
+          end if;
 
-      when others =>
-        acq_fsm_next_state <= IDLE;
+        when WAIT_TRIG =>
+          if acq_fsm_stop = '1' then
+            acq_fsm_current_state <= IDLE;
+          elsif acq_fsm_trig = '1' then
+            acq_fsm_current_state <= POST_TRIG;
+          end if;
 
-    end case;
+        when POST_TRIG =>
+          if acq_fsm_stop = '1' then
+            acq_fsm_current_state <= IDLE;
+          elsif post_trig_done = '1' then
+            if shots_done = '1' then
+              acq_fsm_current_state <= IDLE;
+            else
+              acq_fsm_current_state <= DECR_SHOT;
+            end if;
+          end if;
+
+        when DECR_SHOT =>
+          if acq_fsm_stop = '1' then
+            acq_fsm_current_state <= IDLE;
+          else
+            acq_fsm_current_state <= PRE_TRIG;
+          end if;
+
+        when others =>
+          acq_fsm_current_state <= IDLE;
+
+      end case;
+    end if;
   end process p_acq_fsm_transitions;
 
   -- FSM outputs
   p_acq_fsm_outputs : process(acq_fsm_current_state)
   begin
 
-    shots_decr           <= '0';
-    sync_fifo_dreq       <= '1';
-    acq_fsm_in_pre_trig  <= '0';
-    acq_fsm_in_post_trig <= '0';
-    wb_sync_fifo_wr_en   <= '0';
-
     case acq_fsm_current_state is
 
       when IDLE =>
-
+        shots_decr           <= '0';
+        sync_fifo_dreq       <= '1';
+        acq_fsm_in_pre_trig  <= '0';
+        acq_fsm_in_post_trig <= '0';
+        wb_sync_fifo_wr_en   <= '0';
+        acq_fsm_state        <= "001";
 
       when PRE_TRIG =>
-        wb_sync_fifo_wr_en  <= '1';
-        acq_fsm_in_pre_trig <= '1';
+        wb_sync_fifo_wr_en   <= '1';
+        acq_fsm_in_pre_trig  <= '1';
+        shots_decr           <= '0';
+        sync_fifo_dreq       <= '1';
+        acq_fsm_in_post_trig <= '0';
+        acq_fsm_state        <= "010";
 
       when WAIT_TRIG =>
-        wb_sync_fifo_wr_en <= '1';
+        wb_sync_fifo_wr_en   <= '1';
+        shots_decr           <= '0';
+        sync_fifo_dreq       <= '1';
+        acq_fsm_in_pre_trig  <= '0';
+        acq_fsm_in_post_trig <= '0';
+        acq_fsm_state        <= "011";
 
       when POST_TRIG =>
         wb_sync_fifo_wr_en   <= '1';
         acq_fsm_in_post_trig <= '1';
+        shots_decr           <= '0';
+        sync_fifo_dreq       <= '1';
+        acq_fsm_in_pre_trig  <= '0';
+        acq_fsm_state        <= "100";
 
       when DECR_SHOT =>
-        shots_decr <= '1';
+        shots_decr           <= '1';
+        sync_fifo_dreq       <= '1';
+        acq_fsm_in_pre_trig  <= '0';
+        acq_fsm_in_post_trig <= '0';
+        wb_sync_fifo_wr_en   <= '0';
+        acq_fsm_state        <= "101";
 
       when others =>
+        shots_decr           <= '0';
+        sync_fifo_dreq       <= '1';
+        acq_fsm_in_pre_trig  <= '0';
+        acq_fsm_in_post_trig <= '0';
+        wb_sync_fifo_wr_en   <= '0';
+        acq_fsm_state        <= "111";
 
     end case;
   end process p_acq_fsm_outputs;
