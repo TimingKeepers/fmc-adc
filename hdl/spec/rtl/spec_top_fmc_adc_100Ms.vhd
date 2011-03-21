@@ -270,7 +270,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       wb0_cyc_i   : in  std_logic;
       wb0_stb_i   : in  std_logic;
       wb0_we_i    : in  std_logic;
-      wb0_addr_i  : in  std_logic_vector(29 downto 0);
+      wb0_addr_i  : in  std_logic_vector(27 downto 0);
       wb0_data_i  : in  std_logic_vector(g_P0_DATA_PORT_SIZE - 1 downto 0);
       wb0_data_o  : out std_logic_vector(g_P0_DATA_PORT_SIZE - 1 downto 0);
       wb0_ack_o   : out std_logic;
@@ -281,7 +281,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       wb1_cyc_i   : in  std_logic;
       wb1_stb_i   : in  std_logic;
       wb1_we_i    : in  std_logic;
-      wb1_addr_i  : in  std_logic_vector(29 downto 0);
+      wb1_addr_i  : in  std_logic_vector(27 downto 0);
       wb1_data_i  : in  std_logic_vector(g_P0_DATA_PORT_SIZE - 1 downto 0);
       wb1_data_o  : out std_logic_vector(g_P0_DATA_PORT_SIZE - 1 downto 0);
       wb1_ack_o   : out std_logic;
@@ -530,7 +530,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal wb_dma_we      : std_logic;
   signal wb_dma_ack     : std_logic;    --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
   signal wb_dma_stall   : std_logic;    --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
-  signal wb_dma_adr_ddr : std_logic_vector(29 downto 0);
 
   -- FMC ADC core to DDR wishbone bus
   signal wb_ddr_adr   : std_logic_vector(31 downto 0);

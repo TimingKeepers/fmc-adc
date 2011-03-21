@@ -375,8 +375,8 @@ begin
   -- Resets
   ------------------------------------------------------------------------------
   sys_rst  <= not(sys_rst_n_i);
-  fs_rst_n <= sys_rst_n_i;
-  fs_rst   <= not(sys_rst_n_i);
+  fs_rst_n <= sys_rst_n_i and locked_out;
+  fs_rst   <= not(fs_rst_n);
 
   ------------------------------------------------------------------------------
   -- ADC data clock buffer
@@ -667,11 +667,13 @@ begin
   p_deci_cnt : process (fs_clk)
   begin
     if fs_rst_n = '0' then
-      decim_cnt <= (others => '0');
+      decim_cnt <= to_unsigned(1, decim_cnt'length);
       decim_en  <= '0';
     elsif rising_edge(fs_clk) then
       if decim_cnt = to_unsigned(0, decim_cnt'length) then
-        decim_cnt <= unsigned(decim_factor) - 1;
+        if decim_factor /= X"0000" then
+          decim_cnt <= unsigned(decim_factor) - 1;
+        end if;
         decim_en  <= '1';
       else
         decim_cnt <= decim_cnt - 1;
