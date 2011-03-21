@@ -208,10 +208,12 @@ NET "adc_dco_n_i" IOSTANDARD = "LVDS_25";
 NET "adc_dco_p_i" LOC = Y11; # LA00_P
 NET "adc_dco_p_i" IOSTANDARD = "LVDS_25";
 
-NET "adc_fr_p_i" LOC = AA12; # LA01_N
-NET "adc_fr_p_i" IOSTANDARD = "LVDS_25";
-NET "adc_fr_n_i" LOC = AB12; # LA01_P
+# fr_p and fr_n are swapped compared to the FMC ADC schematics
+# this is to be coherent in the hdl design
+NET "adc_fr_n_i" LOC = AB12; # LA01_N
 NET "adc_fr_n_i" IOSTANDARD = "LVDS_25";
+NET "adc_fr_p_i" LOC = AA12; # LA01_P
+NET "adc_fr_p_i" IOSTANDARD = "LVDS_25";
 
 NET "adc_outa_n_i[0]" LOC = AB4; # LA14_N
 NET "adc_outa_n_i[0]" IOSTANDARD = "LVDS_25";

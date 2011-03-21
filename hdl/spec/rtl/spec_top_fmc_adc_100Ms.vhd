@@ -1028,7 +1028,7 @@ begin
       wb0_cyc_i   => wb_ddr_cyc,
       wb0_stb_i   => wb_ddr_stb,
       wb0_we_i    => wb_ddr_we,
-      wb0_addr_i  => wb_ddr_adr(29 downto 0),
+      wb0_addr_i  => wb_ddr_adr(27 downto 0),
       wb0_data_i  => wb_ddr_dat_o,
       wb0_data_o  => wb_ddr_dat_i,
       wb0_ack_o   => wb_ddr_ack,
@@ -1039,14 +1039,11 @@ begin
       wb1_cyc_i   => wb_dma_cyc,
       wb1_stb_i   => wb_dma_stb,
       wb1_we_i    => wb_dma_we,
-      wb1_addr_i  => wb_dma_adr_ddr,
+      wb1_addr_i  => wb_dma_adr(27 downto 0),
       wb1_data_i  => wb_dma_dat_o,
       wb1_data_o  => wb_dma_dat_i,
       wb1_ack_o   => wb_dma_ack,
       wb1_stall_o => wb_dma_stall);
-
-  -- 32-bit word to byte address
-  wb_dma_adr_ddr <= wb_dma_adr(27 downto 0) & "00";
 
   ------------------------------------------------------------------------------
   -- Assign unused outputs

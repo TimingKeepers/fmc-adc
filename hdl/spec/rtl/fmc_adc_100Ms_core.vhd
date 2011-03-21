@@ -509,7 +509,7 @@ begin
 
       -- Generate bitslip and synced signal
       if(bitslip_sreg(bitslip_sreg'left) = '1') then
-        if(serdes_out_fr /= "11110000") then
+        if(serdes_out_fr /= "00001111") then  -- use fr_n pattern (fr_p and fr_n are swapped on the adc mezzanine)
           serdes_auto_bitslip <= '1';
           serdes_synced       <= '0';
         else
