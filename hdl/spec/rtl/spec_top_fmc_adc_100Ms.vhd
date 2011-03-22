@@ -654,8 +654,9 @@ begin
   ------------------------------------------------------------------------------
   -- System reset
   ------------------------------------------------------------------------------
-  sys_rst   <= not(L_RST_N);
-  sys_rst_n <= L_RST_N;
+  sys_rst_n <= L_RST_N and sys_clk_pll_locked;
+  sys_rst   <= not(sys_rst_n);
+
 
   ------------------------------------------------------------------------------
   -- GN4124 interface
@@ -818,7 +819,7 @@ begin
         g_OUTPUT_RETRIG   => false,
         g_OUTPUT_LENGTH   => 5000000)
       port map(
-        rst_n_i   => L_RST_N,
+        rst_n_i   => sys_rst_n,
         clk_i     => sys_clk_125,
         trigger_i => irq_sources(I),
         pulse_o   => irq_sources_2_led(I));

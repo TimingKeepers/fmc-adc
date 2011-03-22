@@ -591,4 +591,4 @@ NET "cmp_gn4124_core/rst_*" TIG;
 NET "cmp_ddr_ctrl/cmp_ddr_controller/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/selfrefresh_mcb_mode" TIG;
 NET "cmp_ddr_ctrl/cmp_ddr_controller/c3_pll_lock" TIG;
 NET "cmp_ddr_ctrl/cmp_ddr_controller/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/hard_done_cal" TIG;
-
+NET "cmp_ddr_ctrl/cmp_ddr_controller/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/DONE_SOFTANDHARD_CAL" TIG;
