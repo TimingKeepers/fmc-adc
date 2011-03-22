@@ -570,9 +570,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal ddr3_calib_done : std_logic;
 
   -- SPI
-  signal spi_sck_t  : std_logic_vector(2 downto 0);
-  signal spi_din_t  : std_logic_vector(2 downto 0);
-  signal spi_dout_t : std_logic_vector(2 downto 0);
+  signal spi_din_t  : std_logic_vector(3 downto 0);
   signal spi_ss_t   : std_logic_vector(7 downto 0);
 
 
@@ -866,7 +864,7 @@ begin
       ss_pad_o    => spi_ss_t,
       sclk_pad_o  => spi_sck_o,
       mosi_pad_o  => spi_dout_o,
-      miso_pad_i  => spi_din_t(2)
+      miso_pad_i  => spi_din_t(spi_din_t'left)
       );
 
   -- 32-bit word to byte address
@@ -886,7 +884,7 @@ begin
       if sys_rst_n = '0' then
         spi_din_t <= (others => '0');
       else
-        spi_din_t <= spi_din_t(1 downto 0) & spi_din_i;
+        spi_din_t <= spi_din_t(spi_din_t'left-1 downto 0) & spi_din_i;
       end if;
     end if;
   end process p_fmc_spi;
