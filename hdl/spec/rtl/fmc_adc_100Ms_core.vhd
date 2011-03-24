@@ -349,6 +349,9 @@ architecture rtl of fmc_adc_100Ms_core is
   signal ram_addr_cnt : unsigned(25 downto 0);
   signal ram_wr_en    : std_logic;
 
+  -- Wishbone interface to DDR
+  signal wb_ddr_stall_t : std_logic;
+
 begin
 
 
@@ -674,7 +677,7 @@ begin
         if decim_factor /= X"0000" then
           decim_cnt <= unsigned(decim_factor) - 1;
         end if;
-        decim_en  <= '1';
+        decim_en <= '1';
       else
         decim_cnt <= decim_cnt - 1;
         decim_en  <= '0';
@@ -922,7 +925,7 @@ begin
   wb_sync_fifo_din <= sync_fifo_dout(63 downto 0);
   wb_sync_fifo_wr  <= wb_sync_fifo_wr_en and not(wb_sync_fifo_full);
 
-  wb_sync_fifo_rd   <= wb_sync_fifo_dreq and not(wb_sync_fifo_empty);  -- and not(wb_ddr_stall_i)
+  wb_sync_fifo_rd   <= wb_sync_fifo_dreq and not(wb_sync_fifo_empty) and not(wb_ddr_stall_t);
   wb_sync_fifo_dreq <= '1';
 
   ------------------------------------------------------------------------------
@@ -961,23 +964,32 @@ begin
   p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
-      wb_ddr_cyc_o <= '0';
-      wb_ddr_we_o  <= '0';
-      wb_ddr_stb_o <= '0';
-      wb_ddr_adr_o <= (others => '0');
-      wb_ddr_dat_o <= (others => '0');
+      wb_ddr_cyc_o   <= '0';
+      wb_ddr_we_o    <= '0';
+      wb_ddr_stb_o   <= '0';
+      wb_ddr_adr_o   <= (others => '0');
+      wb_ddr_dat_o   <= (others => '0');
+      wb_ddr_stall_t <= '0';
     elsif rising_edge(wb_ddr_clk_i) then
+
       if wb_sync_fifo_valid = '1' then  --if (wb_sync_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
-        wb_ddr_cyc_o <= '1';
         wb_ddr_we_o  <= '1';
         wb_ddr_stb_o <= '1';
         wb_ddr_adr_o <= "000000" & std_logic_vector(ram_addr_cnt);
         wb_ddr_dat_o <= wb_sync_fifo_dout;
       else
-        wb_ddr_cyc_o <= '0';
         wb_ddr_we_o  <= '0';
         wb_ddr_stb_o <= '0';
       end if;
+
+      if wb_sync_fifo_valid = '1' then
+        wb_ddr_cyc_o <= '1';
+      elsif wb_sync_fifo_empty = '1' then
+        wb_ddr_cyc_o <= '0';
+      end if;
+
+      wb_ddr_stall_t <= wb_ddr_stall_i;
+
     end if;
   end process p_wb_master;
 

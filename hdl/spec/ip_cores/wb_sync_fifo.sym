@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <symbol version="7" name="wb_sync_fifo">
     <symboltype>BLOCK</symboltype>
-    <timestamp>2011-3-4T16:18:13</timestamp>
+    <timestamp>2011-3-24T8:0:54</timestamp>
     <pin polarity="Input" x="0" y="80" name="din[63:0]" />
     <pin polarity="Input" x="0" y="144" name="wr_en" />
     <pin polarity="Input" x="0" y="176" name="wr_clk" />
