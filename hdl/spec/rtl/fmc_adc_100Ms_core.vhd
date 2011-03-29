@@ -50,12 +50,11 @@ entity fmc_adc_100Ms_core is
     -- DDR wishbone interface
     wb_ddr_clk_i   : in  std_logic;
     wb_ddr_adr_o   : out std_logic_vector(31 downto 0);
-    wb_ddr_dat_o   : out std_logic_vector(31 downto 0);
-    wb_ddr_sel_o   : out std_logic_vector(3 downto 0);
+    wb_ddr_dat_o   : out std_logic_vector(63 downto 0);
+    wb_ddr_sel_o   : out std_logic_vector(7 downto 0);
     wb_ddr_stb_o   : out std_logic;
     wb_ddr_we_o    : out std_logic;
     wb_ddr_cyc_o   : out std_logic;
-    wb_ddr_dat_i   : in  std_logic_vector(31 downto 0);
     wb_ddr_ack_i   : in  std_logic;
     wb_ddr_stall_i : in  std_logic;
 
@@ -202,19 +201,18 @@ architecture rtl of fmc_adc_100Ms_core is
       );
   end component adc_sync_fifo;
 
-  component wb_sync_fifo
+  component wb_ddr_fifo
     port (
-      rst    : in  std_logic;
-      wr_clk : in  std_logic;
-      rd_clk : in  std_logic;
-      din    : in  std_logic_vector(63 downto 0);
-      wr_en  : in  std_logic;
-      rd_en  : in  std_logic;
-      dout   : out std_logic_vector(31 downto 0);
-      full   : out std_logic;
-      empty  : out std_logic;
-      valid  : out std_logic);
-  end component wb_sync_fifo;
+      rst   : in  std_logic;
+      clk   : in  std_logic;
+      din   : in  std_logic_vector(63 downto 0);
+      wr_en : in  std_logic;
+      rd_en : in  std_logic;
+      dout  : out std_logic_vector(63 downto 0);
+      full  : out std_logic;
+      empty : out std_logic;
+      valid : out std_logic);
+  end component wb_ddr_fifo;
 
   component monostable
     generic(
@@ -315,6 +313,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal acq_fsm_start         : std_logic;
   signal acq_fsm_stop          : std_logic;
   signal acq_fsm_trig          : std_logic;
+  signal acq_fsm_end           : std_logic;
   signal acq_fsm_in_pre_trig   : std_logic;
   signal acq_fsm_in_post_trig  : std_logic;
 
@@ -330,23 +329,25 @@ architecture rtl of fmc_adc_100Ms_core is
   signal shots_done      : std_logic;
   signal shots_decr      : std_logic;
 
-  -- Sync FIFO (from sys_clk_i to wb_ddr_clk)
-  signal wb_sync_fifo_din   : std_logic_vector(63 downto 0);
-  signal wb_sync_fifo_dout  : std_logic_vector(31 downto 0);
-  signal wb_sync_fifo_empty : std_logic;
-  signal wb_sync_fifo_full  : std_logic;
-  signal wb_sync_fifo_wr    : std_logic;
-  signal wb_sync_fifo_rd    : std_logic;
-  signal wb_sync_fifo_valid : std_logic;
-  signal wb_sync_fifo_dreq  : std_logic;
-  signal wb_sync_fifo_wr_en : std_logic;
+  -- Wishbone to DDR flowcontrol FIFO
+  signal wb_ddr_fifo_din   : std_logic_vector(63 downto 0);
+  signal wb_ddr_fifo_dout  : std_logic_vector(63 downto 0);
+  signal wb_ddr_fifo_empty : std_logic;
+  signal wb_ddr_fifo_full  : std_logic;
+  signal wb_ddr_fifo_wr    : std_logic;
+  signal wb_ddr_fifo_rd    : std_logic;
+  signal wb_ddr_fifo_valid : std_logic;
+  signal wb_ddr_fifo_dreq  : std_logic;
+  signal wb_ddr_fifo_wr_en : std_logic;
 
-  -- START sync
+  -- sync to wb clk domain
   signal acq_fsm_start_sync_t : std_logic;
   signal acq_fsm_start_sync   : std_logic;
+  signal acq_fsm_end_sync_t   : std_logic;
+  signal acq_fsm_end_sync     : std_logic;
 
   -- RAM address counter
-  signal ram_addr_cnt : unsigned(25 downto 0);
+  signal ram_addr_cnt : unsigned(24 downto 0);
   signal ram_wr_en    : std_logic;
 
   -- Wishbone interface to DDR
@@ -667,7 +668,7 @@ begin
   --    When the decimantion is enabled, if the trigger occurs between two
   --    samples it will be realigned to the next sample
   ------------------------------------------------------------------------------
-  p_deci_cnt : process (fs_clk)
+  p_deci_cnt : process (fs_clk, fs_rst_n)
   begin
     if fs_rst_n = '0' then
       decim_cnt <= to_unsigned(1, decim_cnt'length);
@@ -685,7 +686,7 @@ begin
     end if;
   end process p_deci_cnt;
 
-  p_trig_align : process (fs_clk)
+  p_trig_align : process (fs_clk, fs_rst_n)
   begin
     if fs_rst_n = '0' then
       trig_align <= '0';
@@ -727,7 +728,7 @@ begin
   begin
     if rising_edge(sys_clk_i) then
       if sys_rst_n_i = '0' then
-        shots_cnt  <= (others => '0');
+        shots_cnt  <= to_unsigned(1, shots_cnt'length);
         shots_done <= '0';
       else
         if acq_fsm_start = '1' then
@@ -749,7 +750,7 @@ begin
   begin
     if rising_edge(sys_clk_i) then
       if sys_rst_n_i = '0' then
-        pre_trig_cnt  <= (others => '0');
+        pre_trig_cnt  <= to_unsigned(1, pre_trig_cnt'length);
         pre_trig_done <= '0';
       else
         if acq_fsm_start = '1' then
@@ -771,7 +772,7 @@ begin
   begin
     if rising_edge(sys_clk_i) then
       if sys_rst_n_i = '0' then
-        post_trig_cnt  <= (others => '0');
+        post_trig_cnt  <= to_unsigned(1, post_trig_cnt'length);
         post_trig_done <= '0';
       else
         if acq_fsm_start = '1' then
@@ -794,6 +795,7 @@ begin
   acq_fsm_start <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "01" else '0';
   acq_fsm_stop  <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "10" else '0';
   acq_fsm_trig  <= sync_fifo_dout(64);
+  acq_fsm_end   <= shots_done and post_trig_done;
 
   -- FSM transitions
   p_acq_fsm_transitions : process(sys_clk_i, sys_rst_n_i)
@@ -859,11 +861,11 @@ begin
         sync_fifo_dreq       <= '1';
         acq_fsm_in_pre_trig  <= '0';
         acq_fsm_in_post_trig <= '0';
-        wb_sync_fifo_wr_en   <= '0';
+        wb_ddr_fifo_wr_en    <= '0';
         acq_fsm_state        <= "001";
 
       when PRE_TRIG =>
-        wb_sync_fifo_wr_en   <= '1';
+        wb_ddr_fifo_wr_en    <= '1';
         acq_fsm_in_pre_trig  <= '1';
         shots_decr           <= '0';
         sync_fifo_dreq       <= '1';
@@ -871,7 +873,7 @@ begin
         acq_fsm_state        <= "010";
 
       when WAIT_TRIG =>
-        wb_sync_fifo_wr_en   <= '1';
+        wb_ddr_fifo_wr_en    <= '1';
         shots_decr           <= '0';
         sync_fifo_dreq       <= '1';
         acq_fsm_in_pre_trig  <= '0';
@@ -879,7 +881,7 @@ begin
         acq_fsm_state        <= "011";
 
       when POST_TRIG =>
-        wb_sync_fifo_wr_en   <= '1';
+        wb_ddr_fifo_wr_en    <= '1';
         acq_fsm_in_post_trig <= '1';
         shots_decr           <= '0';
         sync_fifo_dreq       <= '1';
@@ -891,7 +893,7 @@ begin
         sync_fifo_dreq       <= '1';
         acq_fsm_in_pre_trig  <= '0';
         acq_fsm_in_post_trig <= '0';
-        wb_sync_fifo_wr_en   <= '0';
+        wb_ddr_fifo_wr_en    <= '0';
         acq_fsm_state        <= "101";
 
       when others =>
@@ -899,7 +901,7 @@ begin
         sync_fifo_dreq       <= '1';
         acq_fsm_in_pre_trig  <= '0';
         acq_fsm_in_post_trig <= '0';
-        wb_sync_fifo_wr_en   <= '0';
+        wb_ddr_fifo_wr_en    <= '0';
         acq_fsm_state        <= "111";
 
     end case;
@@ -908,39 +910,42 @@ begin
   ------------------------------------------------------------------------------
   -- Synchronisation FIFO to wishbone DDR clock domain
   ------------------------------------------------------------------------------
-  cmp_wb_sync_fifo : wb_sync_fifo
+  cmp_wb_ddr_fifo : wb_ddr_fifo
     port map(
-      rst    => sys_rst,                -- must be at least 3 wr_clk and rd_clk cycles
-      wr_clk => sys_clk_i,
-      rd_clk => wb_ddr_clk_i,
-      din    => wb_sync_fifo_din,
-      wr_en  => wb_sync_fifo_wr,
-      rd_en  => wb_sync_fifo_rd,
-      dout   => wb_sync_fifo_dout,
-      full   => wb_sync_fifo_full,
-      empty  => wb_sync_fifo_empty,
-      valid  => wb_sync_fifo_valid
+      rst   => sys_rst,                 -- must be at least 3 wr_clk and rd_clk cycles
+      clk   => sys_clk_i,
+      din   => wb_ddr_fifo_din,
+      wr_en => wb_ddr_fifo_wr,
+      rd_en => wb_ddr_fifo_rd,
+      dout  => wb_ddr_fifo_dout,
+      full  => wb_ddr_fifo_full,
+      empty => wb_ddr_fifo_empty,
+      valid => wb_ddr_fifo_valid
       );
 
-  wb_sync_fifo_din <= sync_fifo_dout(63 downto 0);
-  wb_sync_fifo_wr  <= wb_sync_fifo_wr_en and not(wb_sync_fifo_full);
+  wb_ddr_fifo_din <= sync_fifo_dout(63 downto 0);
+  wb_ddr_fifo_wr  <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
 
-  wb_sync_fifo_rd   <= wb_sync_fifo_dreq and not(wb_sync_fifo_empty) and not(wb_ddr_stall_t);
-  wb_sync_fifo_dreq <= '1';
+  wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
+  wb_ddr_fifo_dreq <= '1';
 
   ------------------------------------------------------------------------------
-  -- START synchronization to wishbone DDR clock domain
+  -- Synchronization to wishbone DDR clock domain
   ------------------------------------------------------------------------------
-  p_start_sync : process (wb_ddr_clk_i, sys_rst_n_i)
+  p_wb_sync : process (wb_ddr_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
       acq_fsm_start_sync   <= '0';
       acq_fsm_start_sync_t <= '0';
+      acq_fsm_end_sync     <= '0';
+      acq_fsm_end_sync_t   <= '0';
     elsif rising_edge(wb_ddr_clk_i) then
       acq_fsm_start_sync_t <= acq_fsm_start;
       acq_fsm_start_sync   <= acq_fsm_start_sync_t;
+      acq_fsm_end_sync_t   <= acq_fsm_end;
+      acq_fsm_end_sync     <= acq_fsm_end_sync_t;
     end if;
-  end process p_start_sync;
+  end process p_wb_sync;
 
   ------------------------------------------------------------------------------
   -- RAM address counter (32-bit word address)
@@ -950,9 +955,9 @@ begin
     if sys_rst_n_i = '0' then
       ram_addr_cnt <= (others => '0');
     elsif rising_edge(wb_ddr_clk_i) then
-      if acq_fsm_start_sync = '1' then
+      if acq_fsm_start = '1' then
         ram_addr_cnt <= (others => '0');
-      elsif wb_sync_fifo_valid = '1' then
+      elsif wb_ddr_fifo_valid = '1' then
         ram_addr_cnt <= ram_addr_cnt + 1;
       end if;
     end if;
@@ -972,20 +977,20 @@ begin
       wb_ddr_stall_t <= '0';
     elsif rising_edge(wb_ddr_clk_i) then
 
-      if wb_sync_fifo_valid = '1' then  --if (wb_sync_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
-        wb_ddr_we_o  <= '1';
+      if wb_ddr_fifo_valid = '1' then   --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
         wb_ddr_stb_o <= '1';
-        wb_ddr_adr_o <= "000000" & std_logic_vector(ram_addr_cnt);
-        wb_ddr_dat_o <= wb_sync_fifo_dout;
+        wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
+        wb_ddr_dat_o <= wb_ddr_fifo_dout;
       else
-        wb_ddr_we_o  <= '0';
         wb_ddr_stb_o <= '0';
       end if;
 
-      if wb_sync_fifo_valid = '1' then
+      if wb_ddr_fifo_valid = '1' then
         wb_ddr_cyc_o <= '1';
-      elsif wb_sync_fifo_empty = '1' then
+        wb_ddr_we_o  <= '1';
+      elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_end = '1') then
         wb_ddr_cyc_o <= '0';
+        wb_ddr_we_o  <= '0';
       end if;
 
       wb_ddr_stall_t <= wb_ddr_stall_i;
@@ -993,6 +998,6 @@ begin
     end if;
   end process p_wb_master;
 
-  wb_ddr_sel_o <= "1111";
+  wb_ddr_sel_o <= X"FF";
 
 end rtl;

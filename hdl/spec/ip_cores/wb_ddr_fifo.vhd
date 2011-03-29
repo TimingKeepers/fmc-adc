@@ -26,8 +26,8 @@
 --     (c) Copyright 1995-2009 Xilinx, Inc.                                   --
 --     All rights reserved.                                                   --
 --------------------------------------------------------------------------------
--- You must compile the wrapper file wb_sync_fifo.vhd when simulating
--- the core, wb_sync_fifo. When compiling the wrapper file, be sure to
+-- You must compile the wrapper file wb_ddr_fifo.vhd when simulating
+-- the core, wb_ddr_fifo. When compiling the wrapper file, be sure to
 -- reference the XilinxCoreLib VHDL simulation library. For detailed
 -- instructions, please refer to the "CORE Generator Help".
 
@@ -40,38 +40,36 @@ USE ieee.std_logic_1164.ALL;
 -- synthesis translate_off
 Library XilinxCoreLib;
 -- synthesis translate_on
-ENTITY wb_sync_fifo IS
+ENTITY wb_ddr_fifo IS
 	port (
+	clk: IN std_logic;
 	rst: IN std_logic;
-	wr_clk: IN std_logic;
-	rd_clk: IN std_logic;
 	din: IN std_logic_VECTOR(63 downto 0);
 	wr_en: IN std_logic;
 	rd_en: IN std_logic;
-	dout: OUT std_logic_VECTOR(31 downto 0);
+	dout: OUT std_logic_VECTOR(63 downto 0);
 	full: OUT std_logic;
 	empty: OUT std_logic;
 	valid: OUT std_logic);
-END wb_sync_fifo;
+END wb_ddr_fifo;
 
-ARCHITECTURE wb_sync_fifo_a OF wb_sync_fifo IS
+ARCHITECTURE wb_ddr_fifo_a OF wb_ddr_fifo IS
 -- synthesis translate_off
-component wrapped_wb_sync_fifo
+component wrapped_wb_ddr_fifo
 	port (
+	clk: IN std_logic;
 	rst: IN std_logic;
-	wr_clk: IN std_logic;
-	rd_clk: IN std_logic;
 	din: IN std_logic_VECTOR(63 downto 0);
 	wr_en: IN std_logic;
 	rd_en: IN std_logic;
-	dout: OUT std_logic_VECTOR(31 downto 0);
+	dout: OUT std_logic_VECTOR(63 downto 0);
 	full: OUT std_logic;
 	empty: OUT std_logic;
 	valid: OUT std_logic);
 end component;
 
 -- Configuration specification 
-	for all : wrapped_wb_sync_fifo use entity XilinxCoreLib.fifo_generator_v6_2(behavioral)
+	for all : wrapped_wb_ddr_fifo use entity XilinxCoreLib.fifo_generator_v6_2(behavioral)
 		generic map(
 			c_has_int_clk => 0,
 			c_wr_response_latency => 1,
@@ -81,8 +79,8 @@ end component;
 			c_has_rd_data_count => 0,
 			c_din_width => 64,
 			c_has_wr_data_count => 0,
-			c_full_flags_rst_val => 1,
-			c_implementation_type => 2,
+			c_full_flags_rst_val => 0,
+			c_implementation_type => 0,
 			c_family => "spartan6",
 			c_use_embedded_reg => 0,
 			c_has_wr_rst => 0,
@@ -92,9 +90,9 @@ end component;
 			c_has_meminit_file => 0,
 			c_has_overflow => 0,
 			c_preload_latency => 1,
-			c_dout_width => 32,
+			c_dout_width => 64,
 			c_msgon_val => 1,
-			c_rd_depth => 2048,
+			c_rd_depth => 1024,
 			c_default_value => "BlankString",
 			c_mif_file_name => "BlankString",
 			c_error_injection_type => 0,
@@ -106,11 +104,11 @@ end component;
 			c_has_wr_ack => 0,
 			c_use_ecc => 0,
 			c_wr_ack_low => 0,
-			c_common_clock => 0,
-			c_rd_pntr_width => 11,
+			c_common_clock => 1,
+			c_rd_pntr_width => 10,
 			c_use_fwft_data_count => 0,
 			c_has_almost_empty => 0,
-			c_rd_data_count_width => 11,
+			c_rd_data_count_width => 10,
 			c_enable_rlocs => 0,
 			c_wr_pntr_width => 10,
 			c_overflow_low => 0,
@@ -120,13 +118,13 @@ end component;
 			c_preload_regs => 0,
 			c_dout_rst_val => "0",
 			c_has_data_count => 0,
-			c_prog_full_thresh_negate_val => 1020,
+			c_prog_full_thresh_negate_val => 1021,
 			c_wr_depth => 1024,
 			c_prog_empty_thresh_negate_val => 3,
 			c_prog_empty_thresh_assert_val => 2,
 			c_has_valid => 1,
 			c_init_wr_pntr_val => 0,
-			c_prog_full_thresh_assert_val => 1021,
+			c_prog_full_thresh_assert_val => 1022,
 			c_use_fifo16_flags => 0,
 			c_has_backup => 0,
 			c_valid_low => 0,
@@ -137,11 +135,10 @@ end component;
 -- synthesis translate_on
 BEGIN
 -- synthesis translate_off
-U0 : wrapped_wb_sync_fifo
+U0 : wrapped_wb_ddr_fifo
 		port map (
+			clk => clk,
 			rst => rst,
-			wr_clk => wr_clk,
-			rd_clk => rd_clk,
 			din => din,
 			wr_en => wr_en,
 			rd_en => rd_en,
@@ -151,5 +148,5 @@ U0 : wrapped_wb_sync_fifo
 			valid => valid);
 -- synthesis translate_on
 
-END wb_sync_fifo_a;
+END wb_ddr_fifo_a;
 

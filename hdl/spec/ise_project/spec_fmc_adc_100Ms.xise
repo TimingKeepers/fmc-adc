@@ -79,38 +79,6 @@
       <association xil_pn:name="BehavioralSimulation"/>
       <association xil_pn:name="Implementation"/>
     </file>
-    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3/user_design/rtl/ddr_controller_bank3.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3/user_design/rtl/memc3_infrastructure.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3/user_design/rtl/memc3_wrapper.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
     <file xil_pn:name="../../../../GN4124_core/hdl/spec/ip_cores/fifo_32x512.ngc" xil_pn:type="FILE_NGC">
       <association xil_pn:name="Implementation"/>
     </file>
@@ -179,7 +147,44 @@
     <file xil_pn:name="../ip_cores/adc_sync_fifo.ngc" xil_pn:type="FILE_NGC">
       <association xil_pn:name="Implementation"/>
     </file>
-    <file xil_pn:name="../ip_cores/wb_sync_fifo.ngc" xil_pn:type="FILE_NGC">
+    <file xil_pn:name="../ip_cores/test_dpram.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/ddr_controller_bank3_64b.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/memc3_infrastructure.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/memc3_wrapper.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
+      <association xil_pn:name="Implementation"/>
+    </file>
+    <file xil_pn:name="../ip_cores/wb_ddr_fifo.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation"/>
       <association xil_pn:name="Implementation"/>
     </file>
   </files>

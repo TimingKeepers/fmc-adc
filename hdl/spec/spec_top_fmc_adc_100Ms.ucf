@@ -557,11 +557,11 @@ NET "DDR3_UDQS_N"  IN_TERM = NONE;
 # GN4124
 
 NET "L_CLKp" TNM_NET = "l_clkp_grp";
-TIMESPEC TS_l_clkp = PERIOD "l_clkp_grp" 10 ns HIGH 50%;
+TIMESPEC TS_l_clkp = PERIOD "l_clkp_grp" 6.25 ns HIGH 50%;
 NET "P2L_CLKp" TNM_NET = "p2l_clkp_grp";
-TIMESPEC TS_p2l_clkp = PERIOD "p2l_clkp_grp" 10 ns HIGH 50%;
+TIMESPEC TS_p2l_clkp = PERIOD "p2l_clkp_grp" 6.25 ns HIGH 50%;
 NET "P2L_CLKn" TNM_NET = "p2l_clkn_grp";
-TIMESPEC TS_p2l_clkn = PERIOD "p2l_clkn_grp" 10 ns HIGH 50%;
+TIMESPEC TS_p2l_clkn = PERIOD "p2l_clkn_grp" 6.25 ns HIGH 50%;
 
 # System clock
 

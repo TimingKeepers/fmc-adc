@@ -1,0 +1,14 @@
+# Output products list for <wb_ddr_fifo>
+_xmsgs/pn_parser.xmsgs
+fifo_generator_readme.txt
+fifo_generator_ug175.pdf
+wb_ddr_fifo.asy
+wb_ddr_fifo.gise
+wb_ddr_fifo.ngc
+wb_ddr_fifo.sym
+wb_ddr_fifo.vhd
+wb_ddr_fifo.vho
+wb_ddr_fifo.xco
+wb_ddr_fifo.xise
+wb_ddr_fifo_flist.txt
+wb_ddr_fifo_xmdf.tcl

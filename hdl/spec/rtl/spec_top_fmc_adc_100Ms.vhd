@@ -270,20 +270,20 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       wb0_cyc_i   : in  std_logic;
       wb0_stb_i   : in  std_logic;
       wb0_we_i    : in  std_logic;
-      wb0_addr_i  : in  std_logic_vector(27 downto 0);
+      wb0_addr_i  : in  std_logic_vector(26 downto 0);
       wb0_data_i  : in  std_logic_vector(g_P0_DATA_PORT_SIZE - 1 downto 0);
       wb0_data_o  : out std_logic_vector(g_P0_DATA_PORT_SIZE - 1 downto 0);
       wb0_ack_o   : out std_logic;
       wb0_stall_o : out std_logic;
 
       wb1_clk_i   : in  std_logic;
-      wb1_sel_i   : in  std_logic_vector(g_P0_MASK_SIZE - 1 downto 0);
+      wb1_sel_i   : in  std_logic_vector(g_P1_MASK_SIZE - 1 downto 0);
       wb1_cyc_i   : in  std_logic;
       wb1_stb_i   : in  std_logic;
       wb1_we_i    : in  std_logic;
       wb1_addr_i  : in  std_logic_vector(27 downto 0);
-      wb1_data_i  : in  std_logic_vector(g_P0_DATA_PORT_SIZE - 1 downto 0);
-      wb1_data_o  : out std_logic_vector(g_P0_DATA_PORT_SIZE - 1 downto 0);
+      wb1_data_i  : in  std_logic_vector(g_P1_DATA_PORT_SIZE - 1 downto 0);
+      wb1_data_o  : out std_logic_vector(g_P1_DATA_PORT_SIZE - 1 downto 0);
       wb1_ack_o   : out std_logic;
       wb1_stall_o : out std_logic
       );
@@ -400,12 +400,11 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       -- DDR wishbone interface
       wb_ddr_clk_i   : in  std_logic;
       wb_ddr_adr_o   : out std_logic_vector(31 downto 0);
-      wb_ddr_dat_o   : out std_logic_vector(31 downto 0);
-      wb_ddr_sel_o   : out std_logic_vector(3 downto 0);
+      wb_ddr_dat_o   : out std_logic_vector(63 downto 0);
+      wb_ddr_sel_o   : out std_logic_vector(7 downto 0);
       wb_ddr_stb_o   : out std_logic;
       wb_ddr_we_o    : out std_logic;
       wb_ddr_cyc_o   : out std_logic;
-      wb_ddr_dat_i   : in  std_logic_vector(31 downto 0);
       wb_ddr_ack_i   : in  std_logic;
       wb_ddr_stall_i : in  std_logic;
 
@@ -432,6 +431,17 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       gpio_si570_oe_o    : out std_logic                      -- Si570 (programmable oscillator) output enable
       );
   end component fmc_adc_100Ms_core;
+
+  component test_dpram
+    port (
+      clka  : in  std_logic;
+      wea   : in  std_logic_vector(0 downto 0);
+      addra : in  std_logic_vector(9 downto 0);
+      dina  : in  std_logic_vector(31 downto 0);
+      clkb  : in  std_logic;
+      addrb : in  std_logic_vector(9 downto 0);
+      doutb : out std_logic_vector(31 downto 0));
+  end component test_dpram;
 
   ------------------------------------------------------------------------------
   -- Constants declaration
@@ -521,21 +531,20 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal wb_adr_fmc_adc_core : std_logic_vector(4 downto 0);
 
   -- GN4124 DMA to DDR wishbone bus
-  signal wb_dma_adr     : std_logic_vector(31 downto 0);
-  signal wb_dma_dat_i   : std_logic_vector((32*c_DMA_WB_SLAVES_NB)-1 downto 0);
-  signal wb_dma_dat_o   : std_logic_vector(31 downto 0);
-  signal wb_dma_sel     : std_logic_vector(3 downto 0);
-  signal wb_dma_cyc     : std_logic;    --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
-  signal wb_dma_stb     : std_logic;
-  signal wb_dma_we      : std_logic;
-  signal wb_dma_ack     : std_logic;    --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
-  signal wb_dma_stall   : std_logic;    --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
+  signal wb_dma_adr   : std_logic_vector(31 downto 0);
+  signal wb_dma_dat_i : std_logic_vector((32*c_DMA_WB_SLAVES_NB)-1 downto 0);
+  signal wb_dma_dat_o : std_logic_vector(31 downto 0);
+  signal wb_dma_sel   : std_logic_vector(3 downto 0);
+  signal wb_dma_cyc   : std_logic;      --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
+  signal wb_dma_stb   : std_logic;
+  signal wb_dma_we    : std_logic;
+  signal wb_dma_ack   : std_logic;      --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
+  signal wb_dma_stall : std_logic;      --_vector(c_DMA_WB_SLAVES_NB-1 downto 0);
 
   -- FMC ADC core to DDR wishbone bus
   signal wb_ddr_adr   : std_logic_vector(31 downto 0);
-  signal wb_ddr_dat_i : std_logic_vector((32*c_DMA_WB_SLAVES_NB)-1 downto 0);
-  signal wb_ddr_dat_o : std_logic_vector(31 downto 0);
-  signal wb_ddr_sel   : std_logic_vector(3 downto 0);
+  signal wb_ddr_dat_o : std_logic_vector(63 downto 0);
+  signal wb_ddr_sel   : std_logic_vector(7 downto 0);
   signal wb_ddr_cyc   : std_logic;
   signal wb_ddr_stb   : std_logic;
   signal wb_ddr_we    : std_logic;
@@ -570,8 +579,11 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal ddr3_calib_done : std_logic;
 
   -- SPI
-  signal spi_din_t  : std_logic_vector(3 downto 0);
-  signal spi_ss_t   : std_logic_vector(7 downto 0);
+  signal spi_din_t : std_logic_vector(3 downto 0);
+  signal spi_ss_t  : std_logic_vector(7 downto 0);
+
+  -- Tests
+  signal test_dpram_we : std_logic;
 
 
 begin
@@ -849,22 +861,22 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc_spi : wb_spi_master
     port map (
-      wb_clk_i    => sys_clk_125,
-      wb_rst_i    => sys_rst,
-      wb_adr_i    => wb_adr_fmc_spi,
-      wb_dat_i    => wb_dat_o,
-      wb_dat_o    => wb_dat_fmc_spi,
-      wb_sel_i    => wb_sel,
-      wb_stb_i    => wb_stb,
-      wb_cyc_i    => wb_cyc_fmc_spi,
-      wb_we_i     => wb_we,
-      wb_ack_o    => wb_ack_fmc_spi,
-      wb_err_o    => open,
-      wb_int_o    => open,
-      ss_pad_o    => spi_ss_t,
-      sclk_pad_o  => spi_sck_o,
-      mosi_pad_o  => spi_dout_o,
-      miso_pad_i  => spi_din_t(spi_din_t'left)
+      wb_clk_i   => sys_clk_125,
+      wb_rst_i   => sys_rst,
+      wb_adr_i   => wb_adr_fmc_spi,
+      wb_dat_i   => wb_dat_o,
+      wb_dat_o   => wb_dat_fmc_spi,
+      wb_sel_i   => wb_sel,
+      wb_stb_i   => wb_stb,
+      wb_cyc_i   => wb_cyc_fmc_spi,
+      wb_we_i    => wb_we,
+      wb_ack_o   => wb_ack_fmc_spi,
+      wb_err_o   => open,
+      wb_int_o   => open,
+      ss_pad_o   => spi_ss_t,
+      sclk_pad_o => spi_sck_o,
+      mosi_pad_o => spi_dout_o,
+      miso_pad_i => spi_din_t(spi_din_t'left)
       );
 
   -- 32-bit word to byte address
@@ -947,14 +959,13 @@ begin
       wb_csr_we_i  => wb_we,
       wb_csr_ack_o => wb_ack_fmc_adc_core,
 
-      wb_ddr_clk_i   => sys_clk_250,
+      wb_ddr_clk_i   => sys_clk_125,
       wb_ddr_adr_o   => wb_ddr_adr,
       wb_ddr_dat_o   => wb_ddr_dat_o,
       wb_ddr_sel_o   => wb_ddr_sel,
       wb_ddr_stb_o   => wb_ddr_stb,
       wb_ddr_we_o    => wb_ddr_we,
       wb_ddr_cyc_o   => wb_ddr_cyc,
-      wb_ddr_dat_i   => wb_ddr_dat_i,
       wb_ddr_ack_i   => wb_ddr_ack,
       wb_ddr_stall_i => wb_ddr_stall,
 
@@ -992,9 +1003,13 @@ begin
   ------------------------------------------------------------------------------
   cmp_ddr_ctrl : ddr3_ctrl
     generic map(
-      g_MEMCLK_PERIOD => 3000,
-      g_SIMULATION    => g_SIMULATION,
-      g_CALIB_SOFT_IP => g_CALIB_SOFT_IP)
+      g_MEMCLK_PERIOD     => 3000,
+      g_SIMULATION        => g_SIMULATION,
+      g_CALIB_SOFT_IP     => g_CALIB_SOFT_IP,
+      g_P0_MASK_SIZE      => 8,
+      g_P0_DATA_PORT_SIZE => 64,
+      g_P1_MASK_SIZE      => 4,
+      g_P1_DATA_PORT_SIZE => 32)
     port map (
       clk_i   => ddr_clk,
       rst_n_i => sys_rst_n,
@@ -1021,14 +1036,36 @@ begin
       ddr3_rzq_b    => DDR3_RZQ,
       ddr3_zio_b    => DDR3_ZIO,
 
-      wb0_clk_i   => sys_clk_250,
+      --wb0_clk_i   => '0',
+      --wb0_sel_i   => "0000",
+      --wb0_cyc_i   => '0',
+      --wb0_stb_i   => '0',
+      --wb0_we_i    => '0',
+      --wb0_addr_i  => X"0000000",
+      --wb0_data_i  => X"00000000",
+      --wb0_data_o  => open,
+      --wb0_ack_o   => open,
+      --wb0_stall_o => open,
+
+      --wb1_clk_i   => '0',
+      --wb1_sel_i   => "0000",
+      --wb1_cyc_i   => '0',
+      --wb1_stb_i   => '0',
+      --wb1_we_i    => '0',
+      --wb1_addr_i  => X"0000000",
+      --wb1_data_i  => X"00000000",
+      --wb1_data_o  => open,
+      --wb1_ack_o   => open,
+      --wb1_stall_o => open);
+
+      wb0_clk_i   => sys_clk_125,
       wb0_sel_i   => wb_ddr_sel,
       wb0_cyc_i   => wb_ddr_cyc,
       wb0_stb_i   => wb_ddr_stb,
       wb0_we_i    => wb_ddr_we,
-      wb0_addr_i  => wb_ddr_adr(27 downto 0),
+      wb0_addr_i  => wb_ddr_adr(26 downto 0),
       wb0_data_i  => wb_ddr_dat_o,
-      wb0_data_o  => wb_ddr_dat_i,
+      wb0_data_o  => open,
       wb0_ack_o   => wb_ddr_ack,
       wb0_stall_o => wb_ddr_stall,
 
@@ -1042,6 +1079,48 @@ begin
       wb1_data_o  => wb_dma_dat_i,
       wb1_ack_o   => wb_dma_ack,
       wb1_stall_o => wb_dma_stall);
+
+  --wb_ddr_stall <= '0';
+
+  --test_dpram_we <= wb_ddr_we and wb_ddr_stb and wb_ddr_cyc;
+
+  --p_test_dpram_wr_ack : process (sys_clk_250)
+  --begin
+  --  if rising_edge(sys_clk_250) then
+  --    if sys_rst_n = '0' then
+  --      wb_ddr_ack <= '0';
+  --    elsif wb_ddr_cyc = '1' and wb_ddr_stb = '1' then
+  --      wb_ddr_ack <= '1';
+  --    else
+  --      wb_ddr_ack <= '0';
+  --    end if;
+  --  end if;
+  --end process p_test_dpram_wr_ack;
+
+  --cmp_test_dpram : test_dpram
+  --  port map(
+  --    clka   => sys_clk_250,
+  --    wea(0) => test_dpram_we,           --: in  std_logic_vector(0 downto 0);
+  --    addra  => wb_ddr_adr(9 downto 0),  --: in  std_logic_vector(9 downto 0);
+  --    dina   => wb_ddr_dat_o,            --: in  std_logic_vector(31 downto 0);
+  --    clkb   => sys_clk_125,
+  --    addrb  => wb_dma_adr(9 downto 0),  --: in  std_logic_vector(9 downto 0);
+  --    doutb  => wb_dma_dat_i);           --: out std_logic_vector(31 downto 0));
+
+  --p_test_dpram_rd_ack : process (sys_clk_125)
+  --begin
+  --  if rising_edge(sys_clk_125) then
+  --    if sys_rst_n = '0' then
+  --      wb_dma_ack <= '0';
+  --    elsif wb_dma_cyc = '1' and wb_dma_stb = '1' then
+  --      wb_dma_ack <= '1';
+  --    else
+  --      wb_dma_ack <= '0';
+  --    end if;
+  --  end if;
+  --end process p_test_dpram_rd_ack;
+
+  --wb_dma_stall <= '0';
 
   ------------------------------------------------------------------------------
   -- Assign unused outputs

@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 12.2
-# Date: Thu Mar 24 14:09:13 2011
+# Date: Mon Mar 28 13:17:52 2011
 #
 ##############################################################
 #
@@ -37,7 +37,7 @@ SELECT Fifo_Generator family Xilinx,_Inc. 6.2
 # BEGIN Parameters
 CSET almost_empty_flag=false
 CSET almost_full_flag=false
-CSET component_name=wb_sync_fifo
+CSET component_name=wb_ddr_fifo
 CSET data_count=false
 CSET data_count_width=10
 CSET disable_timing_violations=false
@@ -47,16 +47,16 @@ CSET empty_threshold_negate_value=3
 CSET enable_ecc=false
 CSET enable_int_clk=false
 CSET enable_reset_synchronization=true
-CSET fifo_implementation=Independent_Clocks_Block_RAM
-CSET full_flags_reset_value=1
-CSET full_threshold_assert_value=1021
-CSET full_threshold_negate_value=1020
+CSET fifo_implementation=Common_Clock_Block_RAM
+CSET full_flags_reset_value=0
+CSET full_threshold_assert_value=1022
+CSET full_threshold_negate_value=1021
 CSET inject_dbit_error=false
 CSET inject_sbit_error=false
 CSET input_data_width=64
 CSET input_depth=1024
-CSET output_data_width=32
-CSET output_depth=2048
+CSET output_data_width=64
+CSET output_depth=1024
 CSET overflow_flag=false
 CSET overflow_sense=Active_High
 CSET performance_options=Standard_FIFO
@@ -64,7 +64,7 @@ CSET programmable_empty_type=No_Programmable_Empty_Threshold
 CSET programmable_full_type=No_Programmable_Full_Threshold
 CSET read_clock_frequency=1
 CSET read_data_count=false
-CSET read_data_count_width=11
+CSET read_data_count_width=10
 CSET reset_pin=true
 CSET reset_type=Asynchronous_Reset
 CSET underflow_flag=false
@@ -81,4 +81,4 @@ CSET write_data_count=false
 CSET write_data_count_width=10
 # END Parameters
 GENERATE
-# CRC: d8399107
+# CRC: af2e406b
