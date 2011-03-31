@@ -980,6 +980,7 @@ begin
       if wb_ddr_fifo_valid = '1' then   --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
         wb_ddr_stb_o <= '1';
         wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
+        --wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
         wb_ddr_dat_o <= wb_ddr_fifo_dout;
       else
         wb_ddr_stb_o <= '0';
