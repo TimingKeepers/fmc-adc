@@ -799,7 +799,7 @@ begin
           pre_trig_done <= '0';
         elsif pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) then
           pre_trig_done <= '1';
-        elsif acq_in_pre_trig = '1' then
+        elsif (acq_in_pre_trig = '1' and sync_fifo_valid = '1') then
           pre_trig_cnt <= pre_trig_cnt - 1;
         end if;
       end if;
@@ -821,7 +821,7 @@ begin
           post_trig_done <= '0';
         elsif post_trig_cnt = to_unsigned(0, post_trig_cnt'length) then
           post_trig_done <= '1';
-        elsif acq_in_post_trig = '1' then
+        elsif (acq_in_post_trig = '1' and sync_fifo_valid = '1') then
           post_trig_cnt <= post_trig_cnt - 1;
         end if;
       end if;
@@ -1102,7 +1102,8 @@ begin
       if wb_ddr_fifo_valid = '1' then
         wb_ddr_cyc_o <= '1';
         wb_ddr_we_o  <= '1';
-      elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
+      --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
+      elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
         wb_ddr_cyc_o <= '0';
         wb_ddr_we_o  <= '0';
       end if;
