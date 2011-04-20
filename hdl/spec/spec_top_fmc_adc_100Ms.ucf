@@ -15,23 +15,23 @@ NET "clk20_vcxo_i" IOSTANDARD = "LVCMOS25";
 
 #----------------------------------------
 # SFP slot
+# !! SFP_TX_DISABLE and SFP_MOD_DEF1 are swapped in V1.1 schematics for control signals
 #----------------------------------------
-#NET "EN_FB_RX" LOC = D5;
-#NET "EN_FB_RX" IOSTANDARD = "LVCMOS25";
-#NET "EN_FB_TX" LOC = E5;
-#NET "EN_FB_TX" IOSTANDARD = "LVCMOS25";
-#NET "FB_N" LOC = A18;
-#NET "FB_N" IOSTANDARD = "LVDS_25";
-#NET "FB_P" LOC = B18;
-#NET "FB_P" IOSTANDARD = "LVCMOS25";
-
-#NET "SFP_TX_FAULT" LOC = A17;
+#NET "SFPRX_123_N" LOC = C15;
+#NET "SFPRX_123_N" IOSTANDARD = "LVCMOS25";
+#NET "SFPRX_123_P" LOC = D15;
+#NET "SFPRX_123_P" IOSTANDARD = "LVCMOS25";
+#NET "SFPTX_123_N" LOC = A16;
+#NET "SFPTX_123_N" IOSTANDARD = "LVCMOS25";
+#NET "SFPTX_123_P" LOC = B16;
+#NET "SFPTX_123_P" IOSTANDARD = "LVCMOS25";
+#NET "SFP_TX_FAULT" LOC = B18;
 #NET "SFP_TX_FAULT" IOSTANDARD = "LVCMOS25";
-#NET "SFP_TX_DISABLE" LOC = C17;
+#NET "SFP_TX_DISABLE" LOC = F17;
 #NET "SFP_TX_DISABLE" IOSTANDARD = "LVCMOS25";
 #NET "SFP_LOS" LOC = D18;
 #NET "SFP_LOS" IOSTANDARD = "LVCMOS25";
-#NET "SFP_MOD_DEF1" LOC = F17;
+#NET "SFP_MOD_DEF1" LOC = C17;
 #NET "SFP_MOD_DEF1" IOSTANDARD = "LVCMOS25";
 #NET "SFP_MOD_DEF0" LOC = G15;
 #NET "SFP_MOD_DEF0" IOSTANDARD = "LVCMOS25";
@@ -47,8 +47,6 @@ NET "clk20_vcxo_i" IOSTANDARD = "LVCMOS25";
 #NET "PLL25DAC1_SYNC_N" IOSTANDARD = "LVCMOS25";
 #NET "PLL25DAC2_SYNC_N" LOC = B3;
 #NET "PLL25DAC2_SYNC_N" IOSTANDARD = "LVCMOS25";
-#NET "PLL25DAC_CLR_N" LOC = F7;
-#NET "PLL25DAC_CLR_N" IOSTANDARD = "LVCMOS25";
 #NET "PLL25DAC_DIN" LOC = C4;
 #NET "PLL25DAC_DIN" IOSTANDARD = "LVCMOS25";
 #NET "PLL25DAC_SCLK" LOC = A4;
@@ -63,7 +61,7 @@ NET "clk20_vcxo_i" IOSTANDARD = "LVCMOS25";
 #----------------------------------------
 # I2C interface
 #----------------------------------------
-#NET "FPGA_SCL" LOC = C5;
+#NET "FPGA_SCL" LOC = F7;
 #NET "FPGA_SCL" IOSTANDARD = "LVCMOS25";
 #NET "FPGA_SDA" LOC = F8;
 #NET "FPGA_SDA" IOSTANDARD = "LVCMOS25";
@@ -101,7 +99,7 @@ NET "P2L_DFRAME" LOC = J22;
 NET "P2L_DFRAME" IOSTANDARD = "SSTL18_I";
 NET "P2L_RDY" LOC = J16;
 NET "P2L_RDY" IOSTANDARD = "SSTL18_I";
-NET "P2L_VALID" LOC = N22;
+NET "P2L_VALID" LOC = L19;
 NET "P2L_VALID" IOSTANDARD = "SSTL18_I";
 NET "P_RD_D_RDY[0]" LOC = N16;
 NET "P_RD_D_RDY[0]" IOSTANDARD = "SSTL18_I";
@@ -223,9 +221,9 @@ NET "adc_outb_n_i[0]" LOC = W11; # LA15_N
 NET "adc_outb_n_i[0]" IOSTANDARD = "LVDS_25";
 NET "adc_outb_p_i[0]" LOC = V11; # LA15_P
 NET "adc_outb_p_i[0]" IOSTANDARD = "LVDS_25";
-NET "adc_outa_n_i[1]" LOC = AB15; # LA16_N
+NET "adc_outa_n_i[1]" LOC = Y12; # LA16_N
 NET "adc_outa_n_i[1]" IOSTANDARD = "LVDS_25";
-NET "adc_outa_p_i[1]" LOC = Y15; # LA16_P
+NET "adc_outa_p_i[1]" LOC = W12; # LA16_P
 NET "adc_outa_p_i[1]" IOSTANDARD = "LVDS_25";
 NET "adc_outb_n_i[1]" LOC = AB9; # LA13_N
 NET "adc_outb_n_i[1]" IOSTANDARD = "LVDS_25";
@@ -290,7 +288,7 @@ NET "gpio_ssr_ch1_o[6]" IOSTANDARD = "LVCMOS25";
 
 NET "gpio_ssr_ch2_o[0]" LOC = R11; # LA20_P
 NET "gpio_ssr_ch2_o[0]" IOSTANDARD = "LVCMOS25";
-NET "gpio_ssr_ch2_o[1]" LOC = Y12; # LA19_N
+NET "gpio_ssr_ch2_o[1]" LOC = AB15; # LA19_N
 NET "gpio_ssr_ch2_o[1]" IOSTANDARD = "LVCMOS25";
 NET "gpio_ssr_ch2_o[2]" LOC = R13; # LA22_P
 NET "gpio_ssr_ch2_o[2]" IOSTANDARD = "LVCMOS25";
@@ -341,16 +339,16 @@ NET "si570_thermo_scl_b" IOSTANDARD = "LVCMOS25";
 NET "si570_thermo_sda_b" LOC = T12; # LA18_P
 NET "si570_thermo_sda_b" IOSTANDARD = "LVCMOS25";
 
-NET "prsnt_m2c_n_i" LOC = A2; # PRSNT_M2C_L
+NET "prsnt_m2c_n_i" LOC = AB14; # PRSNT_M2C_L
 NET "prsnt_m2c_n_i" IOSTANDARD = "LVCMOS25";
 
 #----------------------------------------
 # FMC slot (unused pins)
 #----------------------------------------
-#NET "PG_C2M" LOC = B2;
+#NET "PG_C2M" LOC = AA14;
 #NET "PG_C2M" IOSTANDARD = "LVCMOS25";
 
-#NET "LA19_P" LOC = W12;
+#NET "LA19_P" LOC = Y15;
 #NET "LA19_P" IOSTANDARD = "LVCMOS25";
 #NET "LA23_N" LOC = AB16;
 #NET "LA23_N" IOSTANDARD = "LVCMOS25";
@@ -382,9 +380,9 @@ NET "prsnt_m2c_n_i" IOSTANDARD = "LVCMOS25";
 #----------------------------------------
 # SI57x interface
 #----------------------------------------
-#NET "SI57X_SCL" LOC = AA14;
+#NET "SI57X_SCL" LOC = A18;
 #NET "SI57X_SCL" IOSTANDARD = "LVCMOS25";
-#NET "SI57X_SDA" LOC = AB14;
+#NET "SI57X_SDA" LOC = A17;
 #NET "SI57X_SDA" IOSTANDARD = "LVCMOS25";
 #NET "SI57X_OE" LOC = H13;
 #NET "SI57X_OE" IOSTANDARD = "LVCMOS25";
@@ -396,10 +394,10 @@ NET "prsnt_m2c_n_i" IOSTANDARD = "LVCMOS25";
 #----------------------------------------
 # Carrier front panel LEDs
 #----------------------------------------
-NET "led_red_o" LOC = T6;
-NET "led_red_o" IOSTANDARD = "LVCMOS15";
-NET "led_green_o" LOC = Y3;
-NET "led_green_o" IOSTANDARD = "LVCMOS15";
+NET "led_red_o" LOC = D5;
+NET "led_red_o" IOSTANDARD = "LVCMOS25";
+NET "led_green_o" LOC = E5;
+NET "led_green_o" IOSTANDARD = "LVCMOS25";
 
 #----------------------------------------
 # PCB version number (coded with resistors)
@@ -412,14 +410,6 @@ NET "pcb_ver_i[2]" LOC = AA2;
 NET "pcb_ver_i[2]" IOSTANDARD = "LVCMOS15";
 NET "pcb_ver_i[3]" LOC = AA1;
 NET "pcb_ver_i[3]" IOSTANDARD = "LVCMOS15";
-#NET "pcb_ver_i[4]" LOC = N6;
-#NET "pcb_ver_i[4]" IOSTANDARD = "LVCMOS15";
-#NET "pcb_ver_i[5]" LOC = N7;
-#NET "pcb_ver_i[5]" IOSTANDARD = "LVCMOS15";
-#NET "pcb_ver_i[6]" LOC = U4;
-#NET "pcb_ver_i[6]" IOSTANDARD = "LVCMOS15";
-#NET "pcb_ver_i[7]" LOC = T4;
-#NET "pcb_ver_i[7]" IOSTANDARD = "LVCMOS15";
 
 #----------------------------------------
 # DDR3 interface
@@ -525,6 +515,31 @@ NET "DDR3_DQ[14]" LOC = Y2;
 NET "DDR3_DQ[14]" IOSTANDARD = "SSTL15_II";
 NET "DDR3_DQ[15]" LOC = Y1;
 NET "DDR3_DQ[15]" IOSTANDARD = "SSTL15_II";
+
+#----------------------------------------
+# UART
+#----------------------------------------
+#NET "UART_TXD" LOC = A2; # FPGA input
+#NET "UART_TXD" IOSTANDARD = "LVCMOS25";
+#NET "UART_RXD" LOC = B2; # FPGA output
+#NET "UART_RXD" IOSTANDARD = "LVCMOS25";
+
+#----------------------------------------
+# Buttons and LEDs
+#----------------------------------------
+#NET "AUX_PINS[0]" LOC = C22; # Button PB1
+#NET "AUX_PINS[0]" IOSTANDARD = "LVCMOS18";
+#NET "AUX_PINS[1]" LOC = D21; # Button PB2
+#NET "AUX_PINS[1]" IOSTANDARD = "LVCMOS18";
+#NET "AUX_PINS[2]" LOC = G19; # LED LD2
+#NET "AUX_PINS[2]" IOSTANDARD = "LVCMOS18";
+#NET "AUX_PINS[3]" LOC = F20; # LED LD3
+#NET "AUX_PINS[3]" IOSTANDARD = "LVCMOS18";
+#NET "AUX_PINS[4]" LOC = F18; # LED LD4
+#NET "AUX_PINS[4]" IOSTANDARD = "LVCMOS18";
+#NET "AUX_PINS[5]" LOC = C20; # LED LD5
+#NET "AUX_PINS[5]" IOSTANDARD = "LVCMOS18";
+
 
 
 #===============================================================================
