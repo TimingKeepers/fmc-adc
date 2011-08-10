@@ -18,15 +18,16 @@
          <ClosedNode>/spec_top_fmc_adc_100Ms - rtl/cmp_fmc_adc_100Ms_core - fmc_adc_100Ms_core - rtl</ClosedNode>
          <ClosedNode>/spec_top_fmc_adc_100Ms - rtl/cmp_fmc_i2c - i2c_master_top - structural</ClosedNode>
          <ClosedNode>/spec_top_fmc_adc_100Ms - rtl/cmp_fmc_spi - wb_spi_master</ClosedNode>
+         <ClosedNode>/spec_top_fmc_adc_100Ms - rtl/cmp_gn4124_core - gn4124_core - rtl</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>cmp_clk_in - serdes_1_to_n_clk_pll_s2_diff - arch_serdes_1_to_n_clk_pll_s2_diff (/home/mcattin/projects/GN4124_core/hdl/gn4124core/rtl/serdes_1_to_n_clk_pll_s2_diff.vhd)</SelectedItem>
+         <SelectedItem>spec_top_fmc_adc_100Ms - rtl (/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >3</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000002020000000100000001000000640000035c000000020000000000000000000000000000000064ffffffff0000008100000000000000020000035c0000000100000000000000000000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000004a5000000020000000000000000000000000000000064ffffffff000000810000000000000002000004a50000000100000000000000000000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>cmp_clk_in - serdes_1_to_n_clk_pll_s2_diff - arch_serdes_1_to_n_clk_pll_s2_diff (/home/mcattin/projects/GN4124_core/hdl/gn4124core/rtl/serdes_1_to_n_clk_pll_s2_diff.vhd)</CurrentItem>
+      <CurrentItem>spec_top_fmc_adc_100Ms - rtl (/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
@@ -46,20 +47,20 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000415000000010000000100000000000000000000000064ffffffff000000810000000000000001000004150000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001b3000000010000000100000000000000000000000064ffffffff000000810000000000000001000001b30000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Add Existing Source</CurrentItem>
    </ItemView>
    <ItemView guiview="File" >
       <ClosedNodes/>
       <SelectedItems>
-         <SelectedItem>gn4124_core_pkg_s6.vhd</SelectedItem>
+         <SelectedItem>../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/memc3_wrapper.vhd</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000000000000010000000000000000000000000000000000000507000000040101000100000000000000000000000064ffffffff0000008100000000000000040000033c0000000100000000000000d60000000100000000000000840000000100000000000000710000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>gn4124_core_pkg_s6.vhd</CurrentItem>
+      <CurrentItem>../../../../ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/memc3_wrapper.vhd</CurrentItem>
    </ItemView>
    <ItemView guiview="Library" >
       <ClosedNodes>
@@ -83,7 +84,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000287000000010000000100000000000000000000000064ffffffff000000810000000000000001000002870000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000415000000010000000100000000000000000000000064ffffffff000000810000000000000001000004150000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Add Existing Source</CurrentItem>
    </ItemView>
@@ -107,7 +108,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000039e000000010000000100000000000000000000000064ffffffff0000008100000000000000010000039e0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000224000000010000000100000000000000000000000064ffffffff000000810000000000000001000002240000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Add Existing Source</CurrentItem>
    </ItemView>
@@ -129,7 +130,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000013f000000010000000100000000000000000000000064ffffffff0000008100000000000000010000013f0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000014a000000010000000100000000000000000000000064ffffffff0000008100000000000000010000014a0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Add Existing Source</CurrentItem>
    </ItemView>

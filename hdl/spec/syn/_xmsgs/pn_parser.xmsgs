@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated   -->
+<!--     by the Xilinx ISE software.  Any direct editing or        -->
+<!--     changes made to this file may result in unpredictable     -->
+<!--     behavior or data corruption.  It is strongly advised that -->
+<!--     users do not edit the contents of this file.              -->
+<!--                                                               -->
+<!-- Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.    -->
+
+<messages>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/ddr_controller_bank3_64b.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/iodrp_controller.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/iodrp_mcb_controller.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/mcb_raw_wrapper.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/mcb_soft_calibration.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/mcb_soft_calibration_top.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/memc3_infrastructure.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/ip_cores/ddr_controller_bank3_64b/user_design/rtl/memc3_wrapper.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ddr3_ctrl_core/hdl/spec/rtl/ddr3_ctrl.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/ext_pulse_sync/ext_pulse_sync_rtl.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ip_cores/adc_serdes.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ip_cores/multishot_dpram.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ip_cores/test_dpram.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/ip_cores/wb_ddr_fifo.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/rtl/carrier_csr.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/rtl/fmc_adc_100Ms_core.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/rtl/fmc_adc_100Ms_csr.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/monostable/monostable_rtl.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/utils/utils_pkg.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/wb_i2c_master/rtl/vhdl/i2c_master_bit_ctrl.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/wb_i2c_master/rtl/vhdl/i2c_master_byte_ctrl.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/mcattin/projects/wb_i2c_master/rtl/vhdl/i2c_master_top.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1574" ><arg fmt="%s" index="1">Analyzing Verilog file \&quot;/home/mcattin/projects/wb_spi_master/spi_clgen.v\&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1065" >&quot;<arg fmt="%s" index="1">/home/mcattin/projects/wb_spi_master/spi_clgen.v</arg>&quot; Line <arg fmt="%d" index="2">41</arg>. <arg fmt="%s" index="3">Include file found: &apos;/home/mcattin/projects/wb_spi_master/spi_defines.v&apos; in file &quot;/home/mcattin/projects/wb_spi_master/spi_clgen.v&quot; line 41
+</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1065" >&quot;<arg fmt="%s" index="1">/home/mcattin/projects/wb_spi_master/spi_clgen.v</arg>&quot; Line <arg fmt="%d" index="2">42</arg>. <arg fmt="%s" index="3">Include file found: &apos;/home/mcattin/projects/wb_spi_master/timescale.v&apos; in file &quot;/home/mcattin/projects/wb_spi_master/spi_clgen.v&quot; line 42
+</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1574" ><arg fmt="%s" index="1">Analyzing Verilog file \&quot;/home/mcattin/projects/wb_spi_master/spi_shift.v\&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1065" >&quot;<arg fmt="%s" index="1">/home/mcattin/projects/wb_spi_master/spi_shift.v</arg>&quot; Line <arg fmt="%d" index="2">41</arg>. <arg fmt="%s" index="3">Include file found: &apos;/home/mcattin/projects/wb_spi_master/spi_defines.v&apos; in file &quot;/home/mcattin/projects/wb_spi_master/spi_shift.v&quot; line 41
+</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1065" >&quot;<arg fmt="%s" index="1">/home/mcattin/projects/wb_spi_master/spi_shift.v</arg>&quot; Line <arg fmt="%d" index="2">42</arg>. <arg fmt="%s" index="3">Include file found: &apos;/home/mcattin/projects/wb_spi_master/timescale.v&apos; in file &quot;/home/mcattin/projects/wb_spi_master/spi_shift.v&quot; line 42
+</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1574" ><arg fmt="%s" index="1">Analyzing Verilog file \&quot;/home/mcattin/projects/wb_spi_master/spi_top.v\&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1065" >&quot;<arg fmt="%s" index="1">/home/mcattin/projects/wb_spi_master/spi_top.v</arg>&quot; Line <arg fmt="%d" index="2">42</arg>. <arg fmt="%s" index="3">Include file found: &apos;/home/mcattin/projects/wb_spi_master/spi_defines.v&apos; in file &quot;/home/mcattin/projects/wb_spi_master/spi_top.v&quot; line 42
+</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1065" >&quot;<arg fmt="%s" index="1">/home/mcattin/projects/wb_spi_master/spi_top.v</arg>&quot; Line <arg fmt="%d" index="2">43</arg>. <arg fmt="%s" index="3">Include file found: &apos;/home/mcattin/projects/wb_spi_master/timescale.v&apos; in file &quot;/home/mcattin/projects/wb_spi_master/spi_top.v&quot; line 43
+</arg>
+</msg>
+
+</messages>
+

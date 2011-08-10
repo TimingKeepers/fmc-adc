@@ -140,19 +140,12 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputAdded"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
-      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.lso"/>
-      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.ngc"/>
-      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.ngr"/>
-      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.prj"/>
-      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.stx"/>
-      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.syr"/>
-      <outfile xil_pn:name="spec_top_fmc_adc_100Ms.xst"/>
-      <outfile xil_pn:name="spec_top_fmc_adc_100Ms_xst.xrpt"/>
-      <outfile xil_pn:name="webtalk_pn.xml"/>
-      <outfile xil_pn:name="xst"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1303288526" xil_pn:in_ck="2162529744943951648" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="-4337831395208791850" xil_pn:start_ts="1303288525">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -163,6 +156,7 @@
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputRemoved"/>

@@ -15,22 +15,10 @@
   <version xil_pn:ise_version="12.2" xil_pn:schema_version="2"/>
 
   <files>
-    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/gn4124_core_pkg_s6.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/gn4124_core_s6.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/l2p_ser_s6.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/p2l_des_s6.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
+    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/spartan6/gn4124_core_pkg.vhd" xil_pn:type="FILE_VHDL"/>
+    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/spartan6/gn4124_core.vhd" xil_pn:type="FILE_VHDL"/>
+    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/spartan6/l2p_ser.vhd" xil_pn:type="FILE_VHDL"/>
+    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/spartan6/p2l_des.vhd" xil_pn:type="FILE_VHDL"/>
     <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/wbmaster32.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation"/>
       <association xil_pn:name="Implementation"/>
@@ -59,22 +47,10 @@
       <association xil_pn:name="BehavioralSimulation"/>
       <association xil_pn:name="Implementation"/>
     </file>
-    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/serdes_n_to_1_s2_diff.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/serdes_n_to_1_s2_se.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/serdes_1_to_n_clk_pll_s2_diff.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
-    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/serdes_1_to_n_data_s2_se.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation"/>
-      <association xil_pn:name="Implementation"/>
-    </file>
+    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/spartan6/serdes_n_to_1_s2_diff.vhd" xil_pn:type="FILE_VHDL"/>
+    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/spartan6/serdes_n_to_1_s2_se.vhd" xil_pn:type="FILE_VHDL"/>
+    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/spartan6/serdes_1_to_n_clk_pll_s2_diff.vhd" xil_pn:type="FILE_VHDL"/>
+    <file xil_pn:name="../../../../GN4124_core/hdl/gn4124core/rtl/spartan6/serdes_1_to_n_data_s2_se.vhd" xil_pn:type="FILE_VHDL"/>
     <file xil_pn:name="../../../../ddr3_ctrl_core/hdl/spec/rtl/ddr3_ctrl.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation"/>
       <association xil_pn:name="Implementation"/>
