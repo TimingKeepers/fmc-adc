@@ -345,14 +345,14 @@ architecture rtl of fmc_adc_100Ms_core is
   signal multishot_buffer_sel : std_logic;
 
   -- Multi-shot mode
-  constant c_DPRAM_DEPTH : integer := 13;
-  signal dpram_addra_cnt  : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal dpram_addra_trig : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal dpram_addra_post_done : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal dpram_addrb_cnt  : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal dpram_dout       : std_logic_vector(63 downto 0);
-  signal dpram_valid      : std_logic;
-  signal dpram_valid_t    : std_logic;
+  constant c_DPRAM_DEPTH         : integer := 13;
+  signal   dpram_addra_cnt       : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal   dpram_addra_trig      : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal   dpram_addra_post_done : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal   dpram_addrb_cnt       : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal   dpram_dout            : std_logic_vector(63 downto 0);
+  signal   dpram_valid           : std_logic;
+  signal   dpram_valid_t         : std_logic;
 
   signal dpram0_dina  : std_logic_vector(63 downto 0);
   signal dpram0_addra : std_logic_vector(c_DPRAM_DEPTH-1 downto 0);
@@ -761,8 +761,8 @@ begin
   begin
     if rising_edge(sys_clk_i) then
       if sys_rst_n_i = '0' then
-        shots_cnt  <= to_unsigned(0, shots_cnt'length);
-        shots_done <= '0';
+        shots_cnt   <= to_unsigned(0, shots_cnt'length);
+        shots_done  <= '0';
         single_shot <= '0';
       else
         if acq_start = '1' then
@@ -773,7 +773,7 @@ begin
         elsif shots_decr = '1' then
           shots_cnt <= shots_cnt - 1;
         end if;
-        if shots_value = std_logic_vector(to_unsigned(1,shots_value'length)) then
+        if shots_value = std_logic_vector(to_unsigned(1, shots_value'length)) then
           single_shot <= '1';
         else
           single_shot <= '0';
@@ -957,8 +957,8 @@ begin
   begin
     if rising_edge(sys_clk_i) then
       if sys_rst_n_i = '0' then
-        dpram_addra_cnt <= (others => '0');
-        dpram_addra_trig <= (others => '0');
+        dpram_addra_cnt       <= (others => '0');
+        dpram_addra_trig      <= (others => '0');
         dpram_addra_post_done <= (others => '0');
       else
         if shots_decr = '1' then
@@ -1018,7 +1018,7 @@ begin
       else
         if post_trig_done = '1' then
           dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_DPRAM_DEPTH-1 downto 0));
-          dpram_valid_t <= '1';
+          dpram_valid_t   <= '1';
         elsif (dpram_addrb_cnt = dpram_addra_post_done) then
           dpram_valid_t <= '0';
         else
@@ -1050,8 +1050,20 @@ begin
       valid => wb_ddr_fifo_valid
       );
 
-  wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
-  wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
+  p_wb_ddr_fifo_input : process (sys_clk_i)
+  begin
+    if rising_edge(sys_clk_i) then
+      if single_shot = '1' then
+        wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0);
+        wb_ddr_fifo_wr_en <= samples_wr_en;
+      else
+        wb_ddr_fifo_din   <= dpram_dout;
+        wb_ddr_fifo_wr_en <= dpram_valid;
+      end if;
+    end if;
+  end process p_wb_ddr_fifo_input;
+  --wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
+  --wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
   wb_ddr_fifo_wr    <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
 
   wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
@@ -1102,7 +1114,7 @@ begin
       if wb_ddr_fifo_valid = '1' then
         wb_ddr_cyc_o <= '1';
         wb_ddr_we_o  <= '1';
-      --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
+        --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
       elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
         wb_ddr_cyc_o <= '0';
         wb_ddr_we_o  <= '0';

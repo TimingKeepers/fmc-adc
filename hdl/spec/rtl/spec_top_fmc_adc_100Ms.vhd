@@ -49,6 +49,10 @@ entity spec_top_fmc_adc_100Ms is
       led_red_o   : out std_logic;
       led_green_o : out std_logic;
 
+      -- Auxiliary pins
+      aux_leds_o    : out std_logic_vector(3 downto 0);
+      aux_buttons_i : in  std_logic_vector(1 downto 0);
+
       -- PCB version
       pcb_ver_i : in std_logic_vector(3 downto 0);
 
@@ -130,8 +134,10 @@ entity spec_top_fmc_adc_100Ms is
       gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
       gpio_si570_oe_o    : out std_logic;                     -- Si570 (programmable oscillator) output enable
 
-      si570_thermo_scl_b : inout std_logic;  -- I2C bus clock (Si570 and MCP9801 thermometer)
-      si570_thermo_sda_b : inout std_logic;  -- I2C bus data (Si570 and MCP9801 thermometer)
+      si570_scl_b : inout std_logic;    -- I2C bus clock (Si570)
+      si570_sda_b : inout std_logic;    -- I2C bus data (Si570)
+
+      one_wire_b : inout std_logic;     -- 1-wire interface (DS18B20 thermometer + unique ID)
 
       prsnt_m2c_n_i : in std_logic      -- Mezzanine present (active low)
       );
@@ -279,7 +285,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   constant c_BITSTREAM_DATE : std_logic_vector(31 downto 0) := X"4D6BBE3E";  -- UTC time
 
   constant c_BAR0_APERTURE    : integer := 18;  -- nb of bits for 32-bit word address (= byte aperture - 2)
-  constant c_CSR_WB_SLAVES_NB : integer := 10;
+  constant c_CSR_WB_SLAVES_NB : integer := 11;
 
   constant c_CSR_WB_DMA_CONFIG   : integer := 0;
   constant c_CSR_WB_CARRIER_SPI  : integer := 1;
@@ -291,6 +297,9 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   constant c_CSR_WB_FMC_SPI      : integer := 7;
   constant c_CSR_WB_FMC_I2C      : integer := 8;
   constant c_CSR_WB_FMC_ADC_CORE : integer := 9;
+  constant c_CSR_WB_FMC_ONE_WIRE : integer := 10;
+
+  constant c_FMC_ONE_WIRE_NB : integer := 1;
 
   ------------------------------------------------------------------------------
   -- Signals declaration
@@ -365,13 +374,13 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal irq_to_gn4124     : std_logic;
   signal irq_sources_2_led : std_logic_vector(1 downto 0);
 
-  -- Mezzanine I2C for Si570 and thermometer
-  signal si570_thermo_scl_in   : std_logic;
-  signal si570_thermo_scl_out  : std_logic;
-  signal si570_thermo_scl_oe_n : std_logic;
-  signal si570_thermo_sda_in   : std_logic;
-  signal si570_thermo_sda_out  : std_logic;
-  signal si570_thermo_sda_oe_n : std_logic;
+  -- Mezzanine I2C for Si570
+  signal si570_scl_in   : std_logic;
+  signal si570_scl_out  : std_logic;
+  signal si570_scl_oe_n : std_logic;
+  signal si570_sda_in   : std_logic;
+  signal si570_sda_out  : std_logic;
+  signal si570_sda_oe_n : std_logic;
 
   -- LED control from carrier CSR register
   signal led_red   : std_logic;
@@ -396,8 +405,15 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal spi_din_t : std_logic_vector(3 downto 0);
   signal spi_ss_t  : std_logic_vector(7 downto 0);
 
+  -- Mezzanine 1-wire
+  signal owr_pwren : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal owr_en    : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal owr_i     : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+
   -- Tests
   signal test_dpram_we : std_logic;
+  signal led_cnt       : unsigned(26 downto 0);
+  signal led_pps       : std_logic;
 
 
 begin
@@ -566,6 +582,7 @@ begin
   --     0x70000 -> Mezzanine SPI master
   --     0x80000 -> Mezzanine I2C master
   --     0x90000 -> Mezzanine ADC core
+  --     0xA0000 -> Mezzanine 1-wire master
   ------------------------------------------------------------------------------
   cmp_csr_wb_addr_decoder : wb_addr_decoder
     generic map (
@@ -728,7 +745,6 @@ begin
   ------------------------------------------------------------------------------
   -- Mezzanine I2C
   --    Si570 control
-  --    Thermometer control
   --
   -- Note: I2C registers are 8-bit wide, but accessed as 32-bit registers
   ------------------------------------------------------------------------------
@@ -747,23 +763,23 @@ begin
       wb_ack_o => wb_ack(c_CSR_WB_FMC_I2C),
       wb_int_o => open,
 
-      scl_pad_i    => si570_thermo_scl_in,
-      scl_pad_o    => si570_thermo_scl_out,
-      scl_padoen_o => si570_thermo_scl_oe_n,
-      sda_pad_i    => si570_thermo_sda_in,
-      sda_pad_o    => si570_thermo_sda_out,
-      sda_padoen_o => si570_thermo_sda_oe_n
+      scl_pad_i    => si570_scl_in,
+      scl_pad_o    => si570_scl_out,
+      scl_padoen_o => si570_scl_oe_n,
+      sda_pad_i    => si570_sda_in,
+      sda_pad_o    => si570_sda_out,
+      sda_padoen_o => si570_sda_oe_n
       );
 
   -- Classic slave supporting single pipelined accesses, stall isn't used
   wb_stall(c_CSR_WB_FMC_I2C) <= '0';
 
   -- Tri-state buffer for SDA and SCL
-  si570_thermo_scl_b  <= si570_thermo_scl_out when si570_thermo_scl_oe_n = '0' else 'Z';
-  si570_thermo_scl_in <= si570_thermo_scl_b;
+  si570_scl_b  <= si570_scl_out when si570_scl_oe_n = '0' else 'Z';
+  si570_scl_in <= si570_scl_b;
 
-  si570_thermo_sda_b  <= si570_thermo_sda_out when si570_thermo_sda_oe_n = '0' else 'Z';
-  si570_thermo_sda_in <= si570_thermo_sda_b;
+  si570_sda_b  <= si570_sda_out when si570_sda_oe_n = '0' else 'Z';
+  si570_sda_in <= si570_sda_b;
 
   ------------------------------------------------------------------------------
   -- ADC core
@@ -820,6 +836,41 @@ begin
 
   -- Classic slave supporting single pipelined accesses, stall isn't used
   wb_stall(c_CSR_WB_FMC_ADC_CORE) <= '0';
+
+  ------------------------------------------------------------------------------
+  -- Mezzanine 1-wire master
+  --    DS18B20 (thermometer + unique ID)
+  ------------------------------------------------------------------------------
+  cmp_fmc_onewire : wb_onewire_master
+    generic map(
+      g_num_ports        => 1,
+      g_ow_btp_normal    => "5.0",
+      g_ow_btp_overdrive => "1.0"
+      )
+    port map(
+      clk_sys_i => sys_clk_125,
+      rst_n_i   => sys_rst_n,
+
+      wb_cyc_i => wb_cyc(c_CSR_WB_FMC_ONE_WIRE),
+      wb_sel_i => wb_sel,
+      wb_stb_i => wb_stb,
+      wb_we_i  => wb_we,
+      wb_adr_i => wb_adr(1 downto 0),
+      wb_dat_i => wb_dat_o,
+      wb_dat_o => wb_dat_i(c_CSR_WB_FMC_ONE_WIRE * 32 + 31 downto 32 * c_CSR_WB_FMC_ONE_WIRE),
+      wb_ack_o => wb_ack(c_CSR_WB_FMC_ONE_WIRE),
+      wb_int_o => open,
+
+      owr_pwren_o => owr_pwren,
+      owr_en_o    => owr_en,
+      owr_i       => owr_i
+      );
+
+  one_wire_b <= '0' when owr_en(0) = '1' else 'Z';
+  owr_i(0)   <= one_wire_b;
+
+  -- Classic slave supporting single pipelined accesses, stall isn't used
+  wb_stall(c_CSR_WB_FMC_ONE_WIRE) <= '0';
 
   ------------------------------------------------------------------------------
   -- Interrupt stuff
@@ -961,6 +1012,37 @@ begin
   -- Assign unused outputs
   ------------------------------------------------------------------------------
   GPIO(1) <= '0';
+
+  ------------------------------------------------------------------------------
+  -- Blink auxiliary LEDs
+  ------------------------------------------------------------------------------
+  p_led_cnt : process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if (sys_rst_n = '0') then
+        led_cnt <= (others => '0');
+        led_pps <= '0';
+      elsif (led_cnt = X"773593F") then
+        led_cnt <= (others => '0');
+        led_pps <= not(led_pps);
+      else
+        led_cnt <= led_cnt + 1;
+      end if;
+    end if;
+  end process p_led_cnt;
+
+  p_led_blink : process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if sys_rst_n = '0' then
+        aux_leds_o <= X"5";
+      elsif led_pps = '1' then
+        aux_leds_o <= X"A";
+      else
+        aux_leds_o <= X"5";
+      end if;
+    end if;
+  end process p_led_blink;
 
 
 end rtl;
