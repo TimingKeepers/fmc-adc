@@ -139,7 +139,10 @@ entity spec_top_fmc_adc_100Ms is
 
       one_wire_b : inout std_logic;     -- 1-wire interface (DS18B20 thermometer + unique ID)
 
-      prsnt_m2c_n_i : in std_logic      -- Mezzanine present (active low)
+      prsnt_m2c_n_i : in std_logic;     -- Mezzanine present (active low)
+
+      sys_scl_b : inout std_logic;      -- Mezzanine system I2C clock (EEPROM)
+      sys_sda_b : inout std_logic       -- Mezzanine system I2C data (EEPROM)
       );
 end spec_top_fmc_adc_100Ms;
 
@@ -255,14 +258,14 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
       adc_outb_n_i : in std_logic_vector(3 downto 0);
 
-      gpio_dac_clr_n_o   : out std_logic;                     -- offset DACs clear (active low)
-      gpio_led_power_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
-      gpio_led_trigger_o : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
-      gpio_ssr_ch1_o     : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
-      gpio_ssr_ch2_o     : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
-      gpio_ssr_ch3_o     : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
-      gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-      gpio_si570_oe_o    : out std_logic                      -- Si570 (programmable oscillator) output enable
+      gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
+      gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
+      gpio_led_trig_o  : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
+      gpio_ssr_ch1_o   : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
+      gpio_ssr_ch2_o   : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
+      gpio_ssr_ch3_o   : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
+      gpio_ssr_ch4_o   : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
+      gpio_si570_oe_o  : out std_logic                      -- Si570 (programmable oscillator) output enable
       );
   end component fmc_adc_100Ms_core;
 
@@ -381,6 +384,14 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal si570_sda_in   : std_logic;
   signal si570_sda_out  : std_logic;
   signal si570_sda_oe_n : std_logic;
+
+  -- Mezzanine system I2C for EEPROM
+  signal sys_scl_in   : std_logic;
+  signal sys_scl_out  : std_logic;
+  signal sys_scl_oe_n : std_logic;
+  signal sys_sda_in   : std_logic;
+  signal sys_sda_out  : std_logic;
+  signal sys_sda_oe_n : std_logic;
 
   -- LED control from carrier CSR register
   signal led_red   : std_logic;
@@ -691,7 +702,38 @@ begin
   -- Mezzanine system managment I2C master
   --    Access to mezzanine EEPROM
   ------------------------------------------------------------------------------
+  cmp_fmc_sys_i2c : wb_i2c_master
+    port map (
+      clk_sys_i => sys_clk_125,
+      rst_n_i   => sys_rst_n,
 
+      wb_adr_i => wb_adr(2 downto 0),
+      wb_dat_i => wb_dat_o,
+      wb_dat_o => wb_dat_i(c_CSR_WB_FMC_SYS_I2C * 32 + 31 downto 32 * c_CSR_WB_FMC_SYS_I2C),
+      wb_we_i  => wb_we,
+      wb_stb_i => wb_stb,
+      wb_sel_i => wb_sel,
+      wb_cyc_i => wb_cyc(c_CSR_WB_FMC_SYS_I2C),
+      wb_ack_o => wb_ack(c_CSR_WB_FMC_SYS_I2C),
+      wb_int_o => open,
+
+      scl_pad_i    => sys_scl_in,
+      scl_pad_o    => sys_scl_out,
+      scl_padoen_o => sys_scl_oe_n,
+      sda_pad_i    => sys_sda_in,
+      sda_pad_o    => sys_sda_out,
+      sda_padoen_o => sys_sda_oe_n
+      );
+
+  -- Classic slave supporting single pipelined accesses, stall isn't used
+  wb_stall(c_CSR_WB_FMC_SYS_I2C) <= '0';
+
+  -- Tri-state buffer for SDA and SCL
+  sys_scl_b  <= sys_scl_out when sys_scl_oe_n = '0' else 'Z';
+  sys_scl_in <= sys_scl_b;
+
+  sys_sda_b  <= sys_sda_out when sys_sda_oe_n = '0' else 'Z';
+  sys_sda_in <= sys_sda_b;
 
   ------------------------------------------------------------------------------
   -- Mezzanine SPI master
@@ -824,14 +866,14 @@ begin
       adc_outb_p_i => adc_outb_p_i,
       adc_outb_n_i => adc_outb_n_i,
 
-      gpio_dac_clr_n_o   => gpio_dac_clr_n_o,
-      gpio_led_power_o   => gpio_led_power_o,
-      gpio_led_trigger_o => gpio_led_trigger_o,
-      gpio_ssr_ch1_o     => gpio_ssr_ch1_o,
-      gpio_ssr_ch2_o     => gpio_ssr_ch2_o,
-      gpio_ssr_ch3_o     => gpio_ssr_ch3_o,
-      gpio_ssr_ch4_o     => gpio_ssr_ch4_o,
-      gpio_si570_oe_o    => gpio_si570_oe_o
+      gpio_dac_clr_n_o => gpio_dac_clr_n_o,
+      gpio_led_acq_o   => gpio_led_power_o,
+      gpio_led_trig_o  => gpio_led_trigger_o,
+      gpio_ssr_ch1_o   => gpio_ssr_ch1_o,
+      gpio_ssr_ch2_o   => gpio_ssr_ch2_o,
+      gpio_ssr_ch3_o   => gpio_ssr_ch3_o,
+      gpio_ssr_ch4_o   => gpio_ssr_ch4_o,
+      gpio_si570_oe_o  => gpio_si570_oe_o
       );
 
   -- Classic slave supporting single pipelined accesses, stall isn't used

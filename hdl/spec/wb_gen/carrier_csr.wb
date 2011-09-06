@@ -74,7 +74,7 @@ peripheral {
 
     field {
       name = "FMC presence";
-      description = "0: FMC slot is not populated\n1: FMC slot is populated";
+      description = "0: FMC slot is populated\n1: FMC slot is not populated";
       prefix = "fmc_pres";
       type = BIT;
       access_bus = READ_ONLY;

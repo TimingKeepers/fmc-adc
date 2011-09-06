@@ -59,14 +59,6 @@ NET "clk20_vcxo_i" IOSTANDARD = "LVCMOS25";
 #NET "THERMO_ID" IOSTANDARD = "LVCMOS25";
 
 #----------------------------------------
-# I2C interface
-#----------------------------------------
-#NET "FPGA_SCL" LOC = F7;
-#NET "FPGA_SCL" IOSTANDARD = "LVCMOS25";
-#NET "FPGA_SDA" LOC = F8;
-#NET "FPGA_SDA" IOSTANDARD = "LVCMOS25";
-
-#----------------------------------------
 # GN4124 interface
 #----------------------------------------
 NET "L_RST_N" LOC = N20;
@@ -344,6 +336,12 @@ NET "one_wire_b" IOSTANDARD = "LVCMOS25";
 
 NET "prsnt_m2c_n_i" LOC = AB14; # PRSNT_M2C_L
 NET "prsnt_m2c_n_i" IOSTANDARD = "LVCMOS25";
+
+NET "sys_scl_b" LOC = F7; # SCL
+NET "sys_scl_b" IOSTANDARD = "LVCMOS25";
+NET "sys_sda_b" LOC = F8; # SDA
+NET "sys_sda_b" IOSTANDARD = "LVCMOS25";
+
 
 #----------------------------------------
 # FMC slot (unused pins)

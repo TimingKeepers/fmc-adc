@@ -1,4 +1,4 @@
-WBGEN2=~/wbgen2/wishbone-gen/wbgen2
+WBGEN2=~/projects/wbgen2/wishbone-gen/wbgen2
 RTL=../rtl/
 
 carrier_csr:

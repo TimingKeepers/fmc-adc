@@ -50,6 +50,24 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+
+    field {
+      name = "Manual TRIG LED";
+      description = "Manual control of the front panel TRIG LED";
+      prefix = "trig_led";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Manual ACQ LED";
+      description = "Manual control of the front panel ACQ LED";
+      prefix = "acq_led";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
   };
 
   reg {

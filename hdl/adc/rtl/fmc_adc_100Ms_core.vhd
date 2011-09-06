@@ -71,14 +71,14 @@ entity fmc_adc_100Ms_core is
     adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
     adc_outb_n_i : in std_logic_vector(3 downto 0);
 
-    gpio_dac_clr_n_o   : out std_logic;                     -- offset DACs clear (active low)
-    gpio_led_power_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
-    gpio_led_trigger_o : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
-    gpio_ssr_ch1_o     : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
-    gpio_ssr_ch2_o     : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
-    gpio_ssr_ch3_o     : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
-    gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-    gpio_si570_oe_o    : out std_logic                      -- Si570 (programmable oscillator) output enable
+    gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
+    gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
+    gpio_led_trig_o  : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
+    gpio_ssr_ch1_o   : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
+    gpio_ssr_ch2_o   : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
+    gpio_ssr_ch3_o   : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
+    gpio_ssr_ch4_o   : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
+    gpio_si570_oe_o  : out std_logic                      -- Si570 (programmable oscillator) output enable
     );
 end fmc_adc_100Ms_core;
 
@@ -133,6 +133,8 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_ctl_offset_dac_clr_n_o    : out std_logic;
       fmc_adc_core_ctl_man_bitslip_o         : out std_logic;
       fmc_adc_core_ctl_test_data_en_o        : out std_logic;
+      fmc_adc_core_ctl_trig_led_o            : out std_logic;
+      fmc_adc_core_ctl_acq_led_o             : out std_logic;
       fmc_adc_core_sta_fsm_i                 : in  std_logic_vector(2 downto 0);
       fmc_adc_core_sta_serdes_pll_i          : in  std_logic;
       fmc_adc_core_sta_serdes_synced_i       : in  std_logic;
@@ -385,13 +387,18 @@ architecture rtl of fmc_adc_100Ms_core is
   -- Wishbone interface to DDR
   signal wb_ddr_stall_t : std_logic;
 
+  -- LEDs
+  signal trig_led     : std_logic;
+  signal trig_led_man : std_logic;
+  signal acq_led_man  : std_logic;
+
 begin
 
 
   ------------------------------------------------------------------------------
   -- LEDs
   ------------------------------------------------------------------------------
-  gpio_led_power_o <= serdes_synced;
+  gpio_led_acq_o <= samples_wr_en or acq_led_man;
 
   cmp_trig_led_monostable : monostable
     generic map(
@@ -404,8 +411,10 @@ begin
       rst_n_i   => sys_rst_n_i,
       clk_i     => sys_clk_i,
       trigger_i => acq_trig,
-      pulse_o   => gpio_led_trigger_o
+      pulse_o   => trig_led
       );
+
+  gpio_led_trig_o <= trig_led or trig_led_man;
 
   ------------------------------------------------------------------------------
   -- Resets
@@ -583,6 +592,8 @@ begin
       fmc_adc_core_ctl_offset_dac_clr_n_o    => gpio_dac_clr_n_o,
       fmc_adc_core_ctl_man_bitslip_o         => serdes_man_bitslip,
       fmc_adc_core_ctl_test_data_en_o        => test_data_en,
+      fmc_adc_core_ctl_trig_led_o            => trig_led_man,
+      fmc_adc_core_ctl_acq_led_o             => acq_led_man,
       fmc_adc_core_sta_fsm_i                 => acq_fsm_state,
       fmc_adc_core_sta_serdes_pll_i          => locked_out,
       fmc_adc_core_sta_serdes_synced_i       => serdes_synced,
@@ -632,7 +643,7 @@ begin
   -- External hardware trigger synchronization
   cmp_trig_sync : ext_pulse_sync
     generic map(
-      g_MIN_PULSE_WIDTH => 5,           -- clk_i ticks
+      g_MIN_PULSE_WIDTH => 1,           -- clk_i ticks
       g_CLK_FREQUENCY   => 100,         -- MHz
       g_OUTPUT_POLARITY => '0',         -- positive pulse
       g_OUTPUT_RETRIG   => false,
@@ -1064,7 +1075,7 @@ begin
   end process p_wb_ddr_fifo_input;
   --wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
   --wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
-  wb_ddr_fifo_wr    <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
+  wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
 
   wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
   wb_ddr_fifo_dreq <= '1';

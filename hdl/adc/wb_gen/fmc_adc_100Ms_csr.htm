@@ -616,6 +616,40 @@ fmc_adc_core_ctl_test_data_en_o
 wb_stb_i
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ctl_trig_led_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rarr;
+</td>
+<td  class="td_pblock_left">
+wb_we_i
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ctl_acq_led_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&larr;
+</td>
+<td  class="td_pblock_left">
+wb_ack_o
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -630,7 +664,7 @@ wb_stb_i
 &rarr;
 </td>
 <td  class="td_pblock_left">
-wb_we_i
+fs_clk_i
 </td>
 <td  class="td_sym_center">
 
@@ -644,10 +678,10 @@ wb_we_i
 </tr>
 <tr>
 <td  class="td_arrow_left">
-&larr;
+
 </td>
 <td  class="td_pblock_left">
-wb_ack_o
+
 </td>
 <td  class="td_sym_center">
 
@@ -661,10 +695,10 @@ fmc_adc_core_sta_fsm_i[2:0]
 </tr>
 <tr>
 <td  class="td_arrow_left">
-&rarr;
+
 </td>
 <td  class="td_pblock_left">
-fs_clk_i
+
 </td>
 <td  class="td_sym_center">
 
@@ -2163,11 +2197,11 @@ CTL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+ACQ_LED
 </td>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+TRIG_LED
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 TEST_DATA_EN
@@ -2207,6 +2241,14 @@ MAN_BITSLIP
 TEST_DATA_EN
 </b>[<i>read/write</i>]: Enable test data
 <br>Write the address counter value instead of ADC data to DDR
+<li><b>
+TRIG_LED
+</b>[<i>read/write</i>]: Manual TRIG LED
+<br>Manual control of the front panel TRIG LED
+<li><b>
+ACQ_LED
+</b>[<i>read/write</i>]: Manual ACQ LED
+<br>Manual control of the front panel ACQ LED
 </ul>
 <a name="STA"></a>
 <h3><a name="sect_3_2">3.2. Status register</a></h3>
