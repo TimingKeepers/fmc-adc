@@ -76,6 +76,7 @@ peripheral {
 
     field {
       name = "State machine status";
+      description = "States:\n1: IDLE\n2: PRE_TRIG\n3: WAIT_TRIG\n4: POST_TRIG\n5: DECR_SHOT\n7: Illegal";
       prefix = "fsm";
       type = SLV;
       size = 3;
