@@ -381,7 +381,6 @@ architecture rtl of fmc_adc_100Ms_core is
 
   -- RAM address counter
   signal ram_addr_cnt : unsigned(24 downto 0);
-  signal ram_wr_en    : std_logic;
   signal test_data_en : std_logic;
 
   -- Wishbone interface to DDR
@@ -390,6 +389,7 @@ architecture rtl of fmc_adc_100Ms_core is
   -- LEDs
   signal trig_led     : std_logic;
   signal trig_led_man : std_logic;
+  signal acq_led      : std_logic;
   signal acq_led_man  : std_logic;
 
 begin
@@ -398,7 +398,21 @@ begin
   ------------------------------------------------------------------------------
   -- LEDs
   ------------------------------------------------------------------------------
-  gpio_led_acq_o <= samples_wr_en or acq_led_man;
+  cmp_acq_led_monostable : monostable
+    generic map(
+      g_INPUT_POLARITY  => '1',
+      g_OUTPUT_POLARITY => '1',
+      g_OUTPUT_RETRIG   => true,
+      g_OUTPUT_LENGTH   => 12500000
+      )
+    port map(
+      rst_n_i   => sys_rst_n_i,
+      clk_i     => sys_clk_i,
+      trigger_i => samples_wr_en,
+      pulse_o   => acq_led
+      );
+
+  gpio_led_acq_o <= acq_led or acq_led_man;
 
   cmp_trig_led_monostable : monostable
     generic map(
@@ -541,9 +555,9 @@ begin
 
 
   -- serdes bitslip generation
-  p_auto_bitslip : process (fs_clk, sys_rst_n_i)
+  p_auto_bitslip : process (fs_clk, fs_rst_n)
   begin
-    if sys_rst_n_i = '0' then
+    if fs_rst_n = '0' then
       bitslip_sreg        <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
       serdes_auto_bitslip <= '0';
       serdes_synced       <= '0';
@@ -675,9 +689,11 @@ begin
   trig <= sw_trig or hw_trig;
 
   -- Trigger delay
-  p_trig_delay_cnt : process(fs_clk)
+  p_trig_delay_cnt : process(fs_clk, fs_rst_n)
   begin
-    if rising_edge(fs_clk) then
+    if fs_rst_n = '0' then
+      trig_delay_cnt <= (others => '0');
+    elsif rising_edge(fs_clk) then
       if trig = '1' then
         trig_delay_cnt <= unsigned(trig_delay);
       elsif trig_delay_cnt = 0 then
@@ -686,9 +702,11 @@ begin
     end if;
   end process p_trig_delay_cnt;
 
-  p_trig_delay : process(fs_clk)
+  p_trig_delay : process(fs_clk, fs_rst_n)
   begin
-    if rising_edge(fs_clk) then
+    if fs_rst_n = '0' then
+      trig_d <= '0';
+    elsif rising_edge(fs_clk) then
       if trig_delay = X"00000000" then
         if trig = '1' then
           trig_d <= '1';
@@ -768,27 +786,25 @@ begin
   ------------------------------------------------------------------------------
   -- Shots counter
   ------------------------------------------------------------------------------
-  p_shots_cnt : process (sys_clk_i)
+  p_shots_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
-    if rising_edge(sys_clk_i) then
-      if sys_rst_n_i = '0' then
-        shots_cnt   <= to_unsigned(0, shots_cnt'length);
-        shots_done  <= '0';
-        single_shot <= '0';
+    if sys_rst_n_i = '0' then
+      shots_cnt   <= to_unsigned(0, shots_cnt'length);
+      shots_done  <= '0';
+      single_shot <= '0';
+    elsif rising_edge(sys_clk_i) then
+      if acq_start = '1' then
+        shots_cnt  <= unsigned(shots_value);
+        shots_done <= '0';
+      elsif shots_cnt = to_unsigned(1, shots_cnt'length) then
+        shots_done <= '1';
+      elsif shots_decr = '1' then
+        shots_cnt <= shots_cnt - 1;
+      end if;
+      if shots_value = std_logic_vector(to_unsigned(1, shots_value'length)) then
+        single_shot <= '1';
       else
-        if acq_start = '1' then
-          shots_cnt  <= unsigned(shots_value);
-          shots_done <= '0';
-        elsif shots_cnt = to_unsigned(1, shots_cnt'length) then
-          shots_done <= '1';
-        elsif shots_decr = '1' then
-          shots_cnt <= shots_cnt - 1;
-        end if;
-        if shots_value = std_logic_vector(to_unsigned(1, shots_value'length)) then
-          single_shot <= '1';
-        else
-          single_shot <= '0';
-        end if;
+        single_shot <= '0';
       end if;
     end if;
   end process p_shots_cnt;
@@ -798,21 +814,19 @@ begin
   ------------------------------------------------------------------------------
   -- Pre-trigger counter
   ------------------------------------------------------------------------------
-  p_pre_trig_cnt : process (sys_clk_i)
+  p_pre_trig_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
-    if rising_edge(sys_clk_i) then
-      if sys_rst_n_i = '0' then
-        pre_trig_cnt  <= to_unsigned(1, pre_trig_cnt'length);
+    if sys_rst_n_i = '0' then
+      pre_trig_cnt  <= to_unsigned(1, pre_trig_cnt'length);
+      pre_trig_done <= '0';
+    elsif rising_edge(sys_clk_i) then
+      if (acq_start = '1' or pre_trig_done = '1') then
+        pre_trig_cnt  <= unsigned(pre_trig_value);
         pre_trig_done <= '0';
-      else
-        if (acq_start = '1' or pre_trig_done = '1') then
-          pre_trig_cnt  <= unsigned(pre_trig_value);
-          pre_trig_done <= '0';
-        elsif pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) then
-          pre_trig_done <= '1';
-        elsif (acq_in_pre_trig = '1' and sync_fifo_valid = '1') then
-          pre_trig_cnt <= pre_trig_cnt - 1;
-        end if;
+      elsif pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) then
+        pre_trig_done <= '1';
+      elsif (acq_in_pre_trig = '1' and sync_fifo_valid = '1') then
+        pre_trig_cnt <= pre_trig_cnt - 1;
       end if;
     end if;
   end process p_pre_trig_cnt;
@@ -820,21 +834,19 @@ begin
   ------------------------------------------------------------------------------
   -- Post-trigger counter
   ------------------------------------------------------------------------------
-  p_post_trig_cnt : process (sys_clk_i)
+  p_post_trig_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
-    if rising_edge(sys_clk_i) then
-      if sys_rst_n_i = '0' then
-        post_trig_cnt  <= to_unsigned(1, post_trig_cnt'length);
+    if sys_rst_n_i = '0' then
+      post_trig_cnt  <= to_unsigned(1, post_trig_cnt'length);
+      post_trig_done <= '0';
+    elsif rising_edge(sys_clk_i) then
+      if (acq_start = '1' or post_trig_done = '1') then
+        post_trig_cnt  <= unsigned(post_trig_value);
         post_trig_done <= '0';
-      else
-        if (acq_start = '1' or post_trig_done = '1') then
-          post_trig_cnt  <= unsigned(post_trig_value);
-          post_trig_done <= '0';
-        elsif post_trig_cnt = to_unsigned(0, post_trig_cnt'length) then
-          post_trig_done <= '1';
-        elsif (acq_in_post_trig = '1' and sync_fifo_valid = '1') then
-          post_trig_cnt <= post_trig_cnt - 1;
-        end if;
+      elsif post_trig_cnt = to_unsigned(0, post_trig_cnt'length) then
+        post_trig_done <= '1';
+      elsif (acq_in_post_trig = '1' and sync_fifo_valid = '1') then
+        post_trig_cnt <= post_trig_cnt - 1;
       end if;
     end if;
   end process p_post_trig_cnt;
@@ -964,25 +976,23 @@ begin
   -----------------------------------------------------------------------------
 
   -- DPRAM input address counter
-  p_dpram_addra_cnt : process (sys_clk_i)
+  p_dpram_addra_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
-    if rising_edge(sys_clk_i) then
-      if sys_rst_n_i = '0' then
-        dpram_addra_cnt       <= (others => '0');
-        dpram_addra_trig      <= (others => '0');
-        dpram_addra_post_done <= (others => '0');
-      else
-        if shots_decr = '1' then
-          dpram_addra_cnt <= to_unsigned(0, dpram_addra_cnt'length);
-        elsif (samples_wr_en = '1' and sync_fifo_valid = '1') then
-          dpram_addra_cnt <= dpram_addra_cnt + 1;
-        end if;
-        if acq_trig = '1' then
-          dpram_addra_trig <= dpram_addra_cnt;
-        end if;
-        if post_trig_done = '1' then
-          dpram_addra_post_done <= dpram_addra_cnt;
-        end if;
+    if sys_rst_n_i = '0' then
+      dpram_addra_cnt       <= (others => '0');
+      dpram_addra_trig      <= (others => '0');
+      dpram_addra_post_done <= (others => '0');
+    elsif rising_edge(sys_clk_i) then
+      if shots_decr = '1' then
+        dpram_addra_cnt <= to_unsigned(0, dpram_addra_cnt'length);
+      elsif (samples_wr_en = '1' and sync_fifo_valid = '1') then
+        dpram_addra_cnt <= dpram_addra_cnt + 1;
+      end if;
+      if acq_trig = '1' then
+        dpram_addra_trig <= dpram_addra_cnt;
+      end if;
+      if post_trig_done = '1' then
+        dpram_addra_post_done <= dpram_addra_cnt;
       end if;
     end if;
   end process p_dpram_addra_cnt;
@@ -1019,24 +1029,22 @@ begin
       );
 
   -- DPRAM output address counter
-  p_dpram_addrb_cnt : process (sys_clk_i)
+  p_dpram_addrb_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
-    if rising_edge(sys_clk_i) then
-      if sys_rst_n_i = '0' then
-        dpram_addrb_cnt <= (others => '0');
-        dpram_valid_t   <= '0';
-        dpram_valid     <= '0';
+    if sys_rst_n_i = '0' then
+      dpram_addrb_cnt <= (others => '0');
+      dpram_valid_t   <= '0';
+      dpram_valid     <= '0';
+    elsif rising_edge(sys_clk_i) then
+      if post_trig_done = '1' then
+        dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_DPRAM_DEPTH-1 downto 0));
+        dpram_valid_t   <= '1';
+      elsif (dpram_addrb_cnt = dpram_addra_post_done) then
+        dpram_valid_t <= '0';
       else
-        if post_trig_done = '1' then
-          dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_DPRAM_DEPTH-1 downto 0));
-          dpram_valid_t   <= '1';
-        elsif (dpram_addrb_cnt = dpram_addra_post_done) then
-          dpram_valid_t <= '0';
-        else
-          dpram_addrb_cnt <= dpram_addrb_cnt + 1;
-        end if;
-        dpram_valid <= dpram_valid_t;
+        dpram_addrb_cnt <= dpram_addrb_cnt + 1;
       end if;
+      dpram_valid <= dpram_valid_t;
     end if;
   end process p_dpram_addrb_cnt;
 
@@ -1061,81 +1069,84 @@ begin
       valid => wb_ddr_fifo_valid
       );
 
-  p_wb_ddr_fifo_input : process (sys_clk_i)
-  begin
-    if rising_edge(sys_clk_i) then
-      if single_shot = '1' then
-        wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0);
-        wb_ddr_fifo_wr_en <= samples_wr_en;
-      else
-        wb_ddr_fifo_din   <= dpram_dout;
-        wb_ddr_fifo_wr_en <= dpram_valid;
-      end if;
-    end if;
-  end process p_wb_ddr_fifo_input;
-  --wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
-  --wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
-  wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
-
-  wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
-  wb_ddr_fifo_dreq <= '1';
-
-  ------------------------------------------------------------------------------
-  -- RAM address counter (32-bit word address)
-  ------------------------------------------------------------------------------
-  p_ram_addr_cnt : process (wb_ddr_clk_i, sys_rst_n_i)
+  p_wb_ddr_fifo_input : process (sys_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
-      ram_addr_cnt <= (others => '0');
-    elsif rising_edge(wb_ddr_clk_i) then
-      if acq_start = '1' then
-        ram_addr_cnt <= (others => '0');
-      elsif wb_ddr_fifo_valid = '1' then
-        ram_addr_cnt <= ram_addr_cnt + 1;
-      end if;
-    end if;
-  end process p_ram_addr_cnt;
-
-  ------------------------------------------------------------------------------
-  -- Wishbone master (to DDR)
-  ------------------------------------------------------------------------------
-  p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
-  begin
-    if sys_rst_n_i = '0' then
-      wb_ddr_cyc_o   <= '0';
-      wb_ddr_we_o    <= '0';
-      wb_ddr_stb_o   <= '0';
-      wb_ddr_adr_o   <= (others => '0');
-      wb_ddr_dat_o   <= (others => '0');
-      wb_ddr_stall_t <= '0';
-    elsif rising_edge(wb_ddr_clk_i) then
-
-      if wb_ddr_fifo_valid = '1' then   --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
-        wb_ddr_stb_o <= '1';
-        wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
-        if test_data_en = '1' then
-          wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
+      wb_ddr_fifo_din   <= (others => '0');
+      wb_ddr_fifo_wr_en <= '0';
+    elsif rising_edge(sys_clk_i) then
+        if single_shot = '1' then
+          wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0);
+          wb_ddr_fifo_wr_en <= samples_wr_en;
         else
-          wb_ddr_dat_o <= wb_ddr_fifo_dout;
+          wb_ddr_fifo_din   <= dpram_dout;
+          wb_ddr_fifo_wr_en <= dpram_valid;
         end if;
-      else
-        wb_ddr_stb_o <= '0';
       end if;
+end process p_wb_ddr_fifo_input;
+--wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
+--wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
+wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
 
-      if wb_ddr_fifo_valid = '1' then
-        wb_ddr_cyc_o <= '1';
-        wb_ddr_we_o  <= '1';
-        --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
-      elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
-        wb_ddr_cyc_o <= '0';
-        wb_ddr_we_o  <= '0';
-      end if;
+wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
+wb_ddr_fifo_dreq <= '1';
 
-      wb_ddr_stall_t <= wb_ddr_stall_i;
-
+------------------------------------------------------------------------------
+-- RAM address counter (32-bit word address)
+------------------------------------------------------------------------------
+p_ram_addr_cnt : process (wb_ddr_clk_i, sys_rst_n_i)
+begin
+  if sys_rst_n_i = '0' then
+    ram_addr_cnt <= (others => '0');
+  elsif rising_edge(wb_ddr_clk_i) then
+    if acq_start = '1' then
+      ram_addr_cnt <= (others => '0');
+    elsif wb_ddr_fifo_valid = '1' then
+      ram_addr_cnt <= ram_addr_cnt + 1;
     end if;
-  end process p_wb_master;
+  end if;
+end process p_ram_addr_cnt;
 
-  wb_ddr_sel_o <= X"FF";
+------------------------------------------------------------------------------
+-- Wishbone master (to DDR)
+------------------------------------------------------------------------------
+p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
+begin
+  if sys_rst_n_i = '0' then
+    wb_ddr_cyc_o   <= '0';
+    wb_ddr_we_o    <= '0';
+    wb_ddr_stb_o   <= '0';
+    wb_ddr_adr_o   <= (others => '0');
+    wb_ddr_dat_o   <= (others => '0');
+    wb_ddr_stall_t <= '0';
+  elsif rising_edge(wb_ddr_clk_i) then
+
+    if wb_ddr_fifo_valid = '1' then     --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
+      wb_ddr_stb_o <= '1';
+      wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
+      if test_data_en = '1' then
+        wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
+      else
+        wb_ddr_dat_o <= wb_ddr_fifo_dout;
+      end if;
+    else
+      wb_ddr_stb_o <= '0';
+    end if;
+
+    if wb_ddr_fifo_valid = '1' then
+      wb_ddr_cyc_o <= '1';
+      wb_ddr_we_o  <= '1';
+      --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
+    elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
+      wb_ddr_cyc_o <= '0';
+      wb_ddr_we_o  <= '0';
+    end if;
+
+    wb_ddr_stall_t <= wb_ddr_stall_i;
+
+  end if;
+end process p_wb_master;
+
+wb_ddr_sel_o <= X"FF";
 
 end rtl;
