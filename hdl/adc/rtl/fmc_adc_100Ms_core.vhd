@@ -555,9 +555,9 @@ begin
 
 
   -- serdes bitslip generation
-  p_auto_bitslip : process (fs_clk, fs_rst_n)
+  p_auto_bitslip : process (fs_clk, sys_rst_n_i)
   begin
-    if fs_rst_n = '0' then
+    if sys_rst_n_i = '0' then
       bitslip_sreg        <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
       serdes_auto_bitslip <= '0';
       serdes_synced       <= '0';
@@ -779,6 +779,10 @@ begin
       );
 
   sync_fifo_din <= trig_align & serdes_out_data;
+  -- FOR DEBUG: FR instead of CH1 and SerDes Synced instead of CH2
+  --sync_fifo_din <= trig_align & serdes_out_data(63 downto 32) &
+  --                 "000000000000000" & serdes_synced &
+  --                 "00000000" & serdes_out_fr;
 
   sync_fifo_wr <= decim_en and serdes_synced and not(sync_fifo_full);
   sync_fifo_rd <= sync_fifo_dreq and not(sync_fifo_empty);
