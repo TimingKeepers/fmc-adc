@@ -266,6 +266,7 @@ architecture rtl of fmc_adc_100Ms_core is
   -- Clocks and PLL
   signal dco_clk    : std_logic;
   signal clk_fb     : std_logic;
+  signal clk_fb_buf : std_logic;
   signal locked_in  : std_logic;
   signal locked_out : std_logic;
   signal serdes_clk : std_logic;
@@ -473,7 +474,7 @@ begin
       REF_JITTER         => 0.010)
     port map (
       -- Output clocks
-      CLKFBOUT => clk_fb,
+      CLKFBOUT => clk_fb_buf,
       CLKOUT0  => serdes_clk,
       CLKOUT1  => fs_clk_buf,
       CLKOUT2  => open,
@@ -491,6 +492,12 @@ begin
     port map (
       O => fs_clk,
       I => fs_clk_buf
+      );
+
+  cmp_fb_clk_buf : BUFG
+    port map (
+      O => clk_fb,
+      I => clk_fb_buf
       );
 
   ------------------------------------------------------------------------------

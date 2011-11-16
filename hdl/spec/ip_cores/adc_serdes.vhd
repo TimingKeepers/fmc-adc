@@ -137,7 +137,7 @@ begin
     -- Instantiate a buffer for every bit of the data bus
      ibufds_inst : IBUFDS
        generic map (
-         DIFF_TERM  => FALSE,             -- Differential termination
+         DIFF_TERM  => TRUE,             -- Differential termination
          IOSTANDARD => "LVDS_25")
        port map (
          I          => DATA_IN_FROM_PINS_P  (pin_count),
