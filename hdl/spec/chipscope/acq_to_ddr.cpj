@@ -1,9 +1,9 @@
 #ChipScope Pro Analyzer Project File, Version 3.0
-#Wed Nov 16 16:47:15 CET 2011
+#Thu Nov 17 14:31:15 CET 2011
 device.0.configFileDir=/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/syn
 device.0.configFilename=spec_top_fmc_adc_100Ms.bit
 device.0.inserterCDCFileDir=/home/mcattin/projects/fmc_adc_100Ms/hdl/spec/chipscope
-device.0.inserterCDCFilename=acq_to_ddr.cdc
+device.0.inserterCDCFilename=
 deviceChain.deviceName0=XC6SLX45T
 deviceChain.iRLength0=6
 deviceChain.name0=MyDevice0
