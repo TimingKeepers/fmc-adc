@@ -6,3 +6,6 @@ carrier_csr:
 
 utc_core_regs:
 	 $(WBGEN2) -l vhdl -V $(RTL)$@.vhd -D $@.htm -C $@.h $@.wb
+
+irq_controller_regs:
+	 $(WBGEN2) -l vhdl -V $(RTL)$@.vhd -D $@.htm -C $@.h $@.wb

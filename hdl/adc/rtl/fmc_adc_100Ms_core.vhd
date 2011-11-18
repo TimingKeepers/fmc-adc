@@ -34,8 +34,8 @@ use UNISIM.vcomponents.all;
 entity fmc_adc_100Ms_core is
   port (
     -- Clock, reset
-    sys_clk_i   : std_logic;
-    sys_rst_n_i : std_logic;
+    sys_clk_i   : in std_logic;
+    sys_rst_n_i : in std_logic;
 
     -- CSR wishbone interface
     wb_csr_adr_i : in  std_logic_vector(4 downto 0);
@@ -57,6 +57,11 @@ entity fmc_adc_100Ms_core is
     wb_ddr_cyc_o   : out std_logic;
     wb_ddr_ack_i   : in  std_logic;
     wb_ddr_stall_i : in  std_logic;
+
+    -- Events output pulses
+    trigger_p_o   : out std_logic;
+    acq_start_p_o : out std_logic;
+    acq_stop_p_o  : out std_logic;
 
     -- FMC interface
     ext_trigger_p_i : in std_logic;     -- External trigger
@@ -866,6 +871,11 @@ begin
   -- Aqcuisition FSM
   ------------------------------------------------------------------------------
 
+  -- Event pulses to time-tag
+  trigger_p_o   <= acq_trig;
+  acq_start_p_o <= acq_start;
+  acq_stop_p_o  <= acq_stop;
+
   -- FSM commands
   acq_start <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "01" else '0';
   acq_stop  <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "10" else '0';
@@ -1086,78 +1096,78 @@ begin
       wb_ddr_fifo_din   <= (others => '0');
       wb_ddr_fifo_wr_en <= '0';
     elsif rising_edge(sys_clk_i) then
-        if single_shot = '1' then
-          wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0);
-          wb_ddr_fifo_wr_en <= samples_wr_en;
-        else
-          wb_ddr_fifo_din   <= dpram_dout;
-          wb_ddr_fifo_wr_en <= dpram_valid;
-        end if;
+      if single_shot = '1' then
+        wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0);
+        wb_ddr_fifo_wr_en <= samples_wr_en;
+      else
+        wb_ddr_fifo_din   <= dpram_dout;
+        wb_ddr_fifo_wr_en <= dpram_valid;
       end if;
-end process p_wb_ddr_fifo_input;
+    end if;
+  end process p_wb_ddr_fifo_input;
 --wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
 --wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
-wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
+  wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
 
-wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
-wb_ddr_fifo_dreq <= '1';
+  wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
+  wb_ddr_fifo_dreq <= '1';
 
 ------------------------------------------------------------------------------
 -- RAM address counter (32-bit word address)
 ------------------------------------------------------------------------------
-p_ram_addr_cnt : process (wb_ddr_clk_i, sys_rst_n_i)
-begin
-  if sys_rst_n_i = '0' then
-    ram_addr_cnt <= (others => '0');
-  elsif rising_edge(wb_ddr_clk_i) then
-    if acq_start = '1' then
+  p_ram_addr_cnt : process (wb_ddr_clk_i, sys_rst_n_i)
+  begin
+    if sys_rst_n_i = '0' then
       ram_addr_cnt <= (others => '0');
-    elsif wb_ddr_fifo_valid = '1' then
-      ram_addr_cnt <= ram_addr_cnt + 1;
+    elsif rising_edge(wb_ddr_clk_i) then
+      if acq_start = '1' then
+        ram_addr_cnt <= (others => '0');
+      elsif wb_ddr_fifo_valid = '1' then
+        ram_addr_cnt <= ram_addr_cnt + 1;
+      end if;
     end if;
-  end if;
-end process p_ram_addr_cnt;
+  end process p_ram_addr_cnt;
 
 ------------------------------------------------------------------------------
 -- Wishbone master (to DDR)
 ------------------------------------------------------------------------------
-p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
-begin
-  if sys_rst_n_i = '0' then
-    wb_ddr_cyc_o   <= '0';
-    wb_ddr_we_o    <= '0';
-    wb_ddr_stb_o   <= '0';
-    wb_ddr_adr_o   <= (others => '0');
-    wb_ddr_dat_o   <= (others => '0');
-    wb_ddr_stall_t <= '0';
-  elsif rising_edge(wb_ddr_clk_i) then
+  p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
+  begin
+    if sys_rst_n_i = '0' then
+      wb_ddr_cyc_o   <= '0';
+      wb_ddr_we_o    <= '0';
+      wb_ddr_stb_o   <= '0';
+      wb_ddr_adr_o   <= (others => '0');
+      wb_ddr_dat_o   <= (others => '0');
+      wb_ddr_stall_t <= '0';
+    elsif rising_edge(wb_ddr_clk_i) then
 
-    if wb_ddr_fifo_valid = '1' then     --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
-      wb_ddr_stb_o <= '1';
-      wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
-      if test_data_en = '1' then
-        wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
+      if wb_ddr_fifo_valid = '1' then   --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
+        wb_ddr_stb_o <= '1';
+        wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
+        if test_data_en = '1' then
+          wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
+        else
+          wb_ddr_dat_o <= wb_ddr_fifo_dout;
+        end if;
       else
-        wb_ddr_dat_o <= wb_ddr_fifo_dout;
+        wb_ddr_stb_o <= '0';
       end if;
-    else
-      wb_ddr_stb_o <= '0';
+
+      if wb_ddr_fifo_valid = '1' then
+        wb_ddr_cyc_o <= '1';
+        wb_ddr_we_o  <= '1';
+        --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
+      elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
+        wb_ddr_cyc_o <= '0';
+        wb_ddr_we_o  <= '0';
+      end if;
+
+      wb_ddr_stall_t <= wb_ddr_stall_i;
+
     end if;
+  end process p_wb_master;
 
-    if wb_ddr_fifo_valid = '1' then
-      wb_ddr_cyc_o <= '1';
-      wb_ddr_we_o  <= '1';
-      --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
-    elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
-      wb_ddr_cyc_o <= '0';
-      wb_ddr_we_o  <= '0';
-    end if;
-
-    wb_ddr_stall_t <= wb_ddr_stall_i;
-
-  end if;
-end process p_wb_master;
-
-wb_ddr_sel_o <= X"FF";
+  wb_ddr_sel_o <= X"FF";
 
 end rtl;

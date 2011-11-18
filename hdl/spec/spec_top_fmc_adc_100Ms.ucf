@@ -55,8 +55,8 @@ NET "clk20_vcxo_i" IOSTANDARD = "LVCMOS25";
 #----------------------------------------
 # 1-wire thermometer w/ ID
 #----------------------------------------
-#NET "THERMO_ID" LOC = D4;
-#NET "THERMO_ID" IOSTANDARD = "LVCMOS25";
+NET "CARRIER_ONE_WIRE_B" LOC = D4;
+NET "CARRIER_ONE_WIRE_B" IOSTANDARD = "LVCMOS25";
 
 #----------------------------------------
 # GN4124 interface
@@ -331,8 +331,8 @@ NET "si570_scl_b" IOSTANDARD = "LVCMOS25";
 NET "si570_sda_b" LOC = T12; # LA18_P
 NET "si570_sda_b" IOSTANDARD = "LVCMOS25";
 
-NET "one_wire_b" LOC = Y18; # LA29_N
-NET "one_wire_b" IOSTANDARD = "LVCMOS25";
+NET "mezz_one_wire_b" LOC = Y18; # LA29_N
+NET "mezz_one_wire_b" IOSTANDARD = "LVCMOS25";
 
 NET "prsnt_m2c_n_i" LOC = AB14; # PRSNT_M2C_L
 NET "prsnt_m2c_n_i" IOSTANDARD = "LVCMOS25";

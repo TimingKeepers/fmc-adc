@@ -56,6 +56,9 @@ entity spec_top_fmc_adc_100Ms is
       -- PCB version
       pcb_ver_i : in std_logic_vector(3 downto 0);
 
+      -- Carrier 1-wire interface (DS18B20 thermometer + unique ID)
+      carrier_one_wire_b : inout std_logic;
+
       -- GN4124 interface
       L_CLKp       : in    std_logic;                      -- Local bus clock (frequency set in GN4124 config registers)
       L_CLKn       : in    std_logic;                      -- Local bus clock (frequency set in GN4124 config registers)
@@ -137,7 +140,7 @@ entity spec_top_fmc_adc_100Ms is
       si570_scl_b : inout std_logic;    -- I2C bus clock (Si570)
       si570_sda_b : inout std_logic;    -- I2C bus data (Si570)
 
-      one_wire_b : inout std_logic;     -- 1-wire interface (DS18B20 thermometer + unique ID)
+      mezz_one_wire_b : inout std_logic;  -- Mezzanine 1-wire interface (DS18B20 thermometer + unique ID)
 
       prsnt_m2c_n_i : in std_logic;     -- Mezzanine present (active low)
 
@@ -218,11 +221,46 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       );
   end component carrier_csr;
 
+  component utc_core
+    port (
+      clk_i         : in  std_logic;
+      rst_n_i       : in  std_logic;
+      trigger_p_i   : in  std_logic;
+      acq_start_p_i : in  std_logic;
+      acq_stop_p_i  : in  std_logic;
+      wb_adr_i      : in  std_logic_vector(3 downto 0);
+      wb_dat_i      : in  std_logic_vector(31 downto 0);
+      wb_dat_o      : out std_logic_vector(31 downto 0);
+      wb_cyc_i      : in  std_logic;
+      wb_sel_i      : in  std_logic_vector(3 downto 0);
+      wb_stb_i      : in  std_logic;
+      wb_we_i       : in  std_logic;
+      wb_ack_o      : out std_logic
+      );
+  end component utc_core;
+
+  component irq_controller
+    port (
+      clk_i       : in  std_logic;
+      rst_n_i     : in  std_logic;
+      irq_src_p_i : in  std_logic_vector(31 downto 0);
+      irq_p_o     : out std_logic;
+      wb_adr_i    : in  std_logic_vector(1 downto 0);
+      wb_dat_i    : in  std_logic_vector(31 downto 0);
+      wb_dat_o    : out std_logic_vector(31 downto 0);
+      wb_cyc_i    : in  std_logic;
+      wb_sel_i    : in  std_logic_vector(3 downto 0);
+      wb_stb_i    : in  std_logic;
+      wb_we_i     : in  std_logic;
+      wb_ack_o    : out std_logic
+      );
+  end component irq_controller;
+
   component fmc_adc_100Ms_core
     port (
       -- Clock, reset
-      sys_clk_i   : std_logic;
-      sys_rst_n_i : std_logic;
+      sys_clk_i   : in std_logic;
+      sys_rst_n_i : in std_logic;
 
       -- CSR wishbone interface
       wb_csr_adr_i : in  std_logic_vector(4 downto 0);
@@ -244,6 +282,11 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       wb_ddr_cyc_o   : out std_logic;
       wb_ddr_ack_i   : in  std_logic;
       wb_ddr_stall_i : in  std_logic;
+
+      -- Events output pulses
+      trigger_p_o   : out std_logic;
+      acq_start_p_o : out std_logic;
+      acq_stop_p_o  : out std_logic;
 
       -- FMC interface
       ext_trigger_p_i : in std_logic;   -- External trigger
@@ -290,17 +333,17 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   constant c_BAR0_APERTURE    : integer := 18;  -- nb of bits for 32-bit word address (= byte aperture - 2)
   constant c_CSR_WB_SLAVES_NB : integer := 11;
 
-  constant c_CSR_WB_DMA_CONFIG   : integer := 0;
-  constant c_CSR_WB_CARRIER_SPI  : integer := 1;
-  constant c_CSR_WB_CARRIER_I2C  : integer := 2;
-  constant c_CSR_WB_CARRIER_CSR  : integer := 3;
-  constant c_CSR_WB_UTC_CORE     : integer := 4;
-  constant c_CSR_WB_IRQ_CTRL     : integer := 5;
-  constant c_CSR_WB_FMC_SYS_I2C  : integer := 6;
-  constant c_CSR_WB_FMC_SPI      : integer := 7;
-  constant c_CSR_WB_FMC_I2C      : integer := 8;
-  constant c_CSR_WB_FMC_ADC_CORE : integer := 9;
-  constant c_CSR_WB_FMC_ONE_WIRE : integer := 10;
+  constant c_CSR_WB_DMA_CONFIG       : integer := 0;
+  constant c_CSR_WB_CARRIER_SPI      : integer := 1;
+  constant c_CSR_WB_CARRIER_ONE_WIRE : integer := 2;
+  constant c_CSR_WB_CARRIER_CSR      : integer := 3;
+  constant c_CSR_WB_UTC_CORE         : integer := 4;
+  constant c_CSR_WB_IRQ_CTRL         : integer := 5;
+  constant c_CSR_WB_FMC_SYS_I2C      : integer := 6;
+  constant c_CSR_WB_FMC_SPI          : integer := 7;
+  constant c_CSR_WB_FMC_I2C          : integer := 8;
+  constant c_CSR_WB_FMC_ADC_CORE     : integer := 9;
+  constant c_CSR_WB_FMC_ONE_WIRE     : integer := 10;
 
   constant c_FMC_ONE_WIRE_NB : integer := 1;
 
@@ -373,7 +416,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal wb_ddr_stall : std_logic;
 
   -- Interrupts stuff
-  signal irq_sources       : std_logic_vector(1 downto 0);
+  signal irq_sources       : std_logic_vector(31 downto 0);
   signal irq_to_gn4124     : std_logic;
   signal irq_sources_2_led : std_logic_vector(1 downto 0);
 
@@ -417,9 +460,19 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal spi_ss_t  : std_logic_vector(7 downto 0);
 
   -- Mezzanine 1-wire
-  signal owr_pwren : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
-  signal owr_en    : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
-  signal owr_i     : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal mezz_owr_pwren : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal mezz_owr_en    : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal mezz_owr_i     : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+
+  -- Carrier 1-wire
+  signal carrier_owr_pwren : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal carrier_owr_en    : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal carrier_owr_i     : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+
+  -- UTC core
+  signal trigger_p   : std_logic;
+  signal acq_start_p : std_logic;
+  signal acq_stop_p  : std_logic;
 
   -- Tests
   signal test_dpram_we : std_logic;
@@ -541,7 +594,7 @@ begin
       tx_error_i      => TX_ERROR,
       vc_rdy_i        => VC_RDY,
       -- Interrupt interface
-      dma_irq_o       => irq_sources,
+      dma_irq_o       => irq_sources(1 downto 0),
       irq_p_i         => irq_to_gn4124,
       irq_p_o         => GPIO(0),
       -- DMA registers wishbone interface (slave classic)
@@ -585,7 +638,7 @@ begin
   -- CSR wishbone address decoder
   --     0x00000 -> DMA configuration
   --     0x10000 -> Carrier SPI master
-  --     0x20000 -> Carrier I2C master
+  --     0x20000 -> Carrier 1-wire master
   --     0x30000 -> Carrier CSR
   --     0x40000 -> UTC core
   --     0x50000 -> Interrupt controller
@@ -633,9 +686,39 @@ begin
 
 
   ------------------------------------------------------------------------------
-  -- Carrier I2C master
-  --    Thermometer control
+  -- Carrier 1-wire master
+  --    DS18B20 (thermometer + unique ID)
   ------------------------------------------------------------------------------
+  cmp_carrier_onewire : wb_onewire_master
+    generic map(
+      g_num_ports        => 1,
+      g_ow_btp_normal    => "5.0",
+      g_ow_btp_overdrive => "1.0"
+      )
+    port map(
+      clk_sys_i => sys_clk_125,
+      rst_n_i   => sys_rst_n,
+
+      wb_cyc_i => wb_cyc(c_CSR_WB_CARRIER_ONE_WIRE),
+      wb_sel_i => wb_sel,
+      wb_stb_i => wb_stb,
+      wb_we_i  => wb_we,
+      wb_adr_i => wb_adr(1 downto 0),
+      wb_dat_i => wb_dat_o,
+      wb_dat_o => wb_dat_i(c_CSR_WB_CARRIER_ONE_WIRE * 32 + 31 downto 32 * c_CSR_WB_CARRIER_ONE_WIRE),
+      wb_ack_o => wb_ack(c_CSR_WB_CARRIER_ONE_WIRE),
+      wb_int_o => open,
+
+      owr_pwren_o => carrier_owr_pwren,
+      owr_en_o    => carrier_owr_en,
+      owr_i       => carrier_owr_i
+      );
+
+  carrier_one_wire_b       <= '0' when carrier_owr_en(0) = '1' else 'Z';
+  carrier_owr_i(0) <= carrier_one_wire_b;
+
+  -- Classic slave supporting single pipelined accesses, stall isn't used
+  wb_stall(c_CSR_WB_CARRIER_ONE_WIRE) <= '0';
 
 
   ------------------------------------------------------------------------------
@@ -691,12 +774,55 @@ begin
   ------------------------------------------------------------------------------
   -- UTC core
   ------------------------------------------------------------------------------
+  cmp_utc_core : utc_core
+    port map(
+      clk_i   => sys_clk_125,
+      rst_n_i => sys_rst_n,
 
+      trigger_p_i   => trigger_p,
+      acq_start_p_i => acq_start_p,
+      acq_stop_p_i  => acq_stop_p,
+
+      wb_adr_i => wb_adr(3 downto 0),
+      wb_dat_i => wb_dat_o,
+      wb_dat_o => wb_dat_i(c_CSR_WB_UTC_CORE * 32 + 31 downto c_CSR_WB_UTC_CORE * 32),
+      wb_cyc_i => wb_cyc(c_CSR_WB_UTC_CORE),
+      wb_sel_i => wb_sel,
+      wb_stb_i => wb_stb,
+      wb_we_i  => wb_we,
+      wb_ack_o => wb_ack(c_CSR_WB_UTC_CORE)
+      );
+
+  -- Classic slave supporting single pipelined accesses, stall isn't used
+  wb_stall(c_CSR_WB_UTC_CORE) <= '0';
 
   ------------------------------------------------------------------------------
   -- Interrupt controller
   ------------------------------------------------------------------------------
+  cmp_irq_controller : irq_controller
+    port map(
+      clk_i   => sys_clk_125,
+      rst_n_i => sys_rst_n,
 
+      irq_src_p_i => irq_sources,
+
+      irq_p_o => irq_to_gn4124,
+
+      wb_adr_i => wb_adr(1 downto 0),
+      wb_dat_i => wb_dat_o,
+      wb_dat_o => wb_dat_i(c_CSR_WB_IRQ_CTRL * 32 + 31 downto c_CSR_WB_IRQ_CTRL * 32),
+      wb_cyc_i => wb_cyc(c_CSR_WB_IRQ_CTRL),
+      wb_sel_i => wb_sel,
+      wb_stb_i => wb_stb,
+      wb_we_i  => wb_we,
+      wb_ack_o => wb_ack(c_CSR_WB_IRQ_CTRL)
+      );
+
+  -- Classic slave supporting single pipelined accesses, stall isn't used
+  wb_stall(c_CSR_WB_IRQ_CTRL) <= '0';
+
+  -- just forward irq pulses for test
+  --irq_to_gn4124 <= irq_sources(1) or irq_sources(0);
 
   ------------------------------------------------------------------------------
   -- Mezzanine system managment I2C master
@@ -854,6 +980,10 @@ begin
       wb_ddr_ack_i   => wb_ddr_ack,
       wb_ddr_stall_i => wb_ddr_stall,
 
+      trigger_p_o   => trigger_p,
+      acq_start_p_o => acq_start_p,
+      acq_stop_p_o  => acq_stop_p,
+
       ext_trigger_p_i => ext_trigger_p_i,
       ext_trigger_n_i => ext_trigger_n_i,
 
@@ -903,22 +1033,16 @@ begin
       wb_ack_o => wb_ack(c_CSR_WB_FMC_ONE_WIRE),
       wb_int_o => open,
 
-      owr_pwren_o => owr_pwren,
-      owr_en_o    => owr_en,
-      owr_i       => owr_i
+      owr_pwren_o => mezz_owr_pwren,
+      owr_en_o    => mezz_owr_en,
+      owr_i       => mezz_owr_i
       );
 
-  one_wire_b <= '0' when owr_en(0) = '1' else 'Z';
-  owr_i(0)   <= one_wire_b;
+  mezz_one_wire_b <= '0' when mezz_owr_en(0) = '1' else 'Z';
+  mezz_owr_i(0)   <= mezz_one_wire_b;
 
   -- Classic slave supporting single pipelined accesses, stall isn't used
   wb_stall(c_CSR_WB_FMC_ONE_WIRE) <= '0';
-
-  ------------------------------------------------------------------------------
-  -- Interrupt stuff
-  ------------------------------------------------------------------------------
-  -- just forward irq pulses for test
-  irq_to_gn4124 <= irq_sources(1) or irq_sources(0);
 
   ------------------------------------------------------------------------------
   -- DMA wishbone bus slaves
@@ -1008,47 +1132,47 @@ begin
 
   ddr3_calib_done <= ddr3_status(0);
 
-  --wb_ddr_stall <= '0';
+--wb_ddr_stall <= '0';
 
-  --test_dpram_we <= wb_ddr_we and wb_ddr_stb and wb_ddr_cyc;
+--test_dpram_we <= wb_ddr_we and wb_ddr_stb and wb_ddr_cyc;
 
-  --p_test_dpram_wr_ack : process (sys_clk_250)
-  --begin
-  --  if rising_edge(sys_clk_250) then
-  --    if sys_rst_n = '0' then
-  --      wb_ddr_ack <= '0';
-  --    elsif wb_ddr_cyc = '1' and wb_ddr_stb = '1' then
-  --      wb_ddr_ack <= '1';
-  --    else
-  --      wb_ddr_ack <= '0';
-  --    end if;
-  --  end if;
-  --end process p_test_dpram_wr_ack;
+--p_test_dpram_wr_ack : process (sys_clk_250)
+--begin
+--  if rising_edge(sys_clk_250) then
+--    if sys_rst_n = '0' then
+--      wb_ddr_ack <= '0';
+--    elsif wb_ddr_cyc = '1' and wb_ddr_stb = '1' then
+--      wb_ddr_ack <= '1';
+--    else
+--      wb_ddr_ack <= '0';
+--    end if;
+--  end if;
+--end process p_test_dpram_wr_ack;
 
-  --cmp_test_dpram : test_dpram
-  --  port map(
-  --    clka   => sys_clk_250,
-  --    wea(0) => test_dpram_we,           --: in  std_logic_vector(0 downto 0);
-  --    addra  => wb_ddr_adr(9 downto 0),  --: in  std_logic_vector(9 downto 0);
-  --    dina   => wb_ddr_dat_o,            --: in  std_logic_vector(31 downto 0);
-  --    clkb   => sys_clk_125,
-  --    addrb  => wb_dma_adr(9 downto 0),  --: in  std_logic_vector(9 downto 0);
-  --    doutb  => wb_dma_dat_i);           --: out std_logic_vector(31 downto 0));
+--cmp_test_dpram : test_dpram
+--  port map(
+--    clka   => sys_clk_250,
+--    wea(0) => test_dpram_we,           --: in  std_logic_vector(0 downto 0);
+--    addra  => wb_ddr_adr(9 downto 0),  --: in  std_logic_vector(9 downto 0);
+--    dina   => wb_ddr_dat_o,            --: in  std_logic_vector(31 downto 0);
+--    clkb   => sys_clk_125,
+--    addrb  => wb_dma_adr(9 downto 0),  --: in  std_logic_vector(9 downto 0);
+--    doutb  => wb_dma_dat_i);           --: out std_logic_vector(31 downto 0));
 
-  --p_test_dpram_rd_ack : process (sys_clk_125)
-  --begin
-  --  if rising_edge(sys_clk_125) then
-  --    if sys_rst_n = '0' then
-  --      wb_dma_ack <= '0';
-  --    elsif wb_dma_cyc = '1' and wb_dma_stb = '1' then
-  --      wb_dma_ack <= '1';
-  --    else
-  --      wb_dma_ack <= '0';
-  --    end if;
-  --  end if;
-  --end process p_test_dpram_rd_ack;
+--p_test_dpram_rd_ack : process (sys_clk_125)
+--begin
+--  if rising_edge(sys_clk_125) then
+--    if sys_rst_n = '0' then
+--      wb_dma_ack <= '0';
+--    elsif wb_dma_cyc = '1' and wb_dma_stb = '1' then
+--      wb_dma_ack <= '1';
+--    else
+--      wb_dma_ack <= '0';
+--    end if;
+--  end if;
+--end process p_test_dpram_rd_ack;
 
-  --wb_dma_stall <= '0';
+--wb_dma_stall <= '0';
 
   ------------------------------------------------------------------------------
   -- Assign unused outputs
