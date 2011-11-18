@@ -22,7 +22,7 @@ peripheral {
   };
 
   reg {
-    name = "Interrrupt sources register ";
+    name = "Interrupt sources register ";
     description = "Indicates the interrupt source.\nWrite '1' to clear a bit.";
     prefix = "src";
 
