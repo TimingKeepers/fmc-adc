@@ -228,6 +228,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       trigger_p_i   : in  std_logic;
       acq_start_p_i : in  std_logic;
       acq_stop_p_i  : in  std_logic;
+      acq_end_p_i   : in  std_logic;
       wb_adr_i      : in  std_logic_vector(3 downto 0);
       wb_dat_i      : in  std_logic_vector(31 downto 0);
       wb_dat_o      : out std_logic_vector(31 downto 0);
@@ -287,6 +288,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       trigger_p_o   : out std_logic;
       acq_start_p_o : out std_logic;
       acq_stop_p_o  : out std_logic;
+      acq_end_p_o   : out std_logic;
 
       -- FMC interface
       ext_trigger_p_i : in std_logic;   -- External trigger
@@ -416,6 +418,8 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal wb_ddr_stall : std_logic;
 
   -- Interrupts stuff
+  signal dma_irq           : std_logic_vector(1 downto 0);
+  signal dma_irq_p         : std_logic_vector(1 downto 0);
   signal irq_sources       : std_logic_vector(31 downto 0);
   signal irq_to_gn4124     : std_logic;
   signal irq_sources_2_led : std_logic_vector(1 downto 0);
@@ -473,6 +477,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal trigger_p   : std_logic;
   signal acq_start_p : std_logic;
   signal acq_stop_p  : std_logic;
+  signal acq_end_p   : std_logic;
 
   -- Tests
   signal test_dpram_we : std_logic;
@@ -594,7 +599,7 @@ begin
       tx_error_i      => TX_ERROR,
       vc_rdy_i        => VC_RDY,
       -- Interrupt interface
-      dma_irq_o       => irq_sources(1 downto 0),
+      dma_irq_o       => dma_irq,
       irq_p_i         => irq_to_gn4124,
       irq_p_o         => GPIO(0),
       -- DMA registers wishbone interface (slave classic)
@@ -714,8 +719,8 @@ begin
       owr_i       => carrier_owr_i
       );
 
-  carrier_one_wire_b       <= '0' when carrier_owr_en(0) = '1' else 'Z';
-  carrier_owr_i(0) <= carrier_one_wire_b;
+  carrier_one_wire_b <= '0' when carrier_owr_en(0) = '1' else 'Z';
+  carrier_owr_i(0)   <= carrier_one_wire_b;
 
   -- Classic slave supporting single pipelined accesses, stall isn't used
   wb_stall(c_CSR_WB_CARRIER_ONE_WIRE) <= '0';
@@ -782,8 +787,9 @@ begin
       trigger_p_i   => trigger_p,
       acq_start_p_i => acq_start_p,
       acq_stop_p_i  => acq_stop_p,
+      acq_end_p_i   => acq_end_p,
 
-      wb_adr_i => wb_adr(3 downto 0),
+      wb_adr_i => wb_adr(4 downto 0),
       wb_dat_i => wb_dat_o,
       wb_dat_o => wb_dat_i(c_CSR_WB_UTC_CORE * 32 + 31 downto c_CSR_WB_UTC_CORE * 32),
       wb_cyc_i => wb_cyc(c_CSR_WB_UTC_CORE),
@@ -821,8 +827,14 @@ begin
   -- Classic slave supporting single pipelined accesses, stall isn't used
   wb_stall(c_CSR_WB_IRQ_CTRL) <= '0';
 
+  -- IRQ sources
+  irq_sources(1 downto 0)  <= dma_irq;
+  irq_sources(2)           <= trigger_p;
+  irq_sources(3)           <= acq_end_p;
+  irq_sources(31 downto 4) <= (others => '0');
+
   -- just forward irq pulses for test
-  --irq_to_gn4124 <= irq_sources(1) or irq_sources(0);
+  --irq_to_gn4124 <= dma_irq(1) or dma_irq(0);
 
   ------------------------------------------------------------------------------
   -- Mezzanine system managment I2C master
@@ -983,6 +995,7 @@ begin
       trigger_p_o   => trigger_p,
       acq_start_p_o => acq_start_p,
       acq_stop_p_o  => acq_stop_p,
+      acq_end_p_o   => acq_end_p,
 
       ext_trigger_p_i => ext_trigger_p_i,
       ext_trigger_n_i => ext_trigger_n_i,

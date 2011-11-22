@@ -62,6 +62,7 @@ entity fmc_adc_100Ms_core is
     trigger_p_o   : out std_logic;
     acq_start_p_o : out std_logic;
     acq_stop_p_o  : out std_logic;
+    acq_end_p_o   : out std_logic;
 
     -- FMC interface
     ext_trigger_p_i : in std_logic;     -- External trigger
@@ -334,6 +335,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal acq_stop              : std_logic;
   signal acq_trig              : std_logic;
   signal acq_end               : std_logic;
+  signal acq_end_d             : std_logic;
   signal acq_in_pre_trig       : std_logic;
   signal acq_in_post_trig      : std_logic;
   signal samples_wr_en         : std_logic;
@@ -875,6 +877,20 @@ begin
   trigger_p_o   <= acq_trig;
   acq_start_p_o <= acq_start;
   acq_stop_p_o  <= acq_stop;
+
+  -- End of acquisition pulse generation
+  p_acq_end: process (sys_clk_i)
+  begin
+    if rising_edge(sys_clk_i) then
+      if sys_rst_n_i = '0' then
+        acq_end_d <= '0';
+      else
+        acq_end_d <= acq_end;
+      end if;
+    end if;
+  end process p_acq_end;
+
+  acq_end_p_o <= acq_end and not(acq_end_d);
 
   -- FSM commands
   acq_start <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "01" else '0';

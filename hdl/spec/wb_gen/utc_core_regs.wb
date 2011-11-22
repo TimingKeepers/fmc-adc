@@ -203,4 +203,60 @@ peripheral {
     };
   };
 
+  reg {
+    name = "Acquisition end time-tag metadata register";
+    prefix = "acq_end_tag_meta";
+
+    field {
+      name = "Acquisition end time-tag metadata";
+      description = "Holds time-tag metadata of the last acquisition end event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition end time-tag UTC seconds register";
+    prefix = "acq_end_tag_seconds";
+
+    field {
+      name = "Acquisition end time-tag UTC seconds";
+      description = "Holds time-tag UTC seconds of the last acquisition end event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition end time-tag coarse time (system clock ticks 125MHz) register";
+    prefix = "acq_end_tag_coarse";
+
+    field {
+      name = "Acquisition end time-tag coarse time";
+      description = "Holds time-tag coarse time of the last acquisition end event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition end time-tag fine time register, always 0 (used for time-tag format compatibility)";
+    prefix = "acq_end_tag_fine";
+
+    field {
+      name = "Acquisition end time-tag fine time";
+      description = "Holds time-tag fine time of the last acquisition end event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
 };

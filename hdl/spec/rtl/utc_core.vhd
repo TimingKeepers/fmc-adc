@@ -42,9 +42,10 @@ entity utc_core is
     trigger_p_i   : in std_logic;
     acq_start_p_i : in std_logic;
     acq_stop_p_i  : in std_logic;
+    acq_end_p_i   : in std_logic;
 
     -- Wishbone interface
-    wb_adr_i : in  std_logic_vector(3 downto 0);
+    wb_adr_i : in  std_logic_vector(4 downto 0);
     wb_dat_i : in  std_logic_vector(31 downto 0);
     wb_dat_o : out std_logic_vector(31 downto 0);
     wb_cyc_i : in  std_logic;
@@ -66,7 +67,7 @@ architecture rtl of utc_core is
     port (
       rst_n_i                          : in  std_logic;
       wb_clk_i                         : in  std_logic;
-      wb_addr_i                        : in  std_logic_vector(3 downto 0);
+      wb_addr_i                        : in  std_logic_vector(4 downto 0);
       wb_data_i                        : in  std_logic_vector(31 downto 0);
       wb_data_o                        : out std_logic_vector(31 downto 0);
       wb_cyc_i                         : in  std_logic;
@@ -91,7 +92,11 @@ architecture rtl of utc_core is
       utc_core_acq_stop_tag_meta_i     : in  std_logic_vector(31 downto 0);
       utc_core_acq_stop_tag_seconds_i  : in  std_logic_vector(31 downto 0);
       utc_core_acq_stop_tag_coarse_i   : in  std_logic_vector(31 downto 0);
-      utc_core_acq_stop_tag_fine_i     : in  std_logic_vector(31 downto 0)
+      utc_core_acq_stop_tag_fine_i     : in  std_logic_vector(31 downto 0);
+      utc_core_acq_end_tag_meta_i      : in  std_logic_vector(31 downto 0);
+      utc_core_acq_end_tag_seconds_i   : in  std_logic_vector(31 downto 0);
+      utc_core_acq_end_tag_coarse_i    : in  std_logic_vector(31 downto 0);
+      utc_core_acq_end_tag_fine_i      : in  std_logic_vector(31 downto 0)
       );
   end component utc_core_regs;
 
@@ -118,6 +123,10 @@ architecture rtl of utc_core is
   signal utc_acq_stop_tag_seconds  : std_logic_vector(31 downto 0);
   signal utc_acq_stop_tag_coarse   : std_logic_vector(31 downto 0);
   signal utc_acq_stop_tag_fine     : std_logic_vector(31 downto 0);
+  signal utc_acq_end_tag_meta      : std_logic_vector(31 downto 0);
+  signal utc_acq_end_tag_seconds   : std_logic_vector(31 downto 0);
+  signal utc_acq_end_tag_coarse    : std_logic_vector(31 downto 0);
+  signal utc_acq_end_tag_fine      : std_logic_vector(31 downto 0);
 
   signal local_pps : std_logic;
 
@@ -157,7 +166,11 @@ begin
       utc_core_acq_stop_tag_meta_i     => utc_acq_stop_tag_meta,
       utc_core_acq_stop_tag_seconds_i  => utc_acq_stop_tag_seconds,
       utc_core_acq_stop_tag_coarse_i   => utc_acq_stop_tag_coarse,
-      utc_core_acq_stop_tag_fine_i     => utc_acq_stop_tag_fine
+      utc_core_acq_stop_tag_fine_i     => utc_acq_stop_tag_fine,
+      utc_core_acq_end_tag_meta_i      => utc_acq_end_tag_meta,
+      utc_core_acq_end_tag_seconds_i   => utc_acq_end_tag_seconds,
+      utc_core_acq_end_tag_coarse_i    => utc_acq_end_tag_coarse,
+      utc_core_acq_end_tag_fine_i      => utc_acq_end_tag_fine
       );
 
   ------------------------------------------------------------------------------
@@ -186,16 +199,16 @@ begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
         utc_coarse_cnt <= (others => '0');
-        local_pps <= '0';
+        local_pps      <= '0';
       elsif utc_coarse_load_en = '1' then
         utc_coarse_cnt <= unsigned(utc_coarse_load_value);
-        local_pps <= '0';
-      elsif utc_coarse_cnt = to_unsigned(1249999999,utc_coarse_cnt'length) then
+        local_pps      <= '0';
+      elsif utc_coarse_cnt = to_unsigned(1249999999, utc_coarse_cnt'length) then
         utc_coarse_cnt <= (others => '0');
-        local_pps <= '1';
+        local_pps      <= '1';
       else
         utc_coarse_cnt <= utc_coarse_cnt + 1;
-        local_pps <= '0';
+        local_pps      <= '0';
       end if;
     end if;
   end process p_utc_coarse_cnt;
@@ -210,11 +223,11 @@ begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
         utc_trig_tag_seconds <= (others => '0');
-        utc_trig_tag_coarse <= (others => '0');
-        utc_trig_tag_fine <= (others => '0');
+        utc_trig_tag_coarse  <= (others => '0');
+        utc_trig_tag_fine    <= (others => '0');
       elsif trigger_p_i = '1' then
         utc_trig_tag_seconds <= utc_seconds;
-        utc_trig_tag_coarse <= utc_coarse;
+        utc_trig_tag_coarse  <= utc_coarse;
       end if;
     end if;
   end process p_trig_tag;
@@ -229,11 +242,11 @@ begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
         utc_acq_start_tag_seconds <= (others => '0');
-        utc_acq_start_tag_coarse <= (others => '0');
-        utc_acq_start_tag_fine <= (others => '0');
+        utc_acq_start_tag_coarse  <= (others => '0');
+        utc_acq_start_tag_fine    <= (others => '0');
       elsif acq_start_p_i = '1' then
         utc_acq_start_tag_seconds <= utc_seconds;
-        utc_acq_start_tag_coarse <= utc_coarse;
+        utc_acq_start_tag_coarse  <= utc_coarse;
       end if;
     end if;
   end process p_acq_start_tag;
@@ -248,16 +261,35 @@ begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
         utc_acq_stop_tag_seconds <= (others => '0');
-        utc_acq_stop_tag_coarse <= (others => '0');
-        utc_acq_stop_tag_fine <= (others => '0');
+        utc_acq_stop_tag_coarse  <= (others => '0');
+        utc_acq_stop_tag_fine    <= (others => '0');
       elsif acq_stop_p_i = '1' then
         utc_acq_stop_tag_seconds <= utc_seconds;
-        utc_acq_stop_tag_coarse <= utc_coarse;
+        utc_acq_stop_tag_coarse  <= utc_coarse;
       end if;
     end if;
   end process p_acq_stop_tag;
 
   utc_acq_stop_tag_meta <= X"00000000";
+
+  ------------------------------------------------------------------------------
+  -- Last acquisition end event time-tag
+  ------------------------------------------------------------------------------
+  p_acq_end_tag : process (clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_n_i = '0' then
+        utc_acq_end_tag_seconds <= (others => '0');
+        utc_acq_end_tag_coarse  <= (others => '0');
+        utc_acq_end_tag_fine    <= (others => '0');
+      elsif acq_end_p_i = '1' then
+        utc_acq_end_tag_seconds <= utc_seconds;
+        utc_acq_end_tag_coarse  <= utc_coarse;
+      end if;
+    end if;
+  end process p_acq_end_tag;
+
+  utc_acq_end_tag_meta <= X"00000000";
 
 
 end rtl;
