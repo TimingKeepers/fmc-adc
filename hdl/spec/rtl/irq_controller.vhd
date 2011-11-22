@@ -64,23 +64,23 @@ architecture rtl of irq_controller is
   ------------------------------------------------------------------------------
   component irq_controller_regs
     port (
-      rst_n_i                         : in  std_logic;
-      wb_clk_i                        : in  std_logic;
-      wb_addr_i                       : in  std_logic_vector(1 downto 0);
-      wb_data_i                       : in  std_logic_vector(31 downto 0);
-      wb_data_o                       : out std_logic_vector(31 downto 0);
-      wb_cyc_i                        : in  std_logic;
-      wb_sel_i                        : in  std_logic_vector(3 downto 0);
-      wb_stb_i                        : in  std_logic;
-      wb_we_i                         : in  std_logic;
-      wb_ack_o                        : out std_logic;
-      irq_ctrl_status_mult_irq_o      : out std_logic;
-      irq_ctrl_status_mult_irq_i      : in  std_logic;
-      irq_ctrl_status_mult_irq_load_o : out std_logic;
-      irq_ctrl_src_o                  : out std_logic_vector(31 downto 0);
-      irq_ctrl_src_i                  : in  std_logic_vector(31 downto 0);
-      irq_ctrl_src_load_o             : out std_logic;
-      irq_ctrl_en_mask_o              : out std_logic_vector(31 downto 0)
+      rst_n_i                   : in  std_logic;
+      wb_clk_i                  : in  std_logic;
+      wb_addr_i                 : in  std_logic_vector(1 downto 0);
+      wb_data_i                 : in  std_logic_vector(31 downto 0);
+      wb_data_o                 : out std_logic_vector(31 downto 0);
+      wb_cyc_i                  : in  std_logic;
+      wb_sel_i                  : in  std_logic_vector(3 downto 0);
+      wb_stb_i                  : in  std_logic;
+      wb_we_i                   : in  std_logic;
+      wb_ack_o                  : out std_logic;
+      irq_ctrl_multi_irq_o      : out std_logic_vector(31 downto 0);
+      irq_ctrl_multi_irq_i      : in  std_logic_vector(31 downto 0);
+      irq_ctrl_multi_irq_load_o : out std_logic;
+      irq_ctrl_src_o            : out std_logic_vector(31 downto 0);
+      irq_ctrl_src_i            : in  std_logic_vector(31 downto 0);
+      irq_ctrl_src_load_o       : out std_logic;
+      irq_ctrl_en_mask_o        : out std_logic_vector(31 downto 0)
       );
   end component irq_controller_regs;
 
@@ -94,10 +94,8 @@ architecture rtl of irq_controller is
   signal irq_src_rst      : std_logic_vector(31 downto 0);
   signal irq_src_rst_en   : std_logic;
   signal multi_irq        : std_logic_vector(31 downto 0);
-  signal multi_irq_or     : std_logic_vector(32 downto 0);
-  signal multi_irq_rst    : std_logic;
+  signal multi_irq_rst    : std_logic_vector(31 downto 0);
   signal multi_irq_rst_en : std_logic;
-  signal multi_irq_flag   : std_logic;
   signal irq_p_or         : std_logic_vector(32 downto 0);
 
 
@@ -108,23 +106,23 @@ begin
   ------------------------------------------------------------------------------
   cmp_irq_controller_regs : irq_controller_regs
     port map(
-      rst_n_i                         => rst_n_i,
-      wb_clk_i                        => clk_i,
-      wb_addr_i                       => wb_adr_i,
-      wb_data_i                       => wb_dat_i,
-      wb_data_o                       => wb_dat_o,
-      wb_cyc_i                        => wb_cyc_i,
-      wb_sel_i                        => wb_sel_i,
-      wb_stb_i                        => wb_stb_i,
-      wb_we_i                         => wb_we_i,
-      wb_ack_o                        => wb_ack_o,
-      irq_ctrl_status_mult_irq_o      => multi_irq_rst,
-      irq_ctrl_status_mult_irq_load_o => multi_irq_rst_en,
-      irq_ctrl_status_mult_irq_i      => multi_irq_flag,
-      irq_ctrl_src_o                  => irq_src_rst,
-      irq_ctrl_src_i                  => irq_pending,
-      irq_ctrl_src_load_o             => irq_src_rst_en,
-      irq_ctrl_en_mask_o              => irq_en_mask
+      rst_n_i                   => rst_n_i,
+      wb_clk_i                  => clk_i,
+      wb_addr_i                 => wb_adr_i,
+      wb_data_i                 => wb_dat_i,
+      wb_data_o                 => wb_dat_o,
+      wb_cyc_i                  => wb_cyc_i,
+      wb_sel_i                  => wb_sel_i,
+      wb_stb_i                  => wb_stb_i,
+      wb_we_i                   => wb_we_i,
+      wb_ack_o                  => wb_ack_o,
+      irq_ctrl_multi_irq_o      => multi_irq_rst,
+      irq_ctrl_multi_irq_load_o => multi_irq_rst_en,
+      irq_ctrl_multi_irq_i      => multi_irq,
+      irq_ctrl_src_o            => irq_src_rst,
+      irq_ctrl_src_i            => irq_pending,
+      irq_ctrl_src_load_o       => irq_src_rst_en,
+      irq_ctrl_en_mask_o        => irq_en_mask
       );
 
   ------------------------------------------------------------------------------
@@ -159,25 +157,19 @@ begin
           multi_irq(I) <= '0';
         elsif irq_src_p_i(I) = '1' and irq_pending(I) = '1' then
           multi_irq(I) <= '1';
-        elsif multi_irq_rst_en = '1' and multi_irq_rst = '1' then
+        elsif multi_irq_rst_en = '1' and multi_irq_rst(I) = '1' then
           multi_irq(I) <= '0';
         end if;
       end loop;  -- I
     end if;
   end process p_multi_irq_detect;
 
-  multi_irq_or(0) <= '0';
-  l_multi_irq_flag : for I in 0 to multi_irq'length-2 generate
-    multi_irq_or(I+1) <= multi_irq_or(I) or multi_irq(I);
-  end generate l_multi_irq_flag;
-  multi_irq_flag <= multi_irq_or(32);
-
   ------------------------------------------------------------------------------
   -- Generate IRQ output pulse
   ------------------------------------------------------------------------------
   irq_p_or(0) <= '0';
-  l_irq_out_pulse: for I in 0 to irq_p_or'length-2 generate
-    irq_p_or(I+1) <= irq_p_or(I) or irq_src_p_i(I);
+  l_irq_out_pulse : for I in 0 to irq_src_p_i'length-1 generate
+    irq_p_or(I+1) <= irq_p_or(I) or (irq_src_p_i(I) and irq_en_mask(I));
   end generate l_irq_out_pulse;
 
   p_irq_out_pulse : process (clk_i)

@@ -6,15 +6,14 @@ peripheral {
   prefix = "irq_ctrl";
 
   reg {
-    name = "Interrupt controller status register";
-    description = "";
-    prefix = "status";
+    name = "Multiple interrupt register";
+    description = "Multiple interrupts occurs before irq source is read.\nWrite '1' to clear a bit.";
+    prefix = "multi_irq";
 
     field {
       name = "Multiple interrupt";
-      description = "Multiple interrupts occurs before irq source is read.";
-      prefix = "mult_irq";
-      type = BIT;
+      type = SLV;
+      size = 32;
       load = LOAD_EXT;
       access_bus = READ_WRITE;
       access_dev = READ_WRITE;
