@@ -229,7 +229,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       acq_start_p_i : in  std_logic;
       acq_stop_p_i  : in  std_logic;
       acq_end_p_i   : in  std_logic;
-      wb_adr_i      : in  std_logic_vector(3 downto 0);
+      wb_adr_i      : in  std_logic_vector(4 downto 0);
       wb_dat_i      : in  std_logic_vector(31 downto 0);
       wb_dat_o      : out std_logic_vector(31 downto 0);
       wb_cyc_i      : in  std_logic;

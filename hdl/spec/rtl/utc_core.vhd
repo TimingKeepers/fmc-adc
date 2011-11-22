@@ -203,7 +203,7 @@ begin
       elsif utc_coarse_load_en = '1' then
         utc_coarse_cnt <= unsigned(utc_coarse_load_value);
         local_pps      <= '0';
-      elsif utc_coarse_cnt = to_unsigned(1249999999, utc_coarse_cnt'length) then
+      elsif utc_coarse_cnt = to_unsigned(124999999, utc_coarse_cnt'length) then
         utc_coarse_cnt <= (others => '0');
         local_pps      <= '1';
       else
