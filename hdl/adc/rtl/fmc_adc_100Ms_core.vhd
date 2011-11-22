@@ -1114,7 +1114,7 @@ begin
     elsif rising_edge(sys_clk_i) then
       if single_shot = '1' then
         wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0);
-        wb_ddr_fifo_wr_en <= samples_wr_en;
+        wb_ddr_fifo_wr_en <= samples_wr_en and sync_fifo_valid;
       else
         wb_ddr_fifo_din   <= dpram_dout;
         wb_ddr_fifo_wr_en <= dpram_valid;
@@ -1123,7 +1123,7 @@ begin
   end process p_wb_ddr_fifo_input;
 --wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
 --wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
-  wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and sync_fifo_valid and not(wb_ddr_fifo_full);
+  wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and not(wb_ddr_fifo_full);
 
   wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
   wb_ddr_fifo_dreq <= '1';
