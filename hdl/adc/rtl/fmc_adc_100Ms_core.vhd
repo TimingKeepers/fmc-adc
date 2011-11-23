@@ -141,38 +141,50 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_ctl_test_data_en_o        : out std_logic;
       fmc_adc_core_ctl_trig_led_o            : out std_logic;
       fmc_adc_core_ctl_acq_led_o             : out std_logic;
+      fmc_adc_core_ctl_reserved_o            : out std_logic_vector(23 downto 0);
       fmc_adc_core_sta_fsm_i                 : in  std_logic_vector(2 downto 0);
       fmc_adc_core_sta_serdes_pll_i          : in  std_logic;
       fmc_adc_core_sta_serdes_synced_i       : in  std_logic;
+      fmc_adc_core_sta_reserved_i            : in  std_logic_vector(26 downto 0);
       fmc_adc_core_trig_cfg_hw_trig_sel_o    : out std_logic;
       fmc_adc_core_trig_cfg_ext_trig_pol_o   : out std_logic;
       fmc_adc_core_trig_cfg_hw_trig_en_o     : out std_logic;
       fmc_adc_core_trig_cfg_sw_trig_en_o     : out std_logic;
       fmc_adc_core_trig_cfg_int_trig_sel_o   : out std_logic_vector(1 downto 0);
-      fmc_adc_core_trig_cfg_dummy_o          : out std_logic_vector(9 downto 0);
+      fmc_adc_core_trig_cfg_reserved_o       : out std_logic_vector(9 downto 0);
       fmc_adc_core_trig_cfg_int_trig_thres_o : out std_logic_vector(15 downto 0);
       fmc_adc_core_trig_dly_o                : out std_logic_vector(31 downto 0);
       fmc_adc_core_sw_trig_o                 : out std_logic_vector(31 downto 0);
       fmc_adc_core_sw_trig_wr_o              : out std_logic;
       fmc_adc_core_shots_nb_o                : out std_logic_vector(15 downto 0);
-      fmc_adc_core_trig_utc_l_i              : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_trig_utc_h_i              : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_start_utc_l_i             : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_start_utc_h_i             : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_stop_utc_l_i              : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_stop_utc_h_i              : in  std_logic_vector(31 downto 0);
+      fmc_adc_core_shots_reserved_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_trig_pos_i                : in  std_logic_vector(31 downto 0);
+      fmc_adc_core_gain_cal_o                : out std_logic_vector(31 downto 0);
+      fmc_adc_core_offset_cal_o              : out std_logic_vector(31 downto 0);
+      fmc_adc_core_reserved_0_i              : in  std_logic_vector(31 downto 0);
+      fmc_adc_core_reserved_1_i              : in  std_logic_vector(31 downto 0);
+      fmc_adc_core_reserved_2_i              : in  std_logic_vector(31 downto 0);
       fmc_adc_core_sr_deci_o                 : out std_logic_vector(15 downto 0);
+      fmc_adc_core_sr_reserved_o             : out std_logic_vector(15 downto 0);
       fmc_adc_core_pre_samples_o             : out std_logic_vector(31 downto 0);
       fmc_adc_core_post_samples_o            : out std_logic_vector(31 downto 0);
       fmc_adc_core_samp_cnt_i                : in  std_logic_vector(31 downto 0);
       fmc_adc_core_ch1_ssr_o                 : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch1_reserved_o            : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch1_val_i                 : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_reserved_i            : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch2_ssr_o                 : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch2_reserved_o            : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch2_val_i                 : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_reserved_i            : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch3_ssr_o                 : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch3_reserved_o            : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch3_val_i                 : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_reserved_i            : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch4_ssr_o                 : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch4_val_i                 : in  std_logic_vector(15 downto 0)
+      fmc_adc_core_ch4_reserved_o            : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch4_val_i                 : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_reserved_i            : in  std_logic_vector(15 downto 0)
       );
   end component fmc_adc_100Ms_csr;
 
@@ -214,10 +226,10 @@ architecture rtl of fmc_adc_100Ms_core is
     port (
       rst   : in  std_logic;
       clk   : in  std_logic;
-      din   : in  std_logic_vector(63 downto 0);
+      din   : in  std_logic_vector(64 downto 0);
       wr_en : in  std_logic;
       rd_en : in  std_logic;
-      dout  : out std_logic_vector(63 downto 0);
+      dout  : out std_logic_vector(64 downto 0);
       full  : out std_logic;
       empty : out std_logic;
       valid : out std_logic);
@@ -326,6 +338,10 @@ architecture rtl of fmc_adc_100Ms_core is
   signal sync_fifo_valid : std_logic;
   signal sync_fifo_dreq  : std_logic;
 
+  -- Gain/offset calibration values
+  signal gain_calibr   : std_logic_vector(31 downto 0);
+  signal offset_calibr : std_logic_vector(31 downto 0);
+
   -- Acquisition FSM
   signal acq_fsm_current_state : t_acq_fsm_state;
   signal acq_fsm_state         : std_logic_vector(2 downto 0);
@@ -337,6 +353,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal acq_end               : std_logic;
   signal acq_end_d             : std_logic;
   signal acq_in_pre_trig       : std_logic;
+  signal acq_in_wait_trig      : std_logic;
   signal acq_in_post_trig      : std_logic;
   signal samples_wr_en         : std_logic;
 
@@ -355,14 +372,15 @@ architecture rtl of fmc_adc_100Ms_core is
   signal multishot_buffer_sel : std_logic;
 
   -- Multi-shot mode
-  constant c_DPRAM_DEPTH         : integer := 13;
-  signal   dpram_addra_cnt       : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal   dpram_addra_trig      : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal   dpram_addra_post_done : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal   dpram_addrb_cnt       : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal   dpram_dout            : std_logic_vector(63 downto 0);
-  signal   dpram_valid           : std_logic;
-  signal   dpram_valid_t         : std_logic;
+  constant c_DPRAM_DEPTH : integer := 13;
+
+  signal dpram_addra_cnt       : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram_addra_trig      : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram_addra_post_done : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram_addrb_cnt       : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram_dout            : std_logic_vector(63 downto 0);
+  signal dpram_valid           : std_logic;
+  signal dpram_valid_t         : std_logic;
 
   signal dpram0_dina  : std_logic_vector(63 downto 0);
   signal dpram0_addra : std_logic_vector(c_DPRAM_DEPTH-1 downto 0);
@@ -377,8 +395,8 @@ architecture rtl of fmc_adc_100Ms_core is
   signal dpram1_doutb : std_logic_vector(63 downto 0);
 
   -- Wishbone to DDR flowcontrol FIFO
-  signal wb_ddr_fifo_din   : std_logic_vector(63 downto 0);
-  signal wb_ddr_fifo_dout  : std_logic_vector(63 downto 0);
+  signal wb_ddr_fifo_din   : std_logic_vector(64 downto 0);
+  signal wb_ddr_fifo_dout  : std_logic_vector(64 downto 0);
   signal wb_ddr_fifo_empty : std_logic;
   signal wb_ddr_fifo_full  : std_logic;
   signal wb_ddr_fifo_wr    : std_logic;
@@ -390,6 +408,7 @@ architecture rtl of fmc_adc_100Ms_core is
   -- RAM address counter
   signal ram_addr_cnt : unsigned(24 downto 0);
   signal test_data_en : std_logic;
+  signal trig_addr    : std_logic_vector(31 downto 0);
 
   -- Wishbone interface to DDR
   signal wb_ddr_stall_t : std_logic;
@@ -622,38 +641,50 @@ begin
       fmc_adc_core_ctl_test_data_en_o        => test_data_en,
       fmc_adc_core_ctl_trig_led_o            => trig_led_man,
       fmc_adc_core_ctl_acq_led_o             => acq_led_man,
+      fmc_adc_core_ctl_reserved_o            => open,
       fmc_adc_core_sta_fsm_i                 => acq_fsm_state,
       fmc_adc_core_sta_serdes_pll_i          => locked_out,
       fmc_adc_core_sta_serdes_synced_i       => serdes_synced,
+      fmc_adc_core_sta_reserved_i            => (others => '0'),
       fmc_adc_core_trig_cfg_hw_trig_sel_o    => hw_trig_sel,
       fmc_adc_core_trig_cfg_ext_trig_pol_o   => ext_trig_pol,
       fmc_adc_core_trig_cfg_hw_trig_en_o     => hw_trig_en,
       fmc_adc_core_trig_cfg_sw_trig_en_o     => sw_trig_en,
       fmc_adc_core_trig_cfg_int_trig_sel_o   => int_trig_sel,
-      fmc_adc_core_trig_cfg_dummy_o          => open,
+      fmc_adc_core_trig_cfg_reserved_o       => open,
       fmc_adc_core_trig_cfg_int_trig_thres_o => int_trig_thres,
       fmc_adc_core_trig_dly_o                => trig_delay,
       fmc_adc_core_sw_trig_o                 => open,
       fmc_adc_core_sw_trig_wr_o              => sw_trig_t,
       fmc_adc_core_shots_nb_o                => shots_value,
-      fmc_adc_core_trig_utc_l_i              => X"00000000",
-      fmc_adc_core_trig_utc_h_i              => X"00000000",
-      fmc_adc_core_start_utc_l_i             => X"00000000",
-      fmc_adc_core_start_utc_h_i             => X"00000000",
-      fmc_adc_core_stop_utc_l_i              => X"00000000",
-      fmc_adc_core_stop_utc_h_i              => X"00000000",
+      fmc_adc_core_shots_reserved_o          => open,
+      fmc_adc_core_trig_pos_i                => trig_addr,
+      fmc_adc_core_gain_cal_o                => gain_calibr,
+      fmc_adc_core_offset_cal_o              => offset_calibr,
+      fmc_adc_core_reserved_0_i              => (others => '0'),
+      fmc_adc_core_reserved_1_i              => (others => '0'),
+      fmc_adc_core_reserved_2_i              => (others => '0'),
       fmc_adc_core_sr_deci_o                 => decim_factor,
+      fmc_adc_core_sr_reserved_o             => open,
       fmc_adc_core_pre_samples_o             => pre_trig_value,
       fmc_adc_core_post_samples_o            => post_trig_value,
       fmc_adc_core_samp_cnt_i                => X"00000000",
       fmc_adc_core_ch1_ssr_o                 => gpio_ssr_ch1_o,
+      fmc_adc_core_ch1_reserved_o            => open,
       fmc_adc_core_ch1_val_i                 => serdes_out_data(15 downto 0),
+      fmc_adc_core_ch1_reserved_i            => (others => '0'),
       fmc_adc_core_ch2_ssr_o                 => gpio_ssr_ch2_o,
+      fmc_adc_core_ch2_reserved_o            => open,
       fmc_adc_core_ch2_val_i                 => serdes_out_data(31 downto 16),
+      fmc_adc_core_ch2_reserved_i            => (others => '0'),
       fmc_adc_core_ch3_ssr_o                 => gpio_ssr_ch3_o,
+      fmc_adc_core_ch3_reserved_o            => open,
       fmc_adc_core_ch3_val_i                 => serdes_out_data(47 downto 32),
+      fmc_adc_core_ch3_reserved_i            => (others => '0'),
       fmc_adc_core_ch4_ssr_o                 => gpio_ssr_ch4_o,
-      fmc_adc_core_ch4_val_i                 => serdes_out_data(63 downto 48)
+      fmc_adc_core_ch4_reserved_o            => open,
+      fmc_adc_core_ch4_val_i                 => serdes_out_data(63 downto 48),
+      fmc_adc_core_ch4_reserved_i            => (others => '0')
       );
 
   ------------------------------------------------------------------------------
@@ -879,7 +910,7 @@ begin
   acq_stop_p_o  <= acq_stop;
 
   -- End of acquisition pulse generation
-  p_acq_end: process (sys_clk_i)
+  p_acq_end : process (sys_clk_i)
   begin
     if rising_edge(sys_clk_i) then
       if sys_rst_n_i = '0' then
@@ -895,7 +926,7 @@ begin
   -- FSM commands
   acq_start <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "01" else '0';
   acq_stop  <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "10" else '0';
-  acq_trig  <= sync_fifo_valid and sync_fifo_dout(64);
+  acq_trig  <= sync_fifo_valid and sync_fifo_dout(64) and acq_in_wait_trig;
   acq_end   <= shots_done and post_trig_done;
 
   -- FSM transitions
@@ -961,38 +992,43 @@ begin
         shots_decr       <= '0';
         sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '0';
+        acq_in_wait_trig <= '0';
         acq_in_post_trig <= '0';
         samples_wr_en    <= '0';
         acq_fsm_state    <= "001";
 
       when PRE_TRIG =>
-        samples_wr_en    <= '1';
-        acq_in_pre_trig  <= '1';
         shots_decr       <= '0';
         sync_fifo_dreq   <= '1';
+        acq_in_pre_trig  <= '1';
+        acq_in_wait_trig <= '0';
         acq_in_post_trig <= '0';
+        samples_wr_en    <= '1';
         acq_fsm_state    <= "010";
 
       when WAIT_TRIG =>
-        samples_wr_en    <= '1';
         shots_decr       <= '0';
         sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '0';
+        acq_in_wait_trig <= '1';
         acq_in_post_trig <= '0';
+        samples_wr_en    <= '1';
         acq_fsm_state    <= "011";
 
       when POST_TRIG =>
-        samples_wr_en    <= '1';
-        acq_in_post_trig <= '1';
         shots_decr       <= '0';
         sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '0';
+        acq_in_wait_trig <= '0';
+        acq_in_post_trig <= '1';
+        samples_wr_en    <= '1';
         acq_fsm_state    <= "100";
 
       when DECR_SHOT =>
         shots_decr       <= '1';
         sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '0';
+        acq_in_wait_trig <= '0';
         acq_in_post_trig <= '0';
         samples_wr_en    <= '0';
         acq_fsm_state    <= "101";
@@ -1001,6 +1037,7 @@ begin
         shots_decr       <= '0';
         sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '0';
+        acq_in_wait_trig <= '0';
         acq_in_post_trig <= '0';
         samples_wr_en    <= '0';
         acq_fsm_state    <= "111";
@@ -1113,24 +1150,24 @@ begin
       wb_ddr_fifo_wr_en <= '0';
     elsif rising_edge(sys_clk_i) then
       if single_shot = '1' then
-        wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0);
+        wb_ddr_fifo_din   <= acq_trig & sync_fifo_dout(63 downto 0);  -- trigger + data
         wb_ddr_fifo_wr_en <= samples_wr_en and sync_fifo_valid;
       else
-        wb_ddr_fifo_din   <= dpram_dout;
+        wb_ddr_fifo_din   <= '0' & dpram_dout;
         wb_ddr_fifo_wr_en <= dpram_valid;
       end if;
     end if;
   end process p_wb_ddr_fifo_input;
---wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
---wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
+  --wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
+  --wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
   wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and not(wb_ddr_fifo_full);
 
   wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
   wb_ddr_fifo_dreq <= '1';
 
-------------------------------------------------------------------------------
--- RAM address counter (32-bit word address)
-------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
+  -- RAM address counter (32-bit word address)
+  ------------------------------------------------------------------------------
   p_ram_addr_cnt : process (wb_ddr_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
@@ -1144,9 +1181,23 @@ begin
     end if;
   end process p_ram_addr_cnt;
 
-------------------------------------------------------------------------------
--- Wishbone master (to DDR)
-------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
+  -- Store trigger DDR address
+  ------------------------------------------------------------------------------
+  p_trig_addr : process (wb_ddr_clk_i, sys_rst_n_i)
+  begin
+    if sys_rst_n_i = '0' then
+      trig_addr <= (others => '0');
+    elsif rising_edge(wb_ddr_clk_i) then
+      if wb_ddr_fifo_dout(64) = '1' and wb_ddr_fifo_valid = '1' then
+        trig_addr <= "0000000" & std_logic_vector(ram_addr_cnt);
+      end if;
+    end if;
+  end process p_trig_addr;
+
+  ------------------------------------------------------------------------------
+  -- Wishbone master (to DDR)
+  ------------------------------------------------------------------------------
   p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
@@ -1164,7 +1215,7 @@ begin
         if test_data_en = '1' then
           wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
         else
-          wb_ddr_dat_o <= wb_ddr_fifo_dout;
+          wb_ddr_dat_o <= wb_ddr_fifo_dout(63 downto 0);
         end if;
       else
         wb_ddr_stb_o <= '0';
