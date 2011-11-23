@@ -11,7 +11,7 @@ peripheral {
 
     field {
       name = "PCB revision";
-      description = "Binary coded PCB layout revision";
+      description = "Binary coded PCB layout revision.";
       prefix = "pcb_rev";
       type = SLV;
       size = 4;
@@ -20,9 +20,9 @@ peripheral {
     };
 
     field {
-      name = "Dummy";
-      description = "Ignore on read, write with 0's";
-      prefix = "dummy";
+      name = "Reserved register";
+      description = "Ignore on read, write with 0's.";
+      prefix = "reserved";
       type = SLV;
       size = 12;
       access_bus = READ_ONLY;
@@ -46,7 +46,7 @@ peripheral {
 
     field {
       name = "Bitstream type";
-      description = "Bitstream (firmware) type, unsigned 32-bit number";
+      description = "Bitstream (firmware) type, unsigned 32-bit number.";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -60,7 +60,7 @@ peripheral {
 
     field {
       name = "Bitstream date";
-      description = "Bitstream generation date, unsigned 32-bit UTC time";
+      description = "Bitstream generation date, unsigned 32-bit UTC time.";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -74,7 +74,7 @@ peripheral {
 
     field {
       name = "FMC presence";
-      description = "0: FMC slot is populated\n1: FMC slot is not populated";
+      description = "0: FMC slot is populated\n1: FMC slot is not populated.";
       prefix = "fmc_pres";
       type = BIT;
       access_bus = READ_ONLY;
@@ -83,7 +83,7 @@ peripheral {
 
     field {
       name = "GN4142 core P2L PLL status";
-      description = "0: not locked\n1: locked";
+      description = "0: not locked\n1: locked.";
       prefix = "p2l_pll_lck";
       type = BIT;
       access_bus = READ_ONLY;
@@ -92,7 +92,7 @@ peripheral {
 
     field {
       name = "System clock PLL status";
-      description = "0: not locked\n1: locked";
+      description = "0: not locked\n1: locked.";
       prefix = "sys_pll_lck";
       type = BIT;
       access_bus = READ_ONLY;
@@ -101,9 +101,19 @@ peripheral {
 
     field {
       name = "DDR3 calibration status";
-      description = "0: not done\n1: done";
+      description = "0: not done\n1: done.";
       prefix = "ddr3_cal_done";
       type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's.";
+      prefix = "reserved";
+      type = SLV;
+      size = 28;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
@@ -136,6 +146,16 @@ peripheral {
       description = "Active low clear signal for VCXO DACs";
       prefix = "dac_clr_n";
       type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 29;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };

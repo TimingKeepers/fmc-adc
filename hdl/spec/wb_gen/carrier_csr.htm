@@ -192,7 +192,7 @@ wb_addr_i[2:0]
 
 </td>
 <td  class="td_pblock_right">
-carrier_csr_carrier_dummy_i[11:0]
+carrier_csr_carrier_reserved_i[11:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -427,6 +427,23 @@ carrier_csr_stat_ddr3_cal_done_i
 
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+carrier_csr_stat_reserved_i[27:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -502,6 +519,23 @@ carrier_csr_ctrl_dac_clr_n_o
 </td>
 <td  class="td_arrow_right">
 &rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+carrier_csr_ctrl_reserved_o[28:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
 </td>
 </tr>
 </table>
@@ -680,7 +714,7 @@ TYPE[7:0]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-DUMMY[11:4]
+RESERVED[11:4]
 </td>
 <td >
 
@@ -734,7 +768,7 @@ DUMMY[11:4]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=4  class="td_field">
-DUMMY[3:0]
+RESERVED[3:0]
 </td>
 <td style="border: solid 1px black;" colspan=4  class="td_field">
 PCB_REV[3:0]
@@ -763,11 +797,11 @@ PCB_REV[3:0]
 <li><b>
 PCB_REV
 </b>[<i>read-only</i>]: PCB revision
-<br>Binary coded PCB layout revision
+<br>Binary coded PCB layout revision.
 <li><b>
-DUMMY
-</b>[<i>read-only</i>]: Dummy
-<br>Ignore on read, write with 0's
+RESERVED
+</b>[<i>read-only</i>]: Reserved register
+<br>Ignore on read, write with 0's.
 <li><b>
 TYPE
 </b>[<i>read-only</i>]: Carrier type
@@ -1029,7 +1063,7 @@ BITSTREAM_TYPE[7:0]
 <li><b>
 BITSTREAM_TYPE
 </b>[<i>read-only</i>]: Bitstream type
-<br>Bitstream (firmware) type, unsigned 32-bit number
+<br>Bitstream (firmware) type, unsigned 32-bit number.
 </ul>
 <a name="BITSTREAM_DATE"></a>
 <h3><a name="sect_3_3">3.3. Bitstream date</a></h3>
@@ -1287,7 +1321,7 @@ BITSTREAM_DATE[7:0]
 <li><b>
 BITSTREAM_DATE
 </b>[<i>read-only</i>]: Bitstream date
-<br>Bitstream generation date, unsigned 32-bit UTC time
+<br>Bitstream generation date, unsigned 32-bit UTC time.
 </ul>
 <a name="STAT"></a>
 <h3><a name="sect_3_4">3.4. Status</a></h3>
@@ -1353,29 +1387,29 @@ STAT
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[27:20]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -1407,29 +1441,29 @@ STAT
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[19:12]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -1461,29 +1495,29 @@ STAT
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[11:4]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -1515,17 +1549,8 @@ STAT
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=4  class="td_field">
+RESERVED[3:0]
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 DDR3_CAL_DONE
@@ -1538,6 +1563,15 @@ P2L_PLL_LCK
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 FMC_PRES
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
 </td>
 </tr>
 </table>
@@ -1545,19 +1579,23 @@ FMC_PRES
 <li><b>
 FMC_PRES
 </b>[<i>read-only</i>]: FMC presence
-<br>0: FMC slot is populated<br>1: FMC slot is not populated
+<br>0: FMC slot is populated<br>1: FMC slot is not populated.
 <li><b>
 P2L_PLL_LCK
 </b>[<i>read-only</i>]: GN4142 core P2L PLL status
-<br>0: not locked<br>1: locked
+<br>0: not locked<br>1: locked.
 <li><b>
 SYS_PLL_LCK
 </b>[<i>read-only</i>]: System clock PLL status
-<br>0: not locked<br>1: locked
+<br>0: not locked<br>1: locked.
 <li><b>
 DDR3_CAL_DONE
 </b>[<i>read-only</i>]: DDR3 calibration status
-<br>0: not done<br>1: done
+<br>0: not done<br>1: done.
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's.
 </ul>
 <a name="CTRL"></a>
 <h3><a name="sect_3_5">3.5. Control</a></h3>
@@ -1623,29 +1661,29 @@ CTRL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[28:21]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -1677,29 +1715,29 @@ CTRL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[20:13]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -1731,29 +1769,29 @@ CTRL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[12:5]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -1785,20 +1823,8 @@ CTRL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=5  class="td_field">
+RESERVED[4:0]
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 DAC_CLR_N
@@ -1808,6 +1834,18 @@ LED_RED
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 LED_GREEN
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
 </td>
 </tr>
 </table>
@@ -1824,6 +1862,10 @@ LED_RED
 DAC_CLR_N
 </b>[<i>read/write</i>]: DAC clear
 <br>Active low clear signal for VCXO DACs
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
 
 
