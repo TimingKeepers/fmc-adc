@@ -207,7 +207,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       wb_we_i                          : in  std_logic;
       wb_ack_o                         : out std_logic;
       carrier_csr_carrier_pcb_rev_i    : in  std_logic_vector(3 downto 0);
-      carrier_csr_carrier_dummy_i      : in  std_logic_vector(11 downto 0);
+      carrier_csr_carrier_reserved_i   : in  std_logic_vector(11 downto 0);
       carrier_csr_carrier_type_i       : in  std_logic_vector(15 downto 0);
       carrier_csr_bitstream_type_i     : in  std_logic_vector(31 downto 0);
       carrier_csr_bitstream_date_i     : in  std_logic_vector(31 downto 0);
@@ -215,9 +215,11 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       carrier_csr_stat_p2l_pll_lck_i   : in  std_logic;
       carrier_csr_stat_sys_pll_lck_i   : in  std_logic;
       carrier_csr_stat_ddr3_cal_done_i : in  std_logic;
+      carrier_csr_stat_reserved_i      : in  std_logic_vector(27 downto 0);
       carrier_csr_ctrl_led_green_o     : out std_logic;
       carrier_csr_ctrl_led_red_o       : out std_logic;
-      carrier_csr_ctrl_dac_clr_n_o     : out std_logic
+      carrier_csr_ctrl_dac_clr_n_o     : out std_logic;
+      carrier_csr_ctrl_reserved_o      : out std_logic_vector(28 downto 0)
       );
   end component carrier_csr;
 
@@ -746,7 +748,7 @@ begin
       wb_we_i                          => wb_we,
       wb_ack_o                         => wb_ack(c_CSR_WB_CARRIER_CSR),
       carrier_csr_carrier_pcb_rev_i    => pcb_ver_i,
-      carrier_csr_carrier_dummy_i      => X"000",
+      carrier_csr_carrier_reserved_i   => X"000",
       carrier_csr_carrier_type_i       => c_CARRIER_TYPE,
       carrier_csr_bitstream_type_i     => c_BITSTREAM_TYPE,
       carrier_csr_bitstream_date_i     => c_BITSTREAM_DATE,
@@ -754,9 +756,11 @@ begin
       carrier_csr_stat_p2l_pll_lck_i   => p2l_pll_locked,
       carrier_csr_stat_sys_pll_lck_i   => sys_clk_pll_locked,
       carrier_csr_stat_ddr3_cal_done_i => ddr3_calib_done,
+      carrier_csr_stat_reserved_i      => (others => '0'),
       carrier_csr_ctrl_led_green_o     => led_green,
       carrier_csr_ctrl_led_red_o       => led_red,
-      carrier_csr_ctrl_dac_clr_n_o     => open
+      carrier_csr_ctrl_dac_clr_n_o     => open,
+      carrier_csr_ctrl_reserved_o      => open
       );
 
   -- Classic slave supporting single pipelined accesses, stall isn't used
