@@ -40,12 +40,12 @@
 <span style="margin-left: 20px; ">3.4. <A href="#sect_3_4">Trigger delay</a></span><br/>
 <span style="margin-left: 20px; ">3.5. <A href="#sect_3_5">Software trigger</a></span><br/>
 <span style="margin-left: 20px; ">3.6. <A href="#sect_3_6">Number of shots</a></span><br/>
-<span style="margin-left: 20px; ">3.7. <A href="#sect_3_7">Trigger UTC tag (LSBs)</a></span><br/>
-<span style="margin-left: 20px; ">3.8. <A href="#sect_3_8">Trigger UTC tag (MSBs)</a></span><br/>
-<span style="margin-left: 20px; ">3.9. <A href="#sect_3_9">Start UTC tag (LSBs)</a></span><br/>
-<span style="margin-left: 20px; ">3.10. <A href="#sect_3_10">Start UTC tag (MSBs)</a></span><br/>
-<span style="margin-left: 20px; ">3.11. <A href="#sect_3_11">Stop UTC tag (LSBs)</a></span><br/>
-<span style="margin-left: 20px; ">3.12. <A href="#sect_3_12">Stop UTC tag (MSBs)</a></span><br/>
+<span style="margin-left: 20px; ">3.7. <A href="#sect_3_7">Trigger address register</a></span><br/>
+<span style="margin-left: 20px; ">3.8. <A href="#sect_3_8">Gain calibration register</a></span><br/>
+<span style="margin-left: 20px; ">3.9. <A href="#sect_3_9">Offset calibration register</a></span><br/>
+<span style="margin-left: 20px; ">3.10. <A href="#sect_3_10">Reserved register</a></span><br/>
+<span style="margin-left: 20px; ">3.11. <A href="#sect_3_11">Reserved register</a></span><br/>
+<span style="margin-left: 20px; ">3.12. <A href="#sect_3_12">Reserved register</a></span><br/>
 <span style="margin-left: 20px; ">3.13. <A href="#sect_3_13">Sample rate</a></span><br/>
 <span style="margin-left: 20px; ">3.14. <A href="#sect_3_14">Pre-trigger samples</a></span><br/>
 <span style="margin-left: 20px; ">3.15. <A href="#sect_3_15">Post-trigger samples</a></span><br/>
@@ -187,13 +187,13 @@ SHOTS
 REG
 </td>
 <td >
-<A href="#TRIG_UTC_L">Trigger UTC tag (LSBs)</a>
+<A href="#TRIG_POS">Trigger address register</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_trig_utc_l
+fmc_adc_core_trig_pos
 </td>
 <td  class="td_code">
-TRIG_UTC_L
+TRIG_POS
 </td>
 </tr>
 <tr class="tr_even">
@@ -204,13 +204,13 @@ TRIG_UTC_L
 REG
 </td>
 <td >
-<A href="#TRIG_UTC_H">Trigger UTC tag (MSBs)</a>
+<A href="#GAIN_CAL">Gain calibration register</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_trig_utc_h
+fmc_adc_core_gain_cal
 </td>
 <td  class="td_code">
-TRIG_UTC_H
+GAIN_CAL
 </td>
 </tr>
 <tr class="tr_odd">
@@ -221,13 +221,13 @@ TRIG_UTC_H
 REG
 </td>
 <td >
-<A href="#START_UTC_L">Start UTC tag (LSBs)</a>
+<A href="#OFFSET_CAL">Offset calibration register</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_start_utc_l
+fmc_adc_core_offset_cal
 </td>
 <td  class="td_code">
-START_UTC_L
+OFFSET_CAL
 </td>
 </tr>
 <tr class="tr_even">
@@ -238,13 +238,13 @@ START_UTC_L
 REG
 </td>
 <td >
-<A href="#START_UTC_H">Start UTC tag (MSBs)</a>
+<A href="#RESERVED_0">Reserved register</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_start_utc_h
+fmc_adc_core_reserved_0
 </td>
 <td  class="td_code">
-START_UTC_H
+RESERVED_0
 </td>
 </tr>
 <tr class="tr_odd">
@@ -255,13 +255,13 @@ START_UTC_H
 REG
 </td>
 <td >
-<A href="#STOP_UTC_L">Stop UTC tag (LSBs)</a>
+<A href="#RESERVED_1">Reserved register</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_stop_utc_l
+fmc_adc_core_reserved_1
 </td>
 <td  class="td_code">
-STOP_UTC_L
+RESERVED_1
 </td>
 </tr>
 <tr class="tr_even">
@@ -272,13 +272,13 @@ STOP_UTC_L
 REG
 </td>
 <td >
-<A href="#STOP_UTC_H">Stop UTC tag (MSBs)</a>
+<A href="#RESERVED_2">Reserved register</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_stop_utc_h
+fmc_adc_core_reserved_2
 </td>
 <td  class="td_code">
-STOP_UTC_H
+RESERVED_2
 </td>
 </tr>
 <tr class="tr_odd">
@@ -357,13 +357,13 @@ SAMP_CNT
 REG
 </td>
 <td >
-<A href="#CH1_SSR">Solid state relays control for channel 1</a>
+<A href="#CH1">Solid state relays control for channel 1</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch1_ssr
+fmc_adc_core_ch1
 </td>
 <td  class="td_code">
-CH1_SSR
+CH1
 </td>
 </tr>
 <tr class="tr_even">
@@ -374,13 +374,13 @@ CH1_SSR
 REG
 </td>
 <td >
-<A href="#CH1_VAL">Channel 1 current value</a>
+<A href="#CH1">Channel 1 current value</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch1_val
+fmc_adc_core_ch1
 </td>
 <td  class="td_code">
-CH1_VAL
+CH1
 </td>
 </tr>
 <tr class="tr_odd">
@@ -391,13 +391,13 @@ CH1_VAL
 REG
 </td>
 <td >
-<A href="#CH2_SSR">Solid state relays control for channel 2</a>
+<A href="#CH2">Solid state relays control for channel 2</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch2_ssr
+fmc_adc_core_ch2
 </td>
 <td  class="td_code">
-CH2_SSR
+CH2
 </td>
 </tr>
 <tr class="tr_even">
@@ -408,13 +408,13 @@ CH2_SSR
 REG
 </td>
 <td >
-<A href="#CH2_VAL">Channel 2 current value</a>
+<A href="#CH2">Channel 2 current value</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch2_val
+fmc_adc_core_ch2
 </td>
 <td  class="td_code">
-CH2_VAL
+CH2
 </td>
 </tr>
 <tr class="tr_odd">
@@ -425,13 +425,13 @@ CH2_VAL
 REG
 </td>
 <td >
-<A href="#CH3_SSR">Solid state relays control for channel 3</a>
+<A href="#CH3">Solid state relays control for channel 3</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch3_ssr
+fmc_adc_core_ch3
 </td>
 <td  class="td_code">
-CH3_SSR
+CH3
 </td>
 </tr>
 <tr class="tr_even">
@@ -442,13 +442,13 @@ CH3_SSR
 REG
 </td>
 <td >
-<A href="#CH3_VAL">Channel 3 current value</a>
+<A href="#CH3">Channel 3 current value</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch3_val
+fmc_adc_core_ch3
 </td>
 <td  class="td_code">
-CH3_VAL
+CH3
 </td>
 </tr>
 <tr class="tr_odd">
@@ -459,13 +459,13 @@ CH3_VAL
 REG
 </td>
 <td >
-<A href="#CH4_SSR">Solid state relays control for channel 4</a>
+<A href="#CH4">Solid state relays control for channel 4</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch4_ssr
+fmc_adc_core_ch4
 </td>
 <td  class="td_code">
-CH4_SSR
+CH4
 </td>
 </tr>
 <tr class="tr_even">
@@ -476,13 +476,13 @@ CH4_SSR
 REG
 </td>
 <td >
-<A href="#CH4_VAL">Channel 4 current value</a>
+<A href="#CH4">Channel 4 current value</a>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch4_val
+fmc_adc_core_ch4
 </td>
 <td  class="td_code">
-CH4_VAL
+CH4
 </td>
 </tr>
 </table>
@@ -650,6 +650,23 @@ fmc_adc_core_ctl_acq_led_o
 wb_ack_o
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ctl_reserved_o[23:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&rarr;
+</td>
+<td  class="td_pblock_left">
+fs_clk_i
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -661,10 +678,10 @@ wb_ack_o
 </tr>
 <tr>
 <td  class="td_arrow_left">
-&rarr;
+
 </td>
 <td  class="td_pblock_left">
-fs_clk_i
+
 </td>
 <td  class="td_sym_center">
 
@@ -725,6 +742,23 @@ fmc_adc_core_sta_serdes_synced_i
 </td>
 <td  class="td_arrow_right">
 &larr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_sta_reserved_i[26:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
 </td>
 </tr>
 <tr>
@@ -857,7 +891,7 @@ fmc_adc_core_trig_cfg_int_trig_sel_o[1:0]
 
 </td>
 <td  class="td_pblock_right">
-fmc_adc_core_trig_cfg_dummy_o[9:0]
+fmc_adc_core_trig_cfg_reserved_o[9:0]
 </td>
 <td  class="td_arrow_right">
 &rArr;
@@ -1058,6 +1092,23 @@ fmc_adc_core_shots_nb_o[15:0]
 
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_shots_reserved_o[15:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -1078,7 +1129,7 @@ fmc_adc_core_shots_nb_o[15:0]
 
 </td>
 <td  class="td_pblock_right">
-<b>Trigger UTC tag (LSBs):</b>
+<b>Trigger address register:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -1095,7 +1146,7 @@ fmc_adc_core_shots_nb_o[15:0]
 
 </td>
 <td  class="td_pblock_right">
-fmc_adc_core_trig_utc_l_i[31:0]
+fmc_adc_core_trig_pos_i[31:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -1129,7 +1180,7 @@ fmc_adc_core_trig_utc_l_i[31:0]
 
 </td>
 <td  class="td_pblock_right">
-<b>Trigger UTC tag (MSBs):</b>
+<b>Gain calibration register:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -1146,7 +1197,109 @@ fmc_adc_core_trig_utc_l_i[31:0]
 
 </td>
 <td  class="td_pblock_right">
-fmc_adc_core_trig_utc_h_i[31:0]
+fmc_adc_core_gain_cal_o[31:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>Offset calibration register:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_offset_cal_o[31:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>Reserved register:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_reserved_0_i[31:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -1180,7 +1333,7 @@ fmc_adc_core_trig_utc_h_i[31:0]
 
 </td>
 <td  class="td_pblock_right">
-<b>Start UTC tag (LSBs):</b>
+<b>Reserved register:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -1197,58 +1350,7 @@ fmc_adc_core_trig_utc_h_i[31:0]
 
 </td>
 <td  class="td_pblock_right">
-fmc_adc_core_start_utc_l_i[31:0]
-</td>
-<td  class="td_arrow_right">
-&lArr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-&nbsp;
-</td>
-<td  class="td_pblock_right">
-
-</td>
-<td  class="td_arrow_right">
-
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-<b>Start UTC tag (MSBs):</b>
-</td>
-<td  class="td_arrow_right">
-
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-fmc_adc_core_start_utc_h_i[31:0]
+fmc_adc_core_reserved_1_i[31:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -1282,7 +1384,7 @@ fmc_adc_core_start_utc_h_i[31:0]
 
 </td>
 <td  class="td_pblock_right">
-<b>Stop UTC tag (LSBs):</b>
+<b>Reserved register:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -1299,58 +1401,7 @@ fmc_adc_core_start_utc_h_i[31:0]
 
 </td>
 <td  class="td_pblock_right">
-fmc_adc_core_stop_utc_l_i[31:0]
-</td>
-<td  class="td_arrow_right">
-&lArr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-&nbsp;
-</td>
-<td  class="td_pblock_right">
-
-</td>
-<td  class="td_arrow_right">
-
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-<b>Stop UTC tag (MSBs):</b>
-</td>
-<td  class="td_arrow_right">
-
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-fmc_adc_core_stop_utc_h_i[31:0]
+fmc_adc_core_reserved_2_i[31:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -1402,6 +1453,23 @@ fmc_adc_core_stop_utc_h_i[31:0]
 </td>
 <td  class="td_pblock_right">
 fmc_adc_core_sr_deci_o[15:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_sr_reserved_o[15:0]
 </td>
 <td  class="td_arrow_right">
 &rArr;
@@ -1619,6 +1687,23 @@ fmc_adc_core_ch1_ssr_o[6:0]
 
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ch1_reserved_o[24:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -1657,6 +1742,23 @@ fmc_adc_core_ch1_ssr_o[6:0]
 </td>
 <td  class="td_pblock_right">
 fmc_adc_core_ch1_val_i[15:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ch1_reserved_i[15:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -1721,6 +1823,23 @@ fmc_adc_core_ch2_ssr_o[6:0]
 
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ch2_reserved_o[24:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -1759,6 +1878,23 @@ fmc_adc_core_ch2_ssr_o[6:0]
 </td>
 <td  class="td_pblock_right">
 fmc_adc_core_ch2_val_i[15:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ch2_reserved_i[15:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -1823,6 +1959,23 @@ fmc_adc_core_ch3_ssr_o[6:0]
 
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ch3_reserved_o[24:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -1861,6 +2014,23 @@ fmc_adc_core_ch3_ssr_o[6:0]
 </td>
 <td  class="td_pblock_right">
 fmc_adc_core_ch3_val_i[15:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ch3_reserved_i[15:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -1925,6 +2095,23 @@ fmc_adc_core_ch4_ssr_o[6:0]
 
 </td>
 <td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ch4_reserved_o[24:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -1963,6 +2150,23 @@ fmc_adc_core_ch4_ssr_o[6:0]
 </td>
 <td  class="td_pblock_right">
 fmc_adc_core_ch4_val_i[15:0]
+</td>
+<td  class="td_arrow_right">
+&lArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_ch4_reserved_i[15:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -2035,29 +2239,29 @@ CTL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[23:16]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -2089,29 +2293,29 @@ CTL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[15:8]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -2143,29 +2347,29 @@ CTL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[7:0]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -2249,6 +2453,10 @@ TRIG_LED
 ACQ_LED
 </b>[<i>read/write</i>]: Manual ACQ LED
 <br>Manual control of the front panel ACQ LED
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
 <a name="STA"></a>
 <h3><a name="sect_3_2">3.2. Status register</a></h3>
@@ -2314,29 +2522,29 @@ STA
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[26:19]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -2368,29 +2576,29 @@ STA
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[18:11]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -2422,29 +2630,29 @@ STA
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[10:3]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -2476,14 +2684,8 @@ STA
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
-</td>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=3  class="td_field">
+RESERVED[2:0]
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 SERDES_SYNCED
@@ -2493,6 +2695,12 @@ SERDES_PLL
 </td>
 <td style="border: solid 1px black;" colspan=3  class="td_field">
 FSM[2:0]
+</td>
+<td >
+
+</td>
+<td >
+
 </td>
 <td >
 
@@ -2514,6 +2722,10 @@ SERDES_PLL
 SERDES_SYNCED
 </b>[<i>read-only</i>]: SerDes synchronization status
 <br>0: bitslip in progress<br>1: serdes synchronized
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
 <a name="TRIG_CFG"></a>
 <h3><a name="sect_3_3">3.3. Trigger configuration</a></h3>
@@ -2688,7 +2900,7 @@ INT_TRIG_THRES[7:0]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-DUMMY[9:2]
+RESERVED[9:2]
 </td>
 <td >
 
@@ -2742,7 +2954,7 @@ DUMMY[9:2]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=2  class="td_field">
-DUMMY[1:0]
+RESERVED[1:0]
 </td>
 <td style="border: solid 1px black;" colspan=2  class="td_field">
 INT_TRIG_SEL[1:0]
@@ -2789,8 +3001,8 @@ INT_TRIG_SEL
 </b>[<i>read/write</i>]: Channel selection for internal trigger
 <br>00: channel 1<br>01: channel 2<br>10: channel 3<br>11: channel 4
 <li><b>
-DUMMY
-</b>[<i>read/write</i>]: Dummy
+RESERVED
+</b>[<i>read/write</i>]: Reserved
 <br>Ignore on read, write with 0's
 <li><b>
 INT_TRIG_THRES
@@ -3379,29 +3591,29 @@ SHOTS
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[15:8]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -3433,29 +3645,29 @@ SHOTS
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[7:0]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -3572,16 +3784,20 @@ NB[7:0]
 NB
 </b>[<i>read/write</i>]: Number of shots
 <br>Number of shots required in multi-shot mode, set to one for single-shot mode
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="TRIG_UTC_L"></a>
-<h3><a name="sect_3_7">3.7. Trigger UTC tag (LSBs)</a></h3>
+<a name="TRIG_POS"></a>
+<h3><a name="sect_3_7">3.7. Trigger address register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_trig_utc_l
+fmc_adc_core_trig_pos
 </td>
 </tr>
 <tr>
@@ -3597,7 +3813,7 @@ fmc_adc_core_trig_utc_l
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-TRIG_UTC_L
+TRIG_POS
 </td>
 </tr>
 <tr>
@@ -3638,7 +3854,7 @@ TRIG_UTC_L
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-TRIG_UTC_L[31:24]
+TRIG_POS[31:24]
 </td>
 <td >
 
@@ -3692,7 +3908,7 @@ TRIG_UTC_L[31:24]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-TRIG_UTC_L[23:16]
+TRIG_POS[23:16]
 </td>
 <td >
 
@@ -3746,7 +3962,7 @@ TRIG_UTC_L[23:16]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-TRIG_UTC_L[15:8]
+TRIG_POS[15:8]
 </td>
 <td >
 
@@ -3800,7 +4016,7 @@ TRIG_UTC_L[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-TRIG_UTC_L[7:0]
+TRIG_POS[7:0]
 </td>
 <td >
 
@@ -3827,19 +4043,19 @@ TRIG_UTC_L[7:0]
 </table>
 <ul>
 <li><b>
-TRIG_UTC_L
-</b>[<i>read-only</i>]: Trigger UTC tag (LSBs)
-<br>UTC time tag (LSBs) of the last trigger, inlcuding the trigger delay
+TRIG_POS
+</b>[<i>read-only</i>]: Trigger address
+<br>Trigger address in DDR memory.<br>Only used in single-shot mode
 </ul>
-<a name="TRIG_UTC_H"></a>
-<h3><a name="sect_3_8">3.8. Trigger UTC tag (MSBs)</a></h3>
+<a name="GAIN_CAL"></a>
+<h3><a name="sect_3_8">3.8. Gain calibration register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_trig_utc_h
+fmc_adc_core_gain_cal
 </td>
 </tr>
 <tr>
@@ -3855,7 +4071,7 @@ fmc_adc_core_trig_utc_h
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-TRIG_UTC_H
+GAIN_CAL
 </td>
 </tr>
 <tr>
@@ -3896,7 +4112,7 @@ TRIG_UTC_H
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-TRIG_UTC_H[31:24]
+GAIN_CAL[31:24]
 </td>
 <td >
 
@@ -3950,7 +4166,7 @@ TRIG_UTC_H[31:24]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-TRIG_UTC_H[23:16]
+GAIN_CAL[23:16]
 </td>
 <td >
 
@@ -4004,7 +4220,7 @@ TRIG_UTC_H[23:16]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-TRIG_UTC_H[15:8]
+GAIN_CAL[15:8]
 </td>
 <td >
 
@@ -4058,7 +4274,7 @@ TRIG_UTC_H[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-TRIG_UTC_H[7:0]
+GAIN_CAL[7:0]
 </td>
 <td >
 
@@ -4085,19 +4301,19 @@ TRIG_UTC_H[7:0]
 </table>
 <ul>
 <li><b>
-TRIG_UTC_H
-</b>[<i>read-only</i>]: Trigger UTC tag (MSBs)
-<br>UTC time tag (MSBs) of the last trigger, inlcuding the trigger delay
+GAIN_CAL
+</b>[<i>read/write</i>]: Gain calibration
+<br>Gain applied to all data coming from the ADC.
 </ul>
-<a name="START_UTC_L"></a>
-<h3><a name="sect_3_9">3.9. Start UTC tag (LSBs)</a></h3>
+<a name="OFFSET_CAL"></a>
+<h3><a name="sect_3_9">3.9. Offset calibration register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_start_utc_l
+fmc_adc_core_offset_cal
 </td>
 </tr>
 <tr>
@@ -4113,7 +4329,7 @@ fmc_adc_core_start_utc_l
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-START_UTC_L
+OFFSET_CAL
 </td>
 </tr>
 <tr>
@@ -4154,7 +4370,7 @@ START_UTC_L
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-START_UTC_L[31:24]
+OFFSET_CAL[31:24]
 </td>
 <td >
 
@@ -4208,7 +4424,7 @@ START_UTC_L[31:24]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-START_UTC_L[23:16]
+OFFSET_CAL[23:16]
 </td>
 <td >
 
@@ -4262,7 +4478,7 @@ START_UTC_L[23:16]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-START_UTC_L[15:8]
+OFFSET_CAL[15:8]
 </td>
 <td >
 
@@ -4316,7 +4532,7 @@ START_UTC_L[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-START_UTC_L[7:0]
+OFFSET_CAL[7:0]
 </td>
 <td >
 
@@ -4343,19 +4559,19 @@ START_UTC_L[7:0]
 </table>
 <ul>
 <li><b>
-START_UTC_L
-</b>[<i>read-only</i>]: Start UTC tag (LSBs)
-<br>UTC time tag (LSBs) of the last start
+OFFSET_CAL
+</b>[<i>read/write</i>]: Offset calibration
+<br>Offset applied to all data coming from the ADC.
 </ul>
-<a name="START_UTC_H"></a>
-<h3><a name="sect_3_10">3.10. Start UTC tag (MSBs)</a></h3>
+<a name="RESERVED_0"></a>
+<h3><a name="sect_3_10">3.10. Reserved register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_start_utc_h
+fmc_adc_core_reserved_0
 </td>
 </tr>
 <tr>
@@ -4371,7 +4587,7 @@ fmc_adc_core_start_utc_h
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-START_UTC_H
+RESERVED_0
 </td>
 </tr>
 <tr>
@@ -4412,7 +4628,7 @@ START_UTC_H
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-START_UTC_H[31:24]
+RESERVED_0[31:24]
 </td>
 <td >
 
@@ -4466,7 +4682,7 @@ START_UTC_H[31:24]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-START_UTC_H[23:16]
+RESERVED_0[23:16]
 </td>
 <td >
 
@@ -4520,7 +4736,7 @@ START_UTC_H[23:16]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-START_UTC_H[15:8]
+RESERVED_0[15:8]
 </td>
 <td >
 
@@ -4574,7 +4790,7 @@ START_UTC_H[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-START_UTC_H[7:0]
+RESERVED_0[7:0]
 </td>
 <td >
 
@@ -4601,19 +4817,19 @@ START_UTC_H[7:0]
 </table>
 <ul>
 <li><b>
-START_UTC_H
-</b>[<i>read-only</i>]: Start UTC tag (MSBs)
-<br>UTC time tag (MSBs) of the last start
+RESERVED_0
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="STOP_UTC_L"></a>
-<h3><a name="sect_3_11">3.11. Stop UTC tag (LSBs)</a></h3>
+<a name="RESERVED_1"></a>
+<h3><a name="sect_3_11">3.11. Reserved register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_stop_utc_l
+fmc_adc_core_reserved_1
 </td>
 </tr>
 <tr>
@@ -4629,7 +4845,7 @@ fmc_adc_core_stop_utc_l
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-STOP_UTC_L
+RESERVED_1
 </td>
 </tr>
 <tr>
@@ -4670,7 +4886,7 @@ STOP_UTC_L
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-STOP_UTC_L[31:24]
+RESERVED_1[31:24]
 </td>
 <td >
 
@@ -4724,7 +4940,7 @@ STOP_UTC_L[31:24]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-STOP_UTC_L[23:16]
+RESERVED_1[23:16]
 </td>
 <td >
 
@@ -4778,7 +4994,7 @@ STOP_UTC_L[23:16]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-STOP_UTC_L[15:8]
+RESERVED_1[15:8]
 </td>
 <td >
 
@@ -4832,7 +5048,7 @@ STOP_UTC_L[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-STOP_UTC_L[7:0]
+RESERVED_1[7:0]
 </td>
 <td >
 
@@ -4859,19 +5075,19 @@ STOP_UTC_L[7:0]
 </table>
 <ul>
 <li><b>
-STOP_UTC_L
-</b>[<i>read-only</i>]: Stop UTC tag (LSBs)
-<br>UTC time tag (LSBs) of the last stop
+RESERVED_1
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="STOP_UTC_H"></a>
-<h3><a name="sect_3_12">3.12. Stop UTC tag (MSBs)</a></h3>
+<a name="RESERVED_2"></a>
+<h3><a name="sect_3_12">3.12. Reserved register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_stop_utc_h
+fmc_adc_core_reserved_2
 </td>
 </tr>
 <tr>
@@ -4887,7 +5103,7 @@ fmc_adc_core_stop_utc_h
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-STOP_UTC_H
+RESERVED_2
 </td>
 </tr>
 <tr>
@@ -4928,7 +5144,7 @@ STOP_UTC_H
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-STOP_UTC_H[31:24]
+RESERVED_2[31:24]
 </td>
 <td >
 
@@ -4982,7 +5198,7 @@ STOP_UTC_H[31:24]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-STOP_UTC_H[23:16]
+RESERVED_2[23:16]
 </td>
 <td >
 
@@ -5036,7 +5252,7 @@ STOP_UTC_H[23:16]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-STOP_UTC_H[15:8]
+RESERVED_2[15:8]
 </td>
 <td >
 
@@ -5090,7 +5306,7 @@ STOP_UTC_H[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-STOP_UTC_H[7:0]
+RESERVED_2[7:0]
 </td>
 <td >
 
@@ -5117,9 +5333,9 @@ STOP_UTC_H[7:0]
 </table>
 <ul>
 <li><b>
-STOP_UTC_H
-</b>[<i>read-only</i>]: Stop UTC tag (MSBs)
-<br>UTC time tag (MSBs) of the last stop
+RESERVED_2
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
 <a name="SR"></a>
 <h3><a name="sect_3_13">3.13. Sample rate</a></h3>
@@ -5185,29 +5401,29 @@ SR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[15:8]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -5239,29 +5455,29 @@ SR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[7:0]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -5378,6 +5594,10 @@ DECI[7:0]
 DECI
 </b>[<i>read/write</i>]: Sample rate decimation
 <br>Decimation factor
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
 <a name="PRE_SAMPLES"></a>
 <h3><a name="sect_3_14">3.14. Pre-trigger samples</a></h3>
@@ -6153,7 +6373,7 @@ SAMP_CNT
 </b>[<i>read-only</i>]: Sample counter
 <br>Counts the number of sample.<br> It is reset on START and then counts the number of pre-trigger + post-trigger samples
 </ul>
-<a name="CH1_SSR"></a>
+<a name="CH1"></a>
 <h3><a name="sect_3_17">3.17. Solid state relays control for channel 1</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -6161,7 +6381,7 @@ SAMP_CNT
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch1_ssr
+fmc_adc_core_ch1
 </td>
 </tr>
 <tr>
@@ -6177,7 +6397,7 @@ fmc_adc_core_ch1_ssr
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-CH1_SSR
+CH1
 </td>
 </tr>
 <tr>
@@ -6217,29 +6437,29 @@ CH1_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[24:17]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -6271,29 +6491,29 @@ CH1_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[16:9]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -6325,29 +6545,29 @@ CH1_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[8:1]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -6379,11 +6599,11 @@ CH1_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+RESERVED[0:0]
 </td>
 <td style="border: solid 1px black;" colspan=7  class="td_field">
-CH1_SSR[6:0]
+SSR[6:0]
 </td>
 <td >
 
@@ -6407,11 +6627,15 @@ CH1_SSR[6:0]
 </table>
 <ul>
 <li><b>
-CH1_SSR
+SSR
 </b>[<i>read/write</i>]: Solid state relays control for channel 1
 <br>Controls input voltage range, termination and DC offset error calibration
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="CH1_VAL"></a>
+<a name="CH1"></a>
 <h3><a name="sect_3_18">3.18. Channel 1 current value</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -6419,7 +6643,7 @@ CH1_SSR
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch1_val
+fmc_adc_core_ch1
 </td>
 </tr>
 <tr>
@@ -6435,7 +6659,7 @@ fmc_adc_core_ch1_val
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-CH1_VAL
+CH1
 </td>
 </tr>
 <tr>
@@ -6475,29 +6699,29 @@ CH1_VAL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[15:8]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -6529,29 +6753,29 @@ CH1_VAL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[7:0]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -6584,7 +6808,7 @@ CH1_VAL
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-CH1_VAL[15:8]
+VAL[15:8]
 </td>
 <td >
 
@@ -6638,7 +6862,7 @@ CH1_VAL[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-CH1_VAL[7:0]
+VAL[7:0]
 </td>
 <td >
 
@@ -6665,11 +6889,15 @@ CH1_VAL[7:0]
 </table>
 <ul>
 <li><b>
-CH1_VAL
+VAL
 </b>[<i>read-only</i>]: Channel 1 current value
 <br>Current ADC raw value
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="CH2_SSR"></a>
+<a name="CH2"></a>
 <h3><a name="sect_3_19">3.19. Solid state relays control for channel 2</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -6677,7 +6905,7 @@ CH1_VAL
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch2_ssr
+fmc_adc_core_ch2
 </td>
 </tr>
 <tr>
@@ -6693,7 +6921,7 @@ fmc_adc_core_ch2_ssr
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-CH2_SSR
+CH2
 </td>
 </tr>
 <tr>
@@ -6733,29 +6961,29 @@ CH2_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[24:17]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -6787,29 +7015,29 @@ CH2_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[16:9]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -6841,29 +7069,29 @@ CH2_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[8:1]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -6895,11 +7123,11 @@ CH2_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+RESERVED[0:0]
 </td>
 <td style="border: solid 1px black;" colspan=7  class="td_field">
-CH2_SSR[6:0]
+SSR[6:0]
 </td>
 <td >
 
@@ -6923,11 +7151,15 @@ CH2_SSR[6:0]
 </table>
 <ul>
 <li><b>
-CH2_SSR
+SSR
 </b>[<i>read/write</i>]: Solid state relays control for channel 2
 <br>Controls input voltage range, termination and DC offset error calibration
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="CH2_VAL"></a>
+<a name="CH2"></a>
 <h3><a name="sect_3_20">3.20. Channel 2 current value</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -6935,7 +7167,7 @@ CH2_SSR
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch2_val
+fmc_adc_core_ch2
 </td>
 </tr>
 <tr>
@@ -6951,7 +7183,7 @@ fmc_adc_core_ch2_val
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-CH2_VAL
+CH2
 </td>
 </tr>
 <tr>
@@ -6991,29 +7223,29 @@ CH2_VAL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[15:8]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7045,29 +7277,29 @@ CH2_VAL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[7:0]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7100,7 +7332,7 @@ CH2_VAL
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-CH2_VAL[15:8]
+VAL[15:8]
 </td>
 <td >
 
@@ -7154,7 +7386,7 @@ CH2_VAL[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-CH2_VAL[7:0]
+VAL[7:0]
 </td>
 <td >
 
@@ -7181,11 +7413,15 @@ CH2_VAL[7:0]
 </table>
 <ul>
 <li><b>
-CH2_VAL
+VAL
 </b>[<i>read-only</i>]: Channel 2 current value
 <br>Current ADC raw value
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="CH3_SSR"></a>
+<a name="CH3"></a>
 <h3><a name="sect_3_21">3.21. Solid state relays control for channel 3</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -7193,7 +7429,7 @@ CH2_VAL
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch3_ssr
+fmc_adc_core_ch3
 </td>
 </tr>
 <tr>
@@ -7209,7 +7445,7 @@ fmc_adc_core_ch3_ssr
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-CH3_SSR
+CH3
 </td>
 </tr>
 <tr>
@@ -7249,29 +7485,29 @@ CH3_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[24:17]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7303,29 +7539,29 @@ CH3_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[16:9]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7357,29 +7593,29 @@ CH3_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[8:1]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7411,11 +7647,11 @@ CH3_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+RESERVED[0:0]
 </td>
 <td style="border: solid 1px black;" colspan=7  class="td_field">
-CH3_SSR[6:0]
+SSR[6:0]
 </td>
 <td >
 
@@ -7439,11 +7675,15 @@ CH3_SSR[6:0]
 </table>
 <ul>
 <li><b>
-CH3_SSR
+SSR
 </b>[<i>read/write</i>]: Solid state relays control for channel 3
 <br>Controls input voltage range, termination and DC offset error calibration
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="CH3_VAL"></a>
+<a name="CH3"></a>
 <h3><a name="sect_3_22">3.22. Channel 3 current value</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -7451,7 +7691,7 @@ CH3_SSR
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch3_val
+fmc_adc_core_ch3
 </td>
 </tr>
 <tr>
@@ -7467,7 +7707,7 @@ fmc_adc_core_ch3_val
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-CH3_VAL
+CH3
 </td>
 </tr>
 <tr>
@@ -7507,29 +7747,29 @@ CH3_VAL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[15:8]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7561,29 +7801,29 @@ CH3_VAL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[7:0]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7616,7 +7856,7 @@ CH3_VAL
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-CH3_VAL[15:8]
+VAL[15:8]
 </td>
 <td >
 
@@ -7670,7 +7910,7 @@ CH3_VAL[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-CH3_VAL[7:0]
+VAL[7:0]
 </td>
 <td >
 
@@ -7697,11 +7937,15 @@ CH3_VAL[7:0]
 </table>
 <ul>
 <li><b>
-CH3_VAL
+VAL
 </b>[<i>read-only</i>]: Channel 3 current value
 <br>Current ADC raw value
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="CH4_SSR"></a>
+<a name="CH4"></a>
 <h3><a name="sect_3_23">3.23. Solid state relays control for channel 4</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -7709,7 +7953,7 @@ CH3_VAL
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch4_ssr
+fmc_adc_core_ch4
 </td>
 </tr>
 <tr>
@@ -7725,7 +7969,7 @@ fmc_adc_core_ch4_ssr
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-CH4_SSR
+CH4
 </td>
 </tr>
 <tr>
@@ -7765,29 +8009,29 @@ CH4_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[24:17]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7819,29 +8063,29 @@ CH4_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[16:9]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7873,29 +8117,29 @@ CH4_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[8:1]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -7927,11 +8171,11 @@ CH4_SSR
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+RESERVED[0:0]
 </td>
 <td style="border: solid 1px black;" colspan=7  class="td_field">
-CH4_SSR[6:0]
+SSR[6:0]
 </td>
 <td >
 
@@ -7955,11 +8199,15 @@ CH4_SSR[6:0]
 </table>
 <ul>
 <li><b>
-CH4_SSR
+SSR
 </b>[<i>read/write</i>]: Solid state relays control for channel 4
 <br>Controls input voltage range, termination and DC offset error calibration
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
-<a name="CH4_VAL"></a>
+<a name="CH4"></a>
 <h3><a name="sect_3_24">3.24. Channel 4 current value</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -7967,7 +8215,7 @@ CH4_SSR
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-fmc_adc_core_ch4_val
+fmc_adc_core_ch4
 </td>
 </tr>
 <tr>
@@ -7983,7 +8231,7 @@ fmc_adc_core_ch4_val
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-CH4_VAL
+CH4
 </td>
 </tr>
 <tr>
@@ -8023,29 +8271,29 @@ CH4_VAL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[15:8]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -8077,29 +8325,29 @@ CH4_VAL
 </td>
 </tr>
 <tr>
-<td  class="td_unused">
--
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[7:0]
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
-<td  class="td_unused">
--
+<td >
+
 </td>
 </tr>
 </table>
@@ -8132,7 +8380,7 @@ CH4_VAL
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-CH4_VAL[15:8]
+VAL[15:8]
 </td>
 <td >
 
@@ -8186,7 +8434,7 @@ CH4_VAL[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-CH4_VAL[7:0]
+VAL[7:0]
 </td>
 <td >
 
@@ -8213,9 +8461,13 @@ CH4_VAL[7:0]
 </table>
 <ul>
 <li><b>
-CH4_VAL
+VAL
 </b>[<i>read-only</i>]: Channel 4 current value
 <br>Current ADC raw value
+<li><b>
+RESERVED
+</b>[<i>read-only</i>]: Reserved
+<br>Ignore on read, write with 0's
 </ul>
 
 

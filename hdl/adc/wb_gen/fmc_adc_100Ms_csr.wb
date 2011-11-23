@@ -68,6 +68,16 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 24;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
   };
 
   reg {
@@ -97,6 +107,16 @@ peripheral {
       description = "0: bitslip in progress\n1: serdes synchronized";
       prefix = "serdes_synced";
       type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 27;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
@@ -158,9 +178,9 @@ peripheral {
     };
 
     field {
-      name = "Dummy";
+      name = "Reserved";
       description = "Ignore on read, write with 0's";
-      prefix = "dummy";
+      prefix = "reserved";
       type = SLV;
       size = 10;
       access_bus = READ_WRITE;
@@ -219,15 +239,25 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
   };
 
   reg {
-    name = "Trigger UTC tag (LSBs)";
-    prefix = "trig_utc_l";
+    name = "Trigger address register";
+    prefix = "trig_pos";
 
     field {
-      name = "Trigger UTC tag (LSBs)";
-      description = "UTC time tag (LSBs) of the last trigger, inlcuding the trigger delay";
+      name = "Trigger address";
+      description = "Trigger address in DDR memory.\nOnly used in single-shot mode";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -236,12 +266,40 @@ peripheral {
   };
 
   reg {
-    name = "Trigger UTC tag (MSBs)";
-    prefix = "trig_utc_h";
+    name = "Gain calibration register";
+    prefix = "gain_cal";
 
     field {
-      name = "Trigger UTC tag (MSBs)";
-      description = "UTC time tag (MSBs) of the last trigger, inlcuding the trigger delay";
+      name = "Gain calibration";
+      description = "Gain applied to all data coming from the ADC.";
+      type = SLV;
+      size = 32;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Offset calibration register";
+    prefix = "offset_cal";
+
+    field {
+      name = "Offset calibration";
+      description = "Offset applied to all data coming from the ADC.";
+      type = SLV;
+      size = 32;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Reserved register";
+    prefix = "reserved_0";
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -250,12 +308,12 @@ peripheral {
   };
 
   reg {
-    name = "Start UTC tag (LSBs)";
-    prefix = "start_utc_l";
+    name = "Reserved register";
+    prefix = "reserved_1";
 
     field {
-      name = "Start UTC tag (LSBs)";
-      description = "UTC time tag (LSBs) of the last start";
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -264,40 +322,12 @@ peripheral {
   };
 
   reg {
-    name = "Start UTC tag (MSBs)";
-    prefix = "start_utc_h";
+    name = "Reserved register";
+    prefix = "reserved_2";
 
     field {
-      name = "Start UTC tag (MSBs)";
-      description = "UTC time tag (MSBs) of the last start";
-      type = SLV;
-      size = 32;
-      access_bus = READ_ONLY;
-      access_dev = WRITE_ONLY;
-    };
-  };
-
-  reg {
-    name = "Stop UTC tag (LSBs)";
-    prefix = "stop_utc_l";
-
-    field {
-      name = "Stop UTC tag (LSBs)";
-      description = "UTC time tag (LSBs) of the last stop";
-      type = SLV;
-      size = 32;
-      access_bus = READ_ONLY;
-      access_dev = WRITE_ONLY;
-    };
-  };
-
-  reg {
-    name = "Stop UTC tag (MSBs)";
-    prefix = "stop_utc_h";
-
-    field {
-      name = "Stop UTC tag (MSBs)";
-      description = "UTC time tag (MSBs) of the last stop";
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -318,6 +348,16 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
       clock = "fs_clk_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
     };
   };
 
@@ -365,13 +405,24 @@ peripheral {
 
   reg {
     name = "Solid state relays control for channel 1";
-    prefix = "ch1_ssr";
+    prefix = "ch1";
 
     field {
       name = "Solid state relays control for channel 1";
       description = "Controls input voltage range, termination and DC offset error calibration";
+      prefix = "ssr";
       type = SLV;
       size = 7;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 25;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -379,28 +430,50 @@ peripheral {
 
   reg {
     name = "Channel 1 current value";
-    prefix = "ch1_val";
+    prefix = "ch1";
 
     field {
       name = "Channel 1 current value";
       description = "Current ADC raw value";
+      prefix = "val";
       type = SLV;
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
       clock = "fs_clk_i";
     };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
   };
 
   reg {
     name = "Solid state relays control for channel 2";
-    prefix = "ch2_ssr";
+    prefix = "ch2";
 
     field {
       name = "Solid state relays control for channel 2";
       description = "Controls input voltage range, termination and DC offset error calibration";
+      prefix = "ssr";
       type = SLV;
       size = 7;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 25;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -408,28 +481,50 @@ peripheral {
 
   reg {
     name = "Channel 2 current value";
-    prefix = "ch2_val";
+    prefix = "ch2";
 
     field {
       name = "Channel 2 current value";
       description = "Current ADC raw value";
+      prefix = "val";
       type = SLV;
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
       clock = "fs_clk_i";
     };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
   };
 
   reg {
     name = "Solid state relays control for channel 3";
-    prefix = "ch3_ssr";
+    prefix = "ch3";
 
     field {
       name = "Solid state relays control for channel 3";
       description = "Controls input voltage range, termination and DC offset error calibration";
+      prefix = "ssr";
       type = SLV;
       size = 7;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 25;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -437,28 +532,50 @@ peripheral {
 
   reg {
     name = "Channel 3 current value";
-    prefix = "ch3_val";
+    prefix = "ch3";
 
     field {
       name = "Channel 3 current value";
       description = "Current ADC raw value";
+      prefix = "val";
       type = SLV;
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
       clock = "fs_clk_i";
     };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
   };
 
   reg {
     name = "Solid state relays control for channel 4";
-    prefix = "ch4_ssr";
+    prefix = "ch4";
 
     field {
       name = "Solid state relays control for channel 4";
       description = "Controls input voltage range, termination and DC offset error calibration";
+      prefix = "ssr";
       type = SLV;
       size = 7;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 25;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -466,16 +583,27 @@ peripheral {
 
   reg {
     name = "Channel 4 current value";
-    prefix = "ch4_val";
+    prefix = "ch4";
 
     field {
       name = "Channel 4 current value";
       description = "Current ADC raw value";
+      prefix = "val";
       type = SLV;
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
       clock = "fs_clk_i";
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
     };
   };
 
