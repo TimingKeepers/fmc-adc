@@ -137,9 +137,9 @@ peripheral {
     };
 
     field {
-      name = "External hardware trigger polarity";
-      description = "0: positive edge\n1: negative edge";
-      prefix = "ext_trig_pol";
+      name = "Hardware trigger polarity";
+      description = "0: positive edge/slope\n1: negative edge/slope";
+      prefix = "hw_trig_pol";
       type = BIT;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
@@ -189,7 +189,7 @@ peripheral {
 
     field {
       name = "Threshold for internal trigger";
-      description = "Treated as two's complement and compared to raw ADC data";
+      description = "Treated as offset binary and compared to raw ADC data";
       prefix = "int_trig_thres";
       type = SLV;
       size = 16;
@@ -266,76 +266,6 @@ peripheral {
   };
 
   reg {
-    name = "Gain calibration register";
-    prefix = "gain_cal";
-
-    field {
-      name = "Gain calibration";
-      description = "Gain applied to all data coming from the ADC.";
-      type = SLV;
-      size = 32;
-      access_bus = READ_WRITE;
-      access_dev = READ_ONLY;
-    };
-  };
-
-  reg {
-    name = "Offset calibration register";
-    prefix = "offset_cal";
-
-    field {
-      name = "Offset calibration";
-      description = "Offset applied to all data coming from the ADC.";
-      type = SLV;
-      size = 32;
-      access_bus = READ_WRITE;
-      access_dev = READ_ONLY;
-    };
-  };
-
-  reg {
-    name = "Reserved register";
-    prefix = "reserved_0";
-
-    field {
-      name = "Reserved";
-      description = "Ignore on read, write with 0's";
-      type = SLV;
-      size = 32;
-      access_bus = READ_ONLY;
-      access_dev = WRITE_ONLY;
-    };
-  };
-
-  reg {
-    name = "Reserved register";
-    prefix = "reserved_1";
-
-    field {
-      name = "Reserved";
-      description = "Ignore on read, write with 0's";
-      type = SLV;
-      size = 32;
-      access_bus = READ_ONLY;
-      access_dev = WRITE_ONLY;
-    };
-  };
-
-  reg {
-    name = "Reserved register";
-    prefix = "reserved_2";
-
-    field {
-      name = "Reserved";
-      description = "Ignore on read, write with 0's";
-      type = SLV;
-      size = 32;
-      access_bus = READ_ONLY;
-      access_dev = WRITE_ONLY;
-    };
-  };
-
-  reg {
     name = "Sample rate";
     prefix = "sr";
 
@@ -390,12 +320,12 @@ peripheral {
   };
 
   reg {
-    name = "Sample counter";
-    prefix = "samp_cnt";
+    name = "Samples counter";
+    prefix = "samples_cnt";
 
     field {
-      name = "Sample counter";
-      description = "Counts the number of sample.\n It is reset on START and then counts the number of pre-trigger + post-trigger samples";
+      name = "Samples counter";
+      description = "Counts the number of samples.\n It is reset on START and then counts the number of pre-trigger + post-trigger samples";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -404,8 +334,8 @@ peripheral {
   };
 
   reg {
-    name = "Solid state relays control for channel 1";
-    prefix = "ch1";
+    name = "Channel 1 control register";
+    prefix = "ch1_ctl";
 
     field {
       name = "Solid state relays control for channel 1";
@@ -429,11 +359,11 @@ peripheral {
   };
 
   reg {
-    name = "Channel 1 current value";
-    prefix = "ch1";
+    name = "Channel 1 status register";
+    prefix = "ch1_sta";
 
     field {
-      name = "Channel 1 current value";
+      name = "Channel 1 current ADC value";
       description = "Current ADC raw value";
       prefix = "val";
       type = SLV;
@@ -455,8 +385,58 @@ peripheral {
   };
 
   reg {
-    name = "Solid state relays control for channel 2";
-    prefix = "ch2";
+    name = "Channel 1 gain calibration register";
+    prefix = "ch1_gain";
+
+    field {
+      name = "Gain calibration for channel 1";
+      description = "Gain applied to all data coming from the ADC.";
+      prefix = "val";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 1 offset calibration register";
+    prefix = "ch1_offset";
+
+    field {
+      name = "Offset calibration for channel 1";
+      description = "Offset applied to all data coming from the ADC.";
+      prefix = "val";
+      type = SLV;
+      size = 17;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 15;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 2 control register";
+    prefix = "ch2_ctl";
 
     field {
       name = "Solid state relays control for channel 2";
@@ -480,11 +460,11 @@ peripheral {
   };
 
   reg {
-    name = "Channel 2 current value";
-    prefix = "ch2";
+    name = "Channel 2 status register";
+    prefix = "ch2_sta";
 
     field {
-      name = "Channel 2 current value";
+      name = "Channel 2 current ACD value";
       description = "Current ADC raw value";
       prefix = "val";
       type = SLV;
@@ -506,8 +486,58 @@ peripheral {
   };
 
   reg {
-    name = "Solid state relays control for channel 3";
-    prefix = "ch3";
+    name = "Channel 2 gain calibration register";
+    prefix = "ch2_gain";
+
+    field {
+      name = "Gain calibration for channel 2";
+      description = "Gain applied to all data coming from the ADC.";
+      prefix = "val";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 2 offset calibration register";
+    prefix = "ch2_offset";
+
+    field {
+      name = "Offset calibration for channel 2";
+      description = "Offset applied to all data coming from the ADC.";
+      prefix = "val";
+      type = SLV;
+      size = 17;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 15;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 3 control register";
+    prefix = "ch3_ctl";
 
     field {
       name = "Solid state relays control for channel 3";
@@ -531,11 +561,11 @@ peripheral {
   };
 
   reg {
-    name = "Channel 3 current value";
-    prefix = "ch3";
+    name = "Channel 3 status register";
+    prefix = "ch3_sta";
 
     field {
-      name = "Channel 3 current value";
+      name = "Channel 3 current ADC value";
       description = "Current ADC raw value";
       prefix = "val";
       type = SLV;
@@ -557,8 +587,58 @@ peripheral {
   };
 
   reg {
-    name = "Solid state relays control for channel 4";
-    prefix = "ch4";
+    name = "Channel 3 gain calibration register";
+    prefix = "ch3_gain";
+
+    field {
+      name = "Gain calibration for channel 3";
+      description = "Gain applied to all data coming from the ADC.";
+      prefix = "val";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 3 offset calibration register";
+    prefix = "ch3_offset";
+
+    field {
+      name = "Offset calibration for channel 3";
+      description = "Offset applied to all data coming from the ADC.";
+      prefix = "val";
+      type = SLV;
+      size = 17;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 15;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 4 control register";
+    prefix = "ch4_ctl";
 
     field {
       name = "Solid state relays control for channel 4";
@@ -582,11 +662,11 @@ peripheral {
   };
 
   reg {
-    name = "Channel 4 current value";
-    prefix = "ch4";
+    name = "Channel 4 status register";
+    prefix = "ch4_sta";
 
     field {
-      name = "Channel 4 current value";
+      name = "Channel 4 current ADC value";
       description = "Current ADC raw value";
       prefix = "val";
       type = SLV;
@@ -604,6 +684,56 @@ peripheral {
       size = 16;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 4 gain calibration register";
+    prefix = "ch4_gain";
+
+    field {
+      name = "Gain calibration for channel 4";
+      description = "Gain applied to all data coming from the ADC.";
+      prefix = "val";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 4 offset calibration register";
+    prefix = "ch4_offset";
+
+    field {
+      name = "Offset calibration for channel 4";
+      description = "Offset applied to all data coming from the ADC.";
+      prefix = "val";
+      type = SLV;
+      size = 17;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 15;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
     };
   };
 

@@ -147,7 +147,7 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_sta_serdes_synced_i       : in  std_logic;
       fmc_adc_core_sta_reserved_i            : in  std_logic_vector(26 downto 0);
       fmc_adc_core_trig_cfg_hw_trig_sel_o    : out std_logic;
-      fmc_adc_core_trig_cfg_ext_trig_pol_o   : out std_logic;
+      fmc_adc_core_trig_cfg_hw_trig_pol_o    : out std_logic;
       fmc_adc_core_trig_cfg_hw_trig_en_o     : out std_logic;
       fmc_adc_core_trig_cfg_sw_trig_en_o     : out std_logic;
       fmc_adc_core_trig_cfg_int_trig_sel_o   : out std_logic_vector(1 downto 0);
@@ -159,32 +159,43 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_shots_nb_o                : out std_logic_vector(15 downto 0);
       fmc_adc_core_shots_reserved_o          : out std_logic_vector(15 downto 0);
       fmc_adc_core_trig_pos_i                : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_gain_cal_o                : out std_logic_vector(31 downto 0);
-      fmc_adc_core_offset_cal_o              : out std_logic_vector(31 downto 0);
-      fmc_adc_core_reserved_0_i              : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_reserved_1_i              : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_reserved_2_i              : in  std_logic_vector(31 downto 0);
       fmc_adc_core_sr_deci_o                 : out std_logic_vector(15 downto 0);
       fmc_adc_core_sr_reserved_o             : out std_logic_vector(15 downto 0);
       fmc_adc_core_pre_samples_o             : out std_logic_vector(31 downto 0);
       fmc_adc_core_post_samples_o            : out std_logic_vector(31 downto 0);
-      fmc_adc_core_samp_cnt_i                : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_ch1_ssr_o                 : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch1_reserved_o            : out std_logic_vector(24 downto 0);
-      fmc_adc_core_ch1_val_i                 : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_reserved_i            : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_ssr_o                 : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch2_reserved_o            : out std_logic_vector(24 downto 0);
-      fmc_adc_core_ch2_val_i                 : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_reserved_i            : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_ssr_o                 : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch3_reserved_o            : out std_logic_vector(24 downto 0);
-      fmc_adc_core_ch3_val_i                 : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_reserved_i            : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_ssr_o                 : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch4_reserved_o            : out std_logic_vector(24 downto 0);
-      fmc_adc_core_ch4_val_i                 : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_reserved_i            : in  std_logic_vector(15 downto 0)
+      fmc_adc_core_samples_cnt_i             : in  std_logic_vector(31 downto 0);
+      fmc_adc_core_ch1_ctl_ssr_o             : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch1_ctl_reserved_o        : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch1_sta_val_i             : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_sta_reserved_i        : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_gain_val_o            : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_gain_reserved_o       : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_offset_val_o          : out std_logic_vector(16 downto 0);
+      fmc_adc_core_ch1_offset_reserved_o     : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch2_ctl_ssr_o             : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch2_ctl_reserved_o        : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch2_sta_val_i             : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_sta_reserved_i        : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_gain_val_o            : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_gain_reserved_o       : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_offset_val_o          : out std_logic_vector(16 downto 0);
+      fmc_adc_core_ch2_offset_reserved_o     : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch3_ctl_ssr_o             : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch3_ctl_reserved_o        : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch3_sta_val_i             : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_sta_reserved_i        : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_gain_val_o            : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_gain_reserved_o       : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_offset_val_o          : out std_logic_vector(16 downto 0);
+      fmc_adc_core_ch3_offset_reserved_o     : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch4_ctl_ssr_o             : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch4_ctl_reserved_o        : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch4_sta_val_i             : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_sta_reserved_i        : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_gain_val_o            : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_gain_reserved_o       : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_offset_val_o          : out std_logic_vector(16 downto 0);
+      fmc_adc_core_ch4_offset_reserved_o     : out std_logic_vector(14 downto 0)
       );
   end component fmc_adc_100Ms_csr;
 
@@ -206,6 +217,17 @@ architecture rtl of fmc_adc_100Ms_core is
       pulse_o          : out std_logic         --! Synchronized output pulse
       );
   end component ext_pulse_sync;
+
+  component offset_gain
+    port (
+      rst_n_i  : in  std_logic;                      --! Reset (active low)
+      clk_i    : in  std_logic;                      --! Clock
+      offset_i : in  std_logic_vector(16 downto 0);  --! Signed offset input (two's complement)
+      gain_i   : in  std_logic_vector(15 downto 0);  --! Unsigned gain input
+      data_i   : in  std_logic_vector(15 downto 0);  --! Unsigned data input
+      data_o   : out std_logic_vector(15 downto 0)   --! Unsigned data output
+      );
+  end component offset_gain;
 
   component adc_sync_fifo
     port (
@@ -296,6 +318,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal serdes_in_n         : std_logic_vector(8 downto 0);
   signal serdes_out_raw      : std_logic_vector(71 downto 0);
   signal serdes_out_data     : std_logic_vector(63 downto 0);
+  signal serdes_out_data_d   : std_logic_vector(63 downto 0);
   signal serdes_out_fr       : std_logic_vector(7 downto 0);
   signal serdes_auto_bitslip : std_logic;
   signal serdes_man_bitslip  : std_logic;
@@ -304,24 +327,27 @@ architecture rtl of fmc_adc_100Ms_core is
   signal bitslip_sreg        : std_logic_vector(7 downto 0);
 
   -- Trigger
-  signal ext_trig_a     : std_logic;
-  signal ext_trig       : std_logic;
-  signal int_trig       : std_logic;
-  signal int_trig_sel   : std_logic_vector(1 downto 0);
-  signal int_trig_thres : std_logic_vector(15 downto 0);
-  signal ext_trig_pol   : std_logic;
-  signal hw_trig        : std_logic;
-  signal hw_trig_t      : std_logic;
-  signal hw_trig_sel    : std_logic;
-  signal hw_trig_en     : std_logic;
-  signal sw_trig        : std_logic;
-  signal sw_trig_t      : std_logic;
-  signal sw_trig_en     : std_logic;
-  signal trig           : std_logic;
-  signal trig_delay     : std_logic_vector(31 downto 0);
-  signal trig_delay_cnt : unsigned(31 downto 0);
-  signal trig_d         : std_logic;
-  signal trig_align     : std_logic;
+  signal ext_trig_a            : std_logic;
+  signal ext_trig              : std_logic;
+  signal int_trig              : std_logic;
+  signal int_trig_over_thres   : std_logic;
+  signal int_trig_over_thres_d : std_logic;
+  signal int_trig_sel          : std_logic_vector(1 downto 0);
+  signal int_trig_data         : std_logic_vector(15 downto 0);
+  signal int_trig_thres        : std_logic_vector(15 downto 0);
+  signal hw_trig_pol           : std_logic;
+  signal hw_trig               : std_logic;
+  signal hw_trig_t             : std_logic;
+  signal hw_trig_sel           : std_logic;
+  signal hw_trig_en            : std_logic;
+  signal sw_trig               : std_logic;
+  signal sw_trig_t             : std_logic;
+  signal sw_trig_en            : std_logic;
+  signal trig                  : std_logic;
+  signal trig_delay            : std_logic_vector(31 downto 0);
+  signal trig_delay_cnt        : unsigned(31 downto 0);
+  signal trig_d                : std_logic;
+  signal trig_align            : std_logic;
 
   -- Decimation
   signal decim_factor : std_logic_vector(15 downto 0);
@@ -338,9 +364,11 @@ architecture rtl of fmc_adc_100Ms_core is
   signal sync_fifo_valid : std_logic;
   signal sync_fifo_dreq  : std_logic;
 
-  -- Gain/offset calibration values
-  signal gain_calibr   : std_logic_vector(31 downto 0);
-  signal offset_calibr : std_logic_vector(31 downto 0);
+  -- Gain/offset calibration
+  signal gain_calibr     : std_logic_vector(63 downto 0);
+  signal offset_calibr   : std_logic_vector(67 downto 0);
+  signal data_calibr_in  : std_logic_vector(63 downto 0);
+  signal data_calibr_out : std_logic_vector(63 downto 0);
 
   -- Acquisition FSM
   signal acq_fsm_current_state : t_acq_fsm_state;
@@ -364,6 +392,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal post_trig_value      : std_logic_vector(31 downto 0);
   signal post_trig_cnt        : unsigned(31 downto 0);
   signal post_trig_done       : std_logic;
+  signal samples_cnt          : unsigned(31 downto 0);
   signal shots_value          : std_logic_vector(15 downto 0);
   signal shots_cnt            : unsigned(15 downto 0);
   signal shots_done           : std_logic;
@@ -543,6 +572,11 @@ begin
       IO_RESET            => sys_rst
       );
 
+
+  --============================================================================
+  -- Sampling clock domain
+  --============================================================================
+
   -- serdes inputs forming
   serdes_in_p <= adc_fr_p_i
                  & adc_outa_p_i(3) & adc_outb_p_i(3)
@@ -647,7 +681,7 @@ begin
       fmc_adc_core_sta_serdes_synced_i       => serdes_synced,
       fmc_adc_core_sta_reserved_i            => (others => '0'),
       fmc_adc_core_trig_cfg_hw_trig_sel_o    => hw_trig_sel,
-      fmc_adc_core_trig_cfg_ext_trig_pol_o   => ext_trig_pol,
+      fmc_adc_core_trig_cfg_hw_trig_pol_o    => hw_trig_pol,
       fmc_adc_core_trig_cfg_hw_trig_en_o     => hw_trig_en,
       fmc_adc_core_trig_cfg_sw_trig_en_o     => sw_trig_en,
       fmc_adc_core_trig_cfg_int_trig_sel_o   => int_trig_sel,
@@ -659,32 +693,43 @@ begin
       fmc_adc_core_shots_nb_o                => shots_value,
       fmc_adc_core_shots_reserved_o          => open,
       fmc_adc_core_trig_pos_i                => trig_addr,
-      fmc_adc_core_gain_cal_o                => gain_calibr,
-      fmc_adc_core_offset_cal_o              => offset_calibr,
-      fmc_adc_core_reserved_0_i              => (others => '0'),
-      fmc_adc_core_reserved_1_i              => (others => '0'),
-      fmc_adc_core_reserved_2_i              => (others => '0'),
       fmc_adc_core_sr_deci_o                 => decim_factor,
       fmc_adc_core_sr_reserved_o             => open,
       fmc_adc_core_pre_samples_o             => pre_trig_value,
       fmc_adc_core_post_samples_o            => post_trig_value,
-      fmc_adc_core_samp_cnt_i                => X"00000000",
-      fmc_adc_core_ch1_ssr_o                 => gpio_ssr_ch1_o,
-      fmc_adc_core_ch1_reserved_o            => open,
-      fmc_adc_core_ch1_val_i                 => serdes_out_data(15 downto 0),
-      fmc_adc_core_ch1_reserved_i            => (others => '0'),
-      fmc_adc_core_ch2_ssr_o                 => gpio_ssr_ch2_o,
-      fmc_adc_core_ch2_reserved_o            => open,
-      fmc_adc_core_ch2_val_i                 => serdes_out_data(31 downto 16),
-      fmc_adc_core_ch2_reserved_i            => (others => '0'),
-      fmc_adc_core_ch3_ssr_o                 => gpio_ssr_ch3_o,
-      fmc_adc_core_ch3_reserved_o            => open,
-      fmc_adc_core_ch3_val_i                 => serdes_out_data(47 downto 32),
-      fmc_adc_core_ch3_reserved_i            => (others => '0'),
-      fmc_adc_core_ch4_ssr_o                 => gpio_ssr_ch4_o,
-      fmc_adc_core_ch4_reserved_o            => open,
-      fmc_adc_core_ch4_val_i                 => serdes_out_data(63 downto 48),
-      fmc_adc_core_ch4_reserved_i            => (others => '0')
+      fmc_adc_core_samples_cnt_i             => std_logic_vector(samples_cnt),
+      fmc_adc_core_ch1_ctl_ssr_o             => gpio_ssr_ch1_o,
+      fmc_adc_core_ch1_ctl_reserved_o        => open,
+      fmc_adc_core_ch1_sta_val_i             => serdes_out_data(15 downto 0),
+      fmc_adc_core_ch1_sta_reserved_i        => (others => '0'),
+      fmc_adc_core_ch1_gain_val_o            => gain_calibr(15 downto 0),
+      fmc_adc_core_ch1_gain_reserved_o       => open,
+      fmc_adc_core_ch1_offset_val_o          => offset_calibr(16 downto 0),
+      fmc_adc_core_ch1_offset_reserved_o     => open,
+      fmc_adc_core_ch2_ctl_ssr_o             => gpio_ssr_ch2_o,
+      fmc_adc_core_ch2_ctl_reserved_o        => open,
+      fmc_adc_core_ch2_sta_val_i             => serdes_out_data(31 downto 16),
+      fmc_adc_core_ch2_sta_reserved_i        => (others => '0'),
+      fmc_adc_core_ch2_gain_val_o            => gain_calibr(31 downto 16),
+      fmc_adc_core_ch2_gain_reserved_o       => open,
+      fmc_adc_core_ch2_offset_val_o          => offset_calibr(33 downto 17),
+      fmc_adc_core_ch2_offset_reserved_o     => open,
+      fmc_adc_core_ch3_ctl_ssr_o             => gpio_ssr_ch3_o,
+      fmc_adc_core_ch3_ctl_reserved_o        => open,
+      fmc_adc_core_ch3_sta_val_i             => serdes_out_data(47 downto 32),
+      fmc_adc_core_ch3_sta_reserved_i        => (others => '0'),
+      fmc_adc_core_ch3_gain_val_o            => gain_calibr(47 downto 32),
+      fmc_adc_core_ch3_gain_reserved_o       => open,
+      fmc_adc_core_ch3_offset_val_o          => offset_calibr(50 downto 34),
+      fmc_adc_core_ch3_offset_reserved_o     => open,
+      fmc_adc_core_ch4_ctl_ssr_o             => gpio_ssr_ch4_o,
+      fmc_adc_core_ch4_ctl_reserved_o        => open,
+      fmc_adc_core_ch4_sta_val_i             => serdes_out_data(63 downto 48),
+      fmc_adc_core_ch4_sta_reserved_i        => (others => '0'),
+      fmc_adc_core_ch4_gain_val_o            => gain_calibr(63 downto 48),
+      fmc_adc_core_ch4_gain_reserved_o       => open,
+      fmc_adc_core_ch4_offset_val_o          => offset_calibr(67 downto 51),
+      fmc_adc_core_ch4_offset_reserved_o     => open
       );
 
   ------------------------------------------------------------------------------
@@ -711,13 +756,37 @@ begin
     port map(
       rst_n_i          => fs_rst_n,
       clk_i            => fs_clk,
-      input_polarity_i => ext_trig_pol,
+      input_polarity_i => hw_trig_pol,
       pulse_i          => ext_trig_a,
       pulse_o          => ext_trig
       );
 
   -- Internal hardware trigger
-  int_trig <= '0';
+  int_trig_data <= serdes_out_data(15 downto 0) when int_trig_sel = "00" else   -- CH1 selected
+                   serdes_out_data(31 downto 16) when int_trig_sel = "01" else  -- CH2 selected
+                   serdes_out_data(47 downto 32) when int_trig_sel = "10" else  -- CH3 selected
+                   serdes_out_data(63 downto 48) when int_trig_sel = "11" else  -- CH4 selected
+                   (others => '0');
+
+  p_int_trig : process (fs_clk, fs_rst_n)
+  begin
+    if fs_rst_n = '0' then
+      int_trig_over_thres   <= '0';
+      int_trig_over_thres_d <= '0';
+      serdes_out_data_d     <= (others => '0');
+    elsif rising_edge(fs_clk) then
+      if int_trig_data > int_trig_thres then
+        int_trig_over_thres <= '1';
+      else
+        int_trig_over_thres <= '0';
+      end if;
+      int_trig_over_thres_d <= int_trig_over_thres;
+      serdes_out_data_d     <= serdes_out_data;  -- delay data to compensate for threshold detection delay
+    end if;
+  end process p_int_trig;
+
+  int_trig <= int_trig_over_thres and not(int_trig_over_thres_d) when hw_trig_pol = '0' else  -- positive slope
+              not(int_trig_over_thres) and int_trig_over_thres_d;                             -- negative slope
 
   -- Hardware trigger selection
   --    internal = adc data threshold
@@ -807,6 +876,24 @@ begin
   end process p_trig_align;
 
   ------------------------------------------------------------------------------
+  -- Offset and gain calibration
+  ------------------------------------------------------------------------------
+  l_offset_gain_calibr : for I in 0 to 3 generate
+    cmp_offset_gain_calibr : offset_gain
+      port map(
+        rst_n_i  => fs_rst_n,
+        clk_i    => fs_clk,
+        offset_i => offset_calibr((I+1)*17-1 downto I*17),
+        gain_i   => gain_calibr((I+1)*16-1 downto I*16),
+        data_i   => data_calibr_in((I+1)*16-1 downto I*16),
+        data_o   => data_calibr_out((I+1)*16-1 downto I*16)
+        );
+  end generate l_offset_gain_calibr;
+
+  -- An additional 1 fs_clk period delay is added when internal hw trigger is selected
+  data_calibr_in <= serdes_out_data_d when hw_trig_sel = '0' else serdes_out_data;
+
+  ------------------------------------------------------------------------------
   -- Synchronisation FIFO to system clock domain
   ------------------------------------------------------------------------------
   cmp_adc_sync_fifo : adc_sync_fifo
@@ -823,7 +910,7 @@ begin
       valid  => sync_fifo_valid
       );
 
-  sync_fifo_din <= trig_align & serdes_out_data;
+  sync_fifo_din <= trig_align & data_calibr_out;
   -- FOR DEBUG: FR instead of CH1 and SerDes Synced instead of CH2
   --sync_fifo_din <= trig_align & serdes_out_data(63 downto 32) &
   --                 "000000000000000" & serdes_synced &
@@ -831,6 +918,11 @@ begin
 
   sync_fifo_wr <= decim_en and serdes_synced and not(sync_fifo_full);
   sync_fifo_rd <= sync_fifo_dreq and not(sync_fifo_empty);
+
+
+  --============================================================================
+  -- System clock domain
+  --============================================================================
 
   ------------------------------------------------------------------------------
   -- Shots counter
@@ -867,18 +959,35 @@ begin
   begin
     if sys_rst_n_i = '0' then
       pre_trig_cnt  <= to_unsigned(1, pre_trig_cnt'length);
-      pre_trig_done <= '0';
     elsif rising_edge(sys_clk_i) then
       if (acq_start = '1' or pre_trig_done = '1') then
-        pre_trig_cnt  <= unsigned(pre_trig_value);
-        pre_trig_done <= '0';
-      elsif pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) then
-        pre_trig_done <= '1';
+        if unsigned(pre_trig_value) = to_unsigned(0, pre_trig_value'length) then
+          pre_trig_cnt  <= (others => '0');
+        else
+          pre_trig_cnt  <= unsigned(pre_trig_value) - 1;
+        end if;
       elsif (acq_in_pre_trig = '1' and sync_fifo_valid = '1') then
         pre_trig_cnt <= pre_trig_cnt - 1;
       end if;
     end if;
   end process p_pre_trig_cnt;
+
+
+  pre_trig_done <= '1' when (pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) and
+                             sync_fifo_valid = '1') else '0';
+
+  --p_pre_trig_done : process (sys_clk_i, sys_rst_n_i)
+  --begin
+  --  if sys_rst_n_i = '0' then
+  --    pre_trig_done <= '0';
+  --  elsif rising_edge(sys_clk_i) then
+  --    if (acq_start = '1' or pre_trig_done = '1') then
+  --      pre_trig_done <= '0';
+  --    elsif (pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length)) then
+  --      pre_trig_done <= '1';
+  --    end if;
+  --  end if;
+  --end process p_pre_trig_done;
 
   ------------------------------------------------------------------------------
   -- Post-trigger counter
@@ -887,18 +996,50 @@ begin
   begin
     if sys_rst_n_i = '0' then
       post_trig_cnt  <= to_unsigned(1, post_trig_cnt'length);
-      post_trig_done <= '0';
     elsif rising_edge(sys_clk_i) then
       if (acq_start = '1' or post_trig_done = '1') then
-        post_trig_cnt  <= unsigned(post_trig_value);
-        post_trig_done <= '0';
-      elsif post_trig_cnt = to_unsigned(0, post_trig_cnt'length) then
-        post_trig_done <= '1';
+        if unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length) then
+          post_trig_cnt  <= (others => '0');
+        else
+          post_trig_cnt  <= unsigned(post_trig_value) - 1;
+        end if;
       elsif (acq_in_post_trig = '1' and sync_fifo_valid = '1') then
         post_trig_cnt <= post_trig_cnt - 1;
       end if;
     end if;
   end process p_post_trig_cnt;
+
+  post_trig_done <= '1' when (post_trig_cnt = to_unsigned(0, post_trig_cnt'length) and
+                              sync_fifo_valid = '1') else '0';
+
+  --p_post_trig_done : process (sys_clk_i, sys_rst_n_i)
+  --begin
+  --  if sys_rst_n_i = '0' then
+  --    post_trig_done <= '0';
+  --  elsif rising_edge(sys_clk_i) then
+  --    if (acq_start = '1' or post_trig_done = '1') then
+  --      post_trig_done <= '0';
+  --    elsif (post_trig_cnt = to_unsigned(0, post_trig_cnt'length)) then
+  --      post_trig_done <= '1';
+  --    end if;
+  --  end if;
+  --end process p_post_trig_done;
+
+  ------------------------------------------------------------------------------
+  -- Samples counter
+  ------------------------------------------------------------------------------
+  p_samples_cnt : process (sys_clk_i, sys_rst_n_i)
+  begin
+    if sys_rst_n_i = '0' then
+      samples_cnt  <= (others => '0');
+    elsif rising_edge(sys_clk_i) then
+      if (acq_start = '1') then
+        samples_cnt <= (others => '0');
+      elsif ((acq_in_pre_trig = '1' or acq_in_post_trig = '1') and sync_fifo_valid = '1') then
+        samples_cnt <= samples_cnt + 1;
+      end if;
+    end if;
+  end process p_samples_cnt;
 
   ------------------------------------------------------------------------------
   -- Aqcuisition FSM
