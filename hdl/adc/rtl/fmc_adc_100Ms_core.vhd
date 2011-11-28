@@ -955,6 +955,24 @@ begin
   ------------------------------------------------------------------------------
   -- Pre-trigger counter
   ------------------------------------------------------------------------------
+  --p_pre_trig_cnt : process (sys_clk_i, sys_rst_n_i)
+  --begin
+  --  if sys_rst_n_i = '0' then
+  --    pre_trig_cnt  <= to_unsigned(1, pre_trig_cnt'length);
+  --    pre_trig_done <= '0';
+  --  elsif rising_edge(sys_clk_i) then
+  --    if (acq_start = '1' or pre_trig_done = '1') then
+  --      pre_trig_cnt  <= unsigned(pre_trig_value);
+  --      pre_trig_done <= '0';
+  --    elsif pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) then
+  --      pre_trig_done <= '1';
+  --    elsif (acq_in_pre_trig = '1' and sync_fifo_valid = '1') then
+  --      pre_trig_cnt <= pre_trig_cnt - 1;
+  --    end if;
+  --  end if;
+  --end process p_pre_trig_cnt;
+
+
   p_pre_trig_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
@@ -976,22 +994,27 @@ begin
   pre_trig_done <= '1' when (pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) and
                              sync_fifo_valid = '1') else '0';
 
-  --p_pre_trig_done : process (sys_clk_i, sys_rst_n_i)
-  --begin
-  --  if sys_rst_n_i = '0' then
-  --    pre_trig_done <= '0';
-  --  elsif rising_edge(sys_clk_i) then
-  --    if (acq_start = '1' or pre_trig_done = '1') then
-  --      pre_trig_done <= '0';
-  --    elsif (pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length)) then
-  --      pre_trig_done <= '1';
-  --    end if;
-  --  end if;
-  --end process p_pre_trig_done;
-
   ------------------------------------------------------------------------------
   -- Post-trigger counter
   ------------------------------------------------------------------------------
+  --p_post_trig_cnt : process (sys_clk_i, sys_rst_n_i)
+  --begin
+  --  if sys_rst_n_i = '0' then
+  --    post_trig_cnt  <= to_unsigned(1, post_trig_cnt'length);
+  --    post_trig_done <= '0';
+  --  elsif rising_edge(sys_clk_i) then
+  --    if (acq_start = '1' or post_trig_done = '1') then
+  --      post_trig_cnt  <= unsigned(post_trig_value);
+  --      post_trig_done <= '0';
+  --    elsif post_trig_cnt = to_unsigned(0, post_trig_cnt'length) then
+  --      post_trig_done <= '1';
+  --    elsif (acq_in_post_trig = '1' and sync_fifo_valid = '1') then
+  --      post_trig_cnt <= post_trig_cnt - 1;
+  --    end if;
+  --  end if;
+  --end process p_post_trig_cnt;
+
+
   p_post_trig_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
@@ -1011,19 +1034,6 @@ begin
 
   post_trig_done <= '1' when (post_trig_cnt = to_unsigned(0, post_trig_cnt'length) and
                               sync_fifo_valid = '1') else '0';
-
-  --p_post_trig_done : process (sys_clk_i, sys_rst_n_i)
-  --begin
-  --  if sys_rst_n_i = '0' then
-  --    post_trig_done <= '0';
-  --  elsif rising_edge(sys_clk_i) then
-  --    if (acq_start = '1' or post_trig_done = '1') then
-  --      post_trig_done <= '0';
-  --    elsif (post_trig_cnt = to_unsigned(0, post_trig_cnt'length)) then
-  --      post_trig_done <= '1';
-  --    end if;
-  --  end if;
-  --end process p_post_trig_done;
 
   ------------------------------------------------------------------------------
   -- Samples counter
@@ -1252,7 +1262,7 @@ begin
       dpram_valid     <= '0';
     elsif rising_edge(sys_clk_i) then
       if post_trig_done = '1' then
-        dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_DPRAM_DEPTH-1 downto 0));
+        dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_DPRAM_DEPTH-1 downto 0)) + 1;
         dpram_valid_t   <= '1';
       elsif (dpram_addrb_cnt = dpram_addra_post_done) then
         dpram_valid_t <= '0';
