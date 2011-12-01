@@ -931,14 +931,10 @@ begin
   begin
     if sys_rst_n_i = '0' then
       shots_cnt   <= to_unsigned(0, shots_cnt'length);
-      shots_done  <= '0';
       single_shot <= '0';
     elsif rising_edge(sys_clk_i) then
       if acq_start = '1' then
         shots_cnt  <= unsigned(shots_value);
-        shots_done <= '0';
-      elsif shots_cnt = to_unsigned(1, shots_cnt'length) then
-        shots_done <= '1';
       elsif shots_decr = '1' then
         shots_cnt <= shots_cnt - 1;
       end if;
@@ -951,6 +947,7 @@ begin
   end process p_shots_cnt;
 
   multishot_buffer_sel <= std_logic(shots_cnt(0));
+  shots_done <= '1' when shots_cnt = to_unsigned(1, shots_cnt'length) else '0';
 
   ------------------------------------------------------------------------------
   -- Pre-trigger counter
@@ -1112,7 +1109,7 @@ begin
           if acq_stop = '1' then
             acq_fsm_current_state <= IDLE;
           elsif post_trig_done = '1' then
-            if shots_done = '1' then
+            if single_shot = '1' then
               acq_fsm_current_state <= IDLE;
             else
               acq_fsm_current_state <= DECR_SHOT;
@@ -1123,7 +1120,11 @@ begin
           if acq_stop = '1' then
             acq_fsm_current_state <= IDLE;
           else
-            acq_fsm_current_state <= PRE_TRIG;
+            if shots_done = '1' then
+              acq_fsm_current_state <= IDLE;
+            else
+              acq_fsm_current_state <= PRE_TRIG;
+            end if;
           end if;
 
         when others =>
