@@ -748,7 +748,7 @@
     <file xil_pn:name="../../adc/rtl/fmc_adc_100Ms_csr.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="106"/>
     </file>
-    <file xil_pn:name="../../adc/rtl/offset_gain.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../../adc/rtl/offset_gain_s.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="107"/>
     </file>
     <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/gn4124_core_pkg.vhd" xil_pn:type="FILE_VHDL">

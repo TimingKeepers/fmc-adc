@@ -170,32 +170,32 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_ch1_sta_reserved_i        : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch1_gain_val_o            : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch1_gain_reserved_o       : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_offset_val_o          : out std_logic_vector(16 downto 0);
-      fmc_adc_core_ch1_offset_reserved_o     : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch1_offset_val_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_offset_reserved_o     : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch2_ctl_ssr_o             : out std_logic_vector(6 downto 0);
       fmc_adc_core_ch2_ctl_reserved_o        : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch2_sta_val_i             : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch2_sta_reserved_i        : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch2_gain_val_o            : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch2_gain_reserved_o       : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_offset_val_o          : out std_logic_vector(16 downto 0);
-      fmc_adc_core_ch2_offset_reserved_o     : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch2_offset_val_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_offset_reserved_o     : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch3_ctl_ssr_o             : out std_logic_vector(6 downto 0);
       fmc_adc_core_ch3_ctl_reserved_o        : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch3_sta_val_i             : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch3_sta_reserved_i        : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch3_gain_val_o            : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch3_gain_reserved_o       : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_offset_val_o          : out std_logic_vector(16 downto 0);
-      fmc_adc_core_ch3_offset_reserved_o     : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch3_offset_val_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_offset_reserved_o     : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch4_ctl_ssr_o             : out std_logic_vector(6 downto 0);
       fmc_adc_core_ch4_ctl_reserved_o        : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch4_sta_val_i             : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch4_sta_reserved_i        : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch4_gain_val_o            : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch4_gain_reserved_o       : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_offset_val_o          : out std_logic_vector(16 downto 0);
-      fmc_adc_core_ch4_offset_reserved_o     : out std_logic_vector(14 downto 0)
+      fmc_adc_core_ch4_offset_val_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_offset_reserved_o     : out std_logic_vector(15 downto 0)
       );
   end component fmc_adc_100Ms_csr;
 
@@ -218,16 +218,16 @@ architecture rtl of fmc_adc_100Ms_core is
       );
   end component ext_pulse_sync;
 
-  component offset_gain
+  component offset_gain_s
     port (
       rst_n_i  : in  std_logic;                      --! Reset (active low)
       clk_i    : in  std_logic;                      --! Clock
-      offset_i : in  std_logic_vector(16 downto 0);  --! Signed offset input (two's complement)
+      offset_i : in  std_logic_vector(15 downto 0);  --! Signed offset input (two's complement)
       gain_i   : in  std_logic_vector(15 downto 0);  --! Unsigned gain input
-      data_i   : in  std_logic_vector(15 downto 0);  --! Unsigned data input
-      data_o   : out std_logic_vector(15 downto 0)   --! Unsigned data output
+      data_i   : in  std_logic_vector(15 downto 0);  --! Signed data input (two's complement)
+      data_o   : out std_logic_vector(15 downto 0)   --! Signed data output (two's complement)
       );
-  end component offset_gain;
+  end component offset_gain_s;
 
   component adc_sync_fifo
     port (
@@ -366,7 +366,7 @@ architecture rtl of fmc_adc_100Ms_core is
 
   -- Gain/offset calibration
   signal gain_calibr     : std_logic_vector(63 downto 0);
-  signal offset_calibr   : std_logic_vector(67 downto 0);
+  signal offset_calibr   : std_logic_vector(63 downto 0);
   signal data_calibr_in  : std_logic_vector(63 downto 0);
   signal data_calibr_out : std_logic_vector(63 downto 0);
 
@@ -704,7 +704,7 @@ begin
       fmc_adc_core_ch1_sta_reserved_i        => (others => '0'),
       fmc_adc_core_ch1_gain_val_o            => gain_calibr(15 downto 0),
       fmc_adc_core_ch1_gain_reserved_o       => open,
-      fmc_adc_core_ch1_offset_val_o          => offset_calibr(16 downto 0),
+      fmc_adc_core_ch1_offset_val_o          => offset_calibr(15 downto 0),
       fmc_adc_core_ch1_offset_reserved_o     => open,
       fmc_adc_core_ch2_ctl_ssr_o             => gpio_ssr_ch2_o,
       fmc_adc_core_ch2_ctl_reserved_o        => open,
@@ -712,7 +712,7 @@ begin
       fmc_adc_core_ch2_sta_reserved_i        => (others => '0'),
       fmc_adc_core_ch2_gain_val_o            => gain_calibr(31 downto 16),
       fmc_adc_core_ch2_gain_reserved_o       => open,
-      fmc_adc_core_ch2_offset_val_o          => offset_calibr(33 downto 17),
+      fmc_adc_core_ch2_offset_val_o          => offset_calibr(31 downto 16),
       fmc_adc_core_ch2_offset_reserved_o     => open,
       fmc_adc_core_ch3_ctl_ssr_o             => gpio_ssr_ch3_o,
       fmc_adc_core_ch3_ctl_reserved_o        => open,
@@ -720,7 +720,7 @@ begin
       fmc_adc_core_ch3_sta_reserved_i        => (others => '0'),
       fmc_adc_core_ch3_gain_val_o            => gain_calibr(47 downto 32),
       fmc_adc_core_ch3_gain_reserved_o       => open,
-      fmc_adc_core_ch3_offset_val_o          => offset_calibr(50 downto 34),
+      fmc_adc_core_ch3_offset_val_o          => offset_calibr(47 downto 32),
       fmc_adc_core_ch3_offset_reserved_o     => open,
       fmc_adc_core_ch4_ctl_ssr_o             => gpio_ssr_ch4_o,
       fmc_adc_core_ch4_ctl_reserved_o        => open,
@@ -728,7 +728,7 @@ begin
       fmc_adc_core_ch4_sta_reserved_i        => (others => '0'),
       fmc_adc_core_ch4_gain_val_o            => gain_calibr(63 downto 48),
       fmc_adc_core_ch4_gain_reserved_o       => open,
-      fmc_adc_core_ch4_offset_val_o          => offset_calibr(67 downto 51),
+      fmc_adc_core_ch4_offset_val_o          => offset_calibr(63 downto 48),
       fmc_adc_core_ch4_offset_reserved_o     => open
       );
 
@@ -879,11 +879,11 @@ begin
   -- Offset and gain calibration
   ------------------------------------------------------------------------------
   l_offset_gain_calibr : for I in 0 to 3 generate
-    cmp_offset_gain_calibr : offset_gain
+    cmp_offset_gain_calibr : offset_gain_s
       port map(
         rst_n_i  => fs_rst_n,
         clk_i    => fs_clk,
-        offset_i => offset_calibr((I+1)*17-1 downto I*17),
+        offset_i => offset_calibr((I+1)*16-1 downto I*16),
         gain_i   => gain_calibr((I+1)*16-1 downto I*16),
         data_i   => data_calibr_in((I+1)*16-1 downto I*16),
         data_o   => data_calibr_out((I+1)*16-1 downto I*16)

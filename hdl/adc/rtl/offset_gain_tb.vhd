@@ -174,6 +174,20 @@ begin
     wait for 1 us;
 
     wait until rising_edge(clk_i);
+    offset_i <= std_logic_vector(to_signed(-298, 17));
+    gain_i   <= std_logic_vector(to_unsigned(32090, 16));
+    data_i   <= std_logic_vector(to_unsigned(60857, 16));
+
+    wait for 1 us;
+
+    wait until rising_edge(clk_i);
+    offset_i <= std_logic_vector(to_signed(0, 17));
+    gain_i   <= std_logic_vector(to_unsigned(16384, 16));
+    data_i   <= std_logic_vector(to_unsigned(1000, 16));
+
+    wait for 1 us;
+
+    wait until rising_edge(clk_i);
 --    offset_i <= "010000000000000";
     offset_i <= "01111111111111111";
     gain_i   <= X"8000";

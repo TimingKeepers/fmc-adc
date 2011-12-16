@@ -418,7 +418,7 @@ peripheral {
       description = "Offset applied to all data coming from the ADC.";
       prefix = "val";
       type = SLV;
-      size = 17;
+      size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -428,7 +428,7 @@ peripheral {
       description = "Ignore on read, write with 0's";
       prefix = "reserved";
       type = SLV;
-      size = 15;
+      size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -519,7 +519,7 @@ peripheral {
       description = "Offset applied to all data coming from the ADC.";
       prefix = "val";
       type = SLV;
-      size = 17;
+      size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -529,7 +529,7 @@ peripheral {
       description = "Ignore on read, write with 0's";
       prefix = "reserved";
       type = SLV;
-      size = 15;
+      size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -620,7 +620,7 @@ peripheral {
       description = "Offset applied to all data coming from the ADC.";
       prefix = "val";
       type = SLV;
-      size = 17;
+      size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -630,7 +630,7 @@ peripheral {
       description = "Ignore on read, write with 0's";
       prefix = "reserved";
       type = SLV;
-      size = 15;
+      size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -721,7 +721,7 @@ peripheral {
       description = "Offset applied to all data coming from the ADC.";
       prefix = "val";
       type = SLV;
-      size = 17;
+      size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -731,7 +731,7 @@ peripheral {
       description = "Ignore on read, write with 0's";
       prefix = "reserved";
       type = SLV;
-      size = 15;
+      size = 16;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
