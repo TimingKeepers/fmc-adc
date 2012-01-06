@@ -1,0 +1,92 @@
+-------------------------------------------------------------------------------
+-- A simple Lambo DMA Test
+-------------------------------------------------------------------------------
+
+-- Select the GN4124 Primary BFM
+model %d0
+init
+reset %d16
+
+-------------------------------------------------------------------------------
+-- Initialize the Primary GN412x BFM model
+-------------------------------------------------------------------------------
+-- These address ranges will generate traffic from the Primary to the Secondary BFM
+-- bar BAR ADDR SIZE VC TC S
+bar     0 FF00000010000000 08000000 0 7 0
+bar     1 FF000000A0000000 10000000 1 5 0
+
+-- This allocates a RAM block inside the BFM for the FPGA to access
+-- bfm_bar BAR ADDR SIZE
+bfm_bar 0 8765432120000000 20000000
+bfm_bar 1 BB00000040000000 20000000
+
+cpl_modulo %d32
+
+sync
+wait  40
+
+-------------------------------------------------------------------------------
+-- DO some setup
+-------------------------------------------------------------------------------
+-- Lambo setup...
+
+rd  FF00000010000030 0xf 0x00000000
+flush 100
+wr  FF00000010000020 0xf 0x0
+wr  FF00000010000014 0xf 0x0
+wr  FF0000001000000c 0xf 0xffffffff
+wr  FF00000010000054 0xf 0x6
+wr  FF00000010000054 0xf 0x0
+wr  FF00000010000004 0xf 0x1f
+wr  FF00000010000004 0xf 0x7
+wr  FF00000010000058 0xf 0x0
+wr  FF0000001000005c 0xf 0x0
+wr  FF00000010000060 0xf 0x0
+wr  FF00000010000034 0xf 0x8020
+
+
+-------------------------------------------------------------------------------
+-- Do some DMA (this comes from the VDMA builder utility)
+-------------------------------------------------------------------------------
+-- 0x0000 0x00000000                    MAIN: vdma_nop()
+wrb FF00000010004000 F 00000000
+-- 0x0001 0x40000100                 DO_L2P0: vdma_load_sys_addr(r=_IM, "L2P0_SYS_ADDR")
+wrb FF00000010004004 F 40000100
+-- 0x0002 0xF0000102                          vdma_load_xfer_ctl(_IM, "L2P0_XFER_CTL")
+wrb FF00000010004008 F F0000102
+-- 0x0003 0x40000103                 DO_L2P1: vdma_load_sys_addr(r=_IM, "L2P1_SYS_ADDR")
+wrb FF0000001000400C F 40000103
+-- 0x0004 0xF0000105                          vdma_load_xfer_ctl(_IM, "L2P1_XFER_CTL")
+wrb FF00000010004010 F F0000105
+-- 0x0005 0x17210005               WAIT4IDLE: vdma_jmp(c=_EXT_COND_LO, ext_cond=_LDM_IDLE, "WAIT4IDLE")
+wrb FF00000010004014 F 17210005
+-- 0x0006 0x00000000                 FOREVER: vdma_nop()
+wrb FF00000010004018 F 00000000
+-- 0x0007 0x1A000006                          vdma_jmp(c=_ALWAYS, ext_cond=NA, "FOREVER")
+wrb FF0000001000401C F 1A000006
+-- 0x0100 0x20012000           L2P0_SYS_ADDR: vdma_constant_n(0x20012000)
+wrb FF00000010004400 F 20012000
+-- 0x0101 0x87654321                          vdma_constant_n(0x87654321)
+wrb FF00000010004404 F 87654321
+-- 0x0102 0x00010080           L2P0_XFER_CTL: vdma_constant_n(0x10080)
+wrb FF00000010004408 F 00010080
+-- 0x0103 0x40034000           L2P1_SYS_ADDR: vdma_constant_n(0x40034000)
+wrb FF0000001000440C F 40034000
+-- 0x0104 0xBB000000                          vdma_constant_n(0xBB000000)
+wrb FF00000010004410 F BB000000
+-- 0x0105 0x00040080           L2P1_XFER_CTL: vdma_constant_n(0x40080)
+wrb FF00000010004414 F 00040080
+
+-- Start VDMA
+wr  FF00000010000030 F 1
+
+-- Read VDMA idle status
+rd  FF00000010000030 F 0
+
+flush 100
+
+wait  10
+
+
+sync
+

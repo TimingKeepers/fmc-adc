@@ -1,0 +1,47 @@
+-------------------------------------------------------------------------------
+-- Generated from: simple.c - do not edit the vec file directly as it is not the source!
+-- Short example of using the lambo TestBench
+-------------------------------------------------------------------------------
+-- Select the GN4124 Primary BFM
+model %d0
+-- Initialize the BFM to its default state
+init
+
+-- Drive reset to the FPGA
+reset %d16
+
+-------------------------------------------------------------------------------
+-- Initialize the Primary GN412x BFM model
+-------------------------------------------------------------------------------
+-- These address ranges will generate traffic from the BFM to the FPGA
+-- bar BAR ADDR SIZE VC TC S
+bar     0 FF00000010000000 08000000 0 7 0
+bar     1 FF000000A0000000 10000000 1 5 0
+
+-- This allocates a RAM block inside the BFM for the FPGA to access
+-- bfm_bar BAR ADDR SIZE
+bfm_bar 0 8765432120000000 20000000
+bfm_bar 1 BB00000040000000 20000000
+
+-- Wait until the FPGA is un-reset and ready for traffic on the local bus
+wait   %d64
+
+-------------------------------------------------------------------------------
+-- Access the descriptor memory in the Lambo design
+-------------------------------------------------------------------------------
+-- the following three writes will go out in a single packet
+wrb FF00000010004000 F 87654321
+wrb FF00000010004004 F FEEDFACE
+wr  FF00000010004008 F DEADBEEF
+
+-- Now read back what was just written
+-- the following three reads will go out as a single request
+rdb FF00000010004000 F 87654321 FFFFFFFF
+rdb FF00000010004004 F FEEDFACE FFFFFFFF
+rd  FF00000010004008 F DEADBEEF FFFFFFFF
+
+flush  %d256
+
+wait   %d16
+
+sync

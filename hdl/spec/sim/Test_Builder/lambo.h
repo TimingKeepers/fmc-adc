@@ -1,0 +1,25 @@
+#define DMA_STATUS_MASK       0x0000
+#define DMA_CFG               0x0004
+#define DMA_SEQ_EVENT_SET_REG 0x0008
+#define DMA_SEQ_EVENT_CLR_REG 0x000C
+#define DMA_SEQ_EVENT_REG     0x0010
+#define DMA_SEQ_EVENT_EN_REG  0x0014
+#define DMA_SEQ_ADDR_LOW_REG  0x0018
+#define DMA_SEQ_ADDR_HI_REG   0x001C
+#define DMA_SEQ_DPTR_REG      0x0020
+#define DMA_SEQ_XFER_CTRL_REG 0x0024
+#define DMA_SEQ_RA_REG        0x0028
+#define DMA_SEQ_RB_REG        0x002C
+#define DMA_SEQ_CSR_REG       0x0030
+#define DMA_PAYLOAD_SIZE      0x0034
+#define DMA_STATUS            0x0038
+#define DMA_STATUS_RAW        0x003C
+#define APP_STATUS_MASK       0x0050
+#define APP_CFG               0x0054
+#define APP_GEN_COUNT         0x0058
+#define APP_RCV_COUNT         0x005C
+#define APP_RCV_ERR_COUNT     0x0060
+#define APP_STATUS            0x0064
+#define APP_STATUS_RAW        0x0068
+#define DMA_SEQ_DESC_RAM      0x4000
+
