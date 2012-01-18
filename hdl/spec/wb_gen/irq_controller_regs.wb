@@ -7,7 +7,7 @@ peripheral {
 
   reg {
     name = "Multiple interrupt register";
-    description = "Multiple interrupts occurs before irq source is read.\nWrite '1' to clear a bit.";
+    description = "Multiple interrupts occurs before irq source is read.\nWrite '1' to clear a bit.\n\nBit 0: DMA done.\nBit 1: DMA error.\nBit 2: Trigger.\nBit 3: Acquisition end.";
     prefix = "multi_irq";
 
     field {
@@ -22,7 +22,7 @@ peripheral {
 
   reg {
     name = "Interrupt sources register ";
-    description = "Indicates the interrupt source.\nWrite '1' to clear a bit.";
+    description = "Indicates the interrupt source.\nWrite '1' to clear a bit.\n\nBit 0: DMA done.\nBit 1: DMA error.\nBit 2: Trigger.\nBit 3: Acquisition end.";
     prefix = "src";
 
     field {
@@ -37,7 +37,7 @@ peripheral {
 
   reg {
     name = "Interrupt enable mask register";
-    description = "Bit mask to independently enable interrupt sources.";
+    description = "Bit mask to independently enable interrupt sources.\n\nBit 0: DMA done.\nBit 1: DMA error.\nBit 2: Trigger.\nBit 3: Acquisition end.";
     prefix = "en_mask";
 
     field {
