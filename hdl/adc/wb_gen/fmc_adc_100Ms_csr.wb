@@ -189,7 +189,7 @@ peripheral {
 
     field {
       name = "Threshold for internal trigger";
-      description = "Treated as offset binary and compared to raw ADC data";
+      description = "Treated as two's complement and compared to raw ADC data";
       prefix = "int_trig_thres";
       type = SLV;
       size = 16;

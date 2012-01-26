@@ -775,7 +775,7 @@ begin
       int_trig_over_thres_d <= '0';
       serdes_out_data_d     <= (others => '0');
     elsif rising_edge(fs_clk) then
-      if int_trig_data > int_trig_thres then
+      if signed(int_trig_data) > signed(int_trig_thres) then
         int_trig_over_thres <= '1';
       else
         int_trig_over_thres <= '0';
