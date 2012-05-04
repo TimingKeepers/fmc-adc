@@ -339,7 +339,7 @@ peripheral {
 
     field {
       name = "Solid state relays control for channel 1";
-      description = "Controls input voltage range, termination and DC offset error calibration";
+      description = "Controls input voltage range, termination and DC offset error calibration\n0x23: 100mV range\n0x11: 1V range\n0x45: 10V range\n0x00: Open input\n0x42: 100mV range calibration\n0x40: 1V range calibration\n0x44: 10V range calibration\nBit3 is indepandant of the others and enables the 50ohms termination.";
       prefix = "ssr";
       type = SLV;
       size = 7;
@@ -440,7 +440,7 @@ peripheral {
 
     field {
       name = "Solid state relays control for channel 2";
-      description = "Controls input voltage range, termination and DC offset error calibration";
+      description = "Controls input voltage range, termination and DC offset error calibration\n0x23: 100mV range\n0x11: 1V range\n0x45: 10V range\n0x00: Open input\n0x42: 100mV range calibration\n0x40: 1V range calibration\n0x44: 10V range calibration\nBit3 is indepandant of the others and enables the 50ohms termination.";
       prefix = "ssr";
       type = SLV;
       size = 7;
@@ -541,7 +541,7 @@ peripheral {
 
     field {
       name = "Solid state relays control for channel 3";
-      description = "Controls input voltage range, termination and DC offset error calibration";
+      description = "Controls input voltage range, termination and DC offset error calibration\n0x23: 100mV range\n0x11: 1V range\n0x45: 10V range\n0x00: Open input\n0x42: 100mV range calibration\n0x40: 1V range calibration\n0x44: 10V range calibration\nBit3 is indepandant of the others and enables the 50ohms termination.";
       prefix = "ssr";
       type = SLV;
       size = 7;
@@ -642,7 +642,7 @@ peripheral {
 
     field {
       name = "Solid state relays control for channel 4";
-      description = "Controls input voltage range, termination and DC offset error calibration";
+      description = "Controls input voltage range, termination and DC offset error calibration\n0x23: 100mV range\n0x11: 1V range\n0x45: 10V range\n0x00: Open input\n0x42: 100mV range calibration\n0x40: 1V range calibration\n0x44: 10V range calibration\nBit3 is indepandant of the others and enables the 50ohms termination.";
       prefix = "ssr";
       type = SLV;
       size = 7;
