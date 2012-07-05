@@ -201,10 +201,12 @@ wr FF000000000A0000 F 0000000A
 wait %d100
 
 -- trigger config (sw trig enable)
-wr FF00000000090008 F 00000008
+--wr FF00000000090008 F 00000008
+-- trigger config (hw int trig enable)
+--wr FF00000000090008 F 00000004
 
 -- trigger config (int trig)
---wr FF00000000090008 F 02600004
+wr FF00000000090008 F 02600004
 
 -- decimation factor = 1
 wr FF0000000009001C F 00000001
@@ -249,7 +251,7 @@ wr FF00000000090000 F 00000005
 
 wait   %d800
 -- sw trigger
-wr FF00000000090010 F FFFFFFFF
+--wr FF00000000090010 F FFFFFFFF
 
 --wait   %d800
 -- sw trigger

@@ -6,11 +6,11 @@
 ## variables #############################
 PWD := $(shell pwd)
 
-MODELSIM_INI_PATH := /opt/modelsim6.6e/modeltech
+MODELSIM_INI_PATH := /opt/modelsim_10.0c/modeltech
 
 VCOM_FLAGS := -quiet -modelsimini modelsim.ini
-VSIM_FLAGS := 
-VLOG_FLAGS := -quiet -modelsimini modelsim.ini -sv
+VSIM_FLAGS :=
+VLOG_FLAGS := -quiet -modelsimini modelsim.ini 
 VERILOG_SRC := sim_models/2048Mb_ddr3/ddr3.v \
 ../ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v \
 ../ip_cores/general-cores/modules/wishbone/wb_spi/spi_clgen.v \
@@ -33,9 +33,9 @@ testbench/cmd_router1.vhd \
 ../ip_cores/multishot_dpram.vhd \
 ../ip_cores/wb_ddr_fifo.vhd \
 ../ip_cores/adc_serdes.vhd \
-../../../../monostable/monostable_rtl.vhd \
-../../../../utils/utils_pkg.vhd \
-../../../../ext_pulse_sync/ext_pulse_sync_rtl.vhd \
+../ip_cores/monostable/monostable_rtl.vhd \
+../ip_cores/utils/utils_pkg.vhd \
+../ip_cores/ext_pulse_sync/ext_pulse_sync_rtl.vhd \
 ../ip_cores/general-cores/modules/common/gencores_pkg.vhd \
 ../rtl/carrier_csr.vhd \
 ../rtl/utc_core_regs.vhd \
@@ -45,7 +45,7 @@ testbench/cmd_router1.vhd \
 testbench/gn412x_bfm.vhd \
 ../../adc/rtl/fmc_adc_100Ms_core.vhd \
 ../../adc/rtl/fmc_adc_100Ms_csr.vhd \
-../../adc/rtl/offset_gain.vhd \
+../../adc/rtl/offset_gain_s.vhd \
 ../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/gn4124_core_pkg.vhd \
 ../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/dma_controller_wb_slave.vhd \
 ../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/l2p_arbiter.vhd \
@@ -159,7 +159,7 @@ work/irq_controller/.irq_controller_vhd \
 work/gn412x_bfm/.gn412x_bfm_vhd \
 work/fmc_adc_100Ms_core/.fmc_adc_100Ms_core_vhd \
 work/fmc_adc_100Ms_csr/.fmc_adc_100Ms_csr_vhd \
-work/offset_gain/.offset_gain_vhd \
+work/offset_gain_s/.offset_gain_s_vhd \
 work/gn4124_core_pkg/.gn4124_core_pkg_vhd \
 work/dma_controller_wb_slave/.dma_controller_wb_slave_vhd \
 work/l2p_arbiter/.l2p_arbiter_vhd \
@@ -361,17 +361,17 @@ work/adc_serdes/.adc_serdes_vhd: ../ip_cores/adc_serdes.vhd
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/monostable_rtl/.monostable_rtl_vhd: ../../../../monostable/monostable_rtl.vhd
+work/monostable_rtl/.monostable_rtl_vhd: ../ip_cores/monostable/monostable_rtl.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/utils_pkg/.utils_pkg_vhd: ../../../../utils/utils_pkg.vhd
+work/utils_pkg/.utils_pkg_vhd: ../ip_cores/utils/utils_pkg.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/ext_pulse_sync_rtl/.ext_pulse_sync_rtl_vhd: ../../../../ext_pulse_sync/ext_pulse_sync_rtl.vhd
+work/ext_pulse_sync_rtl/.ext_pulse_sync_rtl_vhd: ../ip_cores/ext_pulse_sync/ext_pulse_sync_rtl.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
@@ -429,7 +429,7 @@ work/fmc_adc_100Ms_csr/.fmc_adc_100Ms_csr_vhd: ../../adc/rtl/fmc_adc_100Ms_csr.v
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/offset_gain/.offset_gain_vhd: ../../adc/rtl/offset_gain.vhd
+work/offset_gain_s/.offset_gain_s_vhd: ../../adc/rtl/offset_gain_s.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
