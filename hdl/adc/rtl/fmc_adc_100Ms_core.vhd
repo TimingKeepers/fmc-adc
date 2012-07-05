@@ -822,7 +822,7 @@ begin
     elsif rising_edge(fs_clk) then
       if trig = '1' then
         trig_delay_cnt <= unsigned(trig_delay);
-      elsif trig_delay_cnt = 0 then
+      elsif trig_delay_cnt /= 0 then
         trig_delay_cnt <= trig_delay_cnt - 1;
       end if;
     end if;
@@ -841,11 +841,9 @@ begin
         end if;
       else
         if trig_delay_cnt = X"00000001" then
-          if trig = '1' then
-            trig_d <= '1';
-          else
-            trig_d <= '0';
-          end if;
+          trig_d <= '1';
+        else
+          trig_d <= '0';
         end if;
       end if;
     end if;
