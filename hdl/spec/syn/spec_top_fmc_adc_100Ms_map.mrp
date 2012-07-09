@@ -1,0 +1,836 @@
+Release 13.3 Map O.76xd (lin)
+Xilinx Mapping Report File for Design 'spec_top_fmc_adc_100Ms'
+
+Design Information
+------------------
+Command Line   : map -intstyle ise -p xc6slx45t-fgg484-3 -w -logic_opt off -ol
+high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt 2 -ir off -pr
+off -lc off -power off -o spec_top_fmc_adc_100Ms_map.ncd
+spec_top_fmc_adc_100Ms.ngd spec_top_fmc_adc_100Ms.pcf 
+Target Device  : xc6slx45t
+Target Package : fgg484
+Target Speed   : -3
+Mapper Version : spartan6 -- $Revision: 1.55 $
+Mapped Date    : Fri Jul  6 11:47:41 2012
+
+Design Summary
+--------------
+Number of errors:      0
+Number of warnings:    4
+Slice Logic Utilization:
+  Number of Slice Registers:                 6,833 out of  54,576   12%
+    Number used as Flip Flops:               6,833
+    Number used as Latches:                      0
+    Number used as Latch-thrus:                  0
+    Number used as AND/OR logics:                0
+  Number of Slice LUTs:                      5,319 out of  27,288   19%
+    Number used as logic:                    4,913 out of  27,288   18%
+      Number using O6 output only:           3,084
+      Number using O5 output only:             279
+      Number using O5 and O6:                1,550
+      Number used as ROM:                        0
+    Number used as Memory:                       3 out of   6,408    1%
+      Number used as Dual Port RAM:              0
+      Number used as Single Port RAM:            0
+      Number used as Shift Register:             3
+        Number using O6 output only:             3
+        Number using O5 output only:             0
+        Number using O5 and O6:                  0
+    Number used exclusively as route-thrus:    403
+      Number with same-slice register load:    392
+      Number with same-slice carry load:        11
+      Number with other load:                    0
+
+Slice Logic Distribution:
+  Number of occupied Slices:                 2,467 out of   6,822   36%
+  Nummber of MUXCYs used:                    1,424 out of  13,644   10%
+  Number of LUT Flip Flop pairs used:        7,755
+    Number with an unused Flip Flop:         1,761 out of   7,755   22%
+    Number with an unused LUT:               2,436 out of   7,755   31%
+    Number of fully used LUT-FF pairs:       3,558 out of   7,755   45%
+    Number of unique control sets:             262
+    Number of slice register sites lost
+      to control set restrictions:             700 out of  54,576    1%
+
+  A LUT Flip Flop pair for this architecture represents one LUT paired with
+  one Flip Flop within a slice.  A control set is a unique combination of
+  clock, reset, set, and enable signals for a registered element.
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+
+IO Utilization:
+  Number of bonded IOBs:                       188 out of     296   63%
+    Number of LOCed IOBs:                      188 out of     188  100%
+
+Specific Feature Utilization:
+  Number of RAMB16BWERs:                        67 out of     116   57%
+  Number of RAMB8BWERs:                          2 out of     232    1%
+  Number of BUFIO2/BUFIO2_2CLKs:                 3 out of      32    9%
+    Number used as BUFIO2s:                      3
+    Number used as BUFIO2_2CLKs:                 0
+  Number of BUFIO2FB/BUFIO2FB_2CLKs:             2 out of      32    6%
+    Number used as BUFIO2FBs:                    2
+    Number used as BUFIO2FB_2CLKs:               0
+  Number of BUFG/BUFGMUXs:                       7 out of      16   43%
+    Number used as BUFGs:                        7
+    Number used as BUFGMUX:                      0
+  Number of DCM/DCM_CLKGENs:                     0 out of       8    0%
+  Number of ILOGIC2/ISERDES2s:                  38 out of     376   10%
+    Number used as ILOGIC2s:                     0
+    Number used as ISERDES2s:                   38
+  Number of IODELAY2/IODRP2/IODRP2_MCBs:        25 out of     376    6%
+    Number used as IODELAY2s:                    2
+    Number used as IODRP2s:                      1
+    Number used as IODRP2_MCBs:                 22
+  Number of OLOGIC2/OSERDES2s:                  67 out of     376   17%
+    Number used as OLOGIC2s:                     0
+    Number used as OSERDES2s:                   67
+  Number of BSCANs:                              0 out of       4    0%
+  Number of BUFHs:                               0 out of     256    0%
+  Number of BUFPLLs:                             2 out of       8   25%
+  Number of BUFPLL_MCBs:                         1 out of       4   25%
+  Number of DSP48A1s:                            4 out of      58    6%
+  Number of GTPA1_DUALs:                         0 out of       2    0%
+  Number of ICAPs:                               0 out of       1    0%
+  Number of MCBs:                                1 out of       2   50%
+  Number of PCIE_A1s:                            0 out of       1    0%
+  Number of PCILOGICSEs:                         0 out of       2    0%
+  Number of PLL_ADVs:                            4 out of       4  100%
+  Number of PMVs:                                0 out of       1    0%
+  Number of STARTUPs:                            0 out of       1    0%
+  Number of SUSPEND_SYNCs:                       0 out of       1    0%
+
+Average Fanout of Non-Clock Nets:                3.75
+
+Peak Memory Usage:  409 MB
+Total REAL time to MAP completion:  4 mins 35 secs 
+Total CPU time to MAP completion (all processors):   4 mins 38 secs 
+
+Table of Contents
+-----------------
+Section 1 - Errors
+Section 2 - Warnings
+Section 3 - Informational
+Section 4 - Removed Logic Summary
+Section 5 - Removed Logic
+Section 6 - IOB Properties
+Section 7 - RPMs
+Section 8 - Guide Report
+Section 9 - Area Group and Partition Summary
+Section 10 - Timing Report
+Section 11 - Configuration String Information
+Section 12 - Control Set Information
+Section 13 - Utilization by Hierarchy
+
+Section 1 - Errors
+------------------
+
+Section 2 - Warnings
+--------------------
+WARNING:MapLib:701 - Signal L_CLKp connected to top level port L_CLKp has been
+   removed.
+WARNING:MapLib:701 - Signal L_CLKn connected to top level port L_CLKn has been
+   removed.
+WARNING:MapLib:701 - Signal DDR3_ZIO connected to top level port DDR3_ZIO has
+   been removed.
+WARNING:PhysDesignRules:2410 - This design is using one or more 9K Block RAMs
+   (RAMB8BWER).  9K Block RAM initialization data, both user defined and
+   default, may be incorrect and should not be used.  For more information,
+   please reference Xilinx Answer Record 39999.
+
+Section 3 - Informational
+-------------------------
+INFO:Map:284 - Map is running with the multi-threading option on. Map currently
+   supports the use of up to 2 processors. Based on the the user options and
+   machine load, Map will use 2 processors during this run.
+INFO:LIT:243 - Logical network
+   cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infr
+   astructure_inst/rst0_sync_r<24> has no load.
+INFO:LIT:395 - The above info message is repeated 9 more times for the following
+   (max. 5 shown):
+   N637,
+   N639,
+   aux_buttons_i<1>_IBUF,
+   aux_buttons_i<0>_IBUF,
+   P_WR_REQ<1>_IBUF
+   To see the details of these info messages, please use the -detail switch.
+INFO:MapLib:562 - No environment variables are currently set.
+INFO:LIT:244 - All of the single ended outputs in this design are using slew
+   rate limited output drivers. The delay on speed critical single ended outputs
+   can be dramatically reduced by designating them as fast outputs.
+INFO:Pack:1716 - Initializing temperature to 85.000 Celsius. (default - Range:
+   0.000 to 85.000 Celsius)
+INFO:Pack:1720 - Initializing voltage to 1.140 Volts. (default - Range: 1.140 to
+   1.260 Volts)
+INFO:Timing:3386 - Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx
+   Command Line Tools User Guide for information on generating a TSI report.
+INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
+   (.mrp).
+INFO:Pack:1650 - Map created a placed design.
+
+Section 4 - Removed Logic Summary
+---------------------------------
+  99 block(s) removed
+   8 block(s) optimized away
+  71 signal(s) removed
+
+Section 5 - Removed Logic
+-------------------------
+
+The trimmed logic report below shows the logic removed from your design due to
+sourceless or loadless signals, and VCC or ground connections.  If the removal
+of a signal or symbol results in the subsequent removal of an additional signal
+or symbol, the message explaining that second removal will be indented.  This
+indentation will be repeated as a chain of related logic is removed.
+
+To quickly locate the original cause for the removal of a chain of logic, look
+above the place where that logic is listed in the trimming report, then locate
+the lines that are least indented (begin at the leftmost edge).
+
+The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<24>" is loadless and has been removed.
+ Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_24" (FF) removed.
+  The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<23>" is loadless and has been removed.
+   Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_23" (FF) removed.
+    The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<22>" is loadless and has been removed.
+     Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_22" (FF) removed.
+      The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<21>" is loadless and has been removed.
+       Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_21" (FF) removed.
+        The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<20>" is loadless and has been removed.
+         Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_20" (FF) removed.
+          The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<19>" is loadless and has been removed.
+           Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_19" (FF) removed.
+            The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<18>" is loadless and has been removed.
+             Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_18" (FF) removed.
+              The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<17>" is loadless and has been removed.
+               Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_17" (FF) removed.
+                The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<16>" is loadless and has been removed.
+                 Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_16" (FF) removed.
+                  The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<15>" is loadless and has been removed.
+                   Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_15" (FF) removed.
+                    The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<14>" is loadless and has been removed.
+                     Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_14" (FF) removed.
+                      The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<13>" is loadless and has been removed.
+                       Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_13" (FF) removed.
+                        The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<12>" is loadless and has been removed.
+                         Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_12" (FF) removed.
+                          The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<11>" is loadless and has been removed.
+                           Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_11" (FF) removed.
+                            The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<10>" is loadless and has been removed.
+                             Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_10" (FF) removed.
+                              The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<9>" is loadless and has been removed.
+                               Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_9" (FF) removed.
+                                The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<8>" is loadless and has been removed.
+                                 Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_8" (FF) removed.
+                                  The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<7>" is loadless and has been removed.
+                                   Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_7" (FF) removed.
+                                    The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<6>" is loadless and has been removed.
+                                     Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_6" (FF) removed.
+                                      The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<5>" is loadless and has been removed.
+                                       Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_5" (FF) removed.
+                                        The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<4>" is loadless and has been removed.
+                                         Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_4" (FF) removed.
+                                          The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<3>" is loadless and has been removed.
+                                           Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_3" (FF) removed.
+                                            The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<2>" is loadless and has been removed.
+                                             Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_2" (FF) removed.
+                                              The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<1>" is loadless and has been removed.
+                                               Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_1" (FF) removed.
+                                                The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r<0>" is loadless and has been removed.
+                                                 Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst0_sync_r_0" (FF) removed.
+*The signal
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/c3_async_rst
+" is loadless and has been removed.
+* Loadless block
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
+tructure_inst/rst_tmp1" (ROM) removed.
+Loadless block "cmp_clk_250_buf" (CKBUF) removed.
+ The signal "sys_clk_250_buf" is loadless and has been removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[0].loop3.iodelay_m" (IODELAY2)
+removed.
+ The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/cal_data_master" is loadless
+and has been removed.
+  Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/cal_data_master" (FF)
+removed.
+   The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/cal_data_master_rstpot" is
+loadless and has been removed.
+    Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/cal_data_master_rstpot"
+(ROM) removed.
+     The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/enable" is loadless and has
+been removed.
+      Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/enable" (FF) removed.
+       The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/enable_rstpot" is loadless
+and has been removed.
+        Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/enable_rstpot" (ROM)
+removed.
+         The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<5>" is loadless and
+has been removed.
+          Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_5" (FF) removed.
+           The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter5" is loadless
+and has been removed.
+            Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<5>"
+(XOR) removed.
+             The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<4>" is
+loadless and has been removed.
+              Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<4>"
+(MUX) removed.
+               The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<3>" is
+loadless and has been removed.
+                Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<3>"
+(MUX) removed.
+                 The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<2>" is
+loadless and has been removed.
+                  Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<2>"
+(MUX) removed.
+                   The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<1>" is
+loadless and has been removed.
+                    Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<1>"
+(MUX) removed.
+                     The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<0>" is
+loadless and has been removed.
+                      Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<0>"
+(MUX) removed.
+                       The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<8>_inv" is loadless
+and has been removed.
+                        Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<8>_inv1_INV_0"
+(BUF) removed.
+                         The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<8>" is loadless and
+has been removed.
+                          Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_8" (FF) removed.
+                           The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter8" is loadless
+and has been removed.
+                            Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<8>"
+(XOR) removed.
+                             The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<7>" is
+loadless and has been removed.
+                              Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<7>"
+(MUX) removed.
+                               The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<6>" is
+loadless and has been removed.
+                                Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<6>"
+(MUX) removed.
+                                 The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<5>" is
+loadless and has been removed.
+                                  Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_cy<5>"
+(MUX) removed.
+                                   The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<5>" is
+loadless and has been removed.
+                                    Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<5>"
+(ROM) removed.
+                                 The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<6>" is
+loadless and has been removed.
+                                  Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<6>"
+(ROM) removed.
+                                   The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<6>" is loadless and
+has been removed.
+                                    Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_6" (FF) removed.
+                                     The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter6" is loadless
+and has been removed.
+                                      Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<6>"
+(XOR) removed.
+                               The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<7>" is
+loadless and has been removed.
+                                Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<7>"
+(ROM) removed.
+                                 The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<7>" is loadless and
+has been removed.
+                                  Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_7" (FF) removed.
+                                   The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter7" is loadless
+and has been removed.
+                                    Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<7>"
+(XOR) removed.
+                       The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<0>" is
+loadless and has been removed.
+                        Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<0>"
+(ROM) removed.
+                         The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<0>" is loadless and
+has been removed.
+                          Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_0" (FF) removed.
+                           The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter" is loadless
+and has been removed.
+                            Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<0>"
+(XOR) removed.
+                     The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<1>" is
+loadless and has been removed.
+                      Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<1>"
+(ROM) removed.
+                       The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<1>" is loadless and
+has been removed.
+                        Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_1" (FF) removed.
+                         The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter1" is loadless
+and has been removed.
+                          Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<1>"
+(XOR) removed.
+                   The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<2>" is
+loadless and has been removed.
+                    Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<2>"
+(ROM) removed.
+                     The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<2>" is loadless and
+has been removed.
+                      Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_2" (FF) removed.
+                       The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter2" is loadless
+and has been removed.
+                        Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<2>"
+(XOR) removed.
+                 The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<3>" is
+loadless and has been removed.
+                  Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<3>"
+(ROM) removed.
+                   The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<3>" is loadless and
+has been removed.
+                    Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_3" (FF) removed.
+                     The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter3" is loadless
+and has been removed.
+                      Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<3>"
+(XOR) removed.
+               The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<4>" is
+loadless and has been removed.
+                Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_lut<4>"
+(ROM) removed.
+                 The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter<4>" is loadless and
+has been removed.
+                  Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/counter_4" (FF) removed.
+                   The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter4" is loadless
+and has been removed.
+                    Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/Mcount_counter_xor<4>"
+(XOR) removed.
+     The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/state_FSM_FFd4" is loadless
+and has been removed.
+      Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/state_FSM_FFd4" (FF)
+removed.
+       The signal "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/state_FSM_FFd4-In" is
+loadless and has been removed.
+        Loadless block "cmp_gn4124_core/cmp_p2l_des/cmp_data_in/_n0366_inv1" (ROM)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[10].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[11].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[12].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[13].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[14].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[15].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[1].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[2].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[3].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[4].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[5].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[6].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[7].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[8].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_data_in/loop0[9].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_dframe_in/loop0[0].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block
+"cmp_gn4124_core/cmp_p2l_des/cmp_valid_in/loop0[0].loop3.iodelay_m" (IODELAY2)
+removed.
+Loadless block "cmp_l_clk_buf" (IBUFDS) removed.
+ The signal "L_CLKp" is loadless and has been removed.
+  Loadless block "L_CLKp" (PAD) removed.
+ The signal "L_CLKn" is loadless and has been removed.
+  Loadless block "L_CLKn" (PAD) removed.
+
+The trimmed logic reported below is either:
+   1. part of a cycle
+   2. part of disabled logic
+   3. a side-effect of other trimmed logic
+
+The signal "DDR3_ZIO" is unused and has been removed.
+ Unused block "DDR3_ZIO_OBUFT" (TRI) removed.
+Unused block "DDR3_ZIO" (PAD) removed.
+Unused block "cmp_fmc_adc_100Ms_core/cmp_adc_sync_fifo/GND" (ZERO) removed.
+Unused block "cmp_fmc_adc_100Ms_core/cmp_adc_sync_fifo/VCC" (ONE) removed.
+Unused block "cmp_fmc_adc_100Ms_core/cmp_multishot_dpram0/GND" (ZERO) removed.
+Unused block "cmp_fmc_adc_100Ms_core/cmp_multishot_dpram0/VCC" (ONE) removed.
+Unused block "cmp_fmc_adc_100Ms_core/cmp_multishot_dpram1/GND" (ZERO) removed.
+Unused block "cmp_fmc_adc_100Ms_core/cmp_multishot_dpram1/VCC" (ONE) removed.
+Unused block "cmp_fmc_adc_100Ms_core/cmp_wb_ddr_fifo/GND" (ZERO) removed.
+Unused block "cmp_fmc_adc_100Ms_core/cmp_wb_ddr_fifo/VCC" (ONE) removed.
+
+Optimized Block(s):
+TYPE 		BLOCK
+GND 		XST_GND
+VCC 		XST_VCC
+GND 		cmp_fmc_adc_100Ms_core/cmp_adc_sync_fifo/BU2/XST_GND
+GND 		cmp_fmc_adc_100Ms_core/cmp_multishot_dpram0/BU2/XST_GND
+VCC 		cmp_fmc_adc_100Ms_core/cmp_multishot_dpram0/BU2/XST_VCC
+GND 		cmp_fmc_adc_100Ms_core/cmp_multishot_dpram1/BU2/XST_GND
+VCC 		cmp_fmc_adc_100Ms_core/cmp_multishot_dpram1/BU2/XST_VCC
+GND 		cmp_fmc_adc_100Ms_core/cmp_wb_ddr_fifo/BU2/XST_GND
+
+To enable printing of redundant blocks removed and signals merged, set the
+detailed map report option and rerun map.
+
+Section 6 - IOB Properties
+--------------------------
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| IOB Name                           | Type             | Direction | IO Standard          | Diff  | Drive    | Slew | Reg (s)      | Resistor | IOB      |
+|                                    |                  |           |                      | Term  | Strength | Rate |              |          | Delay    |
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| DDR3_A<0>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<1>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<2>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<3>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<4>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<5>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<6>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<7>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<8>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<9>                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<10>                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<11>                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<12>                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_A<13>                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_BA<0>                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_BA<1>                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_BA<2>                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_CAS_N                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_CKE                           | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_CK_N                          | IOB              | OUTPUT    | DIFF_SSTL15_II       |       |          |      | OSERDES      |          |          |
+| DDR3_CK_P                          | IOB              | OUTPUT    | DIFF_SSTL15_II       |       |          |      | OSERDES      |          |          |
+| DDR3_DQ<0>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<1>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<2>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<3>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<4>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<5>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<6>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<7>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<8>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<9>                         | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<10>                        | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<11>                        | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<12>                        | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<13>                        | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<14>                        | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_DQ<15>                        | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_LDM                           | IOB              | OUTPUT    | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_LDQS_N                        | IOB              | BIDIR     | DIFF_SSTL15_II       |       |          |      |              | PULLUP   |          |
+| DDR3_LDQS_P                        | IOB              | BIDIR     | DIFF_SSTL15_II       |       |          |      |              | PULLDOWN |          |
+| DDR3_ODT                           | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_RAS_N                         | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_RESET_N                       | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| DDR3_RZQ                           | IOB              | BIDIR     | SSTL15_II            |       |          |      |              |          | DEFAULT  |
+| DDR3_UDM                           | IOB              | OUTPUT    | SSTL15_II            |       |          |      |              |          |          |
+| DDR3_UDQS_N                        | IOB              | BIDIR     | DIFF_SSTL15_II       |       |          |      |              | PULLUP   |          |
+| DDR3_UDQS_P                        | IOB              | BIDIR     | DIFF_SSTL15_II       |       |          |      |              | PULLDOWN |          |
+| DDR3_WE_N                          | IOB              | OUTPUT    | SSTL15_II            |       |          |      | OSERDES      |          |          |
+| GPIO<0>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| GPIO<1>                            | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| L2P_CLKn                           | IOB              | OUTPUT    | DIFF_SSTL18_I        |       |          |      | OSERDES      |          |          |
+| L2P_CLKp                           | IOB              | OUTPUT    | DIFF_SSTL18_I        |       |          |      | OSERDES      |          |          |
+| L2P_DATA<0>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<1>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<2>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<3>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<4>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<5>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<6>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<7>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<8>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<9>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<10>                       | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<11>                       | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<12>                       | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<13>                       | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<14>                       | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DATA<15>                       | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_DFRAME                         | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L2P_EDB                            | IOB              | OUTPUT    | SSTL18_I             |       |          |      |              |          |          |
+| L2P_RDY                            | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| L2P_VALID                          | IOB              | OUTPUT    | SSTL18_I             |       |          |      | OSERDES      |          |          |
+| L_RST_N                            | IOB              | INPUT     | LVCMOS18             |       |          |      |              |          |          |
+| L_WR_RDY<0>                        | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| L_WR_RDY<1>                        | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| P2L_CLKn                           | IOB              | INPUT     | DIFF_SSTL18_I        |       |          |      |              |          |          |
+| P2L_CLKp                           | IOB              | INPUT     | DIFF_SSTL18_I        |       |          |      | ISERDES      |          | VARIABLE |
+| P2L_DATA<0>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<1>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<2>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<3>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<4>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<5>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<6>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<7>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<8>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<9>                        | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<10>                       | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<11>                       | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<12>                       | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<13>                       | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<14>                       | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DATA<15>                       | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_DFRAME                         | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P2L_RDY                            | IOB              | OUTPUT    | SSTL18_I             |       |          |      |              |          |          |
+| P2L_VALID                          | IOB              | INPUT     | SSTL18_I             |       |          |      | ISERDES      |          |          |
+| P_RD_D_RDY<0>                      | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| P_RD_D_RDY<1>                      | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| P_WR_RDY<0>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      |              |          |          |
+| P_WR_RDY<1>                        | IOB              | OUTPUT    | SSTL18_I             |       |          |      |              |          |          |
+| P_WR_REQ<0>                        | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| P_WR_REQ<1>                        | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| RX_ERROR                           | IOB              | OUTPUT    | SSTL18_I             |       |          |      |              |          |          |
+| TX_ERROR                           | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| VC_RDY<0>                          | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| VC_RDY<1>                          | IOB              | INPUT     | SSTL18_I             |       |          |      |              |          |          |
+| adc_dco_n_i                        | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_dco_p_i                        | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_fr_n_i                         | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_fr_p_i                         | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| adc_outa_n_i<0>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_outa_n_i<1>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_outa_n_i<2>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_outa_n_i<3>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_outa_p_i<0>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| adc_outa_p_i<1>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| adc_outa_p_i<2>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| adc_outa_p_i<3>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| adc_outb_n_i<0>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_outb_n_i<1>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_outb_n_i<2>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_outb_n_i<3>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      |              |          |          |
+| adc_outb_p_i<0>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| adc_outb_p_i<1>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| adc_outb_p_i<2>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| adc_outb_p_i<3>                    | IOB              | INPUT     | LVDS_25              | TRUE  |          |      | ISERDES      |          |          |
+| aux_buttons_i<0>                   | IOB              | INPUT     | LVCMOS18             |       |          |      |              |          |          |
+| aux_buttons_i<1>                   | IOB              | INPUT     | LVCMOS18             |       |          |      |              |          |          |
+| aux_leds_o<0>                      | IOB              | OUTPUT    | LVCMOS18             |       | 12       | SLOW |              |          |          |
+| aux_leds_o<1>                      | IOB              | OUTPUT    | LVCMOS18             |       | 12       | SLOW |              |          |          |
+| aux_leds_o<2>                      | IOB              | OUTPUT    | LVCMOS18             |       | 12       | SLOW |              |          |          |
+| aux_leds_o<3>                      | IOB              | OUTPUT    | LVCMOS18             |       | 12       | SLOW |              |          |          |
+| carrier_one_wire_b                 | IOB              | BIDIR     | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| clk20_vcxo_i                       | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
+| ext_trigger_n_i                    | IOB              | INPUT     | LVDS_25              | FALSE |          |      |              |          |          |
+| ext_trigger_p_i                    | IOB              | INPUT     | LVDS_25              | FALSE |          |      |              |          |          |
+| gpio_dac_clr_n_o                   | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_led_power_o                   | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_led_trigger_o                 | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_si570_oe_o                    | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch1_o<0>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch1_o<1>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch1_o<2>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch1_o<3>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch1_o<4>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch1_o<5>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch1_o<6>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch2_o<0>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch2_o<1>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch2_o<2>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch2_o<3>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch2_o<4>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch2_o<5>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch2_o<6>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch3_o<0>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch3_o<1>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch3_o<2>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch3_o<3>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch3_o<4>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch3_o<5>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch3_o<6>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch4_o<0>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch4_o<1>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch4_o<2>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch4_o<3>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch4_o<4>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch4_o<5>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| gpio_ssr_ch4_o<6>                  | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| led_green_o                        | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| led_red_o                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| mezz_one_wire_b                    | IOB              | BIDIR     | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| pcb_ver_i<0>                       | IOB              | INPUT     | LVCMOS15             |       |          |      |              |          |          |
+| pcb_ver_i<1>                       | IOB              | INPUT     | LVCMOS15             |       |          |      |              |          |          |
+| pcb_ver_i<2>                       | IOB              | INPUT     | LVCMOS15             |       |          |      |              |          |          |
+| pcb_ver_i<3>                       | IOB              | INPUT     | LVCMOS15             |       |          |      |              |          |          |
+| prsnt_m2c_n_i                      | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
+| si570_scl_b                        | IOB              | BIDIR     | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| si570_sda_b                        | IOB              | BIDIR     | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| spi_cs_adc_n_o                     | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| spi_cs_dac1_n_o                    | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| spi_cs_dac2_n_o                    | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| spi_cs_dac3_n_o                    | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| spi_cs_dac4_n_o                    | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| spi_din_i                          | IOB              | INPUT     | LVCMOS25             |       |          |      |              |          |          |
+| spi_dout_o                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| spi_sck_o                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| sys_scl_b                          | IOB              | BIDIR     | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| sys_sda_b                          | IOB              | BIDIR     | LVCMOS25             |       | 12       | SLOW |              |          |          |
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Section 7 - RPMs
+----------------
+
+Section 8 - Guide Report
+------------------------
+Guide not run on this design.
+
+Section 9 - Area Group and Partition Summary
+--------------------------------------------
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+Area Group Information
+----------------------
+
+  No area groups were found in this design.
+
+----------------------
+
+Section 10 - Timing Report
+--------------------------
+A logic-level (pre-route) timing report can be generated by using Xilinx static
+timing analysis tools, Timing Analyzer (GUI) or TRCE (command line), with the
+mapped NCD and PCF files. Please note that this timing report will be generated
+using estimated delay information. For accurate numbers, please generate a
+timing report with the post Place and Route NCD file.
+
+For more information about the Timing Analyzer, consult the Xilinx Timing
+Analyzer Reference Manual; for more information about TRCE, consult the Xilinx
+Command Line Tools User Guide "TRACE" chapter.
+
+Section 11 - Configuration String Details
+-----------------------------------------
+Use the "-detail" map option to print out Configuration Strings
+
+Section 12 - Control Set Information
+------------------------------------
+Use the "-detail" map option to print out Control Set Information.
+
+Section 13 - Utilization by Hierarchy
+-------------------------------------
+Use the "-detail" map option to print out the Utilization by Hierarchy section.

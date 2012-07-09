@@ -432,11 +432,16 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal wb_ddr_stall : std_logic;
 
   -- Interrupts stuff
-  signal dma_irq           : std_logic_vector(1 downto 0);
-  signal dma_irq_p         : std_logic_vector(1 downto 0);
-  signal irq_sources       : std_logic_vector(31 downto 0);
-  signal irq_to_gn4124     : std_logic;
-  signal irq_sources_2_led : std_logic_vector(1 downto 0);
+  signal dma_irq             : std_logic_vector(1 downto 0);
+  signal dma_irq_p           : std_logic_vector(1 downto 0);
+  signal irq_sources         : std_logic_vector(31 downto 0);
+  signal irq_to_gn4124       : std_logic;
+  signal irq_sources_2_led   : std_logic_vector(1 downto 0);
+  signal ddr_wr_fifo_empty   : std_logic;
+  signal ddr_wr_fifo_empty_d : std_logic;
+  signal ddr_wr_fifo_empty_p : std_logic;
+  signal acq_end_irq_p       : std_logic;
+  signal acq_end             : std_logic;
 
   -- Mezzanine I2C for Si570
   signal si570_scl_in   : std_logic;
@@ -844,10 +849,40 @@ begin
   wb_stall(c_CSR_WB_IRQ_CTRL) <= '0';
 
   -- IRQ sources
+  --   0    -> End of DMA transfer
+  --   1    -> DMA transfer error
+  --   2    -> Trigger
+  --   3    -> End of acquisition (data written to DDR)
+  --   4-31 -> Unused
   irq_sources(1 downto 0)  <= dma_irq;
   irq_sources(2)           <= trigger_p;
-  irq_sources(3)           <= acq_end_p;
+  irq_sources(3)           <= acq_end_irq_p;
   irq_sources(31 downto 4) <= (others => '0');
+
+  -- End of acquisition interrupt generation
+  p_ddr_wr_fifo_empty : process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      ddr_wr_fifo_empty_d <= ddr_wr_fifo_empty;
+    end if;
+  end process p_ddr_wr_fifo_empty;
+
+  ddr_wr_fifo_empty_p <= ddr_wr_fifo_empty and not(ddr_wr_fifo_empty_d);
+
+  p_acq_end : process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if sys_rst_n = '0' then
+        acq_end <= '0';
+      elsif acq_end_p = '1' then
+        acq_end <= '1';
+      elsif ddr_wr_fifo_empty_p = '1' then
+        acq_end <= '0';
+      end if;
+    end if;
+  end process p_acq_end;
+
+  acq_end_irq_p <= ddr_wr_fifo_empty_p and acq_end;
 
   -- just forward irq pulses for test
   --irq_to_gn4124 <= dma_irq(1) or dma_irq(0);
@@ -1148,6 +1183,19 @@ begin
       wb0_ack_o   => wb_ddr_ack,
       wb0_stall_o => wb_ddr_stall,
 
+      p0_cmd_empty_o   => open,
+      p0_cmd_full_o    => open,
+      p0_rd_full_o     => open,
+      p0_rd_empty_o    => open,
+      p0_rd_count_o    => open,
+      p0_rd_overflow_o => open,
+      p0_rd_error_o    => open,
+      p0_wr_full_o     => open,
+      p0_wr_empty_o    => ddr_wr_fifo_empty,
+      p0_wr_count_o    => open,
+      p0_wr_underrun_o => open,
+      p0_wr_error_o    => open,
+
       wb1_clk_i   => sys_clk_125,
       wb1_sel_i   => wb_dma_sel,
       wb1_cyc_i   => wb_dma_cyc,
@@ -1157,7 +1205,22 @@ begin
       wb1_data_i  => wb_dma_dat_o,
       wb1_data_o  => wb_dma_dat_i,
       wb1_ack_o   => wb_dma_ack,
-      wb1_stall_o => wb_dma_stall);
+      wb1_stall_o => wb_dma_stall,
+
+      p1_cmd_empty_o   => open,
+      p1_cmd_full_o    => open,
+      p1_rd_full_o     => open,
+      p1_rd_empty_o    => open,
+      p1_rd_count_o    => open,
+      p1_rd_overflow_o => open,
+      p1_rd_error_o    => open,
+      p1_wr_full_o     => open,
+      p1_wr_empty_o    => open,
+      p1_wr_count_o    => open,
+      p1_wr_underrun_o => open,
+      p1_wr_error_o    => open
+
+      );
 
   ddr3_calib_done <= ddr3_status(0);
 
