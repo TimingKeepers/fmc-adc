@@ -958,176 +958,224 @@
     <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/rtl/ddr3_ctrl_pkg.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="176"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_32b_32b/user_design/rtl/ddr3_ctrl_bank3_32b_32b.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_32b_32b/user_design/rtl/ddr3_ctrl_spec_bank3_32b_32b.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="177"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_32b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_32b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="178"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_32b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_32b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="179"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_32b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_32b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="180"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_32b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_32b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="181"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_32b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_32b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="182"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_32b_32b/user_design/rtl/memc3_infrastructure.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_32b_32b/user_design/rtl/memc3_infrastructure.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="183"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_32b_32b/user_design/rtl/memc3_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_32b_32b/user_design/rtl/memc3_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="184"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_64b_32b/user_design/rtl/ddr3_ctrl_bank3_64b_32b.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/ddr3_ctrl_spec_bank3_64b_32b.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="185"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_64b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="186"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_64b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="187"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="188"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_64b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="189"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="190"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_64b_32b/user_design/rtl/memc3_infrastructure.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/memc3_infrastructure.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="191"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_bank3_64b_32b/user_design/rtl/memc3_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/memc3_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="192"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_32b_32b/user_design/rtl/ddr3_ctrl_bank4_32b_32b.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_32b_32b/user_design/rtl/ddr3_ctrl_svec_bank4_32b_32b.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="193"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_32b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_32b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="194"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_32b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_32b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="195"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_32b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_32b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="196"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_32b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_32b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="197"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_32b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_32b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="198"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_32b_32b/user_design/rtl/memc4_infrastructure.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_32b_32b/user_design/rtl/memc4_infrastructure.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="199"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_32b_32b/user_design/rtl/memc4_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_32b_32b/user_design/rtl/memc4_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="200"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_64b_32b/user_design/rtl/ddr3_ctrl_bank4_64b_32b.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_64b_32b/user_design/rtl/ddr3_ctrl_svec_bank4_64b_32b.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="201"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_64b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_64b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="202"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_64b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_64b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="203"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="204"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_64b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_64b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="205"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="206"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_64b_32b/user_design/rtl/memc4_infrastructure.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_64b_32b/user_design/rtl/memc4_infrastructure.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="207"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank4_64b_32b/user_design/rtl/memc4_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank4_64b_32b/user_design/rtl/memc4_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="208"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_32b_32b/user_design/rtl/ddr3_ctrl_bank5_32b_32b.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_32b_32b/user_design/rtl/ddr3_ctrl_svec_bank5_32b_32b.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="209"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_32b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_32b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="210"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_32b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_32b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="211"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_32b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_32b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="212"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_32b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_32b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="213"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_32b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_32b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="214"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_32b_32b/user_design/rtl/memc5_infrastructure.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_32b_32b/user_design/rtl/memc5_infrastructure.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="215"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_32b_32b/user_design/rtl/memc5_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_32b_32b/user_design/rtl/memc5_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="216"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_64b_32b/user_design/rtl/ddr3_ctrl_bank5_64b_32b.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_64b_32b/user_design/rtl/ddr3_ctrl_svec_bank5_64b_32b.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="217"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_64b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_64b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="218"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_64b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_64b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="219"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="220"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_64b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_64b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="221"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="222"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_64b_32b/user_design/rtl/memc5_infrastructure.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_64b_32b/user_design/rtl/memc5_infrastructure.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="223"/>
     </file>
-    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_bank5_64b_32b/user_design/rtl/memc5_wrapper.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/svec/ip_cores/ddr3_ctrl_svec_bank5_64b_32b/user_design/rtl/memc5_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="224"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/gn4124_core.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_32b_32b/user_design/rtl/ddr3_ctrl_vfc_bank1_32b_32b.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="225"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/gn4124_core_pkg.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_32b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="226"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/l2p_ser.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_32b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="227"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/p2l_des.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_32b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="228"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/serdes_1_to_n_clk_pll_s2_diff.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_32b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="229"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/serdes_1_to_n_data_s2_se.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_32b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="230"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/serdes_n_to_1_s2_diff.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_32b_32b/user_design/rtl/memc1_infrastructure.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="231"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/serdes_n_to_1_s2_se.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_32b_32b/user_design/rtl/memc1_wrapper.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="232"/>
     </file>
-    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/pulse_sync_rtl.vhd" xil_pn:type="FILE_VHDL">
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_64b_32b/user_design/rtl/ddr3_ctrl_vfc_bank1_64b_32b.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="Implementation" xil_pn:seqID="233"/>
+    </file>
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_64b_32b/user_design/rtl/iodrp_controller.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="234"/>
+    </file>
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_64b_32b/user_design/rtl/iodrp_mcb_controller.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="235"/>
+    </file>
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="236"/>
+    </file>
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_64b_32b/user_design/rtl/mcb_soft_calibration_top.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="237"/>
+    </file>
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="238"/>
+    </file>
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_64b_32b/user_design/rtl/memc1_infrastructure.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="239"/>
+    </file>
+    <file xil_pn:name="../ip_cores/ddr3-sp6-core/trunk/hdl/vfc/ip_cores/ddr3_ctrl_vfc_bank1_64b_32b/user_design/rtl/memc1_wrapper.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="240"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/gn4124_core.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="241"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/gn4124_core_pkg.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="242"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/l2p_ser.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="243"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/p2l_des.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="244"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/serdes_1_to_n_clk_pll_s2_diff.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="245"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/serdes_1_to_n_data_s2_se.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="246"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/serdes_n_to_1_s2_diff.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="247"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/serdes_n_to_1_s2_se.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="248"/>
+    </file>
+    <file xil_pn:name="../ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/spartan6/pulse_sync_rtl.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="Implementation" xil_pn:seqID="249"/>
     </file>
   </files>
 

@@ -11,7 +11,7 @@ Target Device  : xc6slx45t
 Target Package : fgg484
 Target Speed   : -3
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Tue Jul 10 18:00:09 2012
+Mapped Date    : Wed Jul 11 17:02:59 2012
 
 Design Summary
 --------------
@@ -103,7 +103,7 @@ Specific Feature Utilization:
 Average Fanout of Non-Clock Nets:                3.76
 
 Peak Memory Usage:  411 MB
-Total REAL time to MAP completion:  4 mins 33 secs 
+Total REAL time to MAP completion:  4 mins 32 secs 
 Total CPU time to MAP completion (all processors):   4 mins 36 secs 
 
 Table of Contents
@@ -134,21 +134,21 @@ WARNING:MapLib:701 - Signal L_CLKn connected to top level port L_CLKn has been
 WARNING:MapLib:701 - Signal DDR3_ZIO connected to top level port DDR3_ZIO has
    been removed.
 WARNING:MapLib:41 - All members of TNM group
-   "cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_bank3_64b_32b_cmp_ddr3_ctrl_memc3_inf
-   rastructure_inst_clk0_bufg_in" have been optimized out of the design.
+   "cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_spec_bank3_64b_32b_cmp_ddr3_ctrl_memc
+   3_infrastructure_inst_clk0_bufg_in" have been optimized out of the design.
 WARNING:MapLib:41 - All members of TNM group
-   "cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_bank3_64b_32b_cmp_ddr3_ctrl_memc3_inf
-   rastructure_inst_clk0_bufg_in_0" have been optimized out of the design.
+   "cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_spec_bank3_64b_32b_cmp_ddr3_ctrl_memc
+   3_infrastructure_inst_clk0_bufg_in_0" have been optimized out of the design.
 WARNING:MapLib:50 - The period specification
-   "TS_cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_bank3_64b_32b_cmp_ddr3_ctrl_memc3_
-   infrastructure_inst_clk0_bufg_in" has been discarded because the group
-   "cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_bank3_64b_32b_cmp_ddr3_ctrl_memc3_inf
-   rastructure_inst_clk0_bufg_in" has been optimized away.
+   "TS_cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_spec_bank3_64b_32b_cmp_ddr3_ctrl_m
+   emc3_infrastructure_inst_clk0_bufg_in" has been discarded because the group
+   "cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_spec_bank3_64b_32b_cmp_ddr3_ctrl_memc
+   3_infrastructure_inst_clk0_bufg_in" has been optimized away.
 WARNING:MapLib:50 - The period specification
-   "TS_cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_bank3_64b_32b_cmp_ddr3_ctrl_memc3_
-   infrastructure_inst_clk0_bufg_in_0" has been discarded because the group
-   "cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_bank3_64b_32b_cmp_ddr3_ctrl_memc3_inf
-   rastructure_inst_clk0_bufg_in_0" has been optimized away.
+   "TS_cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_spec_bank3_64b_32b_cmp_ddr3_ctrl_m
+   emc3_infrastructure_inst_clk0_bufg_in_0" has been discarded because the group
+   "cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen_spec_bank3_64b_32b_cmp_ddr3_ctrl_memc
+   3_infrastructure_inst_clk0_bufg_in_0" has been optimized away.
 WARNING:PhysDesignRules:2410 - This design is using one or more 9K Block RAMs
    (RAMB8BWER).  9K Block RAM initialization data, both user defined and
    default, may be incorrect and should not be used.  For more information,
@@ -160,8 +160,8 @@ INFO:Map:284 - Map is running with the multi-threading option on. Map currently
    supports the use of up to 2 processors. Based on the the user options and
    machine load, Map will use 2 processors during this run.
 INFO:LIT:243 - Logical network
-   cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infr
-   astructure_inst/rst0_sync_r<24> has no load.
+   cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3
+   _infrastructure_inst/rst0_sync_r<24> has no load.
 INFO:LIT:395 - The above info message is repeated 9 more times for the following
    (max. 5 shown):
    N640,
@@ -204,176 +204,177 @@ above the place where that logic is listed in the trimming report, then locate
 the lines that are least indented (begin at the leftmost edge).
 
 The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<24>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<24>" is loadless and has been removed.
  Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_24" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_24" (FF) removed.
   The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/clk0_bufg" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/clk0_bufg" is loadless and has been removed.
    Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/U_BUFG_CLK0" (CKBUF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/U_BUFG_CLK0" (CKBUF) removed.
     The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/clk0_bufg_in" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/clk0_bufg_in" is loadless and has been removed.
   The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<23>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<23>" is loadless and has been removed.
    Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_23" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_23" (FF) removed.
     The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<22>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<22>" is loadless and has been removed.
      Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_22" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_22" (FF) removed.
       The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<21>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<21>" is loadless and has been removed.
        Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_21" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_21" (FF) removed.
         The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<20>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<20>" is loadless and has been removed.
          Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_20" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_20" (FF) removed.
           The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<19>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<19>" is loadless and has been removed.
            Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_19" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_19" (FF) removed.
             The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<18>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<18>" is loadless and has been removed.
              Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_18" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_18" (FF) removed.
               The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<17>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<17>" is loadless and has been removed.
                Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_17" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_17" (FF) removed.
                 The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<16>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<16>" is loadless and has been removed.
                  Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_16" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_16" (FF) removed.
                   The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<15>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<15>" is loadless and has been removed.
                    Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_15" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_15" (FF) removed.
                     The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<14>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<14>" is loadless and has been removed.
                      Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_14" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_14" (FF) removed.
                       The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<13>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<13>" is loadless and has been removed.
                        Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_13" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_13" (FF) removed.
                         The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<12>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<12>" is loadless and has been removed.
                          Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_12" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_12" (FF) removed.
                           The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<11>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<11>" is loadless and has been removed.
                            Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_11" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_11" (FF) removed.
                             The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<10>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<10>" is loadless and has been removed.
                              Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_10" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_10" (FF) removed.
                               The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<9>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<9>" is loadless and has been removed.
                                Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_9" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_9" (FF) removed.
                                 The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<8>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<8>" is loadless and has been removed.
                                  Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_8" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_8" (FF) removed.
                                   The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<7>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<7>" is loadless and has been removed.
                                    Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_7" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_7" (FF) removed.
                                     The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<6>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<6>" is loadless and has been removed.
                                      Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_6" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_6" (FF) removed.
                                       The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<5>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<5>" is loadless and has been removed.
                                        Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_5" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_5" (FF) removed.
                                         The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<4>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<4>" is loadless and has been removed.
                                          Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_4" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_4" (FF) removed.
                                           The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<3>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<3>" is loadless and has been removed.
                                            Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_3" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_3" (FF) removed.
                                             The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<2>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<2>" is loadless and has been removed.
                                              Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_2" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_2" (FF) removed.
                                               The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<1>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<1>" is loadless and has been removed.
                                                Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_1" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_1" (FF) removed.
                                                 The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r<0>" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r<0>" is loadless and has been removed.
                                                  Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst0_sync_r_0" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst0_sync_r_0" (FF) removed.
 *The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst_tmp" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst_tmp" is loadless and has been removed.
 * Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/rst_tmp1" (ROM) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/rst_tmp1" (ROM) removed.
 *  The signal
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/syn_clk0_powerup_pll_locked" is loadless and has been removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/syn_clk0_powerup_pll_locked" is loadless and has been
+removed.
 *   Loadless block
-"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infras
-tructure_inst/syn_clk0_powerup_pll_locked" (FF) removed.
+"cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_i
+nfrastructure_inst/syn_clk0_powerup_pll_locked" (FF) removed.
 Loadless block "cmp_clk_250_buf" (CKBUF) removed.
  The signal "sys_clk_250_buf" is loadless and has been removed.
 Loadless block

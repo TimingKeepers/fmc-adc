@@ -1114,7 +1114,7 @@ begin
   ------------------------------------------------------------------------------
   cmp_ddr_ctrl : ddr3_ctrl
     generic map(
-      g_BANK_PORT_SELECT   => "BANK3_64B_32B",
+      g_BANK_PORT_SELECT   => "SPEC_BANK3_64B_32B",
       g_MEMCLK_PERIOD      => 3000,
       g_SIMULATION         => g_SIMULATION,
       g_CALIB_SOFT_IP      => g_CALIB_SOFT_IP,
