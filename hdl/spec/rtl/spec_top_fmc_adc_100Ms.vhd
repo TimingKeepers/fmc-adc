@@ -715,9 +715,11 @@ begin
   ------------------------------------------------------------------------------
   cmp_carrier_onewire : wb_onewire_master
     generic map(
-      g_num_ports        => 1,
-      g_ow_btp_normal    => "5.0",
-      g_ow_btp_overdrive => "1.0"
+      g_interface_mode      => CLASSIC,
+      g_address_granularity => WORD,
+      g_num_ports           => 1,
+      g_ow_btp_normal       => "5.0",
+      g_ow_btp_overdrive    => "1.0"
       )
     port map(
       clk_sys_i => sys_clk_125,
@@ -727,7 +729,7 @@ begin
       wb_sel_i => wb_sel,
       wb_stb_i => wb_stb,
       wb_we_i  => wb_we,
-      wb_adr_i => wb_adr(1 downto 0),
+      wb_adr_i => wb_adr(2 downto 0),
       wb_dat_i => wb_dat_o,
       wb_dat_o => wb_dat_i(c_CSR_WB_CARRIER_ONE_WIRE * 32 + 31 downto 32 * c_CSR_WB_CARRIER_ONE_WIRE),
       wb_ack_o => wb_ack(c_CSR_WB_CARRIER_ONE_WIRE),
@@ -892,11 +894,15 @@ begin
   --    Access to mezzanine EEPROM
   ------------------------------------------------------------------------------
   cmp_fmc_sys_i2c : wb_i2c_master
+    generic map(
+      g_interface_mode      => CLASSIC,
+      g_address_granularity => WORD
+      )
     port map (
       clk_sys_i => sys_clk_125,
       rst_n_i   => sys_rst_n,
 
-      wb_adr_i => wb_adr(2 downto 0),
+      wb_adr_i => wb_adr(4 downto 0),
       wb_dat_i => wb_dat_o,
       wb_dat_o => wb_dat_i(c_CSR_WB_FMC_SYS_I2C * 32 + 31 downto 32 * c_CSR_WB_FMC_SYS_I2C),
       wb_we_i  => wb_we,
@@ -930,11 +936,15 @@ begin
   --    ADC control
   ------------------------------------------------------------------------------
   cmp_fmc_spi : wb_spi
+    generic map(
+      g_interface_mode      => CLASSIC,
+      g_address_granularity => WORD
+      )
     port map (
       clk_sys_i => sys_clk_125,
       rst_n_i   => sys_rst_n,
 
-      wb_adr_i => wb_adr(2 downto 0),
+      wb_adr_i => wb_adr(4 downto 0),
       wb_dat_i => wb_dat_o,
       wb_dat_o => wb_dat_i(c_CSR_WB_FMC_SPI * 32 + 31 downto c_CSR_WB_FMC_SPI * 32),
       wb_sel_i => wb_sel,
@@ -980,11 +990,15 @@ begin
   -- Note: I2C registers are 8-bit wide, but accessed as 32-bit registers
   ------------------------------------------------------------------------------
   cmp_fmc_i2c : wb_i2c_master
+    generic map(
+      g_interface_mode      => CLASSIC,
+      g_address_granularity => WORD
+      )
     port map (
       clk_sys_i => sys_clk_125,
       rst_n_i   => sys_rst_n,
 
-      wb_adr_i => wb_adr(2 downto 0),
+      wb_adr_i => wb_adr(4 downto 0),
       wb_dat_i => wb_dat_o,
       wb_dat_o => wb_dat_i(c_CSR_WB_FMC_I2C * 32 + 31 downto 32 * c_CSR_WB_FMC_I2C),
       wb_we_i  => wb_we,
@@ -1079,6 +1093,8 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc_onewire : wb_onewire_master
     generic map(
+      g_interface_mode      => CLASSIC,
+      g_address_granularity => WORD,
       g_num_ports        => 1,
       g_ow_btp_normal    => "5.0",
       g_ow_btp_overdrive => "1.0"
@@ -1091,7 +1107,7 @@ begin
       wb_sel_i => wb_sel,
       wb_stb_i => wb_stb,
       wb_we_i  => wb_we,
-      wb_adr_i => wb_adr(1 downto 0),
+      wb_adr_i => wb_adr(2 downto 0),
       wb_dat_i => wb_dat_o,
       wb_dat_o => wb_dat_i(c_CSR_WB_FMC_ONE_WIRE * 32 + 31 downto 32 * c_CSR_WB_FMC_ONE_WIRE),
       wb_ack_o => wb_ack(c_CSR_WB_FMC_ONE_WIRE),

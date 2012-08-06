@@ -546,8 +546,8 @@ NET "AUX_LEDS_O[3]" IOSTANDARD = "LVCMOS18";
 INST "cmp_gn4124_core/l2p_rdy_t" IOB=FALSE;
 INST "cmp_gn4124_core/l_wr_rdy_t*" IOB=FALSE;
 
-INST "cmp_fmc_spi/cmp_wrapped_spi/shift/s_out" IOB=FALSE;
-INST "cmp_fmc_spi/cmp_wrapped_spi/clgen/clk_out" IOB=FALSE;
+INST "cmp_fmc_spi/Wrapped_SPI/shift/s_out" IOB=FALSE;
+INST "cmp_fmc_spi/Wrapped_SPI/clgen/clk_out" IOB=FALSE;
 
 
 #===============================================================================

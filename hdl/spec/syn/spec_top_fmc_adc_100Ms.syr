@@ -125,6 +125,95 @@ Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/g
 Parsing verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/spi_defines.v" included at line 42.
 Parsing verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/timescale.v" included at line 43.
 Parsing module <spi_top>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/generated/lm32_allprofiles.v" into library work
+Parsing module <lm32_top_full_debug>.
+Parsing module <lm32_mc_arithmetic_full_debug>.
+Parsing module <lm32_cpu_full_debug>.
+Parsing module <lm32_load_store_unit_full_debug>.
+Parsing module <lm32_decoder_full_debug>.
+Parsing module <lm32_icache_full_debug>.
+Parsing module <lm32_dcache_full_debug>.
+Parsing module <lm32_debug_full_debug>.
+Parsing module <lm32_instruction_unit_full_debug>.
+Parsing module <lm32_jtag_full_debug>.
+Parsing module <lm32_interrupt_full_debug>.
+Parsing module <lm32_top_full>.
+Parsing module <lm32_mc_arithmetic_full>.
+Parsing module <lm32_cpu_full>.
+Parsing module <lm32_load_store_unit_full>.
+Parsing module <lm32_decoder_full>.
+Parsing module <lm32_icache_full>.
+Parsing module <lm32_dcache_full>.
+Parsing module <lm32_instruction_unit_full>.
+Parsing module <lm32_interrupt_full>.
+Parsing module <lm32_top_medium_debug>.
+Parsing module <lm32_mc_arithmetic_medium_debug>.
+Parsing module <lm32_cpu_medium_debug>.
+Parsing module <lm32_load_store_unit_medium_debug>.
+Parsing module <lm32_decoder_medium_debug>.
+Parsing module <lm32_icache_medium_debug>.
+Parsing module <lm32_debug_medium_debug>.
+Parsing module <lm32_instruction_unit_medium_debug>.
+Parsing module <lm32_jtag_medium_debug>.
+Parsing module <lm32_interrupt_medium_debug>.
+Parsing module <lm32_top_medium_icache_debug>.
+Parsing module <lm32_mc_arithmetic_medium_icache_debug>.
+Parsing module <lm32_cpu_medium_icache_debug>.
+Parsing module <lm32_load_store_unit_medium_icache_debug>.
+Parsing module <lm32_decoder_medium_icache_debug>.
+Parsing module <lm32_icache_medium_icache_debug>.
+Parsing module <lm32_debug_medium_icache_debug>.
+Parsing module <lm32_instruction_unit_medium_icache_debug>.
+Parsing module <lm32_jtag_medium_icache_debug>.
+Parsing module <lm32_interrupt_medium_icache_debug>.
+Parsing module <lm32_top_medium_icache>.
+Parsing module <lm32_mc_arithmetic_medium_icache>.
+Parsing module <lm32_cpu_medium_icache>.
+Parsing module <lm32_load_store_unit_medium_icache>.
+Parsing module <lm32_decoder_medium_icache>.
+Parsing module <lm32_icache_medium_icache>.
+Parsing module <lm32_instruction_unit_medium_icache>.
+Parsing module <lm32_interrupt_medium_icache>.
+Parsing module <lm32_top_medium>.
+Parsing module <lm32_mc_arithmetic_medium>.
+Parsing module <lm32_cpu_medium>.
+Parsing module <lm32_load_store_unit_medium>.
+Parsing module <lm32_decoder_medium>.
+Parsing module <lm32_instruction_unit_medium>.
+Parsing module <lm32_interrupt_medium>.
+Parsing module <lm32_top_minimal>.
+Parsing module <lm32_mc_arithmetic_minimal>.
+Parsing module <lm32_cpu_minimal>.
+Parsing module <lm32_load_store_unit_minimal>.
+Parsing module <lm32_decoder_minimal>.
+Parsing module <lm32_instruction_unit_minimal>.
+Parsing module <lm32_interrupt_minimal>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_mc_arithmetic.v" into library work
+Parsing verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 29.
+Parsing module <lm32_mc_arithmetic>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/jtag_cores.v" into library work
+Parsing module <jtag_cores>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_adder.v" into library work
+Parsing verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 29.
+Parsing module <lm32_adder>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_addsub.v" into library work
+Parsing verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 28.
+Parsing module <lm32_addsub>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_dp_ram.v" into library work
+Parsing module <lm32_dp_ram>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_logic_op.v" into library work
+Parsing verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 29.
+Parsing module <lm32_logic_op>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_ram.v" into library work
+Parsing verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 34.
+Parsing module <lm32_ram>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_shifter.v" into library work
+Parsing verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v" included at line 29.
+Parsing module <lm32_shifter>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/platform/spartan6/lm32_multiplier.v" into library work
+Parsing module <lm32_multiplier>.
+Analyzing Verilog file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/platform/spartan6/jtag_tap.v" into library work
+Parsing module <jtag_tap>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/adc_serdes.vhd" into library work
 Parsing entity <adc_serdes>.
 Parsing architecture <xilinx> of entity <adc_serdes>.
@@ -143,10 +232,15 @@ Parsing package body <gn4124_core_pkg>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/ddr3-sp6-core/trunk/hdl/rtl/ddr3_ctrl_pkg.vhd" into library work
 Parsing package <ddr3_ctrl_pkg>.
 Parsing package body <ddr3_ctrl_pkg>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" into library work
+Parsing package <genram_pkg>.
+Parsing package body <genram_pkg>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gencores_pkg.vhd" into library work
 Parsing package <gencores_pkg>.
+Parsing package body <gencores_pkg>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wishbone_pkg.vhd" into library work
 Parsing package <wishbone_pkg>.
+Parsing package body <wishbone_pkg>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" into library work
 Parsing entity <spec_top_fmc_adc_100Ms>.
 Parsing architecture <rtl> of entity <spec_top_fmc_adc_100ms>.
@@ -183,9 +277,6 @@ Parsing architecture <syn> of entity <dma_controller_wb_slave>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/l2p_arbiter.vhd" into library work
 Parsing entity <l2p_arbiter>.
 Parsing architecture <rtl> of entity <l2p_arbiter>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" into library work
-Parsing package <genram_pkg>.
-Parsing package body <genram_pkg>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/l2p_dma_master.vhd" into library work
 Parsing entity <l2p_dma_master>.
 Parsing architecture <behaviour> of entity <l2p_dma_master>.
@@ -222,12 +313,50 @@ Parsing architecture <behavioral> of entity <gc_delay_gen>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_dual_pi_controller.vhd" into library work
 Parsing entity <gc_dual_pi_controller>.
 Parsing architecture <behavioral> of entity <gc_dual_pi_controller>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_reset.vhd" into library work
+Parsing entity <gc_reset>.
+Parsing architecture <rtl> of entity <gc_reset>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_serial_dac.vhd" into library work
 Parsing entity <gc_serial_dac>.
 Parsing architecture <syn> of entity <gc_serial_dac>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_sync_ffs.vhd" into library work
 Parsing entity <gc_sync_ffs>.
 Parsing architecture <behavioral> of entity <gc_sync_ffs>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_arbitrated_mux.vhd" into library work
+Parsing entity <gc_arbitrated_mux>.
+Parsing architecture <rtl> of entity <gc_arbitrated_mux>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_pulse_synchronizer.vhd" into library work
+Parsing entity <gc_pulse_synchronizer>.
+Parsing architecture <rtl> of entity <gc_pulse_synchronizer>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_frequency_meter.vhd" into library work
+Parsing entity <gc_frequency_meter>.
+Parsing architecture <behavioral> of entity <gc_frequency_meter>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_dual_clock_ram.vhd" into library work
+Parsing entity <gc_dual_clock_ram>.
+Parsing architecture <rtl> of entity <gc_dual_clock_ram>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/common/gc_wfifo.vhd" into library work
+Parsing entity <gc_wfifo>.
+Parsing architecture <rtl> of entity <gc_wfifo>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/memory_loader_pkg.vhd" into library work
+Parsing package <memory_loader_pkg>.
+Parsing package body <memory_loader_pkg>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/generic_shiftreg_fifo.vhd" into library work
+Parsing entity <generic_shiftreg_fifo>.
+Parsing architecture <rtl> of entity <generic_shiftreg_fifo>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram.vhd" into library work
+Parsing entity <generic_dpram>.
+Parsing architecture <syn> of entity <generic_dpram>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_sameclock.vhd" into library work
+Parsing entity <generic_dpram_sameclock>.
+Parsing architecture <syn> of entity <generic_dpram_sameclock>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_dualclock.vhd" into library work
+Parsing entity <generic_dpram_dualclock>.
+Parsing architecture <syn> of entity <generic_dpram_dualclock>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" into library work
+Parsing entity <generic_spram>.
+Parsing architecture <syn> of entity <generic_spram>.
+WARNING:HDLCompiler:443 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 58: Function f_bitstring_2_slv does not always return a value.
+WARNING:HDLCompiler:443 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 63: Function f_load_from_file does not always return a value.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/fifo_generator_v6_1/fifo_generator_v6_1_pkg.vhd" into library fifo_generator_v6_1
 Parsing package <fifo_generator_v6_1_pkg>.
 Parsing package body <fifo_generator_v6_1_pkg>.
@@ -407,18 +536,10 @@ Parsing architecture <xilinx> of entity <fifo_generator_v6_1_fifo16_patch>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/fifo_generator_v6_1/fifo_generator_v6_1_xst.vhd" into library fifo_generator_v6_1
 Parsing entity <fifo_generator_v6_1_xst>.
 Parsing architecture <xilinx> of entity <fifo_generator_v6_1_xst>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" into library work
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" into library work
 Parsing entity <generic_async_fifo>.
 Parsing architecture <syn> of entity <generic_async_fifo>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram.vhd" into library work
-Parsing entity <generic_dpram>.
-Parsing architecture <syn> of entity <generic_dpram>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" into library work
-Parsing entity <generic_spram>.
-Parsing architecture <syn> of entity <generic_spram>.
-WARNING:HDLCompiler:443 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 58: Function f_bitstring_2_slv does not always return a value.
-WARNING:HDLCompiler:443 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 63: Function f_load_from_file does not always return a value.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_sync_fifo.vhd" into library work
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_sync_fifo.vhd" into library work
 Parsing entity <generic_sync_fifo>.
 Parsing architecture <syn> of entity <generic_sync_fifo>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_defaults.vhd" into library blk_mem_gen_v4_1
@@ -504,6 +625,12 @@ Parsing architecture <xilinx> of entity <blk_mem_gen_top>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_xst.vhd" into library blk_mem_gen_v4_1
 Parsing entity <blk_mem_gen_v4_1_xst>.
 Parsing architecture <xilinx> of entity <blk_mem_gen_v4_1_xst>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_async_bridge/wb_async_bridge.vhd" into library work
+Parsing entity <wb_async_bridge>.
+Parsing architecture <behavioral> of entity <wb_async_bridge>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_async_bridge/xwb_async_bridge.vhd" into library work
+Parsing entity <xwb_async_bridge>.
+Parsing architecture <wrapper> of entity <xwb_async_bridge>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" into library work
 Parsing entity <wb_onewire_master>.
 Parsing architecture <rtl> of entity <wb_onewire_master>.
@@ -528,32 +655,9 @@ Parsing architecture <rtl> of entity <xwb_i2c_master>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_bus_fanout/xwb_bus_fanout.vhd" into library work
 Parsing entity <xwb_bus_fanout>.
 Parsing architecture <rtl> of entity <xwb_bus_fanout>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wb_conmax_pri_dec.vhd" into library work
-Parsing entity <wb_conmax_pri_dec>.
-Parsing architecture <behaviour> of entity <wb_conmax_pri_dec>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wb_conmax_pri_enc.vhd" into library work
-Parsing entity <wb_conmax_pri_enc>.
-Parsing architecture <behaviour> of entity <wb_conmax_pri_enc>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wb_conmax_arb.vhd" into library work
-Parsing entity <wb_conmax_arb>.
-Parsing architecture <behaviour> of entity <wb_conmax_arb>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wb_conmax_msel.vhd" into library work
-Parsing entity <wb_conmax_msel>.
-Parsing architecture <behavioral> of entity <wb_conmax_msel>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wbconmax_pkg.vhd" into library work
-Parsing package <wbconmax_pkg>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wb_conmax_slave_if.vhd" into library work
-Parsing entity <wb_conmax_slave_if>.
-Parsing architecture <bahaviour> of entity <wb_conmax_slave_if>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wb_conmax_master_if.vhd" into library work
-Parsing entity <wb_conmax_master_if>.
-Parsing architecture <behaviour> of entity <wb_conmax_master_if>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wb_conmax_rf.vhd" into library work
-Parsing entity <wb_conmax_rf>.
-Parsing architecture <behaviour> of entity <wb_conmax_rf>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_conmax/wb_conmax_top.vhd" into library work
-Parsing entity <wb_conmax_top>.
-Parsing architecture <struct> of entity <wb_conmax_top>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_dpram/xwb_dpram.vhd" into library work
+Parsing entity <xwb_dpram>.
+Parsing architecture <struct> of entity <xwb_dpram>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_gpio_port/wb_gpio_port.vhd" into library work
 Parsing entity <wb_gpio_port>.
 Parsing architecture <behavioral> of entity <wb_gpio_port>.
@@ -563,6 +667,9 @@ Parsing architecture <rtl> of entity <xwb_gpio_port>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_simple_timer/wb_tics.vhd" into library work
 Parsing entity <wb_tics>.
 Parsing architecture <behaviour> of entity <wb_tics>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_simple_timer/xwb_tics.vhd" into library work
+Parsing entity <xwb_tics>.
+Parsing architecture <rtl> of entity <xwb_tics>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_uart/uart_async_rx.vhd" into library work
 Parsing entity <uart_async_rx>.
 Parsing architecture <behavioral> of entity <uart_async_rx>.
@@ -572,32 +679,71 @@ Parsing architecture <behavioral> of entity <uart_async_tx>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_uart/uart_baud_gen.vhd" into library work
 Parsing entity <uart_baud_gen>.
 Parsing architecture <behavioral> of entity <uart_baud_gen>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_uart/uart_wb_slave.vhd" into library work
-Parsing entity <uart_wb_slave>.
-Parsing architecture <syn> of entity <uart_wb_slave>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_uart/simple_uart_pkg.vhd" into library work
+Parsing package <uart_wbgen2_pkg>.
+Parsing package body <uart_wbgen2_pkg>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_uart/simple_uart_wb.vhd" into library work
+Parsing entity <simple_uart_wb>.
+Parsing architecture <syn> of entity <simple_uart_wb>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_uart/wb_simple_uart.vhd" into library work
 Parsing entity <wb_simple_uart>.
 Parsing architecture <syn> of entity <wb_simple_uart>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_uart/xwb_simple_uart.vhd" into library work
+Parsing entity <xwb_simple_uart>.
+Parsing architecture <rtl> of entity <xwb_simple_uart>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_vic/vic_prio_enc.vhd" into library work
 Parsing entity <vic_prio_enc>.
 Parsing architecture <syn> of entity <vic_prio_enc>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd" into library work
+Parsing package <wbgen2_pkg>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_vic/wb_slave_vic.vhd" into library work
+Parsing entity <wb_slave_vic>.
+Parsing architecture <syn> of entity <wb_slave_vic>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_vic/wb_vic.vhd" into library work
 Parsing entity <wb_vic>.
 Parsing architecture <syn> of entity <wb_vic>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_vic/xwb_vic.vhd" into library work
+Parsing entity <xwb_vic>.
+Parsing architecture <wrapper> of entity <xwb_vic>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" into library work
 Parsing entity <wb_spi>.
 Parsing architecture <rtl> of entity <wb_spi>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/xwb_spi.vhd" into library work
 Parsing entity <xwb_spi>.
 Parsing architecture <rtl> of entity <xwb_spi>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_virtual_uart/wb_virtual_uart.vhd" into library work
-Parsing entity <wb_virtual_uart>.
-Parsing architecture <struct> of entity <wb_virtual_uart>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd" into library work
-Parsing package <wbgen2_pkg>.
-Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_virtual_uart/wb_virtual_uart_slave.vhd" into library work
-Parsing entity <wb_virtual_uart_slave>.
-Parsing architecture <syn> of entity <wb_virtual_uart_slave>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_crossbar/sdb_rom.vhd" into library work
+Parsing entity <sdb_rom>.
+Parsing architecture <rtl> of entity <sdb_rom>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_crossbar/xwb_crossbar.vhd" into library work
+Parsing entity <xwb_crossbar>.
+Parsing architecture <rtl> of entity <xwb_crossbar>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_crossbar/xwb_sdb_crossbar.vhd" into library work
+Parsing entity <xwb_sdb_crossbar>.
+Parsing architecture <rtl> of entity <xwb_sdb_crossbar>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/generated/xwb_lm32.vhd" into library work
+Parsing entity <xwb_lm32>.
+Parsing architecture <rtl> of entity <xwb_lm32>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_slave_adapter/wb_slave_adapter.vhd" into library work
+Parsing entity <wb_slave_adapter>.
+Parsing architecture <rtl> of entity <wb_slave_adapter>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xloader_registers_pkg.vhd" into library work
+Parsing package <xldr_wbgen2_pkg>.
+Parsing package body <xldr_wbgen2_pkg>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/wb_xilinx_fpga_loader.vhd" into library work
+Parsing entity <wb_xilinx_fpga_loader>.
+Parsing architecture <behavioral> of entity <wb_xilinx_fpga_loader>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xwb_xilinx_fpga_loader.vhd" into library work
+Parsing entity <xwb_xilinx_fpga_loader>.
+Parsing architecture <rtl> of entity <xwb_xilinx_fpga_loader>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xloader_wb.vhd" into library work
+Parsing entity <xloader_wb>.
+Parsing architecture <syn> of entity <xloader_wb>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_clock_crossing/xwb_clock_crossing.vhd" into library work
+Parsing entity <xwb_clock_crossing>.
+Parsing architecture <rtl> of entity <xwb_clock_crossing>.
+Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_dma/xwb_dma.vhd" into library work
+Parsing entity <xwb_dma>.
+Parsing architecture <rtl> of entity <xwb_dma>.
 Parsing VHDL file "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_dpssram.vhd" into library work
 Parsing entity <wbgen2_dpssram>.
 Parsing architecture <syn> of entity <wbgen2_dpssram>.
@@ -846,6 +992,7 @@ Parsing architecture <rtl> of entity <pulse_synchronizer>.
 =========================================================================
 *                            HDL Elaboration                            *
 =========================================================================
+WARNING:HDLCompiler:746 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" Line 50: Range is empty (null range)
 
 Elaborating entity <spec_top_fmc_adc_100Ms> (architecture <rtl>) with generics from library <work>.
 WARNING:HDLCompiler:1127 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" Line 586: Assignment to sys_rst ignored, since the identifier is never used
@@ -1006,22 +1153,25 @@ Elaborating entity <serdes_n_to_1_s2_se> (architecture <arch_serdes_n_to_1_s2_se
 Elaborating entity <wb_addr_decoder> (architecture <behaviour>) with generics from library <work>.
 
 Elaborating entity <wb_onewire_master> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <wb_slave_adapter> (architecture <rtl>) with generics from library <work>.
 Going to verilog side to elaborate module sockit_owm
 
 Elaborating module <sockit_owm(OVD_E=1,CDR_E=1,BDW=32,OWN=1,BAW=1,BTP_N="5.0",BTP_O="1.0")>.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 195: Result of 32-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 197: Result of 32-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 192: Result of 32-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 194: Result of 32-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 196: Result of 32-bit expression is truncated to fit in 8-bit target.
 WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 199: Result of 32-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 202: Result of 32-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 201: Result of 32-bit expression is truncated to fit in 8-bit target.
 WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 204: Result of 32-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 207: Result of 32-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 209: Result of 32-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 211: Result of 32-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 308: Result of 32-bit expression is truncated to fit in 16-bit target.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 395: Result of 32-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 396: Result of 32-bit expression is truncated to fit in 8-bit target.
-WARNING:HDLCompiler:634 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 159: Net <owr_sel[0]> does not have a driver.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 206: Result of 32-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 208: Result of 32-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 305: Result of 32-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 392: Result of 32-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 393: Result of 32-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:634 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v" Line 156: Net <owr_sel[0]> does not have a driver.
 Back to vhdl to continue elaboration
+WARNING:HDLCompiler:634 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" Line 97: Net <adp_in_err> does not have a driver.
 
 Elaborating entity <carrier_csr> (architecture <syn>) from library <work>.
 WARNING:HDLCompiler:1127 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/carrier_csr.vhd" Line 81: Assignment to bwsel_reg ignored, since the identifier is never used
@@ -1050,7 +1200,9 @@ WARNING:HDLCompiler:1127 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/ir
 WARNING:HDLCompiler:1127 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/irq_controller_regs.vhd" Line 64: Assignment to allones ignored, since the identifier is never used
 WARNING:HDLCompiler:1127 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/irq_controller_regs.vhd" Line 65: Assignment to allzeros ignored, since the identifier is never used
 
-Elaborating entity <wb_i2c_master> (architecture <rtl>) from library <work>.
+Elaborating entity <wb_i2c_master> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <wb_slave_adapter> (architecture <rtl>) with generics from library <work>.
 
 Elaborating entity <i2c_master_top> (architecture <structural>) with generics from library <work>.
 INFO:HDLCompiler:679 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/i2c_master_top.vhd" Line 204. Case statement is complete. others clause is never selected
@@ -1060,8 +1212,11 @@ Elaborating entity <i2c_master_byte_ctrl> (architecture <structural>) from libra
 Elaborating entity <i2c_master_bit_ctrl> (architecture <structural>) from library <work>.
 INFO:HDLCompiler:679 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/i2c_master_bit_ctrl.vhd" Line 561. Case statement is complete. others clause is never selected
 INFO:HDLCompiler:679 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/i2c_master_byte_ctrl.vhd" Line 354. Case statement is complete. others clause is never selected
+WARNING:HDLCompiler:634 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" Line 90: Net <wb_out_err> does not have a driver.
 
-Elaborating entity <wb_spi> (architecture <rtl>) from library <work>.
+Elaborating entity <wb_spi> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <wb_slave_adapter> (architecture <rtl>) with generics from library <work>.
 Going to verilog side to elaborate module spi_top
 
 Elaborating module <spi_top(Tp=1)>.
@@ -1070,6 +1225,7 @@ Elaborating module <spi_clgen>.
 
 Elaborating module <spi_shift>.
 Back to vhdl to continue elaboration
+WARNING:HDLCompiler:634 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" Line 61: Net <wb_out_rty> does not have a driver.
 
 Elaborating entity <fmc_adc_100Ms_core> (architecture <rtl>) from library <work>.
 
@@ -1249,38 +1405,43 @@ Synthesizing Unit <spec_top_fmc_adc_100Ms>.
 WARNING:Xst:647 - Input <aux_buttons_i<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 716: Output port <owr_pwren_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 716: Output port <wb_int_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 755: Output port <carrier_csr_ctrl_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 755: Output port <carrier_csr_ctrl_dac_clr_n_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 894: Output port <wb_int_o> of the instance <cmp_fmc_sys_i2c> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 932: Output port <wb_err_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 932: Output port <wb_int_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 982: Output port <wb_int_o> of the instance <cmp_fmc_i2c> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1080: Output port <owr_pwren_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1080: Output port <wb_int_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <wb0_data_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p0_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_wr_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1115: Output port <p1_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 716: Output port <wb_stall_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 757: Output port <carrier_csr_ctrl_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 757: Output port <carrier_csr_ctrl_dac_clr_n_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 896: Output port <wb_int_o> of the instance <cmp_fmc_sys_i2c> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 896: Output port <wb_stall_o> of the instance <cmp_fmc_sys_i2c> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 938: Output port <wb_err_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 938: Output port <wb_int_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 938: Output port <wb_stall_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 992: Output port <wb_int_o> of the instance <cmp_fmc_i2c> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 992: Output port <wb_stall_o> of the instance <cmp_fmc_i2c> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1094: Output port <owr_pwren_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1094: Output port <wb_int_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1094: Output port <wb_stall_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <wb0_data_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
 WARNING:Xst:653 - Signal <wb_dat_i<63:32>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <wb_ack<1>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <wb_stall<1>> is used but never assigned. This sourceless signal will be automatically connected to value GND.
@@ -1290,13 +1451,13 @@ WARNING:Xst:653 - Signal <wb_stall<1>> is used but never assigned. This sourcele
     Found 1-bit register for signal <led_pps>.
     Found 4-bit register for signal <aux_leds_o>.
     Found 1-bit register for signal <ddr_wr_fifo_empty_d>.
-    Found 27-bit adder for signal <led_cnt[26]_GND_9_o_add_5_OUT> created at line 1241.
-    Found 1-bit tristate buffer for signal <carrier_one_wire_b> created at line 741
-    Found 1-bit tristate buffer for signal <sys_scl_b> created at line 921
-    Found 1-bit tristate buffer for signal <sys_sda_b> created at line 924
-    Found 1-bit tristate buffer for signal <si570_scl_b> created at line 1009
-    Found 1-bit tristate buffer for signal <si570_sda_b> created at line 1012
-    Found 1-bit tristate buffer for signal <mezz_one_wire_b> created at line 1105
+    Found 27-bit adder for signal <led_cnt[26]_GND_10_o_add_5_OUT> created at line 1241.
+    Found 1-bit tristate buffer for signal <carrier_one_wire_b> created at line 743
+    Found 1-bit tristate buffer for signal <sys_scl_b> created at line 927
+    Found 1-bit tristate buffer for signal <sys_sda_b> created at line 930
+    Found 1-bit tristate buffer for signal <si570_scl_b> created at line 1023
+    Found 1-bit tristate buffer for signal <si570_sda_b> created at line 1026
+    Found 1-bit tristate buffer for signal <mezz_one_wire_b> created at line 1121
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  38 D-type flip-flop(s).
@@ -1367,8 +1528,8 @@ WARNING:Xst:647 - Input <pattern2<1:0>> is never used. This port will be preserv
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 12-bit adder for signal <counter[11]_GND_14_o_add_1_OUT> created at line 176.
-    Found 3-bit adder for signal <count[2]_GND_14_o_add_14_OUT> created at line 205.
+    Found 12-bit adder for signal <counter[11]_GND_15_o_add_1_OUT> created at line 176.
+    Found 3-bit adder for signal <count[2]_GND_15_o_add_14_OUT> created at line 205.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  19 D-type flip-flop(s).
@@ -1423,7 +1584,7 @@ WARNING:Xst:653 - Signal <incdec_data> is used but never assigned. This sourcele
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 9-bit adder for signal <counter[8]_GND_59_o_add_2_OUT> created at line 150.
+    Found 9-bit adder for signal <counter[8]_GND_60_o_add_2_OUT> created at line 150.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  47 D-type flip-flop(s).
@@ -1467,9 +1628,9 @@ WARNING:Xst:653 - Signal <incdec_data> is used but never assigned. This sourcele
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 9-bit adder for signal <counter[8]_GND_129_o_add_1_OUT> created at line 150.
-    Found 5-bit adder for signal <pdcounter[4]_GND_129_o_add_34_OUT> created at line 242.
-    Found 5-bit subtractor for signal <GND_129_o_GND_129_o_sub_37_OUT<4:0>> created at line 244.
+    Found 9-bit adder for signal <counter[8]_GND_130_o_add_1_OUT> created at line 150.
+    Found 5-bit adder for signal <pdcounter[4]_GND_130_o_add_34_OUT> created at line 242.
+    Found 5-bit subtractor for signal <GND_130_o_GND_130_o_sub_37_OUT<4:0>> created at line 244.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  24 D-type flip-flop(s).
@@ -1500,7 +1661,7 @@ Synthesizing Unit <p2l_decode32>.
     Found 1-bit register for signal <p2l_d_valid>.
     Found 1-bit register for signal <p2l_d_last>.
     Found 1-bit register for signal <des_p2l_dframe_d>.
-    Found 30-bit adder for signal <p2l_addr[31]_GND_144_o_add_17_OUT> created at line 1241.
+    Found 30-bit adder for signal <p2l_addr[31]_GND_145_o_add_17_OUT> created at line 1241.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred 103 D-type flip-flop(s).
@@ -1585,7 +1746,7 @@ INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/gn4124-c
 Unit <wbmaster32> synthesized.
 
 Synthesizing Unit <generic_async_fifo_1>.
-    Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd".
+    Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd".
         g_data_width = 64
         g_size = 512
         g_show_ahead = false
@@ -1601,19 +1762,19 @@ Synthesizing Unit <generic_async_fifo_1>.
         g_with_wr_count = false
         g_almost_empty_threshold = 0
         g_almost_full_threshold = 500
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <RD_DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <WR_DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <FULL> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <ALMOST_FULL> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <WR_ACK> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <OVERFLOW> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <ALMOST_EMPTY> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <VALID> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <UNDERFLOW> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <PROG_EMPTY> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <SBITERR> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <DBITERR> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <RD_DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <WR_DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <FULL> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <ALMOST_FULL> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <WR_ACK> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <OVERFLOW> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <ALMOST_EMPTY> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <VALID> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <UNDERFLOW> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <PROG_EMPTY> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <SBITERR> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <DBITERR> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
 WARNING:Xst:653 - Signal <wr_count_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <rd_count_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <wr_empty_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
@@ -2591,7 +2752,7 @@ WARNING:Xst:647 - Input <DBITERR_I> is never used. This port will be preserved a
 Unit <output_blk_1> synthesized.
 
 Synthesizing Unit <generic_async_fifo_2>.
-    Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd".
+    Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd".
         g_data_width = 32
         g_size = 512
         g_show_ahead = false
@@ -2607,19 +2768,19 @@ Synthesizing Unit <generic_async_fifo_2>.
         g_with_wr_count = false
         g_almost_empty_threshold = 0
         g_almost_full_threshold = 500
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <RD_DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <WR_DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <FULL> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <ALMOST_FULL> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <WR_ACK> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <OVERFLOW> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <ALMOST_EMPTY> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <VALID> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <UNDERFLOW> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <PROG_EMPTY> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <SBITERR> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_async_fifo.vhd" line 238: Output port <DBITERR> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <RD_DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <WR_DATA_COUNT> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <FULL> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <ALMOST_FULL> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <WR_ACK> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <OVERFLOW> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <ALMOST_EMPTY> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <VALID> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <UNDERFLOW> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <PROG_EMPTY> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <SBITERR> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" line 238: Output port <DBITERR> of the instance <wrapped_gen> is unconnected or connected to loadless signal.
 WARNING:Xst:653 - Signal <wr_count_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <rd_count_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
 WARNING:Xst:653 - Signal <wr_empty_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
@@ -3305,7 +3466,7 @@ Unit <dma_controller> synthesized.
 Synthesizing Unit <dma_controller_wb_slave>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/gn4124-core/trunk/hdl/gn4124core/rtl/dma_controller_wb_slave.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 6-bit register for signal <ack_sreg>.
+    Found 8-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 32-bit register for signal <dma_ctrl_int_write>.
     Found 32-bit register for signal <dma_stat_int_write>.
@@ -3409,11 +3570,9 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     Found 1-bit register for signal <dma_attrib_load_o>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:5>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
     Summary:
-	inferred 975 D-type flip-flop(s).
-	inferred  40 Multiplexer(s).
+	inferred 977 D-type flip-flop(s).
+	inferred  41 Multiplexer(s).
 Unit <dma_controller_wb_slave> synthesized.
 
 Synthesizing Unit <pulse_synchronizer>.
@@ -3748,16 +3907,66 @@ Unit <wb_addr_decoder> synthesized.
 
 Synthesizing Unit <wb_onewire_master>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd".
+        g_interface_mode = classic
+        g_address_granularity = word
         g_num_ports = 1
         g_ow_btp_normal = "5.0"
         g_ow_btp_overdrive = "1.0"
-WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:647 - Input <wb_adr_i<1:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 32-bit register for signal <wb_dat_o>.
-    Found 1-bit register for signal <wb_ack_o>.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <sl_dat_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <ma_adr_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <ma_dat_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <ma_sel_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <master_o_sel> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <sl_err_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <sl_rty_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <sl_ack_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <sl_stall_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <sl_int_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <slave_o_err> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <slave_o_rty> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <ma_cyc_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <ma_stb_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" line 117: Output port <ma_we_o> of the instance <U_Slave_adapter> is unconnected or connected to loadless signal.
+WARNING:Xst:653 - Signal <adp_in_err> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <adp_in_rty> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <adp_in_stall> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Found 32-bit register for signal <adp_in_dat>.
+    Found 1-bit register for signal <adp_in_ack>.
     Summary:
 	inferred  33 D-type flip-flop(s).
 Unit <wb_onewire_master> synthesized.
+
+Synthesizing Unit <wb_slave_adapter_1>.
+    Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_slave_adapter/wb_slave_adapter.vhd".
+        g_master_use_struct = true
+        g_master_mode = classic
+        g_master_granularity = word
+        g_slave_use_struct = true
+        g_slave_mode = classic
+        g_slave_granularity = word
+WARNING:Xst:647 - Input <sl_adr_i<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <sl_dat_i<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <sl_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_dat_i<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <clk_sys_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <rst_n_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <sl_cyc_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <sl_stb_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <sl_we_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_err_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_rty_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_ack_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_stall_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_int_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:653 - Signal <ma_adr_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_dat_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_sel_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_cyc_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_stb_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_we_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Summary:
+	no macro.
+Unit <wb_slave_adapter_1> synthesized.
 
 Synthesizing Unit <sockit_owm>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_onewire_master/sockit_owm.v".
@@ -3800,16 +4009,16 @@ WARNING:Xst:2935 - Signal 'owr_sel', unconnected in block 'sockit_owm', is tied 
     Found 1-bit register for signal <owr_cyc>.
     Found 1-bit register for signal <owr_oen>.
     Found 1-bit register for signal <owr_smp>.
-    Found 17-bit adder for signal <n0139[16:0]> created at line 308.
-    Found 8-bit subtractor for signal <GND_453_o_GND_453_o_sub_37_OUT<7:0>> created at line 395.
-    Found 8-bit subtractor for signal <GND_453_o_GND_453_o_sub_38_OUT<7:0>> created at line 396.
+    Found 17-bit adder for signal <n0139[16:0]> created at line 305.
+    Found 8-bit subtractor for signal <GND_462_o_GND_462_o_sub_37_OUT<7:0>> created at line 392.
+    Found 8-bit subtractor for signal <GND_462_o_GND_462_o_sub_38_OUT<7:0>> created at line 393.
     Found 1-bit shifter logical left for signal <owr_e> created at line 100
-    Found 16-bit comparator equal for signal <pls> created at line 312
-    Found 8-bit comparator equal for signal <cnt[7]_t_rstp[7]_equal_43_o> created at line 402
-    Found 8-bit comparator equal for signal <cnt[7]_t_bits[7]_equal_44_o> created at line 403
-    Found 8-bit comparator equal for signal <cnt[7]_t_rsth[7]_equal_46_o> created at line 412
-    Found 8-bit comparator equal for signal <cnt[7]_t_dat1[7]_equal_47_o> created at line 413
-    Found 8-bit comparator not equal for signal <cnt[7]_t_dat0[7]_equal_48_o> created at line 414
+    Found 16-bit comparator equal for signal <pls> created at line 309
+    Found 8-bit comparator equal for signal <cnt[7]_t_rstp[7]_equal_43_o> created at line 399
+    Found 8-bit comparator equal for signal <cnt[7]_t_bits[7]_equal_44_o> created at line 400
+    Found 8-bit comparator equal for signal <cnt[7]_t_rsth[7]_equal_46_o> created at line 409
+    Found 8-bit comparator equal for signal <cnt[7]_t_dat1[7]_equal_47_o> created at line 410
+    Found 8-bit comparator not equal for signal <cnt[7]_t_dat0[7]_equal_48_o> created at line 411
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  65 D-type flip-flop(s).
@@ -3821,7 +4030,7 @@ Unit <sockit_owm> synthesized.
 Synthesizing Unit <carrier_csr>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/carrier_csr.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 9-bit register for signal <ack_sreg>.
+    Found 6-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 29-bit register for signal <carrier_csr_ctrl_reserved_int>.
     Found 1-bit register for signal <ack_in_progress>.
@@ -3829,8 +4038,11 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     Found 1-bit register for signal <carrier_csr_ctrl_led_red_int>.
     Found 1-bit register for signal <carrier_csr_ctrl_dac_clr_n_int>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <carrier_csr>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <carrier_csr>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <carrier_csr>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:6>> (without init value) have a constant value of 0 in block <carrier_csr>.
     Summary:
-	inferred  74 D-type flip-flop(s).
+	inferred  71 D-type flip-flop(s).
 	inferred   6 Multiplexer(s).
 Unit <carrier_csr> synthesized.
 
@@ -3839,7 +4051,7 @@ Synthesizing Unit <gc_extend_pulse>.
         g_width = 5000000
     Found 32-bit register for signal <cntr>.
     Found 1-bit register for signal <extended_int>.
-    Found 32-bit subtractor for signal <GND_556_o_GND_556_o_sub_2_OUT<31:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_565_o_GND_565_o_sub_2_OUT<31:0>> created at line 1308.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  33 D-type flip-flop(s).
@@ -3863,8 +4075,8 @@ Synthesizing Unit <utc_core>.
     Found 32-bit register for signal <utc_acq_end_tag_coarse>.
     Found 32-bit register for signal <utc_acq_end_tag_fine>.
     Found 32-bit register for signal <utc_seconds_cnt>.
-    Found 32-bit adder for signal <utc_seconds_cnt[31]_GND_557_o_add_0_OUT> created at line 1241.
-    Found 32-bit adder for signal <utc_coarse_cnt[31]_GND_557_o_add_7_OUT> created at line 1241.
+    Found 32-bit adder for signal <utc_seconds_cnt[31]_GND_566_o_add_0_OUT> created at line 1241.
+    Found 32-bit adder for signal <utc_coarse_cnt[31]_GND_566_o_add_7_OUT> created at line 1241.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 449 D-type flip-flop(s).
@@ -3874,17 +4086,14 @@ Unit <utc_core> synthesized.
 Synthesizing Unit <utc_core_regs>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/utc_core_regs.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 6-bit register for signal <ack_sreg>.
+    Found 9-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 1-bit register for signal <ack_in_progress>.
     Found 1-bit register for signal <utc_core_seconds_load_o>.
     Found 1-bit register for signal <utc_core_coarse_load_o>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <utc_core_regs>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <utc_core_regs>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <utc_core_regs>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:6>> (without init value) have a constant value of 0 in block <utc_core_regs>.
     Summary:
-	inferred  41 D-type flip-flop(s).
+	inferred  44 D-type flip-flop(s).
 	inferred  19 Multiplexer(s).
 Unit <utc_core_regs> synthesized.
 
@@ -3901,7 +4110,7 @@ Unit <irq_controller> synthesized.
 Synthesizing Unit <irq_controller_regs>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/rtl/irq_controller_regs.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 8-bit register for signal <ack_sreg>.
+    Found 7-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 32-bit register for signal <irq_ctrl_en_mask_int>.
     Found 1-bit register for signal <ack_in_progress>.
@@ -3909,18 +4118,69 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     Found 1-bit register for signal <irq_ctrl_src_load_o>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
     Summary:
-	inferred  75 D-type flip-flop(s).
+	inferred  74 D-type flip-flop(s).
 	inferred   4 Multiplexer(s).
 Unit <irq_controller_regs> synthesized.
 
 Synthesizing Unit <wb_i2c_master>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd".
-WARNING:Xst:647 - Input <wb_dat_i<31:8>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+        g_interface_mode = classic
+        g_address_granularity = word
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <slave_o_dat> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <ma_adr_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <ma_dat_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <ma_sel_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <master_o_sel> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <sl_err_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <sl_rty_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <slave_o_ack> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <slave_o_err> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <slave_o_rty> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <slave_o_stall> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <slave_o_int> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <ma_cyc_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <ma_stb_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/wb_i2c_master.vhd" line 98: Output port <ma_we_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+WARNING:Xst:653 - Signal <wb_out_err> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <wb_out_rty> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <wb_out_stall> is used but never assigned. This sourceless signal will be automatically connected to value GND.
     Summary:
 	no macro.
 Unit <wb_i2c_master> synthesized.
+
+Synthesizing Unit <wb_slave_adapter_2>.
+    Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_slave_adapter/wb_slave_adapter.vhd".
+        g_master_use_struct = true
+        g_master_mode = classic
+        g_master_granularity = word
+        g_slave_use_struct = false
+        g_slave_mode = classic
+        g_slave_granularity = word
+WARNING:Xst:647 - Input <slave_i_adr<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_sel<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_dat<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_dat_i<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <clk_sys_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <rst_n_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_cyc> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_stb> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_we> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_err_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_rty_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_ack_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_stall_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_int_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:653 - Signal <ma_adr_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_dat_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_sel_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_cyc_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_stb_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_we_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Summary:
+	no macro.
+Unit <wb_slave_adapter_2> synthesized.
 
 Synthesizing Unit <i2c_master_top>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_i2c_master/i2c_master_top.vhd".
@@ -3937,7 +4197,7 @@ WARNING:Xst:647 - Input <arst_i> is never used. This port will be preserved and 
     Found 1-bit register for signal <wb_inta_o>.
     Found 8-bit register for signal <wb_dat_o>.
     Found 1-bit register for signal <iack_o>.
-    Found 8-bit 8-to-1 multiplexer for signal <wb_adr_i[2]_GND_562_o_wide_mux_0_OUT> created at line 191.
+    Found 8-bit 8-to-1 multiplexer for signal <wb_adr_i[2]_GND_578_o_wide_mux_0_OUT> created at line 191.
     Summary:
 	inferred  54 D-type flip-flop(s).
 	inferred  16 Multiplexer(s).
@@ -3968,9 +4228,9 @@ Synthesizing Unit <i2c_master_byte_ctrl>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit subtractor for signal <GND_563_o_GND_563_o_sub_6_OUT<2:0>> created at line 1308.
-    Found 4-bit 6-to-1 multiplexer for signal <c_state[2]_X_93_o_wide_mux_38_OUT> created at line 264.
-    Found 1-bit 3-to-1 multiplexer for signal <c_state[1]_GND_563_o_Mux_40_o> created at line 264.
+    Found 3-bit subtractor for signal <GND_579_o_GND_579_o_sub_6_OUT<2:0>> created at line 1308.
+    Found 4-bit 6-to-1 multiplexer for signal <c_state[2]_X_95_o_wide_mux_38_OUT> created at line 264.
+    Found 1-bit 3-to-1 multiplexer for signal <c_state[1]_GND_579_o_Mux_40_o> created at line 264.
     Found 1-bit 3-to-1 multiplexer for signal <c_state[2]_core_ack_Mux_42_o> created at line 264.
     Summary:
 	inferred   1 Adder/Subtractor(s).
@@ -4019,8 +4279,8 @@ Synthesizing Unit <i2c_master_bit_ctrl>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 16-bit subtractor for signal <GND_564_o_GND_564_o_sub_2_OUT<15:0>> created at line 1308.
-    Found 14-bit subtractor for signal <GND_564_o_GND_564_o_sub_11_OUT<13:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_580_o_GND_580_o_sub_2_OUT<15:0>> created at line 1308.
+    Found 14-bit subtractor for signal <GND_580_o_GND_580_o_sub_11_OUT<13:0>> created at line 1308.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  57 D-type flip-flop(s).
@@ -4030,9 +4290,58 @@ Unit <i2c_master_bit_ctrl> synthesized.
 
 Synthesizing Unit <wb_spi>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd".
+        g_interface_mode = classic
+        g_address_granularity = word
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <slave_o_dat> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <ma_adr_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <ma_dat_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <ma_sel_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <sl_rty_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <slave_o_ack> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <slave_o_err> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <slave_o_rty> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <slave_o_stall> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <slave_o_int> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <ma_cyc_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <ma_stb_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd" line 70: Output port <ma_we_o> of the instance <U_Adapter> is unconnected or connected to loadless signal.
+WARNING:Xst:653 - Signal <wb_out_rty> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <wb_out_stall> is used but never assigned. This sourceless signal will be automatically connected to value GND.
     Summary:
 	no macro.
 Unit <wb_spi> synthesized.
+
+Synthesizing Unit <wb_slave_adapter_3>.
+    Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_slave_adapter/wb_slave_adapter.vhd".
+        g_master_use_struct = true
+        g_master_mode = classic
+        g_master_granularity = byte
+        g_slave_use_struct = false
+        g_slave_mode = classic
+        g_slave_granularity = word
+WARNING:Xst:647 - Input <slave_i_adr<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_sel<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_dat<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_dat_i<31:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <clk_sys_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <rst_n_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_cyc> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_stb> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <slave_i_we> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_err_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_rty_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_ack_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_stall_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ma_int_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:653 - Signal <ma_adr_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_dat_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_sel_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_cyc_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_stb_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+WARNING:Xst:653 - Signal <ma_we_o> is used but never assigned. This sourceless signal will be automatically connected to value GND.
+    Summary:
+	no macro.
+Unit <wb_slave_adapter_3> synthesized.
 
 Synthesizing Unit <spi_top>.
     Related source file is "/home/mcattin/projects/fmc_adc_100ms/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_spi/spi_top.v".
@@ -4071,7 +4380,7 @@ Synthesizing Unit <spi_clgen>.
     Found 1-bit register for signal <clk_out>.
     Found 1-bit register for signal <pos_edge>.
     Found 1-bit register for signal <neg_edge>.
-    Found 16-bit subtractor for signal <cnt[15]_GND_571_o_sub_3_OUT> created at line 80.
+    Found 16-bit subtractor for signal <cnt[15]_GND_594_o_sub_3_OUT> created at line 80.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  19 D-type flip-flop(s).
@@ -4213,9 +4522,9 @@ Synthesizing Unit <spi_shift>.
     Found 1-bit register for signal <data<1>>.
     Found 1-bit register for signal <data<0>>.
     Found 8-bit subtractor for signal <len[6]_cnt[7]_sub_3_OUT> created at line 82.
-    Found 8-bit subtractor for signal <cnt[7]_GND_573_o_sub_4_OUT> created at line 82.
+    Found 8-bit subtractor for signal <cnt[7]_GND_596_o_sub_4_OUT> created at line 82.
     Found 8-bit subtractor for signal <len[6]_cnt[7]_sub_9_OUT> created at line 83.
-    Found 8-bit adder for signal <cnt[7]_GND_573_o_add_6_OUT> created at line 83.
+    Found 8-bit adder for signal <cnt[7]_GND_596_o_add_6_OUT> created at line 83.
     Found 1-bit 128-to-1 multiplexer for signal <tx_bit_pos[6]_data[127]_Mux_19_o> created at line 122.
     Found 1-bit 128-to-1 multiplexer for signal <rx_bit_pos[6]_data[127]_Mux_20_o> created at line 234.
     Summary:
@@ -4307,19 +4616,19 @@ INFO:Xst:3210 - "/home/mcattin/projects/fmc_adc_100ms/hdl/adc/rtl/fmc_adc_100Ms_
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 32-bit adder for signal <samples_cnt[31]_GND_576_o_add_52_OUT> created at line 1241.
-    Found 13-bit adder for signal <dpram_addra_cnt[12]_GND_576_o_add_75_OUT> created at line 1241.
-    Found 13-bit adder for signal <GND_576_o_GND_576_o_add_88_OUT> created at line 1241.
-    Found 13-bit adder for signal <dpram_addrb_cnt[12]_GND_576_o_add_90_OUT> created at line 1241.
-    Found 25-bit adder for signal <ram_addr_cnt[24]_GND_576_o_add_99_OUT> created at line 1241.
-    Found 32-bit subtractor for signal <GND_576_o_GND_576_o_sub_16_OUT<31:0>> created at line 1308.
-    Found 16-bit subtractor for signal <GND_576_o_GND_576_o_sub_24_OUT<15:0>> created at line 1308.
-    Found 16-bit subtractor for signal <GND_576_o_GND_576_o_sub_26_OUT<15:0>> created at line 1308.
-    Found 16-bit subtractor for signal <GND_576_o_GND_576_o_sub_31_OUT<15:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_576_o_GND_576_o_sub_38_OUT<31:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_576_o_GND_576_o_sub_40_OUT<31:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_576_o_GND_576_o_sub_46_OUT<31:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_576_o_GND_576_o_sub_48_OUT<31:0>> created at line 1308.
+    Found 32-bit adder for signal <samples_cnt[31]_GND_599_o_add_52_OUT> created at line 1241.
+    Found 13-bit adder for signal <dpram_addra_cnt[12]_GND_599_o_add_75_OUT> created at line 1241.
+    Found 13-bit adder for signal <GND_599_o_GND_599_o_add_88_OUT> created at line 1241.
+    Found 13-bit adder for signal <dpram_addrb_cnt[12]_GND_599_o_add_90_OUT> created at line 1241.
+    Found 25-bit adder for signal <ram_addr_cnt[24]_GND_599_o_add_99_OUT> created at line 1241.
+    Found 32-bit subtractor for signal <GND_599_o_GND_599_o_sub_16_OUT<31:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_599_o_GND_599_o_sub_24_OUT<15:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_599_o_GND_599_o_sub_26_OUT<15:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_599_o_GND_599_o_sub_31_OUT<15:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_599_o_GND_599_o_sub_38_OUT<31:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_599_o_GND_599_o_sub_40_OUT<31:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_599_o_GND_599_o_sub_46_OUT<31:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_599_o_GND_599_o_sub_48_OUT<31:0>> created at line 1308.
     Found 13-bit subtractor for signal <n0446> created at line 0.
     Found 16-bit 4-to-1 multiplexer for signal <int_trig_data> created at line 348.
     Found 16-bit comparator greater for signal <int_trig_data[15]_int_trig_thres[15]_LessThan_13_o> created at line 790
@@ -4341,7 +4650,7 @@ Synthesizing Unit <monostable>.
     Found 25-bit register for signal <s_monostable_cnt>.
     Found 1-bit register for signal <s_output_pulse>.
     Found 1-bit register for signal <s_trigger_d<0>>.
-    Found 25-bit subtractor for signal <GND_577_o_GND_577_o_sub_4_OUT<24:0>> created at line 1308.
+    Found 25-bit subtractor for signal <GND_600_o_GND_600_o_sub_4_OUT<24:0>> created at line 1308.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  27 D-type flip-flop(s).
@@ -4500,8 +4809,8 @@ Synthesizing Unit <ext_pulse_sync>.
     Found 1-bit register for signal <s_sync_pulse<0>>.
     Found 1-bit register for signal <s_sync_pulse<1>>.
     Found 1-bit register for signal <s_output_pulse>.
-    Found 2-bit adder for signal <s_pulse_length_cnt[1]_GND_700_o_add_2_OUT> created at line 1241.
-    Found 2-bit subtractor for signal <GND_700_o_GND_700_o_sub_9_OUT<1:0>> created at line 1308.
+    Found 2-bit adder for signal <s_pulse_length_cnt[1]_GND_723_o_add_2_OUT> created at line 1241.
+    Found 2-bit subtractor for signal <GND_723_o_GND_723_o_sub_9_OUT<1:0>> created at line 1308.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred   9 D-type flip-flop(s).
@@ -4579,10 +4888,10 @@ WARNING:Xst:647 - Input <ddr_rd_error_i> is never used. This port will be preser
     Found 1-bit register for signal <wb_ack_o>.
     Found 64-bit register for signal <wb_data_o>.
     Found 1-bit register for signal <wb_stall_o>.
-    Found 6-bit adder for signal <ddr_burst_cnt[5]_GND_829_o_add_21_OUT> created at line 1241.
-    Found 6-bit subtractor for signal <GND_829_o_GND_829_o_sub_10_OUT<5:0>> created at line 1308.
-    Found 7-bit comparator greater for signal <GND_829_o_ddr_wr_count_i[6]_LessThan_32_o> created at line 329
-    Found 7-bit comparator greater for signal <GND_829_o_ddr_rd_count_i[6]_LessThan_33_o> created at line 331
+    Found 6-bit adder for signal <ddr_burst_cnt[5]_GND_852_o_add_21_OUT> created at line 1241.
+    Found 6-bit subtractor for signal <GND_852_o_GND_852_o_sub_10_OUT<5:0>> created at line 1308.
+    Found 7-bit comparator greater for signal <GND_852_o_ddr_wr_count_i[6]_LessThan_32_o> created at line 329
+    Found 7-bit comparator greater for signal <GND_852_o_ddr_rd_count_i[6]_LessThan_33_o> created at line 331
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 216 D-type flip-flop(s).
@@ -4617,10 +4926,10 @@ WARNING:Xst:647 - Input <ddr_rd_error_i> is never used. This port will be preser
     Found 1-bit register for signal <wb_ack_o>.
     Found 32-bit register for signal <wb_data_o>.
     Found 1-bit register for signal <wb_stall_o>.
-    Found 6-bit adder for signal <ddr_burst_cnt[5]_GND_830_o_add_21_OUT> created at line 1241.
-    Found 6-bit subtractor for signal <GND_830_o_GND_830_o_sub_10_OUT<5:0>> created at line 1308.
-    Found 7-bit comparator greater for signal <GND_830_o_ddr_wr_count_i[6]_LessThan_32_o> created at line 329
-    Found 7-bit comparator greater for signal <GND_830_o_ddr_rd_count_i[6]_LessThan_33_o> created at line 331
+    Found 6-bit adder for signal <ddr_burst_cnt[5]_GND_853_o_add_21_OUT> created at line 1241.
+    Found 6-bit subtractor for signal <GND_853_o_GND_853_o_sub_10_OUT<5:0>> created at line 1308.
+    Found 7-bit comparator greater for signal <GND_853_o_ddr_wr_count_i[6]_LessThan_32_o> created at line 329
+    Found 7-bit comparator greater for signal <GND_853_o_ddr_rd_count_i[6]_LessThan_33_o> created at line 331
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 149 D-type flip-flop(s).
@@ -5213,35 +5522,35 @@ INFO:Xst:1799 - State 111010 is never reached in FSM <STATE>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 16-bit adder for signal <WAIT_200us_COUNTER[15]_GND_865_o_add_13_OUT> created at line 607.
-    Found 10-bit adder for signal <RstCounter[9]_GND_865_o_add_17_OUT> created at line 669.
-    Found 8-bit adder for signal <WaitTimer[7]_GND_865_o_add_29_OUT> created at line 895.
-    Found 6-bit adder for signal <count[5]_GND_865_o_add_37_OUT> created at line 917.
-    Found 6-bit adder for signal <P_Term[5]_GND_865_o_add_50_OUT> created at line 1090.
-    Found 7-bit adder for signal <N_Term[6]_GND_865_o_add_81_OUT> created at line 1143.
-    Found 8-bit adder for signal <counter_inc[7]_GND_865_o_add_326_OUT> created at line 1655.
-    Found 8-bit adder for signal <DQS_DELAY[7]_GND_865_o_add_329_OUT> created at line 1661.
-    Found 8-bit adder for signal <counter_dec[7]_GND_865_o_add_339_OUT> created at line 1680.
+    Found 16-bit adder for signal <WAIT_200us_COUNTER[15]_GND_888_o_add_13_OUT> created at line 607.
+    Found 10-bit adder for signal <RstCounter[9]_GND_888_o_add_17_OUT> created at line 669.
+    Found 8-bit adder for signal <WaitTimer[7]_GND_888_o_add_29_OUT> created at line 895.
+    Found 6-bit adder for signal <count[5]_GND_888_o_add_37_OUT> created at line 917.
+    Found 6-bit adder for signal <P_Term[5]_GND_888_o_add_50_OUT> created at line 1090.
+    Found 7-bit adder for signal <N_Term[6]_GND_888_o_add_81_OUT> created at line 1143.
+    Found 8-bit adder for signal <counter_inc[7]_GND_888_o_add_326_OUT> created at line 1655.
+    Found 8-bit adder for signal <DQS_DELAY[7]_GND_888_o_add_329_OUT> created at line 1661.
+    Found 8-bit adder for signal <counter_dec[7]_GND_888_o_add_339_OUT> created at line 1680.
     Found 8-bit subtractor for signal <Max_Value_Delta_Up> created at line 414.
     Found 8-bit subtractor for signal <Max_Value_Delta_Dn> created at line 416.
-    Found 6-bit subtractor for signal <GND_865_o_GND_865_o_sub_68_OUT<5:0>> created at line 1095.
-    Found 7-bit subtractor for signal <GND_865_o_GND_865_o_sub_175_OUT<6:0>> created at line 1153.
-    Found 8-bit subtractor for signal <GND_865_o_GND_865_o_sub_343_OUT<7:0>> created at line 1686.
+    Found 6-bit subtractor for signal <GND_888_o_GND_888_o_sub_68_OUT<5:0>> created at line 1095.
+    Found 7-bit subtractor for signal <GND_888_o_GND_888_o_sub_175_OUT<6:0>> created at line 1153.
+    Found 8-bit subtractor for signal <GND_888_o_GND_888_o_sub_343_OUT<7:0>> created at line 1686.
     Found 15-bit adder for signal <_n0863> created at line 478.
+    Found 15-bit adder for signal <n0468> created at line 478.
+    Found 15-bit adder for signal <_n0869> created at line 478.
     Found 15-bit adder for signal <n0476[14:0]> created at line 478.
     Found 15-bit adder for signal <n0478> created at line 478.
-    Found 15-bit adder for signal <n0538> created at line 478.
-    Found 15-bit adder for signal <_n0875> created at line 478.
+    Found 15-bit adder for signal <_n0878> created at line 478.
     Found 15-bit adder for signal <n0736> created at line 478.
     Found 15-bit adder for signal <n0487> created at line 478.
-    Found 15-bit adder for signal <_n0884> created at line 478.
-    Found 15-bit adder for signal <n0468> created at line 478.
-    Found 10-bit comparator greater for signal <RstCounter[9]_PWR_327_o_LessThan_17_o> created at line 667
+    Found 15-bit adder for signal <n0538> created at line 478.
+    Found 10-bit comparator greater for signal <RstCounter[9]_PWR_330_o_LessThan_17_o> created at line 667
     Found 8-bit comparator greater for signal <Dec_Flag> created at line 905
     Found 8-bit comparator greater for signal <Inc_Flag> created at line 906
     Found 6-bit comparator equal for signal <n0161> created at line 1161
     Found 7-bit comparator equal for signal <n0170> created at line 1193
-    Found 6-bit comparator greater for signal <count[5]_PWR_327_o_LessThan_302_o> created at line 1598
+    Found 6-bit comparator greater for signal <count[5]_PWR_330_o_LessThan_302_o> created at line 1598
     Found 8-bit comparator greater for signal <Max_Value_int[7]_Max_Value_Previous[7]_LessThan_308_o> created at line 1631
     Found 8-bit comparator greater for signal <n0250> created at line 1631
     Found 8-bit comparator greater for signal <Max_Value_Previous[7]_Max_Value_int[7]_LessThan_313_o> created at line 1635
@@ -5286,7 +5595,7 @@ Synthesizing Unit <iodrp_controller>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <bit_cnt[2]_GND_866_o_add_12_OUT> created at line 238.
+    Found 3-bit adder for signal <bit_cnt[2]_GND_889_o_add_12_OUT> created at line 238.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  40 D-type flip-flop(s).
@@ -5325,7 +5634,7 @@ WARNING:Xst:647 - Input <drp_ioi_addr<4:0>> is never used. This port will be pre
     | Encoding           | gray                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <bit_cnt[2]_GND_868_o_add_13_OUT> created at line 372.
+    Found 3-bit adder for signal <bit_cnt[2]_GND_891_o_add_13_OUT> created at line 372.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  41 D-type flip-flop(s).
@@ -5392,10 +5701,10 @@ Macro Statistics
  32-bit register                                       : 108
  4-bit register                                        : 13
  5-bit register                                        : 3
- 6-bit register                                        : 12
+ 6-bit register                                        : 11
  64-bit register                                       : 5
  65-bit register                                       : 1
- 7-bit register                                        : 8
+ 7-bit register                                        : 9
  8-bit register                                        : 35
  9-bit register                                        : 69
 # Comparators                                          : 46
@@ -5416,10 +5725,10 @@ Macro Statistics
  8-bit comparator lessequal                            : 2
  8-bit comparator not equal                            : 2
  9-bit comparator lessequal                            : 5
-# Multiplexers                                         : 1002
+# Multiplexers                                         : 1003
  1-bit 11-to-1 multiplexer                             : 2
  1-bit 128-to-1 multiplexer                            : 2
- 1-bit 2-to-1 multiplexer                              : 674
+ 1-bit 2-to-1 multiplexer                              : 675
  1-bit 3-to-1 multiplexer                              : 4
  10-bit 2-to-1 multiplexer                             : 5
  11-bit 2-to-1 multiplexer                             : 12
@@ -5491,6 +5800,7 @@ INFO:Xst:2261 - The FF/Latch <trig_addr_25> in Unit <cmp_fmc_adc_100Ms_core> is 
 INFO:Xst:2261 - The FF/Latch <ddr_cmd_instr_1> in Unit <cmp_ddr3_ctrl_wb_0> is equivalent to the following 4 FFs/Latches, which will be removed : <ddr_cmd_instr_2> <ddr_cmd_byte_addr_0> <ddr_cmd_byte_addr_1> <ddr_cmd_byte_addr_2> 
 INFO:Xst:2261 - The FF/Latch <ddr_wr_mask_0> in Unit <cmp_ddr3_ctrl_wb_0> is equivalent to the following 7 FFs/Latches, which will be removed : <ddr_wr_mask_1> <ddr_wr_mask_2> <ddr_wr_mask_3> <ddr_wr_mask_4> <ddr_wr_mask_5> <ddr_wr_mask_6> <ddr_wr_mask_7> 
 INFO:Xst:2261 - The FF/Latch <ddr_cmd_instr_1> in Unit <cmp_ddr3_ctrl_wb_1> is equivalent to the following 3 FFs/Latches, which will be removed : <ddr_cmd_instr_2> <ddr_cmd_byte_addr_0> <ddr_cmd_byte_addr_1> 
+WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_11> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_13> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5519,6 +5829,7 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_3> (without init value) has a
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_4> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_5> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_13> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_14> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_15> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_16> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5547,7 +5858,6 @@ WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_6> (without init value) has a con
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_7> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_8> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_4> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_5> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5576,7 +5886,7 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_28> (without init value) has a
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_29> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_30> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_31> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_7> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_8> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5606,7 +5916,6 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_0> (without init value) has a 
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_1> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_2> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_3> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_7> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_8> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_9> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_10> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
@@ -5631,9 +5940,10 @@ WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_28> (without init value) has a co
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_29> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_30> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_31> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <addr_fifo_din_30> (without init value) has a constant value of 0 in block <cmp_l2p_dma_master>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <p2l_dma_adr_o_30> (without init value) has a constant value of 0 in block <cmp_p2l_dma_master>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_8> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <busy_data_d> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ce_data_0> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ce_data_1> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
@@ -5660,6 +5970,8 @@ WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_3> (without init value) has a con
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_4> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_5> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_7> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <MCB_UICMD> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_0> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
@@ -5670,7 +5982,7 @@ WARNING:Xst:1710 - FF/Latch <IODRPCTRLR_MEMCELL_ADDR_5> (without init value) has
 WARNING:Xst:1710 - FF/Latch <IODRPCTRLR_MEMCELL_ADDR_6> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <IODRPCTRLR_MEMCELL_ADDR_7> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <Active_IODRP_1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_8> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_0> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_1> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_2> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5684,10 +5996,6 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_9> (without init value) has 
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_11> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_13> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[0].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[1].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[2].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[3].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <trig_addr_25> (without init value) has a constant value of 0 in block <cmp_fmc_adc_100Ms_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ddr_wr_mask_0> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_0>. This FF/Latch will be trimmed during the optimization process.
@@ -5698,35 +6006,37 @@ WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a cons
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[2].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[1].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[0].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_2> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <MCB_UICMD> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <WarmEnough> (without init value) has a constant value of 1 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <SELFREFRESH_MCB_REQ> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <SELFREFRESH_REQ_R1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <DRP_BKST> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R3> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <DRP_BKST> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <SELFREFRESH_REQ_R1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <SELFREFRESH_MCB_REQ> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <WarmEnough> (without init value) has a constant value of 1 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R3> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:2677 - Node <dma_ctrl_carrier_addr_o_0> of sequential type is unconnected in block <cmp_dma_controller>.
 WARNING:Xst:2677 - Node <dma_ctrl_carrier_addr_o_1> of sequential type is unconnected in block <cmp_dma_controller>.
 WARNING:Xst:2677 - Node <dma_ctrl_len_o_0> of sequential type is unconnected in block <cmp_dma_controller>.
@@ -5766,7 +6076,8 @@ WARNING:Xst:2677 - Node <wb_addr_d_26> of sequential type is unconnected in bloc
 WARNING:Xst:2677 - Node <wb_addr_d_27> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
 WARNING:Xst:2677 - Node <ddr_cmd_byte_addr_28> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
 WARNING:Xst:2677 - Node <ddr_cmd_byte_addr_29> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:1>> (without init value) have a constant value of 0 in block <carrier_csr>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<5:1>> (without init value) have a constant value of 0 in block <carrier_csr>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:6>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
 WARNING:Xst:2404 -  FFs/Latches <addr_fifo_din<31:30>> (without init value) have a constant value of 0 in block <l2p_dma_master>.
 WARNING:Xst:2404 -  FFs/Latches <p2l_dma_adr_o<31:30>> (without init value) have a constant value of 0 in block <p2l_dma_master>.
 WARNING:Xst:2404 -  FFs/Latches <wb_ddr_adr_o<31:25>> (without init value) have a constant value of 0 in block <fmc_adc_100Ms_core>.
@@ -5775,8 +6086,8 @@ WARNING:Xst:2404 -  FFs/Latches <ddr_cmd_instr<2:1>> (without init value) have a
 WARNING:Xst:2404 -  FFs/Latches <ddr_cmd_instr<2:1>> (without init value) have a constant value of 0 in block <ddr3_ctrl_wb_2>.
 WARNING:Xst:2404 -  FFs/Latches <IODRPCTRLR_MEMCELL_ADDR<7:4>> (without init value) have a constant value of 0 in block <mcb_soft_calibration>.
 WARNING:Xst:2404 -  FFs/Latches <Active_IODRP<1:1>> (without init value) have a constant value of 0 in block <mcb_soft_calibration>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<5:1>> (without init value) have a constant value of 0 in block <utc_core_regs>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:1>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:1>> (without init value) have a constant value of 0 in block <utc_core_regs>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:1>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
 
 Synthesizing (advanced) Unit <ext_pulse_sync>.
 The following registers are absorbed into counter <s_pulse_length_cnt>: 1 register on signal <s_pulse_length_cnt>.
@@ -5931,10 +6242,10 @@ Macro Statistics
  8-bit comparator lessequal                            : 2
  8-bit comparator not equal                            : 2
  9-bit comparator lessequal                            : 5
-# Multiplexers                                         : 1814
+# Multiplexers                                         : 1815
  1-bit 11-to-1 multiplexer                             : 2
  1-bit 128-to-1 multiplexer                            : 2
- 1-bit 2-to-1 multiplexer                              : 1497
+ 1-bit 2-to-1 multiplexer                              : 1498
  1-bit 3-to-1 multiplexer                              : 4
  1-bit 7-to-1 multiplexer                              : 32
  1-bit 8-to-1 multiplexer                              : 16
@@ -6375,8 +6686,8 @@ Optimizing FSM <cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_dd
  almost_ready3     | 1101
 -------------------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <cmp_fmc_i2c/cmp_wrapped_i2c/byte_ctrl/FSM_8> on signal <c_state[1:3]> with user encoding.
-Optimizing FSM <cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/FSM_8> on signal <c_state[1:3]> with user encoding.
+Optimizing FSM <cmp_fmc_i2c/Wrapped_I2C/byte_ctrl/FSM_8> on signal <c_state[1:3]> with user encoding.
+Optimizing FSM <cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/FSM_8> on signal <c_state[1:3]> with user encoding.
 ----------------------
  State    | Encoding
 ----------------------
@@ -6388,8 +6699,8 @@ Optimizing FSM <cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/FSM_8> on signal <c_st
  st_stop  | 101
 ----------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <cmp_fmc_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/FSM_9> on signal <c_state[1:5]> with user encoding.
-Optimizing FSM <cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/FSM_9> on signal <c_state[1:5]> with user encoding.
+Optimizing FSM <cmp_fmc_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/FSM_9> on signal <c_state[1:5]> with user encoding.
+Optimizing FSM <cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/FSM_9> on signal <c_state[1:5]> with user encoding.
 ---------------------
  State   | Encoding
 ---------------------
@@ -6878,9 +7189,9 @@ WARNING:Xst:2677 - Node <cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_3
 WARNING:Xst:2677 - Node <cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/iodrp_mcb_controller_inst/read_data_2> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
 WARNING:Xst:2677 - Node <cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/iodrp_mcb_controller_inst/read_data_1> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
 WARNING:Xst:2677 - Node <cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/iodrp_mcb_controller_inst/read_data_0> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
-WARNING:Xst:2677 - Node <cmp_fmc_sys_i2c/cmp_wrapped_i2c/wb_inta_o> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
-WARNING:Xst:2677 - Node <cmp_fmc_i2c/cmp_wrapped_i2c/wb_inta_o> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
-WARNING:Xst:2677 - Node <cmp_fmc_spi/cmp_wrapped_spi/wb_int_o> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
+WARNING:Xst:2677 - Node <cmp_fmc_sys_i2c/Wrapped_I2C/wb_inta_o> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
+WARNING:Xst:2677 - Node <cmp_fmc_i2c/Wrapped_I2C/wb_inta_o> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
+WARNING:Xst:2677 - Node <cmp_fmc_spi/Wrapped_SPI/wb_int_o> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
 WARNING:Xst:2677 - Node <cmp_gn4124_core/cmp_p2l_des/cmp_valid_in/pdcounter_4> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
 WARNING:Xst:2677 - Node <cmp_gn4124_core/cmp_p2l_des/cmp_valid_in/pdcounter_3> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
 WARNING:Xst:2677 - Node <cmp_gn4124_core/cmp_p2l_des/cmp_valid_in/pdcounter_2> of sequential type is unconnected in block <spec_top_fmc_adc_100Ms>.
@@ -6984,7 +7295,7 @@ INFO:Xst:2260 - The FF/Latch <U0/grf.rf/gl0.rd/grss.rsts/ram_empty_i> in Unit <B
 INFO:Xst:2260 - The FF/Latch <U0/grf.rf/gl0.wr/gwss.wsts/ram_full_i> in Unit <BU2> is equivalent to the following FF/Latch : <U0/grf.rf/gl0.wr/gwss.wsts/ram_full_fb_i> 
 INFO:Xst:2260 - The FF/Latch <U0/grf.rf/rstblk/ngwrdrst.grst.wr_rst_reg_1> in Unit <BU2> is equivalent to the following FF/Latch : <U0/grf.rf/rstblk/ngwrdrst.grst.wr_rst_reg_0> 
 INFO:Xst:2260 - The FF/Latch <U0/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_2> in Unit <BU2> is equivalent to the following FF/Latch : <U0/grf.rf/rstblk/ngwrdrst.grst.rd_rst_reg_0> 
-FlipFlop cmp_fmc_spi/cmp_wrapped_spi/ctrl_11 has been replicated 1 time(s)
+FlipFlop cmp_fmc_spi/Wrapped_SPI/ctrl_11 has been replicated 1 time(s)
 
 Final Macro Processing ...
 
@@ -7026,28 +7337,28 @@ Top Level Output File Name         : spec_top_fmc_adc_100Ms.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 8188
+# BELS                             : 8192
 #      GND                         : 5
 #      INV                         : 228
 #      LUT1                        : 288
-#      LUT2                        : 567
-#      LUT3                        : 1208
+#      LUT2                        : 568
+#      LUT3                        : 1207
 #      LUT4                        : 686
-#      LUT5                        : 1084
-#      LUT6                        : 1716
+#      LUT5                        : 1052
+#      LUT6                        : 1752
 #      MULT_AND                    : 7
 #      MUXCY                       : 1240
 #      MUXF7                       : 29
 #      VCC                         : 3
 #      XORCY                       : 1127
 # FlipFlops/Latches                : 6862
-#      FD                          : 68
+#      FD                          : 70
 #      FDC                         : 1467
 #      FDCE                        : 3997
-#      FDE                         : 58
+#      FDE                         : 122
 #      FDP                         : 137
 #      FDPE                        : 62
-#      FDR                         : 595
+#      FDR                         : 529
 #      FDRE                        : 474
 #      FDS                         : 4
 # RAMS                             : 69
@@ -7093,16 +7404,16 @@ Selected Device : 6slx45tfgg484-3
 
 Slice Logic Utilization: 
  Number of Slice Registers:            6862  out of  54576    12%  
- Number of Slice LUTs:                 5779  out of  27288    21%  
-    Number used as Logic:              5777  out of  27288    21%  
+ Number of Slice LUTs:                 5783  out of  27288    21%  
+    Number used as Logic:              5781  out of  27288    21%  
     Number used as Memory:                2  out of   6408     0%  
        Number used as SRL:                2
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   9437
-   Number with an unused Flip Flop:    2575  out of   9437    27%  
-   Number with an unused LUT:          3658  out of   9437    38%  
-   Number of fully used LUT-FF pairs:  3204  out of   9437    33%  
+ Number of LUT Flip Flop pairs used:   9441
+   Number with an unused Flip Flop:    2579  out of   9441    27%  
+   Number with an unused LUT:          3658  out of   9441    38%  
+   Number of fully used LUT-FF pairs:  3204  out of   9441    33%  
    Number of unique control sets:       273
 
 IO Utilization: 
@@ -7153,9 +7464,9 @@ Timing Summary:
 Speed Grade: -3
 
    Minimum period: 10.047ns (Maximum Frequency: 99.535MHz)
-   Minimum input arrival time before clock: 9.057ns
+   Minimum input arrival time before clock: 9.044ns
    Maximum output required time after clock: 5.436ns
-   Maximum combinational path delay: 5.762ns
+   Maximum combinational path delay: 5.764ns
 
 Timing Details:
 ---------------
@@ -7164,29 +7475,29 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'cmp_sys_clk_pll/CLKOUT0'
   Clock period: 8.716ns (frequency: 114.732MHz)
-  Total number of paths / destination ports: 388723 / 9284
+  Total number of paths / destination ports: 388893 / 9282
 -------------------------------------------------------------------------
 Delay:               8.716ns (Levels of Logic = 9)
-  Source:            cmp_fmc_spi/cmp_wrapped_spi/ctrl_9 (FF)
-  Destination:       cmp_fmc_spi/cmp_wrapped_spi/shift/data_0 (FF)
+  Source:            cmp_fmc_spi/Wrapped_SPI/ctrl_9 (FF)
+  Destination:       cmp_fmc_spi/Wrapped_SPI/shift/data_0 (FF)
   Source Clock:      cmp_sys_clk_pll/CLKOUT0 rising
   Destination Clock: cmp_sys_clk_pll/CLKOUT0 rising
 
-  Data Path: cmp_fmc_spi/cmp_wrapped_spi/ctrl_9 to cmp_fmc_spi/cmp_wrapped_spi/shift/data_0
+  Data Path: cmp_fmc_spi/Wrapped_SPI/ctrl_9 to cmp_fmc_spi/Wrapped_SPI/shift/data_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q            15   0.447   1.086  cmp_fmc_spi/cmp_wrapped_spi/ctrl_9 (cmp_fmc_spi/cmp_wrapped_spi/ctrl_9)
-     LUT2:I0->O            2   0.203   0.617  cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_cnt[7]_cnt[7]_mux_7_OUT_rs_cy<0>11 (cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_cnt[7]_cnt[7]_mux_7_OUT_rs_cy<0>)
-     LUT6:I5->O            1   0.205   0.580  cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos_B51 (cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos_rs_B<4>)
-     LUT6:I5->O            1   0.205   0.000  cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos_rs_Madd_lut<4> (cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos_rs_Madd_lut<4>)
-     MUXCY:S->O            1   0.172   0.000  cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos_rs_Madd_cy<4> (cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos_rs_Madd_cy<4>)
-     XORCY:CI->O         130   0.180   2.320  cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos_rs_Madd_xor<5> (cmp_fmc_spi/cmp_wrapped_spi/shift/rx_bit_pos<5>)
-     LUT6:I0->O            1   0.203   0.000  cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos[6]_data[127]_Mux_20_o_3 (cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos[6]_data[127]_Mux_20_o_3)
-     MUXF7:I1->O           7   0.140   0.774  cmp_fmc_spi/cmp_wrapped_spi/shift/Mmux_rx_bit_pos[6]_data[127]_Mux_20_o_2_f7 (cmp_fmc_spi/cmp_wrapped_spi/shift/rx_bit_pos[6]_data[127]_Mux_20_o)
-     LUT5:I4->O           19   0.205   1.072  cmp_fmc_spi/cmp_wrapped_spi/shift/rx_clk1 (cmp_fmc_spi/cmp_wrapped_spi/shift/rx_clk_mmx_out)
-     LUT6:I5->O            1   0.205   0.000  cmp_fmc_spi/cmp_wrapped_spi/shift/data_0_rstpot (cmp_fmc_spi/cmp_wrapped_spi/shift/data_0_rstpot)
-     FDC:D                     0.102          cmp_fmc_spi/cmp_wrapped_spi/shift/data_0
+     FDCE:C->Q            15   0.447   1.086  cmp_fmc_spi/Wrapped_SPI/ctrl_9 (cmp_fmc_spi/Wrapped_SPI/ctrl_9)
+     LUT2:I0->O            2   0.203   0.617  cmp_fmc_spi/Wrapped_SPI/shift/Mmux_cnt[7]_cnt[7]_mux_7_OUT_rs_cy<0>11 (cmp_fmc_spi/Wrapped_SPI/shift/Mmux_cnt[7]_cnt[7]_mux_7_OUT_rs_cy<0>)
+     LUT6:I5->O            1   0.205   0.580  cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos_B51 (cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos_rs_B<4>)
+     LUT6:I5->O            1   0.205   0.000  cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos_rs_Madd_lut<4> (cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos_rs_Madd_lut<4>)
+     MUXCY:S->O            1   0.172   0.000  cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos_rs_Madd_cy<4> (cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos_rs_Madd_cy<4>)
+     XORCY:CI->O         130   0.180   2.320  cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos_rs_Madd_xor<5> (cmp_fmc_spi/Wrapped_SPI/shift/rx_bit_pos<5>)
+     LUT6:I0->O            1   0.203   0.000  cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos[6]_data[127]_Mux_20_o_3 (cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos[6]_data[127]_Mux_20_o_3)
+     MUXF7:I1->O           7   0.140   0.774  cmp_fmc_spi/Wrapped_SPI/shift/Mmux_rx_bit_pos[6]_data[127]_Mux_20_o_2_f7 (cmp_fmc_spi/Wrapped_SPI/shift/rx_bit_pos[6]_data[127]_Mux_20_o)
+     LUT5:I4->O           19   0.205   1.072  cmp_fmc_spi/Wrapped_SPI/shift/rx_clk1 (cmp_fmc_spi/Wrapped_SPI/shift/rx_clk_mmx_out)
+     LUT6:I5->O            1   0.205   0.000  cmp_fmc_spi/Wrapped_SPI/shift/data_0_rstpot (cmp_fmc_spi/Wrapped_SPI/shift/data_0_rstpot)
+     FDC:D                     0.102          cmp_fmc_spi/Wrapped_SPI/shift/data_0
     ----------------------------------------
     Total                      8.716ns (2.267ns logic, 6.449ns route)
                                        (26.0% logic, 74.0% route)
@@ -7209,7 +7520,7 @@ Delay:               6.750ns (Levels of Logic = 5)
      FDC:C->Q            155   0.447   2.377  cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2 (cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2)
      LUT6:I0->O            1   0.203   0.684  cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In21 (cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In21)
      LUT6:I4->O            2   0.203   0.961  cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In23 (cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In2)
-     LUT5:I0->O            1   0.203   0.580  cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In3_SW0 (N530)
+     LUT5:I0->O            1   0.203   0.580  cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In3_SW0 (N534)
      LUT6:I5->O            1   0.205   0.580  cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In3 (cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In3)
      LUT4:I3->O            1   0.205   0.000  cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In6 (cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2-In)
      FDC:D                     0.102          cmp_gn4124_core/cmp_l2p_dma_master/l2p_dma_current_state_FSM_FFd2
@@ -7293,29 +7604,29 @@ Delay:               2.854ns (Levels of Logic = 1)
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_sys_clk_pll/CLKOUT0'
   Total number of paths / destination ports: 2908 / 2865
 -------------------------------------------------------------------------
-Offset:              9.057ns (Levels of Logic = 4)
+Offset:              9.044ns (Levels of Logic = 4)
   Source:            L_RST_N (PAD)
-  Destination:       cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/cnt_15 (FF)
+  Destination:       cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/cnt_15 (FF)
   Destination Clock: cmp_sys_clk_pll/CLKOUT0 rising
 
-  Data Path: L_RST_N to cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/cnt_15
+  Data Path: L_RST_N to cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/cnt_15
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           180   1.222   2.036  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT2:I1->O         2081   0.205   2.811  cmp_carrier_onewire/rst1 (cmp_carrier_csr/rst_n_i_inv)
-     LUT6:I1->O           18   0.203   1.050  cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/rst_scl_sync_OR_324_o4 (cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/rst_scl_sync_OR_324_o)
-     LUT2:I1->O           16   0.205   1.004  cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/_n0172_inv1 (cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/_n0172_inv)
-     FDCE:CE                   0.322          cmp_fmc_sys_i2c/cmp_wrapped_i2c/byte_ctrl/bit_ctrl/cnt_0
+     IBUF:I->O           182   1.222   2.038  L_RST_N_IBUF (L_RST_N_IBUF)
+     LUT2:I1->O         2017   0.205   2.796  cmp_carrier_onewire/rst1 (cmp_carrier_csr/rst_n_i_inv)
+     LUT6:I1->O           18   0.203   1.050  cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/rst_scl_sync_OR_325_o4 (cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/rst_scl_sync_OR_325_o)
+     LUT2:I1->O           16   0.205   1.004  cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/_n0172_inv1 (cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/_n0172_inv)
+     FDCE:CE                   0.322          cmp_fmc_sys_i2c/Wrapped_I2C/byte_ctrl/bit_ctrl/cnt_0
     ----------------------------------------
-    Total                      9.057ns (2.157ns logic, 6.900ns route)
-                                       (23.8% logic, 76.2% route)
+    Total                      9.044ns (2.157ns logic, 6.887ns route)
+                                       (23.9% logic, 76.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_gn4124_core/cmp_clk_in/ddly_s'
   Total number of paths / destination ports: 62 / 62
 -------------------------------------------------------------------------
-Offset:              5.269ns (Levels of Logic = 2)
+Offset:              5.271ns (Levels of Logic = 2)
   Source:            L_RST_N (PAD)
   Destination:       cmp_gn4124_core/rst_reg (FF)
   Destination Clock: cmp_gn4124_core/cmp_clk_in/ddly_s rising +90
@@ -7324,18 +7635,18 @@ Offset:              5.269ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           180   1.222   2.035  L_RST_N_IBUF (L_RST_N_IBUF)
+     IBUF:I->O           182   1.222   2.037  L_RST_N_IBUF (L_RST_N_IBUF)
      INV:I->O             38   0.206   1.376  cmp_gn4124_core/rst1_INV_0 (cmp_csr_wb_addr_decoder/rst_n_i_inv)
      FDCE:CLR                  0.430          cmp_gn4124_core/rst_reg
     ----------------------------------------
-    Total                      5.269ns (1.858ns logic, 3.411ns route)
-                                       (35.3% logic, 64.7% route)
+    Total                      5.271ns (1.858ns logic, 3.413ns route)
+                                       (35.2% logic, 64.8% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_fmc_adc_100Ms_core/cmp_serdes_clk_pll/CLKOUT1'
   Total number of paths / destination ports: 2248 / 686
 -------------------------------------------------------------------------
-Offset:              6.359ns (Levels of Logic = 2)
+Offset:              6.345ns (Levels of Logic = 2)
   Source:            L_RST_N (PAD)
   Destination:       cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/fmc_adc_core_ctl_man_bitslip_sync2 (FF)
   Destination Clock: cmp_fmc_adc_100Ms_core/cmp_serdes_clk_pll/CLKOUT1 rising
@@ -7344,18 +7655,18 @@ Offset:              6.359ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           180   1.222   2.036  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT2:I1->O         2081   0.205   2.466  cmp_carrier_onewire/rst1 (cmp_carrier_csr/rst_n_i_inv)
+     IBUF:I->O           182   1.222   2.038  L_RST_N_IBUF (L_RST_N_IBUF)
+     LUT2:I1->O         2017   0.205   2.451  cmp_carrier_onewire/rst1 (cmp_carrier_csr/rst_n_i_inv)
      FDC:CLR                   0.430          cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/fmc_adc_core_sr_deci_swb_s1
     ----------------------------------------
-    Total                      6.359ns (1.857ns logic, 4.502ns route)
-                                       (29.2% logic, 70.8% route)
+    Total                      6.345ns (1.857ns logic, 4.488ns route)
+                                       (29.3% logic, 70.7% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/mcb_drp_clk_bufg_in'
   Total number of paths / destination ports: 115 / 80
 -------------------------------------------------------------------------
-Offset:              6.873ns (Levels of Logic = 3)
+Offset:              6.875ns (Levels of Logic = 3)
   Source:            L_RST_N (PAD)
   Destination:       cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/RST_reg (FF)
   Destination Clock: cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/mcb_drp_clk_bufg_in rising
@@ -7364,19 +7675,19 @@ Offset:              6.873ns (Levels of Logic = 3)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           180   1.222   2.400  L_RST_N_IBUF (L_RST_N_IBUF)
+     IBUF:I->O           182   1.222   2.402  L_RST_N_IBUF (L_RST_N_IBUF)
      LUT6:I0->O           78   0.203   1.837  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst1 (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst)
      LUT2:I0->O            1   0.203   0.579  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/non_violating_rst1 (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/non_violating_rst)
      FDP:PRE                   0.430          cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/RST_reg
     ----------------------------------------
-    Total                      6.873ns (2.058ns logic, 4.815ns route)
+    Total                      6.875ns (2.058ns logic, 4.817ns route)
                                        (29.9% logic, 70.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_sys_clk_pll/CLKOUT2'
   Total number of paths / destination ports: 27 / 27
 -------------------------------------------------------------------------
-Offset:              6.359ns (Levels of Logic = 2)
+Offset:              6.345ns (Levels of Logic = 2)
   Source:            L_RST_N (PAD)
   Destination:       cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/syn_clk0_powerup_pll_locked (FF)
   Destination Clock: cmp_sys_clk_pll/CLKOUT2 rising 0.1X
@@ -7385,12 +7696,12 @@ Offset:              6.359ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           180   1.222   2.036  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT2:I1->O         2081   0.205   2.466  cmp_carrier_onewire/rst1 (cmp_carrier_csr/rst_n_i_inv)
+     IBUF:I->O           182   1.222   2.038  L_RST_N_IBUF (L_RST_N_IBUF)
+     LUT2:I1->O         2017   0.205   2.451  cmp_carrier_onewire/rst1 (cmp_carrier_csr/rst_n_i_inv)
      FDCE:CLR                  0.430          cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/syn_clk0_powerup_pll_locked
     ----------------------------------------
-    Total                      6.359ns (1.857ns logic, 4.502ns route)
-                                       (29.2% logic, 70.8% route)
+    Total                      6.345ns (1.857ns logic, 4.488ns route)
+                                       (29.3% logic, 70.7% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'cmp_sys_clk_pll/CLKOUT0'
@@ -7477,7 +7788,7 @@ Offset:              2.383ns (Levels of Logic = 1)
 Timing constraint: Default path analysis
   Total number of paths / destination ports: 1069 / 962
 -------------------------------------------------------------------------
-Delay:               5.762ns (Levels of Logic = 3)
+Delay:               5.764ns (Levels of Logic = 3)
   Source:            L_RST_N (PAD)
   Destination:       cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/IODRP2_RZQ:T (PAD)
 
@@ -7485,12 +7796,12 @@ Delay:               5.762ns (Levels of Logic = 3)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           180   1.222   2.400  L_RST_N_IBUF (L_RST_N_IBUF)
+     IBUF:I->O           182   1.222   2.402  L_RST_N_IBUF (L_RST_N_IBUF)
      LUT6:I0->O           78   0.203   1.732  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst1 (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst)
      INV:I->O              0   0.206   0.000  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/RZQ_ZIO_ODATAIN1_INV_0 (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/RZQ_ZIO_ODATAIN)
     IODRP2:ODATAIN             0.000          cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/IODRP2_RZQ
     ----------------------------------------
-    Total                      5.762ns (1.631ns logic, 4.131ns route)
+    Total                      5.764ns (1.631ns logic, 4.133ns route)
                                        (28.3% logic, 71.7% route)
 
 =========================================================================
@@ -7546,15 +7857,15 @@ cmp_sys_clk_pll/CLKOUT2|    2.854|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 79.00 secs
-Total CPU time to Xst completion: 77.60 secs
+Total REAL time to Xst completion: 81.00 secs
+Total CPU time to Xst completion: 79.50 secs
  
 --> 
 
 
-Total memory usage is 222568 kilobytes
+Total memory usage is 224648 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings : 1453 (   0 filtered)
-Number of infos    :  375 (   0 filtered)
+Number of warnings : 1522 (   0 filtered)
+Number of infos    :  423 (   0 filtered)
 
