@@ -3350,7 +3350,7 @@ RESERVED
 <li><b>
 INT_TRIG_THRES
 </b>[<i>read/write</i>]: Threshold for internal trigger
-<br>Treated as two's complement and compared to raw ADC data
+<br>Treated as binary two's complement and compared to raw ADC data
 </ul>
 <a name="TRIG_DLY"></a>
 <h3><a name="sect_3_4">3.4. Trigger delay</a></h3>
@@ -3608,7 +3608,7 @@ TRIG_DLY[7:0]
 <li><b>
 TRIG_DLY
 </b>[<i>read/write</i>]: Trigger delay value
-<br>Delay to apply on the trigger in sampling clock ticks
+<br>Delay to apply on the trigger in sampling clock period.<br>The default clock frequency is 100MHz (period = 10ns).
 </ul>
 <a name="SW_TRIG"></a>
 <h3><a name="sect_3_5">3.5. Software trigger</a></h3>
@@ -3647,7 +3647,7 @@ SW_TRIG
 </tr>
 </table>
 <p>
-Writing (anything) to this register generates a software trigger
+Writing (anything) to this register generates a software trigger.
 </p>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -4126,7 +4126,7 @@ NB[7:0]
 <li><b>
 NB
 </b>[<i>read/write</i>]: Number of shots
-<br>Number of shots required in multi-shot mode, set to one for single-shot mode
+<br>Number of shots required in multi-shot mode, set to one for single-shot mode.
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -4388,7 +4388,7 @@ TRIG_POS[7:0]
 <li><b>
 TRIG_POS
 </b>[<i>read-only</i>]: Trigger address
-<br>Trigger address in DDR memory.<br>Only used in single-shot mode
+<br>Trigger address in DDR memory.<br>Only used in single-shot mode.
 </ul>
 <a name="SR"></a>
 <h3><a name="sect_3_8">3.8. Sample rate</a></h3>
@@ -4646,7 +4646,7 @@ DECI[7:0]
 <li><b>
 DECI
 </b>[<i>read/write</i>]: Sample rate decimation
-<br>Decimation factor
+<br>Decimation factor. Takes one sample every N samples and discards the others (N = decimation factor).
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -5944,7 +5944,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read-only</i>]: Channel 1 current ADC value
-<br>Current ADC raw value
+<br>Current ADC raw value. The format is binary two's complement.
 <li><b>
 RESERVED
 </b>[<i>read-only</i>]: Reserved
@@ -6206,7 +6206,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read/write</i>]: Gain calibration for channel 1
-<br>Gain applied to all data coming from the ADC.
+<br>Gain applied to all data coming from the ADC.<br>Fixed point format:<br>Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -6468,7 +6468,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read/write</i>]: Offset calibration for channel 1
-<br>Offset applied to all data coming from the ADC.
+<br>Offset applied to all data coming from the ADC. The format is binary two's complement.
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -6992,7 +6992,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read-only</i>]: Channel 2 current ACD value
-<br>Current ADC raw value
+<br>Current ADC raw value. The format is binary two's complement.
 <li><b>
 RESERVED
 </b>[<i>read-only</i>]: Reserved
@@ -7254,7 +7254,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read/write</i>]: Gain calibration for channel 2
-<br>Gain applied to all data coming from the ADC.
+<br>Gain applied to all data coming from the ADC.<br>Fixed point format:<br>Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -7516,7 +7516,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read/write</i>]: Offset calibration for channel 2
-<br>Offset applied to all data coming from the ADC.
+<br>Offset applied to all data coming from the ADC. The format is binary two's complement.
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -8040,7 +8040,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read-only</i>]: Channel 3 current ADC value
-<br>Current ADC raw value
+<br>Current ADC raw value. The format is binary two's complement.
 <li><b>
 RESERVED
 </b>[<i>read-only</i>]: Reserved
@@ -8302,7 +8302,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read/write</i>]: Gain calibration for channel 3
-<br>Gain applied to all data coming from the ADC.
+<br>Gain applied to all data coming from the ADC.<br>Fixed point format:<br>Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -8564,7 +8564,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read/write</i>]: Offset calibration for channel 3
-<br>Offset applied to all data coming from the ADC.
+<br>Offset applied to all data coming from the ADC. The format is binary two's complement.
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -9088,7 +9088,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read-only</i>]: Channel 4 current ADC value
-<br>Current ADC raw value
+<br>Current ADC raw value. The format is binary two's complement.
 <li><b>
 RESERVED
 </b>[<i>read-only</i>]: Reserved
@@ -9350,7 +9350,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read/write</i>]: Gain calibration for channel 4
-<br>Gain applied to all data coming from the ADC.
+<br>Gain applied to all data coming from the ADC.<br>Fixed point format:<br>Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
@@ -9612,7 +9612,7 @@ VAL[7:0]
 <li><b>
 VAL
 </b>[<i>read/write</i>]: Offset calibration for channel 4
-<br>Offset applied to all data coming from the ADC.
+<br>Offset applied to all data coming from the ADC. The format is binary two's complement.
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved

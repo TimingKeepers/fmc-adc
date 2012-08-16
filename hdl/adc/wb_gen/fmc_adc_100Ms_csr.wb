@@ -189,7 +189,7 @@ peripheral {
 
     field {
       name = "Threshold for internal trigger";
-      description = "Treated as two's complement and compared to raw ADC data";
+      description = "Treated as binary two's complement and compared to raw ADC data";
       prefix = "int_trig_thres";
       type = SLV;
       size = 16;
@@ -205,7 +205,7 @@ peripheral {
 
     field {
       name = "Trigger delay value";
-      description = "Delay to apply on the trigger in sampling clock ticks";
+      description = "Delay to apply on the trigger in sampling clock period.\nThe default clock frequency is 100MHz (period = 10ns).";
       type = SLV;
       size = 32;
       access_bus = READ_WRITE;
@@ -215,7 +215,7 @@ peripheral {
 
   reg {
     name = "Software trigger";
-    description = "Writing (anything) to this register generates a software trigger";
+    description = "Writing (anything) to this register generates a software trigger.";
 
     prefix = "sw_trig";
     field {
@@ -232,7 +232,7 @@ peripheral {
 
     field {
       name = "Number of shots";
-      description = "Number of shots required in multi-shot mode, set to one for single-shot mode";
+      description = "Number of shots required in multi-shot mode, set to one for single-shot mode.";
       prefix = "nb";
       type = SLV;
       size = 16;
@@ -257,7 +257,7 @@ peripheral {
 
     field {
       name = "Trigger address";
-      description = "Trigger address in DDR memory.\nOnly used in single-shot mode";
+      description = "Trigger address in DDR memory.\nOnly used in single-shot mode.";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -271,7 +271,7 @@ peripheral {
 
     field {
       name = "Sample rate decimation";
-      description = "Decimation factor";
+      description = "Decimation factor. Takes one sample every N samples and discards the others (N = decimation factor).";
       prefix = "deci";
       type = SLV;
       size = 16;
@@ -364,7 +364,7 @@ peripheral {
 
     field {
       name = "Channel 1 current ADC value";
-      description = "Current ADC raw value";
+      description = "Current ADC raw value. The format is binary two's complement.";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -390,7 +390,7 @@ peripheral {
 
     field {
       name = "Gain calibration for channel 1";
-      description = "Gain applied to all data coming from the ADC.";
+      description = "Gain applied to all data coming from the ADC.\nFixed point format:\nBit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -415,7 +415,7 @@ peripheral {
 
     field {
       name = "Offset calibration for channel 1";
-      description = "Offset applied to all data coming from the ADC.";
+      description = "Offset applied to all data coming from the ADC. The format is binary two's complement.";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -465,7 +465,7 @@ peripheral {
 
     field {
       name = "Channel 2 current ACD value";
-      description = "Current ADC raw value";
+      description = "Current ADC raw value. The format is binary two's complement.";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -491,7 +491,7 @@ peripheral {
 
     field {
       name = "Gain calibration for channel 2";
-      description = "Gain applied to all data coming from the ADC.";
+      description = "Gain applied to all data coming from the ADC.\nFixed point format:\nBit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -516,7 +516,7 @@ peripheral {
 
     field {
       name = "Offset calibration for channel 2";
-      description = "Offset applied to all data coming from the ADC.";
+      description = "Offset applied to all data coming from the ADC. The format is binary two's complement.";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -566,7 +566,7 @@ peripheral {
 
     field {
       name = "Channel 3 current ADC value";
-      description = "Current ADC raw value";
+      description = "Current ADC raw value. The format is binary two's complement.";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -592,7 +592,7 @@ peripheral {
 
     field {
       name = "Gain calibration for channel 3";
-      description = "Gain applied to all data coming from the ADC.";
+      description = "Gain applied to all data coming from the ADC.\nFixed point format:\nBit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -617,7 +617,7 @@ peripheral {
 
     field {
       name = "Offset calibration for channel 3";
-      description = "Offset applied to all data coming from the ADC.";
+      description = "Offset applied to all data coming from the ADC. The format is binary two's complement.";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -667,7 +667,7 @@ peripheral {
 
     field {
       name = "Channel 4 current ADC value";
-      description = "Current ADC raw value";
+      description = "Current ADC raw value. The format is binary two's complement.";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -693,7 +693,7 @@ peripheral {
 
     field {
       name = "Gain calibration for channel 4";
-      description = "Gain applied to all data coming from the ADC.";
+      description = "Gain applied to all data coming from the ADC.\nFixed point format:\nBit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)";
       prefix = "val";
       type = SLV;
       size = 16;
@@ -718,7 +718,7 @@ peripheral {
 
     field {
       name = "Offset calibration for channel 4";
-      description = "Offset applied to all data coming from the ADC.";
+      description = "Offset applied to all data coming from the ADC. The format is binary two's complement.";
       prefix = "val";
       type = SLV;
       size = 16;
