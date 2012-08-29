@@ -10,8 +10,8 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="744.09448819"
-   height="1052.3622047"
+   width="488.32202"
+   height="236.81071"
    id="svg6649"
    version="1.1"
    inkscape:version="0.47 r22583"
@@ -330,21 +330,25 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="213.97453"
-     inkscape:cy="943.8409"
+     inkscape:zoom="1.4"
+     inkscape:cx="297.12732"
+     inkscape:cy="159.55387"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-global="true"
-     inkscape:window-width="1280"
-     inkscape:window-height="951"
+     inkscape:window-width="1920"
+     inkscape:window-height="1123"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
-       id="grid8318" />
+       id="grid8318"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
   </sodipodi:namedview>
   <metadata
      id="metadata6654">
@@ -361,7 +365,8 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(-135.61713,-69.647018)">
     <g
        id="g8474"
        transform="translate(83.460474,14.63236)">
@@ -697,7 +702,7 @@
        sodipodi:cy="252.36218"
        sodipodi:rx="25"
        sodipodi:ry="25"
-       d="m 200,252.36218 a 25,25 0 1 1 -50,0 l 25,0 z"
+       d="m 200,252.36218 c 0,13.80712 -11.19288,25 -25,25 -13.80712,0 -25,-11.19288 -25,-25 0,0 0,0 0,0 l 25,0 z"
        transform="matrix(0,-0.39999988,0.51428566,0,311.49174,272.32313)"
        sodipodi:start="0"
        sodipodi:end="3.1415927" />
@@ -705,7 +710,7 @@
        sodipodi:end="3.1415927"
        sodipodi:start="0"
        transform="matrix(0,-0.39999988,0.51428566,0,311.49174,324.17822)"
-       d="m 200,252.36218 a 25,25 0 1 1 -50,0 l 25,0 z"
+       d="m 200,252.36218 c 0,13.80712 -11.19288,25 -25,25 -13.80712,0 -25,-11.19288 -25,-25 0,0 0,0 0,0 l 25,0 z"
        sodipodi:ry="25"
        sodipodi:rx="25"
        sodipodi:cy="252.36218"
