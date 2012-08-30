@@ -3057,10 +3057,11 @@ FSM[2:0]
 <li><b>
 FSM
 </b>[<i>read-only</i>]: State machine status
-<br>States:<br>1: IDLE<br>2: PRE_TRIG<br>3: WAIT_TRIG<br>4: POST_TRIG<br>5: DECR_SHOT<br>7: Illegal
+<br>States:<br>0: illegal<br>1: IDLE<br>2: PRE_TRIG<br>3: WAIT_TRIG<br>4: POST_TRIG<br>5: DECR_SHOT<br>6: illegal<br>7: illegal
 <li><b>
 SERDES_PLL
 </b>[<i>read-only</i>]: SerDes PLL status
+<br>Sampling clock recovery PLL.<br>0: not locked<br>1: locked
 <li><b>
 SERDES_SYNCED
 </b>[<i>read-only</i>]: SerDes synchronization status

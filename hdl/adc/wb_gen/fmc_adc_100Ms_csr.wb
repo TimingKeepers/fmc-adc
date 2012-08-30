@@ -86,7 +86,7 @@ peripheral {
 
     field {
       name = "State machine status";
-      description = "States:\n1: IDLE\n2: PRE_TRIG\n3: WAIT_TRIG\n4: POST_TRIG\n5: DECR_SHOT\n7: Illegal";
+      description = "States:\n0: illegal\n1: IDLE\n2: PRE_TRIG\n3: WAIT_TRIG\n4: POST_TRIG\n5: DECR_SHOT\n6: illegal\n7: illegal";
       prefix = "fsm";
       type = SLV;
       size = 3;
@@ -96,6 +96,7 @@ peripheral {
 
     field {
       name = "SerDes PLL status";
+      description = "Sampling clock recovery PLL.\n0: not locked\n1: locked";
       prefix = "serdes_pll";
       type = BIT;
       access_bus = READ_ONLY;
