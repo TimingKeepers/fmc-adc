@@ -1,0 +1,97 @@
+================================================================================
+Memory mapping of FmcAdc100m14b4cha firmware for SPEC
+-----------------------------------------------------
+Matthieu Cattin
+21.11.2011
+================================================================================
+
+CSR wishbone modules base addresses (BAR0):
+
+    0x00000 : DMA configuration
+    0x10000 : Carrier SPI master (DACs for VCXOs)
+    0x20000 : Carrier 1-wire master (thermometer + unique ID)
+    0x30000 : Carrier CSR (control and status registers)
+    0x40000 : UTC core (counters, time-tag)
+    0x50000 : Interrupt controller
+    0x60000 : Mezzanine system managment I2C master (Mezzanine EEPROM)
+    0x70000 : Mezzanine SPI master (offset DACs, ADC control)
+    0x80000 : Mezzanine I2C master (Si570)
+    0x90000 : Mezzanine ADC core (control and status registers)
+    0xA0000 : Mezzanine 1-wire master (thermometer + unique ID)
+
+
+--------------------------------------------------------------------------------
+DMA configuration:
+
+http://svn.ohwr.org/gn4124-core/trunk/documentation/specifications/func_spec_GN4124_core.pdf
+
+Note:
+DMAATTRIBR bit 0 is set to '1' if that is NOT the last item in the list!
+
+
+--------------------------------------------------------------------------------
+Carrier SPI master:
+
+http://opencores.org/websvn,filedetails?repname=spi&path=%2Fspi%2Ftrunk%2Fdoc%2Fspi.pdf
+
+
+--------------------------------------------------------------------------------
+Carrier 1-wire master:
+
+http://opencores.org/websvn,filedetails?repname=sockit_owm&path=%2Fsockit_owm%2Ftrunk%2Fdoc%2Fsockit_owr.pdf
+
+
+--------------------------------------------------------------------------------
+Carrier CSR:
+
+http://www.ohwr.org/projects/fmc-adc-100m14b4cha/repository/changes/trunk/hdl/spec/wb_gen/carrier_csr.htm
+
+
+--------------------------------------------------------------------------------
+UTC core:
+
+http://www.ohwr.org/projects/fmc-adc-100m14b4cha/repository/changes/trunk/hdl/spec/wb_gen/utc_core_regs.htm
+
+
+--------------------------------------------------------------------------------
+Interrupt controller:
+
+http://www.ohwr.org/projects/fmc-adc-100m14b4cha/repository/changes/trunk/hdl/spec/wb_gen/irq_controller_regs.htm
+
+
+--------------------------------------------------------------------------------
+Mezzanine system managment I2C master:
+
+http://opencores.org/websvn,filedetails?repname=i2c&path=%2Fi2c%2Ftrunk%2Fdoc%2Fi2c_specs.pdf
+
+Note:
+Registers are 8-bit wide, but accessed as 32-bit registers (only the 8 LSB are used).
+Therefore addresses from the documentation has to be multiplied by 4.
+
+
+--------------------------------------------------------------------------------
+Mezzanine SPI master:
+
+http://opencores.org/websvn,filedetails?repname=spi&path=%2Fspi%2Ftrunk%2Fdoc%2Fspi.pdf
+
+
+--------------------------------------------------------------------------------
+Mezzanine I2C master:
+
+http://opencores.org/websvn,filedetails?repname=i2c&path=%2Fi2c%2Ftrunk%2Fdoc%2Fi2c_specs.pdf
+
+Note:
+Registers are 8-bit wide, but accessed as 32-bit registers (only the 8 LSB are used).
+Therefore addresses from the documentation has to be multiplied by 4.
+
+
+--------------------------------------------------------------------------------
+Mezzanine ADC core:
+
+http://www.ohwr.org/projects/fmc-adc-100m14b4cha/repository/changes/trunk/hdl/adc/wb_gen/fmc_adc_100Ms_csr.htm
+
+
+--------------------------------------------------------------------------------
+Mezzanine 1-wire master:
+
+http://opencores.org/websvn,filedetails?repname=sockit_owm&path=%2Fsockit_owm%2Ftrunk%2Fdoc%2Fsockit_owr.pdf
