@@ -635,7 +635,7 @@ begin
   ------------------------------------------------------------------------------
   cmp_gn4124_core : gn4124_core
     port map(
-      rst_n_a_i       => L_RST_N,
+      rst_n_a_i       => sys_rst_n,
       status_o        => gn4124_status,
       -- P2L Direction Source Sync DDR related signals
       p2l_clk_p_i     => P2L_CLKp,
