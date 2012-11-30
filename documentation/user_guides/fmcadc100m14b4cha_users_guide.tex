@@ -69,6 +69,8 @@ Here's an overview of the fmcadc100m14b4cha board...
 
 
 \subsection{Trigger}
+Software and/or hardware trigger. Internal or external hardware trigger, polarity selection.
+Optional additional delay on the final trigger (in sampling clock ticks).
 
 \begin{figure}[h!]
   \includegraphics[width=\textwidth]{figures/trigger_unit.pdf}
@@ -99,6 +101,7 @@ V\subscript{out} = V\subscript{in} - (gain\subscript{dac} \cdot V\subscript{dac}
 
 
 \subsection{Time-stamping}
+
 
 
 %===============================================================================
@@ -252,6 +255,13 @@ Therefore gain and offset correction must be applied to the DAC value by the sof
 Below is the pseudo-code to calculate the DAC corrected value, applying gain and offset correction:
 \begin{verbatim}
 c_val = ((((val-0x8000+offset) << 15) * gain) >> 30)+0x8000
+\end{verbatim}
+where:
+\begin{verbatim}
+c_val  = corrected value to write to DAC
+val    = value from user
+offset = DAC offset calibration value from EEPROM
+gain   = DAC gain calibration value from EEPROM
 \end{verbatim}
 
 
