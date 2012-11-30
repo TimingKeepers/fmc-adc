@@ -46,6 +46,7 @@ use work.gn4124_core_pkg.all;
 use work.ddr3_ctrl_pkg.all;
 use work.gencores_pkg.all;
 use work.wishbone_pkg.all;
+use work.fmc_adc_100Ms_core_pkg.all;
 
 
 entity spec_top_fmc_adc_100Ms is
@@ -167,45 +168,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   ------------------------------------------------------------------------------
   -- Components declaration
   ------------------------------------------------------------------------------
-  component wb_addr_decoder
-    generic
-      (
-        g_WINDOW_SIZE  : integer := 18;  -- Number of bits to address periph on the board (32-bit word address)
-        g_WB_SLAVES_NB : integer := 2
-        );
-    port
-      (
-        ---------------------------------------------------------
-        -- GN4124 core clock and reset
-        clk_i   : in std_logic;
-        rst_n_i : in std_logic;
-
-        ---------------------------------------------------------
-        -- wishbone master interface
-        wbm_adr_i   : in  std_logic_vector(31 downto 0);  -- Address
-        wbm_dat_i   : in  std_logic_vector(31 downto 0);  -- Data out
-        wbm_sel_i   : in  std_logic_vector(3 downto 0);   -- Byte select
-        wbm_stb_i   : in  std_logic;                      -- Strobe
-        wbm_we_i    : in  std_logic;                      -- Write
-        wbm_cyc_i   : in  std_logic;                      -- Cycle
-        wbm_dat_o   : out std_logic_vector(31 downto 0);  -- Data in
-        wbm_ack_o   : out std_logic;                      -- Acknowledge
-        wbm_stall_o : out std_logic;                      -- Stall
-
-        ---------------------------------------------------------
-        -- wishbone slaves interface
-        wb_adr_o   : out std_logic_vector(31 downto 0);                     -- Address
-        wb_dat_o   : out std_logic_vector(31 downto 0);                     -- Data out
-        wb_sel_o   : out std_logic_vector(3 downto 0);                      -- Byte select
-        wb_stb_o   : out std_logic;                                         -- Strobe
-        wb_we_o    : out std_logic;                                         -- Write
-        wb_cyc_o   : out std_logic_vector(g_WB_SLAVES_NB-1 downto 0);       -- Cycle
-        wb_dat_i   : in  std_logic_vector((32*g_WB_SLAVES_NB)-1 downto 0);  -- Data in
-        wb_ack_i   : in  std_logic_vector(g_WB_SLAVES_NB-1 downto 0);       -- Acknowledge
-        wb_stall_i : in  std_logic_vector(g_WB_SLAVES_NB-1 downto 0)        -- Stall
-        );
-  end component wb_addr_decoder;
-
   component carrier_csr
     port (
       rst_n_i                          : in  std_logic;
@@ -271,97 +233,189 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       );
   end component irq_controller;
 
-  component fmc_adc_100Ms_core
-    port (
-      -- Clock, reset
-      sys_clk_i   : in std_logic;
-      sys_rst_n_i : in std_logic;
 
-      -- CSR wishbone interface
-      wb_csr_adr_i : in  std_logic_vector(4 downto 0);
-      wb_csr_dat_i : in  std_logic_vector(31 downto 0);
-      wb_csr_dat_o : out std_logic_vector(31 downto 0);
-      wb_csr_cyc_i : in  std_logic;
-      wb_csr_sel_i : in  std_logic_vector(3 downto 0);
-      wb_csr_stb_i : in  std_logic;
-      wb_csr_we_i  : in  std_logic;
-      wb_csr_ack_o : out std_logic;
+  ------------------------------------------------------------------------------
+  -- SDB crossbar constants declaration
+  --
+  -- WARNING: All address in sdb and crossbar are BYTE addresses!
+  ------------------------------------------------------------------------------
 
-      -- DDR wishbone interface
-      wb_ddr_clk_i   : in  std_logic;
-      wb_ddr_adr_o   : out std_logic_vector(31 downto 0);
-      wb_ddr_dat_o   : out std_logic_vector(63 downto 0);
-      wb_ddr_sel_o   : out std_logic_vector(7 downto 0);
-      wb_ddr_stb_o   : out std_logic;
-      wb_ddr_we_o    : out std_logic;
-      wb_ddr_cyc_o   : out std_logic;
-      wb_ddr_ack_i   : in  std_logic;
-      wb_ddr_stall_i : in  std_logic;
+  -- Number of master port(s) on the wishbone crossbar
+  constant c_NUM_WB_MASTERS : integer := 10;
 
-      -- Events output pulses
-      trigger_p_o   : out std_logic;
-      acq_start_p_o : out std_logic;
-      acq_stop_p_o  : out std_logic;
-      acq_end_p_o   : out std_logic;
+  -- Number of slave port(s) on the wishbone crossbar
+  constant c_NUM_WB_SLAVES : integer := 1;
 
-      -- FMC interface
-      ext_trigger_p_i : in std_logic;   -- External trigger
-      ext_trigger_n_i : in std_logic;
+  -- Wishbone master(s)
+  constant c_MASTER_GENNUM : integer := 0;
 
-      adc_dco_p_i  : in std_logic;                     -- ADC data clock
-      adc_dco_n_i  : in std_logic;
-      adc_fr_p_i   : in std_logic;                     -- ADC frame start
-      adc_fr_n_i   : in std_logic;
-      adc_outa_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (odd bits)
-      adc_outa_n_i : in std_logic_vector(3 downto 0);
-      adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
-      adc_outb_n_i : in std_logic_vector(3 downto 0);
+  -- Wishbone slave(s)
+  constant c_SLAVE_DMA         : integer := 0;  -- DMA controller in the Gennum core
+  constant c_SLAVE_ONEWIRE     : integer := 1;  -- Carrier onewire interface
+  constant c_SLAVE_SPEC_CSR    : integer := 2;  -- SPEC control and status registers
+  constant c_SLAVE_UTC         : integer := 3;  -- UTC core for time-tagging
+  constant c_SLAVE_INT         : integer := 4;  -- Interrupt controller
+  constant c_SLAVE_FMC_SYS_I2C : integer := 5;  -- Mezzanine system I2C interface (EEPROM)
+  constant c_SLAVE_FMC_SPI     : integer := 6;  -- Mezzanine SPI interface
+  constant c_SLAVE_FMC_I2C     : integer := 7;  -- Mezzanine I2C controller
+  constant c_SLAVE_FMC_ADC     : integer := 8;  -- Mezzanine ADC core
+  constant c_SLAVE_FMC_ONEWIRE : integer := 9;  -- Mezzanine onewire interface
 
-      gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
-      gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
-      gpio_led_trig_o  : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
-      gpio_ssr_ch1_o   : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
-      gpio_ssr_ch2_o   : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
-      gpio_ssr_ch3_o   : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
-      gpio_ssr_ch4_o   : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-      gpio_si570_oe_o  : out std_logic                      -- Si570 (programmable oscillator) output enable
+  -- Devices sdb description
+  constant c_DMA_SDB_DEVICE : t_sdb_device := (
+    abi_class     => x"0000",              -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"01",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                 -- 32-bit port granularity
+    sdb_component => (
+      addr_first  => x"0000000000000000",
+      addr_last   => x"0000000000000023",
+      product     => (
+        vendor_id => x"000000000000CE42",  -- CERN
+        device_id => x"00000601",
+        version   => x"00000001",
+        date      => x"20121116",
+        name      => "WB-DMA.Control     ")));
+
+  constant c_ONEWIRE_SDB_DEVICE : t_sdb_device := (
+    abi_class     => x"0000",              -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"01",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                 -- 32-bit port granularity
+    sdb_component => (
+      addr_first  => x"0000000000000000",
+      addr_last   => x"0000000000000007",
+      product     => (
+        vendor_id => x"000000000000CE42",  -- CERN
+        device_id => x"00000602",
+        version   => x"00000001",
+        date      => x"20121116",
+        name      => "WB-Onewire.Control ")));
+
+  constant c_SPEC_CSR_SDB_DEVICE : t_sdb_device := (
+    abi_class     => x"0000",              -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"01",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                 -- 32-bit port granularity
+    sdb_component => (
+      addr_first  => x"0000000000000000",
+      addr_last   => x"0000000000000013",
+      product     => (
+        vendor_id => x"000000000000CE42",  -- CERN
+        device_id => x"00000603",
+        version   => x"00000001",
+        date      => x"20121116",
+        name      => "WB-SPEC-CSR        ")));
+
+  constant c_UTC_SDB_DEVICE : t_sdb_device := (
+    abi_class     => x"0000",              -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"01",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                 -- 32-bit port granularity
+    sdb_component => (
+      addr_first  => x"0000000000000000",
+      addr_last   => x"0000000000000043",
+      product     => (
+        vendor_id => x"000000000000CE42",  -- CERN
+        device_id => x"00000604",
+        version   => x"00000001",
+        date      => x"20121116",
+        name      => "WB-UTC-Core        ")));
+
+  constant c_INT_SDB_DEVICE : t_sdb_device := (
+    abi_class     => x"0000",              -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"01",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                 -- 32-bit port granularity
+    sdb_component => (
+      addr_first  => x"0000000000000000",
+      addr_last   => x"000000000000000B",
+      product     => (
+        vendor_id => x"000000000000CE42",  -- CERN
+        device_id => x"00000605",
+        version   => x"00000001",
+        date      => x"20121116",
+        name      => "WB-Int.Control     ")));
+
+  constant c_I2C_SDB_DEVICE : t_sdb_device := (
+    abi_class     => x"0000",              -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"01",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                 -- 32-bit port granularity
+    sdb_component => (
+      addr_first  => x"0000000000000000",
+      addr_last   => x"000000000000001B",
+      product     => (
+        vendor_id => x"000000000000CE42",  -- CERN
+        device_id => x"00000606",
+        version   => x"00000001",
+        date      => x"20121116",
+        name      => "WB-I2C.Control     ")));
+
+  constant c_SPI_SDB_DEVICE : t_sdb_device := (
+    abi_class     => x"0000",              -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"01",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                 -- 32-bit port granularity
+    sdb_component => (
+      addr_first  => x"0000000000000000",
+      addr_last   => x"000000000000001B",
+      product     => (
+        vendor_id => x"000000000000CE42",  -- CERN
+        device_id => x"00000607",
+        version   => x"00000001",
+        date      => x"20121116",
+        name      => "WB-SPI.Control     ")));
+
+  constant c_ADC_SDB_DEVICE : t_sdb_device := (
+    abi_class     => x"0000",              -- undocumented device
+    abi_ver_major => x"01",
+    abi_ver_minor => x"01",
+    wbd_endian    => c_sdb_endian_big,
+    wbd_width     => x"4",                 -- 32-bit port granularity
+    sdb_component => (
+      addr_first  => x"0000000000000000",
+      addr_last   => x"0000000000000067",
+      product     => (
+        vendor_id => x"000000000000CE42",  -- CERN
+        device_id => x"00000608",
+        version   => x"00000001",
+        date      => x"20121116",
+        name      => "WB-FMC-ADC-Core    ")));
+
+  -- sdb header address
+  constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";
+
+  -- Wishbone crossbar layout
+  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(c_NUM_WB_MASTERS-1 downto 0) :=
+    (
+      c_SLAVE_DMA         => f_sdb_embed_device(c_DMA_SDB_DEVICE, x"00001000"),
+      c_SLAVE_ONEWIRE     => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001200"),
+      c_SLAVE_SPEC_CSR    => f_sdb_embed_device(c_SPEC_CSR_SDB_DEVICE, x"00001300"),
+      c_SLAVE_UTC         => f_sdb_embed_device(c_UTC_SDB_DEVICE, x"00001400"),
+      c_SLAVE_INT         => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001500"),
+      c_SLAVE_FMC_SYS_I2C => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001600"),
+      c_SLAVE_FMC_SPI     => f_sdb_embed_device(c_SPI_SDB_DEVICE, x"00001700"),
+      c_SLAVE_FMC_I2C     => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001800"),
+      c_SLAVE_FMC_ADC     => f_sdb_embed_device(c_ADC_SDB_DEVICE, x"00001900"),
+      c_SLAVE_FMC_ONEWIRE => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001A00")
       );
-  end component fmc_adc_100Ms_core;
-
-  component test_dpram
-    port (
-      clka  : in  std_logic;
-      wea   : in  std_logic_vector(0 downto 0);
-      addra : in  std_logic_vector(9 downto 0);
-      dina  : in  std_logic_vector(31 downto 0);
-      clkb  : in  std_logic;
-      addrb : in  std_logic_vector(9 downto 0);
-      doutb : out std_logic_vector(31 downto 0));
-  end component test_dpram;
 
   ------------------------------------------------------------------------------
-  -- Constants declaration
+  -- Other constants declaration
   ------------------------------------------------------------------------------
+
+  -- SPEC carrier CSR constants
   constant c_CARRIER_TYPE   : std_logic_vector(15 downto 0) := X"0001";
   constant c_BITSTREAM_TYPE : std_logic_vector(31 downto 0) := X"00000001";
-  constant c_BITSTREAM_DATE : std_logic_vector(31 downto 0) := X"4D6BBE3E";  -- UTC time
-
-  constant c_BAR0_APERTURE    : integer := 18;  -- nb of bits for 32-bit word address (= byte aperture - 2)
-  constant c_CSR_WB_SLAVES_NB : integer := 11;
-
-  constant c_CSR_WB_DMA_CONFIG       : integer := 0;
-  constant c_CSR_WB_CARRIER_SPI      : integer := 1;
-  constant c_CSR_WB_CARRIER_ONE_WIRE : integer := 2;
-  constant c_CSR_WB_CARRIER_CSR      : integer := 3;
-  constant c_CSR_WB_UTC_CORE         : integer := 4;
-  constant c_CSR_WB_IRQ_CTRL         : integer := 5;
-  constant c_CSR_WB_FMC_SYS_I2C      : integer := 6;
-  constant c_CSR_WB_FMC_SPI          : integer := 7;
-  constant c_CSR_WB_FMC_I2C          : integer := 8;
-  constant c_CSR_WB_FMC_ADC_CORE     : integer := 9;
-  constant c_CSR_WB_FMC_ONE_WIRE     : integer := 10;
-
-  constant c_FMC_ONE_WIRE_NB : integer := 1;
+  constant c_BITSTREAM_DATE : std_logic_vector(31 downto 0) := X"50AA5124";  -- UTC time
 
   ------------------------------------------------------------------------------
   -- Signals declaration
@@ -380,7 +434,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal ddr_clk     : std_logic;
   signal ddr_clk_buf : std_logic;
 
-  -- LCLK from GN4124 used as system clock
+  -- LCLK from GN4124
   signal l_clk : std_logic;
 
   -- Reset
@@ -388,29 +442,21 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal sys_rst   : std_logic;
   signal sys_rst_n : std_logic;
 
-  -- CSR wishbone bus (master)
-  signal wbm_adr   : std_logic_vector(31 downto 0);
-  signal wbm_dat_i : std_logic_vector(31 downto 0);
-  signal wbm_dat_o : std_logic_vector(31 downto 0);
-  signal wbm_sel   : std_logic_vector(3 downto 0);
-  signal wbm_cyc   : std_logic;
-  signal wbm_stb   : std_logic;
-  signal wbm_we    : std_logic;
-  signal wbm_ack   : std_logic;
-  signal wbm_stall : std_logic;
+  -- Wishbone buse(s) from crossbar master port(s)
+  signal cnx_master_out : t_wishbone_master_out_array(c_NUM_WB_MASTERS-1 downto 0);
+  signal cnx_master_in  : t_wishbone_master_in_array(c_NUM_WB_MASTERS-1 downto 0);
 
-  -- CSR wishbone bus (slaves)
-  signal wb_adr   : std_logic_vector(31 downto 0);
-  signal wb_dat_i : std_logic_vector((32*c_CSR_WB_SLAVES_NB)-1 downto 0);
-  signal wb_dat_o : std_logic_vector(31 downto 0);
-  signal wb_sel   : std_logic_vector(3 downto 0);
-  signal wb_cyc   : std_logic_vector(c_CSR_WB_SLAVES_NB-1 downto 0);
-  signal wb_stb   : std_logic;
-  signal wb_we    : std_logic;
-  signal wb_ack   : std_logic_vector(c_CSR_WB_SLAVES_NB-1 downto 0);
-  signal wb_stall : std_logic_vector(c_CSR_WB_SLAVES_NB-1 downto 0);
+  -- Wishbone buse(s) to crossbar slave port(s)
+  signal cnx_slave_out : t_wishbone_slave_out_array(c_NUM_WB_SLAVES-1 downto 0);
+  signal cnx_slave_in  : t_wishbone_slave_in_array(c_NUM_WB_SLAVES-1 downto 0);
 
-  -- GN4124 DMA to DDR wishbone bus
+  -- Wishbone address from GN4124 core (32-bit word address)
+  signal gn_wb_adr : std_logic_vector(31 downto 0);
+
+  -- Wishbone address from to DMA controller (32-bit word address)
+  signal dma_ctrl_wb_adr : std_logic_vector(31 downto 0);
+
+  -- GN4124 core DMA port to DDR wishbone bus
   signal wb_dma_adr   : std_logic_vector(31 downto 0);
   signal wb_dma_dat_i : std_logic_vector(31 downto 0);
   signal wb_dma_dat_o : std_logic_vector(31 downto 0);
@@ -483,14 +529,14 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal spi_ss_t  : std_logic_vector(7 downto 0);
 
   -- Mezzanine 1-wire
-  signal mezz_owr_pwren : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
-  signal mezz_owr_en    : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
-  signal mezz_owr_i     : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal mezz_owr_pwren : std_logic_vector(0 downto 0);
+  signal mezz_owr_en    : std_logic_vector(0 downto 0);
+  signal mezz_owr_i     : std_logic_vector(0 downto 0);
 
   -- Carrier 1-wire
-  signal carrier_owr_pwren : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
-  signal carrier_owr_en    : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
-  signal carrier_owr_i     : std_logic_vector(c_FMC_ONE_WIRE_NB - 1 downto 0);
+  signal carrier_owr_pwren : std_logic_vector(0 downto 0);
+  signal carrier_owr_en    : std_logic_vector(0 downto 0);
+  signal carrier_owr_i     : std_logic_vector(0 downto 0);
 
   -- UTC core
   signal trigger_p   : std_logic;
@@ -499,7 +545,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal acq_end_p   : std_logic;
 
   -- Tests
-  signal test_dpram_we : std_logic;
   signal led_cnt       : unsigned(26 downto 0);
   signal led_pps       : std_logic;
 
@@ -585,7 +630,6 @@ begin
   sys_rst_n <= L_RST_N and sys_clk_pll_locked;
   sys_rst   <= not(sys_rst_n);
 
-
   ------------------------------------------------------------------------------
   -- GN4124 interface
   ------------------------------------------------------------------------------
@@ -623,26 +667,26 @@ begin
       irq_p_o         => GPIO(0),
       -- DMA registers wishbone interface (slave classic)
       dma_reg_clk_i   => sys_clk_125,
-      dma_reg_adr_i   => wb_adr,
-      dma_reg_dat_i   => wb_dat_o,
-      dma_reg_sel_i   => wb_sel,
-      dma_reg_stb_i   => wb_stb,
-      dma_reg_we_i    => wb_we,
-      dma_reg_cyc_i   => wb_cyc(c_CSR_WB_DMA_CONFIG),
-      dma_reg_dat_o   => wb_dat_i(c_CSR_WB_DMA_CONFIG * 32 + 31 downto c_CSR_WB_DMA_CONFIG * 32),
-      dma_reg_ack_o   => wb_ack(c_CSR_WB_DMA_CONFIG),
-      dma_reg_stall_o => wb_stall(c_CSR_WB_DMA_CONFIG),
+      dma_reg_adr_i   => dma_ctrl_wb_adr,
+      dma_reg_dat_i   => cnx_master_out(c_SLAVE_DMA).dat,
+      dma_reg_sel_i   => cnx_master_out(c_SLAVE_DMA).sel,
+      dma_reg_stb_i   => cnx_master_out(c_SLAVE_DMA).stb,
+      dma_reg_we_i    => cnx_master_out(c_SLAVE_DMA).we,
+      dma_reg_cyc_i   => cnx_master_out(c_SLAVE_DMA).cyc,
+      dma_reg_dat_o   => cnx_master_in(c_SLAVE_DMA).dat,
+      dma_reg_ack_o   => cnx_master_in(c_SLAVE_DMA).ack,
+      dma_reg_stall_o => cnx_master_in(c_SLAVE_DMA).stall,
       -- CSR wishbone interface (master pipelined)
       csr_clk_i       => sys_clk_125,
-      csr_adr_o       => wbm_adr,
-      csr_dat_o       => wbm_dat_o,
-      csr_sel_o       => wbm_sel,
-      csr_stb_o       => wbm_stb,
-      csr_we_o        => wbm_we,
-      csr_cyc_o       => wbm_cyc,
-      csr_dat_i       => wbm_dat_i,
-      csr_ack_i       => wbm_ack,
-      csr_stall_i     => wbm_stall,
+      csr_adr_o       => gn_wb_adr,
+      csr_dat_o       => cnx_slave_in(c_MASTER_GENNUM).dat,
+      csr_sel_o       => cnx_slave_in(c_MASTER_GENNUM).sel,
+      csr_stb_o       => cnx_slave_in(c_MASTER_GENNUM).stb,
+      csr_we_o        => cnx_slave_in(c_MASTER_GENNUM).we,
+      csr_cyc_o       => cnx_slave_in(c_MASTER_GENNUM).cyc,
+      csr_dat_i       => cnx_slave_out(c_MASTER_GENNUM).dat,
+      csr_ack_i       => cnx_slave_out(c_MASTER_GENNUM).ack,
+      csr_stall_i     => cnx_slave_out(c_MASTER_GENNUM).stall,
       -- DMA wishbone interface (pipelined)
       dma_clk_i       => sys_clk_125,
       dma_adr_o       => wb_dma_adr,
@@ -658,50 +702,36 @@ begin
 
   p2l_pll_locked <= gn4124_status(0);
 
+  -- Convert 32-bit word address into byte address for crossbar
+  cnx_slave_in(c_MASTER_GENNUM).adr <= gn_wb_adr(29 downto 0) & "00";
+
+  -- Convert 32-bit byte address into word address for DMA controller
+  dma_ctrl_wb_adr <= "00" & cnx_master_out(c_SLAVE_DMA).adr(31 downto 2);
+
+  -- Unused wishbone signals
+  cnx_master_in(c_SLAVE_DMA).err <= '0';
+  cnx_master_in(c_SLAVE_DMA).rty <= '0';
+  cnx_master_in(c_SLAVE_DMA).int <= '0';
+
   ------------------------------------------------------------------------------
-  -- CSR wishbone address decoder
-  --     0x00000 -> DMA configuration
-  --     0x10000 -> Carrier SPI master
-  --     0x20000 -> Carrier 1-wire master
-  --     0x30000 -> Carrier CSR
-  --     0x40000 -> UTC core
-  --     0x50000 -> Interrupt controller
-  --     0x60000 -> Mezzanine system managment I2C master
-  --     0x70000 -> Mezzanine SPI master
-  --     0x80000 -> Mezzanine I2C master
-  --     0x90000 -> Mezzanine ADC core
-  --     0xA0000 -> Mezzanine 1-wire master
+  -- CSR wishbone crossbar
   ------------------------------------------------------------------------------
-  cmp_csr_wb_addr_decoder : wb_addr_decoder
+
+  cmp_sdb_crossbar : xwb_sdb_crossbar
     generic map (
-      g_WINDOW_SIZE  => c_BAR0_APERTURE,
-      g_WB_SLAVES_NB => c_CSR_WB_SLAVES_NB
-      )
+      g_num_masters => c_NUM_WB_SLAVES,
+      g_num_slaves  => c_NUM_WB_MASTERS,
+      g_registered  => true,
+      g_wraparound  => true,
+      g_layout      => c_INTERCONNECT_LAYOUT,
+      g_sdb_addr    => c_SDB_ADDRESS)
     port map (
-      -- GN4124 core clock and reset
-      clk_i       => sys_clk_125,
-      rst_n_i     => L_RST_N,
-      -- wishbone master interface
-      wbm_adr_i   => wbm_adr,
-      wbm_dat_i   => wbm_dat_o,
-      wbm_sel_i   => wbm_sel,
-      wbm_stb_i   => wbm_stb,
-      wbm_we_i    => wbm_we,
-      wbm_cyc_i   => wbm_cyc,
-      wbm_dat_o   => wbm_dat_i,
-      wbm_ack_o   => wbm_ack,
-      wbm_stall_o => wbm_stall,
-      -- wishbone slaves interface
-      wb_adr_o    => wb_adr,
-      wb_dat_o    => wb_dat_o,
-      wb_sel_o    => wb_sel,
-      wb_stb_o    => wb_stb,
-      wb_we_o     => wb_we,
-      wb_cyc_o    => wb_cyc,
-      wb_dat_i    => wb_dat_i,
-      wb_ack_i    => wb_ack,
-      wb_stall_i  => wb_stall
-      );
+      clk_sys_i => sys_clk_125,
+      rst_n_i   => sys_rst_n,
+      slave_i   => cnx_slave_in,
+      slave_o   => cnx_slave_out,
+      master_i  => cnx_master_in,
+      master_o  => cnx_master_out);
 
   ------------------------------------------------------------------------------
   -- Carrier SPI master
@@ -713,10 +743,10 @@ begin
   -- Carrier 1-wire master
   --    DS18B20 (thermometer + unique ID)
   ------------------------------------------------------------------------------
-  cmp_carrier_onewire : wb_onewire_master
+  cmp_carrier_onewire : xwb_onewire_master
     generic map(
       g_interface_mode      => CLASSIC,
-      g_address_granularity => WORD,
+      g_address_granularity => BYTE,
       g_num_ports           => 1,
       g_ow_btp_normal       => "5.0",
       g_ow_btp_overdrive    => "1.0"
@@ -725,15 +755,9 @@ begin
       clk_sys_i => sys_clk_125,
       rst_n_i   => sys_rst_n,
 
-      wb_cyc_i => wb_cyc(c_CSR_WB_CARRIER_ONE_WIRE),
-      wb_sel_i => wb_sel,
-      wb_stb_i => wb_stb,
-      wb_we_i  => wb_we,
-      wb_adr_i => wb_adr(2 downto 0),
-      wb_dat_i => wb_dat_o,
-      wb_dat_o => wb_dat_i(c_CSR_WB_CARRIER_ONE_WIRE * 32 + 31 downto 32 * c_CSR_WB_CARRIER_ONE_WIRE),
-      wb_ack_o => wb_ack(c_CSR_WB_CARRIER_ONE_WIRE),
-      wb_int_o => open,
+      slave_i => cnx_master_out(c_SLAVE_ONEWIRE),
+      slave_o => cnx_master_in(c_SLAVE_ONEWIRE),
+      desc_o  => open,
 
       owr_pwren_o => carrier_owr_pwren,
       owr_en_o    => carrier_owr_en,
@@ -742,10 +766,6 @@ begin
 
   carrier_one_wire_b <= '0' when carrier_owr_en(0) = '1' else 'Z';
   carrier_owr_i(0)   <= carrier_one_wire_b;
-
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_CARRIER_ONE_WIRE) <= '0';
-
 
   ------------------------------------------------------------------------------
   -- Carrier CSR
@@ -758,14 +778,14 @@ begin
     port map(
       rst_n_i                          => sys_rst_n,
       wb_clk_i                         => sys_clk_125,
-      wb_addr_i                        => wb_adr(2 downto 0),
-      wb_data_i                        => wb_dat_o,
-      wb_data_o                        => wb_dat_i(c_CSR_WB_CARRIER_CSR * 32 + 31 downto c_CSR_WB_CARRIER_CSR * 32),
-      wb_cyc_i                         => wb_cyc(c_CSR_WB_CARRIER_CSR),
-      wb_sel_i                         => wb_sel,
-      wb_stb_i                         => wb_stb,
-      wb_we_i                          => wb_we,
-      wb_ack_o                         => wb_ack(c_CSR_WB_CARRIER_CSR),
+      wb_addr_i                        => cnx_master_out(c_SLAVE_SPEC_CSR).adr(4 downto 2),  -- cnx_master_out.adr is byte address
+      wb_data_i                        => cnx_master_out(c_SLAVE_SPEC_CSR).dat,
+      wb_data_o                        => cnx_master_in(c_SLAVE_SPEC_CSR).dat,
+      wb_cyc_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).cyc,
+      wb_sel_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).sel,
+      wb_stb_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).stb,
+      wb_we_i                          => cnx_master_out(c_SLAVE_SPEC_CSR).we,
+      wb_ack_o                         => cnx_master_in(c_SLAVE_SPEC_CSR).ack,
       carrier_csr_carrier_pcb_rev_i    => pcb_ver_i,
       carrier_csr_carrier_reserved_i   => X"000",
       carrier_csr_carrier_type_i       => c_CARRIER_TYPE,
@@ -782,8 +802,11 @@ begin
       carrier_csr_ctrl_reserved_o      => open
       );
 
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_CARRIER_CSR) <= '0';
+  -- Unused wishbone signals
+  cnx_master_in(c_SLAVE_SPEC_CSR).err   <= '0';
+  cnx_master_in(c_SLAVE_SPEC_CSR).rty   <= '0';
+  cnx_master_in(c_SLAVE_SPEC_CSR).stall <= '0';
+  cnx_master_in(c_SLAVE_SPEC_CSR).int   <= '0';
 
   gen_irq_led : for I in 0 to 1 generate
     cmp_irq_led : gc_extend_pulse
@@ -812,18 +835,21 @@ begin
       acq_stop_p_i  => acq_stop_p,
       acq_end_p_i   => acq_end_p,
 
-      wb_adr_i => wb_adr(4 downto 0),
-      wb_dat_i => wb_dat_o,
-      wb_dat_o => wb_dat_i(c_CSR_WB_UTC_CORE * 32 + 31 downto c_CSR_WB_UTC_CORE * 32),
-      wb_cyc_i => wb_cyc(c_CSR_WB_UTC_CORE),
-      wb_sel_i => wb_sel,
-      wb_stb_i => wb_stb,
-      wb_we_i  => wb_we,
-      wb_ack_o => wb_ack(c_CSR_WB_UTC_CORE)
+      wb_adr_i => cnx_master_out(c_SLAVE_UTC).adr(6 downto 2),  -- cnx_master_out.adr is byte address
+      wb_dat_i => cnx_master_out(c_SLAVE_UTC).dat,
+      wb_dat_o => cnx_master_in(c_SLAVE_UTC).dat,
+      wb_cyc_i => cnx_master_out(c_SLAVE_UTC).cyc,
+      wb_sel_i => cnx_master_out(c_SLAVE_UTC).sel,
+      wb_stb_i => cnx_master_out(c_SLAVE_UTC).stb,
+      wb_we_i  => cnx_master_out(c_SLAVE_UTC).we,
+      wb_ack_o => cnx_master_in(c_SLAVE_UTC).ack
       );
 
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_UTC_CORE) <= '0';
+  -- Unused wishbone signals
+  cnx_master_in(c_SLAVE_UTC).err   <= '0';
+  cnx_master_in(c_SLAVE_UTC).rty   <= '0';
+  cnx_master_in(c_SLAVE_UTC).stall <= '0';
+  cnx_master_in(c_SLAVE_UTC).int   <= '0';
 
   ------------------------------------------------------------------------------
   -- Interrupt controller
@@ -837,18 +863,21 @@ begin
 
       irq_p_o => irq_to_gn4124,
 
-      wb_adr_i => wb_adr(1 downto 0),
-      wb_dat_i => wb_dat_o,
-      wb_dat_o => wb_dat_i(c_CSR_WB_IRQ_CTRL * 32 + 31 downto c_CSR_WB_IRQ_CTRL * 32),
-      wb_cyc_i => wb_cyc(c_CSR_WB_IRQ_CTRL),
-      wb_sel_i => wb_sel,
-      wb_stb_i => wb_stb,
-      wb_we_i  => wb_we,
-      wb_ack_o => wb_ack(c_CSR_WB_IRQ_CTRL)
+      wb_adr_i => cnx_master_out(c_SLAVE_INT).adr(3 downto 2),  -- cnx_master_out.adr is byte address
+      wb_dat_i => cnx_master_out(c_SLAVE_INT).dat,
+      wb_dat_o => cnx_master_in(c_SLAVE_INT).dat,
+      wb_cyc_i => cnx_master_out(c_SLAVE_INT).cyc,
+      wb_sel_i => cnx_master_out(c_SLAVE_INT).sel,
+      wb_stb_i => cnx_master_out(c_SLAVE_INT).stb,
+      wb_we_i  => cnx_master_out(c_SLAVE_INT).we,
+      wb_ack_o => cnx_master_in(c_SLAVE_INT).ack
       );
 
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_IRQ_CTRL) <= '0';
+  -- Unused wishbone signals
+  cnx_master_in(c_SLAVE_INT).err   <= '0';
+  cnx_master_in(c_SLAVE_INT).rty   <= '0';
+  cnx_master_in(c_SLAVE_INT).stall <= '0';
+  cnx_master_in(c_SLAVE_INT).int   <= '0';
 
   -- IRQ sources
   --   0    -> End of DMA transfer
@@ -886,31 +915,22 @@ begin
 
   acq_end_irq_p <= ddr_wr_fifo_empty_p and acq_end;
 
-  -- just forward irq pulses for test
-  --irq_to_gn4124 <= dma_irq(1) or dma_irq(0);
-
   ------------------------------------------------------------------------------
   -- Mezzanine system managment I2C master
   --    Access to mezzanine EEPROM
   ------------------------------------------------------------------------------
-  cmp_fmc_sys_i2c : wb_i2c_master
+  cmp_fmc_sys_i2c : xwb_i2c_master
     generic map(
       g_interface_mode      => CLASSIC,
-      g_address_granularity => WORD
+      g_address_granularity => BYTE
       )
     port map (
       clk_sys_i => sys_clk_125,
       rst_n_i   => sys_rst_n,
 
-      wb_adr_i => wb_adr(4 downto 0),
-      wb_dat_i => wb_dat_o,
-      wb_dat_o => wb_dat_i(c_CSR_WB_FMC_SYS_I2C * 32 + 31 downto 32 * c_CSR_WB_FMC_SYS_I2C),
-      wb_we_i  => wb_we,
-      wb_stb_i => wb_stb,
-      wb_sel_i => wb_sel,
-      wb_cyc_i => wb_cyc(c_CSR_WB_FMC_SYS_I2C),
-      wb_ack_o => wb_ack(c_CSR_WB_FMC_SYS_I2C),
-      wb_int_o => open,
+      slave_i => cnx_master_out(c_SLAVE_FMC_SYS_I2C),
+      slave_o => cnx_master_in(c_SLAVE_FMC_SYS_I2C),
+      desc_o  => open,
 
       scl_pad_i    => sys_scl_in,
       scl_pad_o    => sys_scl_out,
@@ -919,9 +939,6 @@ begin
       sda_pad_o    => sys_sda_out,
       sda_padoen_o => sys_sda_oe_n
       );
-
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_FMC_SYS_I2C) <= '0';
 
   -- Tri-state buffer for SDA and SCL
   sys_scl_b  <= sys_scl_out when sys_scl_oe_n = '0' else 'Z';
@@ -935,34 +952,24 @@ begin
   --    Offset DACs control
   --    ADC control
   ------------------------------------------------------------------------------
-  cmp_fmc_spi : wb_spi
+  cmp_fmc_spi : xwb_spi
     generic map(
       g_interface_mode      => CLASSIC,
-      g_address_granularity => WORD
+      g_address_granularity => BYTE
       )
     port map (
       clk_sys_i => sys_clk_125,
       rst_n_i   => sys_rst_n,
 
-      wb_adr_i => wb_adr(4 downto 0),
-      wb_dat_i => wb_dat_o,
-      wb_dat_o => wb_dat_i(c_CSR_WB_FMC_SPI * 32 + 31 downto c_CSR_WB_FMC_SPI * 32),
-      wb_sel_i => wb_sel,
-      wb_stb_i => wb_stb,
-      wb_cyc_i => wb_cyc(c_CSR_WB_FMC_SPI),
-      wb_we_i  => wb_we,
-      wb_ack_o => wb_ack(c_CSR_WB_FMC_SPI),
-      wb_err_o => open,
-      wb_int_o => open,
+      slave_i => cnx_master_out(c_SLAVE_FMC_SPI),
+      slave_o => cnx_master_in(c_SLAVE_FMC_SPI),
+      desc_o  => open,
 
       pad_cs_o   => spi_ss_t,
       pad_sclk_o => spi_sck_o,
       pad_mosi_o => spi_dout_o,
       pad_miso_i => spi_din_t(spi_din_t'left)
       );
-
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_FMC_SPI) <= '0';
 
   -- Assign slave select lines
   spi_cs_adc_n_o  <= spi_ss_t(0);
@@ -989,24 +996,18 @@ begin
   --
   -- Note: I2C registers are 8-bit wide, but accessed as 32-bit registers
   ------------------------------------------------------------------------------
-  cmp_fmc_i2c : wb_i2c_master
+  cmp_fmc_i2c : xwb_i2c_master
     generic map(
       g_interface_mode      => CLASSIC,
-      g_address_granularity => WORD
+      g_address_granularity => BYTE
       )
     port map (
       clk_sys_i => sys_clk_125,
       rst_n_i   => sys_rst_n,
 
-      wb_adr_i => wb_adr(4 downto 0),
-      wb_dat_i => wb_dat_o,
-      wb_dat_o => wb_dat_i(c_CSR_WB_FMC_I2C * 32 + 31 downto 32 * c_CSR_WB_FMC_I2C),
-      wb_we_i  => wb_we,
-      wb_stb_i => wb_stb,
-      wb_sel_i => wb_sel,
-      wb_cyc_i => wb_cyc(c_CSR_WB_FMC_I2C),
-      wb_ack_o => wb_ack(c_CSR_WB_FMC_I2C),
-      wb_int_o => open,
+      slave_i => cnx_master_out(c_SLAVE_FMC_I2C),
+      slave_o => cnx_master_in(c_SLAVE_FMC_I2C),
+      desc_o  => open,
 
       scl_pad_i    => si570_scl_in,
       scl_pad_o    => si570_scl_out,
@@ -1015,9 +1016,6 @@ begin
       sda_pad_o    => si570_sda_out,
       sda_padoen_o => si570_sda_oe_n
       );
-
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_FMC_I2C) <= '0';
 
   -- Tri-state buffer for SDA and SCL
   si570_scl_b  <= si570_scl_out when si570_scl_oe_n = '0' else 'Z';
@@ -1038,14 +1036,14 @@ begin
       sys_clk_i   => sys_clk_125,
       sys_rst_n_i => sys_rst_n,
 
-      wb_csr_adr_i => wb_adr(4 downto 0),
-      wb_csr_dat_i => wb_dat_o,
-      wb_csr_dat_o => wb_dat_i(c_CSR_WB_FMC_ADC_CORE * 32 + 31 downto c_CSR_WB_FMC_ADC_CORE * 32),
-      wb_csr_cyc_i => wb_cyc(c_CSR_WB_FMC_ADC_CORE),
-      wb_csr_sel_i => wb_sel,
-      wb_csr_stb_i => wb_stb,
-      wb_csr_we_i  => wb_we,
-      wb_csr_ack_o => wb_ack(c_CSR_WB_FMC_ADC_CORE),
+      wb_csr_adr_i => cnx_master_out(c_SLAVE_FMC_ADC).adr(6 downto 2),  -- cnx_master_out.adr is byte address
+      wb_csr_dat_i => cnx_master_out(c_SLAVE_FMC_ADC).dat,
+      wb_csr_dat_o => cnx_master_in(c_SLAVE_FMC_ADC).dat,
+      wb_csr_cyc_i => cnx_master_out(c_SLAVE_FMC_ADC).cyc,
+      wb_csr_sel_i => cnx_master_out(c_SLAVE_FMC_ADC).sel,
+      wb_csr_stb_i => cnx_master_out(c_SLAVE_FMC_ADC).stb,
+      wb_csr_we_i  => cnx_master_out(c_SLAVE_FMC_ADC).we,
+      wb_csr_ack_o => cnx_master_in(c_SLAVE_FMC_ADC).ack,
 
       wb_ddr_clk_i   => sys_clk_125,
       wb_ddr_adr_o   => wb_ddr_adr,
@@ -1084,34 +1082,31 @@ begin
       gpio_si570_oe_o  => gpio_si570_oe_o
       );
 
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_FMC_ADC_CORE) <= '0';
+  -- Unused wishbone signals
+  cnx_master_in(c_SLAVE_FMC_ADC).err   <= '0';
+  cnx_master_in(c_SLAVE_FMC_ADC).rty   <= '0';
+  cnx_master_in(c_SLAVE_FMC_ADC).stall <= '0';
+  cnx_master_in(c_SLAVE_FMC_ADC).int   <= '0';
 
   ------------------------------------------------------------------------------
   -- Mezzanine 1-wire master
   --    DS18B20 (thermometer + unique ID)
   ------------------------------------------------------------------------------
-  cmp_fmc_onewire : wb_onewire_master
+  cmp_fmc_onewire : xwb_onewire_master
     generic map(
       g_interface_mode      => CLASSIC,
-      g_address_granularity => WORD,
-      g_num_ports        => 1,
-      g_ow_btp_normal    => "5.0",
-      g_ow_btp_overdrive => "1.0"
+      g_address_granularity => BYTE,
+      g_num_ports           => 1,
+      g_ow_btp_normal       => "5.0",
+      g_ow_btp_overdrive    => "1.0"
       )
     port map(
       clk_sys_i => sys_clk_125,
       rst_n_i   => sys_rst_n,
 
-      wb_cyc_i => wb_cyc(c_CSR_WB_FMC_ONE_WIRE),
-      wb_sel_i => wb_sel,
-      wb_stb_i => wb_stb,
-      wb_we_i  => wb_we,
-      wb_adr_i => wb_adr(2 downto 0),
-      wb_dat_i => wb_dat_o,
-      wb_dat_o => wb_dat_i(c_CSR_WB_FMC_ONE_WIRE * 32 + 31 downto 32 * c_CSR_WB_FMC_ONE_WIRE),
-      wb_ack_o => wb_ack(c_CSR_WB_FMC_ONE_WIRE),
-      wb_int_o => open,
+      slave_i => cnx_master_out(c_SLAVE_FMC_ONEWIRE),
+      slave_o => cnx_master_in(c_SLAVE_FMC_ONEWIRE),
+      desc_o  => open,
 
       owr_pwren_o => mezz_owr_pwren,
       owr_en_o    => mezz_owr_en,
@@ -1120,9 +1115,6 @@ begin
 
   mezz_one_wire_b <= '0' when mezz_owr_en(0) = '1' else 'Z';
   mezz_owr_i(0)   <= mezz_one_wire_b;
-
-  -- Classic slave supporting single pipelined accesses, stall isn't used
-  wb_stall(c_CSR_WB_FMC_ONE_WIRE) <= '0';
 
   ------------------------------------------------------------------------------
   -- DMA wishbone bus slaves
@@ -1165,28 +1157,6 @@ begin
       ddr3_clk_n_o  => DDR3_CK_N,
       ddr3_rzq_b    => DDR3_RZQ,
       ddr3_zio_b    => DDR3_ZIO,
-
-      --wb0_clk_i   => '0',
-      --wb0_sel_i   => "0000",
-      --wb0_cyc_i   => '0',
-      --wb0_stb_i   => '0',
-      --wb0_we_i    => '0',
-      --wb0_addr_i  => X"0000000",
-      --wb0_data_i  => X"00000000",
-      --wb0_data_o  => open,
-      --wb0_ack_o   => open,
-      --wb0_stall_o => open,
-
-      --wb1_clk_i   => '0',
-      --wb1_sel_i   => "0000",
-      --wb1_cyc_i   => '0',
-      --wb1_stb_i   => '0',
-      --wb1_we_i    => '0',
-      --wb1_addr_i  => X"0000000",
-      --wb1_data_i  => X"00000000",
-      --wb1_data_o  => open,
-      --wb1_ack_o   => open,
-      --wb1_stall_o => open);
 
       wb0_clk_i   => sys_clk_125,
       wb0_sel_i   => wb_ddr_sel,
@@ -1239,48 +1209,6 @@ begin
       );
 
   ddr3_calib_done <= ddr3_status(0);
-
---wb_ddr_stall <= '0';
-
---test_dpram_we <= wb_ddr_we and wb_ddr_stb and wb_ddr_cyc;
-
---p_test_dpram_wr_ack : process (sys_clk_250)
---begin
---  if rising_edge(sys_clk_250) then
---    if sys_rst_n = '0' then
---      wb_ddr_ack <= '0';
---    elsif wb_ddr_cyc = '1' and wb_ddr_stb = '1' then
---      wb_ddr_ack <= '1';
---    else
---      wb_ddr_ack <= '0';
---    end if;
---  end if;
---end process p_test_dpram_wr_ack;
-
---cmp_test_dpram : test_dpram
---  port map(
---    clka   => sys_clk_250,
---    wea(0) => test_dpram_we,           --: in  std_logic_vector(0 downto 0);
---    addra  => wb_ddr_adr(9 downto 0),  --: in  std_logic_vector(9 downto 0);
---    dina   => wb_ddr_dat_o,            --: in  std_logic_vector(31 downto 0);
---    clkb   => sys_clk_125,
---    addrb  => wb_dma_adr(9 downto 0),  --: in  std_logic_vector(9 downto 0);
---    doutb  => wb_dma_dat_i);           --: out std_logic_vector(31 downto 0));
-
---p_test_dpram_rd_ack : process (sys_clk_125)
---begin
---  if rising_edge(sys_clk_125) then
---    if sys_rst_n = '0' then
---      wb_dma_ack <= '0';
---    elsif wb_dma_cyc = '1' and wb_dma_stb = '1' then
---      wb_dma_ack <= '1';
---    else
---      wb_dma_ack <= '0';
---    end if;
---  end if;
---end process p_test_dpram_rd_ack;
-
---wb_dma_stall <= '0';
 
   ------------------------------------------------------------------------------
   -- Assign unused outputs

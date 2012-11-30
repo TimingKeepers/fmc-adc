@@ -8,9 +8,8 @@ files = [
 
 modules = {
     "local" : "../../adc/rtl",
-    "svn" : [ "http://svn.ohwr.org/ddr3-sp6-core/trunk/hdl",
-              "http://svn.ohwr.org/gn4124-core/trunk/hdl/gn4124core/rtl",
-              "http://svn.ohwr.org/gn4124-core/trunk/hdl/common/rtl"],
-    "git" : "git://ohwr.org/hdl-core-lib/general-cores.git"}
+    "git" : ["git://ohwr.org/hdl-core-lib/general-cores.git::no_coregen",
+             "git://ohwr.org/hdl-core-lib/ddr3-sp6-core.git::spec_bank3_64b_32b",
+             "git://ohwr.org/hdl-core-lib/gn4124-core.git::master"]}
 
 fetchto="../ip_cores"
