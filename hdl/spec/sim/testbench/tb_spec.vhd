@@ -46,7 +46,7 @@ architecture TEST of TB_SPEC is
     generic
       (
         STRING_MAX     : integer := 256;           -- Command string maximum length
-        T_LCLK         : time    := 10 ns;         -- Local Bus Clock Period
+        T_LCLK         : time    := 5 ns;         -- Local Bus Clock Period
         T_P2L_CLK_DLY  : time    := 2 ns;          -- Delay from LCLK to P2L_CLK
         INSTANCE_LABEL : string  := "GN412X_BFM";  -- Label string to be used as a prefix for messages from the model
         MODE_PRIMARY   : boolean := true           -- TRUE for BFM acting as GN412x, FALSE for BFM acting as the DUT
@@ -492,7 +492,7 @@ begin
     generic map
     (
       STRING_MAX     => STRING_MAX,
-      T_LCLK         => 6.25 ns,
+      T_LCLK         => 5 ns,
       T_P2L_CLK_DLY  => 2 ns,
       INSTANCE_LABEL => "U0(Primary GN412x): ",
       MODE_PRIMARY   => true
