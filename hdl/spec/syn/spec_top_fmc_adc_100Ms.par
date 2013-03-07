@@ -1,7 +1,7 @@
 Release 13.3 par O.76xd (lin)
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
-pcbe15575::  Tue Mar 05 14:03:31 2013
+pcbe15575::  Thu Mar 07 12:40:49 2013
 
 par -w -intstyle ise -ol high -mt off spec_top_fmc_adc_100Ms_map.ncd
 spec_top_fmc_adc_100Ms.ncd spec_top_fmc_adc_100Ms.pcf 
@@ -27,10 +27,10 @@ Slice Logic Utilization:
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                      5,656 out of  27,288   20%
-    Number used as logic:                    5,168 out of  27,288   18%
+  Number of Slice LUTs:                      5,450 out of  27,288   19%
+    Number used as logic:                    5,169 out of  27,288   18%
       Number using O6 output only:           3,262
-      Number using O5 output only:             280
+      Number using O5 output only:             281
       Number using O5 and O6:                1,626
       Number used as ROM:                        0
     Number used as Memory:                       2 out of   6,408    1%
@@ -40,18 +40,18 @@ Slice Logic Utilization:
         Number using O6 output only:             2
         Number using O5 output only:             0
         Number using O5 and O6:                  0
-    Number used exclusively as route-thrus:    486
-      Number with same-slice register load:    475
+    Number used exclusively as route-thrus:    279
+      Number with same-slice register load:    268
       Number with same-slice carry load:        11
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                 2,412 out of   6,822   35%
+  Number of occupied Slices:                 2,618 out of   6,822   38%
   Nummber of MUXCYs used:                    1,424 out of  13,644   10%
-  Number of LUT Flip Flop pairs used:        7,602
-    Number with an unused Flip Flop:         1,775 out of   7,602   23%
-    Number with an unused LUT:               1,946 out of   7,602   25%
-    Number of fully used LUT-FF pairs:       3,881 out of   7,602   51%
+  Number of LUT Flip Flop pairs used:        7,968
+    Number with an unused Flip Flop:         1,934 out of   7,968   24%
+    Number with an unused LUT:               2,518 out of   7,968   31%
+    Number of fully used LUT-FF pairs:       3,516 out of   7,968   44%
     Number of slice register sites lost
       to control set restrictions:               0 out of  54,576    0%
 
@@ -121,29 +121,29 @@ WARNING:Par:288 - The signal P_WR_REQ<1>_IBUF has no load.  PAR will not attempt
 Starting Router
 
 
-Phase  1  : 45008 unrouted;      REAL time: 19 secs 
+Phase  1  : 45135 unrouted;      REAL time: 19 secs 
 
-Phase  2  : 34718 unrouted;      REAL time: 24 secs 
+Phase  2  : 34792 unrouted;      REAL time: 24 secs 
 
-Phase  3  : 14220 unrouted;      REAL time: 48 secs 
+Phase  3  : 14548 unrouted;      REAL time: 52 secs 
 
-Phase  4  : 14410 unrouted; (Setup:0, Hold:8355, Component Switching Limit:0)     REAL time: 53 secs 
+Phase  4  : 14581 unrouted; (Setup:0, Hold:1455, Component Switching Limit:0)     REAL time: 56 secs 
 
 Updating file: spec_top_fmc_adc_100Ms.ncd with current fully routed design.
 
-Phase  5  : 0 unrouted; (Setup:0, Hold:7430, Component Switching Limit:0)     REAL time: 1 mins 34 secs 
+Phase  5  : 0 unrouted; (Setup:0, Hold:1455, Component Switching Limit:0)     REAL time: 1 mins 40 secs 
 
-Phase  6  : 0 unrouted; (Setup:0, Hold:7430, Component Switching Limit:0)     REAL time: 1 mins 34 secs 
+Phase  6  : 0 unrouted; (Setup:0, Hold:1455, Component Switching Limit:0)     REAL time: 1 mins 40 secs 
 
-Phase  7  : 0 unrouted; (Setup:0, Hold:7430, Component Switching Limit:0)     REAL time: 1 mins 34 secs 
+Phase  7  : 0 unrouted; (Setup:0, Hold:1455, Component Switching Limit:0)     REAL time: 1 mins 40 secs 
 
-Phase  8  : 0 unrouted; (Setup:0, Hold:7430, Component Switching Limit:0)     REAL time: 1 mins 34 secs 
+Phase  8  : 0 unrouted; (Setup:0, Hold:1455, Component Switching Limit:0)     REAL time: 1 mins 40 secs 
 
-Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 34 secs 
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 40 secs 
 
-Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 37 secs 
-Total REAL time to Router completion: 1 mins 37 secs 
-Total CPU time to Router completion: 1 mins 37 secs 
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 1 mins 43 secs 
+Total REAL time to Router completion: 1 mins 43 secs 
+Total CPU time to Router completion: 1 mins 43 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -161,19 +161,19 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|cmp_gn4124_core/sys_ |              |      |      |            |             |
-|                 clk | BUFGMUX_X2Y12| No   |  630 |  0.185     |  1.398      |
+|         sys_clk_125 |  BUFGMUX_X2Y2| No   | 1312 |  0.068     |  1.279      |
 +---------------------+--------------+------+------+------------+-------------+
 |cmp_ddr_ctrl/cmp_ddr |              |      |      |            |             |
 |3_ctrl_wrapper/gen_s |              |      |      |            |             |
 |pec_bank3_64b_32b.cm |              |      |      |            |             |
 |p_ddr3_ctrl/c3_mcb_d |              |      |      |            |             |
-|              rp_clk | BUFGMUX_X3Y13| No   |   80 |  0.052     |  1.285      |
+|              rp_clk | BUFGMUX_X3Y13| No   |   80 |  0.070     |  1.285      |
 +---------------------+--------------+------+------+------------+-------------+
-|         sys_clk_125 |  BUFGMUX_X2Y2| No   | 1326 |  0.066     |  1.277      |
+|cmp_gn4124_core/sys_ |              |      |      |            |             |
+|                 clk | BUFGMUX_X2Y12| No   |  692 |  0.187     |  1.398      |
 +---------------------+--------------+------+------+------------+-------------+
 |cmp_fmc_adc_100Ms_co |              |      |      |            |             |
-|           re/fs_clk |  BUFGMUX_X2Y4| No   |  161 |  0.255     |  1.473      |
+|           re/fs_clk |  BUFGMUX_X2Y4| No   |  163 |  0.251     |  1.473      |
 +---------------------+--------------+------+------+------------+-------------+
 |cmp_gn4124_core/io_c |              |      |      |            |             |
 |                  lk |         Local|      |   41 |  0.064     |  1.562      |
@@ -289,12 +289,12 @@ Asterisk (*) preceding a constraint indicates it was not met.
   k_2x_180"         TS_SYS_CLK5 / 2 PHASE 0 |             |            |            |        |            
   .75 ns HIGH 50%                           |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_sys_clk_125_buf = PERIOD TIMEGRP "sys_ | SETUP       |     0.041ns|     7.959ns|       0|           0
-  clk_125_buf" TS_clk20_vcxo_i / 6.25       | HOLD        |     0.279ns|            |       0|           0
+  TS_sys_clk_125_buf = PERIOD TIMEGRP "sys_ | SETUP       |     0.032ns|     7.968ns|       0|           0
+  clk_125_buf" TS_clk20_vcxo_i / 6.25       | HOLD        |     0.354ns|            |       0|           0
      HIGH 50%                               |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_cmp_gn4124_core_cmp_clk_in_rx_pllout_x | SETUP       |     0.064ns|     4.936ns|       0|           0
-  1_0 = PERIOD TIMEGRP         "cmp_gn4124_ | HOLD        |     0.183ns|            |       0|           0
+  TS_cmp_gn4124_core_cmp_clk_in_rx_pllout_x | SETUP       |     0.038ns|     4.962ns|       0|           0
+  1_0 = PERIOD TIMEGRP         "cmp_gn4124_ | HOLD        |     0.060ns|            |       0|           0
   core_cmp_clk_in_rx_pllout_x1_0"         T |             |            |            |        |            
   S_cmp_gn4124_core_cmp_clk_in_buf_P_clk_0  |             |            |            |        |            
   PHASE 1.25 ns HIGH 50%                    |             |            |            |        |            
@@ -302,17 +302,17 @@ Asterisk (*) preceding a constraint indicates it was not met.
   TS_adc_dco_n_i = PERIOD TIMEGRP "adc_dco_ | MINLOWPULSE |     0.364ns|     1.636ns|       0|           0
   n_i" 2 ns HIGH 50%                        |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
+  TS_cmp_fmc_adc_100Ms_core_fs_clk_buf = PE | SETUP       |     0.271ns|     7.729ns|       0|           0
+  RIOD TIMEGRP         "cmp_fmc_adc_100Ms_c | HOLD        |     0.399ns|            |       0|           0
+  ore_fs_clk_buf" TS_adc_dco_n_i / 0.25 HIG |             |            |            |        |            
+  H 50%                                     |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
   TS_ddr_clk_buf = PERIOD TIMEGRP "ddr_clk_ | MINLOWPULSE |     0.428ns|     2.572ns|       0|           0
   buf" TS_clk20_vcxo_i / 16.6666667         |             |            |            |        |            
    HIGH 50%                                 |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   TS_SYS_CLK5 = PERIOD TIMEGRP "SYS_CLK5" 3 | MINLOWPULSE |     0.428ns|     2.572ns|       0|           0
    ns HIGH 50%                              |             |            |            |        |            
-----------------------------------------------------------------------------------------------------------
-  TS_cmp_fmc_adc_100Ms_core_fs_clk_buf = PE | SETUP       |     0.537ns|     7.463ns|       0|           0
-  RIOD TIMEGRP         "cmp_fmc_adc_100Ms_c | HOLD        |     0.405ns|            |       0|           0
-  ore_fs_clk_buf" TS_adc_dco_n_i / 0.25 HIG |             |            |            |        |            
-  H 50%                                     |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   TS_cmp_gn4124_core_cmp_clk_in_buf_P_clk_0 | MINLOWPULSE |     2.200ns|     2.800ns|       0|           0
    = PERIOD TIMEGRP         "cmp_gn4124_cor |             |            |            |        |            
@@ -339,8 +339,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   TS_p2l_clkp = PERIOD TIMEGRP "p2l_clkp_gr | MINPERIOD   |     4.075ns|     0.925ns|       0|           0
   p" 5 ns HIGH 50%                          |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen | SETUP       |     5.099ns|     6.900ns|       0|           0
-  _spec_bank3_64b_32b_cmp_ddr3_ctrl_memc3_i | HOLD        |     0.291ns|            |       0|           0
+  TS_cmp_ddr_ctrl_cmp_ddr3_ctrl_wrapper_gen | SETUP       |     4.593ns|     7.406ns|       0|           0
+  _spec_bank3_64b_32b_cmp_ddr3_ctrl_memc3_i | HOLD        |     0.388ns|            |       0|           0
   nfrastructure_inst_mcb_drp_clk_bufg_in_0  |             |            |            |        |            
           = PERIOD TIMEGRP         "cmp_ddr |             |            |            |        |            
   _ctrl_cmp_ddr3_ctrl_wrapper_gen_spec_bank |             |            |            |        |            
@@ -401,12 +401,12 @@ Derived Constraints for TS_p2l_clkn
 |           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
 |                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
-|TS_p2l_clkn                    |      5.000ns|      0.925ns|      4.936ns|            0|            0|            0|        29035|
-| TS_cmp_gn4124_core_cmp_clk_in_|      5.000ns|      2.800ns|      4.936ns|            0|            0|            0|        29035|
+|TS_p2l_clkn                    |      5.000ns|      0.925ns|      4.962ns|            0|            0|            0|        29035|
+| TS_cmp_gn4124_core_cmp_clk_in_|      5.000ns|      2.800ns|      4.962ns|            0|            0|            0|        29035|
 | buf_P_clk_0                   |             |             |             |             |             |             |             |
 |  TS_cmp_gn4124_core_cmp_clk_in|      2.500ns|          N/A|          N/A|            0|            0|            0|            0|
 |  _rx_pllout_xs_int_0          |             |             |             |             |             |             |             |
-|  TS_cmp_gn4124_core_cmp_clk_in|      5.000ns|      4.936ns|          N/A|            0|            0|        29035|            0|
+|  TS_cmp_gn4124_core_cmp_clk_in|      5.000ns|      4.962ns|          N/A|            0|            0|        29035|            0|
 |  _rx_pllout_x1_0              |             |             |             |             |             |             |             |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
 
@@ -417,9 +417,9 @@ Derived Constraints for TS_clk20_vcxo_i
 |                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
 |TS_clk20_vcxo_i                |     50.000ns|     20.000ns|     49.967ns|            0|            0|            0|       402700|
-| TS_sys_clk_125_buf            |      8.000ns|      7.959ns|          N/A|            0|            0|       392300|            0|
+| TS_sys_clk_125_buf            |      8.000ns|      7.968ns|          N/A|            0|            0|       392300|            0|
 | TS_ddr_clk_buf                |      3.000ns|      2.572ns|      2.998ns|            0|            0|            0|        10400|
-|  TS_cmp_ddr_ctrl_cmp_ddr3_ctrl|     12.000ns|      6.900ns|          N/A|            0|            0|        10400|            0|
+|  TS_cmp_ddr_ctrl_cmp_ddr3_ctrl|     12.000ns|      7.406ns|          N/A|            0|            0|        10400|            0|
 |  _wrapper_gen_spec_bank3_64b_3|             |             |             |             |             |             |             |
 |  2b_cmp_ddr3_ctrl_memc3_infras|             |             |             |             |             |             |             |
 |  tructure_inst_mcb_drp_clk_buf|             |             |             |             |             |             |             |
@@ -461,8 +461,8 @@ Derived Constraints for TS_adc_dco_n_i
 |           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
 |                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
-|TS_adc_dco_n_i                 |      2.000ns|      1.636ns|      1.866ns|            0|            0|            0|        18373|
-| TS_cmp_fmc_adc_100Ms_core_fs_c|      8.000ns|      7.463ns|          N/A|            0|            0|        18373|            0|
+|TS_adc_dco_n_i                 |      2.000ns|      1.636ns|      1.932ns|            0|            0|            0|        18373|
+| TS_cmp_fmc_adc_100Ms_core_fs_c|      8.000ns|      7.729ns|          N/A|            0|            0|        18373|            0|
 | lk_buf                        |             |             |             |             |             |             |             |
 | TS_cmp_fmc_adc_100Ms_core_serd|      1.000ns|          N/A|          N/A|            0|            0|            0|            0|
 | es_clk                        |             |             |             |             |             |             |             |
@@ -482,10 +482,10 @@ All signals are completely routed.
 
 WARNING:Par:283 - There are 6 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
-Total REAL time to PAR completion: 1 mins 40 secs 
-Total CPU time to PAR completion: 1 mins 41 secs 
+Total REAL time to PAR completion: 1 mins 46 secs 
+Total CPU time to PAR completion: 1 mins 47 secs 
 
-Peak Memory Usage:  341 MB
+Peak Memory Usage:  347 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.

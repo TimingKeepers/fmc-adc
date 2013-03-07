@@ -244,6 +244,9 @@ Parsing package body <wishbone_pkg>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core_pkg.vhd" into library work
 Parsing package <fmc_adc_100Ms_core_pkg>.
 Parsing package body <fmc_adc_100Ms_core_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/sdb_meta_pkg.vhd" into library work
+Parsing package <sdb_meta_pkg>.
+Parsing package body <sdb_meta_pkg>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" into library work
 Parsing entity <spec_top_fmc_adc_100Ms>.
 Parsing architecture <rtl> of entity <spec_top_fmc_adc_100ms>.
@@ -820,7 +823,7 @@ Parsing architecture <rtl> of entity <pulse_synchronizer>.
 WARNING:HDLCompiler:746 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" Line 50: Range is empty (null range)
 
 Elaborating entity <spec_top_fmc_adc_100Ms> (architecture <rtl>) with generics from library <work>.
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" Line 631: Assignment to sys_rst ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" Line 638: Assignment to sys_rst ignored, since the identifier is never used
 
 Elaborating entity <gn4124_core> (architecture <rtl>) from library <work>.
 
@@ -976,16 +979,10 @@ WARNING:HDLCompiler:634 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha
 Elaborating entity <serdes_n_to_1_s2_se> (architecture <arch_serdes_n_to_1_s2_se>) with generics from library <work>.
 
 Elaborating entity <xwb_sdb_crossbar> (architecture <rtl>) with generics from library <work>.
-Warning: "Wishbone slave device #8 (WB-FMC-ADC-Core) has an address range that is not a power of 2 minus one (0x67). This is not supported by the crossbar."
-Warning: "Wishbone slave device #7 (WB-I2C.Control) has an address range that is not a power of 2 minus one (0x1b). This is not supported by the crossbar."
-Warning: "Wishbone slave device #6 (WB-SPI.Control) has an address range that is not a power of 2 minus one (0x1b). This is not supported by the crossbar."
-Warning: "Wishbone slave device #5 (WB-I2C.Control) has an address range that is not a power of 2 minus one (0x1b). This is not supported by the crossbar."
-Warning: "Wishbone slave device #4 (WB-Int.Control) has an address range that is not a power of 2 minus one (0xb). This is not supported by the crossbar."
-Warning: "Wishbone slave device #3 (WB-UTC-Core) has an address range that is not a power of 2 minus one (0x43). This is not supported by the crossbar."
-Warning: "Wishbone slave device #2 (WB-SPEC-CSR) has an address range that is not a power of 2 minus one (0x13). This is not supported by the crossbar."
-Warning: "Wishbone slave device #0 (WB-DMA.Control) has an address range that is not a power of 2 minus one (0x23). This is not supported by the crossbar."
 
 Elaborating entity <sdb_rom> (architecture <rtl>) with generics from library <work>.
+Note: "SDB device records: 10"
+Note: "SDB meta-information records: 0"
 
 Elaborating entity <xwb_crossbar> (architecture <rtl>) with generics from library <work>.
 Note: "Mapping slave #0[0x1000/0x1fc0]"
@@ -1255,55 +1252,55 @@ Synthesizing Unit <spec_top_fmc_adc_100Ms>.
         g_SIMULATION = "FALSE"
         g_CALIB_SOFT_IP = "TRUE"
 WARNING:Xst:647 - Input <aux_buttons_i<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 720: Output port <slave_o[0]_err> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 720: Output port <slave_o[0]_rty> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 720: Output port <slave_o[0]_int> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 746: Output port <desc_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 746: Output port <owr_pwren_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 777: Output port <carrier_csr_ctrl_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 777: Output port <carrier_csr_ctrl_dac_clr_n_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 922: Output port <desc_o> of the instance <cmp_fmc_sys_i2c> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 955: Output port <desc_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 999: Output port <desc_o> of the instance <cmp_fmc_i2c> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1095: Output port <desc_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1095: Output port <owr_pwren_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <wb0_data_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p0_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_wr_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1123: Output port <p1_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 727: Output port <slave_o[0]_err> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 727: Output port <slave_o[0]_rty> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 727: Output port <slave_o[0]_int> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 754: Output port <desc_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 754: Output port <owr_pwren_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 785: Output port <carrier_csr_ctrl_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 785: Output port <carrier_csr_ctrl_dac_clr_n_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 930: Output port <desc_o> of the instance <cmp_fmc_sys_i2c> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 963: Output port <desc_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1007: Output port <desc_o> of the instance <cmp_fmc_i2c> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1103: Output port <desc_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1103: Output port <owr_pwren_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <wb0_data_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p0_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1131: Output port <p1_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <acq_end>.
     Found 4-bit register for signal <spi_din_t>.
     Found 27-bit register for signal <led_cnt>.
     Found 1-bit register for signal <led_pps>.
     Found 4-bit register for signal <aux_leds_o>.
     Found 1-bit register for signal <ddr_wr_fifo_empty_d>.
-    Found 27-bit adder for signal <led_cnt[26]_GND_11_o_add_7_OUT> created at line 1241.
-    Found 1-bit tristate buffer for signal <carrier_one_wire_b> created at line 767
-    Found 1-bit tristate buffer for signal <sys_scl_b> created at line 944
-    Found 1-bit tristate buffer for signal <sys_sda_b> created at line 947
-    Found 1-bit tristate buffer for signal <si570_scl_b> created at line 1021
-    Found 1-bit tristate buffer for signal <si570_sda_b> created at line 1024
-    Found 1-bit tristate buffer for signal <mezz_one_wire_b> created at line 1116
+    Found 27-bit adder for signal <led_cnt[26]_GND_12_o_add_7_OUT> created at line 1241.
+    Found 1-bit tristate buffer for signal <carrier_one_wire_b> created at line 775
+    Found 1-bit tristate buffer for signal <sys_scl_b> created at line 952
+    Found 1-bit tristate buffer for signal <sys_sda_b> created at line 955
+    Found 1-bit tristate buffer for signal <si570_scl_b> created at line 1029
+    Found 1-bit tristate buffer for signal <si570_sda_b> created at line 1032
+    Found 1-bit tristate buffer for signal <mezz_one_wire_b> created at line 1124
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  38 D-type flip-flop(s).
@@ -1376,8 +1373,8 @@ WARNING:Xst:647 - Input <pattern2<1:0>> is never used. This port will be preserv
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 12-bit adder for signal <counter[11]_GND_16_o_add_1_OUT> created at line 176.
-    Found 3-bit adder for signal <count[2]_GND_16_o_add_14_OUT> created at line 205.
+    Found 12-bit adder for signal <counter[11]_GND_17_o_add_1_OUT> created at line 176.
+    Found 3-bit adder for signal <count[2]_GND_17_o_add_14_OUT> created at line 205.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  19 D-type flip-flop(s).
@@ -1432,7 +1429,7 @@ WARNING:Xst:653 - Signal <incdec_data> is used but never assigned. This sourcele
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 9-bit adder for signal <counter[8]_GND_61_o_add_2_OUT> created at line 150.
+    Found 9-bit adder for signal <counter[8]_GND_62_o_add_2_OUT> created at line 150.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  47 D-type flip-flop(s).
@@ -1476,9 +1473,9 @@ WARNING:Xst:653 - Signal <incdec_data> is used but never assigned. This sourcele
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 9-bit adder for signal <counter[8]_GND_131_o_add_1_OUT> created at line 150.
-    Found 5-bit adder for signal <pdcounter[4]_GND_131_o_add_34_OUT> created at line 242.
-    Found 5-bit subtractor for signal <GND_131_o_GND_131_o_sub_37_OUT<4:0>> created at line 244.
+    Found 9-bit adder for signal <counter[8]_GND_132_o_add_1_OUT> created at line 150.
+    Found 5-bit adder for signal <pdcounter[4]_GND_132_o_add_34_OUT> created at line 242.
+    Found 5-bit subtractor for signal <GND_132_o_GND_132_o_sub_37_OUT<4:0>> created at line 244.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  24 D-type flip-flop(s).
@@ -1509,7 +1506,7 @@ Synthesizing Unit <p2l_decode32>.
     Found 1-bit register for signal <p2l_d_valid>.
     Found 1-bit register for signal <p2l_d_last>.
     Found 1-bit register for signal <des_p2l_dframe_d>.
-    Found 30-bit adder for signal <p2l_addr[31]_GND_146_o_add_17_OUT> created at line 1241.
+    Found 30-bit adder for signal <p2l_addr[31]_GND_147_o_add_17_OUT> created at line 1241.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred 103 D-type flip-flop(s).
@@ -1586,7 +1583,7 @@ INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/s
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 32-bit 3-to-1 multiplexer for signal <l2p_read_cpl_current_state[1]_X_21_o_wide_mux_11_OUT> created at line 259.
+    Found 32-bit 3-to-1 multiplexer for signal <l2p_read_cpl_current_state[1]_X_22_o_wide_mux_11_OUT> created at line 259.
     Summary:
 	inferred 207 D-type flip-flop(s).
 	inferred  37 Multiplexer(s).
@@ -2439,7 +2436,7 @@ Synthesizing Unit <rd_bin_cntr>.
         C_PNTR_WIDTH = 9
     Found 9-bit register for signal <gc0.count_d1>.
     Found 9-bit register for signal <gc0.count>.
-    Found 9-bit adder for signal <gc0.count[8]_GND_244_o_add_0_OUT> created at line 128.
+    Found 9-bit adder for signal <gc0.count[8]_GND_245_o_add_0_OUT> created at line 128.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  18 D-type flip-flop(s).
@@ -2506,7 +2503,7 @@ Synthesizing Unit <wr_bin_cntr>.
     Found 9-bit register for signal <gic0.gc0.count_d2>.
     Found 9-bit register for signal <gic0.gc0.count_d1>.
     Found 9-bit register for signal <gic0.gc0.count>.
-    Found 9-bit adder for signal <gic0.gc0.count[8]_GND_255_o_add_0_OUT> created at line 270.
+    Found 9-bit adder for signal <gic0.gc0.count[8]_GND_256_o_add_0_OUT> created at line 270.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  27 D-type flip-flop(s).
@@ -3314,7 +3311,7 @@ Unit <dma_controller> synthesized.
 Synthesizing Unit <dma_controller_wb_slave>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/gn4124-core/hdl/gn4124core/rtl/dma_controller_wb_slave.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 7-bit register for signal <ack_sreg>.
+    Found 6-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 32-bit register for signal <dma_ctrl_int_write>.
     Found 32-bit register for signal <dma_stat_int_write>.
@@ -3419,9 +3416,10 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:5>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
     Summary:
-	inferred 976 D-type flip-flop(s).
-	inferred  41 Multiplexer(s).
+	inferred 975 D-type flip-flop(s).
+	inferred  40 Multiplexer(s).
 Unit <dma_controller_wb_slave> synthesized.
 
 Synthesizing Unit <pulse_synchronizer>.
@@ -3498,18 +3496,18 @@ INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/s
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 30-bit adder for signal <target_addr_cnt[29]_GND_333_o_add_4_OUT> created at line 1241.
-    Found 32-bit adder for signal <l2p_address_l[31]_GND_333_o_add_35_OUT> created at line 284.
-    Found 32-bit adder for signal <wb_read_cnt[31]_GND_333_o_add_112_OUT> created at line 1241.
-    Found 32-bit adder for signal <wb_ack_cnt[31]_GND_333_o_add_115_OUT> created at line 1241.
-    Found 30-bit subtractor for signal <GND_333_o_GND_333_o_sub_6_OUT<29:0>> created at line 1308.
-    Found 30-bit subtractor for signal <GND_333_o_GND_333_o_sub_31_OUT<29:0>> created at line 276.
-    Found 11-bit subtractor for signal <GND_333_o_GND_333_o_sub_34_OUT<10:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_333_o_GND_333_o_sub_109_OUT<31:0>> created at line 1308.
-    Found 30-bit comparator greater for signal <GND_333_o_l2p_len_cnt[29]_LessThan_37_o> created at line 286
+    Found 30-bit adder for signal <target_addr_cnt[29]_GND_334_o_add_4_OUT> created at line 1241.
+    Found 32-bit adder for signal <l2p_address_l[31]_GND_334_o_add_35_OUT> created at line 284.
+    Found 32-bit adder for signal <wb_read_cnt[31]_GND_334_o_add_112_OUT> created at line 1241.
+    Found 32-bit adder for signal <wb_ack_cnt[31]_GND_334_o_add_115_OUT> created at line 1241.
+    Found 30-bit subtractor for signal <GND_334_o_GND_334_o_sub_6_OUT<29:0>> created at line 1308.
+    Found 30-bit subtractor for signal <GND_334_o_GND_334_o_sub_31_OUT<29:0>> created at line 276.
+    Found 11-bit subtractor for signal <GND_334_o_GND_334_o_sub_34_OUT<10:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_334_o_GND_334_o_sub_109_OUT<31:0>> created at line 1308.
+    Found 30-bit comparator greater for signal <GND_334_o_l2p_len_cnt[29]_LessThan_37_o> created at line 286
     Found 11-bit comparator greater for signal <n0100> created at line 424
     Found 11-bit comparator greater for signal <n0113> created at line 437
-    Found 32-bit comparator equal for signal <wb_ack_cnt[31]_GND_333_o_equal_110_o> created at line 634
+    Found 32-bit comparator equal for signal <wb_ack_cnt[31]_GND_334_o_equal_110_o> created at line 634
     Summary:
 	inferred   8 Adder/Subtractor(s).
 	inferred 353 D-type flip-flop(s).
@@ -3650,15 +3648,15 @@ INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/s
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 30-bit adder for signal <target_addr_cnt[29]_GND_334_o_add_81_OUT> created at line 1241.
-    Found 32-bit adder for signal <wb_write_cnt[31]_GND_334_o_add_95_OUT> created at line 1241.
-    Found 32-bit adder for signal <wb_ack_cnt[31]_GND_334_o_add_98_OUT> created at line 1241.
-    Found 30-bit subtractor for signal <GND_334_o_GND_334_o_sub_12_OUT<29:0>> created at line 263.
-    Found 11-bit subtractor for signal <GND_334_o_GND_334_o_sub_52_OUT<10:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_334_o_GND_334_o_sub_91_OUT<31:0>> created at line 1308.
-    Found 30-bit comparator greater for signal <GND_334_o_l2p_len_cnt[29]_LessThan_7_o> created at line 248
+    Found 30-bit adder for signal <target_addr_cnt[29]_GND_335_o_add_81_OUT> created at line 1241.
+    Found 32-bit adder for signal <wb_write_cnt[31]_GND_335_o_add_95_OUT> created at line 1241.
+    Found 32-bit adder for signal <wb_ack_cnt[31]_GND_335_o_add_98_OUT> created at line 1241.
+    Found 30-bit subtractor for signal <GND_335_o_GND_335_o_sub_12_OUT<29:0>> created at line 263.
+    Found 11-bit subtractor for signal <GND_335_o_GND_335_o_sub_52_OUT<10:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_335_o_GND_335_o_sub_91_OUT<31:0>> created at line 1308.
+    Found 30-bit comparator greater for signal <GND_335_o_l2p_len_cnt[29]_LessThan_7_o> created at line 248
     Found 11-bit comparator greater for signal <n0049> created at line 356
-    Found 32-bit comparator equal for signal <wb_ack_cnt[31]_GND_334_o_equal_92_o> created at line 596
+    Found 32-bit comparator equal for signal <wb_ack_cnt[31]_GND_335_o_equal_92_o> created at line 596
     Summary:
 	inferred   6 Adder/Subtractor(s).
 	inferred 612 D-type flip-flop(s).
@@ -3737,13 +3735,17 @@ Synthesizing Unit <xwb_sdb_crossbar>.
         g_num_slaves = 10
         g_registered = true
         g_wraparound = true
+        g_use_info = false
         g_layout =
-("00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001101000000000000000000000000000000000000000000000000000000000000110100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011001000000000000000000000000000000000000000000000000000000000001100101100111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000001000000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000110010011010100001100101101010000010100010001000011001011010100001101101111011100100110010100100000001000000010000000100000000
-00001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001100000000000000000000000000000000000000000000000000000000000000110000001101100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010111000000000000000000000000000000000000000000000000000000000001011100011011000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000111000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100100100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000000100
-00000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000000000000000000000000000101100001101100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010101000000000000000000000000000000000000000000000000000000000001010100001011000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000101000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001011011100111010000101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000
-00010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000101000100001100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000010000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101010101010100010000110010110101000011011011110111001001100101001000000010000000100000001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010011000000000000000000000000000000000000000000000000000000000001001100010011000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000011000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100010101000011001011010100001101010011010100100010000000100000001000000010000000100000001000000
-01000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001001000000000000000000000000000000000000000000000000000000000000100100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000100011000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000001000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000100010011010100000100101110010000110110111101101110011101000111001001101111011011000010000000100000001
+("00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001101000000000000000000000000000000000000000000000000000000000000110100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011001000000000000000000000000000000000000000000000000000000000001100101111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000001000000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000110010011010100001100101101010000010100010001000011001011010100001101101111011100100110010100100000001000000010000000100000000
+00001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001100000000000000000000000000000000000000000000000000000000000000110000001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010111000000000000000000000000000000000000000000000000000000000001011100011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000111000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100100100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000000100
+00000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000000000000000000000000000101100001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010101000000000000000000000000000000000000000000000000000000000001010100001111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000101000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001011011100111010000101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000
+00010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000101000111111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000010000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101010101010100010000110010110101000011011011110111001001100101001000000010000000100000001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010011000000000000000000000000000000000000000000000000000000000001001100011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000011000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100010101000011001011010100001101010011010100100010000000100000001000000010000000100000001000000
+01000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001001000000000000000000000000000000000000000000000000000000000000100100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000001000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000100010011010100000100101110010000110110111101101110011101000111001001101111011011000010000000100000001
 00000001000000010000000000001")
+        g_info =
+("01110011011100000110010101100011010111110111010001101111011100000101111101100110011011010110001101011111011000010110010001100011101010011110111001011001011001111011011001100001000001010000100111111111000011101001101011111000101111010011100010110000010100010100100101010011010001010010000000100000001000000010000000100000000000000000000000000001001100110010000000010011000000110000011101101101011000110110000101110100011101000110100101101110001000000010000000100000001000000010000000100000001000000010000010000010","011001110110100101110100001110100010111100101111011011110110100001110111011100100010111001101111011100100110011100101111011001100110110101100011001011010111000001110010011011110110101001100101011000110111010001110011001011110110011001101101011000110010110101100001011001000110001100101101001100010011000000110000011011010011000100110100011000100011010001100011011010000110000100101110011001110110100101110100001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000100
+00001")
         g_sdb_addr = "00000000000000000000000000000000"
     Summary:
 	no macro.
@@ -3751,13 +3753,17 @@ Unit <xwb_sdb_crossbar> synthesized.
 
 Synthesizing Unit <sdb_rom>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_crossbar/sdb_rom.vhd".
+        g_use_info = false
         g_layout =
-("00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001101000000000000000000000000000000000000000000000000000000000000110100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011001000000000000000000000000000000000000000000000000000000000001100101100111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000001000000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000110010011010100001100101101010000010100010001000011001011010100001101101111011100100110010100100000001000000010000000100000000
-00001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001100000000000000000000000000000000000000000000000000000000000000110000001101100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010111000000000000000000000000000000000000000000000000000000000001011100011011000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000111000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100100100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000000100
-00000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000000000000000000000000000101100001101100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010101000000000000000000000000000000000000000000000000000000000001010100001011000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000101000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001011011100111010000101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000
-00010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000101000100001100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000010000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101010101010100010000110010110101000011011011110111001001100101001000000010000000100000001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010011000000000000000000000000000000000000000000000000000000000001001100010011000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000011000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100010101000011001011010100001101010011010100100010000000100000001000000010000000100000001000000
-01000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001001000000000000000000000000000000000000000000000000000000000000100100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000100011000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000001000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000100010011010100000100101110010000110110111101101110011101000111001001101111011011000010000000100000001
+("00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001101000000000000000000000000000000000000000000000000000000000000110100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011001000000000000000000000000000000000000000000000000000000000001100101111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000001000000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000110010011010100001100101101010000010100010001000011001011010100001101101111011100100110010100100000001000000010000000100000000
+00001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001100000000000000000000000000000000000000000000000000000000000000110000001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010111000000000000000000000000000000000000000000000000000000000001011100011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000111000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100100100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000000100
+00000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000000000000000000000000000101100001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010101000000000000000000000000000000000000000000000000000000000001010100001111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000101000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001011011100111010000101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000
+00010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000101000111111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000010000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101010101010100010000110010110101000011011011110111001001100101001000000010000000100000001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010011000000000000000000000000000000000000000000000000000000000001001100011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000011000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100010101000011001011010100001101010011010100100010000000100000001000000010000000100000001000000
+01000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001001000000000000000000000000000000000000000000000000000000000000100100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000001000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000100010011010100000100101110010000110110111101101110011101000111001001101111011011000010000000100000001
 00000001000000010000000000001")
+        g_info =
+("01110011011100000110010101100011010111110111010001101111011100000101111101100110011011010110001101011111011000010110010001100011101010011110111001011001011001111011011001100001000001010000100111111111000011101001101011111000101111010011100010110000010100010100100101010011010001010010000000100000001000000010000000100000000000000000000000000001001100110010000000010011000000110000011101101101011000110110000101110100011101000110100101101110001000000010000000100000001000000010000000100000001000000010000010000010","011001110110100101110100001110100010111100101111011011110110100001110111011100100010111001101111011100100110011100101111011001100110110101100011001011010111000001110010011011110110101001100101011000110111010001110011001011110110011001101101011000110010110101100001011001000110001100101101001100010011000000110000011011010011000100110100011000100011010001100011011010000110000100101110011001110110100101110100001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000100
+00001")
         g_bus_end = "0000000000000000000000000000000000000000000000000001111111111111"
 WARNING:Xst:647 - Input <slave_i_adr<31:10>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <slave_i_adr<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -3916,8 +3922,8 @@ WARNING:Xst:2935 - Signal 'owr_sel', unconnected in block 'sockit_owm', is tied 
     Found 1-bit register for signal <owr_oen>.
     Found 1-bit register for signal <owr_smp>.
     Found 17-bit adder for signal <n0139[16:0]> created at line 305.
-    Found 8-bit subtractor for signal <GND_466_o_GND_466_o_sub_37_OUT<7:0>> created at line 392.
-    Found 8-bit subtractor for signal <GND_466_o_GND_466_o_sub_38_OUT<7:0>> created at line 393.
+    Found 8-bit subtractor for signal <GND_467_o_GND_467_o_sub_37_OUT<7:0>> created at line 392.
+    Found 8-bit subtractor for signal <GND_467_o_GND_467_o_sub_38_OUT<7:0>> created at line 393.
     Found 1-bit shifter logical left for signal <owr_e> created at line 100
     Found 16-bit comparator equal for signal <pls> created at line 309
     Found 8-bit comparator equal for signal <cnt[7]_t_rstp[7]_equal_43_o> created at line 399
@@ -3936,7 +3942,7 @@ Unit <sockit_owm> synthesized.
 Synthesizing Unit <carrier_csr>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 9-bit register for signal <ack_sreg>.
+    Found 8-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 29-bit register for signal <carrier_csr_ctrl_reserved_int>.
     Found 1-bit register for signal <ack_in_progress>.
@@ -3944,8 +3950,9 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     Found 1-bit register for signal <carrier_csr_ctrl_led_red_int>.
     Found 1-bit register for signal <carrier_csr_ctrl_dac_clr_n_int>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <carrier_csr>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <carrier_csr>.
     Summary:
-	inferred  74 D-type flip-flop(s).
+	inferred  73 D-type flip-flop(s).
 	inferred   6 Multiplexer(s).
 Unit <carrier_csr> synthesized.
 
@@ -3954,7 +3961,7 @@ Synthesizing Unit <gc_extend_pulse>.
         g_width = 5000000
     Found 32-bit register for signal <cntr>.
     Found 1-bit register for signal <extended_int>.
-    Found 32-bit subtractor for signal <GND_578_o_GND_578_o_sub_2_OUT<31:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_579_o_GND_579_o_sub_2_OUT<31:0>> created at line 1308.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  33 D-type flip-flop(s).
@@ -3978,8 +3985,8 @@ Synthesizing Unit <utc_core>.
     Found 32-bit register for signal <utc_acq_end_tag_coarse>.
     Found 32-bit register for signal <utc_acq_end_tag_fine>.
     Found 32-bit register for signal <utc_seconds_cnt>.
-    Found 32-bit adder for signal <utc_seconds_cnt[31]_GND_579_o_add_0_OUT> created at line 1241.
-    Found 32-bit adder for signal <utc_coarse_cnt[31]_GND_579_o_add_7_OUT> created at line 1241.
+    Found 32-bit adder for signal <utc_seconds_cnt[31]_GND_580_o_add_0_OUT> created at line 1241.
+    Found 32-bit adder for signal <utc_coarse_cnt[31]_GND_580_o_add_7_OUT> created at line 1241.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 449 D-type flip-flop(s).
@@ -4110,7 +4117,7 @@ WARNING:Xst:647 - Input <arst_i> is never used. This port will be preserved and 
     Found 1-bit register for signal <wb_inta_o>.
     Found 8-bit register for signal <wb_dat_o>.
     Found 1-bit register for signal <iack_o>.
-    Found 8-bit 8-to-1 multiplexer for signal <wb_adr_i[2]_GND_592_o_wide_mux_0_OUT> created at line 191.
+    Found 8-bit 8-to-1 multiplexer for signal <wb_adr_i[2]_GND_593_o_wide_mux_0_OUT> created at line 191.
     Summary:
 	inferred  54 D-type flip-flop(s).
 	inferred  16 Multiplexer(s).
@@ -4141,9 +4148,9 @@ Synthesizing Unit <i2c_master_byte_ctrl>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit subtractor for signal <GND_593_o_GND_593_o_sub_6_OUT<2:0>> created at line 1308.
-    Found 4-bit 6-to-1 multiplexer for signal <c_state[2]_X_100_o_wide_mux_38_OUT> created at line 264.
-    Found 1-bit 3-to-1 multiplexer for signal <c_state[1]_GND_593_o_Mux_40_o> created at line 264.
+    Found 3-bit subtractor for signal <GND_594_o_GND_594_o_sub_6_OUT<2:0>> created at line 1308.
+    Found 4-bit 6-to-1 multiplexer for signal <c_state[2]_X_101_o_wide_mux_38_OUT> created at line 264.
+    Found 1-bit 3-to-1 multiplexer for signal <c_state[1]_GND_594_o_Mux_40_o> created at line 264.
     Found 1-bit 3-to-1 multiplexer for signal <c_state[2]_core_ack_Mux_42_o> created at line 264.
     Summary:
 	inferred   1 Adder/Subtractor(s).
@@ -4192,8 +4199,8 @@ Synthesizing Unit <i2c_master_bit_ctrl>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 16-bit subtractor for signal <GND_594_o_GND_594_o_sub_2_OUT<15:0>> created at line 1308.
-    Found 14-bit subtractor for signal <GND_594_o_GND_594_o_sub_11_OUT<13:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_595_o_GND_595_o_sub_2_OUT<15:0>> created at line 1308.
+    Found 14-bit subtractor for signal <GND_595_o_GND_595_o_sub_11_OUT<13:0>> created at line 1308.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred  57 D-type flip-flop(s).
@@ -4304,7 +4311,7 @@ Synthesizing Unit <spi_clgen>.
     Found 1-bit register for signal <clk_out>.
     Found 1-bit register for signal <pos_edge>.
     Found 1-bit register for signal <neg_edge>.
-    Found 16-bit subtractor for signal <cnt[15]_GND_609_o_sub_3_OUT> created at line 80.
+    Found 16-bit subtractor for signal <cnt[15]_GND_610_o_sub_3_OUT> created at line 80.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  19 D-type flip-flop(s).
@@ -4446,9 +4453,9 @@ Synthesizing Unit <spi_shift>.
     Found 1-bit register for signal <data<1>>.
     Found 1-bit register for signal <data<0>>.
     Found 8-bit subtractor for signal <len[6]_cnt[7]_sub_3_OUT> created at line 82.
-    Found 8-bit subtractor for signal <cnt[7]_GND_611_o_sub_4_OUT> created at line 82.
+    Found 8-bit subtractor for signal <cnt[7]_GND_612_o_sub_4_OUT> created at line 82.
     Found 8-bit subtractor for signal <len[6]_cnt[7]_sub_9_OUT> created at line 83.
-    Found 8-bit adder for signal <cnt[7]_GND_611_o_add_6_OUT> created at line 83.
+    Found 8-bit adder for signal <cnt[7]_GND_612_o_add_6_OUT> created at line 83.
     Found 1-bit 128-to-1 multiplexer for signal <tx_bit_pos[6]_data[127]_Mux_19_o> created at line 122.
     Found 1-bit 128-to-1 multiplexer for signal <rx_bit_pos[6]_data[127]_Mux_20_o> created at line 234.
     Summary:
@@ -4540,19 +4547,19 @@ INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/a
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 32-bit adder for signal <samples_cnt[31]_GND_614_o_add_52_OUT> created at line 1241.
-    Found 13-bit adder for signal <dpram_addra_cnt[12]_GND_614_o_add_75_OUT> created at line 1241.
-    Found 13-bit adder for signal <GND_614_o_GND_614_o_add_88_OUT> created at line 1241.
-    Found 13-bit adder for signal <dpram_addrb_cnt[12]_GND_614_o_add_90_OUT> created at line 1241.
-    Found 25-bit adder for signal <ram_addr_cnt[24]_GND_614_o_add_99_OUT> created at line 1241.
-    Found 32-bit subtractor for signal <GND_614_o_GND_614_o_sub_16_OUT<31:0>> created at line 1308.
-    Found 16-bit subtractor for signal <GND_614_o_GND_614_o_sub_24_OUT<15:0>> created at line 1308.
-    Found 16-bit subtractor for signal <GND_614_o_GND_614_o_sub_26_OUT<15:0>> created at line 1308.
-    Found 16-bit subtractor for signal <GND_614_o_GND_614_o_sub_31_OUT<15:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_614_o_GND_614_o_sub_38_OUT<31:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_614_o_GND_614_o_sub_40_OUT<31:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_614_o_GND_614_o_sub_46_OUT<31:0>> created at line 1308.
-    Found 32-bit subtractor for signal <GND_614_o_GND_614_o_sub_48_OUT<31:0>> created at line 1308.
+    Found 32-bit adder for signal <samples_cnt[31]_GND_615_o_add_52_OUT> created at line 1241.
+    Found 13-bit adder for signal <dpram_addra_cnt[12]_GND_615_o_add_75_OUT> created at line 1241.
+    Found 13-bit adder for signal <GND_615_o_GND_615_o_add_88_OUT> created at line 1241.
+    Found 13-bit adder for signal <dpram_addrb_cnt[12]_GND_615_o_add_90_OUT> created at line 1241.
+    Found 25-bit adder for signal <ram_addr_cnt[24]_GND_615_o_add_99_OUT> created at line 1241.
+    Found 32-bit subtractor for signal <GND_615_o_GND_615_o_sub_16_OUT<31:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_615_o_GND_615_o_sub_24_OUT<15:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_615_o_GND_615_o_sub_26_OUT<15:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_615_o_GND_615_o_sub_31_OUT<15:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_615_o_GND_615_o_sub_38_OUT<31:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_615_o_GND_615_o_sub_40_OUT<31:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_615_o_GND_615_o_sub_46_OUT<31:0>> created at line 1308.
+    Found 32-bit subtractor for signal <GND_615_o_GND_615_o_sub_48_OUT<31:0>> created at line 1308.
     Found 13-bit subtractor for signal <n0446> created at line 0.
     Found 16-bit 4-to-1 multiplexer for signal <int_trig_data> created at line 348.
     Found 16-bit comparator greater for signal <int_trig_data[15]_int_trig_thres[15]_LessThan_13_o> created at line 790
@@ -4574,7 +4581,7 @@ Synthesizing Unit <monostable>.
     Found 25-bit register for signal <s_monostable_cnt>.
     Found 1-bit register for signal <s_output_pulse>.
     Found 1-bit register for signal <s_trigger_d<0>>.
-    Found 25-bit subtractor for signal <GND_615_o_GND_615_o_sub_4_OUT<24:0>> created at line 1308.
+    Found 25-bit subtractor for signal <GND_616_o_GND_616_o_sub_4_OUT<24:0>> created at line 1308.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  27 D-type flip-flop(s).
@@ -4733,8 +4740,8 @@ Synthesizing Unit <ext_pulse_sync>.
     Found 1-bit register for signal <s_sync_pulse<0>>.
     Found 1-bit register for signal <s_sync_pulse<1>>.
     Found 1-bit register for signal <s_output_pulse>.
-    Found 2-bit adder for signal <s_pulse_length_cnt[1]_GND_738_o_add_2_OUT> created at line 1241.
-    Found 2-bit subtractor for signal <GND_738_o_GND_738_o_sub_9_OUT<1:0>> created at line 1308.
+    Found 2-bit adder for signal <s_pulse_length_cnt[1]_GND_739_o_add_2_OUT> created at line 1241.
+    Found 2-bit subtractor for signal <GND_739_o_GND_739_o_sub_9_OUT<1:0>> created at line 1308.
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred   9 D-type flip-flop(s).
@@ -4812,10 +4819,10 @@ WARNING:Xst:647 - Input <ddr_rd_error_i> is never used. This port will be preser
     Found 1-bit register for signal <wb_ack_o>.
     Found 64-bit register for signal <wb_data_o>.
     Found 1-bit register for signal <wb_stall_o>.
-    Found 6-bit adder for signal <ddr_burst_cnt[5]_GND_867_o_add_21_OUT> created at line 1241.
-    Found 6-bit subtractor for signal <GND_867_o_GND_867_o_sub_10_OUT<5:0>> created at line 1308.
-    Found 7-bit comparator greater for signal <GND_867_o_ddr_wr_count_i[6]_LessThan_32_o> created at line 329
-    Found 7-bit comparator greater for signal <GND_867_o_ddr_rd_count_i[6]_LessThan_33_o> created at line 331
+    Found 6-bit adder for signal <ddr_burst_cnt[5]_GND_868_o_add_21_OUT> created at line 1241.
+    Found 6-bit subtractor for signal <GND_868_o_GND_868_o_sub_10_OUT<5:0>> created at line 1308.
+    Found 7-bit comparator greater for signal <GND_868_o_ddr_wr_count_i[6]_LessThan_32_o> created at line 329
+    Found 7-bit comparator greater for signal <GND_868_o_ddr_rd_count_i[6]_LessThan_33_o> created at line 331
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 216 D-type flip-flop(s).
@@ -4850,10 +4857,10 @@ WARNING:Xst:647 - Input <ddr_rd_error_i> is never used. This port will be preser
     Found 1-bit register for signal <wb_ack_o>.
     Found 32-bit register for signal <wb_data_o>.
     Found 1-bit register for signal <wb_stall_o>.
-    Found 6-bit adder for signal <ddr_burst_cnt[5]_GND_868_o_add_21_OUT> created at line 1241.
-    Found 6-bit subtractor for signal <GND_868_o_GND_868_o_sub_10_OUT<5:0>> created at line 1308.
-    Found 7-bit comparator greater for signal <GND_868_o_ddr_wr_count_i[6]_LessThan_32_o> created at line 329
-    Found 7-bit comparator greater for signal <GND_868_o_ddr_rd_count_i[6]_LessThan_33_o> created at line 331
+    Found 6-bit adder for signal <ddr_burst_cnt[5]_GND_869_o_add_21_OUT> created at line 1241.
+    Found 6-bit subtractor for signal <GND_869_o_GND_869_o_sub_10_OUT<5:0>> created at line 1308.
+    Found 7-bit comparator greater for signal <GND_869_o_ddr_wr_count_i[6]_LessThan_32_o> created at line 329
+    Found 7-bit comparator greater for signal <GND_869_o_ddr_rd_count_i[6]_LessThan_33_o> created at line 331
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred 149 D-type flip-flop(s).
@@ -5334,8 +5341,8 @@ WARNING:Xst:647 - Input <MCB_UOCMDREADY> is never used. This port will be preser
 WARNING:Xst:647 - Input <MCB_UO_CAL_START> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" line 558: Output port <DRP_BKST> of the instance <iodrp_controller_inst> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" line 576: Output port <read_data> of the instance <iodrp_mcb_controller_inst> is unconnected or connected to loadless signal.
-    Register <MCB_UIUDQSDEC> equivalent to <MCB_UILDQSDEC> has been removed
     Register <MCB_UIUDQSINC> equivalent to <MCB_UILDQSINC> has been removed
+    Register <MCB_UIUDQSDEC> equivalent to <MCB_UILDQSDEC> has been removed
     Found 1-bit register for signal <Block_Reset>.
     Found 1-bit register for signal <SELFREFRESH_MCB_MODE_R1>.
     Found 1-bit register for signal <SELFREFRESH_MCB_MODE_R2>.
@@ -5446,35 +5453,35 @@ INFO:Xst:1799 - State 111010 is never reached in FSM <STATE>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 16-bit adder for signal <WAIT_200us_COUNTER[15]_GND_903_o_add_13_OUT> created at line 607.
-    Found 10-bit adder for signal <RstCounter[9]_GND_903_o_add_17_OUT> created at line 669.
-    Found 8-bit adder for signal <WaitTimer[7]_GND_903_o_add_29_OUT> created at line 895.
-    Found 6-bit adder for signal <count[5]_GND_903_o_add_37_OUT> created at line 917.
-    Found 6-bit adder for signal <P_Term[5]_GND_903_o_add_50_OUT> created at line 1090.
-    Found 7-bit adder for signal <N_Term[6]_GND_903_o_add_81_OUT> created at line 1143.
-    Found 8-bit adder for signal <counter_inc[7]_GND_903_o_add_326_OUT> created at line 1655.
-    Found 8-bit adder for signal <DQS_DELAY[7]_GND_903_o_add_329_OUT> created at line 1661.
-    Found 8-bit adder for signal <counter_dec[7]_GND_903_o_add_339_OUT> created at line 1680.
+    Found 16-bit adder for signal <WAIT_200us_COUNTER[15]_GND_904_o_add_13_OUT> created at line 607.
+    Found 10-bit adder for signal <RstCounter[9]_GND_904_o_add_17_OUT> created at line 669.
+    Found 8-bit adder for signal <WaitTimer[7]_GND_904_o_add_29_OUT> created at line 895.
+    Found 6-bit adder for signal <count[5]_GND_904_o_add_37_OUT> created at line 917.
+    Found 6-bit adder for signal <P_Term[5]_GND_904_o_add_50_OUT> created at line 1090.
+    Found 7-bit adder for signal <N_Term[6]_GND_904_o_add_81_OUT> created at line 1143.
+    Found 8-bit adder for signal <counter_inc[7]_GND_904_o_add_326_OUT> created at line 1655.
+    Found 8-bit adder for signal <DQS_DELAY[7]_GND_904_o_add_329_OUT> created at line 1661.
+    Found 8-bit adder for signal <counter_dec[7]_GND_904_o_add_339_OUT> created at line 1680.
     Found 8-bit subtractor for signal <Max_Value_Delta_Up> created at line 414.
     Found 8-bit subtractor for signal <Max_Value_Delta_Dn> created at line 416.
-    Found 6-bit subtractor for signal <GND_903_o_GND_903_o_sub_68_OUT<5:0>> created at line 1095.
-    Found 7-bit subtractor for signal <GND_903_o_GND_903_o_sub_175_OUT<6:0>> created at line 1153.
-    Found 8-bit subtractor for signal <GND_903_o_GND_903_o_sub_343_OUT<7:0>> created at line 1686.
+    Found 6-bit subtractor for signal <GND_904_o_GND_904_o_sub_68_OUT<5:0>> created at line 1095.
+    Found 7-bit subtractor for signal <GND_904_o_GND_904_o_sub_175_OUT<6:0>> created at line 1153.
+    Found 8-bit subtractor for signal <GND_904_o_GND_904_o_sub_343_OUT<7:0>> created at line 1686.
     Found 15-bit adder for signal <_n0863> created at line 478.
     Found 15-bit adder for signal <n0468> created at line 478.
-    Found 15-bit adder for signal <_n0869> created at line 478.
+    Found 15-bit adder for signal <n0538> created at line 478.
+    Found 15-bit adder for signal <_n0872> created at line 478.
     Found 15-bit adder for signal <n0736> created at line 478.
     Found 15-bit adder for signal <n0487> created at line 478.
-    Found 15-bit adder for signal <_n0878> created at line 478.
+    Found 15-bit adder for signal <_n0881> created at line 478.
     Found 15-bit adder for signal <n0476[14:0]> created at line 478.
     Found 15-bit adder for signal <n0478> created at line 478.
-    Found 15-bit adder for signal <n0538> created at line 478.
-    Found 10-bit comparator greater for signal <RstCounter[9]_PWR_326_o_LessThan_17_o> created at line 667
+    Found 10-bit comparator greater for signal <RstCounter[9]_PWR_327_o_LessThan_17_o> created at line 667
     Found 8-bit comparator greater for signal <Dec_Flag> created at line 905
     Found 8-bit comparator greater for signal <Inc_Flag> created at line 906
     Found 6-bit comparator equal for signal <n0161> created at line 1161
     Found 7-bit comparator equal for signal <n0170> created at line 1193
-    Found 6-bit comparator greater for signal <count[5]_PWR_326_o_LessThan_302_o> created at line 1598
+    Found 6-bit comparator greater for signal <count[5]_PWR_327_o_LessThan_302_o> created at line 1598
     Found 8-bit comparator greater for signal <Max_Value_int[7]_Max_Value_Previous[7]_LessThan_308_o> created at line 1631
     Found 8-bit comparator greater for signal <n0250> created at line 1631
     Found 8-bit comparator greater for signal <Max_Value_Previous[7]_Max_Value_int[7]_LessThan_313_o> created at line 1635
@@ -5519,7 +5526,7 @@ Synthesizing Unit <iodrp_controller>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <bit_cnt[2]_GND_904_o_add_12_OUT> created at line 238.
+    Found 3-bit adder for signal <bit_cnt[2]_GND_905_o_add_12_OUT> created at line 238.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  40 D-type flip-flop(s).
@@ -5558,7 +5565,7 @@ WARNING:Xst:647 - Input <drp_ioi_addr<4:0>> is never used. This port will be pre
     | Encoding           | gray                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <bit_cnt[2]_GND_906_o_add_13_OUT> created at line 372.
+    Found 3-bit adder for signal <bit_cnt[2]_GND_907_o_add_13_OUT> created at line 372.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  41 D-type flip-flop(s).
@@ -5625,12 +5632,12 @@ Macro Statistics
  32-bit register                                       : 107
  4-bit register                                        : 12
  5-bit register                                        : 3
- 6-bit register                                        : 10
+ 6-bit register                                        : 11
  64-bit register                                       : 5
  65-bit register                                       : 1
- 7-bit register                                        : 9
- 8-bit register                                        : 35
- 9-bit register                                        : 71
+ 7-bit register                                        : 8
+ 8-bit register                                        : 36
+ 9-bit register                                        : 70
 # Comparators                                          : 44
  10-bit comparator greater                             : 1
  11-bit comparator greater                             : 3
@@ -5648,9 +5655,9 @@ Macro Statistics
  8-bit comparator lessequal                            : 2
  8-bit comparator not equal                            : 2
  9-bit comparator lessequal                            : 5
-# Multiplexers                                         : 1008
+# Multiplexers                                         : 1007
  1-bit 128-to-1 multiplexer                            : 2
- 1-bit 2-to-1 multiplexer                              : 684
+ 1-bit 2-to-1 multiplexer                              : 683
  1-bit 3-to-1 multiplexer                              : 4
  10-bit 2-to-1 multiplexer                             : 5
  11-bit 2-to-1 multiplexer                             : 12
@@ -5718,12 +5725,11 @@ INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[1].cmp_offs
 INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[2].cmp_offset_gain_calibr> is equivalent to the following FF/Latch, which will be removed : <gain_17> 
 INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[3].cmp_offset_gain_calibr> is equivalent to the following FF/Latch, which will be removed : <gain_17> 
 INFO:Xst:2261 - The FF/Latch <wb_ddr_adr_o_25> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following 6 FFs/Latches, which will be removed : <wb_ddr_adr_o_26> <wb_ddr_adr_o_27> <wb_ddr_adr_o_28> <wb_ddr_adr_o_29> <wb_ddr_adr_o_30> <wb_ddr_adr_o_31> 
-INFO:Xst:2261 - The FF/Latch <trig_addr_25> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following 6 FFs/Latches, which will be removed : <trig_addr_26> <trig_addr_27> <trig_addr_28> <trig_addr_29> <trig_addr_30> <trig_addr_31> 
 INFO:Xst:2261 - The FF/Latch <wb_ddr_cyc_o> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following FF/Latch, which will be removed : <wb_ddr_we_o> 
+INFO:Xst:2261 - The FF/Latch <trig_addr_25> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following 6 FFs/Latches, which will be removed : <trig_addr_26> <trig_addr_27> <trig_addr_28> <trig_addr_29> <trig_addr_30> <trig_addr_31> 
 INFO:Xst:2261 - The FF/Latch <ddr_cmd_instr_1> in Unit <cmp_ddr3_ctrl_wb_0> is equivalent to the following 4 FFs/Latches, which will be removed : <ddr_cmd_instr_2> <ddr_cmd_byte_addr_0> <ddr_cmd_byte_addr_1> <ddr_cmd_byte_addr_2> 
 INFO:Xst:2261 - The FF/Latch <ddr_wr_mask_0> in Unit <cmp_ddr3_ctrl_wb_0> is equivalent to the following 7 FFs/Latches, which will be removed : <ddr_wr_mask_1> <ddr_wr_mask_2> <ddr_wr_mask_3> <ddr_wr_mask_4> <ddr_wr_mask_5> <ddr_wr_mask_6> <ddr_wr_mask_7> 
 INFO:Xst:2261 - The FF/Latch <ddr_cmd_instr_1> in Unit <cmp_ddr3_ctrl_wb_1> is equivalent to the following 3 FFs/Latches, which will be removed : <ddr_cmd_instr_2> <ddr_cmd_byte_addr_0> <ddr_cmd_byte_addr_1> 
-WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_11> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5752,7 +5758,7 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_2> (without init value) has a
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_3> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_4> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_5> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_13> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_14> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_15> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5781,6 +5787,7 @@ WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_5> (without init value) has a con
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_7> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_8> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_4> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_5> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5810,7 +5817,6 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_29> (without init value) has a
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_30> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_31> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ack_sreg_8> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_7> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_8> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -5864,10 +5870,10 @@ WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_28> (without init value) has a co
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_29> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_30> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_31> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <addr_fifo_din_30> (without init value) has a constant value of 0 in block <cmp_l2p_dma_master>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <p2l_dma_adr_o_30> (without init value) has a constant value of 0 in block <cmp_p2l_dma_master>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_8> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[0].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <busy_data_d> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ce_data_0> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ce_data_1> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
@@ -5895,7 +5901,6 @@ WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_4> (without init value) has a con
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_5> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_7> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <MCB_UICMD> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_0> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
@@ -5919,6 +5924,9 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_8> (without init value) has 
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_11> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[1].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[2].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[3].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <trig_addr_25> (without init value) has a constant value of 0 in block <cmp_fmc_adc_100Ms_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ddr_wr_mask_0> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_0>. This FF/Latch will be trimmed during the optimization process.
@@ -5929,41 +5937,38 @@ WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a cons
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[2].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[1].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[0].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_2> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <MCB_UICMD> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <WarmEnough> (without init value) has a constant value of 1 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <SELFREFRESH_MCB_REQ> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <SELFREFRESH_REQ_R1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <DRP_BKST> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <DRP_BKST> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <SELFREFRESH_REQ_R1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <SELFREFRESH_MCB_REQ> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <WarmEnough> (without init value) has a constant value of 1 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R3> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R3> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:2677 - Node <dma_ctrl_carrier_addr_o_0> of sequential type is unconnected in block <cmp_dma_controller>.
 WARNING:Xst:2677 - Node <dma_ctrl_carrier_addr_o_1> of sequential type is unconnected in block <cmp_dma_controller>.
 WARNING:Xst:2677 - Node <dma_ctrl_len_o_0> of sequential type is unconnected in block <cmp_dma_controller>.
@@ -6001,8 +6006,7 @@ WARNING:Xst:2677 - Node <wb_addr_d_26> of sequential type is unconnected in bloc
 WARNING:Xst:2677 - Node <wb_addr_d_27> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
 WARNING:Xst:2677 - Node <ddr_cmd_byte_addr_28> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
 WARNING:Xst:2677 - Node <ddr_cmd_byte_addr_29> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:1>> (without init value) have a constant value of 0 in block <carrier_csr>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:6>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:1>> (without init value) have a constant value of 0 in block <carrier_csr>.
 WARNING:Xst:2404 -  FFs/Latches <addr_fifo_din<31:30>> (without init value) have a constant value of 0 in block <l2p_dma_master>.
 WARNING:Xst:2404 -  FFs/Latches <p2l_dma_adr_o<31:30>> (without init value) have a constant value of 0 in block <p2l_dma_master>.
 WARNING:Xst:2404 -  FFs/Latches <wb_ddr_adr_o<31:25>> (without init value) have a constant value of 0 in block <fmc_adc_100Ms_core>.
@@ -6184,9 +6188,9 @@ Macro Statistics
  8-bit comparator lessequal                            : 2
  8-bit comparator not equal                            : 2
  9-bit comparator lessequal                            : 5
-# Multiplexers                                         : 1808
+# Multiplexers                                         : 1807
  1-bit 128-to-1 multiplexer                            : 2
- 1-bit 2-to-1 multiplexer                              : 1496
+ 1-bit 2-to-1 multiplexer                              : 1495
  1-bit 3-to-1 multiplexer                              : 4
  1-bit 7-to-1 multiplexer                              : 32
  1-bit 8-to-1 multiplexer                              : 16
@@ -7799,14 +7803,14 @@ cmp_sys_clk_pll/CLKOUT2|    2.854|         |         |         |
 
 
 Total REAL time to Xst completion: 83.00 secs
-Total CPU time to Xst completion: 82.06 secs
+Total CPU time to Xst completion: 82.03 secs
  
 --> 
 
 
-Total memory usage is 223456 kilobytes
+Total memory usage is 227132 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings : 1534 (   0 filtered)
+Number of warnings : 1533 (   0 filtered)
 Number of infos    :  421 (   0 filtered)
 
