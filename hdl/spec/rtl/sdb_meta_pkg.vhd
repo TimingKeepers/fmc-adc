@@ -11,24 +11,25 @@ package sdb_meta_pkg is
   -- Meta-information sdb records
   ------------------------------------------------------------------------------
 
-  -- Top module repository url (64 bytes)
+  -- Top module repository url
   constant c_REPO_URL : t_sdb_repo_url := (
-    -- url (utf-8, 63 bytes)
+    -- url (string, 63 char)
     repo_url => "git://ohwr.org/fmc-projects/fmc-adc-100m14b4cha.git            ");
 
-  -- Synthesis informations (64 bytes)
+  -- Synthesis informations
   constant c_SYNTHESIS : t_sdb_synthesis := (
-    -- Top module name (utf-8, 16 bytes)
+    -- Top module name (string, 16 char)
     syn_module_name  => "spec_top_fmc_adc",
     -- Commit ID (hex string, 128-bit = 32 char)
+    -- git log -1 --format="%H" | cut -c1-31
     syn_commit_id    => "150b83db8fa9e0ff9050166b7695ee9a",
-    -- Synthesis tool name (utf-8, 8 bytes)
+    -- Synthesis tool name (string, 8 char)
     syn_tool_name    => "ISE     ",
     -- Synthesis tool version (bcd encoded, 32-bit)
     syn_tool_version => x"00000133",
     -- Synthesis date (bcd encoded, 32-bit)
     syn_date         => x"20130307",
-    -- Synthesised by (utf-8, 15 bytes)
+    -- Synthesised by (string, 15 char)
     syn_username     => "mcattin        ");
 
 end sdb_meta_pkg;
