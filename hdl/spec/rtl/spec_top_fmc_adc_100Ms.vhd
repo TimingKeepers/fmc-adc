@@ -248,10 +248,10 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       device_id => x"c5be045e",          -- echo "fmc-adc-100m14b4cha" | md5sum | cut -c1-8
       version   => x"00010000",          -- bcd encoded, [31:16] = major, [15:0] = minor
       date      => x"20130307",          -- yyyymmdd
-      name      => "fmc-adc-100m14b4cha")));
+      name      => "fmc-adc-100m14b4cha"));
 
   -- Meta-information sdb records
-  constant c_SDB_INFO : t_sdb_record_array(1 downto 0) := (
+  constant c_SDB_INFO : t_sdb_record_array(2 downto 0) := (
     0 => f_sdb_embed_repo_url(c_REPO_URL),
     1 => f_sdb_embed_synthesis(c_SYNTHESIS),
     2 => f_sdb_embed_integration(c_INTEGRATION)
@@ -740,6 +740,7 @@ begin
       g_num_slaves  => c_NUM_WB_MASTERS,
       g_registered  => true,
       g_wraparound  => true,
+      g_use_info    => true,
       g_info        => c_SDB_INFO,
       g_layout      => c_INTERCONNECT_LAYOUT,
       g_sdb_addr    => c_SDB_ADDRESS)
