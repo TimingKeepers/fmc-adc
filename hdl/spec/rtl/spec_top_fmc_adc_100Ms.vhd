@@ -47,6 +47,7 @@ use work.ddr3_ctrl_pkg.all;
 use work.gencores_pkg.all;
 use work.wishbone_pkg.all;
 use work.fmc_adc_100Ms_core_pkg.all;
+use work.sdb_meta_pkg.all;
 
 
 entity spec_top_fmc_adc_100Ms is
@@ -240,6 +241,12 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   -- WARNING: All address in sdb and crossbar are BYTE addresses!
   ------------------------------------------------------------------------------
 
+  -- Meta-information sdb records
+  constant c_SDB_INFO : t_sdb_record_array(1 downto 0) := (
+    0 => f_sdb_embed_repo_url(c_REPO_URL),
+    1 => f_sdb_embed_synthesis(c_SYNTHESIS)
+    );
+
   -- Number of master port(s) on the wishbone crossbar
   constant c_NUM_WB_MASTERS : integer := 10;
 
@@ -270,7 +277,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"0000000000000023",
+      addr_last   => x"000000000000003F",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"00000601",
@@ -302,7 +309,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"0000000000000013",
+      addr_last   => x"000000000000001F",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"00000603",
@@ -318,7 +325,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"0000000000000043",
+      addr_last   => x"000000000000007F",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"00000604",
@@ -334,7 +341,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000000B",
+      addr_last   => x"000000000000000F",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"00000605",
@@ -350,7 +357,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000001B",
+      addr_last   => x"000000000000001F",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"00000606",
@@ -366,7 +373,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000001B",
+      addr_last   => x"000000000000001F",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"00000607",
@@ -382,7 +389,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"0000000000000067",
+      addr_last   => x"000000000000007F",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"00000608",
@@ -723,6 +730,7 @@ begin
       g_num_slaves  => c_NUM_WB_MASTERS,
       g_registered  => true,
       g_wraparound  => true,
+      g_info        => c_SDB_INFO,
       g_layout      => c_INTERCONNECT_LAYOUT,
       g_sdb_addr    => c_SDB_ADDRESS)
     port map (
