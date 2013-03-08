@@ -140,6 +140,7 @@ V\subscript{out} = V\subscript{in} - (gain\subscript{dac} \cdot V\subscript{dac}
 
 
 %===============================================================================
+\newpage
 \section{Calibration}
 
 The calibration is done once during the prodoction tests.
@@ -148,9 +149,33 @@ The calibration process gives four values per channel and per input range:
 ADC gain correction, ADC offset correction, DAC gain correction and DAC offset correction.
 The temperature during the calibration process is also measured.
 All the calibration values are stored in the FmcAdc100m14b4cha EEPROM.
-More precisely they are stored in the "Internal Use Area" as defined in the IPMI standard\footnote{Platform Management FRU Information Storage Definition v1.0}.
-Tables \ref{tab:adc_calibr_data_eeprom} and \ref{tab:dac_calibr_data_eeprom} shows the calibration data types and the arrangement in the EEPROM.
-The first column "Byte offset" represents the offset within the "Internal Use Area".
+The EEPROM holds a sdbfs\footnote{http://www.ohwr.org/attachments/download/1594/sdbfs-2012-09-19.pdf} file system.
+In addition to the calibration values, the EEPROM also contains mandatory IPMI\footnote{Platform Management FRU Information Storage Definition v1.0} 
+records described in the FMC Standard VITA 57.1 (see table \ref{tab:eeprom_sdbfs} for mapping).
+
+\begin{table}[ht]
+  \centering
+  \begin{tabularx}{\textwidth}{| l | l | l | X |}
+    \hline
+    \textbf{Byte offset} & \textbf{File name}  & \textbf{File Type} & \textbf{Description} \\
+    \hline
+    0x0 & ipmi.sdb & binary & IPMI records \\
+    \hline
+    0x100 & calibration.sdb & binary & Calibration values \\
+    \hline
+    0x1000 & . & binary & Directory \\
+    & & & vendor = 0xCE42 \\
+    & & & device = 0xC5BE045E \\
+    \hline
+  \end{tabularx}
+  \caption{EEPROM sdbfs}
+  \label{tab:eeprom_sdbfs}
+\end{table}
+
+Note that the vendor value 0xCE42 corresponds to CERN. While the device value 0xC5BE045E corresponds to the first 32-bit of the md5 sum of "fmc-adc-100m14b4cha".
+
+Tables \ref{tab:adc_calibr_data_eeprom} and \ref{tab:dac_calibr_data_eeprom} shows the calibration data types and the arrangement in the binary file.
+The first column "Byte offset" represents the offset within the binary file.
 
 \begin{table}[ht]
   \centering
