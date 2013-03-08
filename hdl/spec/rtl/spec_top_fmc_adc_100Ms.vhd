@@ -1051,6 +1051,9 @@ begin
   --    ADC core control and status
   ------------------------------------------------------------------------------
   cmp_fmc_adc_100Ms_core : fmc_adc_100Ms_core
+    generic map (
+      g_multishot_ram_size => 2048
+      )
     port map(
       sys_clk_i   => sys_clk_125,
       sys_rst_n_i => sys_rst_n,

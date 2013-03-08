@@ -43,12 +43,15 @@ package fmc_adc_100Ms_core_pkg is
   ------------------------------------------------------------------------------
   -- Constants declaration
   ------------------------------------------------------------------------------
-  
+
 
   ------------------------------------------------------------------------------
   -- Components declaration
   ------------------------------------------------------------------------------
   component fmc_adc_100Ms_core
+    generic(
+      g_multishot_ram_size : natural := 2048
+      );
     port (
       -- Clock, reset
       sys_clk_i   : in std_logic;
@@ -109,6 +112,6 @@ end fmc_adc_100Ms_core_pkg;
 
 package body fmc_adc_100Ms_core_pkg is
 
-  
+
 
 end fmc_adc_100Ms_core_pkg;
