@@ -7,6 +7,7 @@
 -- unit name: fmc_adc_100Ms_core (fmc_adc_100Ms_core.vhd)
 --
 -- author: Matthieu Cattin (matthieu.cattin@cern.ch)
+--         Theodor Stana (t.stana@cern.ch)
 --
 -- date: 28-02-2011
 --
@@ -15,6 +16,9 @@
 -- description: FMC ADC 100Ms/s core.
 --
 -- dependencies:
+--
+-- references:
+--    [1] Xilinx UG175. FIFO Generator v6.2, July 23, 2010
 --
 --------------------------------------------------------------------------------
 -- GNU LESSER GENERAL PUBLIC LICENSE
@@ -42,8 +46,14 @@ use IEEE.NUMERIC_STD.all;
 library UNISIM;
 use UNISIM.vcomponents.all;
 
+library work;
+use work.genram_pkg.all;
+
 
 entity fmc_adc_100Ms_core is
+  generic(
+    g_multishot_ram_size : natural := 2048
+    );
   port (
     -- Clock, reset
     sys_clk_i   : in std_logic;
@@ -241,45 +251,6 @@ architecture rtl of fmc_adc_100Ms_core is
       );
   end component offset_gain_s;
 
-  component adc_sync_fifo
-    port (
-      rst    : in  std_logic;
-      wr_clk : in  std_logic;
-      rd_clk : in  std_logic;
-      din    : in  std_logic_vector(64 downto 0);
-      wr_en  : in  std_logic;
-      rd_en  : in  std_logic;
-      dout   : out std_logic_vector(64 downto 0);
-      full   : out std_logic;
-      empty  : out std_logic;
-      valid  : out std_logic
-      );
-  end component adc_sync_fifo;
-
-  component wb_ddr_fifo
-    port (
-      rst   : in  std_logic;
-      clk   : in  std_logic;
-      din   : in  std_logic_vector(64 downto 0);
-      wr_en : in  std_logic;
-      rd_en : in  std_logic;
-      dout  : out std_logic_vector(64 downto 0);
-      full  : out std_logic;
-      empty : out std_logic;
-      valid : out std_logic);
-  end component wb_ddr_fifo;
-
-  component multishot_dpram
-    port (
-      clka  : in  std_logic;
-      wea   : in  std_logic_vector(0 downto 0);
-      addra : in  std_logic_vector(12 downto 0);
-      dina  : in  std_logic_vector(63 downto 0);
-      clkb  : in  std_logic;
-      addrb : in  std_logic_vector(12 downto 0);
-      doutb : out std_logic_vector(63 downto 0));
-  end component multishot_dpram;
-
   component monostable
     generic(
       g_INPUT_POLARITY  : std_logic := '1';    --! trigger_i polarity
@@ -300,6 +271,7 @@ architecture rtl of fmc_adc_100Ms_core is
   ------------------------------------------------------------------------------
   -- Constants declaration
   ------------------------------------------------------------------------------
+  constant c_dpram_depth : integer := f_log2_size(g_multishot_ram_size);
 
   ------------------------------------------------------------------------------
   -- Types declaration
@@ -413,26 +385,24 @@ architecture rtl of fmc_adc_100Ms_core is
   signal multishot_buffer_sel : std_logic;
 
   -- Multi-shot mode
-  constant c_DPRAM_DEPTH : integer := 13;
-
-  signal dpram_addra_cnt       : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal dpram_addra_trig      : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal dpram_addra_post_done : unsigned(c_DPRAM_DEPTH-1 downto 0);
-  signal dpram_addrb_cnt       : unsigned(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram_addra_cnt       : unsigned(c_dpram_depth-1 downto 0);
+  signal dpram_addra_trig      : unsigned(c_dpram_depth-1 downto 0);
+  signal dpram_addra_post_done : unsigned(c_dpram_depth-1 downto 0);
+  signal dpram_addrb_cnt       : unsigned(c_dpram_depth-1 downto 0);
   signal dpram_dout            : std_logic_vector(63 downto 0);
   signal dpram_valid           : std_logic;
   signal dpram_valid_t         : std_logic;
 
   signal dpram0_dina  : std_logic_vector(63 downto 0);
-  signal dpram0_addra : std_logic_vector(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram0_addra : std_logic_vector(c_dpram_depth-1 downto 0);
   signal dpram0_wea   : std_logic;
-  signal dpram0_addrb : std_logic_vector(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram0_addrb : std_logic_vector(c_dpram_depth-1 downto 0);
   signal dpram0_doutb : std_logic_vector(63 downto 0);
 
   signal dpram1_dina  : std_logic_vector(63 downto 0);
-  signal dpram1_addra : std_logic_vector(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram1_addra : std_logic_vector(c_dpram_depth-1 downto 0);
   signal dpram1_wea   : std_logic;
-  signal dpram1_addrb : std_logic_vector(c_DPRAM_DEPTH-1 downto 0);
+  signal dpram1_addrb : std_logic_vector(c_dpram_depth-1 downto 0);
   signal dpram1_doutb : std_logic_vector(63 downto 0);
 
   -- Wishbone to DDR flowcontrol FIFO
@@ -906,19 +876,56 @@ begin
   ------------------------------------------------------------------------------
   -- Synchronisation FIFO to system clock domain
   ------------------------------------------------------------------------------
-  cmp_adc_sync_fifo : adc_sync_fifo
+  cmp_adc_sync_fifo : generic_async_fifo
+    generic map (
+      g_data_width             => 65,
+      g_size                   => 16,
+      g_show_ahead             => false,
+      g_with_rd_empty          => true,
+      g_with_rd_full           => false,
+      g_with_rd_almost_empty   => false,
+      g_with_rd_almost_full    => false,
+      g_with_rd_count          => false,
+      g_with_wr_empty          => false,
+      g_with_wr_full           => true,
+      g_with_wr_almost_empty   => false,
+      g_with_wr_almost_full    => false,
+      g_with_wr_count          => false,
+      g_almost_empty_threshold => 0,
+      g_almost_full_threshold  => 0
+      )
     port map(
-      rst    => fs_rst,                 -- must be at least 3 wr_clk and rd_clk cycles
-      wr_clk => fs_clk,
-      rd_clk => sys_clk_i,
-      din    => sync_fifo_din,
-      wr_en  => sync_fifo_wr,
-      rd_en  => sync_fifo_rd,
-      dout   => sync_fifo_dout,
-      full   => sync_fifo_full,
-      empty  => sync_fifo_empty,
-      valid  => sync_fifo_valid
+      rst_n_i           => fs_rst_n,
+      clk_wr_i          => fs_clk,
+      d_i               => sync_fifo_din,
+      we_i              => sync_fifo_wr,
+      wr_empty_o        => open,        -- sync_fifo_empty,
+      wr_full_o         => sync_fifo_full,
+      wr_almost_empty_o => open,
+      wr_almost_full_o  => open,
+      wr_count_o        => open,
+      clk_rd_i          => sys_clk_i,
+      q_o               => sync_fifo_dout,
+      rd_i              => sync_fifo_rd,
+      rd_empty_o        => sync_fifo_empty,
+      rd_full_o         => open,
+      rd_almost_empty_o => open,
+      rd_almost_full_o  => open,
+      rd_count_o        => open
       );
+
+  -- One clock cycle delay for the FIFO's VALID signal. Since the General Cores
+  -- package does not offer the possibility to use the FWFT feature of the FIFOs,
+  -- we simulate the valid flag here according to Figure 4-7 in ref. [1].
+  p_sync_fifo_valid : process (sys_clk_i) is
+  begin
+    if rising_edge(sys_clk_i) then
+      sync_fifo_valid <= sync_fifo_rd;
+      if (sync_fifo_empty = '1') then
+        sync_fifo_valid <= '0';
+      end if;
+    end if;
+  end process;
 
   sync_fifo_din <= trig_align & data_calibr_out;
   -- FOR DEBUG: FR instead of CH1 and SerDes Synced instead of CH2
@@ -944,7 +951,7 @@ begin
       single_shot <= '0';
     elsif rising_edge(sys_clk_i) then
       if acq_start = '1' then
-        shots_cnt  <= unsigned(shots_value);
+        shots_cnt <= unsigned(shots_value);
       elsif shots_decr = '1' then
         shots_cnt <= shots_cnt - 1;
       end if;
@@ -957,7 +964,7 @@ begin
   end process p_shots_cnt;
 
   multishot_buffer_sel <= std_logic(shots_cnt(0));
-  shots_done <= '1' when shots_cnt = to_unsigned(1, shots_cnt'length) else '0';
+  shots_done           <= '1' when shots_cnt = to_unsigned(1, shots_cnt'length) else '0';
 
   ------------------------------------------------------------------------------
   -- Pre-trigger counter
@@ -983,13 +990,13 @@ begin
   p_pre_trig_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
-      pre_trig_cnt  <= to_unsigned(1, pre_trig_cnt'length);
+      pre_trig_cnt <= to_unsigned(1, pre_trig_cnt'length);
     elsif rising_edge(sys_clk_i) then
       if (acq_start = '1' or pre_trig_done = '1') then
         if unsigned(pre_trig_value) = to_unsigned(0, pre_trig_value'length) then
-          pre_trig_cnt  <= (others => '0');
+          pre_trig_cnt <= (others => '0');
         else
-          pre_trig_cnt  <= unsigned(pre_trig_value) - 1;
+          pre_trig_cnt <= unsigned(pre_trig_value) - 1;
         end if;
       elsif (acq_in_pre_trig = '1' and sync_fifo_valid = '1') then
         pre_trig_cnt <= pre_trig_cnt - 1;
@@ -1025,13 +1032,13 @@ begin
   p_post_trig_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
-      post_trig_cnt  <= to_unsigned(1, post_trig_cnt'length);
+      post_trig_cnt <= to_unsigned(1, post_trig_cnt'length);
     elsif rising_edge(sys_clk_i) then
       if (acq_start = '1' or post_trig_done = '1') then
         if unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length) then
-          post_trig_cnt  <= (others => '0');
+          post_trig_cnt <= (others => '0');
         else
-          post_trig_cnt  <= unsigned(post_trig_value) - 1;
+          post_trig_cnt <= unsigned(post_trig_value) - 1;
         end if;
       elsif (acq_in_post_trig = '1' and sync_fifo_valid = '1') then
         post_trig_cnt <= post_trig_cnt - 1;
@@ -1048,7 +1055,7 @@ begin
   p_samples_cnt : process (sys_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
-      samples_cnt  <= (others => '0');
+      samples_cnt <= (others => '0');
     elsif rising_edge(sys_clk_i) then
       if (acq_start = '1') then
         samples_cnt <= (others => '0');
@@ -1242,26 +1249,56 @@ begin
   dpram1_wea   <= (samples_wr_en and sync_fifo_valid) when multishot_buffer_sel = '1' else '0';
 
   -- DPRAMs
-  cmp_multishot_dpram0 : multishot_dpram
-    port map(
-      clka   => sys_clk_i,
-      wea(0) => dpram0_wea,
-      addra  => dpram0_addra,
-      dina   => dpram0_dina,
-      clkb   => sys_clk_i,
-      addrb  => dpram0_addrb,
-      doutb  => dpram0_doutb
+  cmp_multishot_dpram0 : generic_dpram
+    generic map
+    (
+      g_data_width               => 64,
+      g_size                     => g_multishot_ram_size,
+      g_with_byte_enable         => false,
+      g_addr_conflict_resolution => "read_first",
+      g_dual_clock               => true
+      -- default values for the rest of the generics are okay
+      )
+    port map
+    (
+      rst_n_i => sys_rst_n_i,
+      clka_i  => sys_clk_i,
+      bwea_i  => open,
+      wea_i   => dpram0_wea,
+      aa_i    => dpram0_addra,
+      da_i    => dpram0_dina,
+      qa_o    => open,
+      clkb_i  => sys_clk_i,
+      bweb_i  => open,
+      ab_i    => dpram0_addrb,
+      -- db_i    => (others => '0'),
+      qb_o    => dpram0_doutb
       );
 
-  cmp_multishot_dpram1 : multishot_dpram
-    port map(
-      clka   => sys_clk_i,
-      wea(0) => dpram1_wea,
-      addra  => dpram1_addra,
-      dina   => dpram1_dina,
-      clkb   => sys_clk_i,
-      addrb  => dpram1_addrb,
-      doutb  => dpram1_doutb
+  cmp_multishot_dpram1 : generic_dpram
+    generic map
+    (
+      g_data_width               => 64,
+      g_size                     => g_multishot_ram_size,
+      g_with_byte_enable         => false,
+      g_addr_conflict_resolution => "read_first",
+      g_dual_clock               => false
+      -- default values for the rest of the generics are okay
+      )
+    port map
+    (
+      rst_n_i => sys_rst_n_i,
+      clka_i  => sys_clk_i,
+      bwea_i  => open,
+      wea_i   => dpram1_wea,
+      aa_i    => dpram1_addra,
+      da_i    => dpram1_dina,
+      qa_o    => open,
+      clkb_i  => sys_clk_i,
+      bweb_i  => open,
+      ab_i    => dpram1_addrb,
+      -- db_i    => (others => '0'),
+      qb_o    => dpram1_doutb
       );
 
   -- DPRAM output address counter
@@ -1273,7 +1310,7 @@ begin
       dpram_valid     <= '0';
     elsif rising_edge(sys_clk_i) then
       if post_trig_done = '1' then
-        dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_DPRAM_DEPTH-1 downto 0)) + 1;
+        dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_dpram_depth-1 downto 0)) + 1;
         dpram_valid_t   <= '1';
       elsif (dpram_addrb_cnt = dpram_addra_post_done) then
         dpram_valid_t <= '0';
@@ -1292,18 +1329,45 @@ begin
   ------------------------------------------------------------------------------
   -- Flow control FIFO for data to DDR
   ------------------------------------------------------------------------------
-  cmp_wb_ddr_fifo : wb_ddr_fifo
+  cmp_wb_ddr_fifo : generic_sync_fifo
+    generic map (
+      g_data_width             => 65,
+      g_size                   => 64,
+      g_show_ahead             => false,
+      g_with_empty             => true,
+      g_with_full              => true,
+      g_with_almost_empty      => false,
+      g_with_almost_full       => false,
+      g_with_count             => false,
+      g_almost_empty_threshold => 0,
+      g_almost_full_threshold  => 0
+      )
     port map(
-      rst   => sys_rst,                 -- must be at least 3 wr_clk and rd_clk cycles
-      clk   => sys_clk_i,
-      din   => wb_ddr_fifo_din,
-      wr_en => wb_ddr_fifo_wr,
-      rd_en => wb_ddr_fifo_rd,
-      dout  => wb_ddr_fifo_dout,
-      full  => wb_ddr_fifo_full,
-      empty => wb_ddr_fifo_empty,
-      valid => wb_ddr_fifo_valid
+      rst_n_i        => sys_rst_n_i,
+      clk_i          => sys_clk_i,
+      d_i            => wb_ddr_fifo_din,
+      we_i           => wb_ddr_fifo_wr,
+      q_o            => wb_ddr_fifo_dout,
+      rd_i           => wb_ddr_fifo_rd,
+      empty_o        => wb_ddr_fifo_empty,
+      full_o         => wb_ddr_fifo_full,
+      almost_empty_o => open,
+      almost_full_o  => open,
+      count_o        => open
       );
+
+  -- One clock cycle delay for the FIFO's VALID signal. Since the General Cores
+  -- package does not offer the possibility to use the FWFT feature of the FIFOs,
+  -- we simulate the valid flag here according to Figure 4-7 in ref. [1].
+  p_wb_ddr_fifo_valid : process (sys_clk_i) is
+  begin
+    if rising_edge(sys_clk_i) then
+      wb_ddr_fifo_valid <= wb_ddr_fifo_rd;
+      if (wb_ddr_fifo_empty = '1') then
+        wb_ddr_fifo_valid <= '0';
+      end if;
+    end if;
+  end process;
 
   p_wb_ddr_fifo_input : process (sys_clk_i, sys_rst_n_i)
   begin

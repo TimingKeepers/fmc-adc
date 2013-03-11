@@ -35,10 +35,8 @@
 <span style="margin-left: 0px; ">2. <A href="#sect_2_0">HDL symbol</a></span><br/>
 <span style="margin-left: 0px; ">3. <A href="#sect_3_0">Register description</a></span><br/>
 <span style="margin-left: 20px; ">3.1. <A href="#sect_3_1">Carrier type and PCB version</a></span><br/>
-<span style="margin-left: 20px; ">3.2. <A href="#sect_3_2">Bitstream type</a></span><br/>
-<span style="margin-left: 20px; ">3.3. <A href="#sect_3_3">Bitstream date</a></span><br/>
-<span style="margin-left: 20px; ">3.4. <A href="#sect_3_4">Status</a></span><br/>
-<span style="margin-left: 20px; ">3.5. <A href="#sect_3_5">Control</a></span><br/>
+<span style="margin-left: 20px; ">3.2. <A href="#sect_3_2">Status</a></span><br/>
+<span style="margin-left: 20px; ">3.3. <A href="#sect_3_3">Control</a></span><br/>
 <h3><a name="sect_1_0">1. Memory map summary</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -83,40 +81,6 @@ CARRIER
 REG
 </td>
 <td >
-<A href="#BITSTREAM_TYPE">Bitstream type</a>
-</td>
-<td  class="td_code">
-carrier_csr_bitstream_type
-</td>
-<td  class="td_code">
-BITSTREAM_TYPE
-</td>
-</tr>
-<tr class="tr_odd">
-<td  class="td_code">
-0x2
-</td>
-<td >
-REG
-</td>
-<td >
-<A href="#BITSTREAM_DATE">Bitstream date</a>
-</td>
-<td  class="td_code">
-carrier_csr_bitstream_date
-</td>
-<td  class="td_code">
-BITSTREAM_DATE
-</td>
-</tr>
-<tr class="tr_even">
-<td  class="td_code">
-0x3
-</td>
-<td >
-REG
-</td>
-<td >
 <A href="#STAT">Status</a>
 </td>
 <td  class="td_code">
@@ -128,7 +92,7 @@ STAT
 </tr>
 <tr class="tr_odd">
 <td  class="td_code">
-0x4
+0x2
 </td>
 <td >
 REG
@@ -186,7 +150,7 @@ carrier_csr_carrier_pcb_rev_i[3:0]
 &rArr;
 </td>
 <td  class="td_pblock_left">
-wb_addr_i[2:0]
+wb_addr_i[1:0]
 </td>
 <td  class="td_sym_center">
 
@@ -243,7 +207,7 @@ wb_cyc_i
 
 </td>
 <td  class="td_pblock_right">
-<b>Bitstream type:</b>
+<b>Status:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -260,108 +224,6 @@ wb_sel_i[3:0]
 
 </td>
 <td  class="td_pblock_right">
-carrier_csr_bitstream_type_i[31:0]
-</td>
-<td  class="td_arrow_right">
-&lArr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-&rarr;
-</td>
-<td  class="td_pblock_left">
-wb_stb_i
-</td>
-<td  class="td_sym_center">
-&nbsp;
-</td>
-<td  class="td_pblock_right">
-
-</td>
-<td  class="td_arrow_right">
-
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-&rarr;
-</td>
-<td  class="td_pblock_left">
-wb_we_i
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-<b>Bitstream date:</b>
-</td>
-<td  class="td_arrow_right">
-
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-&larr;
-</td>
-<td  class="td_pblock_left">
-wb_ack_o
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-carrier_csr_bitstream_date_i[31:0]
-</td>
-<td  class="td_arrow_right">
-&lArr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-&nbsp;
-</td>
-<td  class="td_pblock_right">
-
-</td>
-<td  class="td_arrow_right">
-
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-<b>Status:</b>
-</td>
-<td  class="td_arrow_right">
-
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
 carrier_csr_stat_fmc_pres_i
 </td>
 <td  class="td_arrow_right">
@@ -370,10 +232,10 @@ carrier_csr_stat_fmc_pres_i
 </tr>
 <tr>
 <td  class="td_arrow_left">
-
+&rarr;
 </td>
 <td  class="td_pblock_left">
-
+wb_stb_i
 </td>
 <td  class="td_sym_center">
 
@@ -387,10 +249,10 @@ carrier_csr_stat_p2l_pll_lck_i
 </tr>
 <tr>
 <td  class="td_arrow_left">
-
+&rarr;
 </td>
 <td  class="td_pblock_left">
-
+wb_we_i
 </td>
 <td  class="td_sym_center">
 
@@ -404,10 +266,10 @@ carrier_csr_stat_sys_pll_lck_i
 </tr>
 <tr>
 <td  class="td_arrow_left">
-
+&larr;
 </td>
 <td  class="td_pblock_left">
-
+wb_ack_o
 </td>
 <td  class="td_sym_center">
 
@@ -805,17 +667,17 @@ RESERVED
 <li><b>
 TYPE
 </b>[<i>read-only</i>]: Carrier type
-<br>Carrier type identifier
+<br>Carrier type identifier<br>1 = SPEC<br>2 = SVEC<br>3 = VFC<br>4 = SPEXI
 </ul>
-<a name="BITSTREAM_TYPE"></a>
-<h3><a name="sect_3_2">3.2. Bitstream type</a></h3>
+<a name="STAT"></a>
+<h3><a name="sect_3_2">3.2. Status</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-carrier_csr_bitstream_type
+carrier_csr_stat
 </td>
 </tr>
 <tr>
@@ -831,522 +693,6 @@ carrier_csr_bitstream_type
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-BITSTREAM_TYPE
-</td>
-</tr>
-<tr>
-<td >
-<b>C offset: </b>
-</td>
-<td  class="td_code">
-0x4
-</td>
-</tr>
-</table>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td  class="td_bit">
-31
-</td>
-<td  class="td_bit">
-30
-</td>
-<td  class="td_bit">
-29
-</td>
-<td  class="td_bit">
-28
-</td>
-<td  class="td_bit">
-27
-</td>
-<td  class="td_bit">
-26
-</td>
-<td  class="td_bit">
-25
-</td>
-<td  class="td_bit">
-24
-</td>
-</tr>
-<tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-BITSTREAM_TYPE[31:24]
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-</tr>
-</table>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td  class="td_bit">
-23
-</td>
-<td  class="td_bit">
-22
-</td>
-<td  class="td_bit">
-21
-</td>
-<td  class="td_bit">
-20
-</td>
-<td  class="td_bit">
-19
-</td>
-<td  class="td_bit">
-18
-</td>
-<td  class="td_bit">
-17
-</td>
-<td  class="td_bit">
-16
-</td>
-</tr>
-<tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-BITSTREAM_TYPE[23:16]
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-</tr>
-</table>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td  class="td_bit">
-15
-</td>
-<td  class="td_bit">
-14
-</td>
-<td  class="td_bit">
-13
-</td>
-<td  class="td_bit">
-12
-</td>
-<td  class="td_bit">
-11
-</td>
-<td  class="td_bit">
-10
-</td>
-<td  class="td_bit">
-9
-</td>
-<td  class="td_bit">
-8
-</td>
-</tr>
-<tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-BITSTREAM_TYPE[15:8]
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-</tr>
-</table>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td  class="td_bit">
-7
-</td>
-<td  class="td_bit">
-6
-</td>
-<td  class="td_bit">
-5
-</td>
-<td  class="td_bit">
-4
-</td>
-<td  class="td_bit">
-3
-</td>
-<td  class="td_bit">
-2
-</td>
-<td  class="td_bit">
-1
-</td>
-<td  class="td_bit">
-0
-</td>
-</tr>
-<tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-BITSTREAM_TYPE[7:0]
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-</tr>
-</table>
-<ul>
-<li><b>
-BITSTREAM_TYPE
-</b>[<i>read-only</i>]: Bitstream type
-<br>Bitstream (firmware) type, unsigned 32-bit number.
-</ul>
-<a name="BITSTREAM_DATE"></a>
-<h3><a name="sect_3_3">3.3. Bitstream date</a></h3>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td >
-<b>HW prefix: </b>
-</td>
-<td  class="td_code">
-carrier_csr_bitstream_date
-</td>
-</tr>
-<tr>
-<td >
-<b>HW address: </b>
-</td>
-<td  class="td_code">
-0x2
-</td>
-</tr>
-<tr>
-<td >
-<b>C prefix: </b>
-</td>
-<td  class="td_code">
-BITSTREAM_DATE
-</td>
-</tr>
-<tr>
-<td >
-<b>C offset: </b>
-</td>
-<td  class="td_code">
-0x8
-</td>
-</tr>
-</table>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td  class="td_bit">
-31
-</td>
-<td  class="td_bit">
-30
-</td>
-<td  class="td_bit">
-29
-</td>
-<td  class="td_bit">
-28
-</td>
-<td  class="td_bit">
-27
-</td>
-<td  class="td_bit">
-26
-</td>
-<td  class="td_bit">
-25
-</td>
-<td  class="td_bit">
-24
-</td>
-</tr>
-<tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-BITSTREAM_DATE[31:24]
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-</tr>
-</table>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td  class="td_bit">
-23
-</td>
-<td  class="td_bit">
-22
-</td>
-<td  class="td_bit">
-21
-</td>
-<td  class="td_bit">
-20
-</td>
-<td  class="td_bit">
-19
-</td>
-<td  class="td_bit">
-18
-</td>
-<td  class="td_bit">
-17
-</td>
-<td  class="td_bit">
-16
-</td>
-</tr>
-<tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-BITSTREAM_DATE[23:16]
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-</tr>
-</table>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td  class="td_bit">
-15
-</td>
-<td  class="td_bit">
-14
-</td>
-<td  class="td_bit">
-13
-</td>
-<td  class="td_bit">
-12
-</td>
-<td  class="td_bit">
-11
-</td>
-<td  class="td_bit">
-10
-</td>
-<td  class="td_bit">
-9
-</td>
-<td  class="td_bit">
-8
-</td>
-</tr>
-<tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-BITSTREAM_DATE[15:8]
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-</tr>
-</table>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td  class="td_bit">
-7
-</td>
-<td  class="td_bit">
-6
-</td>
-<td  class="td_bit">
-5
-</td>
-<td  class="td_bit">
-4
-</td>
-<td  class="td_bit">
-3
-</td>
-<td  class="td_bit">
-2
-</td>
-<td  class="td_bit">
-1
-</td>
-<td  class="td_bit">
-0
-</td>
-</tr>
-<tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-BITSTREAM_DATE[7:0]
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-</tr>
-</table>
-<ul>
-<li><b>
-BITSTREAM_DATE
-</b>[<i>read-only</i>]: Bitstream date
-<br>Bitstream generation date, unsigned 32-bit UTC time.
-</ul>
-<a name="STAT"></a>
-<h3><a name="sect_3_4">3.4. Status</a></h3>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td >
-<b>HW prefix: </b>
-</td>
-<td  class="td_code">
-carrier_csr_stat
-</td>
-</tr>
-<tr>
-<td >
-<b>HW address: </b>
-</td>
-<td  class="td_code">
-0x3
-</td>
-</tr>
-<tr>
-<td >
-<b>C prefix: </b>
-</td>
-<td  class="td_code">
 STAT
 </td>
 </tr>
@@ -1355,7 +701,7 @@ STAT
 <b>C offset: </b>
 </td>
 <td  class="td_code">
-0xc
+0x4
 </td>
 </tr>
 </table>
@@ -1598,7 +944,7 @@ RESERVED
 <br>Ignore on read, write with 0's.
 </ul>
 <a name="CTRL"></a>
-<h3><a name="sect_3_5">3.5. Control</a></h3>
+<h3><a name="sect_3_3">3.3. Control</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
@@ -1613,7 +959,7 @@ carrier_csr_ctrl
 <b>HW address: </b>
 </td>
 <td  class="td_code">
-0x4
+0x2
 </td>
 </tr>
 <tr>
@@ -1629,7 +975,7 @@ CTRL
 <b>C offset: </b>
 </td>
 <td  class="td_code">
-0x10
+0x8
 </td>
 </tr>
 </table>

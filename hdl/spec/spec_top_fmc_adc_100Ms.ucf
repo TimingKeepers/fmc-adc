@@ -258,10 +258,10 @@ NET "spi_cs_dac4_n_o" IOSTANDARD = "LVCMOS25";
 NET "gpio_dac_clr_n_o" LOC = W18; # LA30_N
 NET "gpio_dac_clr_n_o" IOSTANDARD = "LVCMOS25";
 
-NET "gpio_led_power_o" LOC = W15; # LA28_N
-NET "gpio_led_power_o" IOSTANDARD = "LVCMOS25";
-NET "gpio_led_trigger_o" LOC = Y16; # LA28_P
-NET "gpio_led_trigger_o" IOSTANDARD = "LVCMOS25";
+NET "gpio_led_acq_o" LOC = W15; # LA28_N
+NET "gpio_led_acq_o" IOSTANDARD = "LVCMOS25";
+NET "gpio_led_trig_o" LOC = Y16; # LA28_P
+NET "gpio_led_trig_o" IOSTANDARD = "LVCMOS25";
 
 NET "gpio_ssr_ch1_o[0]" LOC = Y17; # LA26_P
 NET "gpio_ssr_ch1_o[0]" IOSTANDARD = "LVCMOS25";
@@ -546,8 +546,8 @@ NET "AUX_LEDS_O[3]" IOSTANDARD = "LVCMOS18";
 INST "cmp_gn4124_core/l2p_rdy_t" IOB=FALSE;
 INST "cmp_gn4124_core/l_wr_rdy_t*" IOB=FALSE;
 
-INST "cmp_fmc_spi/Wrapped_SPI/shift/s_out" IOB=FALSE;
-INST "cmp_fmc_spi/Wrapped_SPI/clgen/clk_out" IOB=FALSE;
+INST "cmp_fmc_spi/U_Wrapped_SPI/Wrapped_SPI/shift/s_out" IOB=FALSE;
+INST "cmp_fmc_spi/U_Wrapped_SPI/Wrapped_SPI/clgen/clk_out" IOB=FALSE;
 
 
 #===============================================================================
@@ -564,17 +564,65 @@ NET "DDR3_UDQS_N"  IN_TERM = NONE;
 
 
 #===============================================================================
-# Clock constraints
+# Timing constraints
 #===============================================================================
 
 # GN4124
 
-NET "L_CLKp" TNM_NET = "l_clkp_grp";
-TIMESPEC TS_l_clkp = PERIOD "l_clkp_grp" 5 ns HIGH 50%;
+#NET "L_CLKp" TNM_NET = "l_clkp_grp";
+#TIMESPEC TS_l_clkp = PERIOD "l_clkp_grp" 5 ns HIGH 50%;
 NET "P2L_CLKp" TNM_NET = "p2l_clkp_grp";
 TIMESPEC TS_p2l_clkp = PERIOD "p2l_clkp_grp" 5 ns HIGH 50%;
 NET "P2L_CLKn" TNM_NET = "p2l_clkn_grp";
 TIMESPEC TS_p2l_clkn = PERIOD "p2l_clkn_grp" 5 ns HIGH 50%;
+
+NET "L2P_CLKN" TNM = "gn4124_data_bus_out";
+NET "L2P_CLKP" TNM = "gn4124_data_bus_out";
+NET "L2P_VALID" TNM = "gn4124_data_bus_out";
+NET "L2P_DFRAME" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[0]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[1]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[2]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[3]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[4]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[5]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[6]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[7]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[8]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[9]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[10]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[11]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[12]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[13]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[14]" TNM = "gn4124_data_bus_out";
+NET "L2P_DATA[15]" TNM = "gn4124_data_bus_out";
+
+#TIMEGRP "gn4124_data_bus_out" OFFSET = OUT AFTER "cmp_gn4124_core/io_clk" REFERENCE_PIN "L2P_CLKP";
+
+NET "P2L_CLKN" TNM = "gn4124_data_bus_in";
+NET "P2L_CLKP" TNM = "gn4124_data_bus_in";
+NET "P2L_DFRAME" TNM = "gn4124_data_bus_in";
+NET "P2L_VALID" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[0]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[1]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[2]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[3]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[4]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[5]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[6]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[7]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[8]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[9]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[10]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[11]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[12]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[13]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[14]" TNM = "gn4124_data_bus_in";
+NET "P2L_DATA[15]" TNM = "gn4124_data_bus_in";
+
+#TIMEGRP "gn4124_data_bus_in" OFFSET = IN 1.2 ns VALID 1.6 ns BEFORE "cmp_gn4124_core/io_clk" RISING;
+#TIMEGRP "gn4124_data_bus_in" OFFSET = IN 1.2 ns VALID 1.6 ns BEFORE "cmp_gn4124_core/io_clk" FALLING;
+
 
 # System clock
 
