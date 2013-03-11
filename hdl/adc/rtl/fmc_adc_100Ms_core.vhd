@@ -1363,7 +1363,7 @@ begin
   begin
     if rising_edge(sys_clk_i) then
       wb_ddr_fifo_valid <= wb_ddr_fifo_rd;
-      if (sync_fifo_empty = '1') then
+      if (wb_ddr_fifo_empty = '1') then
         wb_ddr_fifo_valid <= '0';
       end if;
     end if;
