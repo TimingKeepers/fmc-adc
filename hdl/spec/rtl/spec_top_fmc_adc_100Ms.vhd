@@ -173,7 +173,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
     port (
       rst_n_i                          : in  std_logic;
       wb_clk_i                         : in  std_logic;
-      wb_addr_i                        : in  std_logic_vector(2 downto 0);
+      wb_addr_i                        : in  std_logic_vector(1 downto 0);
       wb_data_i                        : in  std_logic_vector(31 downto 0);
       wb_data_o                        : out std_logic_vector(31 downto 0);
       wb_cyc_i                         : in  std_logic;
@@ -184,8 +184,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       carrier_csr_carrier_pcb_rev_i    : in  std_logic_vector(3 downto 0);
       carrier_csr_carrier_reserved_i   : in  std_logic_vector(11 downto 0);
       carrier_csr_carrier_type_i       : in  std_logic_vector(15 downto 0);
-      carrier_csr_bitstream_type_i     : in  std_logic_vector(31 downto 0);
-      carrier_csr_bitstream_date_i     : in  std_logic_vector(31 downto 0);
       carrier_csr_stat_fmc_pres_i      : in  std_logic;
       carrier_csr_stat_p2l_pll_lck_i   : in  std_logic;
       carrier_csr_stat_sys_pll_lck_i   : in  std_logic;
@@ -422,8 +420,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
 
   -- SPEC carrier CSR constants
   constant c_CARRIER_TYPE   : std_logic_vector(15 downto 0) := X"0001";
-  constant c_BITSTREAM_TYPE : std_logic_vector(31 downto 0) := X"00000001";
-  constant c_BITSTREAM_DATE : std_logic_vector(31 downto 0) := X"50AA5124";  -- UTC time
 
   ------------------------------------------------------------------------------
   -- Signals declaration
@@ -792,7 +788,7 @@ begin
     port map(
       rst_n_i                          => sys_rst_n,
       wb_clk_i                         => sys_clk_125,
-      wb_addr_i                        => cnx_master_out(c_SLAVE_SPEC_CSR).adr(4 downto 2),  -- cnx_master_out.adr is byte address
+      wb_addr_i                        => cnx_master_out(c_SLAVE_SPEC_CSR).adr(3 downto 2),  -- cnx_master_out.adr is byte address
       wb_data_i                        => cnx_master_out(c_SLAVE_SPEC_CSR).dat,
       wb_data_o                        => cnx_master_in(c_SLAVE_SPEC_CSR).dat,
       wb_cyc_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).cyc,
@@ -803,8 +799,6 @@ begin
       carrier_csr_carrier_pcb_rev_i    => pcb_ver_i,
       carrier_csr_carrier_reserved_i   => X"000",
       carrier_csr_carrier_type_i       => c_CARRIER_TYPE,
-      carrier_csr_bitstream_type_i     => c_BITSTREAM_TYPE,
-      carrier_csr_bitstream_date_i     => c_BITSTREAM_DATE,
       carrier_csr_stat_fmc_pres_i      => prsnt_m2c_n_i,
       carrier_csr_stat_p2l_pll_lck_i   => p2l_pll_locked,
       carrier_csr_stat_sys_pll_lck_i   => sys_clk_pll_locked,
