@@ -32,6 +32,16 @@ package sdb_meta_pkg is
     -- Synthesised by (string, 15 char)
     syn_username     => "mcattin        ");
 
+  -- Integration record
+  constant c_INTEGRATION : t_sdb_integration := (
+    product     => (
+      vendor_id => x"000000000000CE42",  -- CERN
+      device_id => x"47c786a2",          -- echo "spec_fmc-adc-100m14b4cha" | md5sum | cut -c1-8
+      version   => x"00010000",          -- bcd encoded, [31:16] = major, [15:0] = minor
+      date      => x"20130307",          -- yyyymmdd
+      name      => "spec_fmcadc100m14b "));
+
+
 end sdb_meta_pkg;
 
 

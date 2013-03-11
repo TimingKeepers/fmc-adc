@@ -241,15 +241,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   -- WARNING: All address in sdb and crossbar are BYTE addresses!
   ------------------------------------------------------------------------------
 
-  -- Integration record
-  constant c_INTEGRATION : t_sdb_integration := (
-    product     => (
-      vendor_id => x"000000000000CE42",  -- CERN
-      device_id => x"c5be045e",          -- echo "fmc-adc-100m14b4cha" | md5sum | cut -c1-8
-      version   => x"00010000",          -- bcd encoded, [31:16] = major, [15:0] = minor
-      date      => x"20130307",          -- yyyymmdd
-      name      => "fmc-adc-100m14b4cha"));
-
   -- Meta-information sdb records
   constant c_SDB_INFO : t_sdb_record_array(2 downto 0) := (
     0 => f_sdb_embed_repo_url(c_REPO_URL),
