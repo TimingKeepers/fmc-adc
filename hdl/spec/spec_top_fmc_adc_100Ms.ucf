@@ -258,10 +258,10 @@ NET "spi_cs_dac4_n_o" IOSTANDARD = "LVCMOS25";
 NET "gpio_dac_clr_n_o" LOC = W18; # LA30_N
 NET "gpio_dac_clr_n_o" IOSTANDARD = "LVCMOS25";
 
-NET "gpio_led_power_o" LOC = W15; # LA28_N
-NET "gpio_led_power_o" IOSTANDARD = "LVCMOS25";
-NET "gpio_led_trigger_o" LOC = Y16; # LA28_P
-NET "gpio_led_trigger_o" IOSTANDARD = "LVCMOS25";
+NET "gpio_led_acq_o" LOC = W15; # LA28_N
+NET "gpio_led_acq_o" IOSTANDARD = "LVCMOS25";
+NET "gpio_led_trig_o" LOC = Y16; # LA28_P
+NET "gpio_led_trig_o" IOSTANDARD = "LVCMOS25";
 
 NET "gpio_ssr_ch1_o[0]" LOC = Y17; # LA26_P
 NET "gpio_ssr_ch1_o[0]" IOSTANDARD = "LVCMOS25";

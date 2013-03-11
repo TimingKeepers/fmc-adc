@@ -142,14 +142,14 @@ entity spec_top_fmc_adc_100Ms is
       spi_cs_dac3_n_o : out std_logic;  -- SPI channel 3 offset DAC chip select (active low)
       spi_cs_dac4_n_o : out std_logic;  -- SPI channel 4 offset DAC chip select (active low)
 
-      gpio_dac_clr_n_o   : out std_logic;                     -- offset DACs clear (active low)
-      gpio_led_power_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
-      gpio_led_trigger_o : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
-      gpio_ssr_ch1_o     : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
-      gpio_ssr_ch2_o     : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
-      gpio_ssr_ch3_o     : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
-      gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-      gpio_si570_oe_o    : out std_logic;                     -- Si570 (programmable oscillator) output enable
+      gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
+      gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
+      gpio_led_trig_o  : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
+      gpio_ssr_ch1_o   : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
+      gpio_ssr_ch2_o   : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
+      gpio_ssr_ch3_o   : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
+      gpio_ssr_ch4_o   : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
+      gpio_si570_oe_o  : out std_logic;                     -- Si570 (programmable oscillator) output enable
 
       si570_scl_b : inout std_logic;    -- I2C bus clock (Si570)
       si570_sda_b : inout std_logic;    -- I2C bus data (Si570)
@@ -499,7 +499,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal dma_irq_p           : std_logic_vector(1 downto 0);
   signal irq_sources         : std_logic_vector(31 downto 0);
   signal irq_to_gn4124       : std_logic;
-  signal irq_sources_2_led   : std_logic_vector(1 downto 0);
+  signal irq_sources_2_led   : std_logic_vector(31 downto 0);
   signal ddr_wr_fifo_empty   : std_logic;
   signal ddr_wr_fifo_empty_d : std_logic;
   signal ddr_wr_fifo_empty_p : std_logic;
@@ -561,9 +561,13 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal acq_stop_p  : std_logic;
   signal acq_end_p   : std_logic;
 
-  -- Tests
-  signal led_cnt : unsigned(26 downto 0);
-  signal led_pps : std_logic;
+  -- led pwm
+  signal led_pwm_update_cnt : unsigned(9 downto 0);
+  signal led_pwm_update : std_logic;
+  signal led_pwm_val : unsigned(16 downto 0);
+  signal led_pwm_val_down : std_logic;
+  signal led_pwm_cnt : unsigned(16 downto 0);
+  signal led_pwm : std_logic;
 
 
 begin
@@ -827,19 +831,9 @@ begin
   cnx_master_in(c_SLAVE_SPEC_CSR).stall <= '0';
   cnx_master_in(c_SLAVE_SPEC_CSR).int   <= '0';
 
-  gen_irq_led : for I in 0 to 1 generate
-    cmp_irq_led : gc_extend_pulse
-      generic map (
-        g_width => 5000000)
-      port map (
-        clk_i      => sys_clk_125,
-        rst_n_i    => sys_rst_n,
-        pulse_i    => irq_sources(I),
-        extended_o => irq_sources_2_led(I));
-  end generate gen_irq_led;
-
-  led_red_o   <= led_red or irq_sources_2_led(0);
-  led_green_o <= led_green or irq_sources_2_led(1);
+  -- SPEC front panel leds
+  led_red_o   <= led_red;
+  led_green_o <= led_green;
 
   ------------------------------------------------------------------------------
   -- UTC core
@@ -933,6 +927,22 @@ begin
   end process p_acq_end;
 
   acq_end_irq_p <= ddr_wr_fifo_empty_p and acq_end;
+
+  -- IRQ leds
+    gen_irq_led : for I in 0 to irq_sources'length-1 generate
+    cmp_irq_led : gc_extend_pulse
+      generic map (
+        g_width => 5000000)
+      port map (
+        clk_i      => sys_clk_125,
+        rst_n_i    => sys_rst_n,
+        pulse_i    => irq_sources(I),
+        extended_o => irq_sources_2_led(I));
+  end generate gen_irq_led;
+
+  aux_leds_o(1) <= not(irq_sources_2_led(2));
+  aux_leds_o(2) <= not(irq_sources_2_led(3));
+  aux_leds_o(3) <= not(irq_sources_2_led(0));
 
   ------------------------------------------------------------------------------
   -- Mezzanine system managment I2C master
@@ -1095,8 +1105,8 @@ begin
       adc_outb_n_i => adc_outb_n_i,
 
       gpio_dac_clr_n_o => gpio_dac_clr_n_o,
-      gpio_led_acq_o   => gpio_led_power_o,
-      gpio_led_trig_o  => gpio_led_trigger_o,
+      gpio_led_acq_o   => gpio_led_acq_o,
+      gpio_led_trig_o  => gpio_led_trig_o,
       gpio_ssr_ch1_o   => gpio_ssr_ch1_o,
       gpio_ssr_ch2_o   => gpio_ssr_ch2_o,
       gpio_ssr_ch3_o   => gpio_ssr_ch3_o,
@@ -1235,38 +1245,73 @@ begin
   ------------------------------------------------------------------------------
   -- Assign unused outputs
   ------------------------------------------------------------------------------
-  GPIO(1) <= '0';
+  GPIO(1) <= '0';                       -- connection to GN4124
 
   ------------------------------------------------------------------------------
-  -- Blink auxiliary LEDs
+  -- FPGA programmed led (heart beat)
   ------------------------------------------------------------------------------
-  p_led_cnt : process (sys_clk_125)
+  p_led_pwn_update_cnt : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
       if (sys_rst_n = '0') then
-        led_cnt <= (others => '0');
-        led_pps <= '0';
-      elsif (led_cnt = X"773593F") then
-        led_cnt <= (others => '0');
-        led_pps <= not(led_pps);
+        led_pwm_update_cnt <= (others => '0');
+        led_pwm_update <= '0';
+      elsif (led_pwm_update_cnt = to_unsigned(954, 10)) then
+        led_pwm_update_cnt <= (others => '0');
+        led_pwm_update <= '1';
       else
-        led_cnt <= led_cnt + 1;
+        led_pwm_update_cnt <= led_pwm_update_cnt + 1;
+        led_pwm_update <= '0';
       end if;
     end if;
-  end process p_led_cnt;
+  end process p_led_pwn_update_cnt;
 
-  p_led_blink : process (sys_clk_125)
+  p_led_pwn_val : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if sys_rst_n = '0' then
-        aux_leds_o <= X"5";
-      elsif led_pps = '1' then
-        aux_leds_o <= X"A";
-      else
-        aux_leds_o <= X"5";
+      if (sys_rst_n = '0') then
+        led_pwm_val <= (others => '0');
+        led_pwm_val_down <= '0';
+      elsif (led_pwm_update = '1') then
+        if led_pwm_val_down = '1' then
+          if led_pwm_val = X"100" then
+            led_pwm_val_down <= '0';
+          end if;
+          led_pwm_val <= led_pwm_val - 1;
+        else
+          if led_pwm_val = X"1FFFE" then
+            led_pwm_val_down <= '1';
+          end if;
+          led_pwm_val <= led_pwm_val + 1;
+        end if;
       end if;
     end if;
-  end process p_led_blink;
+  end process p_led_pwn_val;
 
+  p_led_pwn_cnt : process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if (sys_rst_n = '0') then
+        led_pwm_cnt <= (others => '0');
+      else
+        led_pwm_cnt <= led_pwm_cnt + 1;
+      end if;
+    end if;
+  end process p_led_pwn_cnt;
+
+  p_led_pwn : process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if (sys_rst_n = '0') then
+        led_pwm <= '0';
+      elsif (led_pwm_cnt = 0) then
+        led_pwm <= '1';
+      elsif (led_pwm_cnt = led_pwm_val) then
+        led_pwm <= '0';
+      end if;
+    end if;
+  end process p_led_pwn;
+
+  aux_leds_o(0) <= led_pwm;
 
 end rtl;
