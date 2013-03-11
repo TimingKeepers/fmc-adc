@@ -5,8 +5,8 @@ log -r /*
 ##do wave_datapath.do
 ##do wave_multishot.do
 ##do wave_onewire.do
-##do wave_adc_core.do
-do wave_gnum.do
+do wave_adc_core.do
+##do wave_gnum.do
 ##do wave_end_acq_irq.do
 ##do wave_ddr_wb.do
 
