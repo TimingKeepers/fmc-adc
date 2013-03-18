@@ -239,13 +239,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   -- WARNING: All address in sdb and crossbar are BYTE addresses!
   ------------------------------------------------------------------------------
 
-  -- Meta-information sdb records
-  constant c_SDB_INFO : t_sdb_record_array(2 downto 0) := (
-    0 => f_sdb_embed_repo_url(c_REPO_URL),
-    1 => f_sdb_embed_synthesis(c_SYNTHESIS),
-    2 => f_sdb_embed_integration(c_INTEGRATION)
-    );
-
   -- Number of master port(s) on the wishbone crossbar
   constant c_NUM_WB_MASTERS : integer := 10;
 
@@ -266,6 +259,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   constant c_SLAVE_FMC_I2C     : integer := 7;  -- Mezzanine I2C controller
   constant c_SLAVE_FMC_ADC     : integer := 8;  -- Mezzanine ADC core
   constant c_SLAVE_FMC_ONEWIRE : integer := 9;  -- Mezzanine onewire interface
+
 
   -- Devices sdb description
   constant c_DMA_SDB_DEVICE : t_sdb_device := (
@@ -400,18 +394,21 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";
 
   -- Wishbone crossbar layout
-  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(c_NUM_WB_MASTERS-1 downto 0) :=
+  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(12 downto 0) :=
     (
-      c_SLAVE_DMA         => f_sdb_embed_device(c_DMA_SDB_DEVICE, x"00001000"),
-      c_SLAVE_ONEWIRE     => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001200"),
-      c_SLAVE_SPEC_CSR    => f_sdb_embed_device(c_SPEC_CSR_SDB_DEVICE, x"00001300"),
-      c_SLAVE_UTC         => f_sdb_embed_device(c_UTC_SDB_DEVICE, x"00001400"),
-      c_SLAVE_INT         => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001500"),
-      c_SLAVE_FMC_SYS_I2C => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001600"),
-      c_SLAVE_FMC_SPI     => f_sdb_embed_device(c_SPI_SDB_DEVICE, x"00001700"),
-      c_SLAVE_FMC_I2C     => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001800"),
-      c_SLAVE_FMC_ADC     => f_sdb_embed_device(c_ADC_SDB_DEVICE, x"00001900"),
-      c_SLAVE_FMC_ONEWIRE => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001A00")
+      0  => f_sdb_embed_device(c_DMA_SDB_DEVICE, x"00001000"),
+      1  => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001200"),
+      2  => f_sdb_embed_device(c_SPEC_CSR_SDB_DEVICE, x"00001300"),
+      3  => f_sdb_embed_device(c_UTC_SDB_DEVICE, x"00001400"),
+      4  => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001500"),
+      5  => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001600"),
+      6  => f_sdb_embed_device(c_SPI_SDB_DEVICE, x"00001700"),
+      7  => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001800"),
+      8  => f_sdb_embed_device(c_ADC_SDB_DEVICE, x"00001900"),
+      9  => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001A00"),
+      10 => f_sdb_embed_repo_url(c_SDB_REPO_URL),
+      11 => f_sdb_embed_synthesis(c_SDB_SYNTHESIS),
+      12 => f_sdb_embed_integration(c_SDB_INTEGRATION)
       );
 
   ------------------------------------------------------------------------------
@@ -419,7 +416,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   ------------------------------------------------------------------------------
 
   -- SPEC carrier CSR constants
-  constant c_CARRIER_TYPE   : std_logic_vector(15 downto 0) := X"0001";
+  constant c_CARRIER_TYPE : std_logic_vector(15 downto 0) := X"0001";
 
   ------------------------------------------------------------------------------
   -- Signals declaration
@@ -550,11 +547,11 @@ architecture rtl of spec_top_fmc_adc_100Ms is
 
   -- led pwm
   signal led_pwm_update_cnt : unsigned(9 downto 0);
-  signal led_pwm_update : std_logic;
-  signal led_pwm_val : unsigned(16 downto 0);
-  signal led_pwm_val_down : std_logic;
-  signal led_pwm_cnt : unsigned(16 downto 0);
-  signal led_pwm : std_logic;
+  signal led_pwm_update     : std_logic;
+  signal led_pwm_val        : unsigned(16 downto 0);
+  signal led_pwm_val_down   : std_logic;
+  signal led_pwm_cnt        : unsigned(16 downto 0);
+  signal led_pwm            : std_logic;
 
 
 begin
@@ -731,8 +728,6 @@ begin
       g_num_slaves  => c_NUM_WB_MASTERS,
       g_registered  => true,
       g_wraparound  => true,
-      g_use_info    => true,
-      g_info        => c_SDB_INFO,
       g_layout      => c_INTERCONNECT_LAYOUT,
       g_sdb_addr    => c_SDB_ADDRESS)
     port map (
@@ -914,7 +909,7 @@ begin
   acq_end_irq_p <= ddr_wr_fifo_empty_p and acq_end;
 
   -- IRQ leds
-    gen_irq_led : for I in 0 to irq_sources'length-1 generate
+  gen_irq_led : for I in 0 to irq_sources'length-1 generate
     cmp_irq_led : gc_extend_pulse
       generic map (
         g_width => 5000000)
@@ -1240,13 +1235,13 @@ begin
     if rising_edge(sys_clk_125) then
       if (sys_rst_n = '0') then
         led_pwm_update_cnt <= (others => '0');
-        led_pwm_update <= '0';
+        led_pwm_update     <= '0';
       elsif (led_pwm_update_cnt = to_unsigned(954, 10)) then
         led_pwm_update_cnt <= (others => '0');
-        led_pwm_update <= '1';
+        led_pwm_update     <= '1';
       else
         led_pwm_update_cnt <= led_pwm_update_cnt + 1;
-        led_pwm_update <= '0';
+        led_pwm_update     <= '0';
       end if;
     end if;
   end process p_led_pwn_update_cnt;
@@ -1255,7 +1250,7 @@ begin
   begin
     if rising_edge(sys_clk_125) then
       if (sys_rst_n = '0') then
-        led_pwm_val <= (others => '0');
+        led_pwm_val      <= (others => '0');
         led_pwm_val_down <= '0';
       elsif (led_pwm_update = '1') then
         if led_pwm_val_down = '1' then

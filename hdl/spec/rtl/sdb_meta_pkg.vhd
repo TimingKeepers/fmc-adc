@@ -12,12 +12,12 @@ package sdb_meta_pkg is
   ------------------------------------------------------------------------------
 
   -- Top module repository url
-  constant c_REPO_URL : t_sdb_repo_url := (
+  constant c_SDB_REPO_URL : t_sdb_repo_url := (
     -- url (string, 63 char)
     repo_url => "git://ohwr.org/fmc-projects/fmc-adc-100m14b4cha.git            ");
 
   -- Synthesis informations
-  constant c_SYNTHESIS : t_sdb_synthesis := (
+  constant c_SDB_SYNTHESIS : t_sdb_synthesis := (
     -- Top module name (string, 16 char)
     syn_module_name  => "spec_top_fmc_adc",
     -- Commit ID (hex string, 128-bit = 32 char)
@@ -33,7 +33,7 @@ package sdb_meta_pkg is
     syn_username     => "mcattin        ");
 
   -- Integration record
-  constant c_INTEGRATION : t_sdb_integration := (
+  constant c_SDB_INTEGRATION : t_sdb_integration := (
     product     => (
       vendor_id => x"000000000000CE42",  -- CERN
       device_id => x"47c786a2",          -- echo "spec_fmc-adc-100m14b4cha" | md5sum | cut -c1-8
