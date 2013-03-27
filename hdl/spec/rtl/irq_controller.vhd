@@ -147,7 +147,7 @@ begin
       for I in 0 to irq_pending'length-1 loop
         if rst_n_i = '0' then
           irq_pending(I) <= '0';
-        elsif irq_src_p_i(I) = '1' then
+        elsif irq_src_p_i(I) = '1' and irq_en_mask(I) = '1' then
           irq_pending(I) <= '1';
         elsif irq_src_rst_en = '1' and irq_src_rst(I) = '1' then
           irq_pending(I) <= '0';
