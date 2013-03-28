@@ -11,8 +11,6 @@
 --
 -- date: 28-02-2011
 --
--- version: 1.0
---
 -- description: FMC ADC 100Ms/s core.
 --
 -- dependencies:
@@ -33,7 +31,7 @@
 -- received a copy of the GNU Lesser General Public License along with this
 -- source; if not, download it from http://www.gnu.org/licenses/lgpl-2.1.html
 --------------------------------------------------------------------------------
--- last changes: see svn log.
+-- last changes: see git log.
 --------------------------------------------------------------------------------
 -- TODO: - 
 --------------------------------------------------------------------------------

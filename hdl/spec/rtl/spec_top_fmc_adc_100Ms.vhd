@@ -10,7 +10,7 @@
 --
 -- date: 24-02-2011
 --
--- version: 1.0
+-- version: see sdb_meta_pkg.vhd
 --
 -- description: Top entity of FMC ADC 100Ms/s design for SPEC board.
 --
@@ -29,7 +29,7 @@
 -- received a copy of the GNU Lesser General Public License along with this
 -- source; if not, download it from http://www.gnu.org/licenses/lgpl-2.1.html
 --------------------------------------------------------------------------------
--- last changes: see svn log.
+-- last changes: see git log.
 --------------------------------------------------------------------------------
 -- TODO: - 
 --------------------------------------------------------------------------------
@@ -883,7 +883,7 @@ begin
   irq_sources(3)           <= acq_end_irq_p;
   irq_sources(31 downto 4) <= (others => '0');
 
-  -- End of acquisition interrupt generation
+  -- Detects end of adc core writing to ddr
   p_ddr_wr_fifo_empty : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
@@ -893,6 +893,7 @@ begin
 
   ddr_wr_fifo_empty_p <= ddr_wr_fifo_empty and not(ddr_wr_fifo_empty_d);
 
+  -- End of acquisition interrupt generation
   p_acq_end : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
