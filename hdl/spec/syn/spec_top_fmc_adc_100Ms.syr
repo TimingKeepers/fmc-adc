@@ -214,125 +214,91 @@ Analyzing Verilog file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_gi
 Parsing module <lm32_multiplier>.
 Analyzing Verilog file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_lm32/platform/spartan6/jtag_tap.v" into library work
 Parsing module <jtag_tap>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/adc_serdes.vhd" into library work
-Parsing entity <adc_serdes>.
-Parsing architecture <xilinx> of entity <adc_serdes>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/monostable/monostable_rtl.vhd" into library work
-Parsing entity <monostable>.
-Parsing architecture <rtl> of entity <monostable>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/utils/utils_pkg.vhd" into library work
-Parsing package <utils_pkg>.
-Parsing package body <utils_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ext_pulse_sync/ext_pulse_sync_rtl.vhd" into library work
-Parsing entity <ext_pulse_sync>.
-Parsing architecture <rtl> of entity <ext_pulse_sync>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/gn4124-core/hdl/gn4124core/rtl/spartan6/gn4124_core_pkg.vhd" into library work
-Parsing package <gn4124_core_pkg>.
-Parsing package body <gn4124_core_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_pkg.vhd" into library work
-Parsing package <ddr3_ctrl_pkg>.
-Parsing package body <ddr3_ctrl_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" into library work
-Parsing package <genram_pkg>.
-Parsing package body <genram_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gencores_pkg.vhd" into library work
-Parsing package <gencores_pkg>.
-Parsing package body <gencores_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wishbone_pkg.vhd" into library work
-Parsing package <wishbone_pkg>.
-Parsing package body <wishbone_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core_pkg.vhd" into library work
-Parsing package <fmc_adc_100Ms_core_pkg>.
-Parsing package body <fmc_adc_100Ms_core_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/sdb_meta_pkg.vhd" into library work
-Parsing package <sdb_meta_pkg>.
-Parsing package body <sdb_meta_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" into library work
-Parsing entity <spec_top_fmc_adc_100Ms>.
-Parsing architecture <rtl> of entity <spec_top_fmc_adc_100ms>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" into library work
-Parsing entity <carrier_csr>.
-Parsing architecture <syn> of entity <carrier_csr>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/utc_core_regs.vhd" into library work
-Parsing entity <utc_core_regs>.
-Parsing architecture <syn> of entity <utc_core_regs>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/utc_core.vhd" into library work
-Parsing entity <utc_core>.
-Parsing architecture <rtl> of entity <utc_core>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/irq_controller_regs.vhd" into library work
-Parsing entity <irq_controller_regs>.
-Parsing architecture <syn> of entity <irq_controller_regs>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/irq_controller.vhd" into library work
-Parsing entity <irq_controller>.
-Parsing architecture <rtl> of entity <irq_controller>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" into library work
-Parsing entity <fmc_adc_100Ms_core>.
-Parsing architecture <rtl> of entity <fmc_adc_100ms_core>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_csr.vhd" into library work
-Parsing entity <fmc_adc_100Ms_csr>.
-Parsing architecture <syn> of entity <fmc_adc_100ms_csr>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/offset_gain_s.vhd" into library work
-Parsing entity <offset_gain_s>.
-Parsing architecture <rtl> of entity <offset_gain_s>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_crc_gen.vhd" into library work
-Parsing entity <gc_crc_gen>.
-Parsing architecture <rtl> of entity <gc_crc_gen>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_moving_average.vhd" into library work
-Parsing entity <gc_moving_average>.
-Parsing architecture <rtl> of entity <gc_moving_average>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_extend_pulse.vhd" into library work
-Parsing entity <gc_extend_pulse>.
-Parsing architecture <rtl> of entity <gc_extend_pulse>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_delay_gen.vhd" into library work
-Parsing entity <gc_delay_gen>.
-Parsing architecture <behavioral> of entity <gc_delay_gen>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_dual_pi_controller.vhd" into library work
-Parsing entity <gc_dual_pi_controller>.
-Parsing architecture <behavioral> of entity <gc_dual_pi_controller>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_reset.vhd" into library work
-Parsing entity <gc_reset>.
-Parsing architecture <rtl> of entity <gc_reset>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_serial_dac.vhd" into library work
-Parsing entity <gc_serial_dac>.
-Parsing architecture <syn> of entity <gc_serial_dac>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_sync_ffs.vhd" into library work
-Parsing entity <gc_sync_ffs>.
-Parsing architecture <behavioral> of entity <gc_sync_ffs>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_arbitrated_mux.vhd" into library work
-Parsing entity <gc_arbitrated_mux>.
-Parsing architecture <rtl> of entity <gc_arbitrated_mux>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_pulse_synchronizer.vhd" into library work
-Parsing entity <gc_pulse_synchronizer>.
-Parsing architecture <rtl> of entity <gc_pulse_synchronizer>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_frequency_meter.vhd" into library work
-Parsing entity <gc_frequency_meter>.
-Parsing architecture <behavioral> of entity <gc_frequency_meter>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_dual_clock_ram.vhd" into library work
-Parsing entity <gc_dual_clock_ram>.
-Parsing architecture <rtl> of entity <gc_dual_clock_ram>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_wfifo.vhd" into library work
-Parsing entity <gc_wfifo>.
-Parsing architecture <rtl> of entity <gc_wfifo>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/memory_loader_pkg.vhd" into library work
-Parsing package <memory_loader_pkg>.
-Parsing package body <memory_loader_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/generic_shiftreg_fifo.vhd" into library work
-Parsing entity <generic_shiftreg_fifo>.
-Parsing architecture <rtl> of entity <generic_shiftreg_fifo>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram.vhd" into library work
-Parsing entity <generic_dpram>.
-Parsing architecture <syn> of entity <generic_dpram>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_sameclock.vhd" into library work
-Parsing entity <generic_dpram_sameclock>.
-Parsing architecture <syn> of entity <generic_dpram_sameclock>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_dualclock.vhd" into library work
-Parsing entity <generic_dpram_dualclock>.
-Parsing architecture <syn> of entity <generic_dpram_dualclock>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" into library work
-Parsing entity <generic_spram>.
-Parsing architecture <syn> of entity <generic_spram>.
-WARNING:HDLCompiler:443 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 58: Function f_bitstring_2_slv does not always return a value.
-WARNING:HDLCompiler:443 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 63: Function f_load_from_file does not always return a value.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_xst_comp.vhd" into library blk_mem_gen_v4_1
+Parsing package <blk_mem_gen_v4_1_xst_comp>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_defaults.vhd" into library blk_mem_gen_v4_1
+Parsing package <blk_mem_gen_v4_1_defaults>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_pkg.vhd" into library blk_mem_gen_v4_1
+Parsing package <blk_mem_gen_pkg>.
+Parsing package body <blk_mem_gen_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_getinit_pkg.vhd" into library blk_mem_gen_v4_1
+Parsing package <blk_mem_gen_getinit_pkg>.
+Parsing package body <blk_mem_gen_getinit_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_min_area_pkg.vhd" into library blk_mem_gen_v4_1
+Parsing package <blk_mem_min_area_pkg>.
+Parsing package body <blk_mem_min_area_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_bindec.vhd" into library blk_mem_gen_v4_1
+Parsing entity <bindec>.
+Parsing architecture <xilinx> of entity <bindec>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_mux.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_mux>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_mux>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s6.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_s6>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s6>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s6_init.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_s6_init>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s6_init>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3adsp.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_s3adsp>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3adsp>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3adsp_init.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_s3adsp_init>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3adsp_init>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3a.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_s3a>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3a>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3a_init.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_s3a_init>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3a_init>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v6.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_v6>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v6>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v6_init.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_v6_init>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v6_init>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v5.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_v5>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v5>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v5_init.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_v5_init>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v5_init>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v4.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_v4>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v4>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v4_init.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_v4_init>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v4_init>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_s3>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3_init.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_wrapper_s3_init>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3_init>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_width.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_prim_width>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_prim_width>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_generic_cstr.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_generic_cstr>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_generic_cstr>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_ecc_encoder.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_ecc_encoder>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_ecc_encoder>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_ecc_decoder.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_ecc_decoder>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_ecc_decoder>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_input_block.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_input_block>.
+Parsing architecture <xilinx> of entity <blk_mem_input_block>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_output_block.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_output_block>.
+Parsing architecture <xilinx> of entity <blk_mem_output_block>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_top.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_top>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_top>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_xst.vhd" into library blk_mem_gen_v4_1
+Parsing entity <blk_mem_gen_v4_1_xst>.
+Parsing architecture <xilinx> of entity <blk_mem_gen_v4_1_xst>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/fifo_generator_v6_1/fifo_generator_v6_1_pkg.vhd" into library fifo_generator_v6_1
 Parsing package <fifo_generator_v6_1_pkg>.
 Parsing package body <fifo_generator_v6_1_pkg>.
@@ -355,8 +321,6 @@ Parsing architecture <xilinx> of entity <shft_ram>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/fifo_generator_v6_1/dmem.vhd" into library fifo_generator_v6_1
 Parsing entity <dmem>.
 Parsing architecture <Xilinx> of entity <dmem>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_xst_comp.vhd" into library blk_mem_gen_v4_1
-Parsing package <blk_mem_gen_v4_1_xst_comp>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/fifo_generator_v6_1/memory.vhd" into library fifo_generator_v6_1
 Parsing entity <memory>.
 Parsing architecture <xilinx> of entity <memory>.
@@ -512,95 +476,125 @@ Parsing architecture <xilinx> of entity <fifo_generator_v6_1_fifo16_patch>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/fifo_generator_v6_1/fifo_generator_v6_1_xst.vhd" into library fifo_generator_v6_1
 Parsing entity <fifo_generator_v6_1_xst>.
 Parsing architecture <xilinx> of entity <fifo_generator_v6_1_xst>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/adc_serdes.vhd" into library work
+Parsing entity <adc_serdes>.
+Parsing architecture <xilinx> of entity <adc_serdes>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/monostable/monostable_rtl.vhd" into library work
+Parsing entity <monostable>.
+Parsing architecture <rtl> of entity <monostable>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/utils/utils_pkg.vhd" into library work
+Parsing package <utils_pkg>.
+Parsing package body <utils_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ext_pulse_sync/ext_pulse_sync_rtl.vhd" into library work
+Parsing entity <ext_pulse_sync>.
+Parsing architecture <rtl> of entity <ext_pulse_sync>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" into library work
+Parsing package <genram_pkg>.
+Parsing package body <genram_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" into library work
+Parsing entity <carrier_csr>.
+Parsing architecture <syn> of entity <carrier_csr>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/utc_core_regs.vhd" into library work
+Parsing entity <utc_core_regs>.
+Parsing architecture <syn> of entity <utc_core_regs>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/utc_core.vhd" into library work
+Parsing entity <utc_core>.
+Parsing architecture <rtl> of entity <utc_core>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/irq_controller_regs.vhd" into library work
+Parsing entity <irq_controller_regs>.
+Parsing architecture <syn> of entity <irq_controller_regs>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/irq_controller.vhd" into library work
+Parsing entity <irq_controller>.
+Parsing architecture <rtl> of entity <irq_controller>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core_pkg.vhd" into library work
+Parsing package <fmc_adc_100Ms_core_pkg>.
+Parsing package body <fmc_adc_100Ms_core_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wishbone_pkg.vhd" into library work
+Parsing package <wishbone_pkg>.
+Parsing package body <wishbone_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gencores_pkg.vhd" into library work
+Parsing package <gencores_pkg>.
+Parsing package body <gencores_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_csr.vhd" into library work
+Parsing entity <fmc_adc_100Ms_csr>.
+Parsing architecture <syn> of entity <fmc_adc_100ms_csr>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/offset_gain_s.vhd" into library work
+Parsing entity <offset_gain_s>.
+Parsing architecture <rtl> of entity <offset_gain_s>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/sdb_meta_pkg.vhd" into library work
+Parsing package <sdb_meta_pkg>.
+Parsing package body <sdb_meta_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_crc_gen.vhd" into library work
+Parsing entity <gc_crc_gen>.
+Parsing architecture <rtl> of entity <gc_crc_gen>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_moving_average.vhd" into library work
+Parsing entity <gc_moving_average>.
+Parsing architecture <rtl> of entity <gc_moving_average>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_extend_pulse.vhd" into library work
+Parsing entity <gc_extend_pulse>.
+Parsing architecture <rtl> of entity <gc_extend_pulse>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_delay_gen.vhd" into library work
+Parsing entity <gc_delay_gen>.
+Parsing architecture <behavioral> of entity <gc_delay_gen>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_dual_pi_controller.vhd" into library work
+Parsing entity <gc_dual_pi_controller>.
+Parsing architecture <behavioral> of entity <gc_dual_pi_controller>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_reset.vhd" into library work
+Parsing entity <gc_reset>.
+Parsing architecture <rtl> of entity <gc_reset>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_serial_dac.vhd" into library work
+Parsing entity <gc_serial_dac>.
+Parsing architecture <syn> of entity <gc_serial_dac>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_sync_ffs.vhd" into library work
+Parsing entity <gc_sync_ffs>.
+Parsing architecture <behavioral> of entity <gc_sync_ffs>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_arbitrated_mux.vhd" into library work
+Parsing entity <gc_arbitrated_mux>.
+Parsing architecture <rtl> of entity <gc_arbitrated_mux>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_pulse_synchronizer.vhd" into library work
+Parsing entity <gc_pulse_synchronizer>.
+Parsing architecture <rtl> of entity <gc_pulse_synchronizer>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_frequency_meter.vhd" into library work
+Parsing entity <gc_frequency_meter>.
+Parsing architecture <behavioral> of entity <gc_frequency_meter>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_dual_clock_ram.vhd" into library work
+Parsing entity <gc_dual_clock_ram>.
+Parsing architecture <rtl> of entity <gc_dual_clock_ram>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/common/gc_wfifo.vhd" into library work
+Parsing entity <gc_wfifo>.
+Parsing architecture <rtl> of entity <gc_wfifo>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" into library work
+Parsing entity <fmc_adc_100Ms_core>.
+Parsing architecture <rtl> of entity <fmc_adc_100ms_core>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/memory_loader_pkg.vhd" into library work
+Parsing package <memory_loader_pkg>.
+Parsing package body <memory_loader_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/generic_shiftreg_fifo.vhd" into library work
+Parsing entity <generic_shiftreg_fifo>.
+Parsing architecture <rtl> of entity <generic_shiftreg_fifo>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_pkg.vhd" into library work
+Parsing package <ddr3_ctrl_pkg>.
+Parsing package body <ddr3_ctrl_pkg>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram.vhd" into library work
+Parsing entity <generic_dpram>.
+Parsing architecture <syn> of entity <generic_dpram>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_sameclock.vhd" into library work
+Parsing entity <generic_dpram_sameclock>.
+Parsing architecture <syn> of entity <generic_dpram_sameclock>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_dualclock.vhd" into library work
+Parsing entity <generic_dpram_dualclock>.
+Parsing architecture <syn> of entity <generic_dpram_dualclock>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" into library work
+Parsing entity <generic_spram>.
+Parsing architecture <syn> of entity <generic_spram>.
+WARNING:HDLCompiler:443 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 58: Function f_bitstring_2_slv does not always return a value.
+WARNING:HDLCompiler:443 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd" Line 63: Function f_load_from_file does not always return a value.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd" into library work
 Parsing entity <generic_async_fifo>.
 Parsing architecture <syn> of entity <generic_async_fifo>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_sync_fifo.vhd" into library work
 Parsing entity <generic_sync_fifo>.
 Parsing architecture <syn> of entity <generic_sync_fifo>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_defaults.vhd" into library blk_mem_gen_v4_1
-Parsing package <blk_mem_gen_v4_1_defaults>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_pkg.vhd" into library blk_mem_gen_v4_1
-Parsing package <blk_mem_gen_pkg>.
-Parsing package body <blk_mem_gen_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_getinit_pkg.vhd" into library blk_mem_gen_v4_1
-Parsing package <blk_mem_gen_getinit_pkg>.
-Parsing package body <blk_mem_gen_getinit_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_min_area_pkg.vhd" into library blk_mem_gen_v4_1
-Parsing package <blk_mem_min_area_pkg>.
-Parsing package body <blk_mem_min_area_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_bindec.vhd" into library blk_mem_gen_v4_1
-Parsing entity <bindec>.
-Parsing architecture <xilinx> of entity <bindec>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_mux.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_mux>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_mux>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s6.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_s6>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s6>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s6_init.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_s6_init>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s6_init>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3adsp.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_s3adsp>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3adsp>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3adsp_init.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_s3adsp_init>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3adsp_init>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3a.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_s3a>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3a>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3a_init.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_s3a_init>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3a_init>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v6.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_v6>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v6>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v6_init.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_v6_init>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v6_init>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v5.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_v5>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v5>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v5_init.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_v5_init>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v5_init>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v4.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_v4>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v4>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_v4_init.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_v4_init>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_v4_init>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_s3>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_wrapper_s3_init.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_wrapper_s3_init>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_wrapper_s3_init>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_prim_width.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_prim_width>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_prim_width>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_generic_cstr.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_generic_cstr>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_generic_cstr>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_ecc_encoder.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_ecc_encoder>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_ecc_encoder>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_ecc_decoder.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_ecc_decoder>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_ecc_decoder>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_input_block.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_input_block>.
-Parsing architecture <xilinx> of entity <blk_mem_input_block>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_output_block.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_output_block>.
-Parsing architecture <xilinx> of entity <blk_mem_output_block>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_top.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_top>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_top>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/blk_mem_gen_v4_1/blk_mem_gen_v4_1_xst.vhd" into library blk_mem_gen_v4_1
-Parsing entity <blk_mem_gen_v4_1_xst>.
-Parsing architecture <xilinx> of entity <blk_mem_gen_v4_1_xst>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_async_bridge/wb_async_bridge.vhd" into library work
 Parsing entity <wb_async_bridge>.
 Parsing architecture <behavioral> of entity <wb_async_bridge>.
@@ -672,9 +666,6 @@ Parsing entity <vic_prio_enc>.
 Parsing architecture <syn> of entity <vic_prio_enc>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd" into library work
 Parsing package <wbgen2_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_vic/wb_slave_vic.vhd" into library work
-Parsing entity <wb_slave_vic>.
-Parsing architecture <syn> of entity <wb_slave_vic>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_vic/wb_vic.vhd" into library work
 Parsing entity <wb_vic>.
 Parsing architecture <syn> of entity <wb_vic>.
@@ -705,12 +696,12 @@ Parsing architecture <rtl> of entity <wb_slave_adapter>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xloader_registers_pkg.vhd" into library work
 Parsing package <xldr_wbgen2_pkg>.
 Parsing package body <xldr_wbgen2_pkg>.
-Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/wb_xilinx_fpga_loader.vhd" into library work
-Parsing entity <wb_xilinx_fpga_loader>.
-Parsing architecture <behavioral> of entity <wb_xilinx_fpga_loader>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xwb_xilinx_fpga_loader.vhd" into library work
 Parsing entity <xwb_xilinx_fpga_loader>.
 Parsing architecture <rtl> of entity <xwb_xilinx_fpga_loader>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/wb_xilinx_fpga_loader.vhd" into library work
+Parsing entity <wb_xilinx_fpga_loader>.
+Parsing architecture <behavioral> of entity <wb_xilinx_fpga_loader>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xloader_wb.vhd" into library work
 Parsing entity <xloader_wb>.
 Parsing architecture <syn> of entity <xloader_wb>.
@@ -735,6 +726,9 @@ Parsing architecture <rtl> of entity <wbgen2_fifo_async>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_fifo_sync.vhd" into library work
 Parsing entity <wbgen2_fifo_sync>.
 Parsing architecture <rtl> of entity <wbgen2_fifo_sync>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_vic/wb_slave_vic.vhd" into library work
+Parsing entity <wb_slave_vic>.
+Parsing architecture <syn> of entity <wb_slave_vic>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl.vhd" into library work
 Parsing entity <ddr3_ctrl>.
 Parsing architecture <rtl> of entity <ddr3_ctrl>.
@@ -747,6 +741,9 @@ Parsing package body <ddr3_ctrl_wrapper_pkg>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wrapper.vhd" into library work
 Parsing entity <ddr3_ctrl_wrapper>.
 Parsing architecture <rtl> of entity <ddr3_ctrl_wrapper>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/gn4124-core/hdl/gn4124core/rtl/spartan6/gn4124_core_pkg.vhd" into library work
+Parsing package <gn4124_core_pkg>.
+Parsing package body <gn4124_core_pkg>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/ddr3_ctrl_spec_bank3_64b_32b.vhd" into library work
 Parsing entity <ddr3_ctrl_spec_bank3_64b_32b>.
 Parsing architecture <arc> of entity <ddr3_ctrl_spec_bank3_64b_32b>.
@@ -795,6 +792,9 @@ Parsing architecture <behaviour> of entity <wbmaster32>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/gn4124-core/hdl/gn4124core/rtl/spartan6/gn4124_core.vhd" into library work
 Parsing entity <gn4124_core>.
 Parsing architecture <rtl> of entity <gn4124_core>.
+Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" into library work
+Parsing entity <spec_top_fmc_adc_100Ms>.
+Parsing architecture <rtl> of entity <spec_top_fmc_adc_100ms>.
 Parsing VHDL file "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/gn4124-core/hdl/gn4124core/rtl/spartan6/l2p_ser.vhd" into library work
 Parsing entity <l2p_ser>.
 Parsing architecture <rtl> of entity <l2p_ser>.
@@ -823,7 +823,7 @@ Parsing architecture <rtl> of entity <pulse_synchronizer>.
 WARNING:HDLCompiler:746 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" Line 50: Range is empty (null range)
 
 Elaborating entity <spec_top_fmc_adc_100Ms> (architecture <rtl>) with generics from library <work>.
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" Line 639: Assignment to sys_rst ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" Line 636: Assignment to sys_rst ignored, since the identifier is never used
 
 Elaborating entity <gn4124_core> (architecture <rtl>) from library <work>.
 
@@ -981,8 +981,6 @@ Elaborating entity <serdes_n_to_1_s2_se> (architecture <arch_serdes_n_to_1_s2_se
 Elaborating entity <xwb_sdb_crossbar> (architecture <rtl>) with generics from library <work>.
 
 Elaborating entity <sdb_rom> (architecture <rtl>) with generics from library <work>.
-Note: "SDB device records: 10"
-Note: "SDB meta-information records: 3"
 
 Elaborating entity <xwb_crossbar> (architecture <rtl>) with generics from library <work>.
 Note: "Mapping slave #0[0x1000/0x1fc0]"
@@ -1081,7 +1079,7 @@ WARNING:HDLCompiler:634 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha
 Elaborating entity <fmc_adc_100Ms_core> (architecture <rtl>) with generics from library <work>.
 
 Elaborating entity <monostable> (architecture <rtl>) with generics from library <work>.
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" Line 476: Assignment to fs_rst ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" Line 474: Assignment to fs_rst ignored, since the identifier is never used
 
 Elaborating entity <adc_serdes> (architecture <xilinx>) with generics from library <work>.
 
@@ -1168,8 +1166,8 @@ Elaborating entity <wr_status_flags_as> (architecture <xilinx>) with generics fr
 WARNING:HDLCompiler:634 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/genrams/coregen_ip/fifo_generator_v6_1/wr_status_flags_as.vhd" Line 141: Net <ram_almost_full_i> does not have a driver.
 
 Elaborating entity <output_blk> (architecture <xilinx>) with generics from library <fifo_generator_v6_1>.
-INFO:HDLCompiler:679 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" Line 1147. Case statement is complete. others clause is never selected
-INFO:HDLCompiler:679 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" Line 1205. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" Line 1145. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" Line 1203. Case statement is complete. others clause is never selected
 
 Elaborating entity <generic_dpram> (architecture <syn>) with generics from library <work>.
 
@@ -1369,35 +1367,35 @@ WARNING:HDLCompiler:634 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha
 WARNING:HDLCompiler:634 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" Line 869: Net <mig_p4_wr_mask[3]> does not have a driver.
 WARNING:HDLCompiler:321 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wrapper.vhd" Line 811: Comparison between arrays of unequal length always returns FALSE.
 WARNING:HDLCompiler:321 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wrapper.vhd" Line 906: Comparison between arrays of unequal length always returns FALSE.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[1].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[4].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[5].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[6].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[7].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[8].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[9].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[10].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[11].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[12].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[13].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[14].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[15].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[16].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[17].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[18].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[19].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[20].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[21].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[22].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[23].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[24].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[25].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[26].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[27].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[28].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[29].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[30].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918. All outputs of instance <gen_irq_led[31].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[1].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[4].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[5].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[6].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[7].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[8].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[9].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[10].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[11].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[12].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[13].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[14].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[15].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[16].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[17].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[18].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[19].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[20].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[21].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[22].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[23].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[24].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[25].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[26].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[27].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[28].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[29].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[30].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914. All outputs of instance <gen_irq_led[31].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -1408,71 +1406,71 @@ Synthesizing Unit <spec_top_fmc_adc_100Ms>.
         g_SIMULATION = "FALSE"
         g_CALIB_SOFT_IP = "TRUE"
 WARNING:Xst:647 - Input <aux_buttons_i<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 728: Output port <slave_o[0]_err> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 728: Output port <slave_o[0]_rty> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 728: Output port <slave_o[0]_int> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 756: Output port <desc_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 756: Output port <owr_pwren_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 787: Output port <carrier_csr_ctrl_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 787: Output port <carrier_csr_ctrl_dac_clr_n_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[1].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[4].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[5].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[6].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[7].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[8].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[9].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[10].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[11].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[12].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[13].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[14].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[15].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[16].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[17].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[18].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[19].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[20].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[21].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[22].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[23].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[24].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[25].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[26].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[27].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[28].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[29].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[30].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 918: Output port <extended_o> of the instance <gen_irq_led[31].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 936: Output port <desc_o> of the instance <cmp_fmc_sys_i2c> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 969: Output port <desc_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1013: Output port <desc_o> of the instance <cmp_fmc_i2c> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1112: Output port <desc_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1112: Output port <owr_pwren_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <wb0_data_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p0_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_wr_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1140: Output port <p1_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 725: Output port <slave_o[0]_err> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 725: Output port <slave_o[0]_rty> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 725: Output port <slave_o[0]_int> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 751: Output port <desc_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 751: Output port <owr_pwren_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 782: Output port <carrier_csr_ctrl_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 782: Output port <carrier_csr_ctrl_dac_clr_n_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[1].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[4].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[5].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[6].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[7].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[8].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[9].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[10].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[11].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[12].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[13].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[14].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[15].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[16].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[17].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[18].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[19].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[20].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[21].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[22].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[23].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[24].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[25].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[26].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[27].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[28].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[29].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[30].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 914: Output port <extended_o> of the instance <gen_irq_led[31].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 932: Output port <desc_o> of the instance <cmp_fmc_sys_i2c> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 965: Output port <desc_o> of the instance <cmp_fmc_spi> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1009: Output port <desc_o> of the instance <cmp_fmc_i2c> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1108: Output port <desc_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1108: Output port <owr_pwren_o> of the instance <cmp_fmc_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <wb0_data_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p0_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_wr_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 1136: Output port <p1_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
     Found 1-bit register for signal <acq_end>.
     Found 4-bit register for signal <spi_din_t>.
     Found 10-bit register for signal <led_pwm_update_cnt>.
@@ -1486,13 +1484,13 @@ INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/s
     Found 17-bit adder for signal <led_pwm_val[16]_GND_12_o_add_14_OUT> created at line 1241.
     Found 17-bit adder for signal <led_pwm_cnt[16]_GND_12_o_add_19_OUT> created at line 1241.
     Found 17-bit subtractor for signal <GND_12_o_GND_12_o_sub_13_OUT<16:0>> created at line 1308.
-    Found 1-bit tristate buffer for signal <carrier_one_wire_b> created at line 777
-    Found 1-bit tristate buffer for signal <sys_scl_b> created at line 958
-    Found 1-bit tristate buffer for signal <sys_sda_b> created at line 961
-    Found 1-bit tristate buffer for signal <si570_scl_b> created at line 1035
-    Found 1-bit tristate buffer for signal <si570_sda_b> created at line 1038
-    Found 1-bit tristate buffer for signal <mezz_one_wire_b> created at line 1133
-    Found 17-bit comparator equal for signal <led_pwm_cnt[16]_led_pwm_val[16]_equal_24_o> created at line 1294
+    Found 1-bit tristate buffer for signal <carrier_one_wire_b> created at line 772
+    Found 1-bit tristate buffer for signal <sys_scl_b> created at line 954
+    Found 1-bit tristate buffer for signal <sys_sda_b> created at line 957
+    Found 1-bit tristate buffer for signal <si570_scl_b> created at line 1031
+    Found 1-bit tristate buffer for signal <si570_sda_b> created at line 1034
+    Found 1-bit tristate buffer for signal <mezz_one_wire_b> created at line 1129
+    Found 17-bit comparator equal for signal <led_pwm_cnt[16]_led_pwm_val[16]_equal_24_o> created at line 1290
     Summary:
 	inferred   3 Adder/Subtractor(s).
 	inferred  53 D-type flip-flop(s).
@@ -3926,17 +3924,14 @@ Synthesizing Unit <xwb_sdb_crossbar>.
         g_num_slaves = 10
         g_registered = true
         g_wraparound = true
-        g_use_info = true
         g_layout =
-("00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001101000000000000000000000000000000000000000000000000000000000000110100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011001000000000000000000000000000000000000000000000000000000000001100101111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000001000000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000110010011010100001100101101010000010100010001000011001011010100001101101111011100100110010100100000001000000010000000100000000
-00001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001100000000000000000000000000000000000000000000000000000000000000110000001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010111000000000000000000000000000000000000000000000000000000000001011100011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000111000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100100100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000000100
-00000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000000000000000000000000000101100001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010101000000000000000000000000000000000000000000000000000000000001010100001111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000101000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001011011100111010000101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000
-00010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000101000111111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000010000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101010101010100010000110010110101000011011011110111001001100101001000000010000000100000001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010011000000000000000000000000000000000000000000000000000000000001001100011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000011000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100010101000011001011010100001101010011010100100010000000100000001000000010000000100000001000000
-01000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001001000000000000000000000000000000000000000000000000000000000000100100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000001000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000100010011010100000100101110010000110110111101101110011101000111001001101111011011000010000000100000001
-00000001000000010000000000001")
-        g_info =
-("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011001110010000100100011111000111100001101010001000000000000000010000000000000000001000000001001100000011000100100111001101110000011001010110001101011111011001100110110101100011011000010110010001100011001100010011000000110000011011010011000100110100011000100010000010000000","011100110111000001100101011000110101111101110100011011110111000001011111011001100110110101100011010111110110000101100100011000110000010010111001010010000011100110001100010111001011111111011011110001011100110010100010000010100111100100010001010010101010101101001001010100110100010100100000001000000010000000100000001000000000000000000000000000010011001100100000000100110000001100010010011011010110001101100001011101000111010001101001011011100010000000100000001000000010000000100000001000000010000000100000100
-00010","01100111011010010111010000111010001011110010111101101111011010000111011101110010001011100110111101110010011001110010111101100110011011010110001100101101011100000111001001101111011010100110010101100011011101000111001100101111011001100110110101100011001011010110000101100100011000110010110100110001001100000011000001101101001100010011010001100010001101000110001101101000011000010010111001100111011010010111010000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000010000001")
+("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011001110010000100100011111000111100001101010001000000000000000010000000000000001001000000001001100000011001010000111001101110000011001010110001101011111011001100110110101100011011000010110010001100011001100010011000000110000011011010011000100110100011000100010000010000000","011100110111000001100101011000110101111101110100011011110111000001011111011001100110110101100011010111110110000101100100011000111101110101110110010100001101100110101101000000101110010110100100010001011000101110011101000011100000000010010100010001101000110101001001010100110100010100100000001000000010000000100000001000000000000000000000000000010011001100100000000100110000001100101000011011010110001101100001011101000111010001101001011011100010000000100000001000000010000000100000001000000010000000100000100
+00010","01100111011010010111010000111010001011110010111101101111011010000111011101110010001011100110111101110010011001110010111101100110011011010110001100101101011100000111001001101111011010100110010101100011011101000111001100101111011001100110110101100011001011010110000101100100011000110010110100110001001100000011000001101101001100010011010001100010001101000110001101101000011000010010111001100111011010010111010000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000010000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011010000000000000000000000000000000000000000000000000000000000001101000000111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000010000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001111011011100110010101110111011010010111001001100101001011100100001101101111011011100111010001110010011011110110110000100
+00000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001100100000000000000000000000000000000000000000000000000000000000110010111111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000100000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100011001001101010000110010110101000001010001000100001100101101010000110110111101110010011001010010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011000000000000000000000000000000000000000000000000000000000000001100000011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000110000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001001100100100001100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000
+00010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001011100000000000000000000000000000000000000000000000000000000000101110001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011100000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101001101010000010010010010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010110000000000000000000000000000000000000000000000000000000000001011000011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000110000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001001100100100001100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000
+01000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001010100000000000000000000000000000000000000000000000000000000000101010000111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000010100000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100101101110011101000010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000001010001111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000100000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010101010101000100001100101101010000110110111101110010011001010010000000100000001000000010000000100000001
+00000001000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001001100000000000000000000000000000000000000000000000000000000000100110001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001100000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101001101010000010001010100001100101101010000110101001101010010001000000010000000100000001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010010000000000000000000000000000000000000000000000000000000000001001000000111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000010000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001111011011100110010101110111011010010111001001100101001011100100001101101111011011100111010001110
+01001101111011011000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000011111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000000100000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100010001001101010000010010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001")
         g_sdb_addr = "00000000000000000000000000000000"
     Summary:
 	no macro.
@@ -3944,17 +3939,14 @@ Unit <xwb_sdb_crossbar> synthesized.
 
 Synthesizing Unit <sdb_rom>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/ip_cores/general-cores/modules/wishbone/wb_crossbar/sdb_rom.vhd".
-        g_use_info = true
         g_layout =
-("00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001101000000000000000000000000000000000000000000000000000000000000110100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011001000000000000000000000000000000000000000000000000000000000001100101111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000001000000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000110010011010100001100101101010000010100010001000011001011010100001101101111011100100110010100100000001000000010000000100000000
-00001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001100000000000000000000000000000000000000000000000000000000000000110000001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010111000000000000000000000000000000000000000000000000000000000001011100011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000111000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100100100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000000100
-00000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001011000000000000000000000000000000000000000000000000000000000000101100001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100100110010010000110010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010101000000000000000000000000000000000000000000000000000000000001010100001111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000101000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001011011100111010000101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000
-00010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000101000111111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000010000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101010101010100010000110010110101000011011011110111001001100101001000000010000000100000001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010011000000000000000000000000000000000000000000000000000000000001001100011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000011000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010011010100000100010101000011001011010100001101010011010100100010000000100000001000000010000000100000001000000
-01000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001001000000000000000000000000000000000000000000000000000000000000100100000011100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100111101101110011001010111011101101001011100100110010100101110010000110110111101101110011101000111001001101111011011000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000001000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101000100010011010100000100101110010000110110111101101110011101000111001001101111011011000010000000100000001
-00000001000000010000000000001")
-        g_info =
-("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011001110010000100100011111000111100001101010001000000000000000010000000000000000001000000001001100000011000100100111001101110000011001010110001101011111011001100110110101100011011000010110010001100011001100010011000000110000011011010011000100110100011000100010000010000000","011100110111000001100101011000110101111101110100011011110111000001011111011001100110110101100011010111110110000101100100011000110000010010111001010010000011100110001100010111001011111111011011110001011100110010100010000010100111100100010001010010101010101101001001010100110100010100100000001000000010000000100000001000000000000000000000000000010011001100100000000100110000001100010010011011010110001101100001011101000111010001101001011011100010000000100000001000000010000000100000001000000010000000100000100
-00010","01100111011010010111010000111010001011110010111101101111011010000111011101110010001011100110111101110010011001110010111101100110011011010110001100101101011100000111001001101111011010100110010101100011011101000111001100101111011001100110110101100011001011010110000101100100011000110010110100110001001100000011000001101101001100010011010001100010001101000110001101101000011000010010111001100111011010010111010000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000010000001")
+("00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011001110010000100100011111000111100001101010001000000000000000010000000000000001001000000001001100000011001010000111001101110000011001010110001101011111011001100110110101100011011000010110010001100011001100010011000000110000011011010011000100110100011000100010000010000000","011100110111000001100101011000110101111101110100011011110111000001011111011001100110110101100011010111110110000101100100011000111101110101110110010100001101100110101101000000101110010110100100010001011000101110011101000011100000000010010100010001101000110101001001010100110100010100100000001000000010000000100000001000000000000000000000000000010011001100100000000100110000001100101000011011010110001101100001011101000111010001101001011011100010000000100000001000000010000000100000001000000010000000100000100
+00010","01100111011010010111010000111010001011110010111101101111011010000111011101110010001011100110111101110010011001110010111101100110011011010110001100101101011100000111001001101111011010100110010101100011011101000111001100101111011001100110110101100011001011010110000101100100011000110010110100110001001100000011000001101101001100010011010001100010001101000110001101101000011000010010111001100111011010010111010000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000010000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011010000000000000000000000000000000000000000000000000000000000001101000000111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000010000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001111011011100110010101110111011010010111001001100101001011100100001101101111011011100111010001110010011011110110110000100
+00000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001100100000000000000000000000000000000000000000000000000000000000110010111111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000100000000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100011001001101010000110010110101000001010001000100001100101101010000110110111101110010011001010010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000011000000000000000000000000000000000000000000000000000000000000001100000011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000110000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001001100100100001100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000010000
+00010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001011100000000000000000000000000000000000000000000000000000000000101110001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000011100000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101001101010000010010010010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010110000000000000000000000000000000000000000000000000000000000001011000011111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000110000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001001001100100100001100101110010000110110111101101110011101000111001001101111011011000010000000100000001000000
+01000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001010100000000000000000000000000000000000000000000000000000000000101010000111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000010100000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100100101101110011101000010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000001010001111111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000100000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101010101010101000100001100101101010000110110111101110010011001010010000000100000001000000010000000100000001
+00000001000000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001001100000000000000000000000000000000000000000000000000000000000100110001111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000001100000000000000000000000000000001001000000001001000010001000101100101011101000010001011010101001101010000010001010100001100101101010000110101001101010010001000000010000000100000001000000010000000100000001000000010000000000001","000000000000000000000001000000010000000000000000000000000000010000000000000000000000000000000000000000000000000000010010000000000000000000000000000000000000000000000000000000000001001000000111000000000000000000000000000000000000000000000000110011100100001000000000000000000000011000000010000000000000000000000000000000010010000000010010000100010001011001010111010000100010110101001111011011100110010101110111011010010111001001100101001011100100001101101111011011100111010001110
+01001101111011011000010000000000001","00000000000000000000000100000001000000000000000000000000000001000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000011111100000000000000000000000000000000000000000000000011001110010000100000000000000000000001100000000100000000000000000000000000000001001000000001001000010001000101100101011101000010001011010100010001001101010000010010111001000011011011110110111001110100011100100110111101101100001000000010000000100000001000000010000000000001")
         g_bus_end = "0000000000000000000000000000000000000000000000000001111111111111"
 WARNING:Xst:647 - Input <slave_i_adr<31:10>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <slave_i_adr<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -4133,7 +4125,7 @@ Unit <sockit_owm> synthesized.
 Synthesizing Unit <carrier_csr>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 8-bit register for signal <ack_sreg>.
+    Found 7-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 29-bit register for signal <carrier_csr_ctrl_reserved_int>.
     Found 1-bit register for signal <ack_in_progress>.
@@ -4142,8 +4134,9 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     Found 1-bit register for signal <carrier_csr_ctrl_dac_clr_n_int>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <carrier_csr>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <carrier_csr>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <carrier_csr>.
     Summary:
-	inferred  73 D-type flip-flop(s).
+	inferred  72 D-type flip-flop(s).
 	inferred   6 Multiplexer(s).
 Unit <carrier_csr> synthesized.
 
@@ -4199,7 +4192,7 @@ Unit <irq_controller> synthesized.
 Synthesizing Unit <irq_controller_regs>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/irq_controller_regs.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 8-bit register for signal <ack_sreg>.
+    Found 5-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 32-bit register for signal <irq_ctrl_en_mask_int>.
     Found 1-bit register for signal <ack_in_progress>.
@@ -4207,8 +4200,11 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     Found 1-bit register for signal <irq_ctrl_src_load_o>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:6>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
+    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<5:5>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
     Summary:
-	inferred  75 D-type flip-flop(s).
+	inferred  72 D-type flip-flop(s).
 	inferred   4 Multiplexer(s).
 Unit <irq_controller_regs> synthesized.
 
@@ -4660,36 +4656,36 @@ Synthesizing Unit <fmc_adc_100Ms_core>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd".
         g_multishot_ram_size = 2048
 WARNING:Xst:647 - Input <wb_ddr_ack_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_trig_cfg_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_sw_trig_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_shots_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_sr_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch1_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch1_gain_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch1_offset_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch2_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch2_gain_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch2_offset_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch3_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch3_gain_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch3_offset_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch4_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch4_gain_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 639: Output port <fmc_adc_core_ch4_offset_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 879: Output port <wr_count_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 879: Output port <rd_count_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 879: Output port <wr_empty_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 879: Output port <wr_almost_empty_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 879: Output port <wr_almost_full_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 879: Output port <rd_full_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 879: Output port <rd_almost_empty_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 879: Output port <rd_almost_full_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1252: Output port <qa_o> of the instance <cmp_multishot_dpram0> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1278: Output port <qa_o> of the instance <cmp_multishot_dpram1> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1332: Output port <count_o> of the instance <cmp_wb_ddr_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1332: Output port <almost_empty_o> of the instance <cmp_wb_ddr_fifo> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1332: Output port <almost_full_o> of the instance <cmp_wb_ddr_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_trig_cfg_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_sw_trig_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_shots_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_sr_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch1_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch1_gain_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch1_offset_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch2_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch2_gain_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch2_offset_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch3_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch3_gain_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch3_offset_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch4_ctl_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch4_gain_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 637: Output port <fmc_adc_core_ch4_offset_reserved_o> of the instance <cmp_fmc_adc_100Ms_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 877: Output port <wr_count_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 877: Output port <rd_count_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 877: Output port <wr_empty_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 877: Output port <wr_almost_empty_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 877: Output port <wr_almost_full_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 877: Output port <rd_full_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 877: Output port <rd_almost_empty_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 877: Output port <rd_almost_full_o> of the instance <cmp_adc_sync_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1250: Output port <qa_o> of the instance <cmp_multishot_dpram0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1276: Output port <qa_o> of the instance <cmp_multishot_dpram1> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1330: Output port <count_o> of the instance <cmp_wb_ddr_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1330: Output port <almost_empty_o> of the instance <cmp_wb_ddr_fifo> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/adc/rtl/fmc_adc_100Ms_core.vhd" line 1330: Output port <almost_full_o> of the instance <cmp_wb_ddr_fifo> is unconnected or connected to loadless signal.
     Found 16-bit register for signal <shots_cnt>.
     Found 32-bit register for signal <pre_trig_cnt>.
     Found 32-bit register for signal <post_trig_cnt>.
@@ -4769,9 +4765,9 @@ INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/a
     Found 32-bit subtractor for signal <GND_563_o_GND_563_o_sub_46_OUT<31:0>> created at line 1308.
     Found 32-bit subtractor for signal <GND_563_o_GND_563_o_sub_48_OUT<31:0>> created at line 1308.
     Found 11-bit subtractor for signal <n0450> created at line 0.
-    Found 16-bit 4-to-1 multiplexer for signal <int_trig_data> created at line 320.
-    Found 16-bit comparator greater for signal <int_trig_data[15]_int_trig_thres[15]_LessThan_13_o> created at line 760
-    Found 11-bit comparator equal for signal <dpram_addrb_cnt[10]_dpram_addra_post_done[10]_equal_90_o> created at line 1315
+    Found 16-bit 4-to-1 multiplexer for signal <int_trig_data> created at line 318.
+    Found 16-bit comparator greater for signal <int_trig_data[15]_int_trig_thres[15]_LessThan_13_o> created at line 758
+    Found 11-bit comparator equal for signal <dpram_addrb_cnt[10]_dpram_addra_post_done[10]_equal_90_o> created at line 1313
     Summary:
 	inferred  10 Adder/Subtractor(s).
 	inferred 512 D-type flip-flop(s).
@@ -7764,12 +7760,12 @@ Macro Statistics
  31-bit register                                       : 1
  32-bit register                                       : 108
  4-bit register                                        : 24
- 5-bit register                                        : 3
+ 5-bit register                                        : 4
  6-bit register                                        : 14
  64-bit register                                       : 9
  65-bit register                                       : 1
- 7-bit register                                        : 8
- 8-bit register                                        : 38
+ 7-bit register                                        : 9
+ 8-bit register                                        : 36
  9-bit register                                        : 69
 # Comparators                                          : 45
  10-bit comparator greater                             : 1
@@ -7853,12 +7849,11 @@ INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[1].cmp_offs
 INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[2].cmp_offset_gain_calibr> is equivalent to the following FF/Latch, which will be removed : <gain_17> 
 INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[3].cmp_offset_gain_calibr> is equivalent to the following FF/Latch, which will be removed : <gain_17> 
 INFO:Xst:2261 - The FF/Latch <wb_ddr_adr_o_25> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following 6 FFs/Latches, which will be removed : <wb_ddr_adr_o_26> <wb_ddr_adr_o_27> <wb_ddr_adr_o_28> <wb_ddr_adr_o_29> <wb_ddr_adr_o_30> <wb_ddr_adr_o_31> 
-INFO:Xst:2261 - The FF/Latch <wb_ddr_we_o> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following FF/Latch, which will be removed : <wb_ddr_cyc_o> 
 INFO:Xst:2261 - The FF/Latch <trig_addr_25> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following 6 FFs/Latches, which will be removed : <trig_addr_26> <trig_addr_27> <trig_addr_28> <trig_addr_29> <trig_addr_30> <trig_addr_31> 
+INFO:Xst:2261 - The FF/Latch <wb_ddr_we_o> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following FF/Latch, which will be removed : <wb_ddr_cyc_o> 
 INFO:Xst:2261 - The FF/Latch <ddr_cmd_instr_1> in Unit <cmp_ddr3_ctrl_wb_0> is equivalent to the following 4 FFs/Latches, which will be removed : <ddr_cmd_instr_2> <ddr_cmd_byte_addr_0> <ddr_cmd_byte_addr_1> <ddr_cmd_byte_addr_2> 
 INFO:Xst:2261 - The FF/Latch <ddr_wr_mask_0> in Unit <cmp_ddr3_ctrl_wb_0> is equivalent to the following 7 FFs/Latches, which will be removed : <ddr_wr_mask_1> <ddr_wr_mask_2> <ddr_wr_mask_3> <ddr_wr_mask_4> <ddr_wr_mask_5> <ddr_wr_mask_6> <ddr_wr_mask_7> 
 INFO:Xst:2261 - The FF/Latch <ddr_cmd_instr_1> in Unit <cmp_ddr3_ctrl_wb_1> is equivalent to the following 3 FFs/Latches, which will be removed : <ddr_cmd_instr_2> <ddr_cmd_byte_addr_0> <ddr_cmd_byte_addr_1> 
-WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_11> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -7887,7 +7882,7 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_2> (without init value) has a
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_3> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_4> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_5> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_13> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_14> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_15> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -7916,6 +7911,7 @@ WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_5> (without init value) has a con
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_7> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_8> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <utc_trig_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_4> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_5> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -7944,8 +7940,7 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_28> (without init value) has a
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_29> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_30> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_end_tag_fine_31> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_7> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_8> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_stop_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
@@ -8002,7 +7997,7 @@ WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_31> (without init value) has a co
 WARNING:Xst:1710 - FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <addr_fifo_din_30> (without init value) has a constant value of 0 in block <cmp_l2p_dma_master>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <p2l_dma_adr_o_30> (without init value) has a constant value of 0 in block <cmp_p2l_dma_master>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <busy_data_d> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ce_data_0> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ce_data_1> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
@@ -8054,18 +8049,20 @@ WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_8> (without init value) has 
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_11> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <utc_acq_start_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_utc_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[3].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <trig_addr_25> (without init value) has a constant value of 0 in block <cmp_fmc_adc_100Ms_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ddr_wr_mask_0> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ddr_cmd_instr_1> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ddr_cmd_instr_1> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_1>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_2> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ddr_cmd_instr_1> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_1>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[2].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[1].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[0].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ddr_cmd_instr_1> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ddr_wr_mask_0> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <trig_addr_25> (without init value) has a constant value of 0 in block <cmp_fmc_adc_100Ms_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_2> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
@@ -8075,28 +8072,23 @@ WARNING:Xst:1710 - FF/Latch <DRP_BKST> (without init value) has a constant value
 WARNING:Xst:1710 - FF/Latch <SELFREFRESH_REQ_R1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <SELFREFRESH_MCB_REQ> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <WarmEnough> (without init value) has a constant value of 1 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[3].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R3> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_utc_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:2677 - Node <dma_ctrl_carrier_addr_o_0> of sequential type is unconnected in block <cmp_dma_controller>.
 WARNING:Xst:2677 - Node <dma_ctrl_carrier_addr_o_1> of sequential type is unconnected in block <cmp_dma_controller>.
@@ -8137,7 +8129,7 @@ WARNING:Xst:2677 - Node <wb_addr_d_26> of sequential type is unconnected in bloc
 WARNING:Xst:2677 - Node <wb_addr_d_27> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
 WARNING:Xst:2677 - Node <ddr_cmd_byte_addr_28> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
 WARNING:Xst:2677 - Node <ddr_cmd_byte_addr_29> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:1>> (without init value) have a constant value of 0 in block <carrier_csr>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:1>> (without init value) have a constant value of 0 in block <carrier_csr>.
 WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:6>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
 WARNING:Xst:2404 -  FFs/Latches <addr_fifo_din<31:30>> (without init value) have a constant value of 0 in block <l2p_dma_master>.
 WARNING:Xst:2404 -  FFs/Latches <p2l_dma_adr_o<31:30>> (without init value) have a constant value of 0 in block <p2l_dma_master>.
@@ -8148,7 +8140,7 @@ WARNING:Xst:2404 -  FFs/Latches <ddr_cmd_instr<2:1>> (without init value) have a
 WARNING:Xst:2404 -  FFs/Latches <IODRPCTRLR_MEMCELL_ADDR<7:4>> (without init value) have a constant value of 0 in block <mcb_soft_calibration>.
 WARNING:Xst:2404 -  FFs/Latches <Active_IODRP<1:1>> (without init value) have a constant value of 0 in block <mcb_soft_calibration>.
 WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:1>> (without init value) have a constant value of 0 in block <utc_core_regs>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:1>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<4:1>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
 
 Synthesizing (advanced) Unit <ext_pulse_sync>.
 The following registers are absorbed into counter <s_pulse_length_cnt>: 1 register on signal <s_pulse_length_cnt>.
@@ -9470,28 +9462,28 @@ Top Level Output File Name         : spec_top_fmc_adc_100Ms.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 8516
+# BELS                             : 8520
 #      GND                         : 1
 #      INV                         : 227
 #      LUT1                        : 287
-#      LUT2                        : 745
+#      LUT2                        : 746
 #      LUT3                        : 1132
-#      LUT4                        : 730
-#      LUT5                        : 870
-#      LUT6                        : 2062
+#      LUT4                        : 727
+#      LUT5                        : 875
+#      LUT6                        : 2061
 #      MULT_AND                    : 7
 #      MUXCY                       : 1271
-#      MUXF7                       : 24
+#      MUXF7                       : 26
 #      VCC                         : 1
 #      XORCY                       : 1159
 # FlipFlops/Latches                : 6878
-#      FD                          : 71
+#      FD                          : 73
 #      FDC                         : 1431
 #      FDCE                        : 4023
 #      FDE                         : 118
 #      FDP                         : 140
 #      FDPE                        : 58
-#      FDR                         : 543
+#      FDR                         : 541
 #      FDRE                        : 491
 #      FDS                         : 3
 # RAMS                             : 28
@@ -9537,16 +9529,16 @@ Selected Device : 6slx45tfgg484-3
 
 Slice Logic Utilization: 
  Number of Slice Registers:            6878  out of  54576    12%  
- Number of Slice LUTs:                 6055  out of  27288    22%  
-    Number used as Logic:              6053  out of  27288    22%  
+ Number of Slice LUTs:                 6057  out of  27288    22%  
+    Number used as Logic:              6055  out of  27288    22%  
     Number used as Memory:                2  out of   6408     0%  
        Number used as SRL:                2
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   9475
-   Number with an unused Flip Flop:    2597  out of   9475    27%  
-   Number with an unused LUT:          3420  out of   9475    36%  
-   Number of fully used LUT-FF pairs:  3458  out of   9475    36%  
+ Number of LUT Flip Flop pairs used:   9477
+   Number with an unused Flip Flop:    2599  out of   9477    27%  
+   Number with an unused LUT:          3420  out of   9477    36%  
+   Number of fully used LUT-FF pairs:  3458  out of   9477    36%  
    Number of unique control sets:       266
 
 IO Utilization: 
@@ -9608,7 +9600,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'cmp_sys_clk_pll/CLKOUT0'
   Clock period: 8.716ns (frequency: 114.732MHz)
-  Total number of paths / destination ports: 391567 / 7731
+  Total number of paths / destination ports: 391593 / 7729
 -------------------------------------------------------------------------
 Delay:               8.716ns (Levels of Logic = 9)
   Source:            cmp_fmc_spi/U_Wrapped_SPI/Wrapped_SPI/ctrl_9 (FF)
@@ -9733,7 +9725,7 @@ Delay:               2.854ns (Levels of Logic = 1)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_sys_clk_pll/CLKOUT0'
-  Total number of paths / destination ports: 3523 / 2951
+  Total number of paths / destination ports: 3525 / 2951
 -------------------------------------------------------------------------
 Offset:              9.066ns (Levels of Logic = 4)
   Source:            L_RST_N (PAD)
@@ -9987,13 +9979,13 @@ cmp_sys_clk_pll/CLKOUT2|    2.854|         |         |         |
 =========================================================================
 
 
-Total REAL time to Xst completion: 84.00 secs
-Total CPU time to Xst completion: 82.47 secs
+Total REAL time to Xst completion: 86.00 secs
+Total CPU time to Xst completion: 82.91 secs
  
 --> 
 
 
-Total memory usage is 230480 kilobytes
+Total memory usage is 230496 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings : 1784 (   0 filtered)
