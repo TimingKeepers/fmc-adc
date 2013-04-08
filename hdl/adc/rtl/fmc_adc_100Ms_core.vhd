@@ -1004,7 +1004,7 @@ begin
 
 
   pre_trig_done <= '1' when (pre_trig_cnt = to_unsigned(0, pre_trig_cnt'length) and
-                             sync_fifo_valid = '1') else '0';
+                             sync_fifo_valid = '1' and acq_in_pre_trig = '1') else '0';
 
   ------------------------------------------------------------------------------
   -- Post-trigger counter
@@ -1045,7 +1045,7 @@ begin
   end process p_post_trig_cnt;
 
   post_trig_done <= '1' when (post_trig_cnt = to_unsigned(0, post_trig_cnt'length) and
-                              sync_fifo_valid = '1') else '0';
+                              sync_fifo_valid = '1' and acq_in_post_trig = '1') else '0';
 
   ------------------------------------------------------------------------------
   -- Samples counter
@@ -1233,7 +1233,11 @@ begin
         dpram_addra_trig <= dpram_addra_cnt;
       end if;
       if post_trig_done = '1' then
-        dpram_addra_post_done <= dpram_addra_cnt;
+        if unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length) then
+          dpram_addra_post_done <= dpram_addra_cnt - 1;
+        else
+          dpram_addra_post_done <= dpram_addra_cnt;
+        end if;
       end if;
     end if;
   end process p_dpram_addra_cnt;
@@ -1308,7 +1312,7 @@ begin
       dpram_valid     <= '0';
     elsif rising_edge(sys_clk_i) then
       if post_trig_done = '1' then
-        dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_dpram_depth-1 downto 0)) + 1;
+        dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_dpram_depth-1 downto 0));
         dpram_valid_t   <= '1';
       elsif (dpram_addrb_cnt = dpram_addra_post_done) then
         dpram_valid_t <= '0';
