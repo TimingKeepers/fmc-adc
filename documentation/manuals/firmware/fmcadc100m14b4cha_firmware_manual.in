@@ -1,0 +1,334 @@
+\input texinfo    @c -*-texinfo-*-
+%
+% fine-delay.in - main file for the documentation
+%
+%%%%
+
+%------------------------------------------------------------------------------
+%
+%                         NOTE FOR THE UNAWARE USER
+%                         =========================
+%
+%    This file is a texinfo source. It isn't the binary file of some strange
+%    editor of mine. If you want ASCII, you should "make fine-delay.txt".
+%
+%------------------------------------------------------------------------------
+
+%
+% This is not a conventional info file...
+% I use three extra features:
+%   - The '%' as a comment marker, if at beginning of line ("\%" -> "%")
+%   - leading blanks are allowed (this is something I can't live without)
+%   - braces are automatically escaped when they appear in example blocks
+%
+
+@comment %**start of header
+@documentlanguage en
+@documentencoding UTF-8
+@setfilename fmcadc100m14b4cha_firmware_manual.info
+@settitle fmcadc100m14b4cha_firmware_manual
+@iftex
+@afourpaper
+@end iftex
+@paragraphindent 3
+@comment %**end of header
+
+@setchapternewpage off
+
+@set update-month April 2013
+
+@finalout
+
+@titlepage
+@center @image{../../figures/cern_logo,3cm,,,pdf} @hfill @image{../../figures/ohr_logo,3cm,,,pdf}
+@title FmcAdc100m14b4cha Firmware Guide
+@subtitle @value{update-month}
+@subtitle Simple PCIe FMC Carrier (SPEC) version
+@author Matthieu Cattin (CERN)
+@end titlepage
+@headings single
+
+@iftex
+@contents
+@end iftex
+
+@c ##########################################################################
+@node Top
+@top Introduction
+
+This document describes the hdl developed to support the FmcAdc100m14b4cha@footnote{http://www.ohwr.org/projects/fmc-adc-100m14b4cha} mezzanine card on the SPEC@footnote{http://www.ohwr.org/projects/spec} carrier card.
+
+@float Figure,fig:firmware_arch
+@center @image{../../figures/firmware_arch, 15cm,,,pdf}
+@caption{FPGA firmware architecture block diargam.}
+@end float
+
+
+@c ##########################################################################
+@node Configuration
+@chapter Configuration
+
+@c --------------------------------------------------------------------------
+@section Input ranges
+Three input ranges, optional input 50ohms termination.
+Calibration input configuration.
+
+@float Figure,fig:analogue_input
+@center @image{../../figures/analogue_input, 15cm,,,pdf}
+@caption{Simplified schematics of the analogue input.}
+@end float
+
+Only the following input switch configurations are valid. All other switch configurations shouldn't be used.
+
+@float Table,tab:switch_config
+@multitable @columnfractions .09 .08 .08 .08 .08 .08 .08 .08 .35
+@headitem SW[7..1] @tab SW7 @tab SW6 @tab SW5 @tab SW4 @tab SW3 @tab SW2 @tab SW1 @tab Description
+@item @code{0x23} @tab @code{OFF} @tab @code{ON}  @tab @code{OFF} @tab @code{X}   @tab @code{OFF} @tab @code{ON}  @tab @code{ON}  @tab 100mV range
+@item @code{0x11} @tab @code{OFF} @tab @code{OFF} @tab @code{ON}  @tab @code{X}   @tab @code{OFF} @tab @code{OFF} @tab @code{ON}  @tab 1V range
+@item @code{0x45} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{ON}  @tab @code{OFF} @tab @code{ON}  @tab 10V range
+@item @code{0x42} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{OFF} @tab @code{ON}  @tab @code{OFF} @tab 100mV range offset calibration
+@item @code{0x40} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{OFF} @tab @code{ON}  @tab @code{ON}  @tab 1V range offset calibration
+@item @code{0x44} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab 10V range offset calibration
+@item @code{0x00} @tab @code{X}   @tab @code{OFF} @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{X}   @tab @code{OFF} @tab Input disconnected
+@item @code{0x08} @tab @code{X}   @tab @code{X}   @tab @code{X}   @tab @code{ON}  @tab @code{X}   @tab @code{X}   @tab @code{X}   @tab 50ohm termination
+@end multitable
+@caption{Analogue input switches configurations.}
+@end float
+
+@c --------------------------------------------------------------------------
+@section Input offset
+
+Each channel has a DAC allowing to apply a dc offset to the input signal.
+The voltage range of the DAC is 10V (-5V to +5V) and is independent from the selected input range.
+
+The following equation shows how to convert a digital value written to a DAC to an offset voltage.
+
+@code{Vdac = Vref * Ddac/0x8000}
+
+Where:
+
+@code{Vref = 5V}
+
+@code{Ddac = digital value written to the DAC}
+
+@code{Vdac = DAC voltage}
+
+The following equation shows the relation between the input voltage and the offset (applied by the DAC). Note that the offset from the DAC is subtracted from the input voltage.
+
+
+@code{Vout = Vin - Vdac}
+
+Where:
+
+@code{Vin = Input voltage}
+
+@code{Vdac = DAC voltage}
+
+@code{Vout = Output voltage (to filter stage and ADC)}
+
+@c --------------------------------------------------------------------------
+@section Trigger
+Software and/or hardware trigger. Internal or external hardware trigger, polarity selection.
+Optional additional delay on the final trigger (in sampling clock ticks).
+
+@float Figure,fig:trig_unit
+@center @image{../../figures/trigger_unit, 15cm,,,pdf}
+@caption{Trigger unit diagram.}
+@end float
+
+@c --------------------------------------------------------------------------
+@section Time-stamping
+
+
+
+
+@c ##########################################################################
+@node Calibration
+@chapter Calibration
+
+The calibration is done once during the prodoction tests.
+It can be repeated afterwards with the production test suite (PTS) and the corresponding testbench.
+The calibration process gives four values per channel and per input range:
+ADC gain correction, ADC offset correction, DAC gain correction and DAC offset correction.
+The temperature during the calibration process is also measured.
+All the calibration values are stored in the FmcAdc100m14b4cha EEPROM.
+The EEPROM holds a sdbfs@footnote{http://www.ohwr.org/attachments/download/1594/sdbfs-2012-09-19.pdf} file system.
+In addition to the calibration values, the EEPROM also contains mandatory IPMI@footnote{Platform Management FRU Information Storage Definition v1.0} 
+records described in the FMC Standard VITA 57.1 (see table @ref{tab:eeprom_sdbfs} for mapping).
+
+@float Table,tab:eeprom_sdbfs
+@multitable @columnfractions .12 .18 .15 .30
+@headitem Byte offset @tab File name @tab File Type @tab Description
+@item @code{0x0}    @tab ipmi.sdb        @tab binary @tab IPMI records
+@item @code{0x100}  @tab calibration.sdb @tab binary @tab Calibration values
+@item @code{0x1000} @tab .               @tab binary @tab Directory
+@item               @tab                 @tab        @tab vendor = 0xCE42
+@item               @tab                 @tab        @tab device = 0xC5BE045E
+@end multitable
+@caption{EEPROM sdb file system.}
+@end float
+
+Note that the vendor value 0xCE42 corresponds to CERN. While the device value 0xC5BE045E corresponds to the first 32-bit of the md5 sum of "fmc-adc-100m14b4cha".
+
+Two registers per channel are implemented in the FPGA for ADC gain and offset correction.
+When an input range is selected, the corresponding gain/offset correction values must be loaded from the EEPROM to those registers.
+
+As the DAC value is set once before an acquisition, there is no need to implement the gain and offset correction in the FPGA.
+Therefore gain and offset correction must be applied to the DAC value by the software.
+
+Below is the pseudo-code to calculate the DAC corrected value, applying gain and offset correction:
+
+@code{c_val = ((((val-0x8000+offset) << 15) * gain) >> 30)+0x8000}
+
+where:
+
+@code{c_val  = corrected value to write to DAC}
+
+@code{val    = value from user}
+
+@code{offset = DAC offset calibration value from EEPROM}
+
+@code{gain   = DAC gain calibration value from EEPROM}
+
+
+@c ##########################################################################
+@node Acquisition
+@chapter Acquisition
+
+@float Figure,fig:adc_core_fs_clk
+@center @image{../../figures/adc_core_fs_clk, 15cm,,,pdf}
+@caption{ADC core diagram (sampling clock domain).}
+@end float
+
+@float Figure,fig:adc_core_sys_clk
+@center @image{../../figures/adc_core_sys_clk, 15cm,,,pdf}
+@caption{ADC core diagram (system clock domain).}
+@end float
+
+@c --------------------------------------------------------------------------
+@section Single shot mode
+
+@itemize
+@item State machine
+@item Memory management (with figure)
+@item ...
+@end itemize
+
+
+@c --------------------------------------------------------------------------
+@section Multi-shot mode
+
+@itemize
+@item State machine
+@item Memory management (with figure)
+@item ...
+@end itemize
+
+
+@c ##########################################################################
+@page
+@node Appendix
+@appendix
+
+@c --------------------------------------------------------------------------
+@section Calibration data storage in EEPROM
+Tables @ref{tab:adc_calibr_data_eeprom} and @ref{tab:dac_calibr_data_eeprom} shows the calibration data types and the arrangement in the binary file.
+The first column "Byte offset" represents the offset within the binary file.
+
+@float Table,tab:adc_calibr_data_eeprom
+@multitable @columnfractions .10 .10 .35 .40
+@headitem Byte offset @tab Input range @tab Description @tab Type
+@item @code{0x0} @tab 10V @tab Offset correction channel 1 @tab 16-bit signed
+@item @code{0x2} @tab @tab Offset correction channel 2 @tab 16-bit signed
+@item @code{0x4} @tab @tab Offset correction channel 3 @tab 16-bit signed
+@item @code{0x6} @tab @tab Offset correction channel 4 @tab 16-bit signed
+@item @code{0x8} @tab @tab Gain correction channel 1 @tab 16-bit unsigned
+@item @code{0xA} @tab @tab Gain correction channel 2 @tab 16-bit unsigned
+@item @code{0xC} @tab @tab Gain correction channel 3 @tab 16-bit unsigned
+@item @code{0xE} @tab @tab Gain correction channel 4 @tab 16-bit unsigned
+@item @code{0x10} @tab @tab Temperature @tab 16-bit unsigned * 0.01@textdegree{}
+@item @code{0x12} @tab 1V @tab Offset correction channel 1 @tab 16-bit signed
+@item @code{0x14} @tab @tab Offset correction channel 2 @tab 16-bit signed
+@item @code{0x16} @tab @tab Offset correction channel 3 @tab 16-bit signed
+@item @code{0x18} @tab @tab Offset correction channel 4 @tab 16-bit signed
+@item @code{0x1A} @tab @tab Gain correction channel 1 @tab 16-bit unsigned
+@item @code{0x1C} @tab @tab Gain correction channel 2 @tab 16-bit unsigned
+@item @code{0x1E} @tab @tab Gain correction channel 3 @tab 16-bit unsigned
+@item @code{0x20} @tab @tab Gain correction channel 4 @tab 16-bit unsigned
+@item @code{0x22} @tab @tab Temperature @tab 16-bit unsigned * 0.01@textdegree{}
+@item @code{0x24} @tab 100mV @tab Offset correction channel 1 @tab 16-bit signed
+@item @code{0x26} @tab @tab Offset correction channel 2 @tab 16-bit signed
+@item @code{0x28} @tab @tab Offset correction channel 3 @tab 16-bit signed
+@item @code{0x2A} @tab @tab Offset correction channel 4 @tab 16-bit signed
+@item @code{0x2C} @tab @tab Gain correction channel 1 @tab 16-bit unsigned
+@item @code{0x2E} @tab @tab Gain correction channel 2 @tab 16-bit unsigned
+@item @code{0x30} @tab @tab Gain correction channel 3 @tab 16-bit unsigned
+@item @code{0x32} @tab @tab Gain correction channel 4 @tab 16-bit unsigned
+@item @code{0x34} @tab @tab Temperature @tab 16-bit unsigned * 0.01@textdegree{}
+@end multitable
+@caption{ADC calibration data stored in EEPROM (calibration.sdb file).}
+@end float
+
+@float Table,tab:dac_calibr_data_eeprom
+@multitable @columnfractions .12 .12 .30 .30
+@headitem Byte offset @tab Input range @tab Description @tab Type
+@item @code{0x36} @tab 10V @tab Offset correction channel 1 @tab 16-bit signed
+@item @code{0x38} @tab @tab Offset correction channel 2 @tab 16-bit signed
+@item @code{0x3A} @tab @tab Offset correction channel 3 @tab 16-bit signed
+@item @code{0x3C} @tab @tab Offset correction channel 4 @tab 16-bit signed
+@item @code{0x3E} @tab @tab Gain correction channel 1 @tab 16-bit unsigned
+@item @code{0x40} @tab @tab Gain correction channel 2 @tab 16-bit unsigned
+@item @code{0x42} @tab @tab Gain correction channel 3 @tab 16-bit unsigned
+@item @code{0x44} @tab @tab Gain correction channel 4 @tab 16-bit unsigned
+@item @code{0x46} @tab @tab Temperature @tab 16-bit unsigned * 0.01@textdegree{}
+@item @code{0x48} @tab 1V @tab Offset correction channel 1 @tab 16-bit signed
+@item @code{0x4A} @tab @tab Offset correction channel 2 @tab 16-bit signed
+@item @code{0x4C} @tab @tab Offset correction channel 3 @tab 16-bit signed
+@item @code{0x4E} @tab @tab Offset correction channel 4 @tab 16-bit signed
+@item @code{0x50} @tab @tab Gain correction channel 1 @tab 16-bit unsigned
+@item @code{0x52} @tab @tab Gain correction channel 2 @tab 16-bit unsigned
+@item @code{0x54} @tab @tab Gain correction channel 3 @tab 16-bit unsigned
+@item @code{0x56} @tab @tab Gain correction channel 4 @tab 16-bit unsigned
+@item @code{0x58} @tab @tab Temperature @tab 16-bit unsigned * 0.01@textdegree{}
+@item @code{0x5A} @tab 100mV @tab Offset correction channel 1 @tab 16-bit signed
+@item @code{0x5C} @tab @tab Offset correction channel 2 @tab 16-bit signed
+@item @code{0x5E} @tab @tab Offset correction channel 3 @tab 16-bit signed
+@item @code{0x60} @tab @tab Offset correction channel 4 @tab 16-bit signed
+@item @code{0x62} @tab @tab Gain correction channel 1 @tab 16-bit unsigned
+@item @code{0x64} @tab @tab Gain correction channel 2 @tab 16-bit unsigned
+@item @code{0x66} @tab @tab Gain correction channel 3 @tab 16-bit unsigned
+@item @code{0x68} @tab @tab Gain correction channel 4 @tab 16-bit unsigned
+@item @code{0x6A} @tab @tab Temperature @tab 16-bit unsigned * 0.01@textdegree{}
+@end multitable
+@caption{DAC calibration data stored in EEPROM (calibration.sdb file).}
+@end float
+
+@c --------------------------------------------------------------------------
+@c macro to allow includes from wbgen2 generated tex register documentation
+@macro regsection{name}
+@section \name\
+@end macro
+
+@c --------------------------------------------------------------------------
+@appendix ADC core registers
+@anchor{ADC core registers}
+   @include fmc_adc_100Ms_csr.tex
+
+@c --------------------------------------------------------------------------
+@appendix Interrupt controller registers
+@anchor{Interrupt controller registers}
+   @include irq_controller_regs.tex
+
+@c --------------------------------------------------------------------------
+@appendix UTC core registers
+@anchor{UTC core registers}
+   @include utc_core_regs.tex
+
+@c --------------------------------------------------------------------------
+@appendix Carrier registers
+@anchor{Carrier registers}
+   @include carrier_csr.tex
+
+
+
+@bye

@@ -1,0 +1,109 @@
+@regsection Memory map summary
+@multitable  @columnfractions .10 .15 .15 .55
+@headitem Address @tab Type @tab Prefix @tab Name
+@item @code{0x0} @tab
+REG @tab
+@code{carrier} @tab
+Carrier type and PCB version
+@item @code{0x4} @tab
+REG @tab
+@code{stat} @tab
+Status
+@item @code{0x8} @tab
+REG @tab
+@code{ctrl} @tab
+Control
+@end multitable 
+@regsection @code{carrier} - Carrier type and PCB version
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{3...0}
+@tab R/O @tab
+@code{PCB_REV}
+@tab @code{X} @tab 
+PCB revision
+@item @code{15...4}
+@tab R/O @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved register
+@item @code{31...16}
+@tab R/O @tab
+@code{TYPE}
+@tab @code{X} @tab 
+Carrier type
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{pcb_rev} @tab Binary coded PCB layout revision.
+@item @code{reserved} @tab Ignore on read, write with 0's.
+@item @code{type} @tab Carrier type identifier@*1 = SPEC@*2 = SVEC@*3 = VFC@*4 = SPEXI
+@end multitable
+@regsection @code{stat} - Status
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{0}
+@tab R/O @tab
+@code{FMC_PRES}
+@tab @code{X} @tab 
+FMC presence
+@item @code{1}
+@tab R/O @tab
+@code{P2L_PLL_LCK}
+@tab @code{X} @tab 
+GN4142 core P2L PLL status
+@item @code{2}
+@tab R/O @tab
+@code{SYS_PLL_LCK}
+@tab @code{X} @tab 
+System clock PLL status
+@item @code{3}
+@tab R/O @tab
+@code{DDR3_CAL_DONE}
+@tab @code{X} @tab 
+DDR3 calibration status
+@item @code{31...4}
+@tab R/O @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{fmc_pres} @tab 0: FMC slot is populated@*1: FMC slot is not populated.
+@item @code{p2l_pll_lck} @tab 0: not locked@*1: locked.
+@item @code{sys_pll_lck} @tab 0: not locked@*1: locked.
+@item @code{ddr3_cal_done} @tab 0: not done@*1: done.
+@item @code{reserved} @tab Ignore on read, write with 0's.
+@end multitable
+@regsection @code{ctrl} - Control
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{0}
+@tab R/W @tab
+@code{LED_GREEN}
+@tab @code{X} @tab 
+Green LED
+@item @code{1}
+@tab R/W @tab
+@code{LED_RED}
+@tab @code{X} @tab 
+Red LED
+@item @code{2}
+@tab R/W @tab
+@code{DAC_CLR_N}
+@tab @code{X} @tab 
+DAC clear
+@item @code{31...3}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{led_green} @tab Front panel green LED control
+@item @code{led_red} @tab Front panel red LED control
+@item @code{dac_clr_n} @tab Active low clear signal for VCXO DACs
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable

@@ -1,0 +1,664 @@
+@regsection Memory map summary
+@multitable  @columnfractions .10 .15 .15 .55
+@headitem Address @tab Type @tab Prefix @tab Name
+@item @code{0x0} @tab
+REG @tab
+@code{ctl} @tab
+Control register
+@item @code{0x4} @tab
+REG @tab
+@code{sta} @tab
+Status register
+@item @code{0x8} @tab
+REG @tab
+@code{trig_cfg} @tab
+Trigger configuration
+@item @code{0xc} @tab
+REG @tab
+@code{trig_dly} @tab
+Trigger delay
+@item @code{0x10} @tab
+REG @tab
+@code{sw_trig} @tab
+Software trigger
+@item @code{0x14} @tab
+REG @tab
+@code{shots} @tab
+Number of shots
+@item @code{0x18} @tab
+REG @tab
+@code{trig_pos} @tab
+Trigger address register
+@item @code{0x1c} @tab
+REG @tab
+@code{sr} @tab
+Sample rate
+@item @code{0x20} @tab
+REG @tab
+@code{pre_samples} @tab
+Pre-trigger samples
+@item @code{0x24} @tab
+REG @tab
+@code{post_samples} @tab
+Post-trigger samples
+@item @code{0x28} @tab
+REG @tab
+@code{samples_cnt} @tab
+Samples counter
+@item @code{0x2c} @tab
+REG @tab
+@code{ch1_ctl} @tab
+Channel 1 control register
+@item @code{0x30} @tab
+REG @tab
+@code{ch1_sta} @tab
+Channel 1 status register
+@item @code{0x34} @tab
+REG @tab
+@code{ch1_gain} @tab
+Channel 1 gain calibration register
+@item @code{0x38} @tab
+REG @tab
+@code{ch1_offset} @tab
+Channel 1 offset calibration register
+@item @code{0x3c} @tab
+REG @tab
+@code{ch2_ctl} @tab
+Channel 2 control register
+@item @code{0x40} @tab
+REG @tab
+@code{ch2_sta} @tab
+Channel 2 status register
+@item @code{0x44} @tab
+REG @tab
+@code{ch2_gain} @tab
+Channel 2 gain calibration register
+@item @code{0x48} @tab
+REG @tab
+@code{ch2_offset} @tab
+Channel 2 offset calibration register
+@item @code{0x4c} @tab
+REG @tab
+@code{ch3_ctl} @tab
+Channel 3 control register
+@item @code{0x50} @tab
+REG @tab
+@code{ch3_sta} @tab
+Channel 3 status register
+@item @code{0x54} @tab
+REG @tab
+@code{ch3_gain} @tab
+Channel 3 gain calibration register
+@item @code{0x58} @tab
+REG @tab
+@code{ch3_offset} @tab
+Channel 3 offset calibration register
+@item @code{0x5c} @tab
+REG @tab
+@code{ch4_ctl} @tab
+Channel 4 control register
+@item @code{0x60} @tab
+REG @tab
+@code{ch4_sta} @tab
+Channel 4 status register
+@item @code{0x64} @tab
+REG @tab
+@code{ch4_gain} @tab
+Channel 4 gain calibration register
+@item @code{0x68} @tab
+REG @tab
+@code{ch4_offset} @tab
+Channel 4 offset calibration register
+@end multitable 
+@regsection @code{ctl} - Control register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{1...0}
+@tab R/W @tab
+@code{FSM_CMD}
+@tab @code{X} @tab 
+State machine commands
+@item @code{2}
+@tab R/W @tab
+@code{FMC_CLK_OE}
+@tab @code{X} @tab 
+FMC Si750 output enable
+@item @code{3}
+@tab R/W @tab
+@code{OFFSET_DAC_CLR_N}
+@tab @code{X} @tab 
+Offset DACs clear (active low)
+@item @code{4}
+@tab W/O @tab
+@code{MAN_BITSLIP}
+@tab @code{X} @tab 
+Manual serdes bitslip
+@item @code{5}
+@tab R/W @tab
+@code{TEST_DATA_EN}
+@tab @code{X} @tab 
+Enable test data
+@item @code{6}
+@tab R/W @tab
+@code{TRIG_LED}
+@tab @code{X} @tab 
+Manual TRIG LED
+@item @code{7}
+@tab R/W @tab
+@code{ACQ_LED}
+@tab @code{X} @tab 
+Manual ACQ LED
+@item @code{31...8}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{fsm_cmd} @tab 1: start@*2: stop
+@item @code{test_data_en} @tab Write the address counter value instead of ADC data to DDR
+@item @code{trig_led} @tab Manual control of the front panel TRIG LED
+@item @code{acq_led} @tab Manual control of the front panel ACQ LED
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{sta} - Status register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{2...0}
+@tab R/O @tab
+@code{FSM}
+@tab @code{X} @tab 
+State machine status
+@item @code{3}
+@tab R/O @tab
+@code{SERDES_PLL}
+@tab @code{X} @tab 
+SerDes PLL status
+@item @code{4}
+@tab R/O @tab
+@code{SERDES_SYNCED}
+@tab @code{X} @tab 
+SerDes synchronization status
+@item @code{31...5}
+@tab R/O @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{fsm} @tab States:@*0: illegal@*1: IDLE@*2: PRE_TRIG@*3: WAIT_TRIG@*4: POST_TRIG@*5: DECR_SHOT@*6: illegal@*7: illegal
+@item @code{serdes_pll} @tab Sampling clock recovery PLL.@*0: not locked@*1: locked
+@item @code{serdes_synced} @tab 0: bitslip in progress@*1: serdes synchronized
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{trig_cfg} - Trigger configuration
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{0}
+@tab R/W @tab
+@code{HW_TRIG_SEL}
+@tab @code{X} @tab 
+Hardware trigger selection
+@item @code{1}
+@tab R/W @tab
+@code{HW_TRIG_POL}
+@tab @code{X} @tab 
+Hardware trigger polarity
+@item @code{2}
+@tab R/W @tab
+@code{HW_TRIG_EN}
+@tab @code{X} @tab 
+Hardware trigger enable
+@item @code{3}
+@tab R/W @tab
+@code{SW_TRIG_EN}
+@tab @code{X} @tab 
+Software trigger enable
+@item @code{5...4}
+@tab R/W @tab
+@code{INT_TRIG_SEL}
+@tab @code{X} @tab 
+Channel selection for internal trigger
+@item @code{15...6}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@item @code{31...16}
+@tab R/W @tab
+@code{INT_TRIG_THRES}
+@tab @code{X} @tab 
+Threshold for internal trigger
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{hw_trig_sel} @tab 0: internal (data threshold)@*1: external (front panel trigger input)
+@item @code{hw_trig_pol} @tab 0: positive edge/slope@*1: negative edge/slope
+@item @code{hw_trig_en} @tab 0: disable@*1: enable
+@item @code{sw_trig_en} @tab 0: disable@*1: enable
+@item @code{int_trig_sel} @tab 00: channel 1@*01: channel 2@*10: channel 3@*11: channel 4
+@item @code{reserved} @tab Ignore on read, write with 0's
+@item @code{int_trig_thres} @tab Treated as binary two's complement and compared to raw ADC data
+@end multitable
+@regsection @code{trig_dly} - Trigger delay
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/W @tab
+@code{TRIG_DLY}
+@tab @code{X} @tab 
+Trigger delay value
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig_dly} @tab Delay to apply on the trigger in sampling clock period.@*The default clock frequency is 100MHz (period = 10ns).
+@end multitable
+@regsection @code{sw_trig} - Software trigger
+Writing (anything) to this register generates a software trigger.
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab W/O @tab
+@code{SW_TRIG}
+@tab @code{X} @tab 
+Software trigger
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@end multitable
+@regsection @code{shots} - Number of shots
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{NB}
+@tab @code{X} @tab 
+Number of shots
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{nb} @tab Number of shots required in multi-shot mode, set to one for single-shot mode.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{trig_pos} - Trigger address register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{TRIG_POS}
+@tab @code{X} @tab 
+Trigger address
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig_pos} @tab Trigger address in DDR memory.@*Only used in single-shot mode.
+@end multitable
+@regsection @code{sr} - Sample rate
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{DECI}
+@tab @code{X} @tab 
+Sample rate decimation
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{deci} @tab Decimation factor. Takes one sample every N samples and discards the others (N = decimation factor).
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{pre_samples} - Pre-trigger samples
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/W @tab
+@code{PRE_SAMPLES}
+@tab @code{X} @tab 
+Pre-trigger samples
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{pre_samples} @tab Number of requested pre-trigger samples
+@end multitable
+@regsection @code{post_samples} - Post-trigger samples
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/W @tab
+@code{POST_SAMPLES}
+@tab @code{X} @tab 
+Post-trigger samples
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{post_samples} @tab Number of requested post-trigger samples
+@end multitable
+@regsection @code{samples_cnt} - Samples counter
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{SAMPLES_CNT}
+@tab @code{X} @tab 
+Samples counter
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{samples_cnt} @tab Counts the number of samples.@* It is reset on START and then counts the number of pre-trigger + post-trigger samples
+@end multitable
+@regsection @code{ch1_ctl} - Channel 1 control register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{6...0}
+@tab R/W @tab
+@code{SSR}
+@tab @code{X} @tab 
+Solid state relays control for channel 1
+@item @code{31...7}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{ssr} @tab Controls input voltage range, termination and DC offset error calibration@*0x23: 100mV range@*0x11: 1V range@*0x45: 10V range@*0x00: Open input@*0x42: 100mV range calibration@*0x40: 1V range calibration@*0x44: 10V range calibration@*Bit3 is indepandant of the others and enables the 50ohms termination.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch1_sta} - Channel 1 status register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/O @tab
+@code{VAL}
+@tab @code{X} @tab 
+Channel 1 current ADC value
+@item @code{31...16}
+@tab R/O @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Current ADC raw value. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch1_gain} - Channel 1 gain calibration register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{X} @tab 
+Gain calibration for channel 1
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Gain applied to all data coming from the ADC.@*Fixed point format:@*Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch1_offset} - Channel 1 offset calibration register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{X} @tab 
+Offset calibration for channel 1
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch2_ctl} - Channel 2 control register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{6...0}
+@tab R/W @tab
+@code{SSR}
+@tab @code{X} @tab 
+Solid state relays control for channel 2
+@item @code{31...7}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{ssr} @tab Controls input voltage range, termination and DC offset error calibration@*0x23: 100mV range@*0x11: 1V range@*0x45: 10V range@*0x00: Open input@*0x42: 100mV range calibration@*0x40: 1V range calibration@*0x44: 10V range calibration@*Bit3 is indepandant of the others and enables the 50ohms termination.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch2_sta} - Channel 2 status register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/O @tab
+@code{VAL}
+@tab @code{X} @tab 
+Channel 2 current ACD value
+@item @code{31...16}
+@tab R/O @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Current ADC raw value. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch2_gain} - Channel 2 gain calibration register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{X} @tab 
+Gain calibration for channel 2
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Gain applied to all data coming from the ADC.@*Fixed point format:@*Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch2_offset} - Channel 2 offset calibration register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{X} @tab 
+Offset calibration for channel 2
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch3_ctl} - Channel 3 control register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{6...0}
+@tab R/W @tab
+@code{SSR}
+@tab @code{X} @tab 
+Solid state relays control for channel 3
+@item @code{31...7}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{ssr} @tab Controls input voltage range, termination and DC offset error calibration@*0x23: 100mV range@*0x11: 1V range@*0x45: 10V range@*0x00: Open input@*0x42: 100mV range calibration@*0x40: 1V range calibration@*0x44: 10V range calibration@*Bit3 is indepandant of the others and enables the 50ohms termination.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch3_sta} - Channel 3 status register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/O @tab
+@code{VAL}
+@tab @code{X} @tab 
+Channel 3 current ADC value
+@item @code{31...16}
+@tab R/O @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Current ADC raw value. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch3_gain} - Channel 3 gain calibration register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{X} @tab 
+Gain calibration for channel 3
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Gain applied to all data coming from the ADC.@*Fixed point format:@*Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch3_offset} - Channel 3 offset calibration register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{X} @tab 
+Offset calibration for channel 3
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch4_ctl} - Channel 4 control register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{6...0}
+@tab R/W @tab
+@code{SSR}
+@tab @code{X} @tab 
+Solid state relays control for channel 4
+@item @code{31...7}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{ssr} @tab Controls input voltage range, termination and DC offset error calibration@*0x23: 100mV range@*0x11: 1V range@*0x45: 10V range@*0x00: Open input@*0x42: 100mV range calibration@*0x40: 1V range calibration@*0x44: 10V range calibration@*Bit3 is indepandant of the others and enables the 50ohms termination.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch4_sta} - Channel 4 status register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/O @tab
+@code{VAL}
+@tab @code{X} @tab 
+Channel 4 current ADC value
+@item @code{31...16}
+@tab R/O @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Current ADC raw value. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch4_gain} - Channel 4 gain calibration register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{X} @tab 
+Gain calibration for channel 4
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Gain applied to all data coming from the ADC.@*Fixed point format:@*Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch4_offset} - Channel 4 offset calibration register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{X} @tab 
+Offset calibration for channel 4
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{X} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable

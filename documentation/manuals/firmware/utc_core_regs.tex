@@ -1,0 +1,311 @@
+@regsection Memory map summary
+@multitable  @columnfractions .10 .15 .15 .55
+@headitem Address @tab Type @tab Prefix @tab Name
+@item @code{0x0} @tab
+REG @tab
+@code{seconds} @tab
+UTC seconds register
+@item @code{0x4} @tab
+REG @tab
+@code{coarse} @tab
+UTC coarse time register, system clock ticks (125MHz)
+@item @code{0x8} @tab
+REG @tab
+@code{trig_tag_meta} @tab
+Trigger time-tag metadata register
+@item @code{0xc} @tab
+REG @tab
+@code{trig_tag_seconds} @tab
+Trigger time-tag UTC seconds register
+@item @code{0x10} @tab
+REG @tab
+@code{trig_tag_coarse} @tab
+Trigger time-tag coarse time (system clock ticks 125MHz) register
+@item @code{0x14} @tab
+REG @tab
+@code{trig_tag_fine} @tab
+Trigger time-tag fine time register, always 0 (used for time-tag format compatibility)
+@item @code{0x18} @tab
+REG @tab
+@code{acq_start_tag_meta} @tab
+Acquisition start time-tag metadata register
+@item @code{0x1c} @tab
+REG @tab
+@code{acq_start_tag_seconds} @tab
+Acquisition start time-tag UTC seconds register
+@item @code{0x20} @tab
+REG @tab
+@code{acq_start_tag_coarse} @tab
+Acquisition start time-tag coarse time (system clock ticks 125MHz) register
+@item @code{0x24} @tab
+REG @tab
+@code{acq_start_tag_fine} @tab
+Acquisition start time-tag fine time register, always 0 (used for time-tag format compatibility)
+@item @code{0x28} @tab
+REG @tab
+@code{acq_stop_tag_meta} @tab
+Acquisition stop time-tag metadata register
+@item @code{0x2c} @tab
+REG @tab
+@code{acq_stop_tag_seconds} @tab
+Acquisition stop time-tag UTC seconds register
+@item @code{0x30} @tab
+REG @tab
+@code{acq_stop_tag_coarse} @tab
+Acquisition stop time-tag coarse time (system clock ticks 125MHz) register
+@item @code{0x34} @tab
+REG @tab
+@code{acq_stop_tag_fine} @tab
+Acquisition stop time-tag fine time register, always 0 (used for time-tag format compatibility)
+@item @code{0x38} @tab
+REG @tab
+@code{acq_end_tag_meta} @tab
+Acquisition end time-tag metadata register
+@item @code{0x3c} @tab
+REG @tab
+@code{acq_end_tag_seconds} @tab
+Acquisition end time-tag UTC seconds register
+@item @code{0x40} @tab
+REG @tab
+@code{acq_end_tag_coarse} @tab
+Acquisition end time-tag coarse time (system clock ticks 125MHz) register
+@item @code{0x44} @tab
+REG @tab
+@code{acq_end_tag_fine} @tab
+Acquisition end time-tag fine time register, always 0 (used for time-tag format compatibility)
+@end multitable 
+@regsection @code{seconds} - UTC seconds register
+UTC seconds counter. Incremented everytime the UTC coarse counter overflows.
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/W @tab
+@code{SECONDS}
+@tab @code{X} @tab 
+UTC seconds
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@end multitable
+@regsection @code{coarse} - UTC coarse time register, system clock ticks (125MHz)
+UTC coarse time counter clocked by 125MHz system clock.
+Counts from 0 to 125000000.
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/W @tab
+@code{COARSE}
+@tab @code{X} @tab 
+UTC coarse time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@end multitable
+@regsection @code{trig_tag_meta} - Trigger time-tag metadata register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{TRIG_TAG_META}
+@tab @code{X} @tab 
+Trigger time-tag metadata
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig_tag_meta} @tab Holds time-tag metadata of the last trigger event
+@end multitable
+@regsection @code{trig_tag_seconds} - Trigger time-tag UTC seconds register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{TRIG_TAG_SECONDS}
+@tab @code{X} @tab 
+Trigger time-tag UTC seconds
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig_tag_seconds} @tab Holds time-tag UTC seconds of the last trigger event
+@end multitable
+@regsection @code{trig_tag_coarse} - Trigger time-tag coarse time (system clock ticks 125MHz) register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{TRIG_TAG_COARSE}
+@tab @code{X} @tab 
+Trigger time-tag coarse time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig_tag_coarse} @tab Holds time-tag coarse time of the last trigger event
+@end multitable
+@regsection @code{trig_tag_fine} - Trigger time-tag fine time register, always 0 (used for time-tag format compatibility)
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{TRIG_TAG_FINE}
+@tab @code{X} @tab 
+Trigger time-tag fine time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig_tag_fine} @tab Holds time-tag fine time of the last trigger event
+@end multitable
+@regsection @code{acq_start_tag_meta} - Acquisition start time-tag metadata register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_START_TAG_META}
+@tab @code{X} @tab 
+Acquisition start time-tag metadata
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_start_tag_meta} @tab Holds time-tag metadata of the last acquisition start event
+@end multitable
+@regsection @code{acq_start_tag_seconds} - Acquisition start time-tag UTC seconds register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_START_TAG_SECONDS}
+@tab @code{X} @tab 
+Acquisition start time-tag UTC seconds
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_start_tag_seconds} @tab Holds time-tag UTC seconds of the last acquisition start event
+@end multitable
+@regsection @code{acq_start_tag_coarse} - Acquisition start time-tag coarse time (system clock ticks 125MHz) register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_START_TAG_COARSE}
+@tab @code{X} @tab 
+Acquisition start time-tag coarse time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_start_tag_coarse} @tab Holds time-tag coarse time of the last acquisition start event
+@end multitable
+@regsection @code{acq_start_tag_fine} - Acquisition start time-tag fine time register, always 0 (used for time-tag format compatibility)
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_START_TAG_FINE}
+@tab @code{X} @tab 
+Acquisition start time-tag fine time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_start_tag_fine} @tab Holds time-tag fine time of the last acquisition start event
+@end multitable
+@regsection @code{acq_stop_tag_meta} - Acquisition stop time-tag metadata register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_STOP_TAG_META}
+@tab @code{X} @tab 
+Acquisition stop time-tag metadata
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_stop_tag_meta} @tab Holds time-tag metadata of the last acquisition stop event
+@end multitable
+@regsection @code{acq_stop_tag_seconds} - Acquisition stop time-tag UTC seconds register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_STOP_TAG_SECONDS}
+@tab @code{X} @tab 
+Acquisition stop time-tag UTC seconds
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_stop_tag_seconds} @tab Holds time-tag UTC seconds of the last acquisition stop event
+@end multitable
+@regsection @code{acq_stop_tag_coarse} - Acquisition stop time-tag coarse time (system clock ticks 125MHz) register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_STOP_TAG_COARSE}
+@tab @code{X} @tab 
+Acquisition stop time-tag coarse time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_stop_tag_coarse} @tab Holds time-tag coarse time of the last acquisition stop event
+@end multitable
+@regsection @code{acq_stop_tag_fine} - Acquisition stop time-tag fine time register, always 0 (used for time-tag format compatibility)
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_STOP_TAG_FINE}
+@tab @code{X} @tab 
+Acquisition stop time-tag fine time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_stop_tag_fine} @tab Holds time-tag fine time of the last acquisition stop event
+@end multitable
+@regsection @code{acq_end_tag_meta} - Acquisition end time-tag metadata register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_END_TAG_META}
+@tab @code{X} @tab 
+Acquisition end time-tag metadata
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_end_tag_meta} @tab Holds time-tag metadata of the last acquisition end event
+@end multitable
+@regsection @code{acq_end_tag_seconds} - Acquisition end time-tag UTC seconds register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_END_TAG_SECONDS}
+@tab @code{X} @tab 
+Acquisition end time-tag UTC seconds
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_end_tag_seconds} @tab Holds time-tag UTC seconds of the last acquisition end event
+@end multitable
+@regsection @code{acq_end_tag_coarse} - Acquisition end time-tag coarse time (system clock ticks 125MHz) register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_END_TAG_COARSE}
+@tab @code{X} @tab 
+Acquisition end time-tag coarse time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_end_tag_coarse} @tab Holds time-tag coarse time of the last acquisition end event
+@end multitable
+@regsection @code{acq_end_tag_fine} - Acquisition end time-tag fine time register, always 0 (used for time-tag format compatibility)
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{ACQ_END_TAG_FINE}
+@tab @code{X} @tab 
+Acquisition end time-tag fine time
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{acq_end_tag_fine} @tab Holds time-tag fine time of the last acquisition end event
+@end multitable
