@@ -14,7 +14,8 @@
 \newcommand{\subscript}[1]{\ensuremath{_{\textnormal{\scriptsize{#1}}}}}
 
 % Define the title
-\title{FmcAdc100m14b4cha User's Guide}
+\title{FmcAdc100m14b4cha for SPEC \\
+Firmware Guide}
 \author{Matthieu Cattin}
 
 \begin{document}
@@ -33,7 +34,7 @@
 
 % Document abstract
 \begin{abstract}
-This document, blabla...
+This document describes the hdl developed to support the FmcAdc100m14b4cha\footnote{http://www.ohwr.org/projects/fmc-adc-100m14b4cha} mezzanine card on the SPEC\footnote{http://www.ohwr.org/projects/spec} carrier card.
 \end{abstract}
 
 
@@ -43,7 +44,7 @@ This document, blabla...
 \hline
 Revision & Date & Author &  Comments\\
 \hline
-0.1 & 07.02.2012 & Matthieu CATTIN & Initial revision\\
+0.1 & 07.02.2012 & Matthieu CATTIN & Initial release\\
 \hline
 \end{tabularx}
 
@@ -83,6 +84,38 @@ Optional additional delay on the final trigger (in sampling clock ticks).
 Three input ranges, optional input 50ohms termination.
 Calibration input configuration.
 
+\begin{figure}[h!]
+  \includegraphics[width=\textwidth]{figures/analogue_input.pdf}
+  \caption{Simplified schematics of the analogue input.}
+  \label{fig:analogue_input}
+\end{figure}
+
+\begin{table}[ht]
+  \centering
+  \begin{tabularx}{\textwidth}{| X | c | c | c | c | c | c | c |}
+    \hline
+    & \textbf{SW1} & \textbf{SW2}  & \textbf{SW3} & \textbf{SW4} & \textbf{SW5} & \textbf{SW6} & \textbf{SW7} \\
+    \hline
+    \textbf{100mV range} & ON & ON & OFF & X & OFF & ON & OFF \\
+    \hline
+    \textbf{1V range} & ON & OFF & OFF & X & ON & OFF & OFF \\
+    \hline
+    \textbf{10V range} & ON & OFF & ON & X & OFF & OFF & ON \\
+    \hline
+    \textbf{100mV range calibration} & OFF & ON & OFF & OFF & OFF & OFF & ON \\
+    \hline
+    \textbf{1V range calibration} & OFF & OFF & OFF & OFF & OFF & OFF & ON \\
+    \hline
+    \textbf{10V range calibration} & OFF & OFF & ON & OFF & OFF & OFF & ON \\
+    \hline
+    \textbf{Disconnect input} & OFF & X & X & OFF & OFF & OFF & X \\
+    \hline
+    \textbf{50ohm termination} & X & X & X & ON & X & X & X \\
+    \hline
+  \end{tabularx}
+  \caption{Analogue input switches.}
+  \label{tab:input_sw}
+\end{table}
 
 \subsection{Input offset}
 
@@ -168,7 +201,7 @@ records described in the FMC Standard VITA 57.1 (see table \ref{tab:eeprom_sdbfs
     & & & device = 0xC5BE045E \\
     \hline
   \end{tabularx}
-  \caption{EEPROM sdbfs}
+  \caption{EEPROM sdb file system.}
   \label{tab:eeprom_sdbfs}
 \end{table}
 
@@ -220,7 +253,7 @@ The first column "Byte offset" represents the offset within the binary file.
     52 & & Temperature & 16-bit unsigned * 0.01$^\circ$C \\
     \hline
   \end{tabularx}
-  \caption{ADC calibration data}
+  \caption{ADC calibration data.}
   \label{tab:adc_calibr_data_eeprom}
 \end{table}
 
@@ -267,7 +300,7 @@ The first column "Byte offset" represents the offset within the binary file.
     106 & & Temperature & 16-bit unsigned * 0.01$^\circ$C \\
     \hline
   \end{tabularx}
-  \caption{DAC calibration data}
+  \caption{DAC calibration data.}
   \label{tab:dac_calibr_data_eeprom}
 \end{table}
 
