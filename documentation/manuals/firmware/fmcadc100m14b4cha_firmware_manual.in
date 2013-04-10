@@ -58,10 +58,165 @@
 
 This document describes the hdl developed to support the FmcAdc100m14b4cha@footnote{http://www.ohwr.org/projects/fmc-adc-100m14b4cha} mezzanine card on the SPEC@footnote{http://www.ohwr.org/projects/spec} carrier card.
 
+@c ##########################################################################
+@node Architecture
+@chapter Architecture
+
+This chapter describes each internal block of the FPGA.
+All blocks (except the memory controller) are connected to the PCIe bridge interface through a wishbone bus. The DDR memory can only be access through DMA.
+The figure @ref{fig:firmware_arch} illustrates the FPGA architecture. The peripherals connected to each block are also shown.
+A crossbar from the general-cores@footnote{http://www.ohwr.org/projects/general-cores} library is used to map the Wishbone slaves in the BAR 0 address space.
+The following table shows the memory mapping.
+
+@float Table,tab:memory_map
+@multitable @columnfractions .10 .25 .30 .35
+@headitem Byte offset @tab Core @tab Library @tab Description
+@item @code{0x0000} @tab sdb_rom            @tab general-cores       @tab SDB records
+@item @code{0x1000} @tab gn4124_core        @tab gn4124-core         @tab DMA controller
+@item @code{0x1100} @tab -                  @tab -                   @tab Carrier SPI master@footnote{Not implemented.}
+@item @code{0x1200} @tab xwb_onewire_master @tab general-cores       @tab Carrier 1-wire master
+@item @code{0x1300} @tab carrier_csr        @tab fmc-adc-100m14b4cha @tab Carrier control and status
+@item @code{0x1400} @tab utc_core           @tab fmc-adc-100m14b4cha @tab Time-tagging core
+@item @code{0x1500} @tab irq_controller     @tab fmc-adc-100m14b4cha @tab Interrupt controller
+@item @code{0x1600} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine system I2C master
+@item @code{0x1700} @tab xwb_spi            @tab general-cores       @tab Mezzanine SPI master
+@item @code{0x1800} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine I2C master
+@item @code{0x1900} @tab fmc_adc_100Ms_core @tab fmc-adc-100m14b4cha @tab ADC core
+@item @code{0x1A00} @tab xwb_onewire_master @tab general-cores       @tab Mezzanine 1-wire master
+@end multitable
+@caption{Wishbone bus memory mapping (BAR 0).}
+@end float
+
+The Wishbone crossbar also implements SDB@footnote{http://www.ohwr.org/projects/fpga-config-space} records. Those records describes the Wishbone slaves and their mapping on the bus.
+
+Note that some of the cores from the general-cores library are based on cores from OpenCores@footnote{http://opencores.org/}. Therefore, the documentation for those cores is hosted on the OpenCores website.
+
+The register description for the cores from the carrier control and status, the time-tagging core, the interrupt controller and the ADC core can be found in annexe.
+
 @float Figure,fig:firmware_arch
 @center @image{../../figures/firmware_arch, 15cm,,,pdf}
 @caption{FPGA firmware architecture block diargam.}
 @end float
+
+- TODO registers are 32-bits
+
+@c --------------------------------------------------------------------------
+@section Clocks
+
+- TODO add info about clocks (sys, ddr, local bus, )
+
+@c --------------------------------------------------------------------------
+@section GN4124 core
+
+This block is the interface between the GN4124@footnote{PCI Express bridge from Semtech (was Gennum)} local bus and the other blocks in the FPGA.
+The GN4124 is a four lane PCI Express bridge. In addition to th PHY, it also contains the data link and transaction layers.
+The GN4124 bridge is used to access the FPGA registers, but also to generate MSI interrupts and re-program the FPGA.
+The BAR 4 (Base Address Register) allows access to the GN4124 internal registers.
+The BAR 0 is connected to the local bus and therefore allows access to the FPGA.
+
+The GN4124 core is made of a local bus interface with the GN4124 chip, a Wishbone bus master mapped to BAR0 and a DMA controller. The DMA controller has two Wishbone ports. A Wishbone slave to configure the DMA controller and a Wishbone master to access the DDR memory.
+
+- wb addr alignment
+- ddr memory access (interleaved, no address converter)
+
+@c --------------------------------------------------------------------------
+@section Carrier control and status
+
+This block contains control and status registers related to the carrier board.
+A first register allows to readout the carrier PCB revision and carrier type.
+Another register signals the presence of a mezzanine in the FMC slot, gives the status of the local bus and system PLLs and indicates the DDR memory controller calibration state.
+The last register of this block allows to control the carrier's LEDs on the front panel. There is on red and one green LED.
+
+@c --------------------------------------------------------------------------
+@section Carrier 1-wire master
+
+This 1-wire master controls the DS18B20 thermometer chip located on the carrier board.
+This chip also contains a unique 64-bit identifier.
+This block is based on an OpenCores design.
+
+- TODO add ref to opencores doc
+
+@c --------------------------------------------------------------------------
+@section Carrier SPI master
+
+The carrier SPI master is not implemented. It is meant to control DACs connected to VCXO for White Rabbit@footnote{http://www.ohwr.org/projects/white-rabbit} applications.
+
+@c --------------------------------------------------------------------------
+@section Memory controller
+
+
+
+@c --------------------------------------------------------------------------
+@section Interrupt controller
+
+The interrupt controller has four interrupt inputs and one interrupt request output.
+It also have one interrupt enable mask register and one interrupt source register.
+Each time a valid rising edge is detected on one of the inputs, a pulse is generated on the interrupt request output.
+A rising edge is valid if the corresponding bit in the interrupt enable mask register is set.
+When a valid rising edge is detected, the corresponding bit in the interrupt source register is set as well. This indicates to the host which source caused the interrput.
+To clear a bit in the interrupt source register, a '1' must be written to it.
+
+- TODO explain the multi-irq register (or remove it!)
+
+
+@c --------------------------------------------------------------------------
+@section Time-tagging core
+
+This block allows time-tagging of interresting events in the ADC core.
+It is based on a second counter and a 125MHz system clock ticks counter.
+Those two counters are accessible in read/write mode via registers.
+The following events are time-tagged:
+@itemize @bullet
+@item The trigger
+@item The acquisition start
+@item The acquisition stop
+@item The acquisition end
+@end itemize
+To time-tag the events, the ADC core sends pulses to the time-tagging core.
+
+@c --------------------------------------------------------------------------
+@section ADC core
+
+
+
+@c --------------------------------------------------------------------------
+@section Mezzanine SPI master
+
+This SPI master controls the LTC2174 ADC and the four MAX5442 offset DACs.
+The following table shows how the peripherals are wired to the core.
+@float Table,tab:spi_ss
+@multitable @columnfractions .12 .35
+@headitem Slave select @tab Peripheral
+@item @code{0} @tab LTC2174 ADC
+@item @code{1} @tab MAX5442 DAC for channel 1
+@item @code{2} @tab MAX5442 DAC for channel 2
+@item @code{3} @tab MAX5442 DAC for channel 3
+@item @code{4} @tab MAX5442 DAC for channel 4
+@end multitable
+@caption{Mezzanine SPI slave select lines mapping.}
+@end float
+This block is based on an OpenCores design.
+
+- TODO add ref to opencores doc
+
+@c --------------------------------------------------------------------------
+@section Mezzanine 1-wire master
+
+This 1-wire master controls the DS18B20 thermometer chip located on the mezzanine board.
+This chip also contains a unique 64-bit identifier.
+This block is based on an OpenCores design.
+
+- TODO add ref to opencores doc
+
+@c --------------------------------------------------------------------------
+@section Mezzanine I2C master
+
+
+
+@c --------------------------------------------------------------------------
+@section Mezzanine system management I2C master
+
+
 
 
 @c ##########################################################################
@@ -78,7 +233,8 @@ Calibration input configuration.
 @caption{Simplified schematics of the analogue input.}
 @end float
 
-Only the following input switch configurations are valid. All other switch configurations shouldn't be used.
+Only the following input switch configurations are valid.
+All other switch configurations shouldn't be used.
 
 @float Table,tab:switch_config
 @multitable @columnfractions .09 .08 .08 .08 .08 .08 .08 .08 .35
@@ -113,7 +269,8 @@ Where:
 
 @code{Vdac = DAC voltage}
 
-The following equation shows the relation between the input voltage and the offset (applied by the DAC). Note that the offset from the DAC is subtracted from the input voltage.
+The following equation shows the relation between the input voltage and the offset (applied by the DAC).
+Note that the offset from the DAC is subtracted from the input voltage.
 
 
 @code{Vout = Vin - Vdac}
@@ -328,6 +485,19 @@ The first column "Byte offset" represents the offset within the binary file.
 @appendix Carrier registers
 @anchor{Carrier registers}
    @include carrier_csr.tex
+
+@c --------------------------------------------------------------------------
+@appendix Glossary
+@section Glossary
+
+@table @b
+@item Local bus
+      The @b{local bus} is the interface between the GN4124 and the FPGA.
+@item Pulse
+      In this document, a @b{pulse} refers to a one clock tick wide pulse.
+@item Tick
+      A clock @b{tick} corresponds to a period of the clock.
+@end table
 
 
 
