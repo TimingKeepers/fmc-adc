@@ -1,6 +1,6 @@
 \input texinfo    @c -*-texinfo-*-
 %
-% fine-delay.in - main file for the documentation
+% fmcadc100m14b4cha_firmware_manual.in - main file for the documentation
 %
 %%%%
 
@@ -40,10 +40,11 @@
 @finalout
 
 @titlepage
-@center @image{../../figures/cern_logo,3cm,,,pdf} @hfill @image{../../figures/ohr_logo,3cm,,,pdf}
 @title FmcAdc100m14b4cha Firmware Guide
 @subtitle @value{update-month}
 @subtitle Simple PCIe FMC Carrier (SPEC) version
+@sp 10
+@center @image{../../figures/cern_logo,3cm,,,pdf} @hfill @image{../../figures/ohr_logo,3cm,,,pdf}
 @author Matthieu Cattin (CERN)
 @end titlepage
 @headings single
@@ -56,20 +57,20 @@
 @node Top
 @top Introduction
 
-This document describes the hdl developed to support the FmcAdc100m14b4cha@footnote{http://www.ohwr.org/projects/fmc-adc-100m14b4cha} mezzanine card on the SPEC@footnote{http://www.ohwr.org/projects/spec} carrier card.
+This document describes the hdl developed to support the FmcAdc100m14b4cha@footnote{http://www.ohwr.org/projects/fmc-adc-100m14b4cha} (later refered to as fmc-adc) mezzanine card on the SPEC@footnote{http://www.ohwr.org/projects/spec} carrier card.
 
 @c ##########################################################################
 @node Architecture
 @chapter Architecture
 
-This chapter describes each internal block of the FPGA.
-All blocks (except the memory controller) are connected to the PCIe bridge interface through a wishbone bus. The DDR memory can only be access through DMA.
-The figure @ref{fig:firmware_arch} illustrates the FPGA architecture. The peripherals connected to each block are also shown.
+This chapter describes the internal blocks of the FPGA.
+All blocks (except the memory controller) are connected to the PCIe bridge interface through a Wishbone bus. The DDR memory can only be access through DMA.
+The @ref{fig:firmware_arch} illustrates the FPGA architecture. The peripherals connected to each block are also shown.
 A crossbar from the general-cores@footnote{http://www.ohwr.org/projects/general-cores} library is used to map the Wishbone slaves in the BAR 0 address space.
 The following table shows the memory mapping.
 
 @float Table,tab:memory_map
-@multitable @columnfractions .10 .25 .30 .35
+@multitable {Byte offset}{xwb_onewire_master}{fmc-adc-100m14b4cha}{Mezzanine system @math{I^2C} master}
 @headitem Byte offset @tab Core @tab Library @tab Description
 @item @code{0x0000} @tab sdb_rom            @tab general-cores       @tab SDB records
 @item @code{0x1000} @tab gn4124_core        @tab gn4124-core         @tab DMA controller
@@ -78,9 +79,9 @@ The following table shows the memory mapping.
 @item @code{0x1300} @tab carrier_csr        @tab fmc-adc-100m14b4cha @tab Carrier control and status
 @item @code{0x1400} @tab utc_core           @tab fmc-adc-100m14b4cha @tab Time-tagging core
 @item @code{0x1500} @tab irq_controller     @tab fmc-adc-100m14b4cha @tab Interrupt controller
-@item @code{0x1600} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine system I2C master
+@item @code{0x1600} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine system @math{I^2C} master
 @item @code{0x1700} @tab xwb_spi            @tab general-cores       @tab Mezzanine SPI master
-@item @code{0x1800} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine I2C master
+@item @code{0x1800} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine @math{I^2C} master
 @item @code{0x1900} @tab fmc_adc_100Ms_core @tab fmc-adc-100m14b4cha @tab ADC core
 @item @code{0x1A00} @tab xwb_onewire_master @tab general-cores       @tab Mezzanine 1-wire master
 @end multitable
@@ -88,22 +89,39 @@ The following table shows the memory mapping.
 @end float
 
 The Wishbone crossbar also implements SDB@footnote{http://www.ohwr.org/projects/fpga-config-space} records. Those records describes the Wishbone slaves and their mapping on the bus.
+The SDB records ROM must be located at offset @code{0x0}.
 
 Note that some of the cores from the general-cores library are based on cores from OpenCores@footnote{http://opencores.org/}. Therefore, the documentation for those cores is hosted on the OpenCores website.
 
-The register description for the cores from the carrier control and status, the time-tagging core, the interrupt controller and the ADC core can be found in annexe.
+The register description for the cores for the carrier control and status, the time-tagging core, the interrupt controller and the ADC core can be found in annexe.
 
 @float Figure,fig:firmware_arch
 @center @image{../../figures/firmware_arch, 15cm,,,pdf}
 @caption{FPGA firmware architecture block diargam.}
 @end float
 
-- TODO registers are 32-bits
+@table @b
+@item TODO
+      registers are 32-bits
+@end table
 
 @c --------------------------------------------------------------------------
-@section Clocks
+@section Clock domains
 
-- TODO add info about clocks (sys, ddr, local bus, )
+The fmc-adc design has four different clock domains. They are listed in the followig table.
+
+@float Table,tab:clocks
+@multitable {@code{sys_clk_125}}{DDR interface clock}{125.00 MHz}{Si570 on the fmc-adc mezzanine.}
+@headitem Name @tab Description @tab Frequency @tab Source
+@item @code{sys_clk_125} @tab Main system clock @tab 125.00 MHz @tab 20MHz TCXO (carrier)
+@item @code{ddr_clk} @tab DDR interface clock @tab 333.33 MHz @tab 20MHz TCXO (carrier)
+@item @code{fs_clk} @tab Sampling clock @tab 100.00 MHz @tab Si570 (mezzanine)
+@item @code{p2l_clk} @tab Local bus clock @tab 200.00 MHz @tab GN4124 (carrier)
+@end multitable
+@caption{Clock domains.}
+@end float
+
+@b{Note:} By default, the sampling clock is 100MHz. But is can be changed to any frequency from 10MHz to 105MHz. The lower bound is defined by the Si570 programmable oscillator. While the upper bound is limited by the LTC2174 ADC.
 
 @c --------------------------------------------------------------------------
 @section GN4124 core
@@ -116,8 +134,14 @@ The BAR 0 is connected to the local bus and therefore allows access to the FPGA.
 
 The GN4124 core is made of a local bus interface with the GN4124 chip, a Wishbone bus master mapped to BAR0 and a DMA controller. The DMA controller has two Wishbone ports. A Wishbone slave to configure the DMA controller and a Wishbone master to access the DDR memory.
 
-- wb addr alignment
-- ddr memory access (interleaved, no address converter)
+@table @b
+@item TODO
+      wb addr alignment
+@item TODO
+      ddr memory access (interleaved, no address converter)
+@item TODO
+      wb buses size
+@end table
 
 @c --------------------------------------------------------------------------
 @section Carrier control and status
@@ -134,7 +158,10 @@ This 1-wire master controls the DS18B20 thermometer chip located on the carrier 
 This chip also contains a unique 64-bit identifier.
 This block is based on an OpenCores design.
 
-- TODO add ref to opencores doc
+@table @b
+@item TODO
+      add ref to opencores doc
+@end table
 
 @c --------------------------------------------------------------------------
 @section Carrier SPI master
@@ -144,46 +171,89 @@ The carrier SPI master is not implemented. It is meant to control DACs connected
 @c --------------------------------------------------------------------------
 @section Memory controller
 
+The memory controller block is the interface between the 256MB DDR memory located on the SPEC board and the other blocks in the FPGA.
+It is basically a MCB core (Memory Controller Block) generated with Xilinx CoreGen and an additional wrapper implementing two Wishbone slave interfaces.
+One of the Wishbone slave interface is connected to the ADC core.
+The other Wishbone slave interface is connected to the DMA Wishbone master of the GN4124 core.
 
+@float Table,tab:mem_ctrl_ports
+@multitable {WB Slave}{GN4124 core}{Data width}{Access type}
+@headitem WB Slave @tab WB Master @tab Data width @tab Access type
+@item @code{0} @tab ADC core @tab 64-bit @tab Write only
+@item @code{1} @tab GN4124 core @tab 32-bit @tab Read/write
+@end multitable
+@caption{Memory controller Wishbone interfaces.}
+@end float
+
+@table @b
+@item TODO
+      max bandwidth, concurent access, ...
+@item TODO
+      add ref to ddr core, xilinx doc
+@end table
 
 @c --------------------------------------------------------------------------
 @section Interrupt controller
 
-The interrupt controller has four interrupt inputs and one interrupt request output.
+The interrupt controller purpose is to concentrate several interrupt source into one interrupt request line. It has four interrupt inputs and one interrupt request output.
 It also have one interrupt enable mask register and one interrupt source register.
 Each time a valid rising edge is detected on one of the inputs, a pulse is generated on the interrupt request output.
+The interrupt request output is connected to the GPIO 8 of the GN4124 chip.
+Note that the GN4124 must be configured to generate a MSI when a rising edge is detected on GPIO 8.
 A rising edge is valid if the corresponding bit in the interrupt enable mask register is set.
 When a valid rising edge is detected, the corresponding bit in the interrupt source register is set as well. This indicates to the host which source caused the interrput.
 To clear a bit in the interrupt source register, a '1' must be written to it.
 
-- TODO explain the multi-irq register (or remove it!)
+@noindent There are four interrupt sources in the design. They are listed below.
 
+@table @b
+@item DMA done
+      This interrupt signals the end of a DMA transfer.
+@item DMA error
+      This interrupt signals an error in a DMA transfer.
+@item Trigger
+      This interrupt signals that a valid trigger arrived while the acquisition state machine was in the "wait trigger" state.
+@item Acquisition end
+      This interrupt signals the end of an acquisition. In case of multi-shot acquisition, it occurs at the end of the last shot.
+@end table
+
+@table @b
+@item TODO
+      explain the multi-irq register (or remove it!)
+@end table
 
 @c --------------------------------------------------------------------------
 @section Time-tagging core
 
 This block allows time-tagging of interresting events in the ADC core.
-It is based on a second counter and a 125MHz system clock ticks counter.
+It is based on a seconds counter and a 125MHz system clock ticks counter.
 Those two counters are accessible in read/write mode via registers.
-The following events are time-tagged:
-@itemize @bullet
-@item The trigger
-@item The acquisition start
-@item The acquisition stop
-@item The acquisition end
-@end itemize
 To time-tag the events, the ADC core sends pulses to the time-tagging core.
+The following events are time-tagged; trigger, acquisition start, acquisition stop and acquisition end.
 
 @c --------------------------------------------------------------------------
 @section ADC core
 
-
+The ADC core is the main block of the design.
+On the mezzanine interface side, it takes a data flow from the LTC2174 ADC chip, an external trigger and controls the analogue switches to select the input range or calibration mode.
+On the internal interface side, it has a Wishbone master to write data to the DDR memory controller.
+It also has a Wishbone slave to access the core's control and status regiters.
+In addition, it outputs the following event as pulses:
+@itemize @bullet
+@item Trigger
+@item Acquisition start
+@item Acquisition stop
+@item Acquisition end
+@end itemize
+The internal detailed functionning of this block is described further in the document(@xref{Configuration}, @ref{Acquisition} and @ref{Calibration}).
 
 @c --------------------------------------------------------------------------
 @section Mezzanine SPI master
 
 This SPI master controls the LTC2174 ADC and the four MAX5442 offset DACs.
 The following table shows how the peripherals are wired to the core.
+This block is based on an OpenCores design.
+
 @float Table,tab:spi_ss
 @multitable @columnfractions .12 .35
 @headitem Slave select @tab Peripheral
@@ -195,9 +265,13 @@ The following table shows how the peripherals are wired to the core.
 @end multitable
 @caption{Mezzanine SPI slave select lines mapping.}
 @end float
-This block is based on an OpenCores design.
 
-- TODO add ref to opencores doc
+@table @b
+@item TODO
+      add ref to opencores doc
+@item TODO
+      add ref to LTC2174, MAX5442 datasheet
+@end table
 
 @c --------------------------------------------------------------------------
 @section Mezzanine 1-wire master
@@ -206,18 +280,56 @@ This 1-wire master controls the DS18B20 thermometer chip located on the mezzanin
 This chip also contains a unique 64-bit identifier.
 This block is based on an OpenCores design.
 
-- TODO add ref to opencores doc
+@table @b
+@item TODO
+      add ref to opencores doc
+@item TODO
+      add ref to DS18B20 datasheet
+@end table
 
 @c --------------------------------------------------------------------------
-@section Mezzanine I2C master
+@section Mezzanine @math{I^2C} master
 
+This @math{I^2C} master controls the Si570 programmable oscillator chip located on the mezzanine board.
+This chip is used to produce the ADC sampling clock.
+This block is based on an OpenCores design.
 
+@float Table,tab:i2c_slave
+@multitable @columnfractions .15 .50
+@headitem Slave address @tab Peripheral
+@item @code{0x55} @tab Si570 programmable oscillator
+@end multitable
+@caption{Mezzanine @math{I^2C} slaves mapping.}
+@end float
+
+@table @b
+@item TODO
+      add ref to opencores doc
+@item TODO
+      add ref to Si570 datasheet
+@end table
 
 @c --------------------------------------------------------------------------
-@section Mezzanine system management I2C master
+@section Mezzanine system management @math{I^2C} master
 
+This @math{I^2C} master access the 24AA64T 64Kb EEPROM memory chip located on the mezzanine board.
+This memory is mandatory as specified in the FMC standard (VITA 57.1). It is connected to the system management @math{I^2C} bus, also specified in the FMC standard.
+This block is based on an OpenCores design.
 
+@float Table,tab:sys_i2c_slave
+@multitable @columnfractions .15 .50
+@headitem Slave address @tab Peripheral
+@item @code{0x50} @tab 24AA64T 64Kb EEPROM memory
+@end multitable
+@caption{Mezzanine system management @math{I^2C} slaves mapping.}
+@end float
 
+@table @b
+@item TODO
+      add ref to opencores doc
+@item TODO
+      add ref to 24AA64T datasheet
+@end table
 
 @c ##########################################################################
 @node Configuration
@@ -225,8 +337,6 @@ This block is based on an OpenCores design.
 
 @c --------------------------------------------------------------------------
 @section Input ranges
-Three input ranges, optional input 50ohms termination.
-Calibration input configuration.
 
 @float Figure,fig:analogue_input
 @center @image{../../figures/analogue_input, 15cm,,,pdf}
@@ -234,10 +344,10 @@ Calibration input configuration.
 @end float
 
 Only the following input switch configurations are valid.
-All other switch configurations shouldn't be used.
+For all others switch configurations, the behaviour is not defined and therefore shouldn't be used.
 
 @float Table,tab:switch_config
-@multitable @columnfractions .09 .08 .08 .08 .08 .08 .08 .08 .35
+@multitable {SW[7..1]}{SW7}{SW6}{SW5}{SW4}{SW3}{SW2}{SW1}{100mV range offset calibration}
 @headitem SW[7..1] @tab SW7 @tab SW6 @tab SW5 @tab SW4 @tab SW3 @tab SW2 @tab SW1 @tab Description
 @item @code{0x23} @tab @code{OFF} @tab @code{ON}  @tab @code{OFF} @tab @code{X}   @tab @code{OFF} @tab @code{ON}  @tab @code{ON}  @tab 100mV range
 @item @code{0x11} @tab @code{OFF} @tab @code{OFF} @tab @code{ON}  @tab @code{X}   @tab @code{OFF} @tab @code{OFF} @tab @code{ON}  @tab 1V range
@@ -251,37 +361,45 @@ All other switch configurations shouldn't be used.
 @caption{Analogue input switches configurations.}
 @end float
 
+@table @b
+@item TODO
+      Three input ranges, optional input 50ohms termination.
+@item TODO
+      Calibration input configuration.
+@end table
+
 @c --------------------------------------------------------------------------
 @section Input offset
 
-Each channel has a DAC allowing to apply a dc offset to the input signal.
+Each channel has a 16-bit DAC allowing to apply a dc offset to the input signal.
 The voltage range of the DAC is 10V (-5V to +5V) and is independent from the selected input range.
 
 The following equation shows how to convert a digital value written to a DAC to an offset voltage.
 
-@code{Vdac = Vref * Ddac/0x8000}
-
+@example
+@group
+v_dac = v_ref * d_dac/0x8000
 Where:
-
-@code{Vref = 5V}
-
-@code{Ddac = digital value written to the DAC}
-
-@code{Vdac = DAC voltage}
+v_ref = DAC's voltage reference = 5V
+d_dac = Digital value written to the DAC
+v_dac = DAC voltage
+@sp 1
+@end group
+@end example
 
 The following equation shows the relation between the input voltage and the offset (applied by the DAC).
 Note that the offset from the DAC is subtracted from the input voltage.
 
-
-@code{Vout = Vin - Vdac}
-
+@example
+@group
+v_out = v_in - v_dac
 Where:
-
-@code{Vin = Input voltage}
-
-@code{Vdac = DAC voltage}
-
-@code{Vout = Output voltage (to filter stage and ADC)}
+v_in  = Input voltage
+v_dac = DAC voltage
+v_out = Output voltage (to filter and ADC)
+@sp 1
+@end group
+@end example
 
 @c --------------------------------------------------------------------------
 @section Trigger
