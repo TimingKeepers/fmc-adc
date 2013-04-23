@@ -335,8 +335,23 @@ This block is based on an OpenCores design.
 @node Configuration
 @chapter Configuration
 
+The @ref{fig:adc_core_fs_clk} is a block diagram of the ADC core part in the sampling clock domain. It contains a ADC data stream de-serialiser, an offset and gain correction (of ADC data)block, an under-sampling block and a trigger unit.
+The four channels data and the trigger signal are synchronised to the system clock domain using a FIFO.
+The configuration signals coming from registers in the system clock domain are synchronised to the sampling clock within the Wishbone slave (wbgen2 feature).
+
+@float Figure,fig:adc_core_fs_clk
+@center @image{../../figures/adc_core_fs_clk, 15cm,,,pdf}
+@caption{ADC core diagram (sampling clock domain).}
+@end float
+
+
 @c --------------------------------------------------------------------------
 @section Input ranges
+
+The @ref{fig:analogue_input} shows a simplified schematics of the analogue input used for each channel.
+Each input can be independantly configured with one of the three available ranges; 100mV, 1V, 10V.
+Each range is defined as the maximum peak-to-peak input voltage.
+Independantly to the selected range, a 50ohms termination can be added to each input.
 
 @float Figure,fig:analogue_input
 @center @image{../../figures/analogue_input, 15cm,,,pdf}
@@ -362,8 +377,6 @@ For all others switch configurations, the behaviour is not defined and therefore
 @end float
 
 @table @b
-@item TODO
-      Three input ranges, optional input 50ohms termination.
 @item TODO
       Calibration input configuration.
 @end table
@@ -403,17 +416,57 @@ v_out = Output voltage (to filter and ADC)
 
 @c --------------------------------------------------------------------------
 @section Trigger
-Software and/or hardware trigger. Internal or external hardware trigger, polarity selection.
-Optional additional delay on the final trigger (in sampling clock ticks).
+
+The trigger unit is made of a hardware and a software source.
+Each hardware and software sources can be enabled independantly.
+The two sources are then or'ed together to drive a delay generator.
+The delay generator allows to insert an defined number of sampling clock period before the trigger goes to the acquisition state machine.
+The hardware trigger source can be either internal (based on an adc input channel) or external (dedicated trigger input).
+For both internal and external sources, the polarity can be selected between positive and negative slope (resp. rising and falling edge). By default the polatity is set to positive slope.
+For the internal trigger source, the adc input channel and the threshold should be configured.
+By default, the channel 1 is selected and the threshold is set to 0.
+Note that the threshold is 16-bit signed (two's complement).
+The @ref{fig:trig_hw_int} sketches the internal hardware trigger threshold behaviour.
+The software trigger source concists in a pulse generated when a write cycle is detected on the "Software trigger".
+The @ref{fig:trig_unit} shows the different trigger configurations.
+For futher information on the trigger configuration registers @pxref{ADC core registers}.
 
 @float Figure,fig:trig_unit
 @center @image{../../figures/trigger_unit, 15cm,,,pdf}
 @caption{Trigger unit diagram.}
 @end float
 
+@float Figure,fig:trig_hw_int
+@center @image{../../figures/trig_hw_int, 15cm,,,pdf}
+@caption{Internal hardware trigger trheshold.}
+@end float
+
+@table @b
+@item TODO
+External trigger input synch, glitch filter, expected 100MHz fs_clk (-> could be a limitation), input bandwidth (or reflexions killing input signal)...
+@end table
+
+@c --------------------------------------------------------------------------
+@section Undersampling
+
+The undersampling block is simply validating one in N samples and forwarding it to the acquisition logic.
+The number (N) is configured in the "Sample rate" register.
+If N > 1, then the trigger pulse is aligned to the next valid sample.
+If N = 1 all the samples are valid and therefore the trigger is always aligned.
+A value of N = 0 is treated as N = 1 in the firmware.
+
+@b{Note:} Undersampling might be unaccurately called decimation in the documentation or source code.
+
+
 @c --------------------------------------------------------------------------
 @section Time-stamping
 
+@table @b
+@item TODO
+Setting counters (e.g. with host OS time, ntp)
+@item TODO
+WR benefits -> improvement section.
+@end table
 
 
 
@@ -470,9 +523,11 @@ where:
 @node Acquisition
 @chapter Acquisition
 
-@float Figure,fig:adc_core_fs_clk
-@center @image{../../figures/adc_core_fs_clk, 15cm,,,pdf}
-@caption{ADC core diagram (sampling clock domain).}
+
+
+@float Figure,fig:acq_fsm
+@center @image{../../figures/acq_fsm, 15cm,,,pdf}
+@caption{Acquisition state machine.}
 @end float
 
 @float Figure,fig:adc_core_sys_clk
@@ -498,6 +553,18 @@ where:
 @item Memory management (with figure)
 @item ...
 @end itemize
+
+@c ##########################################################################
+@node Improvements
+@chapter Improvements
+
+@table @b
+@item TODO
+WR -> time-tag, sampling clock control...
+@item TODO
+...
+@end table
+
 
 
 @c ##########################################################################

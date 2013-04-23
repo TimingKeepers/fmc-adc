@@ -61,16 +61,20 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="466.53983"
-     inkscape:cy="173.07614"
+     inkscape:cx="347.74813"
+     inkscape:cy="141.86467"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g3179"
      showgrid="false"
      inkscape:window-width="1916"
      inkscape:window-height="1118"
      inkscape:window-x="0"
      inkscape:window-y="25"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid18254" />
+  </sodipodi:namedview>
   <metadata
      id="metadata3531">
     <rdf:RDF>
@@ -206,13 +210,13 @@
          sodipodi:linespacing="125%"
          id="text4087"
          y="149.83934"
-         x="367.68146"
+         x="358.01105"
          style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
          xml:space="preserve"><tspan
            y="149.83934"
-           x="367.68146"
+           x="358.01105"
            id="tspan4089"
-           sodipodi:role="line">Decimation</tspan></text>
+           sodipodi:role="line">Undersampling</tspan></text>
       <rect
          y="127.86414"
          x="356.28873"
