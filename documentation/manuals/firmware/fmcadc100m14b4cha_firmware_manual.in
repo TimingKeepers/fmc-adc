@@ -30,10 +30,10 @@
 @iftex
 @afourpaper
 @end iftex
-@paragraphindent 3
+@c @paragraphindent 0
 @comment %**end of header
 
-@setchapternewpage off
+@setchapternewpage on
 
 @set update-month April 2013
 
@@ -42,7 +42,7 @@
 @titlepage
 @title FmcAdc100m14b4cha Firmware Guide
 @subtitle @value{update-month}
-@subtitle Simple PCIe FMC Carrier (SPEC) version
+@subtitle For Simple PCIe FMC Carrier (SPEC)
 @sp 10
 @center @image{../../figures/cern_logo,3cm,,,pdf} @hfill @image{../../figures/ohr_logo,3cm,,,pdf}
 @author Matthieu Cattin (CERN)
@@ -57,17 +57,25 @@
 @node Top
 @top Introduction
 
-This document describes the hdl developed to support the FmcAdc100m14b4cha@footnote{http://www.ohwr.org/projects/fmc-adc-100m14b4cha} (later refered to as fmc-adc) mezzanine card on the SPEC@footnote{http://www.ohwr.org/projects/spec} carrier card.
+This document describes the hdl (gateware) developed to support the FmcAdc100m14b4cha@footnote{http://www.ohwr.org/projects/fmc-adc-100m14b4cha} (later refered to as fmc-adc) mezzanine card on the SPEC@footnote{http://www.ohwr.org/projects/spec} carrier card.
+The gateware architecture is describled in detail.
+The configuration and operation of the gateware is also explained.
+On the other hand, this manual is not intended to provide information about the software used to control the fmc-adc board.
+
+@table @b
+@item TODO
+      ADD ref to fmc-adc sw manual...
+@end table
 
 @c ##########################################################################
 @node Architecture
 @chapter Architecture
 
 This chapter describes the internal blocks of the FPGA.
-All blocks (except the memory controller) are connected to the PCIe bridge interface through a Wishbone bus. The DDR memory can only be access through DMA.
+All blocks (except the memory controller) are connected to the PCIe bridge interface using a Wishbone bus. The DDR memory can only be access through DMA.
 The @ref{fig:firmware_arch} illustrates the FPGA architecture. The peripherals connected to each block are also shown.
 A crossbar from the general-cores@footnote{http://www.ohwr.org/projects/general-cores} library is used to map the Wishbone slaves in the BAR 0 address space.
-The following table shows the memory mapping.
+The @ref{tab:memory_map} shows the memory mapping.
 
 @float Table,tab:memory_map
 @multitable {Byte offset}{xwb_onewire_master}{fmc-adc-100m14b4cha}{Mezzanine system @math{I^2C} master}
@@ -88,8 +96,28 @@ The following table shows the memory mapping.
 @caption{Wishbone bus memory mapping (BAR 0).}
 @end float
 
-The Wishbone crossbar also implements SDB@footnote{http://www.ohwr.org/projects/fpga-config-space} records. Those records describes the Wishbone slaves and their mapping on the bus.
+The Wishbone crossbar also implements SDB@footnote{http://www.ohwr.org/projects/fpga-config-space} records. Those records describe the Wishbone slaves and their mapping on the bus.
 The SDB records ROM must be located at offset @code{0x0}.
+In order to identify the gateware, SDB meta-information records are used.
+The following three meta-information records are used in the design:
+@table @b
+@item Integration
+      vendor_id = 0x0000CE42 (CERN vendor ID)@*
+      device_id = 0x47C786A2 (echo "spec_fmc-adc-100m14b4cha"|md5sum|cut -c1-8) @*
+      version   = [31:16]=major, [15:0]=minor, bcd encoded@*
+      date      = release date, format yyyymmdd@*
+      name      = "spec_fmcadc100m14b"
+@item Top module repository url
+      repo_url = "git://ohwr.org/fmc-projects/fmc-adc-100m14b4cha.git"
+@item Synthesis tool information
+      syn_module_name  = "spec_top_fmc_adc"@*
+      syn_commit_id    = git log -1 --format="%H" | cut -c1-32 @*
+      syn_tool_name    = "ISE"@*
+      syn_tool_version = bcd encoded synthesis tool version@*
+      syn_date         = synthesis date, format yyyymmdd@*
+      syn_username     = "mcattin" (synthesised by)
+@end table
+
 
 Note that some of the cores from the general-cores library are based on cores from OpenCores@footnote{http://opencores.org/}. Therefore, the documentation for those cores is hosted on the OpenCores website.
 
@@ -100,9 +128,17 @@ The register description for the cores for the carrier control and status, the t
 @caption{FPGA firmware architecture block diargam.}
 @end float
 
+There are three different Wishbone bus in the design.
 @table @b
-@item TODO
-      registers are 32-bits
+@item Mapped WB bus (blue)
+      This bus connects all the peripheral to the GN4142 core.@*
+      Data: 32-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
+@item ADC core to memory controller (orange)
+      This bus is used to write samples from the ADC core to the DDR memory.@*
+      Data: 64-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
+@item Memory controller to GN4124 core (red)
+      This bus is used to read samples from the DDR memory.@*
+      Data: 32-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
 @end table
 
 @c --------------------------------------------------------------------------
@@ -121,13 +157,15 @@ The fmc-adc design has four different clock domains. They are listed in the foll
 @caption{Clock domains.}
 @end float
 
-@b{Note:} By default, the sampling clock is 100MHz. But is can be changed to any frequency from 10MHz to 105MHz. The lower bound is defined by the Si570 programmable oscillator. While the upper bound is limited by the LTC2174 ADC.
+@quotation Note
+By default, the sampling clock is 100MHz. But it can be changed to any frequency from 10MHz to 105MHz. The lower bound is defined by the Si570 programmable oscillator. While the upper bound is limited by the LTC2174 ADC.
+@end quotation
 
 @c --------------------------------------------------------------------------
 @section GN4124 core
 
-This block is the interface between the GN4124@footnote{PCI Express bridge from Semtech (was Gennum)} local bus and the other blocks in the FPGA.
-The GN4124 is a four lane PCI Express bridge. In addition to th PHY, it also contains the data link and transaction layers.
+This block is the interface between the GN4124@footnote{PCI Express bridge from Semtech (formerly Gennum)} local bus and the other blocks in the FPGA.
+The GN4124 is a four lane PCI Express Generation 1.1 bridge. In addition to th PHY, it also contains the data link and transaction layers.
 The GN4124 bridge is used to access the FPGA registers, but also to generate MSI interrupts and re-program the FPGA.
 The BAR 4 (Base Address Register) allows access to the GN4124 internal registers.
 The BAR 0 is connected to the local bus and therefore allows access to the FPGA.
@@ -225,7 +263,7 @@ To clear a bit in the interrupt source register, a '1' must be written to it.
 @c --------------------------------------------------------------------------
 @section Time-tagging core
 
-This block allows time-tagging of interresting events in the ADC core.
+This block allows time-tagging of important events in the ADC core.
 It is based on a seconds counter and a 125MHz system clock ticks counter.
 Those two counters are accessible in read/write mode via registers.
 To time-tag the events, the ADC core sends pulses to the time-tagging core.
@@ -239,7 +277,7 @@ On the mezzanine interface side, it takes a data flow from the LTC2174 ADC chip,
 On the internal interface side, it has a Wishbone master to write data to the DDR memory controller.
 It also has a Wishbone slave to access the core's control and status regiters.
 In addition, it outputs the following event as pulses:
-@itemize @bullet
+@itemize @textdegree
 @item Trigger
 @item Acquisition start
 @item Acquisition stop
@@ -335,15 +373,19 @@ This block is based on an OpenCores design.
 @node Configuration
 @chapter Configuration
 
-The @ref{fig:adc_core_fs_clk} is a block diagram of the ADC core part in the sampling clock domain. It contains a ADC data stream de-serialiser, an offset and gain correction (of ADC data)block, an under-sampling block and a trigger unit.
+The @ref{fig:adc_core_fs_clk} is a block diagram of the ADC core part in the sampling clock domain. It contains a ADC data stream de-serialiser, an offset and gain correction block (for ADC data), an under-sampling block and a trigger unit.
 The four channels data and the trigger signal are synchronised to the system clock domain using a FIFO.
-The configuration signals coming from registers in the system clock domain are synchronised to the sampling clock within the Wishbone slave (wbgen2 feature).
+The configuration signals coming from registers in the system clock domain are synchronised to the sampling clock within the Wishbone slave (wbgen2@footnote{http://www.ohwr.org/projects/wishbone-gen} feature).
 
 @float Figure,fig:adc_core_fs_clk
 @center @image{../../figures/adc_core_fs_clk, 15cm,,,pdf}
 @caption{ADC core diagram (sampling clock domain).}
 @end float
 
+@table @b
+@item TODO
+      Data bus format (4ch x (14-bit << 2))...
+@end table
 
 @c --------------------------------------------------------------------------
 @section Input ranges
@@ -352,6 +394,10 @@ The @ref{fig:analogue_input} shows a simplified schematics of the analogue input
 Each input can be independantly configured with one of the three available ranges; 100mV, 1V, 10V.
 Each range is defined as the maximum peak-to-peak input voltage.
 Independantly to the selected range, a 50ohms termination can be added to each input.
+
+In addition to the three ranges for normal operation, there are three more configurations used for offset calibration of each range.
+
+Opto-isolated analogue switches allow the different configurations. They are represented by normal switched in the simplified schematics.
 
 @float Figure,fig:analogue_input
 @center @image{../../figures/analogue_input, 15cm,,,pdf}
@@ -368,7 +414,7 @@ For all others switch configurations, the behaviour is not defined and therefore
 @item @code{0x11} @tab @code{OFF} @tab @code{OFF} @tab @code{ON}  @tab @code{X}   @tab @code{OFF} @tab @code{OFF} @tab @code{ON}  @tab 1V range
 @item @code{0x45} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{ON}  @tab @code{OFF} @tab @code{ON}  @tab 10V range
 @item @code{0x42} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{OFF} @tab @code{ON}  @tab @code{OFF} @tab 100mV range offset calibration
-@item @code{0x40} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{OFF} @tab @code{ON}  @tab @code{ON}  @tab 1V range offset calibration
+@item @code{0x40} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{OFF} @tab @code{OFF}  @tab @code{OFF}  @tab 1V range offset calibration
 @item @code{0x44} @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{ON}  @tab @code{OFF} @tab @code{OFF} @tab 10V range offset calibration
 @item @code{0x00} @tab @code{X}   @tab @code{OFF} @tab @code{OFF} @tab @code{OFF} @tab @code{X}   @tab @code{X}   @tab @code{OFF} @tab Input disconnected
 @item @code{0x08} @tab @code{X}   @tab @code{X}   @tab @code{X}   @tab @code{ON}  @tab @code{X}   @tab @code{X}   @tab @code{X}   @tab 50ohm termination
@@ -376,17 +422,11 @@ For all others switch configurations, the behaviour is not defined and therefore
 @caption{Analogue input switches configurations.}
 @end float
 
-@table @b
-@item TODO
-      Calibration input configuration.
-@end table
-
 @c --------------------------------------------------------------------------
 @section Input offset
 
 Each channel has a 16-bit DAC allowing to apply a dc offset to the input signal.
 The voltage range of the DAC is 10V (-5V to +5V) and is independent from the selected input range.
-
 The following equation shows how to convert a digital value written to a DAC to an offset voltage.
 
 @example
@@ -396,7 +436,6 @@ Where:
 v_ref = DAC's voltage reference = 5V
 d_dac = Digital value written to the DAC
 v_dac = DAC voltage
-@sp 1
 @end group
 @end example
 
@@ -410,7 +449,6 @@ Where:
 v_in  = Input voltage
 v_dac = DAC voltage
 v_out = Output voltage (to filter and ADC)
-@sp 1
 @end group
 @end example
 
@@ -422,7 +460,8 @@ Each hardware and software sources can be enabled independantly.
 The two sources are then or'ed together to drive a delay generator.
 The delay generator allows to insert an defined number of sampling clock period before the trigger goes to the acquisition state machine.
 The hardware trigger source can be either internal (based on an adc input channel) or external (dedicated trigger input).
-For both internal and external sources, the polarity can be selected between positive and negative slope (resp. rising and falling edge). By default the polatity is set to positive slope.
+For both internal and external hardware triggers, the polarity can be selected between positive and negative slope (resp. rising and falling edge). By default the polatity is set to positive slope.
+The external trigger input is synchronised to the sampling clock. The external trigger pulse must be at least one sampling clock cycle wide.
 For the internal trigger source, the adc input channel and the threshold should be configured.
 By default, the channel 1 is selected and the threshold is set to 0.
 Note that the threshold is 16-bit signed (two's complement).
@@ -437,13 +476,13 @@ For futher information on the trigger configuration registers @pxref{ADC core re
 @end float
 
 @float Figure,fig:trig_hw_int
-@center @image{../../figures/trig_hw_int, 15cm,,,pdf}
+@center @image{../../figures/trig_hw_int, 12cm,,,pdf}
 @caption{Internal hardware trigger trheshold.}
 @end float
 
 @table @b
 @item TODO
-External trigger input synch, glitch filter, expected 100MHz fs_clk (-> could be a limitation), input bandwidth (or reflexions killing input signal)...
+Ext trigger input bandwidth (or reflexions killing input signal)...
 @end table
 
 @c --------------------------------------------------------------------------
@@ -455,34 +494,44 @@ If N > 1, then the trigger pulse is aligned to the next valid sample.
 If N = 1 all the samples are valid and therefore the trigger is always aligned.
 A value of N = 0 is treated as N = 1 in the firmware.
 
-@b{Note:} Undersampling might be unaccurately called decimation in the documentation or source code.
-
+@quotation Note
+Undersampling might be unaccurately called decimation in the documentation or source code.
+@end quotation
 
 @c --------------------------------------------------------------------------
-@section Time-stamping
+@section Time-taging
 
-@table @b
-@item TODO
-Setting counters (e.g. with host OS time, ntp)
-@item TODO
-WR benefits -> improvement section.
-@end table
+The time-tagging core contains two free running counters.
+The first one counts seconds and the second one counts system clock ticks (8ns resolution).
+The system clock ticks counter is alos called coarse counter.
+Those two counters can be set via the cores's Wishbone interface.
 
+For example, the host computer can use the OS time to set the seconds counter and simply reset the coarse counter.
 
+It is planned, in a later release, to set the time-tagging core counters using the White Rabbit core, for more details @pxref{Improvements}.
 
 @c ##########################################################################
 @node Calibration
 @chapter Calibration
 
-The calibration is done once during the prodoction tests.
+The calibration is done once during the production tests.
 It can be repeated afterwards with the production test suite (PTS) and the corresponding testbench.
-The calibration process gives four values per channel and per input range:
-ADC gain correction, ADC offset correction, DAC gain correction and DAC offset correction.
-The temperature during the calibration process is also measured.
+The calibration process gives the following four values per channel and per input range:
+@itemize @textdegree
+@item ADC gain correction
+@item ADC offset correction
+@item DAC gain correction
+@item DAC offset correction
+@end itemize
+
+Note that the temperature during the calibration process is also measured.
+This could be used for later temperature compensated calibration value computing.
+
+@c --------------------------------------------------------------------------
+@section Calibration data storage
 All the calibration values are stored in the FmcAdc100m14b4cha EEPROM.
 The EEPROM holds a sdbfs@footnote{http://www.ohwr.org/attachments/download/1594/sdbfs-2012-09-19.pdf} file system.
-In addition to the calibration values, the EEPROM also contains mandatory IPMI@footnote{Platform Management FRU Information Storage Definition v1.0} 
-records described in the FMC Standard VITA 57.1 (see table @ref{tab:eeprom_sdbfs} for mapping).
+In addition to the calibration values, the EEPROM also contains mandatory IPMI@footnote{Platform Management FRU Information Storage Definition v1.0} records specified in the FMC Standard VITA 57.1 (see table @ref{tab:eeprom_sdbfs} for mapping).
 
 @float Table,tab:eeprom_sdbfs
 @multitable @columnfractions .12 .18 .15 .30
@@ -498,61 +547,155 @@ records described in the FMC Standard VITA 57.1 (see table @ref{tab:eeprom_sdbfs
 
 Note that the vendor value 0xCE42 corresponds to CERN. While the device value 0xC5BE045E corresponds to the first 32-bit of the md5 sum of "fmc-adc-100m14b4cha".
 
+@c --------------------------------------------------------------------------
+@section Calibration data usage
+
+@subsection ADC calibration
 Two registers per channel are implemented in the FPGA for ADC gain and offset correction.
 When an input range is selected, the corresponding gain/offset correction values must be loaded from the EEPROM to those registers.
 
-As the DAC value is set once before an acquisition, there is no need to implement the gain and offset correction in the FPGA.
-Therefore gain and offset correction must be applied to the DAC value by the software.
+@float Figure,fig:off_gain_corr
+@center @image{../../figures/offset_gain_corr, 10cm,,,pdf}
+@caption{ADC offset and gain correction block.}
+@end float
 
-Below is the pseudo-code to calculate the DAC corrected value, applying gain and offset correction:
+@quotation Note
+On FPGA start-up, the gain registers are set to 0x8000 (1.000) and the offset registers to 0x0000.
+This means a unit gain and no offset.
+@end quotation
 
-@code{c_val = ((((val-0x8000+offset) << 15) * gain) >> 30)+0x8000}
 
+@subsection DAC calibration
+The DAC value is only set once before an acquisition.
+Therefore, there is no need to implement the gain and offset correction in the FPGA.
+The software controlling the fmc-adc must apply the DAC gain and offset correction prior to write a value to the DAC.
+As for the ADC correction values, there is one pair (offset, gain) of DAC correction values per input range.
+
+Below is the pseudo-code to calculate the corrected DAC value (applying gain and offset correction):
+@example
+@group
+c_val = ((((val-0x8000+offset) << 15) * gain) >> 30)+0x8000
 where:
-
-@code{c_val  = corrected value to write to DAC}
-
-@code{val    = value from user}
-
-@code{offset = DAC offset calibration value from EEPROM}
-
-@code{gain   = DAC gain calibration value from EEPROM}
+c_val  = corrected value to write to DAC
+val    = value from user
+offset = DAC offset calibration value from EEPROM
+gain   = DAC gain calibration value from EEPROM
+@end group
+@end example
 
 
 @c ##########################################################################
 @node Acquisition
 @chapter Acquisition
 
+This chapter describes the two modes of acquisition, single-shot and multi-shot.
+It also explains how the software is expected to control the fmc-adc acquisitions.
 
-
-@float Figure,fig:acq_fsm
-@center @image{../../figures/acq_fsm, 15cm,,,pdf}
-@caption{Acquisition state machine.}
-@end float
+The @ref{fig:adc_core_sys_clk} shows the ADC core acquisition logic.
+The heart of the acquisition logic is a state machine driven by user commands (start, stop), the trigger signal and counters events (e.g. pre-trig done, etc...).
+The ADC samples are routed along a datapath (bold arrows), which depends on the acquisition mode.
+It is explained in detail in the @ref{Single-shot mode} and @ref{Multi-shot mode}.
+The four channels data and the trigger are concatenated together and fed to a FIFO to synchronise between the sampling clock domain and the system clock domain.
+Even if the LTC2174 ADC is 14-bit, the data of each channel is stored in a 16-bit word.
+The 14 bits of ADC data takes the MSB part of the 16-bit word and the two LSBs are set to 0.
+Along the datapath, we call a sample a 64-bit vector containing a sample for each channel.
+At the output of the ADC core, a flow control FIFO allows to cope with the memory controller temporary unavailabilities (due to DDR refresh cycles).
 
 @float Figure,fig:adc_core_sys_clk
 @center @image{../../figures/adc_core_sys_clk, 15cm,,,pdf}
-@caption{ADC core diagram (system clock domain).}
+@caption{Acquisition logic diagram (system clock domain).}
 @end float
 
+Samples are stored interleaved in the DDR memory.
+The @ref{fig:mem_samples} illustrates the way samples are written, stored and read in the DDR memory.
+The DDR memory size is 2Gb or 256MB.
+@w{It means that the maximum number of samples that can be stored is 128M samples (@math{2^{27}*16}).}
+
+@float Figure,fig:mem_samples
+@center @image{../../figures/memory_samples, 15cm,,,pdf}
+@caption{Illustation of samples storage in DDR memory.}
+@end float
+
+The acquisition process is driven by a state machine.
+The @ref{fig:acq_fsm} represents its states and transitions.
+At start-up, the state machine is @code{IDLE}, waiting for an acquisistion start command (@code{ACQ_START}).
+Commands are sent to the state machine by writing in the @code{FSM_CMD} field of the control register (@pxref{ADC core registers}).
+When a start command is received, the state machine goes to @code{PRE_TRIG} and stays in this state until the programmed number of pre-trigger samples are recorded.
+After that, it goes in @code{WAIT_TRIG} state and continue recording sample to memory.
+When a valid trigger is detected, the state machine moves to @code{POST_TRIG}.
+It will stays in this state until the programmed number of post-trigger samples is reached.
+Then, depending on the mode, the state machine either goes back to @code{IDLE} (single-shot mode) or to @code{PRE_TRIG} (multi-shot mode).
+
+@quotation Note
+Start commands are taken into account only in @code{IDLE} state.
+@end quotation
+
+@quotation Note
+Trigger are taken into account only in @code{WAIT_TRIG} state.
+@end quotation
+
+@float Figure,fig:acq_fsm
+@center @image{../../figures/acq_fsm, 10cm,,,pdf}
+@caption{Acquisition state machine.}
+@end float
+
+There are two LED on the fmc-adc front panel.
+The LED labeled @code{ACQ} is turned ON when the acquisition state machine is @b{not} in the @code{IDLE} state.
+The LED labeled @code{TRIG} flashes when a valid trigger is detected @b{and} the acquisition state machine is in the @code{WAIT_TRIG} state.
+
 @c --------------------------------------------------------------------------
-@section Single shot mode
+@node Single-shot mode
+@section Single-shot mode
 
-@itemize
-@item State machine
-@item Memory management (with figure)
-@item ...
-@end itemize
+@enumerate
+@item Configure acquisition (trigger, number of samples, interrupts, etc...).
+@item Make sure the acquisition state machine is IDLE.
+@item Issue a start acquisition command.
+@item Trigger interrupt generated (if a valid trigger is detected).
+@item End of acquisition interrupt generated.
+@item Make sure the acquisition state machine is IDLE.
+@item Read trigger position register.
+@item Configure the DMA to retreive data.
+@item Start the DMA transfer.
+@item DMA done interrupt generated.
+@item Ready for a new acquisition start command.
+@end enumerate
+
+
+@float Figure,fig:mem_single_shot
+@center @image{../../figures/memory_single-shot, 15cm,,,pdf}
+@caption{Single-shot mode acquisition example.}
+@end float
+
+@float Figure,fig:mem_single_shot_overlap
+@center @image{../../figures/memory_single-shot_overlap, 15cm,,,pdf}
+@caption{Single-shot mode acquisition example (overlapping DDR memory).}
+@end float
+
+@table @b
+@item TODO
+      DDR used as a circular buffer...
+@item TODO
+      trig position reg (bytes? words?)
+@end table
 
 
 @c --------------------------------------------------------------------------
+@node Multi-shot mode
 @section Multi-shot mode
 
-@itemize
-@item State machine
-@item Memory management (with figure)
-@item ...
-@end itemize
+@float Figure,fig:mem_multi_shot
+@center @image{../../figures/memory_multi-shot, 15cm,,,pdf}
+@caption{.}
+@end float
+
+@table @b
+@item TODO
+      internal DPRAM -> max samples limit.
+@item TODO
+      shot packing in DDR.
+@end table
+
 
 @c ##########################################################################
 @node Improvements
