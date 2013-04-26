@@ -170,16 +170,13 @@ The GN4124 bridge is used to access the FPGA registers, but also to generate MSI
 The BAR 4 (Base Address Register) allows access to the GN4124 internal registers.
 The BAR 0 is connected to the local bus and therefore allows access to the FPGA.
 
-The GN4124 core is made of a local bus interface with the GN4124 chip, a Wishbone bus master mapped to BAR0 and a DMA controller. The DMA controller has two Wishbone ports. A Wishbone slave to configure the DMA controller and a Wishbone master to access the DDR memory.
+The GN4124 core is made of a local bus interface with the GN4124 chip, a Wishbone bus master mapped to BAR0 and a DMA controller. The DMA controller has two Wishbone ports, a Wishbone slave to configure the DMA controller and a Wishbone master to access the DDR memory.
+The GN4124 Wishbone interfaces (masters and slave) are 32-bit data width and 32-bit word aligned addresses.
 
-@table @b
-@item TODO
-      wb addr alignment
-@item TODO
-      ddr memory access (interleaved, no address converter)
-@item TODO
-      wb buses size
-@end table
+@quotation Note
+It is not possible to insert an address converter (for non-interleaved data read) between the GN4124 core and the memory controller.
+Because the DDR memory access is not efficiant when reading non-consecutive addresses.
+@end quotation
 
 @c --------------------------------------------------------------------------
 @section Carrier control and status
@@ -195,6 +192,8 @@ The last register of this block allows to control the carrier's LEDs on the fron
 This 1-wire master controls the DS18B20 thermometer chip located on the carrier board.
 This chip also contains a unique 64-bit identifier.
 This block is based on an OpenCores design.
+
+http://opencores.org/websvn,filedetails?repname=sockit_owm&path=%2Fsockit_owm%2Ftrunk%2Fdoc%2Fsockit_owr.pdf
 
 @table @b
 @item TODO
@@ -250,7 +249,7 @@ To clear a bit in the interrupt source register, a '1' must be written to it.
 @item DMA error
       This interrupt signals an error in a DMA transfer.
 @item Trigger
-      This interrupt signals that a valid trigger arrived while the acquisition state machine was in the "wait trigger" state.
+      This interrupt signals that a valid trigger arrived while the acquisition state machine was in the @code{WAIT_TRIG} state.
 @item Acquisition end
       This interrupt signals the end of an acquisition. In case of multi-shot acquisition, it occurs at the end of the last shot.
 @end table
@@ -466,7 +465,7 @@ For the internal trigger source, the adc input channel and the threshold should 
 By default, the channel 1 is selected and the threshold is set to 0.
 Note that the threshold is 16-bit signed (two's complement).
 The @ref{fig:trig_hw_int} sketches the internal hardware trigger threshold behaviour.
-The software trigger source concists in a pulse generated when a write cycle is detected on the "Software trigger".
+The software trigger source concists in a pulse generated when a write cycle is detected on the @i{Software trigger} register.
 The @ref{fig:trig_unit} shows the different trigger configurations.
 For futher information on the trigger configuration registers @pxref{ADC core registers}.
 
@@ -489,7 +488,7 @@ Ext trigger input bandwidth (or reflexions killing input signal)...
 @section Undersampling
 
 The undersampling block is simply validating one in N samples and forwarding it to the acquisition logic.
-The number (N) is configured in the "Sample rate" register.
+The number (N) is configured in the @i{Sample rate} register.
 If N > 1, then the trigger pulse is aligned to the next valid sample.
 If N = 1 all the samples are valid and therefore the trigger is always aligned.
 A value of N = 0 is treated as N = 1 in the firmware.
@@ -595,10 +594,10 @@ The @ref{fig:adc_core_sys_clk} shows the ADC core acquisition logic.
 The heart of the acquisition logic is a state machine driven by user commands (start, stop), the trigger signal and counters events (e.g. pre-trig done, etc...).
 The ADC samples are routed along a datapath (bold arrows), which depends on the acquisition mode.
 It is explained in detail in the @ref{Single-shot mode} and @ref{Multi-shot mode}.
-The four channels data and the trigger are concatenated together and fed to a FIFO to synchronise between the sampling clock domain and the system clock domain.
+The four channels data and the trigger are concatenated together and fed to a FIFO to be synchronised between the sampling clock domain and the system clock domain.
 Even if the LTC2174 ADC is 14-bit, the data of each channel is stored in a 16-bit word.
 The 14 bits of ADC data takes the MSB part of the 16-bit word and the two LSBs are set to 0.
-Along the datapath, we call a sample a 64-bit vector containing a sample for each channel.
+Along the datapath, we call @i{sample} a 64-bit vector containing a sample for each channel.
 At the output of the ADC core, a flow control FIFO allows to cope with the memory controller temporary unavailabilities (due to DDR refresh cycles).
 
 @float Figure,fig:adc_core_sys_clk
@@ -625,6 +624,8 @@ After that, it goes in @code{WAIT_TRIG} state and continue recording sample to m
 When a valid trigger is detected, the state machine moves to @code{POST_TRIG}.
 It will stays in this state until the programmed number of post-trigger samples is reached.
 Then, depending on the mode, the state machine either goes back to @code{IDLE} (single-shot mode) or to @code{PRE_TRIG} (multi-shot mode).
+When the acquisition is terminated (state machine back to @code{IDLE}) and all samples have been written to the DDR memory, only then the software can retrieve the samples using DMA transfer.
+An interrupt is generated when the acquisition ends.
 
 @quotation Note
 Start commands are taken into account only in @code{IDLE} state.
@@ -632,6 +633,10 @@ Start commands are taken into account only in @code{IDLE} state.
 
 @quotation Note
 Trigger are taken into account only in @code{WAIT_TRIG} state.
+@end quotation
+
+@quotation Note
+A stop command will bring the state machine back to @code{IDLE} from any state.
 @end quotation
 
 @float Figure,fig:acq_fsm
@@ -643,24 +648,49 @@ There are two LED on the fmc-adc front panel.
 The LED labeled @code{ACQ} is turned ON when the acquisition state machine is @b{not} in the @code{IDLE} state.
 The LED labeled @code{TRIG} flashes when a valid trigger is detected @b{and} the acquisition state machine is in the @code{WAIT_TRIG} state.
 
+@table @b
+@item TODO
+      end_acq interrupt after acq_stop command ??
+@item TODO
+      corner cases: pre/post trig = 0, 1
+@end table
+
 @c --------------------------------------------------------------------------
 @node Single-shot mode
 @section Single-shot mode
 
+The procedure below lists the different step of a single-shot acquisition process.
+
 @enumerate
 @item Configure acquisition (trigger, number of samples, interrupts, etc...).
-@item Make sure the acquisition state machine is IDLE.
-@item Issue a start acquisition command.
-@item Trigger interrupt generated (if a valid trigger is detected).
-@item End of acquisition interrupt generated.
-@item Make sure the acquisition state machine is IDLE.
+@item Issue a start acquisition command (the acquisition state machine must be IDLE).
+@item When a valid trigger is detected, an interrupt is generated.
+@item At the end of the acquisition, another interrupt is generated.
 @item Read trigger position register.
 @item Configure the DMA to retreive data.
-@item Start the DMA transfer.
-@item DMA done interrupt generated.
-@item Ready for a new acquisition start command.
+@item Start the DMA transfer (the acquisition state machine must be IDLE).
+@item When the DMA transfer is done, an interrupt is generated.
+@item The board is ready for a new acquisition start command.
 @end enumerate
 
+In single-shot mode, the DDR memory is used as a circular buffer.
+When the acquisition starts, samples are direcly written to the DDR memory (via FIFOs).
+The acquisition logic stops writing to the memory when the configured number of pre/post-trigger samples is reached.
+It could happen that the write pointer reaches the top of the memory before the end of the acquisition.
+In this case, the write pointer is reset to address zero and overwrite previous samples.
+In order to allow the software to retreive the requested samples (around the trigger), the @i{Trigger address} register s
+tores the write pointer address at the trigger moment.
+
+@quotation Note
+The value stored in the @i{Trigger address} register is a sample address (64-bit word address).
+@end quotation
+
+@quotation Note
+Every new acquisition starts writing at address @code{0x0}.
+@end quotation
+
+The @ref{fig:mem_single_shot} and @ref{fig:mem_single_shot_overlap} illustrate the use of the DDR memory as a cicular buffer.
+The acquisition state machine is also represented.
 
 @float Figure,fig:mem_single_shot
 @center @image{../../figures/memory_single-shot, 15cm,,,pdf}
@@ -672,30 +702,38 @@ The LED labeled @code{TRIG} flashes when a valid trigger is detected @b{and} the
 @caption{Single-shot mode acquisition example (overlapping DDR memory).}
 @end float
 
-@table @b
-@item TODO
-      DDR used as a circular buffer...
-@item TODO
-      trig position reg (bytes? words?)
-@end table
+@quotation Note
+@i{Orange}: Samples written to memory and read back via DMA.
+@i{Grey}: Samples written to memory, but not read.
+@i{White}: Empty memory (or previous acquisition samples).
+@end quotation
 
 
 @c --------------------------------------------------------------------------
 @node Multi-shot mode
 @section Multi-shot mode
 
+The multi-shot acquisition process is almost identical to the single-shot one, except that once the acquisition is started it will go around the state machine as many time as the number of configured shots.
+It means that if the board is configured for N shots, it will generate N trigger interrupts and then another interrupt at the end of the acquisition.
+
+Unlike the single-mode acquisition, in multi-shot, the DDR memory is not used as a circular buffer.
+Instead, two dual port RAM (dpram) are implemented inside the FPGA.
+Those dprams are alternatively used as circular buffer for each shot.
+Even shots uses dpram0 and odd shots dpram1.
+@quotation Note
+The dprams are 2048 samples deep. It means that the total number of samples (pre-trigger + post-trigger) for a shot cannot exceed 2048.
+@end quotation
+
+When a shot is finished, the correcponding dpram samples are written to the DDR memory.
+Only the pre-trigger and post-trigger samples are written.
+The first shot is written starting at address @code{0x0}.
+Then the second shot is written right after the last post-trigger sample of the first shot.
+The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
+
 @float Figure,fig:mem_multi_shot
 @center @image{../../figures/memory_multi-shot, 15cm,,,pdf}
-@caption{.}
+@caption{DDR memory usage in multi-shot mode acquisition.}
 @end float
-
-@table @b
-@item TODO
-      internal DPRAM -> max samples limit.
-@item TODO
-      shot packing in DDR.
-@end table
-
 
 @c ##########################################################################
 @node Improvements
