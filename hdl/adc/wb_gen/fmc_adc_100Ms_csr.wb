@@ -11,7 +11,7 @@ peripheral {
 
     field {
       name = "State machine commands";
-      description = "1: start\n2: stop";
+      description = "1: ACQ_START (start acquisition, only when FSM is idle)\n2: ACQ_STOP (stop acquisition, anytime)";
       prefix = "fsm_cmd";
       type = PASS_THROUGH;
       size = 2;
