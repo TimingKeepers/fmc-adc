@@ -41,7 +41,7 @@
 
 @titlepage
 @title FmcAdc100m14b4cha Firmware Guide
-@subtitle @value{update-month}
+@subtitle @value{update-month} - Release 1.1
 @subtitle For Simple PCIe FMC Carrier (SPEC)
 @sp 10
 @center @image{../../figures/cern_logo,3cm,,,pdf} @hfill @image{../../figures/ohr_logo,3cm,,,pdf}
@@ -57,10 +57,41 @@
 @node Top
 @top Introduction
 
-This document describes the hdl (gateware) developed to support the FmcAdc100m14b4cha@footnote{http://www.ohwr.org/projects/fmc-adc-100m14b4cha} (later refered to as fmc-adc) mezzanine card on the SPEC@footnote{http://www.ohwr.org/projects/spec} carrier card.
+This document describes the hdl (gateware) developed to support the FmcAdc100m14b4cha (later refered to as fmc-adc) mezzanine card on the SPEC@footnote{@uref{http://www.ohwr.org/projects/spec}} carrier card.
 The gateware architecture is describled in detail.
 The configuration and operation of the gateware is also explained.
 On the other hand, this manual is not intended to provide information about the software used to control the fmc-adc board.
+
+@c --------------------------------------------------------------------------
+@section Repositories and Releases
+
+This project is hosted on the Open Hardware repository at the following link:
+@uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}
+
+Here a list of resources that you can find on the project page.
+@table @code
+
+@item Document@footnote{@uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha/documents}}
+contains the @t{.pdf} documentation for every official release.
+
+@item File@footnote{@uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha/files}}
+contains the @t{.tar.gz} file for every official release including the @t{.git} tree.
+
+@item Repository@footnote{@uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha/repository}}
+contains the git repository of the project
+
+@end table
+
+On the repository the official releases have a tag named
+@code{spec-fmc-adc-v#maj.#min} where @code{#maj} represent the major release
+version of the gateware and @code{#min} the minor one (e.g @code{spec-fmc-adc-v1.2}).
+
+@b{Note:} If you got this from the repository (as opposed to a named
+@i{tar.gz} or @i{pdf} file) it may happen that you are looking at a later commit
+than the release this manual claims to document.
+It is a fact of life that developers forget to re-read and fix documentation
+while updating the code. In that case, please run ``@code{git describe HEAD}''
+to ensure where you are.
 
 @table @b
 @item TODO
@@ -74,7 +105,7 @@ On the other hand, this manual is not intended to provide information about the 
 This chapter describes the internal blocks of the FPGA.
 All blocks (except the memory controller) are connected to the PCIe bridge interface using a Wishbone bus. The DDR memory can only be access through DMA.
 The @ref{fig:firmware_arch} illustrates the FPGA architecture. The peripherals connected to each block are also shown.
-A crossbar from the general-cores@footnote{http://www.ohwr.org/projects/general-cores} library is used to map the Wishbone slaves in the BAR 0 address space.
+A crossbar from the general-cores@footnote{@uref{http://www.ohwr.org/projects/general-cores}} library is used to map the Wishbone slaves in the BAR 0 address space.
 The @ref{tab:memory_map} shows the memory mapping.
 
 @float Table,tab:memory_map
@@ -96,7 +127,7 @@ The @ref{tab:memory_map} shows the memory mapping.
 @caption{Wishbone bus memory mapping (BAR 0).}
 @end float
 
-The Wishbone crossbar also implements SDB@footnote{http://www.ohwr.org/projects/fpga-config-space} records. Those records describe the Wishbone slaves and their mapping on the bus.
+The Wishbone crossbar also implements SDB@footnote{@uref{http://www.ohwr.org/projects/fpga-config-space}} records. Those records describe the Wishbone slaves and their mapping on the bus.
 The SDB records ROM must be located at offset @code{0x0}.
 In order to identify the gateware, SDB meta-information records are used.
 The following three meta-information records are used in the design:
@@ -119,7 +150,8 @@ The following three meta-information records are used in the design:
 @end table
 
 
-Note that some of the cores from the general-cores library are based on cores from OpenCores@footnote{http://opencores.org/}. Therefore, the documentation for those cores is hosted on the OpenCores website.
+Note that some of the cores from the general-cores library are based on cores from
+OpenCores@footnote{@uref{http://opencores.org/}}. Therefore, the documentation for those cores is hosted on the OpenCores website.
 
 The register description for the cores for the carrier control and status, the time-tagging core, the interrupt controller and the ADC core can be found in annexe.
 
@@ -193,17 +225,20 @@ This 1-wire master controls the DS18B20 thermometer chip located on the carrier 
 This chip also contains a unique 64-bit identifier.
 This block is based on an OpenCores design.
 
-http://opencores.org/websvn,filedetails?repname=sockit_owm&path=%2Fsockit_owm%2Ftrunk%2Fdoc%2Fsockit_owr.pdf
+@uref{http://opencores.org/project@comma{}sockit_owm}
 
 @table @b
 @item TODO
-      add ref to opencores doc
+      @verbatim
+      broken @comma{} to generate url link
+      @end verbatim
 @end table
 
 @c --------------------------------------------------------------------------
 @section Carrier SPI master
 
-The carrier SPI master is not implemented. It is meant to control DACs connected to VCXO for White Rabbit@footnote{http://www.ohwr.org/projects/white-rabbit} applications.
+The carrier SPI master is not implemented. It is meant to control DACs connected to VCXO for
+White Rabbit@footnote{@uref{http://www.ohwr.org/projects/white-rabbit}} applications.
 
 @c --------------------------------------------------------------------------
 @section Memory controller
@@ -222,12 +257,16 @@ The other Wishbone slave interface is connected to the DMA Wishbone master of th
 @caption{Memory controller Wishbone interfaces.}
 @end float
 
-@table @b
-@item TODO
-      max bandwidth, concurent access, ...
-@item TODO
-      add ref to ddr core, xilinx doc
-@end table
+The memory controller side connected to the chip is 16-bit DDR data bus, clocked at 333.33 MHz.
+This gives a maximum bandwidth of 1333.33 MB/s.
+Each of the four channel is 200 MB/s, for a total of 800 MB/s.
+In the current design, the two Wishbone port have the same priority.
+The arbitration is done with a simple round-robin.
+Therefore, the samples stored in the DDR memory cannot be read during an acquisition.
+
+@uref{http://www.ohwr.org/projects/ddr3-sp6-core}
+
+@uref{http://www.xilinx.com/support/documentation/user_guides/ug388.pdf}
 
 @c --------------------------------------------------------------------------
 @section Interrupt controller
@@ -303,12 +342,11 @@ This block is based on an OpenCores design.
 @caption{Mezzanine SPI slave select lines mapping.}
 @end float
 
-@table @b
-@item TODO
-      add ref to opencores doc
-@item TODO
-      add ref to LTC2174, MAX5442 datasheet
-@end table
+@uref{http://opencores.org/project@comma{}spi}
+
+@uref{http://cds.linear.com/docs/en/datasheet/21754314fa.pdf}
+
+@uref{http://datasheets.maximintegrated.com/en/ds/MAX5441-MAX5444.pdf}
 
 @c --------------------------------------------------------------------------
 @section Mezzanine 1-wire master
@@ -317,12 +355,9 @@ This 1-wire master controls the DS18B20 thermometer chip located on the mezzanin
 This chip also contains a unique 64-bit identifier.
 This block is based on an OpenCores design.
 
-@table @b
-@item TODO
-      add ref to opencores doc
-@item TODO
-      add ref to DS18B20 datasheet
-@end table
+@uref{http://opencores.org/project@comma{}sockit_owm}
+
+@uref{http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf}
 
 @c --------------------------------------------------------------------------
 @section Mezzanine @math{I^2C} master
@@ -339,34 +374,28 @@ This block is based on an OpenCores design.
 @caption{Mezzanine @math{I^2C} slaves mapping.}
 @end float
 
-@table @b
-@item TODO
-      add ref to opencores doc
-@item TODO
-      add ref to Si570 datasheet
-@end table
+@uref{http://opencores.org/project@comma{}i2c}
+
+@uref{https://www.silabs.com/Support%20Documents/TechnicalDocs/si570.pdf}
 
 @c --------------------------------------------------------------------------
 @section Mezzanine system management @math{I^2C} master
 
-This @math{I^2C} master access the 24AA64T 64Kb EEPROM memory chip located on the mezzanine board.
+This @math{I^2C} master access the 24AA64 64Kb EEPROM memory chip located on the mezzanine board.
 This memory is mandatory as specified in the FMC standard (VITA 57.1). It is connected to the system management @math{I^2C} bus, also specified in the FMC standard.
 This block is based on an OpenCores design.
 
 @float Table,tab:sys_i2c_slave
 @multitable @columnfractions .15 .50
 @headitem Slave address @tab Peripheral
-@item @code{0x50} @tab 24AA64T 64Kb EEPROM memory
+@item @code{0x50} @tab 24AA64 64Kb EEPROM memory
 @end multitable
 @caption{Mezzanine system management @math{I^2C} slaves mapping.}
 @end float
 
-@table @b
-@item TODO
-      add ref to opencores doc
-@item TODO
-      add ref to 24AA64T datasheet
-@end table
+@uref{http://opencores.org/project@comma{}i2c}
+
+@uref{http://ww1.microchip.com/downloads/en/devicedoc/21189f.pdf}
 
 @c ##########################################################################
 @node Configuration
@@ -374,7 +403,7 @@ This block is based on an OpenCores design.
 
 The @ref{fig:adc_core_fs_clk} is a block diagram of the ADC core part in the sampling clock domain. It contains a ADC data stream de-serialiser, an offset and gain correction block (for ADC data), an under-sampling block and a trigger unit.
 The four channels data and the trigger signal are synchronised to the system clock domain using a FIFO.
-The configuration signals coming from registers in the system clock domain are synchronised to the sampling clock within the Wishbone slave (wbgen2@footnote{http://www.ohwr.org/projects/wishbone-gen} feature).
+The configuration signals coming from registers in the system clock domain are synchronised to the sampling clock within the Wishbone slave (wbgen2@footnote{@uref{http://www.ohwr.org/projects/wishbone-gen}} feature).
 
 @float Figure,fig:adc_core_fs_clk
 @center @image{../../figures/adc_core_fs_clk, 15cm,,,pdf}
@@ -430,11 +459,16 @@ The following equation shows how to convert a digital value written to a DAC to 
 
 @example
 @group
-v_dac = v_ref * d_dac/0x8000
+v_dac = (v_ref * d_dac/0x8000) - v_ref
 Where:
 v_ref = DAC's voltage reference = 5V
 d_dac = Digital value written to the DAC
 v_dac = DAC voltage
+
+Example:
+0xFFFF =>  4.999V
+0x8000 =>  0.000V
+0x0000 => -5.000V
 @end group
 @end example
 
@@ -529,7 +563,7 @@ This could be used for later temperature compensated calibration value computing
 @c --------------------------------------------------------------------------
 @section Calibration data storage
 All the calibration values are stored in the FmcAdc100m14b4cha EEPROM.
-The EEPROM holds a sdbfs@footnote{http://www.ohwr.org/attachments/download/1594/sdbfs-2012-09-19.pdf} file system.
+The EEPROM holds a sdbfs@footnote{@uref{http://www.ohwr.org/attachments/download/1594/sdbfs-2012-09-19.pdf}} file system.
 In addition to the calibration values, the EEPROM also contains mandatory IPMI@footnote{Platform Management FRU Information Storage Definition v1.0} records specified in the FMC Standard VITA 57.1 (see table @ref{tab:eeprom_sdbfs} for mapping).
 
 @float Table,tab:eeprom_sdbfs
@@ -558,6 +592,15 @@ When an input range is selected, the corresponding gain/offset correction values
 @caption{ADC offset and gain correction block.}
 @end float
 
+The offset register takes a 16-bit signed value.
+The gain register takes a 16-bit fixed point value.
+The fixed point format is as follow:
+
+@float Figure,fig:adc_gain_format
+@center @image{../../figures/adc_gain_format, 13cm,,,pdf}
+@caption{ADC gain register format.}
+@end float
+
 @quotation Note
 On FPGA start-up, the gain registers are set to 0x8000 (1.000) and the offset registers to 0x0000.
 This means a unit gain and no offset.
@@ -573,12 +616,12 @@ As for the ADC correction values, there is one pair (offset, gain) of DAC correc
 Below is the pseudo-code to calculate the corrected DAC value (applying gain and offset correction):
 @example
 @group
-c_val = ((((val-0x8000+offset) << 15) * gain) >> 30)+0x8000
+c_val = ((val + offset) * gain/0x8000) - 0x8000
 where:
-c_val  = corrected value to write to DAC
-val    = value from user
-offset = DAC offset calibration value from EEPROM
-gain   = DAC gain calibration value from EEPROM
+c_val  = corrected value to write to DAC (16-bit unsigned)
+val    = value from user (16-bit signed)
+offset = DAC offset calibration value from EEPROM (16-bit signed)
+gain   = DAC gain calibration value from EEPROM (16-bit fixed point)
 @end group
 @end example
 
@@ -650,9 +693,9 @@ The LED labeled @code{TRIG} flashes when a valid trigger is detected @b{and} the
 
 @table @b
 @item TODO
-      end_acq interrupt after acq_stop command ??
+      end_acq interrupt after acq_stop command, is it somtehing that we want?
 @item TODO
-      corner cases: pre/post trig = 0, 1
+      corner cases: pre/post trig = 0, 1 (-> explain how many samples are stored, trigger+pre/post...)
 @end table
 
 @c --------------------------------------------------------------------------
@@ -793,7 +836,7 @@ The first column "Byte offset" represents the offset within the binary file.
 @end float
 
 @float Table,tab:dac_calibr_data_eeprom
-@multitable @columnfractions .12 .12 .30 .30
+@multitable @columnfractions .10 .10 .35 .40
 @headitem Byte offset @tab Input range @tab Description @tab Type
 @item @code{0x36} @tab 10V @tab Offset correction channel 1 @tab 16-bit signed
 @item @code{0x38} @tab @tab Offset correction channel 2 @tab 16-bit signed
@@ -851,6 +894,16 @@ The first column "Byte offset" represents the offset within the binary file.
 @appendix Carrier registers
 @anchor{Carrier registers}
    @include carrier_csr.tex
+
+@c --------------------------------------------------------------------------
+@appendix References
+@section References
+
+@table @b
+@item TODO
+      Add reference table, biblio -> how to automate that?
+@end table
+
 
 @c --------------------------------------------------------------------------
 @appendix Glossary
