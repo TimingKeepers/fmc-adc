@@ -124,6 +124,16 @@ It means that driver versions 1.x should work with any firmware version 1.x.
 But the driver version 2.0 might not work with the firmware version 1.1.
 
 @c ##########################################################################
+@node Build from sources
+@chapter Build from sources
+
+@table @b
+@item TODO
+      Explain how to build with hdlmake.
+@end table
+
+
+@c ##########################################################################
 @node Architecture
 @chapter Architecture
 
@@ -906,6 +916,7 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @c DONE Rename UTC core in time-tagging core or something like that (stricly speaking, it is not UTC).
 @item Include the git tree in a .tar.gz along with the .bin file (in the files section) for each release. -> modify the Release chapter accordingly.
 @item Make the project ucfgen friendly (check what has to be done, perhaps nothing).
+@c TODO check Atos comments.
 @end itemize
 
 @c --------------------------------------------------------------------------
