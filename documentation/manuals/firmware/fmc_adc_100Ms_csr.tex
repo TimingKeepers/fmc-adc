@@ -117,7 +117,7 @@ Channel 4 offset calibration register
 @tab R/W @tab
 @code{FSM_CMD}
 @tab @code{X} @tab 
-State machine commands
+State machine commands (ignore on read)
 @item @code{2}
 @tab R/W @tab
 @code{FMC_CLK_OE}
@@ -132,7 +132,7 @@ Offset DACs clear (active low)
 @tab W/O @tab
 @code{MAN_BITSLIP}
 @tab @code{X} @tab 
-Manual serdes bitslip
+Manual serdes bitslip (ignore on read)
 @item @code{5}
 @tab R/W @tab
 @code{TEST_DATA_EN}
@@ -263,7 +263,7 @@ Writing (anything) to this register generates a software trigger.
 @tab W/O @tab
 @code{SW_TRIG}
 @tab @code{X} @tab 
-Software trigger
+Software trigger (ignore on read)
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description

@@ -565,7 +565,7 @@ rst_n_i
 &rarr;
 </td>
 <td  class="td_pblock_left">
-wb_clk_i
+clk_sys_i
 </td>
 <td  class="td_sym_center">
 
@@ -582,7 +582,7 @@ fmc_adc_core_ctl_fsm_cmd_o[1:0]
 &rArr;
 </td>
 <td  class="td_pblock_left">
-wb_addr_i[4:0]
+wb_adr_i[4:0]
 </td>
 <td  class="td_sym_center">
 
@@ -599,7 +599,7 @@ fmc_adc_core_ctl_fsm_cmd_wr_o
 &rArr;
 </td>
 <td  class="td_pblock_left">
-wb_data_i[31:0]
+wb_dat_i[31:0]
 </td>
 <td  class="td_sym_center">
 
@@ -616,7 +616,7 @@ fmc_adc_core_ctl_fmc_clk_oe_o
 &lArr;
 </td>
 <td  class="td_pblock_left">
-wb_data_o[31:0]
+wb_dat_o[31:0]
 </td>
 <td  class="td_sym_center">
 
@@ -715,10 +715,10 @@ fmc_adc_core_ctl_reserved_o[23:0]
 </tr>
 <tr>
 <td  class="td_arrow_left">
-
+&larr;
 </td>
 <td  class="td_pblock_left">
-
+wb_stall_o
 </td>
 <td  class="td_sym_center">
 &nbsp;
@@ -2773,8 +2773,8 @@ FSM_CMD[1:0]
 <ul>
 <li><b>
 FSM_CMD
-</b>[<i>read/write</i>]: State machine commands
-<br>1: start<br>2: stop
+</b>[<i>read/write</i>]: State machine commands (ignore on read)
+<br>1: ACQ_START (start acquisition, only when FSM is idle)<br>2: ACQ_STOP (stop acquisition, anytime)
 <li><b>
 FMC_CLK_OE
 </b>[<i>read/write</i>]: FMC Si750 output enable
@@ -2783,7 +2783,7 @@ OFFSET_DAC_CLR_N
 </b>[<i>read/write</i>]: Offset DACs clear (active low)
 <li><b>
 MAN_BITSLIP
-</b>[<i>write-only</i>]: Manual serdes bitslip
+</b>[<i>write-only</i>]: Manual serdes bitslip (ignore on read)
 <li><b>
 TEST_DATA_EN
 </b>[<i>read/write</i>]: Enable test data
@@ -3869,7 +3869,7 @@ SW_TRIG[7:0]
 <ul>
 <li><b>
 SW_TRIG
-</b>[<i>write-only</i>]: Software trigger
+</b>[<i>write-only</i>]: Software trigger (ignore on read)
 </ul>
 <a name="SHOTS"></a>
 <h3><a name="sect_3_6">3.6. Number of shots</a></h3>

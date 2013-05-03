@@ -10,7 +10,7 @@ peripheral {
     prefix = "ctl";
 
     field {
-      name = "State machine commands";
+      name = "State machine commands (ignore on read)";
       description = "1: ACQ_START (start acquisition, only when FSM is idle)\n2: ACQ_STOP (stop acquisition, anytime)";
       prefix = "fsm_cmd";
       type = PASS_THROUGH;
@@ -36,7 +36,7 @@ peripheral {
     };
 
     field {
-      name = "Manual serdes bitslip";
+      name = "Manual serdes bitslip (ignore on read)";
       prefix = "man_bitslip";
       type = MONOSTABLE;
       clock = "fs_clk_i"
@@ -220,7 +220,7 @@ peripheral {
 
     prefix = "sw_trig";
     field {
-      name = "Software trigger";
+      name = "Software trigger (ignore on read)";
       type = PASS_THROUGH;
       size = 32;
       clock = "fs_clk_i";
