@@ -9,7 +9,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="550"
+   width="547.2998"
    height="111.4375"
    id="svg8584"
    version="1.1"
@@ -365,6 +365,13 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective8435"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -373,9 +380,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="262.40694"
-     inkscape:cy="6.1907319"
+     inkscape:zoom="2.8"
+     inkscape:cx="297.50463"
+     inkscape:cy="44.217629"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -401,7 +408,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -409,262 +416,254 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-14.842766,-177.42468)">
+     transform="translate(-15.007805,-177.92468)">
     <rect
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3287"
        width="425"
        height="25"
-       x="116.67773"
-       y="213.36218" />
+       x="114.84277"
+       y="213.86218" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DiamondM)"
-       d="m 116.67773,207.36218 0,-15.15762"
+       d="m 114.84277,207.86218 0,-15.15762"
        id="path5968" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#TriangleOutM-7)"
-       d="m 256.67773,188.20456 0,15.15762"
+       d="m 250.0078,189.20456 0,15.15762"
        id="path5968-1" />
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
-       x="104.99218"
-       y="187.86218"
+       x="103.15722"
+       y="188.36218"
        id="text3281-3"
        sodipodi:linespacing="125%"><tspan
          id="tspan4235-0"
          sodipodi:role="line"
-         x="104.99218"
-         y="187.86218">Events :</tspan></text>
+         x="103.15722"
+         y="188.36218">Events :</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
-       x="104.99218"
-       y="233.36218"
+       x="103.15722"
+       y="233.86218"
        id="text3281-3-4"
        sodipodi:linespacing="125%"><tspan
          id="tspan4235-0-8"
          sodipodi:role="line"
-         x="104.99218"
-         y="233.36218">Memory :</tspan></text>
+         x="103.15722"
+         y="233.86218">Memory :</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
-       x="104.99218"
-       y="278.36218"
+       x="103.15722"
+       y="278.86218"
        id="text3281-3-2"
        sodipodi:linespacing="125%"><tspan
          id="tspan4235-0-0"
          sodipodi:role="line"
-         x="104.99218"
-         y="278.36218">State machine :</tspan></text>
+         x="103.15722"
+         y="278.86218">State machine :</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:url(#DiamondM)"
-       d="m 361.67773,208.5198 0,-15.15762"
+       d="m 359.84277,209.0198 0,-15.15762"
        id="path5968-5" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="138.33398"
-       y="183.36218"
+       x="136.49902"
+       y="183.86218"
        id="text3291-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="138.33398"
-         y="183.36218"
+         x="136.49902"
+         y="183.86218"
          id="tspan3295-7"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">ACQ_START</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="266.30273"
-       y="183.36218"
+       x="259.63281"
+       y="184.36218"
        id="text3291-3-7"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="266.30273"
-         y="183.36218"
+         x="259.63281"
+         y="184.36218"
          id="tspan3295-7-8"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">TRIG</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="378.52148"
-       y="183.36218"
+       x="376.68652"
+       y="183.86218"
        id="text3291-3-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="378.52148"
-         y="183.36218"
+         x="376.68652"
+         y="183.86218"
          id="tspan3295-7-5"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">ACQ_END</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="144.04297"
-       y="280.38757"
+       x="142.20801"
+       y="280.88757"
        id="text3291-3-42"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="144.04297"
-         y="280.38757"
+         x="142.20801"
+         y="280.88757"
          id="tspan3295-7-6"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">PRE_TRIG</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="214.6768"
-       y="280.38757"
+       x="212.84184"
+       y="280.88757"
        id="text3291-3-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="214.6768"
-         y="280.38757"
+         x="212.84184"
+         y="280.88757"
          id="tspan3295-7-0"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">WAIT_TRIG</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="309.04297"
-       y="280.38757"
+       x="307.20801"
+       y="280.88757"
        id="text3291-3-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="309.04297"
-         y="280.38757"
+         x="307.20801"
+         y="280.88757"
          id="tspan3295-7-62"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">POST_TRIG</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="451.57303"
-       y="281.2782"
+       x="449.73807"
+       y="281.7782"
        id="text3291-3-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="451.57303"
-         y="281.2782"
+         x="449.73807"
+         y="281.7782"
          id="tspan3295-7-63"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">IDLE</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 172.21648,278.2979 c -0.53875,0.0643 4.46125,-9.93572 4.46125,-9.93572 l 75,0 5,10 -5,10 -75,0 -4.46125,-10.06428 z"
+       d="m 170.38152,278.7979 c -0.53875,0.0643 4.46125,-9.93572 4.46125,-9.93572 l 75,0 5,10 -5,10 -75,0 -4.46125,-10.06428 z"
        id="path10157" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 256.67773,278.36218 5,-10 95,0 5,10 -5,10 -95,0 -5,-10 z"
+       d="m 254.84277,278.86218 5,-10 95,0 5,10 -5,10 -95,0 -5,-10 z"
        id="path10159" />
     <rect
        style="opacity:0.98999999;fill:#a4a4a4;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3287-5"
        width="245"
        height="25"
-       x="116.67773"
-       y="213.36218" />
+       x="114.84277"
+       y="213.86218" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="118.89648"
-       y="253.36218"
+       x="117.06152"
+       y="253.86218"
        id="text3291-3-90"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="118.89648"
-         y="253.36218"
+         x="117.06152"
+         y="253.86218"
          id="tspan3295-7-4"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">0x0</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="540.74023"
-       y="253.36218"
+       x="538.90527"
+       y="253.86218"
        id="text3291-3-90-76"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="540.74023"
-         y="253.36218"
+         x="538.90527"
+         y="253.86218"
          id="tspan3295-7-4-3"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">0x0fffffff</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 116.8091,238.58742 -0.13137,4.77476"
+       d="m 114.97414,239.08742 -0.13137,4.77476"
        id="path10314" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 256.67773,213.86216 0,29.5"
-       id="path10316" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 361.77109,238.96623 -0.0934,4.39595"
+       d="m 359.93613,239.46623 -0.0934,4.39595"
        id="path10318" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 541.67773,238.36218 0,5"
+       d="m 539.84277,238.86218 0,5"
        id="path10320" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 196.67773,238.36218 0,5"
+       d="m 194.84277,238.86218 0,5"
        id="path10344" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#TriangleInM);marker-end:url(#TriangleOutM-7)"
-       d="m 200.01659,243.86218 53,0"
-       id="path10346" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#TriangleInM);marker-end:url(#TriangleOutM-7)"
-       d="m 260.01659,243.86218 98,0"
-       id="path10346-7" />
     <rect
        style="opacity:0.98999999;fill:#ff9900;fill-opacity:1;stroke:#000000;stroke-width:0.99999994;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3287-5-2"
        width="165"
        height="25"
-       x="196.67773"
-       y="213.36218" />
+       x="194.84277"
+       y="213.86218" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="226.41551"
-       y="224.29626"
+       x="224.58055"
+       y="224.79626"
        id="text3291-3-90-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="226.41551"
-         y="224.29626"
+         x="224.58055"
+         y="224.79626"
          id="tspan3295-7-4-5"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">PRE_TRIG</tspan><tspan
          sodipodi:role="line"
-         x="226.41551"
-         y="231.79626"
+         x="224.58055"
+         y="232.29626"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
          id="tspan12413">SAMPLES</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="308.91553"
-       y="224.29626"
+       x="307.08057"
+       y="224.79626"
        id="text3291-3-90-6-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="308.91553"
-         y="224.29626"
+         x="307.08057"
+         y="224.79626"
          id="tspan3295-7-4-5-1"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">POST_TRIG</tspan><tspan
          sodipodi:role="line"
-         x="308.91553"
-         y="231.79626"
+         x="307.08057"
+         y="232.29626"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
          id="tspan12415">SAMPLES</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0"
-       d="m 256.8563,213.36218 -0.17857,25"
+       d="m 255.02134,213.86218 -0.17857,25"
        id="path12451" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 116.67773,268.36218 0,20 50,0 5,-10 -5,-10 -50,0 z"
+       d="m 114.84277,268.86218 0,20 50,0 5,-10 -5,-10 -50,0 z"
        id="path12999" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 361.67773,278.36218 5,-10 175,0 0,20 -175,0 -5,-10 z"
+       d="m 359.84277,278.86218 5,-10 175,0 0,20 -175,0 -5,-10 z"
        id="path13001" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0"
+       d="m 249.84277,213.86218 0,25"
+       id="path12449" />
   </g>
 </svg>

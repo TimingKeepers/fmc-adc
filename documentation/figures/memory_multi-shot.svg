@@ -9,7 +9,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="550"
+   width="511.54697"
    height="40.613285"
    id="svg13628"
    version="1.1"
@@ -217,6 +217,74 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6271"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6271-3"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6271-2"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective6311"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective7377"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker13563-8"
+       style="overflow:visible">
+      <path
+         id="path13565-4"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.4,0.4)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective7377-0"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="TriangleOutM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker13563-3"
+       style="overflow:visible">
+      <path
+         id="path13565-7"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.4,0.4)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -225,9 +293,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="212.29967"
-     inkscape:cy="-62.004079"
+     inkscape:zoom="1.4"
+     inkscape:cx="278.36942"
+     inkscape:cy="31.821678"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -252,7 +320,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -260,210 +328,271 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-75.917969,-266.86218)">
+     transform="translate(-96.704559,-266.75021)">
     <rect
        style="opacity:0.98999999;fill:none;stroke:#000000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3287"
        width="425"
        height="25"
-       x="160"
-       y="267.36218" />
+       x="160.78659"
+       y="267.25021" />
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:125%;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana Bold"
-       x="147.98828"
-       y="282.36218"
+       x="148.77487"
+       y="282.25021"
        id="text3281-3-4"
        sodipodi:linespacing="125%"><tspan
          id="tspan4235-0-8"
          sodipodi:role="line"
-         x="147.98828"
-         y="282.36218">Memory :</tspan></text>
+         x="148.77487"
+         y="282.25021">Memory :</tspan></text>
     <rect
        style="opacity:0.98999999;fill:#a4a4a4;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3287-5"
        width="425.13138"
        height="25"
-       x="160"
-       y="267.36218" />
+       x="160.78659"
+       y="267.25021" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="162.21875"
-       y="307.36218"
+       x="163.00534"
+       y="307.25021"
        id="text3291-3-90"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="162.21875"
-         y="307.36218"
+         x="163.00534"
+         y="307.25021"
          id="tspan3295-7-4"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">0x0</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="584.06256"
-       y="307.36218"
+       x="584.84918"
+       y="307.25021"
        id="text3291-3-90-76"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="584.06256"
-         y="307.36218"
+         x="584.84918"
+         y="307.25021"
          id="tspan3295-7-4-3"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">0x0fffffff</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 160.13139,292.58744 -0.13137,4.77476"
+       d="m 160.91798,292.47547 -0.13137,4.77476"
        id="path10314" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 585.00002,292.3622 0,5"
+       d="m 585.78661,292.25023 0,5"
        id="path10320" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 275,292.36218 0,5"
+       d="m 275.78659,292.25021 0,5"
        id="path10344" />
     <rect
        style="opacity:0.98999999;fill:#ff9900;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3287-5-2"
        width="114.86862"
        height="25"
-       x="160.13138"
-       y="267.58743" />
+       x="160.91797"
+       y="267.47546" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="240.92793"
-       y="278.52151"
+       x="241.71452"
+       y="278.40955"
        id="text3291-3-90-6-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="240.92793"
-         y="278.52151"
+         x="241.71452"
+         y="278.40955"
          id="tspan3295-7-4-5-1"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">POST_TRIG</tspan><tspan
          sodipodi:role="line"
-         x="240.92793"
-         y="286.02151"
+         x="241.71452"
+         y="285.90955"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
          id="tspan12419">SAMPLES</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="183.42793"
-       y="278.52151"
+       x="184.21452"
+       y="278.40955"
        id="text3291-3-90-6"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="183.42793"
-         y="278.52151"
+         x="184.21452"
+         y="278.40955"
          id="tspan3295-7-4-5"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">PRE_TRIG</tspan><tspan
          sodipodi:role="line"
-         x="183.42793"
-         y="286.02151"
+         x="184.21452"
+         y="285.90955"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
          id="tspan12417">SAMPLES</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0"
-       d="m 205,267.36218 0,25"
+       d="m 205.78659,267.25021 0,25"
        id="path12449" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 390,292.36218 0,5"
+       d="m 390.78659,292.25021 0,5"
        id="path10344-3" />
     <rect
        style="opacity:0.98999999;fill:#ff9900;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3287-5-2-8"
        width="114.86862"
        height="25"
-       x="275.13138"
-       y="267.58743" />
+       x="275.91797"
+       y="267.47546" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="355.92795"
-       y="278.52151"
+       x="356.71454"
+       y="278.40955"
        id="text3291-3-90-6-6-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="355.92795"
-         y="278.52151"
+         x="356.71454"
+         y="278.40955"
          id="tspan3295-7-4-5-1-0"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">POST_TRIG</tspan><tspan
          sodipodi:role="line"
-         x="355.92795"
-         y="286.02151"
+         x="356.71454"
+         y="285.90955"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
          id="tspan12419-6">SAMPLES</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="298.42792"
-       y="278.52151"
+       x="299.21451"
+       y="278.40955"
        id="text3291-3-90-6-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="298.42792"
-         y="278.52151"
+         x="299.21451"
+         y="278.40955"
          id="tspan3295-7-4-5-6"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">PRE_TRIG</tspan><tspan
          sodipodi:role="line"
-         x="298.42792"
-         y="286.02151"
+         x="299.21451"
+         y="285.90955"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
          id="tspan12417-7">SAMPLES</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0"
-       d="m 320,267.36218 0,25"
+       d="m 320.78659,267.25021 0,25"
        id="path12449-8" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 505,292.36218 0,5"
+       d="m 505.78659,292.25021 0,5"
        id="path10344-8" />
     <rect
        style="opacity:0.98999999;fill:#ff9900;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3287-5-2-2"
        width="114.86862"
        height="25"
-       x="390.13138"
-       y="267.58743" />
+       x="390.91797"
+       y="267.47546" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="470.92795"
-       y="278.52151"
+       x="471.71454"
+       y="278.40955"
        id="text3291-3-90-6-6-36"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="470.92795"
-         y="278.52151"
+         x="471.71454"
+         y="278.40955"
          id="tspan3295-7-4-5-1-7"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">POST_TRIG</tspan><tspan
          sodipodi:role="line"
-         x="470.92795"
-         y="286.02151"
+         x="471.71454"
+         y="285.90955"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
          id="tspan12419-3">SAMPLES</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="413.42795"
-       y="278.52151"
+       x="414.21454"
+       y="278.40955"
        id="text3291-3-90-6-14"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="413.42795"
-         y="278.52151"
+         x="414.21454"
+         y="278.40955"
          id="tspan3295-7-4-5-7"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace">PRE_TRIG</tspan><tspan
          sodipodi:role="line"
-         x="413.42795"
-         y="286.02151"
+         x="414.21454"
+         y="285.90955"
          style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
          id="tspan12417-3">SAMPLES</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0"
-       d="m 435,267.36218 0,25"
+       d="m 435.78659,267.25021 0,25"
        id="path12449-9" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0"
+       d="m 210.91797,267.47547 0,25"
+       id="path12449-94" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0"
+       d="m 325.91797,267.47547 0,25"
+       id="path12449-0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 1;stroke-dashoffset:0"
+       d="m 440.91797,267.47547 0,25"
+       id="path12449-09" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
+       x="241.18359"
+       y="304.47546"
+       id="text3291-3-90-6-6-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="241.18359"
+         y="304.47546"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
+         id="tspan12419-4">TRIGGER SAMPLE</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker13563)"
+       d="m 132,26.613285 0,9 3,0"
+       id="path6333"
+       transform="translate(75.917969,266.86218)" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
+       x="356.18359"
+       y="304.47546"
+       id="text3291-3-90-6-6-2-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="356.18359"
+         y="304.47546"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
+         id="tspan12419-4-4">TRIGGER SAMPLE</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker13563)"
+       d="m 322.91797,293.47547 0,9 3,0"
+       id="path6333-8" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
+       x="471.18359"
+       y="304.47546"
+       id="text3291-3-90-6-6-2-57"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="471.18359"
+         y="304.47546"
+         style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Monospace;-inkscape-font-specification:Monospace"
+         id="tspan12419-4-5">TRIGGER SAMPLE</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker13563)"
+       d="m 437.91797,293.47547 0,9 3,0"
+       id="path6333-80" />
   </g>
 </svg>
