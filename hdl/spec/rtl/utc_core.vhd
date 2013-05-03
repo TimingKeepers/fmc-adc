@@ -78,15 +78,16 @@ architecture rtl of utc_core is
   component utc_core_regs
     port (
       rst_n_i                          : in  std_logic;
-      wb_clk_i                         : in  std_logic;
-      wb_addr_i                        : in  std_logic_vector(4 downto 0);
-      wb_data_i                        : in  std_logic_vector(31 downto 0);
-      wb_data_o                        : out std_logic_vector(31 downto 0);
+      clk_sys_i                        : in  std_logic;
+      wb_adr_i                         : in  std_logic_vector(4 downto 0);
+      wb_dat_i                         : in  std_logic_vector(31 downto 0);
+      wb_dat_o                         : out std_logic_vector(31 downto 0);
       wb_cyc_i                         : in  std_logic;
       wb_sel_i                         : in  std_logic_vector(3 downto 0);
       wb_stb_i                         : in  std_logic;
       wb_we_i                          : in  std_logic;
       wb_ack_o                         : out std_logic;
+      wb_stall_o                       : out std_logic;
       utc_core_seconds_o               : out std_logic_vector(31 downto 0);
       utc_core_seconds_i               : in  std_logic_vector(31 downto 0);
       utc_core_seconds_load_o          : out std_logic;
@@ -152,15 +153,16 @@ begin
   cmp_utc_core_regs : utc_core_regs
     port map(
       rst_n_i                          => rst_n_i,
-      wb_clk_i                         => clk_i,
-      wb_addr_i                        => wb_adr_i,
-      wb_data_i                        => wb_dat_i,
-      wb_data_o                        => wb_dat_o,
+      clk_sys_i                        => clk_i,
+      wb_adr_i                         => wb_adr_i,
+      wb_dat_i                         => wb_dat_i,
+      wb_dat_o                         => wb_dat_o,
       wb_cyc_i                         => wb_cyc_i,
       wb_sel_i                         => wb_sel_i,
       wb_stb_i                         => wb_stb_i,
       wb_we_i                          => wb_we_i,
       wb_ack_o                         => wb_ack_o,
+      wb_stall_o                       => open,
       utc_core_seconds_o               => utc_seconds_load_value,
       utc_core_seconds_i               => utc_seconds,
       utc_core_seconds_load_o          => utc_seconds_load_en,

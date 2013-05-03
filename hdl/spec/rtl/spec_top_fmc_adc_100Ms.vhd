@@ -172,15 +172,16 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   component carrier_csr
     port (
       rst_n_i                          : in  std_logic;
-      wb_clk_i                         : in  std_logic;
-      wb_addr_i                        : in  std_logic_vector(1 downto 0);
-      wb_data_i                        : in  std_logic_vector(31 downto 0);
-      wb_data_o                        : out std_logic_vector(31 downto 0);
+      clk_sys_i                        : in  std_logic;
+      wb_adr_i                         : in  std_logic_vector(1 downto 0);
+      wb_dat_i                         : in  std_logic_vector(31 downto 0);
+      wb_dat_o                         : out std_logic_vector(31 downto 0);
       wb_cyc_i                         : in  std_logic;
       wb_sel_i                         : in  std_logic_vector(3 downto 0);
       wb_stb_i                         : in  std_logic;
       wb_we_i                          : in  std_logic;
       wb_ack_o                         : out std_logic;
+      wb_stall_o                       : out std_logic;
       carrier_csr_carrier_pcb_rev_i    : in  std_logic_vector(3 downto 0);
       carrier_csr_carrier_reserved_i   : in  std_logic_vector(11 downto 0);
       carrier_csr_carrier_type_i       : in  std_logic_vector(15 downto 0);
@@ -782,15 +783,16 @@ begin
   cmp_carrier_csr : carrier_csr
     port map(
       rst_n_i                          => sys_rst_n,
-      wb_clk_i                         => sys_clk_125,
-      wb_addr_i                        => cnx_master_out(c_SLAVE_SPEC_CSR).adr(3 downto 2),  -- cnx_master_out.adr is byte address
-      wb_data_i                        => cnx_master_out(c_SLAVE_SPEC_CSR).dat,
-      wb_data_o                        => cnx_master_in(c_SLAVE_SPEC_CSR).dat,
+      clk_sys_i                        => sys_clk_125,
+      wb_adr_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).adr(3 downto 2),  -- cnx_master_out.adr is byte address
+      wb_dat_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).dat,
+      wb_dat_o                         => cnx_master_in(c_SLAVE_SPEC_CSR).dat,
       wb_cyc_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).cyc,
       wb_sel_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).sel,
       wb_stb_i                         => cnx_master_out(c_SLAVE_SPEC_CSR).stb,
       wb_we_i                          => cnx_master_out(c_SLAVE_SPEC_CSR).we,
       wb_ack_o                         => cnx_master_in(c_SLAVE_SPEC_CSR).ack,
+      wb_stall_o                       => open,
       carrier_csr_carrier_pcb_rev_i    => pcb_ver_i,
       carrier_csr_carrier_reserved_i   => X"000",
       carrier_csr_carrier_type_i       => c_CARRIER_TYPE,

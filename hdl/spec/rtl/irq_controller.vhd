@@ -77,15 +77,16 @@ architecture rtl of irq_controller is
   component irq_controller_regs
     port (
       rst_n_i                   : in  std_logic;
-      wb_clk_i                  : in  std_logic;
-      wb_addr_i                 : in  std_logic_vector(1 downto 0);
-      wb_data_i                 : in  std_logic_vector(31 downto 0);
-      wb_data_o                 : out std_logic_vector(31 downto 0);
+      clk_sys_i                 : in  std_logic;
+      wb_adr_i                  : in  std_logic_vector(1 downto 0);
+      wb_dat_i                  : in  std_logic_vector(31 downto 0);
+      wb_dat_o                  : out std_logic_vector(31 downto 0);
       wb_cyc_i                  : in  std_logic;
       wb_sel_i                  : in  std_logic_vector(3 downto 0);
       wb_stb_i                  : in  std_logic;
       wb_we_i                   : in  std_logic;
       wb_ack_o                  : out std_logic;
+      wb_stall_o                  : out std_logic;
       irq_ctrl_multi_irq_o      : out std_logic_vector(31 downto 0);
       irq_ctrl_multi_irq_i      : in  std_logic_vector(31 downto 0);
       irq_ctrl_multi_irq_load_o : out std_logic;
@@ -119,15 +120,16 @@ begin
   cmp_irq_controller_regs : irq_controller_regs
     port map(
       rst_n_i                   => rst_n_i,
-      wb_clk_i                  => clk_i,
-      wb_addr_i                 => wb_adr_i,
-      wb_data_i                 => wb_dat_i,
-      wb_data_o                 => wb_dat_o,
+      clk_sys_i                 => clk_i,
+      wb_adr_i                  => wb_adr_i,
+      wb_dat_i                  => wb_dat_i,
+      wb_dat_o                  => wb_dat_o,
       wb_cyc_i                  => wb_cyc_i,
       wb_sel_i                  => wb_sel_i,
       wb_stb_i                  => wb_stb_i,
       wb_we_i                   => wb_we_i,
       wb_ack_o                  => wb_ack_o,
+      wb_stall_o                => open,
       irq_ctrl_multi_irq_o      => multi_irq_rst,
       irq_ctrl_multi_irq_load_o => multi_irq_rst_en,
       irq_ctrl_multi_irq_i      => multi_irq,
