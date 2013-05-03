@@ -1,17 +1,17 @@
 peripheral {
-  name = "UTC core registers";
-  description = "Wishbone slave for registers related to UTC core";
-  hdl_entity = "utc_core_regs";
+  name = "Time-tagging core registers";
+  description = "Wishbone slave for registers related to time-tagging core";
+  hdl_entity = "timetag_core_regs";
 
-  prefix = "utc_core";
+  prefix = "timetag_core";
 
   reg {
-    name = "UTC seconds register";
-    description = "UTC seconds counter. Incremented everytime the UTC coarse counter overflows.";
+    name = "Timetag seconds register";
+    description = "Seconds counter. Incremented everytime the coarse counter overflows.";
     prefix = "seconds";
 
     field {
-      name = "UTC seconds";
+      name = "Timetag seconds";
       type = SLV;
       load = LOAD_EXT;
       size = 32;
@@ -21,12 +21,12 @@ peripheral {
   };
 
   reg {
-    name = "UTC coarse time register, system clock ticks (125MHz)";
-    description = "UTC coarse time counter clocked by 125MHz system clock.\nCounts from 0 to 125000000.";
+    name = "Timetag coarse time register, system clock ticks (125MHz)";
+    description = "Coarse time counter clocked by 125MHz system clock.\nCounts from 0 to 125000000.";
     prefix = "coarse";
 
     field {
-      name = "UTC coarse time";
+      name = "Timetag coarse time";
       type = SLV;
       load = LOAD_EXT;
       size = 32;
@@ -50,12 +50,12 @@ peripheral {
   };
 
   reg {
-    name = "Trigger time-tag UTC seconds register";
+    name = "Trigger time-tag seconds register";
     prefix = "trig_tag_seconds";
 
     field {
-      name = "Trigger time-tag UTC seconds";
-      description = "Holds time-tag UTC seconds of the last trigger event";
+      name = "Trigger time-tag seconds";
+      description = "Holds time-tag seconds of the last trigger event";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -106,12 +106,12 @@ peripheral {
   };
 
   reg {
-    name = "Acquisition start time-tag UTC seconds register";
+    name = "Acquisition start time-tag seconds register";
     prefix = "acq_start_tag_seconds";
 
     field {
-      name = "Acquisition start time-tag UTC seconds";
-      description = "Holds time-tag UTC seconds of the last acquisition start event";
+      name = "Acquisition start time-tag seconds";
+      description = "Holds time-tag seconds of the last acquisition start event";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -162,12 +162,12 @@ peripheral {
   };
 
   reg {
-    name = "Acquisition stop time-tag UTC seconds register";
+    name = "Acquisition stop time-tag seconds register";
     prefix = "acq_stop_tag_seconds";
 
     field {
-      name = "Acquisition stop time-tag UTC seconds";
-      description = "Holds time-tag UTC seconds of the last acquisition stop event";
+      name = "Acquisition stop time-tag seconds";
+      description = "Holds time-tag seconds of the last acquisition stop event";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;
@@ -218,12 +218,12 @@ peripheral {
   };
 
   reg {
-    name = "Acquisition end time-tag UTC seconds register";
+    name = "Acquisition end time-tag seconds register";
     prefix = "acq_end_tag_seconds";
 
     field {
-      name = "Acquisition end time-tag UTC seconds";
-      description = "Holds time-tag UTC seconds of the last acquisition end event";
+      name = "Acquisition end time-tag seconds";
+      description = "Holds time-tag seconds of the last acquisition end event";
       type = SLV;
       size = 32;
       access_bus = READ_ONLY;

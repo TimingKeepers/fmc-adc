@@ -197,7 +197,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       );
   end component carrier_csr;
 
-  component utc_core
+  component timetag_core
     port (
       clk_i         : in  std_logic;
       rst_n_i       : in  std_logic;
@@ -214,7 +214,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       wb_we_i       : in  std_logic;
       wb_ack_o      : out std_logic
       );
-  end component utc_core;
+  end component timetag_core;
 
   component irq_controller
     port (
@@ -253,7 +253,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   constant c_SLAVE_DMA         : integer := 0;  -- DMA controller in the Gennum core
   constant c_SLAVE_ONEWIRE     : integer := 1;  -- Carrier onewire interface
   constant c_SLAVE_SPEC_CSR    : integer := 2;  -- SPEC control and status registers
-  constant c_SLAVE_UTC         : integer := 3;  -- UTC core for time-tagging
+  constant c_SLAVE_TIMETAG     : integer := 3;  -- TIMETAG core for time-tagging
   constant c_SLAVE_INT         : integer := 4;  -- Interrupt controller
   constant c_SLAVE_FMC_SYS_I2C : integer := 5;  -- Mezzanine system I2C interface (EEPROM)
   constant c_SLAVE_FMC_SPI     : integer := 6;  -- Mezzanine SPI interface
@@ -311,7 +311,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
         date      => x"20121116",
         name      => "WB-SPEC-CSR        ")));
 
-  constant c_UTC_SDB_DEVICE : t_sdb_device := (
+  constant c_TIMETAG_SDB_DEVICE : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
     abi_ver_major => x"01",
     abi_ver_minor => x"01",
@@ -325,7 +325,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
         device_id => x"00000604",
         version   => x"00000001",
         date      => x"20121116",
-        name      => "WB-UTC-Core        ")));
+        name      => "WB-Timetag-Core    ")));
 
   constant c_INT_SDB_DEVICE : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
@@ -400,7 +400,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       0  => f_sdb_embed_device(c_DMA_SDB_DEVICE, x"00001000"),
       1  => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001200"),
       2  => f_sdb_embed_device(c_SPEC_CSR_SDB_DEVICE, x"00001300"),
-      3  => f_sdb_embed_device(c_UTC_SDB_DEVICE, x"00001400"),
+      3  => f_sdb_embed_device(c_TIMETAG_SDB_DEVICE, x"00001400"),
       4  => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001500"),
       5  => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001600"),
       6  => f_sdb_embed_device(c_SPI_SDB_DEVICE, x"00001700"),
@@ -540,7 +540,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal carrier_owr_en    : std_logic_vector(0 downto 0);
   signal carrier_owr_i     : std_logic_vector(0 downto 0);
 
-  -- UTC core
+  -- Time-tagging core
   signal trigger_p   : std_logic;
   signal acq_start_p : std_logic;
   signal acq_stop_p  : std_logic;
@@ -818,9 +818,9 @@ begin
   led_green_o <= led_green;
 
   ------------------------------------------------------------------------------
-  -- UTC core
+  -- Time-tagging core
   ------------------------------------------------------------------------------
-  cmp_utc_core : utc_core
+  cmp_timetag_core : timetag_core
     port map(
       clk_i   => sys_clk_125,
       rst_n_i => sys_rst_n,
@@ -830,21 +830,21 @@ begin
       acq_stop_p_i  => acq_stop_p,
       acq_end_p_i   => acq_end_p,
 
-      wb_adr_i => cnx_master_out(c_SLAVE_UTC).adr(6 downto 2),  -- cnx_master_out.adr is byte address
-      wb_dat_i => cnx_master_out(c_SLAVE_UTC).dat,
-      wb_dat_o => cnx_master_in(c_SLAVE_UTC).dat,
-      wb_cyc_i => cnx_master_out(c_SLAVE_UTC).cyc,
-      wb_sel_i => cnx_master_out(c_SLAVE_UTC).sel,
-      wb_stb_i => cnx_master_out(c_SLAVE_UTC).stb,
-      wb_we_i  => cnx_master_out(c_SLAVE_UTC).we,
-      wb_ack_o => cnx_master_in(c_SLAVE_UTC).ack
+      wb_adr_i => cnx_master_out(c_SLAVE_TIMETAG).adr(6 downto 2),  -- cnx_master_out.adr is byte address
+      wb_dat_i => cnx_master_out(c_SLAVE_TIMETAG).dat,
+      wb_dat_o => cnx_master_in(c_SLAVE_TIMETAG).dat,
+      wb_cyc_i => cnx_master_out(c_SLAVE_TIMETAG).cyc,
+      wb_sel_i => cnx_master_out(c_SLAVE_TIMETAG).sel,
+      wb_stb_i => cnx_master_out(c_SLAVE_TIMETAG).stb,
+      wb_we_i  => cnx_master_out(c_SLAVE_TIMETAG).we,
+      wb_ack_o => cnx_master_in(c_SLAVE_TIMETAG).ack
       );
 
   -- Unused wishbone signals
-  cnx_master_in(c_SLAVE_UTC).err   <= '0';
-  cnx_master_in(c_SLAVE_UTC).rty   <= '0';
-  cnx_master_in(c_SLAVE_UTC).stall <= '0';
-  cnx_master_in(c_SLAVE_UTC).int   <= '0';
+  cnx_master_in(c_SLAVE_TIMETAG).err   <= '0';
+  cnx_master_in(c_SLAVE_TIMETAG).rty   <= '0';
+  cnx_master_in(c_SLAVE_TIMETAG).stall <= '0';
+  cnx_master_in(c_SLAVE_TIMETAG).int   <= '0';
 
   ------------------------------------------------------------------------------
   -- Interrupt controller

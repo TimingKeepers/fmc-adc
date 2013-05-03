@@ -6,7 +6,7 @@ carrier_csr:
 	$(WBGEN2) -l vhdl -V $(RTL)$@.vhd -f html -D $@.htm -C $@.h $@.wb
 	$(WBGEN2) -f texinfo -D $(TEX)$@.tex $@.wb
 
-utc_core_regs:
+timetag_core_regs:
 	$(WBGEN2) -l vhdl -V $(RTL)$@.vhd -f html -D $@.htm -C $@.h $@.wb
 	$(WBGEN2) -f texinfo -D $(TEX)$@.tex $@.wb
 
