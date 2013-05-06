@@ -301,7 +301,6 @@ architecture rtl of fmc_adc_100Ms_core is
   signal serdes_in_n         : std_logic_vector(8 downto 0);
   signal serdes_out_raw      : std_logic_vector(71 downto 0);
   signal serdes_out_data     : std_logic_vector(63 downto 0);
-  signal serdes_out_data_d   : std_logic_vector(63 downto 0);
   signal serdes_out_fr       : std_logic_vector(7 downto 0);
   signal serdes_auto_bitslip : std_logic;
   signal serdes_man_bitslip  : std_logic;
@@ -348,10 +347,12 @@ architecture rtl of fmc_adc_100Ms_core is
   signal sync_fifo_dreq  : std_logic;
 
   -- Gain/offset calibration
-  signal gain_calibr     : std_logic_vector(63 downto 0);
-  signal offset_calibr   : std_logic_vector(63 downto 0);
-  signal data_calibr_in  : std_logic_vector(63 downto 0);
-  signal data_calibr_out : std_logic_vector(63 downto 0);
+  signal gain_calibr       : std_logic_vector(63 downto 0);
+  signal offset_calibr     : std_logic_vector(63 downto 0);
+  signal data_calibr_in    : std_logic_vector(63 downto 0);
+  signal data_calibr_out   : std_logic_vector(63 downto 0);
+  signal data_calibr_out_d : std_logic_vector(63 downto 0);
+
 
   -- Acquisition FSM
   signal acq_fsm_current_state : t_acq_fsm_state;
@@ -715,6 +716,23 @@ begin
       );
 
   ------------------------------------------------------------------------------
+  -- Offset and gain calibration
+  ------------------------------------------------------------------------------
+  l_offset_gain_calibr : for I in 0 to 3 generate
+    cmp_offset_gain_calibr : offset_gain_s
+      port map(
+        rst_n_i  => fs_rst_n,
+        clk_i    => fs_clk,
+        offset_i => offset_calibr((I+1)*16-1 downto I*16),
+        gain_i   => gain_calibr((I+1)*16-1 downto I*16),
+        data_i   => data_calibr_in((I+1)*16-1 downto I*16),
+        data_o   => data_calibr_out((I+1)*16-1 downto I*16)
+        );
+  end generate l_offset_gain_calibr;
+
+  data_calibr_in <= serdes_out_data;
+
+  ------------------------------------------------------------------------------
   -- Trigger
   ------------------------------------------------------------------------------
 
@@ -744,10 +762,10 @@ begin
       );
 
   -- Internal hardware trigger
-  int_trig_data <= serdes_out_data(15 downto 0) when int_trig_sel = "00" else   -- CH1 selected
-                   serdes_out_data(31 downto 16) when int_trig_sel = "01" else  -- CH2 selected
-                   serdes_out_data(47 downto 32) when int_trig_sel = "10" else  -- CH3 selected
-                   serdes_out_data(63 downto 48) when int_trig_sel = "11" else  -- CH4 selected
+  int_trig_data <= data_calibr_out(15 downto 0) when int_trig_sel = "00" else   -- CH1 selected
+                   data_calibr_out(31 downto 16) when int_trig_sel = "01" else  -- CH2 selected
+                   data_calibr_out(47 downto 32) when int_trig_sel = "10" else  -- CH3 selected
+                   data_calibr_out(63 downto 48) when int_trig_sel = "11" else  -- CH4 selected
                    (others => '0');
 
   p_int_trig : process (fs_clk, fs_rst_n)
@@ -755,7 +773,7 @@ begin
     if fs_rst_n = '0' then
       int_trig_over_thres   <= '0';
       int_trig_over_thres_d <= '0';
-      serdes_out_data_d     <= (others => '0');
+      data_calibr_out_d     <= (others => '0');
     elsif rising_edge(fs_clk) then
       if signed(int_trig_data) > signed(int_trig_thres) then
         int_trig_over_thres <= '1';
@@ -763,7 +781,7 @@ begin
         int_trig_over_thres <= '0';
       end if;
       int_trig_over_thres_d <= int_trig_over_thres;
-      serdes_out_data_d     <= serdes_out_data;  -- delay data to compensate for threshold detection delay
+      data_calibr_out_d     <= data_calibr_out;  -- delay data to compensate for threshold detection delay
     end if;
   end process p_int_trig;
 
@@ -856,24 +874,6 @@ begin
   end process p_trig_align;
 
   ------------------------------------------------------------------------------
-  -- Offset and gain calibration
-  ------------------------------------------------------------------------------
-  l_offset_gain_calibr : for I in 0 to 3 generate
-    cmp_offset_gain_calibr : offset_gain_s
-      port map(
-        rst_n_i  => fs_rst_n,
-        clk_i    => fs_clk,
-        offset_i => offset_calibr((I+1)*16-1 downto I*16),
-        gain_i   => gain_calibr((I+1)*16-1 downto I*16),
-        data_i   => data_calibr_in((I+1)*16-1 downto I*16),
-        data_o   => data_calibr_out((I+1)*16-1 downto I*16)
-        );
-  end generate l_offset_gain_calibr;
-
-  -- An additional 1 fs_clk period delay is added when internal hw trigger is selected
-  data_calibr_in <= serdes_out_data_d when hw_trig_sel = '0' else serdes_out_data;
-
-  ------------------------------------------------------------------------------
   -- Synchronisation FIFO to system clock domain
   ------------------------------------------------------------------------------
   cmp_adc_sync_fifo : generic_async_fifo
@@ -927,7 +927,9 @@ begin
     end if;
   end process;
 
-  sync_fifo_din <= trig_align & data_calibr_out;
+  -- An additional 1 fs_clk period delay is added when internal hw trigger is selected
+  sync_fifo_din <= trig_align & data_calibr_out_d when hw_trig_sel = '0' else trig_align & data_calibr_out;
+
   -- FOR DEBUG: FR instead of CH1 and SerDes Synced instead of CH2
   --sync_fifo_din <= trig_align & serdes_out_data(63 downto 32) &
   --                 "000000000000000" & serdes_synced &
