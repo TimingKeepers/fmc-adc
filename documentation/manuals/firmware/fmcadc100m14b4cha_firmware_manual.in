@@ -157,6 +157,7 @@ Here is the procedure to build the FPGA binary image from the hdl source.
       Location of fetched and generated hdl cores and libraries.
 @item hdl/spec/syn/
       Synthesis directory for SPEC carrier. This is where the synthesis top manifest and the ISE project are stored.
+      For each release, the synthesis, place&route and timing reports are also saved here.
 @item hdl/spec/sim/
       SPEC carrier related simulation files and testbenches.
 @item hdl/spec/chipscope/
@@ -320,6 +321,10 @@ This block contains control and status registers related to the carrier board.
 A first register allows to readout the carrier PCB revision and carrier type.
 Another register signals the presence of a mezzanine in the FMC slot, gives the status of the local bus and system PLLs and indicates the DDR memory controller calibration state.
 The last register of this block allows to control the carrier's LEDs on the front panel. There is on red and one green LED.
+
+@quotation Note
+The ``Carrier Type'' field is used only for test purpose. The carrier board identification is done through the PCI Express vendor and device ID.
+@end quotation
 
 @c --------------------------------------------------------------------------
 @section Carrier 1-wire Master
@@ -773,6 +778,10 @@ This means a unit gain and no offset.
 After gain and offset correction, the two LSB of the data words can be different from zero.
 @end quotation
 
+@quotation Note
+It is usually the driver's task to read the calibration data from the FMC EEPROM and load them to the corresponding registers. This has to be done once at start-up and then every time the input range is changed.
+@end quotation
+
 
 @subsection DAC Calibration
 The DAC value is only set once before an acquisition.
@@ -961,14 +970,13 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @itemize @textdegree
 @c DONE Take data for threshold trigger after offset/gain correction.
 @c DONE Solve the internal trigger threshold issue (triggering even if signal < threshold!).
-@c      Taking the threshold trigger data after offset/gain correction solved the problem.
+@c      -> Taking the threshold trigger data after offset/gain correction solved the problem.
 @c DONE Update interface of wbgen2 generated cores (name change).
 @c DONE License header in every file -> check
 @item Remove huge files from git repo. @b{!!! This will change all commits sha !!!}
 @c DONE Rename UTC core in time-tagging core or something like that (stricly speaking, it is not UTC).
-@item Include the git tree in a .tar.gz along with the .bin file (in the files section) for each release. -> modify the Release chapter accordingly.
-@item Make the project ucfgen friendly (check what has to be done, perhaps nothing).
-@c TODO check Atos comments.
+@c DONE check Atos comments.
+@item Add a reference section (bibliography).
 @end itemize
 
 @c --------------------------------------------------------------------------
@@ -977,7 +985,8 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @itemize @textdegree
 @item Remove carrier SPI master from mapping -> shift other slaves base addresses.
 @item Add WR core; 1)for time-tags, 2)for sampling clock control@*
-      Define behaviour when WR is desconnected.
+      - Define behaviour when WR is desconnected.@*
+      - Assign signals to SPEC front panel LEDs.
 @item Add Etherbone support.
 @item Remove mutli-irq register from interrupt controller.@*
       Perhaps add a counter per interrupt source instead.
@@ -999,6 +1008,11 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @item Review reset logic.
 @item Generate an end of acquisition interrupt after an acquisition stop command?
 @item Remove meta-info field in time-tags?
+@item Move sdb device descriptions from top to the wishbone_pkg.vhd (general-cores lib).
+@item Make the project ucfgen friendly.@*
+      - Put all mezzanine related cores in a wrapper (fmc adc block).@*
+      - Add a crossbar inside the fmc adc block -> check impact on sdb.
+@item Include the git tree in a .tar.gz along with the .bin file (in the files section) for each release. -> modify the Release chapter accordingly.
 @end itemize
 
 

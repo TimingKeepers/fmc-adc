@@ -97,7 +97,7 @@ peripheral {
 
     field {
       name = "Green LED";
-      description = "Front panel green LED control";
+      description = "Manual control of the front panel green LED (unused in the fmc-adc application)";
       prefix = "led_green";
       type = BIT;
       access_bus = READ_WRITE;
@@ -106,7 +106,7 @@ peripheral {
 
     field {
       name = "Red LED";
-      description = "Front panel red LED control";
+      description = "Manual control of the front panel red LED (unused in the fmc-adc application)";
       prefix = "led_red";
       type = BIT;
       access_bus = READ_WRITE;
