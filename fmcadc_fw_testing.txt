@@ -1,0 +1,80 @@
+
+Trigger:
+- Hardware external rising edge
+- Hardware external falling edge
+- Hardware internal positive slope
+- Hardware internal negative slope
+- Hardware internal positive slope, threshold range
+- Hardware internal negative slope, threshold range
+- Hardware internal on channel 1
+- Hardware internal on channel 2
+- Hardware internal on channel 3
+- Hardware internal on channel 4
+- Hardware enable
+- Software
+- Software enable
+- Delay range
+- Trigger alignment when decimation factor is > 1
+
+Datapath:
+- ADC offset correction
+- ADC gain correction
+- Decimation range
+- Pre-trigger samples range
+- Post-trigger samples range
+- Total number of samples range (full memory, overlapping, etc...)
+- Number of shots range
+- Multi-shot mode, memory arrangement
+- Multi-shot mode, number of samples range (up to max dpram size)
+- 
+
+ADC core CSR:
+* Acq and trig LEDs manual control bits => tested with production test03
+- Test data (Write the address counter value instead of ADC data to DDR)
+! Manual bitslip of adc data serdes => Cannot be tested as automatic bitslip is generated in hdl
+- Offset DAC clear
+- FMC clock enable
+- FSM start command
+- FSM stop command
+- FSM unused commands (shouldn't do anything)
+! FSM state => cannot test all states (e.g. DECR_SHOT lasts only 1 tick)
+- SerDes PLL lock status (use FMC clock enable)
+! SerDes sync status, must be 1 => cannot test more
+* Trigger config, delay and software trigger registers => see Trigger chapter
+* Number of shots => see Datapath chapter
+* Trigger position => see Datapath chapter
+* Decimation rate => see Datapath chapter
+* Pre-trigger samples => see Datapath chapter
+* Post-trigger samples => see Datapath chapter
+- Samples counter
+* Channel N control register (switches) => tested with production test08
+- Channel N value register (use pattern from ADC)
+* Channel N correction gain and offset registers => see Datapath chapter
+- 
+
+Interrupts:
+- Interrupt mask
+- DMA done interrupt
+? DMA error interrupt => how to force a DMA error
+- Trigger interrupt
+- End of acquisition interrupt
+- Multi-interrupt
+
+Time-tags:
+- UTC set register
+- Coarse set register
+- Trigger tag
+- Acquisition start tag
+- Acquisition stop tag
+- Acquisition end tag
+
+
+Carrier CSR:
+* Carrier type => tested in fmc_adc_spec access class
+? Carrier PCB revision => how to automate this test?
+! FMC mezzanine presence => cannot automated this test
+! P2L PLL lock status, must be 1 => cannot test more
+! SysClk PLL lock status, must be 1 => cannot test more
+! DDR calibration done status, must be 1 => cannot test more
+! SPEC LEDs => cannot automated this test
+=> carrier specific firmaware parts will be hard to test...
