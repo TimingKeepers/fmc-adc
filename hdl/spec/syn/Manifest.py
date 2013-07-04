@@ -15,10 +15,11 @@ files = [
     "../../ip_cores/adc_serdes.vhd",
     "../../ip_cores/monostable/monostable_rtl.vhd",
     "../../ip_cores/ext_pulse_sync/ext_pulse_sync_rtl.vhd",
-    "../../ip_cores/utils/utils_pkg.vhd",]
+    "../../ip_cores/utils/utils_pkg.vhd"]
 
 modules = { "local" : ["../rtl",
-                       "../../adc/rtl"],
+                       "../../adc/rtl",
+                       "../../ip_cores/timetag_core/rtl"],
             "git" : ["git://ohwr.org/hdl-core-lib/general-cores.git::sdb_extension",
                      "git://ohwr.org/hdl-core-lib/ddr3-sp6-core.git::spec_bank3_64b_32b",
                      "git://ohwr.org/hdl-core-lib/gn4124-core.git::master"]}
