@@ -190,7 +190,7 @@ The fmc-adc firmware depends on the following hdl cores and libraries:
 
 This chapter describes the internal blocks of the FPGA.
 All blocks (except the memory controller) are connected to the PCIe bridge interface using a Wishbone bus. The DDR memory can only be access through DMA.
-The @ref{fig:firmware_arch} illustrates the FPGA architecture. The peripherals connected to each block are also shown.
+The @ref{fig:spec_fw_arch} illustrates the FPGA architecture. The peripherals connected to each block are also shown.
 A crossbar from the general-cores@footnote{@uref{http://www.ohwr.org/projects/general-cores}} library is used to map the Wishbone slaves in the BAR 0 address space.
 The @ref{tab:memory_map} shows the Wishbone slaves mapping.
 
@@ -244,8 +244,8 @@ OpenCores@footnote{@uref{http://opencores.org/}}. Therefore, the documentation f
 
 The register description for the cores for the carrier control and status, the time-tagging core, the interrupt controller and the ADC core can be found in annexe (@xref{ADC Core Registers}, @ref{Interrupt Controller Registers}, @ref{Time-tagging Core Registers} and @ref{Carrier Registers}). The registers for those cores have been generated using @command{wbgen2}@footnote{@uref{http://www.ohwr.org/projects/wishbone-gen}}.
 
-@float Figure,fig:firmware_arch
-@center @image{../../figures/firmware_arch, 15cm,,,pdf}
+@float Figure,fig:spec_fw_arch
+@center @image{../../figures/spec_fw_arch, 15cm,,,pdf}
 @caption{FPGA firmware architecture block diargam.}
 @end float
 
@@ -973,9 +973,15 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @c      -> Taking the threshold trigger data after offset/gain correction solved the problem.
 @c DONE Update interface of wbgen2 generated cores (name change).
 @c DONE License header in every file -> check
-@item Remove huge files from git repo. @b{!!! This will change all commits sha !!!}
 @c DONE Rename UTC core in time-tagging core or something like that (stricly speaking, it is not UTC).
 @c DONE check Atos comments.
+
+@c DONE Remove carrier SPI master from mapping -> shift other slaves base addresses.
+@c DONE Make the project ucfgen friendly.
+@c        - Put all mezzanine related cores in a wrapper (fmc adc mezzanine).
+@c        - Add a crossbar inside the fmc adc block -> check impact on sdb.
+
+@item Remove huge files from git repo. @b{!!! This will change all commits sha !!!}
 @item Add a reference section (bibliography).
 @end itemize
 
@@ -983,7 +989,6 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @section For a later release
 
 @itemize @textdegree
-@item Remove carrier SPI master from mapping -> shift other slaves base addresses.
 @item Add WR core; 1)for time-tags, 2)for sampling clock control@*
       - Define behaviour when WR is desconnected.@*
       - Assign signals to SPEC front panel LEDs.
@@ -1009,9 +1014,6 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @item Generate an end of acquisition interrupt after an acquisition stop command?
 @item Remove meta-info field in time-tags?
 @item Move sdb device descriptions from top to the wishbone_pkg.vhd (general-cores lib).
-@item Make the project ucfgen friendly.@*
-      - Put all mezzanine related cores in a wrapper (fmcÂ adcÂ block).@*
-      - Add a crossbar inside the fmc adc block -> check impact on sdb.
 @item Include the git tree in a .tar.gz along with the .bin file (in the files section) for each release. -> modify the Release chapter accordingly.
 @end itemize
 
