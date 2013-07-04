@@ -46,7 +46,7 @@ use work.gn4124_core_pkg.all;
 use work.ddr3_ctrl_pkg.all;
 use work.gencores_pkg.all;
 use work.wishbone_pkg.all;
-use work.fmc_adc_100Ms_core_pkg.all;
+use work.fmc_adc_mezzanine_pkg.all;
 use work.sdb_meta_pkg.all;
 
 
@@ -241,7 +241,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   ------------------------------------------------------------------------------
 
   -- Number of master port(s) on the wishbone crossbar
-  constant c_NUM_WB_MASTERS : integer := 10;
+  constant c_NUM_WB_MASTERS : integer := 6;
 
   -- Number of slave port(s) on the wishbone crossbar
   constant c_NUM_WB_SLAVES : integer := 1;
@@ -250,17 +250,12 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   constant c_MASTER_GENNUM : integer := 0;
 
   -- Wishbone slave(s)
-  constant c_SLAVE_DMA         : integer := 0;  -- DMA controller in the Gennum core
-  constant c_SLAVE_ONEWIRE     : integer := 1;  -- Carrier onewire interface
-  constant c_SLAVE_SPEC_CSR    : integer := 2;  -- SPEC control and status registers
-  constant c_SLAVE_TIMETAG     : integer := 3;  -- TIMETAG core for time-tagging
-  constant c_SLAVE_INT         : integer := 4;  -- Interrupt controller
-  constant c_SLAVE_FMC_SYS_I2C : integer := 5;  -- Mezzanine system I2C interface (EEPROM)
-  constant c_SLAVE_FMC_SPI     : integer := 6;  -- Mezzanine SPI interface
-  constant c_SLAVE_FMC_I2C     : integer := 7;  -- Mezzanine I2C controller
-  constant c_SLAVE_FMC_ADC     : integer := 8;  -- Mezzanine ADC core
-  constant c_SLAVE_FMC_ONEWIRE : integer := 9;  -- Mezzanine onewire interface
-
+  constant c_SLAVE_DMA      : integer := 0;  -- DMA controller in the Gennum core
+  constant c_SLAVE_ONEWIRE  : integer := 1;  -- Carrier onewire interface
+  constant c_SLAVE_SPEC_CSR : integer := 2;  -- SPEC control and status registers
+  constant c_SLAVE_TIMETAG  : integer := 3;  -- TIMETAG core for time-tagging
+  constant c_SLAVE_INT      : integer := 4;  -- Interrupt controller
+  constant c_SLAVE_FMC_ADC  : integer := 5;  -- FMC ADC mezzanine
 
   -- Devices sdb description
   constant c_DMA_SDB_DEVICE : t_sdb_device := (
@@ -343,73 +338,24 @@ architecture rtl of spec_top_fmc_adc_100Ms is
         date      => x"20121116",
         name      => "WB-Int.Control     ")));
 
-  constant c_I2C_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000001F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000606",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-I2C.Control     ")));
-
-  constant c_SPI_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000001F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000607",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-SPI.Control     ")));
-
-  constant c_ADC_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000007F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000608",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-FMC-ADC-Core    ")));
+  -- f_xwb_bridge_manual_sdb(size, sdb_addr)
+  constant c_FMC_ADC_SDB_BRIDGE : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00002000");
 
   -- sdb header address
   constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";
 
   -- Wishbone crossbar layout
-  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(12 downto 0) :=
+  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(8 downto 0) :=
     (
-      0  => f_sdb_embed_device(c_DMA_SDB_DEVICE, x"00001000"),
-      1  => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001200"),
-      2  => f_sdb_embed_device(c_SPEC_CSR_SDB_DEVICE, x"00001300"),
-      3  => f_sdb_embed_device(c_TIMETAG_SDB_DEVICE, x"00001400"),
-      4  => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001500"),
-      5  => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001600"),
-      6  => f_sdb_embed_device(c_SPI_SDB_DEVICE, x"00001700"),
-      7  => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001800"),
-      8  => f_sdb_embed_device(c_ADC_SDB_DEVICE, x"00001900"),
-      9  => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001A00"),
-      10 => f_sdb_embed_repo_url(c_SDB_REPO_URL),
-      11 => f_sdb_embed_synthesis(c_SDB_SYNTHESIS),
-      12 => f_sdb_embed_integration(c_SDB_INTEGRATION)
+      0 => f_sdb_embed_device(c_DMA_SDB_DEVICE, x"00001000"),
+      1 => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001100"),
+      2 => f_sdb_embed_device(c_SPEC_CSR_SDB_DEVICE, x"00001200"),
+      3 => f_sdb_embed_device(c_TIMETAG_SDB_DEVICE, x"00001300"),
+      4 => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001400"),
+      5 => f_sdb_embed_bridge(c_FMC_ADC_SDB_BRIDGE, x"00002000"),
+      6 => f_sdb_embed_repo_url(c_SDB_REPO_URL),
+      7 => f_sdb_embed_synthesis(c_SDB_SYNTHESIS),
+      8 => f_sdb_embed_integration(c_SDB_INTEGRATION)
       );
 
   ------------------------------------------------------------------------------
@@ -491,22 +437,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal acq_end_irq_p       : std_logic;
   signal acq_end             : std_logic;
 
-  -- Mezzanine I2C for Si570
-  signal si570_scl_in   : std_logic;
-  signal si570_scl_out  : std_logic;
-  signal si570_scl_oe_n : std_logic;
-  signal si570_sda_in   : std_logic;
-  signal si570_sda_out  : std_logic;
-  signal si570_sda_oe_n : std_logic;
-
-  -- Mezzanine system I2C for EEPROM
-  signal sys_scl_in   : std_logic;
-  signal sys_scl_out  : std_logic;
-  signal sys_scl_oe_n : std_logic;
-  signal sys_sda_in   : std_logic;
-  signal sys_sda_out  : std_logic;
-  signal sys_sda_oe_n : std_logic;
-
   -- LED control from carrier CSR register
   signal led_red   : std_logic;
   signal led_green : std_logic;
@@ -530,13 +460,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal spi_din_t : std_logic_vector(3 downto 0);
   signal spi_ss_t  : std_logic_vector(7 downto 0);
 
-  -- Mezzanine 1-wire
-  signal mezz_owr_pwren : std_logic_vector(0 downto 0);
-  signal mezz_owr_en    : std_logic_vector(0 downto 0);
-  signal mezz_owr_i     : std_logic_vector(0 downto 0);
-
   -- Carrier 1-wire
-  signal carrier_owr_pwren : std_logic_vector(0 downto 0);
   signal carrier_owr_en    : std_logic_vector(0 downto 0);
   signal carrier_owr_i     : std_logic_vector(0 downto 0);
 
@@ -765,7 +689,7 @@ begin
       slave_o => cnx_master_in(c_SLAVE_ONEWIRE),
       desc_o  => open,
 
-      owr_pwren_o => carrier_owr_pwren,
+      owr_pwren_o => open,
       owr_en_o    => carrier_owr_en,
       owr_i       => carrier_owr_i
       );
@@ -928,137 +852,30 @@ begin
   aux_leds_o(3) <= not(irq_sources_2_led(0));
 
   ------------------------------------------------------------------------------
-  -- Mezzanine system managment I2C master
-  --    Access to mezzanine EEPROM
+  -- FMC ADC mezzanine (wb bridge)
+  --    Mezzanine system managment I2C master
+  --    Mezzanine SPI master
+  --    Mezzanine I2C
+  --    ADC core
+  --    Mezzanine 1-wire master
   ------------------------------------------------------------------------------
-  cmp_fmc_sys_i2c : xwb_i2c_master
+  cmp_fmc_adc_mezzanine_0 : fmc_adc_mezzanine
     generic map(
-      g_interface_mode      => CLASSIC,
-      g_address_granularity => BYTE
-      )
-    port map (
-      clk_sys_i => sys_clk_125,
-      rst_n_i   => sys_rst_n,
-
-      slave_i => cnx_master_out(c_SLAVE_FMC_SYS_I2C),
-      slave_o => cnx_master_in(c_SLAVE_FMC_SYS_I2C),
-      desc_o  => open,
-
-      scl_pad_i    => sys_scl_in,
-      scl_pad_o    => sys_scl_out,
-      scl_padoen_o => sys_scl_oe_n,
-      sda_pad_i    => sys_sda_in,
-      sda_pad_o    => sys_sda_out,
-      sda_padoen_o => sys_sda_oe_n
-      );
-
-  -- Tri-state buffer for SDA and SCL
-  sys_scl_b  <= sys_scl_out when sys_scl_oe_n = '0' else 'Z';
-  sys_scl_in <= sys_scl_b;
-
-  sys_sda_b  <= sys_sda_out when sys_sda_oe_n = '0' else 'Z';
-  sys_sda_in <= sys_sda_b;
-
-  ------------------------------------------------------------------------------
-  -- Mezzanine SPI master
-  --    Offset DACs control
-  --    ADC control
-  ------------------------------------------------------------------------------
-  cmp_fmc_spi : xwb_spi
-    generic map(
-      g_interface_mode      => CLASSIC,
-      g_address_granularity => BYTE
-      )
-    port map (
-      clk_sys_i => sys_clk_125,
-      rst_n_i   => sys_rst_n,
-
-      slave_i => cnx_master_out(c_SLAVE_FMC_SPI),
-      slave_o => cnx_master_in(c_SLAVE_FMC_SPI),
-      desc_o  => open,
-
-      pad_cs_o   => spi_ss_t,
-      pad_sclk_o => spi_sck_o,
-      pad_mosi_o => spi_dout_o,
-      pad_miso_i => spi_din_t(spi_din_t'left)
-      );
-
-  -- Assign slave select lines
-  spi_cs_adc_n_o  <= spi_ss_t(0);
-  spi_cs_dac1_n_o <= spi_ss_t(1);
-  spi_cs_dac2_n_o <= spi_ss_t(2);
-  spi_cs_dac3_n_o <= spi_ss_t(3);
-  spi_cs_dac4_n_o <= spi_ss_t(4);
-
-  -- Add some FF after the input pin to solve timing problem
-  p_fmc_spi : process (sys_clk_125)
-  begin
-    if rising_edge(sys_clk_125) then
-      if sys_rst_n = '0' then
-        spi_din_t <= (others => '0');
-      else
-        spi_din_t <= spi_din_t(spi_din_t'left-1 downto 0) & spi_din_i;
-      end if;
-    end if;
-  end process p_fmc_spi;
-
-  ------------------------------------------------------------------------------
-  -- Mezzanine I2C
-  --    Si570 control
-  --
-  -- Note: I2C registers are 8-bit wide, but accessed as 32-bit registers
-  ------------------------------------------------------------------------------
-  cmp_fmc_i2c : xwb_i2c_master
-    generic map(
-      g_interface_mode      => CLASSIC,
-      g_address_granularity => BYTE
-      )
-    port map (
-      clk_sys_i => sys_clk_125,
-      rst_n_i   => sys_rst_n,
-
-      slave_i => cnx_master_out(c_SLAVE_FMC_I2C),
-      slave_o => cnx_master_in(c_SLAVE_FMC_I2C),
-      desc_o  => open,
-
-      scl_pad_i    => si570_scl_in,
-      scl_pad_o    => si570_scl_out,
-      scl_padoen_o => si570_scl_oe_n,
-      sda_pad_i    => si570_sda_in,
-      sda_pad_o    => si570_sda_out,
-      sda_padoen_o => si570_sda_oe_n
-      );
-
-  -- Tri-state buffer for SDA and SCL
-  si570_scl_b  <= si570_scl_out when si570_scl_oe_n = '0' else 'Z';
-  si570_scl_in <= si570_scl_b;
-
-  si570_sda_b  <= si570_sda_out when si570_sda_oe_n = '0' else 'Z';
-  si570_sda_in <= si570_sda_b;
-
-  ------------------------------------------------------------------------------
-  -- ADC core
-  --    Solid State Relays control
-  --    Si570 output enable
-  --    Offset DACs control (CLR_N)
-  --    ADC core control and status
-  ------------------------------------------------------------------------------
-  cmp_fmc_adc_100Ms_core : fmc_adc_100Ms_core
-    generic map (
       g_multishot_ram_size => 2048
       )
     port map(
       sys_clk_i   => sys_clk_125,
       sys_rst_n_i => sys_rst_n,
 
-      wb_csr_adr_i => cnx_master_out(c_SLAVE_FMC_ADC).adr(6 downto 2),  -- cnx_master_out.adr is byte address
-      wb_csr_dat_i => cnx_master_out(c_SLAVE_FMC_ADC).dat,
-      wb_csr_dat_o => cnx_master_in(c_SLAVE_FMC_ADC).dat,
-      wb_csr_cyc_i => cnx_master_out(c_SLAVE_FMC_ADC).cyc,
-      wb_csr_sel_i => cnx_master_out(c_SLAVE_FMC_ADC).sel,
-      wb_csr_stb_i => cnx_master_out(c_SLAVE_FMC_ADC).stb,
-      wb_csr_we_i  => cnx_master_out(c_SLAVE_FMC_ADC).we,
-      wb_csr_ack_o => cnx_master_in(c_SLAVE_FMC_ADC).ack,
+      wb_csr_adr_i   => cnx_master_out(c_SLAVE_FMC_ADC).adr,
+      wb_csr_dat_i   => cnx_master_out(c_SLAVE_FMC_ADC).dat,
+      wb_csr_dat_o   => cnx_master_in(c_SLAVE_FMC_ADC).dat,
+      wb_csr_cyc_i   => cnx_master_out(c_SLAVE_FMC_ADC).cyc,
+      wb_csr_sel_i   => cnx_master_out(c_SLAVE_FMC_ADC).sel,
+      wb_csr_stb_i   => cnx_master_out(c_SLAVE_FMC_ADC).stb,
+      wb_csr_we_i    => cnx_master_out(c_SLAVE_FMC_ADC).we,
+      wb_csr_ack_o   => cnx_master_in(c_SLAVE_FMC_ADC).ack,
+      wb_csr_stall_o => cnx_master_in(c_SLAVE_FMC_ADC).stall,
 
       wb_ddr_clk_i   => sys_clk_125,
       wb_ddr_adr_o   => wb_ddr_adr,
@@ -1094,42 +911,30 @@ begin
       gpio_ssr_ch2_o   => gpio_ssr_ch2_o,
       gpio_ssr_ch3_o   => gpio_ssr_ch3_o,
       gpio_ssr_ch4_o   => gpio_ssr_ch4_o,
-      gpio_si570_oe_o  => gpio_si570_oe_o
+      gpio_si570_oe_o  => gpio_si570_oe_o,
+
+      spi_din_i       => spi_din_i,
+      spi_dout_o      => spi_dout_o,
+      spi_sck_o       => spi_sck_o,
+      spi_cs_adc_n_o  => spi_cs_adc_n_o,
+      spi_cs_dac1_n_o => spi_cs_dac1_n_o,
+      spi_cs_dac2_n_o => spi_cs_dac2_n_o,
+      spi_cs_dac3_n_o => spi_cs_dac3_n_o,
+      spi_cs_dac4_n_o => spi_cs_dac4_n_o,
+
+      si570_scl_b => si570_scl_b,
+      si570_sda_b => si570_sda_b,
+
+      mezz_one_wire_b => mezz_one_wire_b,
+
+      sys_scl_b => sys_scl_b,
+      sys_sda_b => sys_sda_b
       );
 
   -- Unused wishbone signals
-  cnx_master_in(c_SLAVE_FMC_ADC).err   <= '0';
-  cnx_master_in(c_SLAVE_FMC_ADC).rty   <= '0';
-  cnx_master_in(c_SLAVE_FMC_ADC).stall <= '0';
-  cnx_master_in(c_SLAVE_FMC_ADC).int   <= '0';
-
-  ------------------------------------------------------------------------------
-  -- Mezzanine 1-wire master
-  --    DS18B20 (thermometer + unique ID)
-  ------------------------------------------------------------------------------
-  cmp_fmc_onewire : xwb_onewire_master
-    generic map(
-      g_interface_mode      => CLASSIC,
-      g_address_granularity => BYTE,
-      g_num_ports           => 1,
-      g_ow_btp_normal       => "5.0",
-      g_ow_btp_overdrive    => "1.0"
-      )
-    port map(
-      clk_sys_i => sys_clk_125,
-      rst_n_i   => sys_rst_n,
-
-      slave_i => cnx_master_out(c_SLAVE_FMC_ONEWIRE),
-      slave_o => cnx_master_in(c_SLAVE_FMC_ONEWIRE),
-      desc_o  => open,
-
-      owr_pwren_o => mezz_owr_pwren,
-      owr_en_o    => mezz_owr_en,
-      owr_i       => mezz_owr_i
-      );
-
-  mezz_one_wire_b <= '0' when mezz_owr_en(0) = '1' else 'Z';
-  mezz_owr_i(0)   <= mezz_one_wire_b;
+  cnx_master_in(c_SLAVE_FMC_ADC).err <= '0';
+  cnx_master_in(c_SLAVE_FMC_ADC).rty <= '0';
+  cnx_master_in(c_SLAVE_FMC_ADC).int <= '0';
 
   ------------------------------------------------------------------------------
   -- DMA wishbone bus slaves
@@ -1231,7 +1036,7 @@ begin
   GPIO(1) <= '0';                       -- connection to GN4124
 
   ------------------------------------------------------------------------------
-  -- FPGA programmed led (heart beat)
+  -- FPGA loaded led (heart beat)
   ------------------------------------------------------------------------------
   p_led_pwn_update_cnt : process (sys_clk_125)
   begin
