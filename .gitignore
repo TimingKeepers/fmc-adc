@@ -1,6 +1,6 @@
-hdl/spec/ip_cores/ddr3-sp6-core/
-hdl/spec/ip_cores/general-cores/
-hdl/spec/ip_cores/gn4124-core/
+hdl/ip_cores/ddr3-sp6-core/
+hdl/ip_cores/general-cores/
+hdl/ip_cores/gn4124-core/
 hdl/spec/sim/modelsim.ini
 hdl/spec/sim/work/
 hdl/spec/syn/_ngo/
