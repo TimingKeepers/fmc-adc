@@ -1,0 +1,77 @@
+
+#
+# Mezzanine top level pin assignment file:
+# syntax: pin FMC_pin_name Core_Pin_name IO_Standard
+# % is replaced with FMC number if the carrier supports more than 1 mezzanine
+#
+
+mezzanine fmc-adc-v5
+
+pin la_n17 adc%_ext_trigger_n_i lvds_25
+pin la_p17 adc%_ext_trigger_p_i lvds_25
+pin la_n00 adc%_dco_n_i lvds_25
+pin la_p00 adc%_dco_p_i lvds_25
+pin la_n01 adc%_fr_n_i lvds_25
+pin la_p01 adc%_fr_p_i lvds_25
+pin la_n14 adc%_outa_n_i[0] lvds_25
+pin la_p14 adc%_outa_p_i[0] lvds_25
+pin la_n15 adc%_outb_n_i[0] lvds_25
+pin la_p15 adc%_outb_p_i[0] lvds_25
+pin la_n16 adc%_outa_n_i[1] lvds_25
+pin la_p16 adc%_outa_p_i[1] lvds_25
+pin la_n13 adc%_outb_n_i[1] lvds_25
+pin la_p13 adc%_outb_p_i[1] lvds_25
+pin la_n10 adc%_outa_n_i[2] lvds_25
+pin la_p10 adc%_outa_p_i[2] lvds_25
+pin la_n09 adc%_outb_n_i[2] lvds_25
+pin la_p09 adc%_outb_p_i[2] lvds_25
+pin la_n07 adc%_outa_n_i[3] lvds_25
+pin la_p07 adc%_outa_p_i[3] lvds_25
+pin la_n05 adc%_outb_n_i[3] lvds_25
+pin la_p05 adc%_outb_p_i[3] lvds_25
+pin la_p25 adc%_spi_din_i lvcmos25
+pin la_n31 adc%_spi_dout_o lvcmos25
+pin la_p31 adc%_spi_sck_o lvcmos25
+pin la_p30 adc%_spi_cs_adc_n_o lvcmos25
+pin la_p32 adc%_spi_cs_dac1_n_o lvcmos25
+pin la_n32 adc%_spi_cs_dac2_n_o lvcmos25
+pin la_p33 adc%_spi_cs_dac3_n_o lvcmos25
+pin la_n33 adc%_spi_cs_dac4_n_o lvcmos25
+pin la_n30 adc%_gpio_dac_clr_n_o lvcmos25
+pin la_n28 adc%_gpio_led_acq_o lvcmos25
+pin la_p28 adc%_gpio_led_trig_o lvcmos25
+pin la_p26 adc%_gpio_ssr_ch1_o[0] lvcmos25
+pin la_n26 adc%_gpio_ssr_ch1_o[1] lvcmos25
+pin la_n27 adc%_gpio_ssr_ch1_o[2] lvcmos25
+pin la_n25 adc%_gpio_ssr_ch1_o[3] lvcmos25
+pin la_p24 adc%_gpio_ssr_ch1_o[4] lvcmos25
+pin la_n24 adc%_gpio_ssr_ch1_o[5] lvcmos25
+pin la_p29 adc%_gpio_ssr_ch1_o[6] lvcmos25
+pin la_p20 adc%_gpio_ssr_ch2_o[0] lvcmos25
+pin la_n19 adc%_gpio_ssr_ch2_o[1] lvcmos25
+pin la_p22 adc%_gpio_ssr_ch2_o[2] lvcmos25
+pin la_n22 adc%_gpio_ssr_ch2_o[3] lvcmos25
+pin la_p21 adc%_gpio_ssr_ch2_o[4] lvcmos25
+pin la_p27 adc%_gpio_ssr_ch2_o[5] lvcmos25
+pin la_n21 adc%_gpio_ssr_ch2_o[6] lvcmos25
+pin la_p08 adc%_gpio_ssr_ch3_o[0] lvcmos25
+pin la_n08 adc%_gpio_ssr_ch3_o[1] lvcmos25
+pin la_p12 adc%_gpio_ssr_ch3_o[2] lvcmos25
+pin la_n12 adc%_gpio_ssr_ch3_o[3] lvcmos25
+pin la_p11 adc%_gpio_ssr_ch3_o[4] lvcmos25
+pin la_n11 adc%_gpio_ssr_ch3_o[5] lvcmos25
+pin la_n20 adc%_gpio_ssr_ch3_o[6] lvcmos25
+pin la_p02 adc%_gpio_ssr_ch4_o[0] lvcmos25
+pin la_n02 adc%_gpio_ssr_ch4_o[1] lvcmos25
+pin la_p03 adc%_gpio_ssr_ch4_o[2] lvcmos25
+pin la_n03 adc%_gpio_ssr_ch4_o[3] lvcmos25
+pin la_p04 adc%_gpio_ssr_ch4_o[4] lvcmos25
+pin la_p06 adc%_gpio_ssr_ch4_o[5] lvcmos25
+pin la_n04 adc%_gpio_ssr_ch4_o[6] lvcmos25
+pin la_n06 adc%_gpio_si570_oe_o lvcmos25
+pin la_n18 adc%_si570_scl_b lvcmos25
+pin la_p18 adc%_si570_sda_b lvcmos25
+pin la_n29 adc%_one_wire_b lvcmos25
+
+
+#eof
