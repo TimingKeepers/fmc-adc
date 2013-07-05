@@ -48,6 +48,7 @@ use work.gencores_pkg.all;
 use work.wishbone_pkg.all;
 use work.fmc_adc_mezzanine_pkg.all;
 use work.sdb_meta_pkg.all;
+use work.timetag_core_pkg.all;
 
 
 entity spec_top_fmc_adc_100Ms is
@@ -197,25 +198,6 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       carrier_csr_ctrl_reserved_o      : out std_logic_vector(28 downto 0)
       );
   end component carrier_csr;
-
-  component timetag_core
-    port (
-      clk_i         : in  std_logic;
-      rst_n_i       : in  std_logic;
-      trigger_p_i   : in  std_logic;
-      acq_start_p_i : in  std_logic;
-      acq_stop_p_i  : in  std_logic;
-      acq_end_p_i   : in  std_logic;
-      wb_adr_i      : in  std_logic_vector(4 downto 0);
-      wb_dat_i      : in  std_logic_vector(31 downto 0);
-      wb_dat_o      : out std_logic_vector(31 downto 0);
-      wb_cyc_i      : in  std_logic;
-      wb_sel_i      : in  std_logic_vector(3 downto 0);
-      wb_stb_i      : in  std_logic;
-      wb_we_i       : in  std_logic;
-      wb_ack_o      : out std_logic
-      );
-  end component timetag_core;
 
   component irq_controller
     port (
