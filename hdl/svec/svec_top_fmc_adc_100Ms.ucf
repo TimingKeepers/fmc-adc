@@ -1,0 +1,965 @@
+#===============================================================================
+# The IO Location Constraints
+#===============================================================================
+
+#----------------------------------------
+# VME interface
+#----------------------------------------
+NET "vme_write_n_i" LOC = R1;
+NET "vme_sysreset_n_i" LOC = P4;
+#NET "vme_sysclk_i" LOC = P3;
+NET "vme_retry_oe_o" LOC = R4;
+NET "vme_retry_n_o" LOC = AB2;
+NET "vme_lword_n_b" LOC = M7;
+NET "vme_iackout_n_o" LOC = N3;
+NET "vme_iackin_n_i" LOC = P7;
+NET "vme_iack_n_i" LOC = N1;
+NET "vme_dtack_oe_o" LOC = T1;
+NET "vme_dtack_n_o" LOC = R5;
+NET "vme_ds_n_i[1]" LOC = Y7;
+NET "vme_ds_n_i[0]" LOC = Y6;
+NET "vme_data_oe_n_o" LOC = P1;
+NET "vme_data_dir_o" LOC = P2;
+NET "vme_berr_o" LOC = R3;
+NET "vme_as_n_i" LOC = P6;
+NET "vme_addr_oe_n_o" LOC = N4;
+NET "vme_addr_dir_o" LOC = N5;
+NET "vme_irq_n_o[7]" LOC = R7;
+NET "vme_irq_n_o[6]" LOC = AH2;
+NET "vme_irq_n_o[5]" LOC = AF2;
+NET "vme_irq_n_o[4]" LOC = N9;
+NET "vme_irq_n_o[3]" LOC = N10;
+NET "vme_irq_n_o[2]" LOC = AH4;
+NET "vme_irq_n_o[1]" LOC = AG4;
+NET "vme_ga_i[5]" LOC = M6;
+NET "vme_ga_i[4]" LOC = V9;
+NET "vme_ga_i[3]" LOC = V10;
+NET "vme_ga_i[2]" LOC = AJ1;
+NET "vme_ga_i[1]" LOC = AH1;
+NET "vme_ga_i[0]" LOC = V7;
+NET "vme_data_b[31]" LOC = AK3;
+NET "vme_data_b[30]" LOC = AH3;
+NET "vme_data_b[29]" LOC = T8;
+NET "vme_data_b[28]" LOC = T9;
+NET "vme_data_b[27]" LOC = AK4;
+NET "vme_data_b[26]" LOC = AJ4;
+NET "vme_data_b[25]" LOC = W6;
+NET "vme_data_b[24]" LOC = W7;
+NET "vme_data_b[23]" LOC = AB6;
+NET "vme_data_b[22]" LOC = AB7;
+NET "vme_data_b[21]" LOC = W9;
+NET "vme_data_b[20]" LOC = W10;
+NET "vme_data_b[19]" LOC = AK5;
+NET "vme_data_b[18]" LOC = AH5;
+NET "vme_data_b[17]" LOC = AD6;
+NET "vme_data_b[16]" LOC = AC6;
+NET "vme_data_b[15]" LOC = AA6;
+NET "vme_data_b[14]" LOC = AA7;
+NET "vme_data_b[13]" LOC = T6;
+NET "vme_data_b[12]" LOC = T7;
+NET "vme_data_b[11]" LOC = AG5;
+NET "vme_data_b[10]" LOC = AE5;
+NET "vme_data_b[9]" LOC = Y11;
+NET "vme_data_b[8]" LOC = W11;
+NET "vme_data_b[7]" LOC = AF6;
+NET "vme_data_b[6]" LOC = AE6;
+NET "vme_data_b[5]" LOC = Y8;
+NET "vme_data_b[4]" LOC = Y9;
+NET "vme_data_b[3]" LOC = AE7;
+NET "vme_data_b[2]" LOC = AD7;
+NET "vme_data_b[1]" LOC = AA9;
+NET "vme_data_b[0]" LOC = AA10;
+NET "vme_am_i[5]" LOC = V8;
+NET "vme_am_i[4]" LOC = AG3;
+NET "vme_am_i[3]" LOC = AF3;
+NET "vme_am_i[2]" LOC = AF4;
+NET "vme_am_i[1]" LOC = AE4;
+NET "vme_am_i[0]" LOC = AK2;
+NET "vme_addr_b[31]" LOC = T2;
+NET "vme_addr_b[30]" LOC = T3;
+NET "vme_addr_b[29]" LOC = T4;
+NET "vme_addr_b[28]" LOC = U1;
+NET "vme_addr_b[27]" LOC = U3;
+NET "vme_addr_b[26]" LOC = U4;
+NET "vme_addr_b[25]" LOC = U5;
+NET "vme_addr_b[24]" LOC = V1;
+NET "vme_addr_b[23]" LOC = V2;
+NET "vme_addr_b[22]" LOC = W1;
+NET "vme_addr_b[21]" LOC = W3;
+NET "vme_addr_b[20]" LOC = AA4;
+NET "vme_addr_b[19]" LOC = AA5;
+NET "vme_addr_b[18]" LOC = Y1;
+NET "vme_addr_b[17]" LOC = Y2;
+NET "vme_addr_b[16]" LOC = Y3;
+NET "vme_addr_b[15]" LOC = Y4;
+NET "vme_addr_b[14]" LOC = AC1;
+NET "vme_addr_b[13]" LOC = AC3;
+NET "vme_addr_b[12]" LOC = AD1;
+NET "vme_addr_b[11]" LOC = AD2;
+NET "vme_addr_b[10]" LOC = AB3;
+NET "vme_addr_b[9]" LOC = AB4;
+NET "vme_addr_b[8]" LOC = AD3;
+NET "vme_addr_b[7]" LOC = AD4;
+NET "vme_addr_b[6]" LOC = AC4;
+NET "vme_addr_b[5]" LOC = AC5;
+NET "vme_addr_b[4]" LOC = N7;
+NET "vme_addr_b[3]" LOC = N8;
+NET "vme_addr_b[2]" LOC = AE1;
+NET "vme_addr_b[1]" LOC = AE3;
+NET "vme_write_n_i" IOSTANDARD = "LVCMOS33";
+NET "vme_sysreset_n_i" IOSTANDARD = "LVCMOS33";
+#NET "vme_sysclk_i" IOSTANDARD = "LVCMOS33";
+NET "vme_retry_oe_o" IOSTANDARD = "LVCMOS33";
+NET "vme_retry_n_o" IOSTANDARD = "LVCMOS33";
+NET "vme_lword_n_b" IOSTANDARD = "LVCMOS33";
+NET "vme_iackout_n_o" IOSTANDARD = "LVCMOS33";
+NET "vme_iackin_n_i" IOSTANDARD = "LVCMOS33";
+NET "vme_iack_n_i" IOSTANDARD = "LVCMOS33";
+NET "vme_dtack_oe_o" IOSTANDARD = "LVCMOS33";
+NET "vme_dtack_n_o" IOSTANDARD = "LVCMOS33";
+NET "vme_ds_n_i[1]" IOSTANDARD = "LVCMOS33";
+NET "vme_ds_n_i[0]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_oe_n_o" IOSTANDARD = "LVCMOS33";
+NET "vme_data_dir_o" IOSTANDARD = "LVCMOS33";
+NET "vme_berr_o" IOSTANDARD = "LVCMOS33";
+NET "vme_as_n_i" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_oe_n_o" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_dir_o" IOSTANDARD = "LVCMOS33";
+NET "vme_irq_n_o[7]" IOSTANDARD = "LVCMOS33";
+NET "vme_irq_n_o[6]" IOSTANDARD = "LVCMOS33";
+NET "vme_irq_n_o[5]" IOSTANDARD = "LVCMOS33";
+NET "vme_irq_n_o[4]" IOSTANDARD = "LVCMOS33";
+NET "vme_irq_n_o[3]" IOSTANDARD = "LVCMOS33";
+NET "vme_irq_n_o[2]" IOSTANDARD = "LVCMOS33";
+NET "vme_irq_n_o[1]" IOSTANDARD = "LVCMOS33";
+NET "vme_ga_i[5]" IOSTANDARD = "LVCMOS33";
+NET "vme_ga_i[4]" IOSTANDARD = "LVCMOS33";
+NET "vme_ga_i[3]" IOSTANDARD = "LVCMOS33";
+NET "vme_ga_i[2]" IOSTANDARD = "LVCMOS33";
+NET "vme_ga_i[1]" IOSTANDARD = "LVCMOS33";
+NET "vme_ga_i[0]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[31]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[30]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[29]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[28]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[27]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[26]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[25]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[24]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[23]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[22]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[21]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[20]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[19]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[18]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[17]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[16]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[15]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[14]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[13]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[12]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[11]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[10]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[9]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[8]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[7]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[6]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[5]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[4]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[3]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[2]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[1]" IOSTANDARD = "LVCMOS33";
+NET "vme_data_b[0]" IOSTANDARD = "LVCMOS33";
+NET "vme_am_i[5]" IOSTANDARD = "LVCMOS33";
+NET "vme_am_i[4]" IOSTANDARD = "LVCMOS33";
+NET "vme_am_i[3]" IOSTANDARD = "LVCMOS33";
+NET "vme_am_i[2]" IOSTANDARD = "LVCMOS33";
+NET "vme_am_i[1]" IOSTANDARD = "LVCMOS33";
+NET "vme_am_i[0]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[31]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[30]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[29]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[28]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[27]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[26]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[25]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[24]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[23]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[22]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[21]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[20]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[19]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[18]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[17]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[16]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[15]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[14]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[13]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[12]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[11]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[10]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[9]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[8]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[7]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[6]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[5]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[4]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[3]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[2]" IOSTANDARD = "LVCMOS33";
+NET "vme_addr_b[1]" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# DDR0 (bank 4)
+#----------------------------------------
+NET "ddr0_zio_b" LOC = J6;
+NET "ddr0_rzq_b" LOC = L7;
+NET "ddr0_we_n_o" LOC = F4;
+NET "ddr0_udqs_p_b" LOC = K2;
+NET "ddr0_udqs_n_b" LOC = K1;
+NET "ddr0_udm_o" LOC = K4;
+NET "ddr0_reset_n_o" LOC = G5;
+NET "ddr0_ras_n_o" LOC = C1;
+NET "ddr0_odt_o" LOC = E4;
+NET "ddr0_ldqs_p_b" LOC = J5;
+NET "ddr0_ldqs_n_b" LOC = J4;
+NET "ddr0_ldm_o" LOC = K3;
+NET "ddr0_cke_o" LOC = C4;
+NET "ddr0_ck_p_o" LOC = E3;
+NET "ddr0_ck_n_o" LOC = E1;
+NET "ddr0_cas_n_o" LOC = B1;
+NET "ddr0_dq_b[15]" LOC = M1;
+NET "ddr0_dq_b[14]" LOC = M2;
+NET "ddr0_dq_b[13]" LOC = L1;
+NET "ddr0_dq_b[12]" LOC = L3;
+NET "ddr0_dq_b[11]" LOC = L4;
+NET "ddr0_dq_b[10]" LOC = L5;
+NET "ddr0_dq_b[9]" LOC = M3;
+NET "ddr0_dq_b[8]" LOC = M4;
+NET "ddr0_dq_b[7]" LOC = H1;
+NET "ddr0_dq_b[6]" LOC = H2;
+NET "ddr0_dq_b[5]" LOC = G1;
+NET "ddr0_dq_b[4]" LOC = G3;
+NET "ddr0_dq_b[3]" LOC = J1;
+NET "ddr0_dq_b[2]" LOC = J3;
+NET "ddr0_dq_b[1]" LOC = H3;
+NET "ddr0_dq_b[0]" LOC = H4;
+NET "ddr0_ba_o[2]" LOC = F3;
+NET "ddr0_ba_o[1]" LOC = D1;
+NET "ddr0_ba_o[0]" LOC = D2;
+#NET "ddr0_a_o[14]" LOC = A5;
+NET "ddr0_a_o[13]" LOC = B5;
+NET "ddr0_a_o[12]" LOC = A4;
+NET "ddr0_a_o[11]" LOC = G4;
+NET "ddr0_a_o[10]" LOC = D5;
+NET "ddr0_a_o[9]" LOC = A2;
+NET "ddr0_a_o[8]" LOC = B2;
+NET "ddr0_a_o[7]" LOC = B3;
+NET "ddr0_a_o[6]" LOC = F1;
+NET "ddr0_a_o[5]" LOC = F2;
+NET "ddr0_a_o[4]" LOC = C5;
+NET "ddr0_a_o[3]" LOC = E5;
+NET "ddr0_a_o[2]" LOC = A3;
+NET "ddr0_a_o[1]" LOC = D3;
+NET "ddr0_a_o[0]" LOC = D4;
+NET "ddr0_zio_b" IOSTANDARD = "SSTL15_II";
+NET "ddr0_rzq_b" IOSTANDARD = "SSTL15_II";
+NET "ddr0_we_n_o" IOSTANDARD = "SSTL15_II";
+NET "ddr0_udqs_p_b" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr0_udqs_n_b" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr0_udm_o" IOSTANDARD = "SSTL15_II";
+NET "ddr0_reset_n_o" IOSTANDARD = "SSTL15_II";
+NET "ddr0_ras_n_o" IOSTANDARD = "SSTL15_II";
+NET "ddr0_odt_o" IOSTANDARD = "SSTL15_II";
+NET "ddr0_ldqs_p_b" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr0_ldqs_n_b" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr0_ldm_o" IOSTANDARD = "SSTL15_II";
+NET "ddr0_cke_o" IOSTANDARD = "SSTL15_II";
+NET "ddr0_ck_p_o" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr0_ck_n_o" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr0_cas_n_o" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[15]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[14]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[13]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[12]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[11]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[10]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[9]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[8]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[7]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[6]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[5]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[4]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[3]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[2]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[1]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_dq_b[0]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_ba_o[2]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_ba_o[1]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_ba_o[0]" IOSTANDARD = "SSTL15_II";
+#NET "ddr0_a_o[14]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[13]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[12]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[11]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[10]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[9]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[8]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[7]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[6]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[5]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[4]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[3]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[2]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[1]" IOSTANDARD = "SSTL15_II";
+NET "ddr0_a_o[0]" IOSTANDARD = "SSTL15_II";
+
+#----------------------------------------
+# DDR1 (bank 5)
+#----------------------------------------
+NET "ddr1_zio_b" LOC = L24;
+NET "ddr1_rzq_b" LOC = G25;
+NET "ddr1_we_n_o" LOC = E26;
+NET "ddr1_udqs_p_b" LOC = K28;
+NET "ddr1_udqs_n_b" LOC = K30;
+NET "ddr1_udm_o" LOC = J27;
+NET "ddr1_reset_n_o" LOC = C26;
+NET "ddr1_ras_n_o" LOC = K26;
+NET "ddr1_odt_o" LOC = E30;
+NET "ddr1_ldqs_p_b" LOC = J29;
+NET "ddr1_ldqs_n_b" LOC = J30;
+NET "ddr1_ldm_o" LOC = J28;
+NET "ddr1_cke_o" LOC = B29;
+NET "ddr1_ck_p_o" LOC = E27;
+NET "ddr1_ck_n_o" LOC = E28;
+NET "ddr1_cas_n_o" LOC = K27;
+NET "ddr1_dq_b[15]" LOC = M30;
+NET "ddr1_dq_b[14]" LOC = M28;
+NET "ddr1_dq_b[13]" LOC = M27;
+NET "ddr1_dq_b[12]" LOC = M26;
+NET "ddr1_dq_b[11]" LOC = L30;
+NET "ddr1_dq_b[10]" LOC = L29;
+NET "ddr1_dq_b[9]" LOC = L28;
+NET "ddr1_dq_b[8]" LOC = L27;
+NET "ddr1_dq_b[7]" LOC = F30;
+NET "ddr1_dq_b[6]" LOC = F28;
+NET "ddr1_dq_b[5]" LOC = G28;
+NET "ddr1_dq_b[4]" LOC = G27;
+NET "ddr1_dq_b[3]" LOC = G30;
+NET "ddr1_dq_b[2]" LOC = G29;
+NET "ddr1_dq_b[1]" LOC = H30;
+NET "ddr1_dq_b[0]" LOC = H28;
+NET "ddr1_ba_o[2]" LOC = D26;
+NET "ddr1_ba_o[1]" LOC = C27;
+NET "ddr1_ba_o[0]" LOC = D27;
+#NET "ddr1_a_o[14]" LOC = A29;
+NET "ddr1_a_o[13]" LOC = A28;
+NET "ddr1_a_o[12]" LOC = B30;
+NET "ddr1_a_o[11]" LOC = A26;
+NET "ddr1_a_o[10]" LOC = F26;
+NET "ddr1_a_o[9]" LOC = A27;
+NET "ddr1_a_o[8]" LOC = B27;
+NET "ddr1_a_o[7]" LOC = C29;
+NET "ddr1_a_o[6]" LOC = H27;
+NET "ddr1_a_o[5]" LOC = H26;
+NET "ddr1_a_o[4]" LOC = F27;
+NET "ddr1_a_o[3]" LOC = E29;
+NET "ddr1_a_o[2]" LOC = C30;
+NET "ddr1_a_o[1]" LOC = D30;
+NET "ddr1_a_o[0]" LOC = D28;
+NET "ddr1_zio_b" IOSTANDARD = "SSTL15_II";
+NET "ddr1_rzq_b" IOSTANDARD = "SSTL15_II";
+NET "ddr1_we_n_o" IOSTANDARD = "SSTL15_II";
+NET "ddr1_udqs_p_b" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr1_udqs_n_b" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr1_udm_o" IOSTANDARD = "SSTL15_II";
+NET "ddr1_reset_n_o" IOSTANDARD = "SSTL15_II";
+NET "ddr1_ras_n_o" IOSTANDARD = "SSTL15_II";
+NET "ddr1_odt_o" IOSTANDARD = "SSTL15_II";
+NET "ddr1_ldqs_p_b" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr1_ldqs_n_b" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr1_ldm_o" IOSTANDARD = "SSTL15_II";
+NET "ddr1_cke_o" IOSTANDARD = "SSTL15_II";
+NET "ddr1_ck_p_o" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr1_ck_n_o" IOSTANDARD = "DIFF_SSTL15_II";
+NET "ddr1_cas_n_o" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[15]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[14]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[13]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[12]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[11]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[10]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[9]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[8]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[7]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[6]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[5]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[4]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[3]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[2]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[1]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_dq_b[0]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_ba_o[2]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_ba_o[1]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_ba_o[0]" IOSTANDARD = "SSTL15_II";
+#NET "ddr1_a_o[14]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[13]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[12]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[11]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[10]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[9]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[8]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[7]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[6]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[5]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[4]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[3]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[2]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[1]" IOSTANDARD = "SSTL15_II";
+NET "ddr1_a_o[0]" IOSTANDARD = "SSTL15_II";
+
+#----------------------------------------
+# Clock and reset inputs
+#----------------------------------------
+NET "rst_n_i" LOC = AD28;
+NET "rst_n_i" IOSTANDARD = "LVCMOS33";
+
+NET "clk_20m_vcxo_i" LOC = V26;
+#NET "clk_125m_pllref_n_i" LOC = AB30;
+#NET "clk_125m_pllref_p_i" LOC = AB28;
+NET "clk_20m_vcxo_i" IOSTANDARD = "LVCMOS33";
+#NET "clk_125m_pllref_n_i" IOSTANDARD = "LVDS_25";
+#NET "clk_125m_pllref_n_i" IOSTANDARD = "LVDS_25";
+
+#----------------------------------------
+# SFP slot
+#----------------------------------------
+#NET "sfp_txp_o" LOC = B23;
+#NET "sfp_txn_o" LOC = A23;
+#NET "sfp_rxp_i" LOC = D22;
+#NET "sfp_rxn_i" LOC = C22;
+#NET "clk_125m_gtp_p_i" LOC = B19;
+#NET "clk_125m_gtp_n_i" LOC = A19;
+
+#NET "sfp_los_i" LOC = W25;
+#NET "sfp_mod_def0_b" LOC = Y26;
+#NET "sfp_mod_def1_b" LOC = Y27;
+#NET "sfp_mod_def2_b" LOC = AA24;
+#NET "sfp_rate_select_o" LOC = W24;
+#NET "sfp_tx_disable_o" LOC = AA25;
+#NET "sfp_tx_fault_i" LOC = AA27;
+#NET "sfp_los_i" IOSTANDARD = "LVCMOS33";
+#NET "sfp_mod_def0_b" IOSTANDARD = "LVCMOS33";
+#NET "sfp_mod_def1_b" IOSTANDARD = "LVCMOS33";
+#NET "sfp_mod_def2_b" IOSTANDARD = "LVCMOS33";
+#NET "sfp_rate_select_o" IOSTANDARD = "LVCMOS33";
+#NET "sfp_tx_disable_o" IOSTANDARD = "LVCMOS33";
+#NET "sfp_tx_fault_i" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# Clock controls
+#----------------------------------------
+#NET "pll20dac_din_o" LOC = U28;
+#NET "pll20dac_sclk_o" LOC = AA28;
+#NET "pll20dac_sync_n_o" LOC = N28;
+#NET "pll25dac_din_o" LOC = P25;
+#NET "pll25dac_sclk_o" LOC = N27;
+#NET "pll25dac_sync_n_o" LOC = P26;
+#NET "pll20dac_din_o" IOSTANDARD = "LVCMOS33";
+#NET "pll20dac_sclk_o" IOSTANDARD = "LVCMOS33";
+#NET "pll20dac_sync_n_o" IOSTANDARD = "LVCMOS33";
+#NET "pll25dac_din_o" IOSTANDARD = "LVCMOS33";
+#NET "pll25dac_sclk_o" IOSTANDARD = "LVCMOS33";
+#NET "pll25dac_sync_n_o" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# UART
+#----------------------------------------
+#NET "uart_txd_o" LOC = U27;
+#NET "uart_rxd_i" LOC = U25;
+#NET "uart_txd_o" IOSTANDARD = "LVCMOS33";
+#NET "uart_rxd_i" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# 1-wire thermoeter + unique ID
+#----------------------------------------
+NET "carrier_one_wire_b" LOC = AC30;
+NET "carrier_one_wire_b" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# Front panel LEDs
+#----------------------------------------
+NET "fp_led_line_oen_o[0]" LOC = AD26;
+NET "fp_led_line_oen_o[1]" LOC = AD27;
+NET "fp_led_line_o[0]" LOC = AC27;
+NET "fp_led_line_o[1]" LOC = AC28;
+NET "fp_led_column_o[0]" LOC = AE30;
+NET "fp_led_column_o[1]" LOC = AE27;
+NET "fp_led_column_o[2]" LOC = AE28;
+NET "fp_led_column_o[3]" LOC = AF28;
+NET "fp_led_line_oen_o[0]" IOSTANDARD="LVCMOS33";
+NET "fp_led_line_oen_o[1]" IOSTANDARD="LVCMOS33";
+NET "fp_led_line_o[0]" IOSTANDARD="LVCMOS33";
+NET "fp_led_line_o[1]" IOSTANDARD="LVCMOS33";
+NET "fp_led_column_o[0]" IOSTANDARD="LVCMOS33";
+NET "fp_led_column_o[1]" IOSTANDARD="LVCMOS33";
+NET "fp_led_column_o[2]" IOSTANDARD="LVCMOS33";
+NET "fp_led_column_o[3]" IOSTANDARD="LVCMOS33";
+
+#----------------------------------------
+# Front panel IOs
+#----------------------------------------
+#NET "fp_gpio_b[1]" LOC = R30;
+#NET "fp_gpio_b[2]" LOC = T28;
+#NET "fp_gpio_b[3]" LOC = U29;
+#NET "fp_gpio_b[4]" LOC = V27;
+#NET "fpgpio1_a2b_o" LOC = R29;
+#NET "fpgpio2_a2b_o" LOC = T30;
+#NET "fpgpio34_a2b_o" LOC = V28;
+#NET "term_en_o[1]" LOC = AB1;
+#NET "term_en_o[2]" LOC = W5;
+#NET "term_en_o[3]" LOC = W4;
+#NET "term_en_o[4]" LOC = V4;
+#NET "fp_gpio_b[1]" IOSTANDARD = "LVCMOS33";
+#NET "fp_gpio_b[2]" IOSTANDARD = "LVCMOS33";
+#NET "fp_gpio_b[3]" IOSTANDARD = "LVCMOS33";
+#NET "fp_gpio_b[4]" IOSTANDARD = "LVCMOS33";
+#NET "fpgpio1_a2b_o" IOSTANDARD = "LVCMOS33";
+#NET "fpgpio2_a2b_o" IOSTANDARD = "LVCMOS33";
+#NET "fpgpio34_a2b_o" IOSTANDARD = "LVCMOS33";
+#NET "term_en_o[1]" IOSTANDARD = "LVCMOS33";
+#NET "term_en_o[2]" IOSTANDARD = "LVCMOS33";
+#NET "term_en_o[3]" IOSTANDARD = "LVCMOS33";
+#NET "term_en_o[4]" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# Debug LEDs
+#----------------------------------------
+#NET "dbg_led_n_o[4]" LOC = U7;
+#NET "dbg_led_n_o[3]" LOC = AG1;
+#NET "dbg_led_n_o[2]" LOC = AF1;
+#NET "dbg_led_n_o[1]" LOC = R6;
+#NET "dbg_led_n_o[4]" IOSTANDARD = "LVCMOS33";
+#NET "dbg_led_n_o[3]" IOSTANDARD = "LVCMOS33";
+#NET "dbg_led_n_o[2]" IOSTANDARD = "LVCMOS33";
+#NET "dbg_led_n_o[1]" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# Switches and button
+#----------------------------------------
+#NET "pushbutton_i" LOC = P24;
+#NET "noga_i[0]" LOC = AE26;
+#NET "noga_i[1]" LOC = P23;
+#NET "noga_i[2]" LOC = Y24;
+#NET "noga_i[3]" LOC = Y23;
+#NET "noga_i[4]" LOC = V23;
+#NET "switch_i[0]" LOC = W22;
+#NET "switch_i[1]" LOC = W21;
+#NET "usega_i" LOC = Y22;
+#NET "pushbutton_i" IOSTANDARD = "LVCMOS33";
+#NET "noga_i[0]" IOSTANDARD = "LVCMOS33";
+#NET "noga_i[1]" IOSTANDARD = "LVCMOS33";
+#NET "noga_i[2]" IOSTANDARD = "LVCMOS33";
+#NET "noga_i[3]" IOSTANDARD = "LVCMOS33";
+#NET "noga_i[4]" IOSTANDARD = "LVCMOS33";
+#NET "switch_i[0]" IOSTANDARD = "LVCMOS33";
+#NET "switch_i[1]" IOSTANDARD = "LVCMOS33";
+#NET "usega_i" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# Inter-FPGA lines
+#----------------------------------------
+#NET "rsvd_b[0]" LOC = AG26;
+#NET "rsvd_b[1]" LOC = AH26;
+#NET "rsvd_b[2]" LOC = AG27;
+#NET "rsvd_b[3]" LOC = AH27;
+#NET "rsvd_b[4]" LOC = AK27;
+#NET "rsvd_b[5]" LOC = AG28;
+#NET "rsvd_b[6]" LOC = AJ28;
+#NET "rsvd_b[7]" LOC = AK28;
+#NET "rsvd_b[0]" IOSTANDARD = "LVCMOS33";
+#NET "rsvd_b[1]" IOSTANDARD = "LVCMOS33";
+#NET "rsvd_b[2]" IOSTANDARD = "LVCMOS33";
+#NET "rsvd_b[3]" IOSTANDARD = "LVCMOS33";
+#NET "rsvd_b[4]" IOSTANDARD = "LVCMOS33";
+#NET "rsvd_b[5]" IOSTANDARD = "LVCMOS33";
+#NET "rsvd_b[6]" IOSTANDARD = "LVCMOS33";
+#NET "rsvd_b[7]" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# PCB revision
+#----------------------------------------
+NET "pcbrev_i[4]" LOC = AF17;
+NET "pcbrev_i[3]" LOC = AE17;
+NET "pcbrev_i[2]" LOC = AD18;
+NET "pcbrev_i[1]" LOC = AE20;
+NET "pcbrev_i[0]" LOC = AD20;
+NET "pcbrev_i[4]" IOSTANDARD = "LVCMOS25";
+NET "pcbrev_i[3]" IOSTANDARD = "LVCMOS25";
+NET "pcbrev_i[2]" IOSTANDARD = "LVCMOS25";
+NET "pcbrev_i[1]" IOSTANDARD = "LVCMOS25";
+NET "pcbrev_i[0]" IOSTANDARD = "LVCMOS25";
+
+#----------------------------------------
+# Carrier I2C EEPROM
+#----------------------------------------
+NET "carrier_scl_b" LOC = AC29;
+NET "carrier_sda_b" LOC = AA30;
+NET "carrier_scl_b" IOSTANDARD = "LVCMOS33";
+NET "carrier_sda_b" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# FMC slots management
+#----------------------------------------
+NET "fmc0_prsnt_m2c_n_i" LOC = N30;
+NET "fmc0_scl_b" LOC = P28;
+NET "fmc0_sda_b" LOC = P30;
+NET "fmc0_prsnt_m2c_n_i" IOSTANDARD = "LVCMOS33";
+NET "fmc0_scl_b" IOSTANDARD = "LVCMOS33";
+NET "fmc0_sda_b" IOSTANDARD = "LVCMOS33";
+
+NET "fmc1_prsnt_m2c_n_i" LOC = AE29;
+NET "fmc1_scl_b" LOC = W29;
+NET "fmc1_sda_b" LOC = V30;
+NET "fmc1_prsnt_m2c_n_i" IOSTANDARD = "LVCMOS33";
+NET "fmc1_scl_b" IOSTANDARD = "LVCMOS33";
+NET "fmc1_sda_b" IOSTANDARD = "LVCMOS33";
+
+#----------------------------------------
+# FMC slots
+#----------------------------------------
+# <ucfgen_start>
+
+# This section has bee generated automatically by ucfgen.py. Do not hand-modify if not really necessary.
+# ucfgen pin assignments for mezzanine fmc-adc-v5 slot 0
+NET "adc0_ext_trigger_n_i" LOC = "A15";
+NET "adc0_ext_trigger_n_i" IOSTANDARD = "LVDS_25";
+NET "adc0_ext_trigger_p_i" LOC = "B15";
+NET "adc0_ext_trigger_p_i" IOSTANDARD = "LVDS_25";
+NET "adc0_dco_n_i" LOC = "A16";
+NET "adc0_dco_n_i" IOSTANDARD = "LVDS_25";
+NET "adc0_dco_p_i" LOC = "C16";
+NET "adc0_dco_p_i" IOSTANDARD = "LVDS_25";
+NET "adc0_fr_n_i" LOC = "G21";
+NET "adc0_fr_n_i" IOSTANDARD = "LVDS_25";
+NET "adc0_fr_p_i" LOC = "H21";
+NET "adc0_fr_p_i" IOSTANDARD = "LVDS_25";
+NET "adc0_outa_n_i[0]" LOC = "E17";
+NET "adc0_outa_n_i[0]" IOSTANDARD = "LVDS_25";
+NET "adc0_outa_p_i[0]" LOC = "F17";
+NET "adc0_outa_p_i[0]" IOSTANDARD = "LVDS_25";
+NET "adc0_outb_n_i[0]" LOC = "G16";
+NET "adc0_outb_n_i[0]" IOSTANDARD = "LVDS_25";
+NET "adc0_outb_p_i[0]" LOC = "H16";
+NET "adc0_outb_p_i[0]" IOSTANDARD = "LVDS_25";
+NET "adc0_outa_n_i[1]" LOC = "E19";
+NET "adc0_outa_n_i[1]" IOSTANDARD = "LVDS_25";
+NET "adc0_outa_p_i[1]" LOC = "F19";
+NET "adc0_outa_p_i[1]" IOSTANDARD = "LVDS_25";
+NET "adc0_outb_n_i[1]" LOC = "F18";
+NET "adc0_outb_n_i[1]" IOSTANDARD = "LVDS_25";
+NET "adc0_outb_p_i[1]" LOC = "G18";
+NET "adc0_outb_p_i[1]" IOSTANDARD = "LVDS_25";
+NET "adc0_outa_n_i[2]" LOC = "K21";
+NET "adc0_outa_n_i[2]" IOSTANDARD = "LVDS_25";
+NET "adc0_outa_p_i[2]" LOC = "L21";
+NET "adc0_outa_p_i[2]" IOSTANDARD = "LVDS_25";
+NET "adc0_outb_n_i[2]" LOC = "L20";
+NET "adc0_outb_n_i[2]" IOSTANDARD = "LVDS_25";
+NET "adc0_outb_p_i[2]" LOC = "M20";
+NET "adc0_outb_p_i[2]" IOSTANDARD = "LVDS_25";
+NET "adc0_outa_n_i[3]" LOC = "F22";
+NET "adc0_outa_n_i[3]" IOSTANDARD = "LVDS_25";
+NET "adc0_outa_p_i[3]" LOC = "G22";
+NET "adc0_outa_p_i[3]" IOSTANDARD = "LVDS_25";
+NET "adc0_outb_n_i[3]" LOC = "L19";
+NET "adc0_outb_n_i[3]" IOSTANDARD = "LVDS_25";
+NET "adc0_outb_p_i[3]" LOC = "M19";
+NET "adc0_outb_p_i[3]" IOSTANDARD = "LVDS_25";
+NET "adc0_spi_din_i" LOC = "F11";
+NET "adc0_spi_din_i" IOSTANDARD = "LVCMOS25";
+NET "adc0_spi_dout_o" LOC = "K11";
+NET "adc0_spi_dout_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_spi_sck_o" LOC = "L11";
+NET "adc0_spi_sck_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_spi_cs_adc_n_o" LOC = "J13";
+NET "adc0_spi_cs_adc_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_spi_cs_dac1_n_o" LOC = "H11";
+NET "adc0_spi_cs_dac1_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_spi_cs_dac2_n_o" LOC = "G11";
+NET "adc0_spi_cs_dac2_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_spi_cs_dac3_n_o" LOC = "J12";
+NET "adc0_spi_cs_dac3_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_spi_cs_dac4_n_o" LOC = "H12";
+NET "adc0_spi_cs_dac4_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_dac_clr_n_o" LOC = "H13";
+NET "adc0_gpio_dac_clr_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_led_acq_o" LOC = "K12";
+NET "adc0_gpio_led_acq_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_led_trig_o" LOC = "L12";
+NET "adc0_gpio_led_trig_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch1_o[0]" LOC = "L14";
+NET "adc0_gpio_ssr_ch1_o[0]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch1_o[1]" LOC = "K14";
+NET "adc0_gpio_ssr_ch1_o[1]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch1_o[2]" LOC = "L13";
+NET "adc0_gpio_ssr_ch1_o[2]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch1_o[3]" LOC = "E11";
+NET "adc0_gpio_ssr_ch1_o[3]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch1_o[4]" LOC = "G10";
+NET "adc0_gpio_ssr_ch1_o[4]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch1_o[5]" LOC = "F10";
+NET "adc0_gpio_ssr_ch1_o[5]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch1_o[6]" LOC = "F9";
+NET "adc0_gpio_ssr_ch1_o[6]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch2_o[0]" LOC = "F15";
+NET "adc0_gpio_ssr_ch2_o[0]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch2_o[1]" LOC = "F14";
+NET "adc0_gpio_ssr_ch2_o[1]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch2_o[2]" LOC = "F13";
+NET "adc0_gpio_ssr_ch2_o[2]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch2_o[3]" LOC = "E13";
+NET "adc0_gpio_ssr_ch2_o[3]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch2_o[4]" LOC = "G12";
+NET "adc0_gpio_ssr_ch2_o[4]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch2_o[5]" LOC = "M13";
+NET "adc0_gpio_ssr_ch2_o[5]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch2_o[6]" LOC = "F12";
+NET "adc0_gpio_ssr_ch2_o[6]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch3_o[0]" LOC = "F23";
+NET "adc0_gpio_ssr_ch3_o[0]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch3_o[1]" LOC = "E23";
+NET "adc0_gpio_ssr_ch3_o[1]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch3_o[2]" LOC = "F21";
+NET "adc0_gpio_ssr_ch3_o[2]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch3_o[3]" LOC = "E21";
+NET "adc0_gpio_ssr_ch3_o[3]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch3_o[4]" LOC = "G20";
+NET "adc0_gpio_ssr_ch3_o[4]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch3_o[5]" LOC = "F20";
+NET "adc0_gpio_ssr_ch3_o[5]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch3_o[6]" LOC = "E15";
+NET "adc0_gpio_ssr_ch3_o[6]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch4_o[0]" LOC = "J22";
+NET "adc0_gpio_ssr_ch4_o[0]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch4_o[1]" LOC = "H22";
+NET "adc0_gpio_ssr_ch4_o[1]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch4_o[2]" LOC = "E25";
+NET "adc0_gpio_ssr_ch4_o[2]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch4_o[3]" LOC = "D25";
+NET "adc0_gpio_ssr_ch4_o[3]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch4_o[4]" LOC = "D24";
+NET "adc0_gpio_ssr_ch4_o[4]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch4_o[5]" LOC = "B25";
+NET "adc0_gpio_ssr_ch4_o[5]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_ssr_ch4_o[6]" LOC = "C24";
+NET "adc0_gpio_ssr_ch4_o[6]" IOSTANDARD = "LVCMOS25";
+NET "adc0_gpio_si570_oe_o" LOC = "A25";
+NET "adc0_gpio_si570_oe_o" IOSTANDARD = "LVCMOS25";
+NET "adc0_si570_scl_b" LOC = "H14";
+NET "adc0_si570_scl_b" IOSTANDARD = "LVCMOS25";
+NET "adc0_si570_sda_b" LOC = "J14";
+NET "adc0_si570_sda_b" IOSTANDARD = "LVCMOS25";
+NET "adc0_one_wire_b" LOC = "E9";
+NET "adc0_one_wire_b" IOSTANDARD = "LVCMOS25";
+# ucfgen pin assignments for mezzanine fmc-adc-v5 slot 1
+NET "adc1_ext_trigger_n_i" LOC = "AD16";
+NET "adc1_ext_trigger_n_i" IOSTANDARD = "LVDS_25";
+NET "adc1_ext_trigger_p_i" LOC = "AC16";
+NET "adc1_ext_trigger_p_i" IOSTANDARD = "LVDS_25";
+NET "adc1_dco_n_i" LOC = "AK17";
+NET "adc1_dco_n_i" IOSTANDARD = "LVDS_25";
+NET "adc1_dco_p_i" LOC = "AJ17";
+NET "adc1_dco_p_i" IOSTANDARD = "LVDS_25";
+NET "adc1_fr_n_i" LOC = "AH8";
+NET "adc1_fr_n_i" IOSTANDARD = "LVDS_25";
+NET "adc1_fr_p_i" LOC = "AG8";
+NET "adc1_fr_p_i" IOSTANDARD = "LVDS_25";
+NET "adc1_outa_n_i[0]" LOC = "AA15";
+NET "adc1_outa_n_i[0]" IOSTANDARD = "LVDS_25";
+NET "adc1_outa_p_i[0]" LOC = "Y15";
+NET "adc1_outa_p_i[0]" IOSTANDARD = "LVDS_25";
+NET "adc1_outb_n_i[0]" LOC = "AA17";
+NET "adc1_outb_n_i[0]" IOSTANDARD = "LVDS_25";
+NET "adc1_outb_p_i[0]" LOC = "Y17";
+NET "adc1_outb_p_i[0]" IOSTANDARD = "LVDS_25";
+NET "adc1_outa_n_i[1]" LOC = "AC14";
+NET "adc1_outa_n_i[1]" IOSTANDARD = "LVDS_25";
+NET "adc1_outa_p_i[1]" LOC = "AB14";
+NET "adc1_outa_p_i[1]" IOSTANDARD = "LVDS_25";
+NET "adc1_outb_n_i[1]" LOC = "AD15";
+NET "adc1_outb_n_i[1]" IOSTANDARD = "LVDS_25";
+NET "adc1_outb_p_i[1]" LOC = "AC15";
+NET "adc1_outb_p_i[1]" IOSTANDARD = "LVDS_25";
+NET "adc1_outa_n_i[2]" LOC = "AA14";
+NET "adc1_outa_n_i[2]" IOSTANDARD = "LVDS_25";
+NET "adc1_outa_p_i[2]" LOC = "Y14";
+NET "adc1_outa_p_i[2]" IOSTANDARD = "LVDS_25";
+NET "adc1_outb_n_i[2]" LOC = "Y13";
+NET "adc1_outb_n_i[2]" IOSTANDARD = "LVDS_25";
+NET "adc1_outb_p_i[2]" LOC = "W14";
+NET "adc1_outb_p_i[2]" IOSTANDARD = "LVDS_25";
+NET "adc1_outa_n_i[3]" LOC = "AE12";
+NET "adc1_outa_n_i[3]" IOSTANDARD = "LVDS_25";
+NET "adc1_outa_p_i[3]" LOC = "AD12";
+NET "adc1_outa_p_i[3]" IOSTANDARD = "LVDS_25";
+NET "adc1_outb_n_i[3]" LOC = "AF11";
+NET "adc1_outb_n_i[3]" IOSTANDARD = "LVDS_25";
+NET "adc1_outb_p_i[3]" LOC = "AE11";
+NET "adc1_outb_p_i[3]" IOSTANDARD = "LVDS_25";
+NET "adc1_spi_din_i" LOC = "AB17";
+NET "adc1_spi_din_i" IOSTANDARD = "LVCMOS25";
+NET "adc1_spi_dout_o" LOC = "AA21";
+NET "adc1_spi_dout_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_spi_sck_o" LOC = "Y21";
+NET "adc1_spi_sck_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_spi_cs_adc_n_o" LOC = "W20";
+NET "adc1_spi_cs_adc_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_spi_cs_dac1_n_o" LOC = "W19";
+NET "adc1_spi_cs_dac1_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_spi_cs_dac2_n_o" LOC = "Y19";
+NET "adc1_spi_cs_dac2_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_spi_cs_dac3_n_o" LOC = "AA19";
+NET "adc1_spi_cs_dac3_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_spi_cs_dac4_n_o" LOC = "AB19";
+NET "adc1_spi_cs_dac4_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_dac_clr_n_o" LOC = "Y20";
+NET "adc1_gpio_dac_clr_n_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_led_acq_o" LOC = "AC22";
+NET "adc1_gpio_led_acq_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_led_trig_o" LOC = "AA22";
+NET "adc1_gpio_led_trig_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch1_o[0]" LOC = "AC19";
+NET "adc1_gpio_ssr_ch1_o[0]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch1_o[1]" LOC = "AD19";
+NET "adc1_gpio_ssr_ch1_o[1]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch1_o[2]" LOC = "AC20";
+NET "adc1_gpio_ssr_ch1_o[2]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch1_o[3]" LOC = "AD17";
+NET "adc1_gpio_ssr_ch1_o[3]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch1_o[4]" LOC = "AB21";
+NET "adc1_gpio_ssr_ch1_o[4]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch1_o[5]" LOC = "AC21";
+NET "adc1_gpio_ssr_ch1_o[5]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch1_o[6]" LOC = "AC24";
+NET "adc1_gpio_ssr_ch1_o[6]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch2_o[0]" LOC = "AE19";
+NET "adc1_gpio_ssr_ch2_o[0]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch2_o[1]" LOC = "AF23";
+NET "adc1_gpio_ssr_ch2_o[1]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch2_o[2]" LOC = "AE24";
+NET "adc1_gpio_ssr_ch2_o[2]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch2_o[3]" LOC = "AF24";
+NET "adc1_gpio_ssr_ch2_o[3]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch2_o[4]" LOC = "AD22";
+NET "adc1_gpio_ssr_ch2_o[4]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch2_o[5]" LOC = "AB20";
+NET "adc1_gpio_ssr_ch2_o[5]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch2_o[6]" LOC = "AE22";
+NET "adc1_gpio_ssr_ch2_o[6]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch3_o[0]" LOC = "AB12";
+NET "adc1_gpio_ssr_ch3_o[0]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch3_o[1]" LOC = "AC12";
+NET "adc1_gpio_ssr_ch3_o[1]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch3_o[2]" LOC = "AE15";
+NET "adc1_gpio_ssr_ch3_o[2]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch3_o[3]" LOC = "AF15";
+NET "adc1_gpio_ssr_ch3_o[3]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch3_o[4]" LOC = "Y16";
+NET "adc1_gpio_ssr_ch3_o[4]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch3_o[5]" LOC = "AB16";
+NET "adc1_gpio_ssr_ch3_o[5]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch3_o[6]" LOC = "AF19";
+NET "adc1_gpio_ssr_ch3_o[6]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch4_o[0]" LOC = "AC11";
+NET "adc1_gpio_ssr_ch4_o[0]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch4_o[1]" LOC = "AD11";
+NET "adc1_gpio_ssr_ch4_o[1]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch4_o[2]" LOC = "AE13";
+NET "adc1_gpio_ssr_ch4_o[2]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch4_o[3]" LOC = "AF13";
+NET "adc1_gpio_ssr_ch4_o[3]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch4_o[4]" LOC = "AJ15";
+NET "adc1_gpio_ssr_ch4_o[4]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch4_o[5]" LOC = "AD10";
+NET "adc1_gpio_ssr_ch4_o[5]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_ssr_ch4_o[6]" LOC = "AK15";
+NET "adc1_gpio_ssr_ch4_o[6]" IOSTANDARD = "LVCMOS25";
+NET "adc1_gpio_si570_oe_o" LOC = "AE10";
+NET "adc1_gpio_si570_oe_o" IOSTANDARD = "LVCMOS25";
+NET "adc1_si570_scl_b" LOC = "AF21";
+NET "adc1_si570_scl_b" IOSTANDARD = "LVCMOS25";
+NET "adc1_si570_sda_b" LOC = "AE21";
+NET "adc1_si570_sda_b" IOSTANDARD = "LVCMOS25";
+NET "adc1_one_wire_b" LOC = "AD24";
+NET "adc1_one_wire_b" IOSTANDARD = "LVCMOS25";
+# <ucfgen_end>
+
+
+#===============================================================================
+# Timing constraints
+#===============================================================================
+
+# System clock
+
+NET "clk_20m_vcxo_i" TNM_NET = clk_20m_vcxo_i;
+TIMESPEC TS_clk_20m_vcxo_i = PERIOD "clk_20m_vcxo_i" 50 ns HIGH 50%;
+
+# DDR3
+
+#NET "cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/sys_clk_ibufg" TNM_NET = "SYS_CLK5";
+#TIMESPEC "TS_SYS_CLK5" = PERIOD "SYS_CLK5"  3.0  ns HIGH 50 %;
+
+# ADC
+NET "adc0_dco_n_i" TNM_NET = adc0_dco_n_i;
+TIMESPEC TS_adc0_dco_n_i = PERIOD "adc0_dco_n_i" 2 ns HIGH 50%;
+
+NET "adc1_dco_n_i" TNM_NET = adc1_dco_n_i;
+TIMESPEC TS_adc1_dco_n_i = PERIOD "adc1_dco_n_i" 2 ns HIGH 50%;
+
+#===============================================================================
+# IOBs
+#===============================================================================
+
+#INST "cmp_fmc_adc_mezzanine_0/cmp_fmc_spi/U_Wrapped_SPI/Wrapped_SPI/shift/s_out" IOB=FALSE;
+#INST "cmp_fmc_adc_mezzanine_0/cmp_fmc_spi/U_Wrapped_SPI/Wrapped_SPI/clgen/clk_out" IOB=FALSE;
+
+
+#===============================================================================
+# Terminations
+#===============================================================================
+
+# DDR3
+
+NET "ddr0_dq_b[*]"   IN_TERM = NONE;
+NET "ddr0_ldqs_p_b"  IN_TERM = NONE;
+NET "ddr0_ldqs_n_b"  IN_TERM = NONE;
+NET "ddr0_udqs_p_b"  IN_TERM = NONE;
+NET "ddr0_udqs_n_b"  IN_TERM = NONE;
+
+NET "ddr1_dq_b[*]"   IN_TERM = NONE;
+NET "ddr1_ldqs_p_b"  IN_TERM = NONE;
+NET "ddr1_ldqs_n_b"  IN_TERM = NONE;
+NET "ddr1_udqs_p_b"  IN_TERM = NONE;
+NET "ddr1_udqs_n_b"  IN_TERM = NONE;
+
+
+#===============================================================================
+# False Path
+#===============================================================================
+
+# Reset
+
+NET "cmp_sync_ddr_rst/sync2" TIG;
+NET "powerup_rst_n" TIG;
+
+
+# DDR3
+
+NET "cmp_ddr_ctrl_bank4/cmp_ddr3_ctrl_wrapper/gen_svec_bank4_64b_32b.cmp_ddr3_ctrl/memc4_wrapper_inst/memc4_mcb_raw_wrapper_inst/selfrefresh_mcb_mode" TIG;
+NET "cmp_ddr_ctrl_bank4/cmp_ddr3_ctrl_wrapper/gen_svec_bank4_64b_32b.cmp_ddr3_ctrl/c4_pll_lock" TIG;
+NET "cmp_ddr_ctrl_bank4/cmp_ddr3_ctrl_wrapper/gen_svec_bank4_64b_32b.cmp_ddr3_ctrl/memc4_wrapper_inst/memc4_mcb_raw_wrapper_inst/hard_done_cal" TIG;
+NET "cmp_ddr_ctrl_bank4/cmp_ddr3_ctrl_wrapper/gen_svec_bank4_64b_32b.cmp_ddr3_ctrl/memc4_wrapper_inst/memc4_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/DONE_SOFTANDHARD_CAL" TIG;
+
+NET "cmp_ddr_ctrl_bank5/cmp_ddr3_ctrl_wrapper/gen_svec_bank5_64b_32b.cmp_ddr3_ctrl/memc5_wrapper_inst/memc5_mcb_raw_wrapper_inst/selfrefresh_mcb_mode" TIG;
+NET "cmp_ddr_ctrl_bank5/cmp_ddr3_ctrl_wrapper/gen_svec_bank5_64b_32b.cmp_ddr3_ctrl/c5_pll_lock" TIG;
+NET "cmp_ddr_ctrl_bank5/cmp_ddr3_ctrl_wrapper/gen_svec_bank5_64b_32b.cmp_ddr3_ctrl/memc5_wrapper_inst/memc5_mcb_raw_wrapper_inst/hard_done_cal" TIG;
+NET "cmp_ddr_ctrl_bank5/cmp_ddr3_ctrl_wrapper/gen_svec_bank5_64b_32b.cmp_ddr3_ctrl/memc5_wrapper_inst/memc5_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/DONE_SOFTANDHARD_CAL" TIG;

@@ -1,0 +1,128 @@
+peripheral {
+  name = "SVEC carrier control and status registers";
+  description = "Wishbone slave for control and status registers related to the SVEC FMC carrier";
+  hdl_entity = "carrier_csr";
+
+  prefix = "carrier_csr";
+
+  reg {
+    name = "Carrier type and PCB version";
+    prefix = "carrier";
+
+    field {
+      name = "PCB revision";
+      description = "Binary coded PCB layout revision.";
+      prefix = "pcb_rev";
+      type = SLV;
+      size = 5;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Reserved register";
+      description = "Ignore on read, write with 0's.";
+      prefix = "reserved";
+      type = SLV;
+      size = 11;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Carrier type";
+      description = "Carrier type identifier\n1 = SPEC\n2 = SVEC\n3 = VFC\n4 = SPEXI";
+      prefix = "type";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Status";
+    prefix = "stat";
+
+    field {
+      name = "FMC 1 presence";
+      description = "0: FMC slot 1 is populated\n1: FMC slot 1 is not populated.";
+      prefix = "fmc0_pres";
+      type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "FMC 2 presence";
+      description = "0: FMC slot 2 is populated\n1: FMC slot 2 is not populated.";
+      prefix = "fmc1_pres";
+      type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "System clock PLL status";
+      description = "0: not locked\n1: locked.";
+      prefix = "sys_pll_lck";
+      type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "DDR3 bank 4 calibration status";
+      description = "0: not done\n1: done.";
+      prefix = "ddr0_cal_done";
+      type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "DDR3 bank 5 calibration status";
+      description = "0: not done\n1: done.";
+      prefix = "ddr1_cal_done";
+      type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's.";
+      prefix = "reserved";
+      type = SLV;
+      size = 27;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Control";
+    prefix = "ctrl";
+
+    field {
+      name = "Front panel LED manual control";
+      description = "Height front panel LED, two bits per LED.\n00 = OFF\n01 = Green\n10 = Red\n11 = Orange";
+      prefix = "fp_leds_man";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+};
