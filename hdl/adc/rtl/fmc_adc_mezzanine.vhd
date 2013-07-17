@@ -47,7 +47,8 @@ use work.wishbone_pkg.all;
 
 entity fmc_adc_mezzanine is
   generic(
-    g_multishot_ram_size : natural := 2048
+    g_multishot_ram_size : natural := 2048;
+    g_carrier_type : string := "SPEC"
     );
   port (
     -- Clock, reset
@@ -415,7 +416,8 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc_adc_100Ms_core : fmc_adc_100Ms_core
     generic map (
-      g_multishot_ram_size => g_multishot_ram_size
+      g_multishot_ram_size => g_multishot_ram_size,
+      g_carrier_type => g_carrier_type
       )
     port map(
       sys_clk_i   => sys_clk_i,

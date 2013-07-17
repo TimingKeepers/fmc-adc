@@ -50,7 +50,8 @@ package fmc_adc_mezzanine_pkg is
   ------------------------------------------------------------------------------
   component fmc_adc_mezzanine
     generic(
-      g_multishot_ram_size : natural := 2048
+      g_multishot_ram_size : natural := 2048;
+      g_carrier_type : string := "SPEC"
       );
     port (
       -- Clock, reset

@@ -50,7 +50,8 @@ use work.genram_pkg.all;
 
 entity fmc_adc_100Ms_core is
   generic(
-    g_multishot_ram_size : natural := 2048
+    g_multishot_ram_size : natural := 2048;
+    g_carrier_type : string := "SPEC"
     );
   port (
     -- Clock, reset
@@ -531,11 +532,22 @@ begin
       I => fs_clk_buf
       );
 
-  cmp_fb_clk_buf : BUFG
-    port map (
-      O => clk_fb,
-      I => clk_fb_buf
-      );
+  gen_fb_clk_check: if (g_carrier_type /= "SPEC" and
+                        g_carrier_type /= "SVEC") generate
+    assert false report "[fmc_adc_100Ms_core] Selected carrier type not supported. Must be SPEC or SVEC." severity failure;
+  end generate gen_fb_clk_check;
+
+  gen_fb_clk_spec: if g_carrier_type = "SPEC" generate
+    cmp_fb_clk_buf : BUFG
+      port map (
+        O => clk_fb,
+        I => clk_fb_buf
+        );
+  end generate gen_fb_clk_spec;
+
+  gen_fb_clk_svec: if g_carrier_type = "SVEC" generate
+        clk_fb <= clk_fb_buf;
+  end generate gen_fb_clk_svec;
 
   ------------------------------------------------------------------------------
   -- ADC data and frame SerDes
