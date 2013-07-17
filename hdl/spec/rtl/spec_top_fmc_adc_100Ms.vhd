@@ -236,8 +236,8 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   constant c_SLAVE_DMA      : integer := 0;  -- DMA controller in the Gennum core
   constant c_SLAVE_ONEWIRE  : integer := 1;  -- Carrier onewire interface
   constant c_SLAVE_SPEC_CSR : integer := 2;  -- SPEC control and status registers
-  constant c_SLAVE_TIMETAG  : integer := 3;  -- TIMETAG core for time-tagging
-  constant c_SLAVE_INT      : integer := 4;  -- Interrupt controller
+  constant c_SLAVE_INT      : integer := 3;  -- Interrupt controller
+  constant c_SLAVE_TIMETAG  : integer := 4;  -- TIMETAG core for time-tagging
   constant c_SLAVE_FMC_ADC  : integer := 5;  -- FMC ADC mezzanine
 
   -- Devices sdb description
@@ -322,7 +322,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
         name      => "WB-Int.Control     ")));
 
   -- f_xwb_bridge_manual_sdb(size, sdb_addr)
-  constant c_FMC_ADC_SDB_BRIDGE : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00002000");
+  constant c_FMC_ADC_SDB_BRIDGE : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00004000");
 
   -- sdb header address
   constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";
@@ -333,9 +333,9 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       0 => f_sdb_embed_device(c_DMA_SDB_DEVICE, x"00001000"),
       1 => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001100"),
       2 => f_sdb_embed_device(c_SPEC_CSR_SDB_DEVICE, x"00001200"),
-      3 => f_sdb_embed_device(c_TIMETAG_SDB_DEVICE, x"00001300"),
-      4 => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001400"),
-      5 => f_sdb_embed_bridge(c_FMC_ADC_SDB_BRIDGE, x"00002000"),
+      3 => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001300"),
+      4 => f_sdb_embed_device(c_TIMETAG_SDB_DEVICE, x"00002000"),
+      5 => f_sdb_embed_bridge(c_FMC_ADC_SDB_BRIDGE, x"00004000"),
       6 => f_sdb_embed_repo_url(c_SDB_REPO_URL),
       7 => f_sdb_embed_synthesis(c_SDB_SYNTHESIS),
       8 => f_sdb_embed_integration(c_SDB_INTEGRATION)
