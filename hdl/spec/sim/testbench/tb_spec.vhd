@@ -46,7 +46,7 @@ architecture TEST of TB_SPEC is
     generic
       (
         STRING_MAX     : integer := 256;           -- Command string maximum length
-        T_LCLK         : time    := 5 ns;         -- Local Bus Clock Period
+        T_LCLK         : time    := 5 ns;          -- Local Bus Clock Period
         T_P2L_CLK_DLY  : time    := 2 ns;          -- Delay from LCLK to P2L_CLK
         INSTANCE_LABEL : string  := "GN412X_BFM";  -- Label string to be used as a prefix for messages from the model
         MODE_PRIMARY   : boolean := true           -- TRUE for BFM acting as GN412x, FALSE for BFM acting as the DUT
@@ -248,24 +248,24 @@ architecture TEST of TB_SPEC is
         spi_cs_dac3_n_o : out std_logic;  -- SPI channel 3 offset DAC chip select (active low)
         spi_cs_dac4_n_o : out std_logic;  -- SPI channel 4 offset DAC chip select (active low)
 
-        gpio_dac_clr_n_o   : out std_logic;                     -- offset DACs clear (active low)
-        gpio_led_power_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
-        gpio_led_trigger_o : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
-        gpio_ssr_ch1_o     : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
-        gpio_ssr_ch2_o     : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
-        gpio_ssr_ch3_o     : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
-        gpio_ssr_ch4_o     : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-        gpio_si570_oe_o    : out std_logic;                     -- Si570 (programmable oscillator) output enable
+        gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
+        gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
+        gpio_led_trig_o  : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
+        gpio_ssr_ch1_o   : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
+        gpio_ssr_ch2_o   : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
+        gpio_ssr_ch3_o   : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
+        gpio_ssr_ch4_o   : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
+        gpio_si570_oe_o  : out std_logic;                     -- Si570 (programmable oscillator) output enable
 
         si570_scl_b : inout std_logic;  -- I2C bus clock (Si570)
         si570_sda_b : inout std_logic;  -- I2C bus data (Si570)
 
-        mezz_one_wire_b : inout std_logic;   -- 1-wire interface (DS18B20 thermometer + unique ID)
+        mezz_one_wire_b : inout std_logic;  -- 1-wire interface (DS18B20 thermometer + unique ID)
 
         prsnt_m2c_n_i : in std_logic;   -- Mezzanine present (active low)
 
-        sys_scl_b : inout std_logic;       -- Mezzanine system I2C clock (EEPROM)
-        sys_sda_b : inout std_logic        -- Mezzanine system I2C data (EEPROM)
+        sys_scl_b : inout std_logic;    -- Mezzanine system I2C clock (EEPROM)
+        sys_sda_b : inout std_logic     -- Mezzanine system I2C data (EEPROM)
         );
   end component spec_top_fmc_adc_100Ms;
 
@@ -334,11 +334,11 @@ architecture TEST of TB_SPEC is
 -----------------------------------------------------------------------------
 
   -- System signals
-  signal clk20_vcxo_i : std_logic                    := '0';  -- 20MHz VCXO clock
-  signal led_red_o    : std_logic;
-  signal led_green_o  : std_logic;
-  signal pcb_ver_i    : std_logic_vector(3 downto 0) := X"1";
-  signal carrier_one_wire_b : std_logic;        -- 1-wire interface (DS18B20)
+  signal clk20_vcxo_i       : std_logic                    := '0';  -- 20MHz VCXO clock
+  signal led_red_o          : std_logic;
+  signal led_green_o        : std_logic;
+  signal pcb_ver_i          : std_logic_vector(3 downto 0) := X"1";
+  signal carrier_one_wire_b : std_logic;                            -- 1-wire interface (DS18B20)
 
   -- GN4124 interface
   signal RSTINn             : std_logic;
@@ -418,19 +418,19 @@ architecture TEST of TB_SPEC is
   signal spi_cs_dac3_n_o : std_logic;         -- SPI channel 3 offset DAC chip select (active low)
   signal spi_cs_dac4_n_o : std_logic;         -- SPI channel 4 offset DAC chip select (active low)
 
-  signal gpio_dac_clr_n_o   : std_logic;                     -- offset DACs clear (active low)
-  signal gpio_led_power_o   : std_logic;                     -- Mezzanine front panel power LED (PWR)
-  signal gpio_led_trigger_o : std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
-  signal gpio_ssr_ch1_o     : std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
-  signal gpio_ssr_ch2_o     : std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
-  signal gpio_ssr_ch3_o     : std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
-  signal gpio_ssr_ch4_o     : std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-  signal gpio_si570_oe_o    : std_logic;                     -- Si570 (programmable oscillator) output enable
+  signal gpio_dac_clr_n_o : std_logic;                     -- offset DACs clear (active low)
+  signal gpio_led_acq_o   : std_logic;                     -- Mezzanine front panel power LED (PWR)
+  signal gpio_led_trig_o  : std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
+  signal gpio_ssr_ch1_o   : std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
+  signal gpio_ssr_ch2_o   : std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
+  signal gpio_ssr_ch3_o   : std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
+  signal gpio_ssr_ch4_o   : std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
+  signal gpio_si570_oe_o  : std_logic;                     -- Si570 (programmable oscillator) output enable
 
   signal si570_scl_b : std_logic;       -- I2C bus clock (Si570)
   signal si570_sda_b : std_logic;       -- I2C bus data (Si570)
 
-  signal mezz_one_wire_b : std_logic;        -- 1-wire interface (DS18B20)
+  signal mezz_one_wire_b : std_logic;   -- 1-wire interface (DS18B20)
 
   signal prsnt_m2c_n_i : std_logic := '0';  -- Mezzanine present (active low)
 
@@ -580,12 +580,12 @@ begin
       g_SIMULATION    => "TRUE",
       g_CALIB_SOFT_IP => "FALSE")
     port map (
-      clk20_vcxo_i  => clk20_vcxo_i,
-      led_red_o     => LED_RED,
-      led_green_o   => LED_GREEN,
-      aux_leds_o    => aux_leds_o,
-      aux_buttons_i => aux_buttons_i,
-      pcb_ver_i     => pcb_ver_i,
+      clk20_vcxo_i       => clk20_vcxo_i,
+      led_red_o          => LED_RED,
+      led_green_o        => LED_GREEN,
+      aux_leds_o         => aux_leds_o,
+      aux_buttons_i      => aux_buttons_i,
+      pcb_ver_i          => pcb_ver_i,
       carrier_one_wire_b => carrier_one_wire_b,
 
       -- GN4124 interface
@@ -636,14 +636,14 @@ begin
       spi_cs_dac3_n_o => spi_cs_dac3_n_o,
       spi_cs_dac4_n_o => spi_cs_dac4_n_o,
 
-      gpio_dac_clr_n_o   => gpio_dac_clr_n_o,
-      gpio_led_power_o   => gpio_led_power_o,
-      gpio_led_trigger_o => gpio_led_trigger_o,
-      gpio_ssr_ch1_o     => gpio_ssr_ch1_o,
-      gpio_ssr_ch2_o     => gpio_ssr_ch2_o,
-      gpio_ssr_ch3_o     => gpio_ssr_ch3_o,
-      gpio_ssr_ch4_o     => gpio_ssr_ch4_o,
-      gpio_si570_oe_o    => gpio_si570_oe_o,
+      gpio_dac_clr_n_o => gpio_dac_clr_n_o,
+      gpio_led_acq_o   => gpio_led_acq_o,
+      gpio_led_trig_o  => gpio_led_trig_o,
+      gpio_ssr_ch1_o   => gpio_ssr_ch1_o,
+      gpio_ssr_ch2_o   => gpio_ssr_ch2_o,
+      gpio_ssr_ch3_o   => gpio_ssr_ch3_o,
+      gpio_ssr_ch4_o   => gpio_ssr_ch4_o,
+      gpio_si570_oe_o  => gpio_si570_oe_o,
 
       si570_scl_b => si570_scl_b,
       si570_sda_b => si570_sda_b,
