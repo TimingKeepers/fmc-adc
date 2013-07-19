@@ -51,7 +51,7 @@ use work.genram_pkg.all;
 entity fmc_adc_100Ms_core is
   generic(
     g_multishot_ram_size : natural := 2048;
-    g_carrier_type : string := "SPEC"
+    g_carrier_type       : string  := "SPEC"
     );
   port (
     -- Clock, reset
@@ -133,6 +133,7 @@ architecture rtl of fmc_adc_100Ms_core is
         BITSLIP             : in  std_logic;
         -- Clock and reset signals
         CLK_IN              : in  std_logic;  -- Fast clock from PLL/MMCM
+        CLK_OUT             : out std_logic;
         CLK_DIV_IN          : in  std_logic;  -- Slow clock from PLL/MMCM
         LOCKED_IN           : in  std_logic;
         LOCKED_OUT          : out std_logic;
@@ -288,14 +289,15 @@ architecture rtl of fmc_adc_100Ms_core is
   signal fs_rst_n : std_logic;
 
   -- Clocks and PLL
-  signal dco_clk    : std_logic;
-  signal clk_fb     : std_logic;
-  signal clk_fb_buf : std_logic;
-  signal locked_in  : std_logic;
-  signal locked_out : std_logic;
-  signal serdes_clk : std_logic;
-  signal fs_clk     : std_logic;
-  signal fs_clk_buf : std_logic;
+  signal dco_clk     : std_logic;
+  signal dco_clk_buf : std_logic;
+  signal clk_fb      : std_logic;
+  signal clk_fb_buf  : std_logic;
+  signal locked_in   : std_logic;
+  signal locked_out  : std_logic;
+  signal serdes_clk  : std_logic;
+  signal fs_clk      : std_logic;
+  signal fs_clk_buf  : std_logic;
 
   -- SerDes
   signal serdes_in_p         : std_logic_vector(8 downto 0);
@@ -486,7 +488,20 @@ begin
     port map (
       I  => adc_dco_p_i,
       IB => adc_dco_n_i,
-      O  => dco_clk
+      O  => dco_clk_buf
+      );
+
+  cmp_dco_bufio : BUFIO2
+    generic map (
+      DIVIDE        => 1,
+      DIVIDE_BYPASS => true,
+      I_INVERT      => false,
+      USE_DOUBLER   => false)
+    port map (
+      I            => dco_clk_buf,
+      IOCLK        => open,
+      DIVCLK       => dco_clk,
+      SERDESSTROBE => open
       );
 
   ------------------------------------------------------------------------------
@@ -497,7 +512,7 @@ begin
   cmp_serdes_clk_pll : PLL_BASE
     generic map (
       BANDWIDTH          => "OPTIMIZED",
-      CLK_FEEDBACK       => "CLKFBOUT",
+      CLK_FEEDBACK       => "CLKOUT0",
       COMPENSATION       => "SYSTEM_SYNCHRONOUS",
       DIVCLK_DIVIDE      => 1,
       CLKFBOUT_MULT      => 2,
@@ -512,7 +527,7 @@ begin
       REF_JITTER         => 0.010)
     port map (
       -- Output clocks
-      CLKFBOUT => clk_fb_buf,
+      CLKFBOUT => open,
       CLKOUT0  => serdes_clk,
       CLKOUT1  => fs_clk_buf,
       CLKOUT2  => open,
@@ -532,22 +547,30 @@ begin
       I => fs_clk_buf
       );
 
-  gen_fb_clk_check: if (g_carrier_type /= "SPEC" and
-                        g_carrier_type /= "SVEC") generate
-    assert false report "[fmc_adc_100Ms_core] Selected carrier type not supported. Must be SPEC or SVEC." severity failure;
-  end generate gen_fb_clk_check;
+  cmp_fb_clk_bufio : BUFIO2FB
+    generic map (
+      DIVIDE_BYPASS => true)
+    port map (
+      I => clk_fb_buf,
+      O => clk_fb
+      );
 
-  gen_fb_clk_spec: if g_carrier_type = "SPEC" generate
-    cmp_fb_clk_buf : BUFG
-      port map (
-        O => clk_fb,
-        I => clk_fb_buf
-        );
-  end generate gen_fb_clk_spec;
+  --gen_fb_clk_check : if (g_carrier_type /= "SPEC" and
+  --                      g_carrier_type /= "SVEC") generate
+  --  assert false report "[fmc_adc_100Ms_core] Selected carrier type not supported. Must be SPEC or SVEC." severity failure;
+  --end generate gen_fb_clk_check;
 
-  gen_fb_clk_svec: if g_carrier_type = "SVEC" generate
-        clk_fb <= clk_fb_buf;
-  end generate gen_fb_clk_svec;
+  --gen_fb_clk_spec : if g_carrier_type = "SPEC" generate
+  --  cmp_fb_clk_buf : BUFG
+  --    port map (
+  --      O => clk_fb,
+  --      I => clk_fb_buf
+  --      );
+  --end generate gen_fb_clk_spec;
+
+  --gen_fb_clk_svec : if g_carrier_type = "SVEC" generate
+  --  clk_fb <= clk_fb_buf;
+  --end generate gen_fb_clk_svec;
 
   ------------------------------------------------------------------------------
   -- ADC data and frame SerDes
@@ -559,6 +582,7 @@ begin
       DATA_IN_TO_DEVICE   => serdes_out_raw,
       BITSLIP             => serdes_bitslip,
       CLK_IN              => serdes_clk,
+      CLK_OUT             => clk_fb_buf,
       CLK_DIV_IN          => fs_clk,
       LOCKED_IN           => locked_in,
       LOCKED_OUT          => locked_out,

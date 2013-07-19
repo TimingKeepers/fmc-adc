@@ -76,7 +76,8 @@ port
 
   BITSLIP                 : in    std_logic;
 -- Clock and reset signals
-  CLK_IN                  : in    std_logic;                    -- Fast clock from PLL/MMCM 
+  CLK_IN                  : in    std_logic;                    -- Fast clock from PLL/MMCM
+  CLK_OUT                 : out   std_logic;
   CLK_DIV_IN              : in    std_logic;                    -- Slow clock from PLL/MMCM
   LOCKED_IN               : in    std_logic;
   LOCKED_OUT              : out   std_logic;
@@ -127,7 +128,8 @@ begin
       LOCKED       => LOCKED_IN,
       PLLIN        => CLK_IN);
 
-  
+  CLK_OUT <= clk_in_int_buf;
+
   -- We have multiple bits- step over every bit, instantiating the required elements
   pins: for pin_count in 0 to sys_w-1 generate 
 
