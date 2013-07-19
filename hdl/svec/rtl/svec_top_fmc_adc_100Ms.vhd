@@ -314,12 +314,12 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   constant c_WB_SLAVE_SVEC_CSR     : integer := 2;   -- SVEC control and status registers
   constant c_WB_SLAVE_INT          : integer := 3;   -- Interrupt controller
   constant c_WB_SLAVE_FMC0_TIMETAG : integer := 4;   -- FMC slot 1 timetag core
-  constant c_WB_SLAVE_FMC0_DDR_ADR : integer := 5;   -- FMC slot 1 DDR address
-  constant c_WB_SLAVE_FMC0_DDR_DAT : integer := 6;   -- FMC slot 1 DDR data
+  constant c_WB_SLAVE_FMC0_DDR_DAT : integer := 5;   -- FMC slot 1 DDR data
+  constant c_WB_SLAVE_FMC0_DDR_ADR : integer := 6;   -- FMC slot 1 DDR address
   constant c_WB_SLAVE_FMC0_ADC     : integer := 7;   -- FMC slot 1 ADC mezzanine
   constant c_WB_SLAVE_FMC1_TIMETAG : integer := 8;   -- FMC slot 2 timetag core
-  constant c_WB_SLAVE_FMC1_DDR_ADR : integer := 9;   -- FMC slot 2 DDR address
-  constant c_WB_SLAVE_FMC1_DDR_DAT : integer := 10;  -- FMC slot 2 DDR data
+  constant c_WB_SLAVE_FMC1_DDR_DAT : integer := 9;   -- FMC slot 2 DDR data
+  constant c_WB_SLAVE_FMC1_DDR_ADR : integer := 10;  -- FMC slot 2 DDR address
   constant c_WB_SLAVE_FMC1_ADC     : integer := 11;  -- FMC slot 2 ADC mezzanine
 
 
@@ -575,11 +575,15 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal ddr0_status     : std_logic_vector(31 downto 0);
   signal ddr0_calib_done : std_logic;
   signal ddr0_addr_cnt   : unsigned(31 downto 0);
+  signal ddr0_wb_cyc_d   : std_logic;
+  signal ddr0_wb_cyc_fe  : std_logic;
 
   -- DDR1 (bank 5)
   signal ddr1_status     : std_logic_vector(31 downto 0);
   signal ddr1_calib_done : std_logic;
   signal ddr1_addr_cnt   : unsigned(31 downto 0);
+  signal ddr1_wb_cyc_d   : std_logic;
+  signal ddr1_wb_cyc_fe  : std_logic;
 
   -- Carrier 1-wire
   signal carrier_owr_en : std_logic_vector(0 downto 0);
@@ -935,10 +939,10 @@ begin
     begin
       if rising_edge(sys_clk_125) then
         if sys_rst_n = '0' then
-          ddr_wr_fifo_empty_d(I) <= '0';
+          ddr_wr_fifo_empty_d(I)  <= '0';
           ddr_wr_fifo_empty_d1(I) <= '0';
         else
-          ddr_wr_fifo_empty_d(I) <= ddr_wr_fifo_empty(I);
+          ddr_wr_fifo_empty_d(I)  <= ddr_wr_fifo_empty(I);
           ddr_wr_fifo_empty_d1(I) <= ddr_wr_fifo_empty_d(I);
         end if;
       end if;
@@ -973,7 +977,8 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc_adc_mezzanine_0 : fmc_adc_mezzanine
     generic map(
-      g_multishot_ram_size => 2048
+      g_multishot_ram_size => 2048,
+      g_carrier_type       => "SVEC"
       )
     port map(
       sys_clk_i   => sys_clk_125,
@@ -1058,7 +1063,8 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc_adc_mezzanine_1 : fmc_adc_mezzanine
     generic map(
-      g_multishot_ram_size => 2048
+      g_multishot_ram_size => 2048,
+      g_carrier_type       => "SVEC"
       )
     port map(
       sys_clk_i   => sys_clk_125,
@@ -1229,6 +1235,24 @@ begin
   -- DDR0 (bank 4) address counter
   --  The address counter is set by writing to the c_WB_SLAVE_FMC0_DDR_ADR wishbone periph.
   --  Than the counter is incremented on every access to the c_WB_SLAVE_FMC0_DDR_DAT wishbone periph.
+  --  The counter is incremented on the falling edge of cyc. This is because the ddr controller
+  --  samples the address on (cyc_re and stb)+1
+
+  -- cyc falling edge detection
+  p_ddr0_wb_cyc : process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if (sys_rst_n = '0') then
+        ddr0_wb_cyc_d <= '0';
+      else
+        ddr0_wb_cyc_d <= cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).cyc;
+      end if;
+    end if;
+  end process p_ddr0_wb_cyc;
+
+  ddr0_wb_cyc_fe <= not(cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).cyc) and ddr0_wb_cyc_d;
+
+  -- address counter
   p_ddr0_addr_cnt : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
@@ -1238,14 +1262,13 @@ begin
              cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).stb = '1' and
              cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).cyc = '1') then
         ddr0_addr_cnt <= unsigned(cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).dat);
-      elsif (cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).stb = '1' and
-             cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).cyc = '1') then
+      elsif (ddr0_wb_cyc_fe = '1') then
         ddr0_addr_cnt <= ddr0_addr_cnt + 1;
       end if;
     end if;
   end process p_ddr0_addr_cnt;
 
-  -- ACK generation
+  -- ack generation
   p_ddr0_addr_ack : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
@@ -1365,6 +1388,24 @@ begin
   -- DDR1 (bank 5) address counter
   --  The address counter is set by writing to the c_WB_SLAVE_FMC1_DDR_ADR wishbone periph.
   --  Than the counter is incremented on every access to the c_WB_SLAVE_FMC1_DDR_DAT wishbone periph.
+  --  The counter is incremented on the falling edge of cyc. This is because the ddr controller
+  --  samples the address on (cyc_re and stb)+1
+
+  -- cyc falling edge detection
+  p_ddr1_wb_cyc : process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if (sys_rst_n = '0') then
+        ddr1_wb_cyc_d <= '0';
+      else
+        ddr1_wb_cyc_d <= cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).cyc;
+      end if;
+    end if;
+  end process p_ddr1_wb_cyc;
+
+  ddr1_wb_cyc_fe <= not(cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).cyc) and ddr1_wb_cyc_d;
+
+  -- address counter
   p_ddr1_addr_cnt : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
@@ -1374,14 +1415,13 @@ begin
              cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).stb = '1' and
              cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).cyc = '1') then
         ddr1_addr_cnt <= unsigned(cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).dat);
-      elsif (cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).stb = '1' and
-             cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).cyc = '1') then
+      elsif (ddr1_wb_cyc_fe = '1') then
         ddr1_addr_cnt <= ddr1_addr_cnt + 1;
       end if;
     end if;
   end process p_ddr1_addr_cnt;
 
-  -- ACK generation
+  -- ack generation
   p_ddr1_addr_ack : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
