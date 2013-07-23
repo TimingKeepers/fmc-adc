@@ -199,16 +199,16 @@ The @ref{tab:memory_map} shows the Wishbone slaves mapping.
 @headitem Byte offset @tab Core @tab Library @tab Description
 @item @code{0x0000} @tab sdb_rom            @tab general-cores       @tab SDB records
 @item @code{0x1000} @tab gn4124_core        @tab gn4124-core         @tab DMA controller
-@item @code{0x1100} @tab -                  @tab -                   @tab Carrier SPI master@footnote{Not implemented.}
-@item @code{0x1200} @tab xwb_onewire_master @tab general-cores       @tab Carrier 1-wire master
-@item @code{0x1300} @tab carrier_csr        @tab fmc-adc-100m14b4cha @tab Carrier control and status
-@item @code{0x1400} @tab utc_core           @tab fmc-adc-100m14b4cha @tab Time-tagging core
-@item @code{0x1500} @tab irq_controller     @tab fmc-adc-100m14b4cha @tab Interrupt controller
-@item @code{0x1600} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine system I2C master
-@item @code{0x1700} @tab xwb_spi            @tab general-cores       @tab Mezzanine SPI master
-@item @code{0x1800} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine I2C master
-@item @code{0x1900} @tab fmc_adc_100Ms_core @tab fmc-adc-100m14b4cha @tab ADC core
-@item @code{0x1A00} @tab xwb_onewire_master @tab general-cores       @tab Mezzanine 1-wire master
+@item @code{0x1100} @tab xwb_onewire_master @tab general-cores       @tab Carrier 1-wire master
+@item @code{0x1200} @tab carrier_csr        @tab fmc-adc-100m14b4cha @tab Carrier control and status
+@item @code{0x1300} @tab irq_controller     @tab fmc-adc-100m14b4cha @tab Interrupt controller
+@item @code{0x2000} @tab utc_core           @tab fmc-adc-100m14b4cha @tab Time-tagging core
+@item @code{0x4000} @tab sdb_rom            @tab general-cores       @tab fmc-adc bridge SDB records
+@item @code{0x5000} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine system I2C master
+@item @code{0x5100} @tab xwb_spi            @tab general-cores       @tab Mezzanine SPI master
+@item @code{0x5200} @tab xwb_i2c_master     @tab general-cores       @tab Mezzanine I2C master
+@item @code{0x5300} @tab fmc_adc_100Ms_core @tab fmc-adc-100m14b4cha @tab ADC core
+@item @code{0x5400} @tab xwb_onewire_master @tab general-cores       @tab Mezzanine 1-wire master
 @end multitable
 @caption{Wishbone bus memory mapping (BAR 0).}
 @end float
@@ -245,7 +245,7 @@ OpenCores@footnote{@uref{http://opencores.org/}}. Therefore, the documentation f
 The register description for the cores for the carrier control and status, the time-tagging core, the interrupt controller and the ADC core can be found in annexe (@xref{ADC Core Registers}, @ref{Interrupt Controller Registers}, @ref{Time-tagging Core Registers} and @ref{Carrier Registers}). The registers for those cores have been generated using @command{wbgen2}@footnote{@uref{http://www.ohwr.org/projects/wishbone-gen}}.
 
 @float Figure,fig:spec_fw_arch
-@center @image{../../figures/spec_fw_arch, 15cm,,,pdf}
+@center @image{../../figures/spec_fw_arch_module, 15cm,,,pdf}
 @caption{FPGA firmware architecture block diargam.}
 @end float
 
