@@ -2,10 +2,12 @@ hdl/ip_cores/ddr3-sp6-core/
 hdl/ip_cores/general-cores/
 hdl/ip_cores/gn4124-core/
 hdl/ip_cores/vme64x-core/
+hdl/ip_cores/wr-cores/
 hdl/ip_cores/.lso
 hdl/ip_cores/_xmsgs
 hdl/*/sim/modelsim.ini
 hdl/*/sim/work/
+hdl/*/sim/fifo_generator_v6_1/
 hdl/*/syn/_ngo/
 hdl/*/syn/_xmsgs/
 hdl/*/syn/par_usage_statistics.html
@@ -54,6 +56,13 @@ hdl/*/syn/*_summary.html
 hdl/*/release/
 hdl/*/chipscope/*.vcd
 hdl/*/chipscope/*.wlf
+hdl/svec/sim/testbench/fifo_generator_v6_1/
+hdl/svec/sim/testbench/modelsim.ini
+hdl/svec/sim/testbench/simdrv_defs.svh
+hdl/svec/sim/testbench/transcript
+hdl/svec/sim/testbench/vsim.wlf
+hdl/svec/sim/testbench/vsim_stacktrace.vstf
+hdl/svec/sim/testbench/work/
 documentation/manuals/*/*.html
 *.texi
 *.aux
