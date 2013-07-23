@@ -1,0 +1,4 @@
+one page: pdftk A=input_file.pdf cat A33 output output_file.pdf
+a range : pdftk A=input_file.pdf cat A33-40 output output_file.pdf
+
+pdfcrop --bbox '20 300 630 590' serdes_clk.pdf serdes_clk_crop.pdf
