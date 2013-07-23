@@ -1,0 +1,37 @@
+peripheral {
+	name = "Interrupt controller";
+	description = "Fmc-adc interrrupt controller for SVEC.";
+	hdl_entity = "irq_controller";
+	prefix = "irq_ctrl";
+
+
+	irq {
+            name = "FMC slot 1 trigger interrupt";
+	    description = "FMC slot 1 trigger interrupt line (rising edge sensitive).";
+            prefix = "fmc0_trig";
+	    trigger = EDGE_RISING;
+	};
+
+        irq {
+            name = "FMC slot 1 end of acquisition interrupt";
+	    description = "FMC slot 1 end of acquisition interrupt line (rising edge sensitive).";
+            prefix = "fmc0_acq_end";
+	    trigger = EDGE_RISING;
+	};
+
+        irq {
+            name = "FMC slot 2 trigger interrupt";
+	    description = "FMC slot 2 trigger interrupt line (rising edge sensitive).";
+            prefix = "fmc1_trig";
+	    trigger = EDGE_RISING;
+	};
+
+        irq {
+            name = "FMC slot 2 end of acquisition interrupt";
+	    description = "FMC slot 2 end of acquisition interrupt line (rising edge sensitive).";
+            prefix = "fmc1_acq_end";
+	    trigger = EDGE_RISING;
+	};
+
+
+};

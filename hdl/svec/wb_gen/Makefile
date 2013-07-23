@@ -9,3 +9,7 @@ carrier_csr:
 irq_controller_regs:
 	$(WBGEN2) -l vhdl -V $(RTL)$@.vhd -f html -D $@.htm -C $@.h $@.wb
 	$(WBGEN2) -f texinfo -D $(TEX)$@.tex $@.wb
+
+irq_controller:
+	$(WBGEN2) -l vhdl -V $(RTL)$@.vhd -f html -D $@.htm -C $@.h $@.wb
+	$(WBGEN2) -f texinfo -D $(TEX)$@.tex $@.wb

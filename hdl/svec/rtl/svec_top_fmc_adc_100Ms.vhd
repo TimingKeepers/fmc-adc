@@ -278,20 +278,25 @@ architecture rtl of svec_top_fmc_adc_100Ms is
 
   component irq_controller
     port (
-      clk_i       : in  std_logic;
-      rst_n_i     : in  std_logic;
-      irq_src_p_i : in  std_logic_vector(31 downto 0);
-      irq_p_o     : out std_logic;
-      wb_adr_i    : in  std_logic_vector(1 downto 0);
-      wb_dat_i    : in  std_logic_vector(31 downto 0);
-      wb_dat_o    : out std_logic_vector(31 downto 0);
-      wb_cyc_i    : in  std_logic;
-      wb_sel_i    : in  std_logic_vector(3 downto 0);
-      wb_stb_i    : in  std_logic;
-      wb_we_i     : in  std_logic;
-      wb_ack_o    : out std_logic
+      rst_n_i            : in  std_logic;
+      clk_sys_i          : in  std_logic;
+      wb_adr_i           : in  std_logic_vector(1 downto 0);
+      wb_dat_i           : in  std_logic_vector(31 downto 0);
+      wb_dat_o           : out std_logic_vector(31 downto 0);
+      wb_cyc_i           : in  std_logic;
+      wb_sel_i           : in  std_logic_vector(3 downto 0);
+      wb_stb_i           : in  std_logic;
+      wb_we_i            : in  std_logic;
+      wb_ack_o           : out std_logic;
+      wb_stall_o         : out std_logic;
+      wb_int_o           : out std_logic;
+      irq_fmc0_trig_i    : in  std_logic;
+      irq_fmc0_acq_end_i : in  std_logic;
+      irq_fmc1_trig_i    : in  std_logic;
+      irq_fmc1_acq_end_i : in  std_logic
       );
   end component irq_controller;
+
 
   ------------------------------------------------------------------------------
   -- SDB crossbar constants declaration
@@ -557,15 +562,17 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal wb_ddr1_adc_stall : std_logic;
 
   -- Interrupts stuff
-  signal irq_sources          : std_logic_vector(31 downto 0);
-  signal irq_to_vme           : std_logic;
-  signal irq_sources_2_led    : std_logic_vector(31 downto 0);
   signal ddr_wr_fifo_empty    : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal ddr_wr_fifo_empty_d  : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal ddr_wr_fifo_empty_d1 : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal ddr_wr_fifo_empty_p  : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal acq_end_irq_p        : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal acq_end_extend       : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
+  signal fmc0_trig_irq_led    : std_logic;
+  signal fmc0_acq_end_irq_led : std_logic;
+  signal irq_to_vme           : std_logic;
+  signal irq_to_vme_t         : std_logic;
+  signal irq_to_vme_sync      : std_logic;
 
   -- Front panel LED control
   signal led_state     : std_logic_vector(15 downto 0);
@@ -716,7 +723,7 @@ begin
   ------------------------------------------------------------------------------
   -- VME interface
   ------------------------------------------------------------------------------
-  cmp_vme_Core : xvme64x_core
+  cmp_vme_core : xvme64x_core
     port map (
       clk_i           => sys_clk_62_5,
       rst_n_i         => powerup_rst_n,
@@ -747,7 +754,7 @@ begin
       VME_ADDR_OE_N_o => vme_addr_oe_n_o,
       master_o        => vme_master_out,
       master_i        => vme_master_in,
-      irq_i           => irq_to_vme
+      irq_i           => irq_to_vme_sync
       );
 
   -- VME tri-state buffers
@@ -777,6 +784,18 @@ begin
 
   cnx_slave_in(c_WB_MASTER_VME) <= vme_sync_master_out;
   vme_sync_master_in            <= cnx_slave_out(c_WB_MASTER_VME);
+
+  -- Interrupt line synchronisation to vme 62.5MHz
+  p_irq_to_vme_sync : process (sys_clk_62_5)
+  begin
+    if powerup_rst_n = '0' then
+      irq_to_vme_t    <= '0';
+      irq_to_vme_sync <= '0';
+    elsif rising_edge(sys_clk_62_5) then
+      irq_to_vme_t    <= irq_to_vme;
+      irq_to_vme_sync <= irq_to_vme_t;
+    end if;
+  end process p_irq_to_vme_sync;
 
 
   ------------------------------------------------------------------------------
@@ -901,37 +920,27 @@ begin
   ------------------------------------------------------------------------------
   cmp_irq_controller : irq_controller
     port map(
-      clk_i       => sys_clk_125,
-      rst_n_i     => sys_rst_n,
-      irq_src_p_i => irq_sources,
-      irq_p_o     => irq_to_vme,
-      wb_adr_i    => cnx_master_out(c_WB_SLAVE_INT).adr(3 downto 2),  -- cnx_master_out.adr is byte address
-      wb_dat_i    => cnx_master_out(c_WB_SLAVE_INT).dat,
-      wb_dat_o    => cnx_master_in(c_WB_SLAVE_INT).dat,
-      wb_cyc_i    => cnx_master_out(c_WB_SLAVE_INT).cyc,
-      wb_sel_i    => cnx_master_out(c_WB_SLAVE_INT).sel,
-      wb_stb_i    => cnx_master_out(c_WB_SLAVE_INT).stb,
-      wb_we_i     => cnx_master_out(c_WB_SLAVE_INT).we,
-      wb_ack_o    => cnx_master_in(c_WB_SLAVE_INT).ack
+      rst_n_i            => sys_rst_n,
+      clk_sys_i          => sys_clk_125,
+      wb_adr_i           => cnx_master_out(c_WB_SLAVE_INT).adr(3 downto 2),  -- cnx_master_out.adr is byte address
+      wb_dat_i           => cnx_master_out(c_WB_SLAVE_INT).dat,
+      wb_dat_o           => cnx_master_in(c_WB_SLAVE_INT).dat,
+      wb_cyc_i           => cnx_master_out(c_WB_SLAVE_INT).cyc,
+      wb_sel_i           => cnx_master_out(c_WB_SLAVE_INT).sel,
+      wb_stb_i           => cnx_master_out(c_WB_SLAVE_INT).stb,
+      wb_we_i            => cnx_master_out(c_WB_SLAVE_INT).we,
+      wb_ack_o           => cnx_master_in(c_WB_SLAVE_INT).ack,
+      wb_stall_o         => cnx_master_in(c_WB_SLAVE_INT).stall,
+      wb_int_o           => irq_to_vme,
+      irq_fmc0_trig_i    => trig_p(0),
+      irq_fmc0_acq_end_i => acq_end_irq_p(0),
+      irq_fmc1_trig_i    => trig_p(1),
+      irq_fmc1_acq_end_i => acq_end_irq_p(1)
       );
 
   -- Unused wishbone signals
-  cnx_master_in(c_WB_SLAVE_INT).err   <= '0';
-  cnx_master_in(c_WB_SLAVE_INT).rty   <= '0';
-  cnx_master_in(c_WB_SLAVE_INT).stall <= '0';
-  cnx_master_in(c_WB_SLAVE_INT).int   <= '0';
-
-  -- IRQ sources
-  --   0    -> FMC slot 1 trigger
-  --   1    -> FMC slot 1 end of acquisition (data written to DDR)
-  --   2    -> FMC slot 2 trigger
-  --   3    -> FMC slot 2 end of acquisition (data written to DDR)
-  --   4-31 -> Unused
-  irq_sources(0)           <= trig_p(0);
-  irq_sources(1)           <= acq_end_irq_p(0);
-  irq_sources(2)           <= trig_p(1);
-  irq_sources(3)           <= acq_end_irq_p(1);
-  irq_sources(31 downto 4) <= (others => '0');
+  cnx_master_in(c_WB_SLAVE_INT).err <= '0';
+  cnx_master_in(c_WB_SLAVE_INT).rty <= '0';
 
   -- Detects end of adc core writing to ddr
   l_ddr_wr_fifo_empty : for I in 0 to c_NB_FMC_SLOTS-1 generate
@@ -1527,7 +1536,7 @@ begin
       line_oen_o => fp_led_line_oen_o
       );
 
-  cmp_vme_access_Led : gc_extend_pulse
+  cmp_vme_access_led : gc_extend_pulse
     generic map (
       g_width => 5000000)
     port map (
@@ -1535,6 +1544,26 @@ begin
       rst_n_i    => sys_rst_n,
       pulse_i    => cnx_slave_in(c_WB_MASTER_VME).cyc,
       extended_o => vme_access
+      );
+
+  cmp_fmc0_trig_irq_led : gc_extend_pulse
+    generic map (
+      g_width => 5000000)
+    port map (
+      clk_i      => sys_clk_125,
+      rst_n_i    => sys_rst_n,
+      pulse_i    => trig_p(0),
+      extended_o => fmc0_trig_irq_led
+      );
+
+  cmp_fmc0_acq_end_irq_led : gc_extend_pulse
+    generic map (
+      g_width => 5000000)
+    port map (
+      clk_i      => sys_clk_125,
+      rst_n_i    => sys_rst_n,
+      pulse_i    => acq_end_irq_p(0),
+      extended_o => fmc0_acq_end_irq_led
       );
 
   -- LED 1 : VME access
@@ -1549,19 +1578,19 @@ begin
   -- LED 4 : 
   led_state(7 downto 6) <= '0' & led_pwm;
 
-  led_state(15 downto 8) <= led_state_man(15 downto 8);
-
   -- LED 5 : 
-  --led_state(9 downto 8) <= c_LED_OFF;
+  led_state(9 downto 8) <= fmc0_trig_irq_led & '0';
 
   -- LED 6 : 
-  --led_state(11 downto 10) <= c_LED_OFF;
+  led_state(11 downto 10) <= fmc0_acq_end_irq_led & '0';
 
   -- LED 7 : 
-  --led_state(13 downto 12) <= c_LED_OFF;
+  led_state(13 downto 12) <= '0' & cnx_master_in(c_WB_SLAVE_INT).int;
 
   -- LED 8 : 
-  --led_state(15 downto 14) <= c_LED_OFF;
+  led_state(15 downto 14) <= '0' & irq_to_vme_sync;
+
+  --led_state(15 downto 12) <= led_state_man(15 downto 12);
 
   ------------------------------------------------------------------------------
   -- FPGA loaded led (heart beat)
