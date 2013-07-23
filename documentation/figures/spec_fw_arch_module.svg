@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="777.4173"
+   width="711.60577"
    height="494.52264"
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.47 r22583"
    version="1.0"
-   sodipodi:docname="firmware_arch_module.svg"
+   sodipodi:docname="spec_fw_arch_module.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs4">
@@ -218,9 +218,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.9218939"
-     inkscape:cx="307.47502"
-     inkscape:cy="241.15718"
+     inkscape:zoom="1.3589842"
+     inkscape:cx="403.37898"
+     inkscape:cy="222.86078"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -246,7 +246,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -254,7 +254,7 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(70.317971,-28.409512)">
+     transform="translate(74.204518,-28.409512)">
     <path
        style="fill:none;stroke:#0020ff;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:none"
        d="m 148.46868,315.29271 -16.79354,0"
@@ -1103,21 +1103,6 @@
          x="-61.404377"
          y="193.35922"
          id="tspan3509">  front-end</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="650.22919"
-       y="179.3732"
-       id="text3428"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="650.22919"
-         y="179.3732"
-         id="tspan3432">GN4124</tspan><tspan
-         sodipodi:role="line"
-         x="650.22919"
-         y="191.8732"
-         id="tspan3475">PCIe bridge</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
