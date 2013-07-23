@@ -15,13 +15,7 @@ REG @tab
 Interrupt enable mask register
 @end multitable 
 @regsection @code{multi_irq} - Multiple interrupt register
-Multiple interrupts occurs before irq source is read.
-Write '1' to clear a bit.
-
-Bit 0: DMA done.
-Bit 1: DMA error.
-Bit 2: Trigger.
-Bit 3: Acquisition end.
+Multiple interrupts occurs before irq source is read.@*Write '1' to clear a bit.@*@*Bit 0: DMA done.@*Bit 1: DMA error.@*Bit 2: Trigger.@*Bit 3: Acquisition end.
 @multitable @columnfractions .10 .10 .15 .10 .55
 @headitem Bits @tab Access @tab Prefix @tab Default @tab Name
 @item @code{31...0}
@@ -30,17 +24,8 @@ Bit 3: Acquisition end.
 @tab @code{X} @tab 
 Multiple interrupt
 @end multitable
-@multitable @columnfractions 0.15 0.85
-@headitem Field @tab Description
-@end multitable
 @regsection @code{src} - Interrupt sources register 
-Indicates the interrupt source.
-Write '1' to clear a bit.
-
-Bit 0: DMA done.
-Bit 1: DMA error.
-Bit 2: Trigger.
-Bit 3: Acquisition end.
+Indicates the interrupt source.@*Write '1' to clear a bit.@*@*Bit 0: DMA done.@*Bit 1: DMA error.@*Bit 2: Trigger.@*Bit 3: Acquisition end.
 @multitable @columnfractions .10 .10 .15 .10 .55
 @headitem Bits @tab Access @tab Prefix @tab Default @tab Name
 @item @code{31...0}
@@ -49,24 +34,13 @@ Bit 3: Acquisition end.
 @tab @code{X} @tab 
 Interrupt sources
 @end multitable
-@multitable @columnfractions 0.15 0.85
-@headitem Field @tab Description
-@end multitable
 @regsection @code{en_mask} - Interrupt enable mask register
-Bit mask to independently enable interrupt sources.
-
-Bit 0: DMA done.
-Bit 1: DMA error.
-Bit 2: Trigger.
-Bit 3: Acquisition end.
+Bit mask to independently enable interrupt sources.@*@*Bit 0: DMA done.@*Bit 1: DMA error.@*Bit 2: Trigger.@*Bit 3: Acquisition end.
 @multitable @columnfractions .10 .10 .15 .10 .55
 @headitem Bits @tab Access @tab Prefix @tab Default @tab Name
 @item @code{31...0}
 @tab R/W @tab
 @code{EN_MASK}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Interrupt enable mask
-@end multitable
-@multitable @columnfractions 0.15 0.85
-@headitem Field @tab Description
 @end multitable

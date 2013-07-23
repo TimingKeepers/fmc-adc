@@ -116,42 +116,42 @@ Channel 4 offset calibration register
 @item @code{1...0}
 @tab R/W @tab
 @code{FSM_CMD}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 State machine commands (ignore on read)
 @item @code{2}
 @tab R/W @tab
 @code{FMC_CLK_OE}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 FMC Si750 output enable
 @item @code{3}
 @tab R/W @tab
 @code{OFFSET_DAC_CLR_N}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Offset DACs clear (active low)
 @item @code{4}
 @tab W/O @tab
 @code{MAN_BITSLIP}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Manual serdes bitslip (ignore on read)
 @item @code{5}
 @tab R/W @tab
 @code{TEST_DATA_EN}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Enable test data
 @item @code{6}
 @tab R/W @tab
 @code{TRIG_LED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Manual TRIG LED
 @item @code{7}
 @tab R/W @tab
 @code{ACQ_LED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Manual ACQ LED
 @item @code{31...8}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -199,37 +199,37 @@ Reserved
 @item @code{0}
 @tab R/W @tab
 @code{HW_TRIG_SEL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Hardware trigger selection
 @item @code{1}
 @tab R/W @tab
 @code{HW_TRIG_POL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Hardware trigger polarity
 @item @code{2}
 @tab R/W @tab
 @code{HW_TRIG_EN}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Hardware trigger enable
 @item @code{3}
 @tab R/W @tab
 @code{SW_TRIG_EN}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Software trigger enable
 @item @code{5...4}
 @tab R/W @tab
 @code{INT_TRIG_SEL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Channel selection for internal trigger
 @item @code{15...6}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @item @code{31...16}
 @tab R/W @tab
 @code{INT_TRIG_THRES}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Threshold for internal trigger
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -248,7 +248,7 @@ Threshold for internal trigger
 @item @code{31...0}
 @tab R/W @tab
 @code{TRIG_DLY}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Trigger delay value
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -262,11 +262,8 @@ Writing (anything) to this register generates a software trigger.
 @item @code{31...0}
 @tab W/O @tab
 @code{SW_TRIG}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Software trigger (ignore on read)
-@end multitable
-@multitable @columnfractions 0.15 0.85
-@headitem Field @tab Description
 @end multitable
 @regsection @code{shots} - Number of shots
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -274,12 +271,12 @@ Software trigger (ignore on read)
 @item @code{15...0}
 @tab R/W @tab
 @code{NB}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Number of shots
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -306,12 +303,12 @@ Trigger address
 @item @code{15...0}
 @tab R/W @tab
 @code{DECI}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Sample rate decimation
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -325,7 +322,7 @@ Reserved
 @item @code{31...0}
 @tab R/W @tab
 @code{PRE_SAMPLES}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Pre-trigger samples
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -338,7 +335,7 @@ Pre-trigger samples
 @item @code{31...0}
 @tab R/W @tab
 @code{POST_SAMPLES}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Post-trigger samples
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -364,12 +361,12 @@ Samples counter
 @item @code{6...0}
 @tab R/W @tab
 @code{SSR}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Solid state relays control for channel 1
 @item @code{31...7}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -402,12 +399,12 @@ Reserved
 @item @code{15...0}
 @tab R/W @tab
 @code{VAL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Gain calibration for channel 1
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -421,12 +418,12 @@ Reserved
 @item @code{15...0}
 @tab R/W @tab
 @code{VAL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Offset calibration for channel 1
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -440,12 +437,12 @@ Reserved
 @item @code{6...0}
 @tab R/W @tab
 @code{SSR}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Solid state relays control for channel 2
 @item @code{31...7}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -478,12 +475,12 @@ Reserved
 @item @code{15...0}
 @tab R/W @tab
 @code{VAL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Gain calibration for channel 2
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -497,12 +494,12 @@ Reserved
 @item @code{15...0}
 @tab R/W @tab
 @code{VAL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Offset calibration for channel 2
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -516,12 +513,12 @@ Reserved
 @item @code{6...0}
 @tab R/W @tab
 @code{SSR}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Solid state relays control for channel 3
 @item @code{31...7}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -554,12 +551,12 @@ Reserved
 @item @code{15...0}
 @tab R/W @tab
 @code{VAL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Gain calibration for channel 3
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -573,12 +570,12 @@ Reserved
 @item @code{15...0}
 @tab R/W @tab
 @code{VAL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Offset calibration for channel 3
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -592,12 +589,12 @@ Reserved
 @item @code{6...0}
 @tab R/W @tab
 @code{SSR}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Solid state relays control for channel 4
 @item @code{31...7}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -630,12 +627,12 @@ Reserved
 @item @code{15...0}
 @tab R/W @tab
 @code{VAL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Gain calibration for channel 4
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
@@ -649,12 +646,12 @@ Reserved
 @item @code{15...0}
 @tab R/W @tab
 @code{VAL}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Offset calibration for channel 4
 @item @code{31...16}
 @tab R/W @tab
 @code{RESERVED}
-@tab @code{X} @tab 
+@tab @code{0} @tab 
 Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
