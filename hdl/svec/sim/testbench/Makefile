@@ -56,8 +56,7 @@ VHDL_SRC := ../../../ip_cores/adc_sync_fifo.vhd \
 ../../../ip_cores/ext_pulse_sync/ext_pulse_sync_rtl.vhd \
 ../../rtl/bicolor_led_ctrl_pkg.vhd \
 ../../rtl/carrier_csr.vhd \
-../../rtl/irq_controller.vhd \
-../../rtl/irq_controller_regs.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd \
 ../../rtl/bicolor_led_ctrl.vhd \
 ../../../ip_cores/general-cores/modules/genrams/genram_pkg.vhd \
 ../../../adc/rtl/fmc_adc_mezzanine_pkg.vhd \
@@ -118,7 +117,7 @@ VHDL_SRC := ../../../ip_cores/adc_sync_fifo.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_uart/wb_simple_uart.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_uart/xwb_simple_uart.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_vic/vic_prio_enc.vhd \
-../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_vic/wb_slave_vic.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_vic/wb_vic.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_vic/xwb_vic.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_spi/wb_spi.vhd \
@@ -139,7 +138,7 @@ VHDL_SRC := ../../../ip_cores/adc_sync_fifo.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_eic.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_fifo_async.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_fifo_sync.vhd \
-../../../ip_cores/general-cores/modules/wishbone/wb_vic/wb_slave_vic.vhd \
+../../rtl/irq_controller.vhd \
 ../../../ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl.vhd \
 ../../../ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wb.vhd \
 ../../../ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wrapper_pkg.vhd \
@@ -188,8 +187,7 @@ work/utils_pkg/.utils_pkg_vhd \
 work/ext_pulse_sync_rtl/.ext_pulse_sync_rtl_vhd \
 work/bicolor_led_ctrl_pkg/.bicolor_led_ctrl_pkg_vhd \
 work/carrier_csr/.carrier_csr_vhd \
-work/irq_controller/.irq_controller_vhd \
-work/irq_controller_regs/.irq_controller_regs_vhd \
+work/wbgen2_pkg/.wbgen2_pkg_vhd \
 work/bicolor_led_ctrl/.bicolor_led_ctrl_vhd \
 work/genram_pkg/.genram_pkg_vhd \
 work/fmc_adc_mezzanine_pkg/.fmc_adc_mezzanine_pkg_vhd \
@@ -250,7 +248,7 @@ work/simple_uart_wb/.simple_uart_wb_vhd \
 work/wb_simple_uart/.wb_simple_uart_vhd \
 work/xwb_simple_uart/.xwb_simple_uart_vhd \
 work/vic_prio_enc/.vic_prio_enc_vhd \
-work/wbgen2_pkg/.wbgen2_pkg_vhd \
+work/wb_slave_vic/.wb_slave_vic_vhd \
 work/wb_vic/.wb_vic_vhd \
 work/xwb_vic/.xwb_vic_vhd \
 work/wb_spi/.wb_spi_vhd \
@@ -271,7 +269,7 @@ work/wbgen2_dpssram/.wbgen2_dpssram_vhd \
 work/wbgen2_eic/.wbgen2_eic_vhd \
 work/wbgen2_fifo_async/.wbgen2_fifo_async_vhd \
 work/wbgen2_fifo_sync/.wbgen2_fifo_sync_vhd \
-work/wb_slave_vic/.wb_slave_vic_vhd \
+work/irq_controller/.irq_controller_vhd \
 work/ddr3_ctrl/.ddr3_ctrl_vhd \
 work/ddr3_ctrl_wb/.ddr3_ctrl_wb_vhd \
 work/ddr3_ctrl_wrapper_pkg/.ddr3_ctrl_wrapper_pkg_vhd \
@@ -464,12 +462,7 @@ work/carrier_csr/.carrier_csr_vhd: ../../rtl/carrier_csr.vhd
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/irq_controller/.irq_controller_vhd: ../../rtl/irq_controller.vhd
-		vcom $(VCOM_FLAGS)  -work work $< 
-		@mkdir -p $(dir $@) && touch $@
-
-
-work/irq_controller_regs/.irq_controller_regs_vhd: ../../rtl/irq_controller_regs.vhd
+work/wbgen2_pkg/.wbgen2_pkg_vhd: ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
@@ -899,10 +892,13 @@ work/vic_prio_enc/.vic_prio_enc_vhd: ../../../ip_cores/general-cores/modules/wis
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/wbgen2_pkg/.wbgen2_pkg_vhd: ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd
+work/wb_slave_vic/.wb_slave_vic_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_vic/wb_slave_vic.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
+
+work/wb_slave_vic/.wb_slave_vic: \
+work/wbgen2_pkg/.wbgen2_pkg
 
 work/wb_vic/.wb_vic_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_vic/wb_vic.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
@@ -1070,12 +1066,12 @@ work/wbgen2_fifo_sync/.wbgen2_fifo_sync_vhd: ../../../ip_cores/general-cores/mod
 work/wbgen2_fifo_sync/.wbgen2_fifo_sync: \
 work/wbgen2_pkg/.wbgen2_pkg
 
-work/wb_slave_vic/.wb_slave_vic_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_vic/wb_slave_vic.vhd
+work/irq_controller/.irq_controller_vhd: ../../rtl/irq_controller.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/wb_slave_vic/.wb_slave_vic: \
+work/irq_controller/.irq_controller: \
 work/wbgen2_pkg/.wbgen2_pkg
 
 work/ddr3_ctrl/.ddr3_ctrl_vhd: ../../../ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl.vhd

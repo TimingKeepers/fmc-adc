@@ -2,7 +2,7 @@
 `define DECLARE_FMC(__nb) \
     logic       adc``__nb``_ext_trigger_p; \
     logic       adc``__nb``_ext_trigger_n; \
-    logic       adc``__nb``_dco_p; \
+    logic       adc``__nb``_dco_p = 'b0; \
     logic       adc``__nb``_dco_n; \
     logic       adc``__nb``_fr_p; \
     logic       adc``__nb``_fr_n; \
@@ -67,3 +67,5 @@
       .fmc``__nb``_prsnt_m2c_n_i(fmc``__nb``_prsnt_m2c_n), \
       .fmc``__nb``_scl_b(fmc``__nb``_scl), \
       .fmc``__nb``_sda_b(fmc``__nb``_sda),
+
+
