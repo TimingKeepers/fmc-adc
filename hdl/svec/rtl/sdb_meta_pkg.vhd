@@ -68,7 +68,7 @@ package sdb_meta_pkg is
   constant c_SDB_INTEGRATION : t_sdb_integration := (
     product     => (
       vendor_id => x"000000000000CE42",  -- CERN
-      device_id => x"5c01a632",          -- echo "spec_fmc-adc-100m14b4cha" | md5sum | cut -c1-8
+      device_id => x"5c01a632",          -- echo "svec_fmc-adc-100m14b4cha" | md5sum | cut -c1-8
       version   => x"00010001",          -- bcd encoded, [31:16] = major, [15:0] = minor
       date      => x"20130704",          -- yyyymmdd
       name      => "svec_fmcadc100m14b "));
