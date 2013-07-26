@@ -10,7 +10,7 @@
 %                         =========================
 %
 %    This file is a texinfo source. It isn't the binary file of some strange
-%    editor of mine. If you want ASCII, you should "make fine-delay.txt".
+%    editor of mine. If you want ASCII, you should "make fmcadc100m14b4cha_firmware_manual.txt".
 %
 %------------------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ Here is the procedure to build the FPGA binary image from the hdl source.
 @item Get fmc-adc hdl sources.@*
       @code{git clone git://ohwr.org/fmc-projects/fmc-adc-100m14b4cha.git <src_dir>}
 @item Goto the synthesis directory.@*
-      @code{cd <src_dir/hdl/spec/syn/>}
+      @code{cd <src_dir>/hdl/<carrier>/syn/}
 @item Fetch the dependencies.@*
       @code{hdlmake -f}
 @item Generate an ISE project file.@*
@@ -149,19 +149,19 @@ Here is the procedure to build the FPGA binary image from the hdl source.
       ADC specific hdl sources.
 @item hdl/adc/wb_gen/
       ADC specific @command{wbgen2} sources, html documentation and C header file.
-@item hdl/spec/rtl/
-      SPEC carrier related hdl sources.
-@item hdl/spec/wb_gen/
-      SPEC carrier related @command{wbgen2} sources, html documentation and C header file.
-@item hdl/spec/ip_cores/
+@item hdl/ip_cores/
       Location of fetched and generated hdl cores and libraries.
-@item hdl/spec/syn/
-      Synthesis directory for SPEC carrier. This is where the synthesis top manifest and the ISE project are stored.
+@item hdl/<carrier>/rtl/
+      Carrier related hdl sources.
+@item hdl/<carrier>/wb_gen/
+      Carrier related @command{wbgen2} sources, html documentation and C header file.
+@item hdl/<carrier>/syn/
+      Synthesis directory for selected carrier. This is where the synthesis top manifest and the ISE project are stored.
       For each release, the synthesis, place&route and timing reports are also saved here.
-@item hdl/spec/sim/
-      SPEC carrier related simulation files and testbenches.
-@item hdl/spec/chipscope/
-      SPEC carrier related Chipscope projects used for debug purpose.
+@item hdl/<carrier>/sim/
+      Carrier related simulation files and testbenches.
+@item hdl/<carrier>/chipscope/
+      Carrier related Chipscope projects used for debug purpose.
 @end table
 
 It could happen that a hdl source directory contains extra source files that are not used in the current firmware release.
@@ -177,10 +177,14 @@ The fmc-adc firmware depends on the following hdl cores and libraries:
       @code{branch: master}
 @item ddr3-sp6-core
       @code{repo  : git://ohwr.org/hdl-core-lib/ddr3-sp6-core}@*
-      @code{branch: spec_bank3_64b_32b}
+      @code{branch: spec_bank3_64b_32b (for spec carrier)}
+      @code{branch: svec_bank4_64b_32b_bank5_64b_32b (for svec carrier)}
 @item general-cores
       @code{repo  : git://ohwr.org/hdl-core-lib/general-cores.git}@*
       @code{branch: sdb_extension}
+@item vme64x-core
+      @code{repo  : git://ohwr.org/hdl-core-lib/vme64x-core.git}@*
+      @code{branch: master}
 @end table
 
 @c ##########################################################################
@@ -980,6 +984,7 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @c DONE Make the project ucfgen friendly.
 @c        - Put all mezzanine related cores in a wrapper (fmc adc mezzanine).
 @c        - Add a crossbar inside the fmc adc block -> check impact on sdb.
+@c DONE @item Add a software reset feature?
 
 @item Remove huge files from git repo. @b{!!! This will change all commits sha !!!}
 @item Add a reference section (bibliography).
@@ -994,7 +999,8 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
       - Assign signals to SPEC front panel LEDs.
 @item Add Etherbone support.
 @item Remove mutli-irq register from interrupt controller.@*
-      Perhaps add a counter per interrupt source instead.
+      Perhaps add a counter per interrupt source instead.@*
+      Or use wbgen2 eic (with level interrupt output).
 @item Remove unused 250MHz clock signals and buffer.
 @item Unify address inferfaces: put all in bytes (wishbone addr, trig pointer, ...)@*
       - Change GN4142-core WB bus(es) to byte address.@*
@@ -1110,7 +1116,7 @@ The first column "Byte offset" represents the offset within the binary file.
 @c --------------------------------------------------------------------------
 @appendix Interrupt Controller Registers
 @anchor{Interrupt Controller Registers}
-   @include irq_controller_regs.tex
+   @include spec/irq_controller_regs.tex
 
 @c --------------------------------------------------------------------------
 @appendix Time-tagging Core Registers
@@ -1120,7 +1126,7 @@ The first column "Byte offset" represents the offset within the binary file.
 @c --------------------------------------------------------------------------
 @appendix Carrier Registers
 @anchor{Carrier Registers}
-   @include carrier_csr.tex
+   @include spec/carrier_csr.tex
 
 @c --------------------------------------------------------------------------
 @appendix References
