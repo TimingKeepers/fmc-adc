@@ -832,7 +832,6 @@ Parsing architecture <rtl> of entity <pulse_synchronizer>.
 WARNING:HDLCompiler:746 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/general-cores/modules/genrams/genram_pkg.vhd" Line 50: Range is empty (null range)
 
 Elaborating entity <spec_top_fmc_adc_100Ms> (architecture <rtl>) with generics from library <work>.
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" Line 544: Assignment to sys_rst ignored, since the identifier is never used
 
 Elaborating entity <gn4124_core> (architecture <rtl>) from library <work>.
 
@@ -1024,11 +1023,12 @@ Back to vhdl to continue elaboration
 WARNING:HDLCompiler:634 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd" Line 97: Net <adp_in_err> does not have a driver.
 
 Elaborating entity <carrier_csr> (architecture <syn>) from library <work>.
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 77: Assignment to bwsel_reg ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 78: Assignment to rd_int ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 79: Assignment to wr_int ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 80: Assignment to allones ignored, since the identifier is never used
-WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 81: Assignment to allzeros ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 83: Assignment to bwsel_reg ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 84: Assignment to rd_int ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 85: Assignment to wr_int ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 86: Assignment to allones ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 87: Assignment to allzeros ignored, since the identifier is never used
+INFO:HDLCompiler:679 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/carrier_csr.vhd" Line 165. Case statement is complete. others clause is never selected
 
 Elaborating entity <timetag_core> (architecture <rtl>) from library <work>.
 
@@ -1386,35 +1386,35 @@ WARNING:HDLCompiler:634 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha
 WARNING:HDLCompiler:634 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/ddr3-sp6-core/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_raw_wrapper.vhd" Line 869: Net <mig_p4_wr_mask[3]> does not have a driver.
 WARNING:HDLCompiler:321 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wrapper.vhd" Line 811: Comparison between arrays of unequal length always returns FALSE.
 WARNING:HDLCompiler:321 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wrapper.vhd" Line 906: Comparison between arrays of unequal length always returns FALSE.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[1].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[4].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[5].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[6].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[7].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[8].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[9].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[10].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[11].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[12].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[13].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[14].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[15].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[16].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[17].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[18].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[19].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[20].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[21].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[22].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[23].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[24].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[25].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[26].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[27].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[28].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[29].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[30].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
-WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823. All outputs of instance <gen_irq_led[31].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[1].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[4].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[5].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[6].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[7].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[8].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[9].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[10].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[11].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[12].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[13].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[14].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[15].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[16].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[17].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[18].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[19].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[20].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[21].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[22].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[23].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[24].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[25].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[26].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[27].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[28].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[29].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[30].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
+WARNING:Xst:2972 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848. All outputs of instance <gen_irq_led[31].cmp_irq_led> of block <gc_extend_pulse> are unconnected in block <spec_top_fmc_adc_100Ms>. Underlying logic will be removed.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -1425,67 +1425,70 @@ Synthesizing Unit <spec_top_fmc_adc_100Ms>.
         g_SIMULATION = "FALSE"
         g_CALIB_SOFT_IP = "TRUE"
 WARNING:Xst:647 - Input <aux_buttons_i<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 633: Output port <slave_o[0]_err> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 633: Output port <slave_o[0]_rty> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 633: Output port <slave_o[0]_int> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 659: Output port <desc_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 659: Output port <owr_pwren_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 690: Output port <carrier_csr_ctrl_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 690: Output port <wb_stall_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 690: Output port <carrier_csr_ctrl_dac_clr_n_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[1].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[4].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[5].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[6].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[7].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[8].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[9].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[10].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[11].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[12].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[13].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[14].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[15].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[16].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[17].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[18].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[19].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[20].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[21].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[22].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[23].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[24].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[25].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[26].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[27].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[28].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[29].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[30].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 823: Output port <extended_o> of the instance <gen_irq_led[31].cmp_irq_led> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <wb0_data_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p0_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_wr_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 927: Output port <p1_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 656: Output port <slave_o[0]_err> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 656: Output port <slave_o[0]_rty> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 656: Output port <slave_o[0]_int> of the instance <cmp_sdb_crossbar> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 682: Output port <desc_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 682: Output port <owr_pwren_o> of the instance <cmp_carrier_onewire> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 713: Output port <carrier_csr_ctrl_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 713: Output port <carrier_csr_rst_reserved_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 713: Output port <wb_stall_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 713: Output port <carrier_csr_ctrl_dac_clr_n_o> of the instance <cmp_carrier_csr> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[1].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[4].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[5].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[6].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[7].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[8].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[9].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[10].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[11].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[12].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[13].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[14].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[15].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[16].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[17].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[18].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[19].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[20].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[21].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[22].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[23].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[24].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[25].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[26].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[27].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[28].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[29].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[30].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 848: Output port <extended_o> of the instance <gen_irq_led[31].cmp_irq_led> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <wb0_data_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_rd_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_wr_count_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p0_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_cmd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_cmd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_rd_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_rd_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_rd_overflow_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_rd_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_wr_full_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_wr_empty_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_wr_underrun_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/spec/rtl/spec_top_fmc_adc_100Ms.vhd" line 952: Output port <p1_wr_error_o> of the instance <cmp_ddr_ctrl> is unconnected or connected to loadless signal.
+    Found 8-bit register for signal <powerup_reset_cnt>.
+    Found 1-bit register for signal <ddr_wr_fifo_empty_d>.
     Found 1-bit register for signal <acq_end>.
     Found 10-bit register for signal <led_pwm_update_cnt>.
     Found 1-bit register for signal <led_pwm_update>.
@@ -1493,16 +1496,17 @@ INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/s
     Found 1-bit register for signal <led_pwm_val_down>.
     Found 17-bit register for signal <led_pwm_cnt>.
     Found 1-bit register for signal <led_pwm>.
-    Found 1-bit register for signal <ddr_wr_fifo_empty_d>.
-    Found 10-bit adder for signal <led_pwm_update_cnt[9]_GND_13_o_add_5_OUT> created at line 1241.
-    Found 17-bit adder for signal <led_pwm_val[16]_GND_13_o_add_12_OUT> created at line 1241.
-    Found 17-bit adder for signal <led_pwm_cnt[16]_GND_13_o_add_17_OUT> created at line 1241.
-    Found 17-bit subtractor for signal <GND_13_o_GND_13_o_sub_11_OUT<16:0>> created at line 1308.
-    Found 1-bit tristate buffer for signal <carrier_one_wire_b> created at line 680
-    Found 17-bit comparator equal for signal <led_pwm_cnt[16]_led_pwm_val[16]_equal_22_o> created at line 1081
+    Found 1-bit register for signal <powerup_rst_n>.
+    Found 8-bit adder for signal <powerup_reset_cnt[7]_GND_13_o_add_1_OUT> created at line 1241.
+    Found 10-bit adder for signal <led_pwm_update_cnt[9]_GND_13_o_add_11_OUT> created at line 1241.
+    Found 17-bit adder for signal <led_pwm_val[16]_GND_13_o_add_18_OUT> created at line 1241.
+    Found 17-bit adder for signal <led_pwm_cnt[16]_GND_13_o_add_23_OUT> created at line 1241.
+    Found 17-bit subtractor for signal <GND_13_o_GND_13_o_sub_17_OUT<16:0>> created at line 1308.
+    Found 1-bit tristate buffer for signal <carrier_one_wire_b> created at line 703
+    Found 17-bit comparator equal for signal <led_pwm_cnt[16]_led_pwm_val[16]_equal_28_o> created at line 1106
     Summary:
-	inferred   3 Adder/Subtractor(s).
-	inferred  49 D-type flip-flop(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  58 D-type flip-flop(s).
 	inferred   1 Comparator(s).
 	inferred   1 Tristate(s).
 Unit <spec_top_fmc_adc_100Ms> synthesized.
@@ -3511,7 +3515,7 @@ Unit <dma_controller> synthesized.
 Synthesizing Unit <dma_controller_wb_slave>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/gn4124-core/hdl/gn4124core/rtl/dma_controller_wb_slave.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 7-bit register for signal <ack_sreg>.
+    Found 8-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 32-bit register for signal <dma_ctrl_int_write>.
     Found 32-bit register for signal <dma_stat_int_write>.
@@ -3615,9 +3619,8 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     Found 1-bit register for signal <dma_attrib_load_o>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
     Summary:
-	inferred 976 D-type flip-flop(s).
+	inferred 977 D-type flip-flop(s).
 	inferred  41 Multiplexer(s).
 Unit <dma_controller_wb_slave> synthesized.
 
@@ -4130,14 +4133,17 @@ WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserv
     Found 9-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 29-bit register for signal <carrier_csr_ctrl_reserved_int>.
+    Found 20-bit register for signal <carrier_csr_rst_reserved_int>.
     Found 1-bit register for signal <ack_in_progress>.
     Found 1-bit register for signal <carrier_csr_ctrl_led_green_int>.
     Found 1-bit register for signal <carrier_csr_ctrl_led_red_int>.
     Found 1-bit register for signal <carrier_csr_ctrl_dac_clr_n_int>.
+    Found 1-bit register for signal <carrier_csr_rst_fmc0_int>.
+    Found 32-bit 4-to-1 multiplexer for signal <rwaddr_reg[1]_X_92_o_wide_mux_6_OUT> created at line 113.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <carrier_csr>.
     Summary:
-	inferred  74 D-type flip-flop(s).
-	inferred   4 Multiplexer(s).
+	inferred  95 D-type flip-flop(s).
+	inferred   3 Multiplexer(s).
 Unit <carrier_csr> synthesized.
 
 Synthesizing Unit <timetag_core>.
@@ -4169,18 +4175,15 @@ Unit <timetag_core> synthesized.
 Synthesizing Unit <timetag_core_regs>.
     Related source file is "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/timetag_core/rtl/timetag_core_regs.vhd".
 WARNING:Xst:647 - Input <wb_sel_i<3:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 5-bit register for signal <ack_sreg>.
+    Found 8-bit register for signal <ack_sreg>.
     Found 32-bit register for signal <rddata_reg>.
     Found 1-bit register for signal <ack_in_progress>.
     Found 1-bit register for signal <timetag_core_seconds_load_o>.
     Found 1-bit register for signal <timetag_core_coarse_load_o>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<9:9>> (without init value) have a constant value of 0 in block <timetag_core_regs>.
     WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:8>> (without init value) have a constant value of 0 in block <timetag_core_regs>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:7>> (without init value) have a constant value of 0 in block <timetag_core_regs>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:6>> (without init value) have a constant value of 0 in block <timetag_core_regs>.
-    WARNING:Xst:2404 -  FFs/Latches <ack_sreg<5:5>> (without init value) have a constant value of 0 in block <timetag_core_regs>.
     Summary:
-	inferred  40 D-type flip-flop(s).
+	inferred  43 D-type flip-flop(s).
 	inferred  19 Multiplexer(s).
 Unit <timetag_core_regs> synthesized.
 
@@ -7553,8 +7556,8 @@ WARNING:Xst:647 - Input <MCB_UOCMDREADY> is never used. This port will be preser
 WARNING:Xst:647 - Input <MCB_UO_CAL_START> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/ddr3-sp6-core/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" line 558: Output port <DRP_BKST> of the instance <iodrp_controller_inst> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/home/mcattin/projects/svn_to_git/fmc-adc-100m14b4cha_git/hdl/ip_cores/ddr3-sp6-core/hdl/spec/ip_cores/ddr3_ctrl_spec_bank3_64b_32b/user_design/rtl/mcb_soft_calibration.vhd" line 576: Output port <read_data> of the instance <iodrp_mcb_controller_inst> is unconnected or connected to loadless signal.
-    Register <MCB_UIUDQSINC> equivalent to <MCB_UILDQSINC> has been removed
     Register <MCB_UIUDQSDEC> equivalent to <MCB_UILDQSDEC> has been removed
+    Register <MCB_UIUDQSINC> equivalent to <MCB_UILDQSINC> has been removed
     Found 1-bit register for signal <Block_Reset>.
     Found 1-bit register for signal <SELFREFRESH_MCB_MODE_R1>.
     Found 1-bit register for signal <SELFREFRESH_MCB_MODE_R2>.
@@ -7793,7 +7796,7 @@ Macro Statistics
  128x32-bit single-port Read Only RAM                  : 1
  2048x64-bit dual-port RAM                             : 2
  256x32-bit single-port Read Only RAM                  : 1
-# Adders/Subtractors                                   : 110
+# Adders/Subtractors                                   : 111
  10-bit adder                                          : 7
  11-bit adder                                          : 1
  11-bit addsub                                         : 1
@@ -7822,12 +7825,12 @@ Macro Statistics
  6-bit subtractor                                      : 3
  7-bit adder                                           : 1
  7-bit subtractor                                      : 1
- 8-bit adder                                           : 4
+ 8-bit adder                                           : 5
  8-bit addsub                                          : 1
  8-bit subtractor                                      : 7
  9-bit adder                                           : 13
-# Registers                                            : 1208
- 1-bit register                                        : 784
+# Registers                                            : 1212
+ 1-bit register                                        : 786
  10-bit register                                       : 11
  11-bit register                                       : 6
  12-bit register                                       : 1
@@ -7836,6 +7839,7 @@ Macro Statistics
  17-bit register                                       : 2
  18-bit register                                       : 8
  2-bit register                                        : 26
+ 20-bit register                                       : 1
  24-bit register                                       : 1
  25-bit register                                       : 8
  27-bit register                                       : 1
@@ -7846,12 +7850,12 @@ Macro Statistics
  31-bit register                                       : 1
  32-bit register                                       : 108
  4-bit register                                        : 24
- 5-bit register                                        : 4
+ 5-bit register                                        : 3
  6-bit register                                        : 14
  64-bit register                                       : 9
  65-bit register                                       : 1
- 7-bit register                                        : 11
- 8-bit register                                        : 36
+ 7-bit register                                        : 10
+ 8-bit register                                        : 39
  9-bit register                                        : 70
 # Comparators                                          : 45
  10-bit comparator greater                             : 1
@@ -7871,7 +7875,7 @@ Macro Statistics
  8-bit comparator lessequal                            : 2
  8-bit comparator not equal                            : 2
  9-bit comparator lessequal                            : 5
-# Multiplexers                                         : 1068
+# Multiplexers                                         : 1067
  1-bit 128-to-1 multiplexer                            : 2
  1-bit 2-to-1 multiplexer                              : 737
  1-bit 3-to-1 multiplexer                              : 4
@@ -7885,8 +7889,9 @@ Macro Statistics
  25-bit 2-to-1 multiplexer                             : 3
  3-bit 2-to-1 multiplexer                              : 8
  30-bit 2-to-1 multiplexer                             : 9
- 32-bit 2-to-1 multiplexer                             : 109
+ 32-bit 2-to-1 multiplexer                             : 107
  32-bit 3-to-1 multiplexer                             : 1
+ 32-bit 4-to-1 multiplexer                             : 1
  32-bit 7-to-1 multiplexer                             : 1
  4-bit 2-to-1 multiplexer                              : 27
  4-bit 6-to-1 multiplexer                              : 2
@@ -7935,11 +7940,13 @@ INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[1].cmp_offs
 INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[2].cmp_offset_gain_calibr> is equivalent to the following FF/Latch, which will be removed : <gain_17> 
 INFO:Xst:2261 - The FF/Latch <gain_16> in Unit <l_offset_gain_calibr[3].cmp_offset_gain_calibr> is equivalent to the following FF/Latch, which will be removed : <gain_17> 
 INFO:Xst:2261 - The FF/Latch <wb_ddr_adr_o_25> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following 6 FFs/Latches, which will be removed : <wb_ddr_adr_o_26> <wb_ddr_adr_o_27> <wb_ddr_adr_o_28> <wb_ddr_adr_o_29> <wb_ddr_adr_o_30> <wb_ddr_adr_o_31> 
-INFO:Xst:2261 - The FF/Latch <wb_ddr_cyc_o> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following FF/Latch, which will be removed : <wb_ddr_we_o> 
 INFO:Xst:2261 - The FF/Latch <trig_addr_25> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following 6 FFs/Latches, which will be removed : <trig_addr_26> <trig_addr_27> <trig_addr_28> <trig_addr_29> <trig_addr_30> <trig_addr_31> 
+INFO:Xst:2261 - The FF/Latch <wb_ddr_cyc_o> in Unit <cmp_fmc_adc_100Ms_core> is equivalent to the following FF/Latch, which will be removed : <wb_ddr_we_o> 
 INFO:Xst:2261 - The FF/Latch <ddr_cmd_instr_1> in Unit <cmp_ddr3_ctrl_wb_0> is equivalent to the following 4 FFs/Latches, which will be removed : <ddr_cmd_instr_2> <ddr_cmd_byte_addr_0> <ddr_cmd_byte_addr_1> <ddr_cmd_byte_addr_2> 
 INFO:Xst:2261 - The FF/Latch <ddr_wr_mask_0> in Unit <cmp_ddr3_ctrl_wb_0> is equivalent to the following 7 FFs/Latches, which will be removed : <ddr_wr_mask_1> <ddr_wr_mask_2> <ddr_wr_mask_3> <ddr_wr_mask_4> <ddr_wr_mask_5> <ddr_wr_mask_6> <ddr_wr_mask_7> 
 INFO:Xst:2261 - The FF/Latch <ddr_cmd_instr_1> in Unit <cmp_ddr3_ctrl_wb_1> is equivalent to the following 3 FFs/Latches, which will be removed : <ddr_cmd_instr_2> <ddr_cmd_byte_addr_0> <ddr_cmd_byte_addr_1> 
+WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_11> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_13> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
@@ -7967,7 +7974,8 @@ WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_2> (without init value) h
 WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_3> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_4> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_5> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_13> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_14> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_15> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_16> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
@@ -7995,8 +8003,6 @@ WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_5> (without init value) has a
 WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_7> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_8> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <timetag_trig_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_end_tag_fine_4> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_end_tag_fine_5> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_end_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
@@ -8026,6 +8032,7 @@ WARNING:Xst:1710 - FF/Latch <timetag_acq_end_tag_fine_29> (without init value) h
 WARNING:Xst:1710 - FF/Latch <timetag_acq_end_tag_fine_30> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_end_tag_fine_31> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ack_sreg_8> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_6> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_7> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_8> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_stop_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
@@ -8080,7 +8087,7 @@ WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_28> (without init value) has a co
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_29> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_30> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_31> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <addr_fifo_din_30> (without init value) has a constant value of 0 in block <cmp_l2p_dma_master>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ack_sreg_8> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <busy_data_d> (without init value) has a constant value of 0 in block <cmp_data_in>. This FF/Latch will be trimmed during the optimization process.
@@ -8109,6 +8116,7 @@ WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_3> (without init value) has a con
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_4> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_5> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <dma_stat_int_read_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <MCB_UICMD> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_0> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <MCB_UIDQCOUNT_2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
@@ -8119,7 +8127,7 @@ WARNING:Xst:1710 - FF/Latch <IODRPCTRLR_MEMCELL_ADDR_5> (without init value) has
 WARNING:Xst:1710 - FF/Latch <IODRPCTRLR_MEMCELL_ADDR_6> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <IODRPCTRLR_MEMCELL_ADDR_7> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <Active_IODRP_1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_0> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_1> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_2> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
@@ -8132,13 +8140,6 @@ WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_8> (without init value) 
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_9> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_10> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_11> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_12> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <timetag_acq_start_tag_fine_13> (without init value) has a constant value of 0 in block <cmp_timetag_core>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <p2l_dma_adr_o_30> (without init value) has a constant value of 0 in block <cmp_p2l_dma_master>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[0].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[1].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[2].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[3].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <trig_addr_25> (without init value) has a constant value of 0 in block <cmp_fmc_adc_100Ms_core>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ddr_wr_mask_0> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ddr_cmd_instr_1> (without init value) has a constant value of 0 in block <cmp_ddr3_ctrl_wb_0>. This FF/Latch will be trimmed during the optimization process.
@@ -8146,35 +8147,43 @@ WARNING:Xst:1710 - FF/Latch <ddr_cmd_instr_1> (without init value) has a constan
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_2> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[3].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[2].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[1].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <gain_16> has a constant value of 0 in block <l_offset_gain_calibr[0].cmp_offset_gain_calibr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <p2l_dma_adr_o_30> (without init value) has a constant value of 0 in block <cmp_p2l_dma_master>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <MCB_UICMD> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <WarmEnough> (without init value) has a constant value of 1 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <SELFREFRESH_MCB_REQ> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <SELFREFRESH_REQ_R1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <DRP_BKST> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_2> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_4> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_5> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_6> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <memcell_addr_reg_7> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <DRP_BKST> (without init value) has a constant value of 0 in block <iodrp_mcb_controller_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <SELFREFRESH_REQ_R1> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <SELFREFRESH_MCB_REQ> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <WarmEnough> (without init value) has a constant value of 1 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <dma_controller_wb_slave_0>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_7> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R2> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <SELFREFRESH_REQ_R3> (without init value) has a constant value of 0 in block <mcb_soft_calibration_inst>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_6> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_5> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_4> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_3> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_2> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_timetag_core_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_irq_controller_regs>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ack_sreg_1> (without init value) has a constant value of 0 in block <cmp_carrier_csr>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:2677 - Node <dma_ctrl_carrier_addr_o_0> of sequential type is unconnected in block <cmp_dma_controller>.
@@ -8215,7 +8224,7 @@ WARNING:Xst:2677 - Node <wb_addr_d_27> of sequential type is unconnected in bloc
 WARNING:Xst:2677 - Node <ddr_cmd_byte_addr_28> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
 WARNING:Xst:2677 - Node <ddr_cmd_byte_addr_29> of sequential type is unconnected in block <cmp_ddr3_ctrl_wb_1>.
 WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:1>> (without init value) have a constant value of 0 in block <carrier_csr>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<6:6>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:6>> (without init value) have a constant value of 0 in block <dma_controller_wb_slave>.
 WARNING:Xst:2404 -  FFs/Latches <addr_fifo_din<31:30>> (without init value) have a constant value of 0 in block <l2p_dma_master>.
 WARNING:Xst:2404 -  FFs/Latches <p2l_dma_adr_o<31:30>> (without init value) have a constant value of 0 in block <p2l_dma_master>.
 WARNING:Xst:2404 -  FFs/Latches <wb_ddr_adr_o<31:25>> (without init value) have a constant value of 0 in block <fmc_adc_100Ms_core>.
@@ -8224,7 +8233,7 @@ WARNING:Xst:2404 -  FFs/Latches <ddr_cmd_instr<2:1>> (without init value) have a
 WARNING:Xst:2404 -  FFs/Latches <ddr_cmd_instr<2:1>> (without init value) have a constant value of 0 in block <ddr3_ctrl_wb_2>.
 WARNING:Xst:2404 -  FFs/Latches <IODRPCTRLR_MEMCELL_ADDR<7:4>> (without init value) have a constant value of 0 in block <mcb_soft_calibration>.
 WARNING:Xst:2404 -  FFs/Latches <Active_IODRP<1:1>> (without init value) have a constant value of 0 in block <mcb_soft_calibration>.
-WARNING:Xst:2404 -  FFs/Latches <ack_sreg<4:1>> (without init value) have a constant value of 0 in block <timetag_core_regs>.
+WARNING:Xst:2404 -  FFs/Latches <ack_sreg<7:1>> (without init value) have a constant value of 0 in block <timetag_core_regs>.
 WARNING:Xst:2404 -  FFs/Latches <ack_sreg<8:1>> (without init value) have a constant value of 0 in block <irq_controller_regs>.
 
 Synthesizing (advanced) Unit <ext_pulse_sync>.
@@ -8393,6 +8402,7 @@ Unit <serdes_1_to_n_data_s2_se_2> synthesized (advanced).
 
 Synthesizing (advanced) Unit <spec_top_fmc_adc_100Ms>.
 The following registers are absorbed into counter <led_pwm_val>: 1 register on signal <led_pwm_val>.
+The following registers are absorbed into counter <powerup_reset_cnt>: 1 register on signal <powerup_reset_cnt>.
 The following registers are absorbed into counter <led_pwm_cnt>: 1 register on signal <led_pwm_cnt>.
 The following registers are absorbed into counter <led_pwm_update_cnt>: 1 register on signal <led_pwm_update_cnt>.
 Unit <spec_top_fmc_adc_100Ms> synthesized (advanced).
@@ -8437,7 +8447,7 @@ Macro Statistics
  8-bit adder                                           : 3
  8-bit subtractor                                      : 5
  9-bit adder                                           : 13
-# Counters                                             : 41
+# Counters                                             : 42
  10-bit up counter                                     : 2
  11-bit down counter                                   : 1
  11-bit up counter                                     : 1
@@ -8456,11 +8466,11 @@ Macro Statistics
  32-bit down counter                                   : 4
  32-bit up counter                                     : 6
  6-bit up counter                                      : 1
- 8-bit up counter                                      : 3
+ 8-bit up counter                                      : 4
  8-bit updown counter                                  : 1
  9-bit up counter                                      : 3
-# Registers                                            : 6840
- Flip-Flops                                            : 6840
+# Registers                                            : 6862
+ Flip-Flops                                            : 6862
 # Comparators                                          : 45
  10-bit comparator greater                             : 1
  11-bit comparator equal                               : 1
@@ -8479,9 +8489,9 @@ Macro Statistics
  8-bit comparator lessequal                            : 2
  8-bit comparator not equal                            : 2
  9-bit comparator lessequal                            : 5
-# Multiplexers                                         : 1771
+# Multiplexers                                         : 1739
  1-bit 128-to-1 multiplexer                            : 2
- 1-bit 2-to-1 multiplexer                              : 1451
+ 1-bit 2-to-1 multiplexer                              : 1419
  1-bit 3-to-1 multiplexer                              : 4
  1-bit 7-to-1 multiplexer                              : 32
  1-bit 8-to-1 multiplexer                              : 16
@@ -8493,8 +8503,9 @@ Macro Statistics
  2-bit 2-to-1 multiplexer                              : 4
  3-bit 2-to-1 multiplexer                              : 8
  30-bit 2-to-1 multiplexer                             : 6
- 32-bit 2-to-1 multiplexer                             : 84
+ 32-bit 2-to-1 multiplexer                             : 83
  32-bit 3-to-1 multiplexer                             : 1
+ 32-bit 4-to-1 multiplexer                             : 1
  4-bit 2-to-1 multiplexer                              : 27
  4-bit 6-to-1 multiplexer                              : 2
  5-bit 2-to-1 multiplexer                              : 6
@@ -9517,8 +9528,8 @@ INFO:Xst:3203 - The FF/Latch <cmp_gn4124_core/cmp_p2l_dma_master/cmp_to_wb_fifo/
 
 Mapping all equations...
 Building and optimizing final netlist ...
-INFO:Xst:2261 - The FF/Latch <cmp_gn4124_core/cmp_wbmaster32/cmp_from_wb_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d1> in Unit <spec_top_fmc_adc_100Ms> is equivalent to the following FF/Latch, which will be removed : <cmp_gn4124_core/cmp_l2p_dma_master/cmp_data_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d1> 
 INFO:Xst:2261 - The FF/Latch <cmp_ddr_ctrl/cmp_ddr3_ctrl_wb_0/rst_n> in Unit <spec_top_fmc_adc_100Ms> is equivalent to the following FF/Latch, which will be removed : <cmp_ddr_ctrl/cmp_ddr3_ctrl_wb_1/rst_n> 
+INFO:Xst:2261 - The FF/Latch <cmp_gn4124_core/cmp_wbmaster32/cmp_from_wb_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d1> in Unit <spec_top_fmc_adc_100Ms> is equivalent to the following FF/Latch, which will be removed : <cmp_gn4124_core/cmp_l2p_dma_master/cmp_data_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d1> 
 INFO:Xst:2261 - The FF/Latch <cmp_gn4124_core/cmp_wbmaster32/cmp_fifo_to_wb/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d1> in Unit <spec_top_fmc_adc_100Ms> is equivalent to the following 2 FFs/Latches, which will be removed : <cmp_gn4124_core/cmp_l2p_dma_master/cmp_addr_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d1> <cmp_gn4124_core/cmp_p2l_dma_master/cmp_to_wb_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d1> 
 INFO:Xst:2261 - The FF/Latch <cmp_gn4124_core/cmp_wbmaster32/cmp_from_wb_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d2> in Unit <spec_top_fmc_adc_100Ms> is equivalent to the following FF/Latch, which will be removed : <cmp_gn4124_core/cmp_l2p_dma_master/cmp_data_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d2> 
 INFO:Xst:2261 - The FF/Latch <cmp_gn4124_core/cmp_wbmaster32/cmp_fifo_to_wb/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d2> in Unit <spec_top_fmc_adc_100Ms> is equivalent to the following 2 FFs/Latches, which will be removed : <cmp_gn4124_core/cmp_l2p_dma_master/cmp_addr_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d2> <cmp_gn4124_core/cmp_p2l_dma_master/cmp_to_wb_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d2> 
@@ -9544,8 +9555,8 @@ Unit <spec_top_fmc_adc_100Ms> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 6882
- Flip-Flops                                            : 6882
+# Registers                                            : 6912
+ Flip-Flops                                            : 6912
 # Shift Registers                                      : 2
  2-bit shift register                                  : 2
 
@@ -9570,29 +9581,29 @@ Top Level Output File Name         : spec_top_fmc_adc_100Ms.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 8502
+# BELS                             : 8536
 #      GND                         : 1
-#      INV                         : 227
-#      LUT1                        : 287
-#      LUT2                        : 691
-#      LUT3                        : 1281
-#      LUT4                        : 571
-#      LUT5                        : 938
-#      LUT6                        : 2037
+#      INV                         : 229
+#      LUT1                        : 294
+#      LUT2                        : 694
+#      LUT3                        : 1256
+#      LUT4                        : 585
+#      LUT5                        : 954
+#      LUT6                        : 2039
 #      MULT_AND                    : 7
-#      MUXCY                       : 1271
+#      MUXCY                       : 1278
 #      MUXF7                       : 31
 #      VCC                         : 1
-#      XORCY                       : 1159
-# FlipFlops/Latches                : 6884
-#      FD                          : 75
+#      XORCY                       : 1167
+# FlipFlops/Latches                : 6914
+#      FD                          : 76
 #      FDC                         : 1431
-#      FDCE                        : 4026
+#      FDCE                        : 4047
 #      FDE                         : 118
 #      FDP                         : 140
 #      FDPE                        : 58
 #      FDR                         : 542
-#      FDRE                        : 491
+#      FDRE                        : 499
 #      FDS                         : 3
 # RAMS                             : 29
 #      RAMB16BWER                  : 27
@@ -9636,18 +9647,18 @@ Selected Device : 6slx45tfgg484-3
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:            6884  out of  54576    12%  
- Number of Slice LUTs:                 6034  out of  27288    22%  
-    Number used as Logic:              6032  out of  27288    22%  
+ Number of Slice Registers:            6914  out of  54576    12%  
+ Number of Slice LUTs:                 6053  out of  27288    22%  
+    Number used as Logic:              6051  out of  27288    22%  
     Number used as Memory:                2  out of   6408     0%  
        Number used as SRL:                2
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   9378
-   Number with an unused Flip Flop:    2494  out of   9378    26%  
-   Number with an unused LUT:          3344  out of   9378    35%  
-   Number of fully used LUT-FF pairs:  3540  out of   9378    37%  
-   Number of unique control sets:       266
+ Number of LUT Flip Flop pairs used:   9418
+   Number with an unused Flip Flop:    2504  out of   9418    26%  
+   Number with an unused LUT:          3365  out of   9418    35%  
+   Number of fully used LUT-FF pairs:  3549  out of   9418    37%  
+   Number of unique control sets:       271
 
 IO Utilization: 
  Number of IOs:                         191
@@ -9681,7 +9692,7 @@ Clock Information:
 ---------------------------------------------------------------------------------------------------------------------+------------------------+-------+
 Clock Signal                                                                                                         | Clock buffer(FF name)  | Load  |
 ---------------------------------------------------------------------------------------------------------------------+------------------------+-------+
-cmp_sys_clk_pll/CLKOUT0                                                                                              | BUFG                   | 3790  |
+cmp_sys_clk_pll/CLKOUT0                                                                                              | BUFG                   | 3820  |
 cmp_gn4124_core/cmp_clk_in/ddly_s                                                                                    | PLL_ADV:CLKOUT2        | 2406  |
 cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_serdes_clk_pll/CLKOUT1                                            | BUFG                   | 509   |
 cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/mcb_drp_clk_bufg_in| BUFGMUX                | 197   |
@@ -9697,9 +9708,9 @@ Timing Summary:
 Speed Grade: -3
 
    Minimum period: 10.047ns (Maximum Frequency: 99.535MHz)
-   Minimum input arrival time before clock: 9.071ns
+   Minimum input arrival time before clock: 4.056ns
    Maximum output required time after clock: 6.684ns
-   Maximum combinational path delay: 5.943ns
+   Maximum combinational path delay: 4.960ns
 
 Timing Details:
 ---------------
@@ -9708,7 +9719,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'cmp_sys_clk_pll/CLKOUT0'
   Clock period: 9.337ns (frequency: 107.103MHz)
-  Total number of paths / destination ports: 407107 / 7743
+  Total number of paths / destination ports: 412898 / 10254
 -------------------------------------------------------------------------
 Delay:               9.337ns (Levels of Logic = 7)
   Source:            cmp_sdb_crossbar/crossbar/matrix_old_0_5 (FF)
@@ -9723,7 +9734,7 @@ Delay:               9.337ns (Levels of Logic = 7)
      FDR:C->Q            432   0.447   2.187  cmp_sdb_crossbar/crossbar/matrix_old_0_5 (cmp_sdb_crossbar/crossbar/matrix_old_0_5)
      LUT3:I1->O          185   0.203   2.268  cmp_fmc_adc_mezzanine_0/cmp_sdb_crossbar/crossbar/master_oe[3]_adr<4>1 (cmp_fmc_adc_mezzanine_0/cnx_master_out[3]_adr<4>)
      LUT6:I3->O            1   0.205   0.580  cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886773 (cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886772)
-     LUT6:I5->O            1   0.205   0.580  cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886775_SW0 (N654)
+     LUT6:I5->O            1   0.205   0.580  cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886775_SW0 (N680)
      LUT6:I5->O            1   0.205   0.580  cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886775 (cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886774)
      LUT6:I5->O            1   0.205   0.580  cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886776 (cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886775)
      LUT6:I5->O            1   0.205   0.580  cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux28867710 (cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/mux2886779)
@@ -9830,110 +9841,107 @@ Delay:               2.854ns (Levels of Logic = 1)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_sys_clk_pll/CLKOUT0'
-  Total number of paths / destination ports: 3526 / 2954
+  Total number of paths / destination ports: 694 / 137
 -------------------------------------------------------------------------
-Offset:              9.071ns (Levels of Logic = 4)
+Offset:              3.564ns (Levels of Logic = 2)
   Source:            L_RST_N (PAD)
-  Destination:       cmp_fmc_adc_mezzanine_0/cmp_fmc_sys_i2c/U_Wrapped_I2C/Wrapped_I2C/byte_ctrl/bit_ctrl/cnt_15 (FF)
+  Destination:       powerup_reset_cnt_0 (FF)
   Destination Clock: cmp_sys_clk_pll/CLKOUT0 rising
 
-  Data Path: L_RST_N to cmp_fmc_adc_mezzanine_0/cmp_fmc_sys_i2c/U_Wrapped_I2C/Wrapped_I2C/byte_ctrl/bit_ctrl/cnt_15
+  Data Path: L_RST_N to powerup_reset_cnt_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           191   1.222   2.046  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT2:I1->O         2098   0.205   2.815  cmp_fmc_adc_mezzanine_0/cmp_fmc_i2c/U_Wrapped_I2C/rst1 (cmp_carrier_csr/rst_n_i_inv)
-     LUT6:I1->O           18   0.203   1.050  cmp_fmc_adc_mezzanine_0/cmp_fmc_sys_i2c/U_Wrapped_I2C/Wrapped_I2C/byte_ctrl/bit_ctrl/rst_scl_sync_OR_1224_o4 (cmp_fmc_adc_mezzanine_0/cmp_fmc_sys_i2c/U_Wrapped_I2C/Wrapped_I2C/byte_ctrl/bit_ctrl/rst_scl_sync_OR_1224_o)
-     LUT2:I1->O           16   0.205   1.004  cmp_fmc_adc_mezzanine_0/cmp_fmc_sys_i2c/U_Wrapped_I2C/Wrapped_I2C/byte_ctrl/bit_ctrl/_n0172_inv1 (cmp_fmc_adc_mezzanine_0/cmp_fmc_sys_i2c/U_Wrapped_I2C/Wrapped_I2C/byte_ctrl/bit_ctrl/_n0172_inv)
-     FDCE:CE                   0.322          cmp_fmc_adc_mezzanine_0/cmp_fmc_sys_i2c/U_Wrapped_I2C/Wrapped_I2C/byte_ctrl/bit_ctrl/cnt_0
+     IBUF:I->O             3   1.222   1.015  L_RST_N_IBUF (L_RST_N_IBUF)
+     LUT6:I0->O            8   0.203   0.802  _n0181_inv (_n0181_inv)
+     FDRE:CE                   0.322          powerup_reset_cnt_0
     ----------------------------------------
-    Total                      9.071ns (2.157ns logic, 6.914ns route)
-                                       (23.8% logic, 76.2% route)
+    Total                      3.564ns (1.747ns logic, 1.817ns route)
+                                       (49.0% logic, 51.0% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_gn4124_core/cmp_clk_in/ddly_s'
-  Total number of paths / destination ports: 63 / 63
+  Total number of paths / destination ports: 62 / 62
 -------------------------------------------------------------------------
-Offset:              6.373ns (Levels of Logic = 2)
-  Source:            L_RST_N (PAD)
-  Destination:       cmp_gn4124_core/rst_reg (FF)
+Offset:              2.447ns (Levels of Logic = 1)
+  Source:            cmp_gn4124_core/cmp_clk_in/rx_bufpll_inst:LOCK (PAD)
+  Destination:       cmp_gn4124_core/cmp_clk_in/state_FSM_FFd5 (FF)
   Destination Clock: cmp_gn4124_core/cmp_clk_in/ddly_s rising +90
 
-  Data Path: L_RST_N to cmp_gn4124_core/rst_reg
+  Data Path: cmp_gn4124_core/cmp_clk_in/rx_bufpll_inst:LOCK to cmp_gn4124_core/cmp_clk_in/state_FSM_FFd5
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           191   1.222   2.046  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT2:I1->O         2098   0.205   2.470  cmp_fmc_adc_mezzanine_0/cmp_fmc_i2c/U_Wrapped_I2C/rst1 (cmp_carrier_csr/rst_n_i_inv)
-     FDCE:CLR                  0.430          cmp_gn4124_core/rst_reg
+    BUFPLL:LOCK            2   0.000   0.721  cmp_gn4124_core/cmp_clk_in/rx_bufpll_inst (cmp_gn4124_core/cmp_clk_in/rx_bufplllckd)
+     LUT2:I0->O           20   0.203   1.092  cmp_gn4124_core/cmp_clk_in/not_rx_bufpll_lckd1 (cmp_gn4124_core/cmp_clk_in/not_rx_bufpll_lckd)
+     FDP:PRE                   0.430          cmp_gn4124_core/cmp_clk_in/busyd
     ----------------------------------------
-    Total                      6.373ns (1.857ns logic, 4.516ns route)
-                                       (29.1% logic, 70.9% route)
+    Total                      2.447ns (0.633ns logic, 1.813ns route)
+                                       (25.9% logic, 74.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_serdes_clk_pll/CLKOUT1'
-  Total number of paths / destination ports: 2064 / 621
+  Total number of paths / destination ports: 1578 / 475
 -------------------------------------------------------------------------
-Offset:              6.373ns (Levels of Logic = 2)
-  Source:            L_RST_N (PAD)
-  Destination:       cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/fmc_adc_core_ctl_man_bitslip_sync2 (FF)
+Offset:              3.556ns (Levels of Logic = 1)
+  Source:            cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_adc_serdes/bufpll_inst:LOCK (PAD)
+  Destination:       cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/trig_delay_cnt_31 (FF)
   Destination Clock: cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_serdes_clk_pll/CLKOUT1 rising
 
-  Data Path: L_RST_N to cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/fmc_adc_core_ctl_man_bitslip_sync2
+  Data Path: cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_adc_serdes/bufpll_inst:LOCK to cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/trig_delay_cnt_31
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           191   1.222   2.046  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT2:I1->O         2098   0.205   2.470  cmp_fmc_adc_mezzanine_0/cmp_fmc_i2c/U_Wrapped_I2C/rst1 (cmp_carrier_csr/rst_n_i_inv)
-     FDC:CLR                   0.430          cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_fmc_adc_100Ms_csr/fmc_adc_core_sr_deci_swb_s1
+    BUFPLL:LOCK            2   0.000   0.845  cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_adc_serdes/bufpll_inst (cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/locked_out)
+     LUT3:I0->O          357   0.205   2.075  cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_adc_sync_fifo/sclr1 (cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_adc_sync_fifo/sclr)
+     FDP:PRE                   0.430          cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_adc_sync_fifo/wrapped_gen/grf.rf/rstblk/grstd1.grst_full.rst_d1
     ----------------------------------------
-    Total                      6.373ns (1.857ns logic, 4.516ns route)
-                                       (29.1% logic, 70.9% route)
+    Total                      3.556ns (0.635ns logic, 2.921ns route)
+                                       (17.9% logic, 82.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/mcb_drp_clk_bufg_in'
-  Total number of paths / destination ports: 115 / 80
+  Total number of paths / destination ports: 80 / 78
 -------------------------------------------------------------------------
-Offset:              6.883ns (Levels of Logic = 3)
-  Source:            L_RST_N (PAD)
+Offset:              4.056ns (Levels of Logic = 2)
+  Source:            cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/BUFPLL_MCB_INST:LOCK (PAD)
   Destination:       cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/RST_reg (FF)
   Destination Clock: cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/mcb_drp_clk_bufg_in rising
 
-  Data Path: L_RST_N to cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/RST_reg
+  Data Path: cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/BUFPLL_MCB_INST:LOCK to cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/RST_reg
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           191   1.222   2.410  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT6:I0->O           78   0.203   1.837  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst1 (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst)
+    BUFPLL_MCB:LOCK        8   0.000   0.803  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/BUFPLL_MCB_INST (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/c3_pll_lock)
+     LUT6:I5->O           78   0.205   1.837  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst1 (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst)
      LUT2:I0->O            1   0.203   0.579  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/non_violating_rst1 (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/non_violating_rst)
      FDP:PRE                   0.430          cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/RST_reg
     ----------------------------------------
-    Total                      6.883ns (2.058ns logic, 4.825ns route)
-                                       (29.9% logic, 70.1% route)
+    Total                      4.056ns (0.838ns logic, 3.218ns route)
+                                       (20.7% logic, 79.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'cmp_sys_clk_pll/CLKOUT2'
-  Total number of paths / destination ports: 27 / 27
+  Total number of paths / destination ports: 1 / 1
 -------------------------------------------------------------------------
-Offset:              6.373ns (Levels of Logic = 2)
-  Source:            L_RST_N (PAD)
+Offset:              1.124ns (Levels of Logic = 0)
+  Source:            cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/BUFPLL_MCB_INST:LOCK (PAD)
   Destination:       cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/syn_clk0_powerup_pll_locked (FF)
   Destination Clock: cmp_sys_clk_pll/CLKOUT2 rising 0.1X
 
-  Data Path: L_RST_N to cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/syn_clk0_powerup_pll_locked
+  Data Path: cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/BUFPLL_MCB_INST:LOCK to cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/syn_clk0_powerup_pll_locked
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           191   1.222   2.046  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT2:I1->O         2098   0.205   2.470  cmp_fmc_adc_mezzanine_0/cmp_fmc_i2c/U_Wrapped_I2C/rst1 (cmp_carrier_csr/rst_n_i_inv)
-     FDCE:CLR                  0.430          cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/syn_clk0_powerup_pll_locked
+    BUFPLL_MCB:LOCK        8   0.000   0.802  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/BUFPLL_MCB_INST (cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/c3_pll_lock)
+     FDCE:CE                   0.322          cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/syn_clk0_powerup_pll_locked
     ----------------------------------------
-    Total                      6.373ns (1.857ns logic, 4.516ns route)
-                                       (29.1% logic, 70.9% route)
+    Total                      1.124ns (0.322ns logic, 0.802ns route)
+                                       (28.7% logic, 71.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'cmp_sys_clk_pll/CLKOUT0'
-  Total number of paths / destination ports: 242 / 222
+  Total number of paths / destination ports: 372 / 288
 -------------------------------------------------------------------------
 Offset:              6.684ns (Levels of Logic = 2)
   Source:            cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_adc_sync_fifo/wrapped_gen/grf.rf/mem/gbm.gbmg.gbmga.ngecc.bmg/blk_mem_generator/valid.cstr/ramloop[1].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram (RAM)
@@ -10014,22 +10022,22 @@ Offset:              2.383ns (Levels of Logic = 1)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 1073 / 965
+  Total number of paths / destination ports: 1007 / 945
 -------------------------------------------------------------------------
-Delay:               5.943ns (Levels of Logic = 2)
-  Source:            L_RST_N (PAD)
-  Destination:       cmp_gn4124_core/cmp_clk_in/iserdes_s:RST (PAD)
+Delay:               4.960ns (Levels of Logic = 2)
+  Source:            cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0:P1WREMPTY (PAD)
+  Destination:       aux_leds_o<2> (PAD)
 
-  Data Path: L_RST_N to cmp_gn4124_core/cmp_clk_in/iserdes_s:RST
+  Data Path: cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0:P1WREMPTY to aux_leds_o<2>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O           191   1.222   2.046  L_RST_N_IBUF (L_RST_N_IBUF)
-     LUT2:I1->O         2098   0.205   2.470  cmp_fmc_adc_mezzanine_0/cmp_fmc_i2c/U_Wrapped_I2C/rst1 (cmp_carrier_csr/rst_n_i_inv)
-    ISERDES2:RST               0.000          cmp_gn4124_core/cmp_clk_in/iserdes_m
+    MCB:P1WREMPTY         38   0.000   1.605  cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0 (ddr_wr_fifo_empty)
+     LUT4:I1->O            1   0.205   0.579  aux_leds_o<2>1 (aux_leds_o_2_OBUF)
+     OBUF:I->O                 2.571          aux_leds_o_2_OBUF (aux_leds_o<2>)
     ----------------------------------------
-    Total                      5.943ns (1.427ns logic, 4.516ns route)
-                                       (24.0% logic, 76.0% route)
+    Total                      4.960ns (2.776ns logic, 2.184ns route)
+                                       (56.0% logic, 44.0% route)
 
 =========================================================================
 
@@ -10042,6 +10050,7 @@ Clock to Setup on destination clock cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_
 Source Clock                                                                                                         |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------------------------------------------------------------------------------------------------------------+---------+---------+---------+---------+
 cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/memc3_infrastructure_inst/mcb_drp_clk_bufg_in|    7.816|         |         |         |
+cmp_sys_clk_pll/CLKOUT0                                                                                              |    6.122|         |         |         |
 ---------------------------------------------------------------------------------------------------------------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock cmp_fmc_adc_mezzanine_0/cmp_fmc_adc_100Ms_core/cmp_serdes_clk_pll/CLKOUT1
@@ -10059,7 +10068,7 @@ Clock to Setup on destination clock cmp_gn4124_core/cmp_clk_in/ddly_s
 Source Clock                     |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------------------------+---------+---------+---------+---------+
 cmp_gn4124_core/cmp_clk_in/ddly_s|    6.237|         |         |         |
-cmp_sys_clk_pll/CLKOUT0          |    3.144|         |         |         |
+cmp_sys_clk_pll/CLKOUT0          |    5.218|         |         |         |
 ---------------------------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock cmp_sys_clk_pll/CLKOUT0
@@ -10078,21 +10087,22 @@ Clock to Setup on destination clock cmp_sys_clk_pll/CLKOUT2
                        | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock           |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 -----------------------+---------+---------+---------+---------+
+cmp_sys_clk_pll/CLKOUT0|    5.615|         |         |         |
 cmp_sys_clk_pll/CLKOUT2|    2.854|         |         |         |
 -----------------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 86.00 secs
-Total CPU time to Xst completion: 83.15 secs
+Total REAL time to Xst completion: 85.00 secs
+Total CPU time to Xst completion: 82.97 secs
  
 --> 
 
 
-Total memory usage is 233128 kilobytes
+Total memory usage is 233512 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings : 1790 (   0 filtered)
-Number of infos    :  511 (   0 filtered)
+Number of warnings : 1789 (   0 filtered)
+Number of infos    :  512 (   0 filtered)
 

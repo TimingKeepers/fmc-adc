@@ -122,7 +122,7 @@ entity spec_top_fmc_adc_100Ms is
       DDR3_RZQ     : inout std_logic;
 
       -- FMC slot
-      adc0_ext_trigger_p_i : in std_logic;   -- External trigger
+      adc0_ext_trigger_p_i : in std_logic;  -- External trigger
       adc0_ext_trigger_n_i : in std_logic;
 
       adc0_dco_p_i  : in std_logic;                     -- ADC data clock
@@ -152,16 +152,16 @@ entity spec_top_fmc_adc_100Ms is
       adc0_gpio_ssr_ch4_o   : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
       adc0_gpio_si570_oe_o  : out std_logic;                     -- Si570 (programmable oscillator) output enable
 
-      adc0_si570_scl_b : inout std_logic;    -- I2C bus clock (Si570)
-      adc0_si570_sda_b : inout std_logic;    -- I2C bus data (Si570)
+      adc0_si570_scl_b : inout std_logic;  -- I2C bus clock (Si570)
+      adc0_si570_sda_b : inout std_logic;  -- I2C bus data (Si570)
 
       adc0_one_wire_b : inout std_logic;  -- Mezzanine 1-wire interface (DS18B20 thermometer + unique ID)
 
       -- FMC slot management
-      fmc0_prsnt_m2c_n_i : in std_logic;     -- Mezzanine present (active low)
+      fmc0_prsnt_m2c_n_i : in std_logic;  -- Mezzanine present (active low)
 
-      fmc0_sys_scl_b : inout std_logic;      -- Mezzanine system I2C clock (EEPROM)
-      fmc0_sys_sda_b : inout std_logic       -- Mezzanine system I2C data (EEPROM)
+      fmc0_sys_scl_b : inout std_logic;  -- Mezzanine system I2C clock (EEPROM)
+      fmc0_sys_sda_b : inout std_logic   -- Mezzanine system I2C data (EEPROM)
       );
 end spec_top_fmc_adc_100Ms;
 
@@ -195,7 +195,9 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       carrier_csr_ctrl_led_green_o     : out std_logic;
       carrier_csr_ctrl_led_red_o       : out std_logic;
       carrier_csr_ctrl_dac_clr_n_o     : out std_logic;
-      carrier_csr_ctrl_reserved_o      : out std_logic_vector(28 downto 0)
+      carrier_csr_ctrl_reserved_o      : out std_logic_vector(28 downto 0);
+      carrier_csr_rst_fmc0_o           : out std_logic;
+      carrier_csr_rst_reserved_o       : out std_logic_vector(19 downto 0)
       );
   end component carrier_csr;
 
@@ -369,9 +371,11 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal l_clk : std_logic;
 
   -- Reset
-  signal rst       : std_logic;
-  signal sys_rst   : std_logic;
-  signal sys_rst_n : std_logic;
+  signal powerup_reset_cnt : unsigned(7 downto 0) := "00000000";
+  signal powerup_rst_n     : std_logic            := '0';
+  signal sw_rst_fmc0       : std_logic;
+  signal sys_rst_n         : std_logic;
+  signal fmc0_rst_n        : std_logic;
 
   -- Wishbone buse(s) from crossbar master port(s)
   signal cnx_master_out : t_wishbone_master_out_array(c_NUM_WB_MASTERS-1 downto 0);
@@ -444,8 +448,8 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal spi_ss_t  : std_logic_vector(7 downto 0);
 
   -- Carrier 1-wire
-  signal carrier_owr_en    : std_logic_vector(0 downto 0);
-  signal carrier_owr_i     : std_logic_vector(0 downto 0);
+  signal carrier_owr_en : std_logic_vector(0 downto 0);
+  signal carrier_owr_i  : std_logic_vector(0 downto 0);
 
   -- Time-tagging core
   signal trigger_p   : std_logic;
@@ -540,8 +544,27 @@ begin
   ------------------------------------------------------------------------------
   -- System reset
   ------------------------------------------------------------------------------
-  sys_rst_n <= L_RST_N and sys_clk_pll_locked;
-  sys_rst   <= not(sys_rst_n);
+  p_powerup_reset : process(sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if(L_RST_N = '0') then
+        powerup_rst_n <= '0';
+      elsif sys_clk_pll_locked = '1' then
+        if(powerup_reset_cnt = "11111111") then
+          powerup_rst_n <= '1';
+        else
+          powerup_rst_n     <= '0';
+          powerup_reset_cnt <= powerup_reset_cnt + 1;
+        end if;
+      else
+        powerup_rst_n     <= '0';
+        powerup_reset_cnt <= "00000000";
+      end if;
+    end if;
+  end process;
+
+  sys_rst_n <= powerup_rst_n;
+  fmc0_rst_n <= powerup_rst_n and sw_rst_fmc0;
 
   ------------------------------------------------------------------------------
   -- GN4124 interface
@@ -711,7 +734,9 @@ begin
       carrier_csr_ctrl_led_green_o     => led_green,
       carrier_csr_ctrl_led_red_o       => led_red,
       carrier_csr_ctrl_dac_clr_n_o     => open,
-      carrier_csr_ctrl_reserved_o      => open
+      carrier_csr_ctrl_reserved_o      => open,
+      carrier_csr_rst_fmc0_o           => sw_rst_fmc0,
+      carrier_csr_rst_reserved_o       => open
       );
 
   -- Unused wishbone signals
@@ -730,7 +755,7 @@ begin
   cmp_timetag_core : timetag_core
     port map(
       clk_i   => sys_clk_125,
-      rst_n_i => sys_rst_n,
+      rst_n_i => fmc0_rst_n,
 
       trigger_p_i   => trigger_p,
       acq_start_p_i => acq_start_p,
@@ -845,11 +870,11 @@ begin
   cmp_fmc_adc_mezzanine_0 : fmc_adc_mezzanine
     generic map(
       g_multishot_ram_size => 2048,
-      g_carrier_type => "SPEC"
+      g_carrier_type       => "SPEC"
       )
     port map(
       sys_clk_i   => sys_clk_125,
-      sys_rst_n_i => sys_rst_n,
+      sys_rst_n_i => fmc0_rst_n,
 
       wb_csr_adr_i   => cnx_master_out(c_SLAVE_FMC_ADC).adr,
       wb_csr_dat_i   => cnx_master_out(c_SLAVE_FMC_ADC).dat,
@@ -938,7 +963,7 @@ begin
       g_P1_BYTE_ADDR_WIDTH => 30)
     port map (
       clk_i   => ddr_clk,
-      rst_n_i => sys_rst_n,
+      rst_n_i => fmc0_rst_n,
 
       status_o => ddr3_status,
 

@@ -13,6 +13,10 @@ Status
 REG @tab
 @code{ctrl} @tab
 Control
+@item @code{0xc} @tab
+REG @tab
+@code{rst} @tab
+Reset Register
 @end multitable 
 @regsection @code{carrier} - Carrier type and PCB version
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -105,5 +109,25 @@ Reserved
 @item @code{led_green} @tab Manual control of the front panel green LED (unused in the fmc-adc application)
 @item @code{led_red} @tab Manual control of the front panel red LED (unused in the fmc-adc application)
 @item @code{dac_clr_n} @tab Active low clear signal for VCXO DACs
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{rst} - Reset Register
+Controls software reset of the mezzanine including the ddr interface and the time-tagging core.
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{0}
+@tab R/W @tab
+@code{FMC0}
+@tab @code{0} @tab 
+State of the reset line
+@item @code{20...1}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{0} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{fmc0} @tab write 0: FMC is held in reset@* write 1: Normal FMC operation
 @item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
