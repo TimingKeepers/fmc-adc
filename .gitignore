@@ -14,6 +14,8 @@ hdl/*/syn/par_usage_statistics.html
 hdl/*/syn/run.tcl
 hdl/*/syn/*.gise
 hdl/*/syn/*.bgn
+hdl/*/syn/*.bin
+hdl/*/syn/*.bit
 hdl/*/syn/*.bld
 hdl/*/syn/*.cmd_log
 hdl/*/syn/*.drc
