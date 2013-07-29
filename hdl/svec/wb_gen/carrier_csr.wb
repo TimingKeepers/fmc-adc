@@ -125,4 +125,42 @@ peripheral {
     };
   };
 
+  reg {
+    name = "Reset Register";
+    prefix = "rst";
+    description = "Controls software reset of the mezzanines including the ddr interface and the time-tagging core.";
+
+    field {
+      name = "State of the FMC 1 reset line";
+      description = "write 0: FMC is held in reset\
+                     write 1: Normal FMC operation";
+      type = BIT;
+      size = 1;
+      prefix = "fmc0_n";
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      };
+
+    field {
+      name = "State of the FMC 2 reset line";
+      description = "write 0: FMC is held in reset\
+                     write 1: Normal FMC operation";
+      type = BIT;
+      size = 1;
+      prefix = "fmc1_n";
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 30;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
 };

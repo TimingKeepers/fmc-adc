@@ -272,7 +272,10 @@ architecture rtl of svec_top_fmc_adc_100Ms is
       carrier_csr_stat_ddr1_cal_done_i : in  std_logic;
       carrier_csr_stat_reserved_i      : in  std_logic_vector(26 downto 0);
       carrier_csr_ctrl_fp_leds_man_o   : out std_logic_vector(15 downto 0);
-      carrier_csr_ctrl_reserved_o      : out std_logic_vector(15 downto 0)
+      carrier_csr_ctrl_reserved_o      : out std_logic_vector(15 downto 0);
+      carrier_csr_rst_fmc0_n_o         : out std_logic;
+      carrier_csr_rst_fmc1_n_o         : out std_logic;
+      carrier_csr_rst_reserved_o       : out std_logic_vector(29 downto 0)
       );
   end component carrier_csr;
 
@@ -516,6 +519,14 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal powerup_rst_n     : std_logic            := '0';
   signal sys_rst_n         : std_logic;
   signal ddr_rst_n         : std_logic;
+  signal sw_rst_fmc0_n     : std_logic;
+  signal sw_rst_fmc1_n     : std_logic;
+  signal ddr_sw_rst_fmc0_n : std_logic;
+  signal ddr_sw_rst_fmc1_n : std_logic;
+  signal fmc0_rst_n        : std_logic;
+  signal fmc1_rst_n        : std_logic;
+  signal fmc0_ddr_rst_n    : std_logic;
+  signal fmc1_ddr_rst_n    : std_logic;
 
   -- VME
   signal vme_data_b_out    : std_logic_vector(31 downto 0);
@@ -702,7 +713,7 @@ begin
     end if;
   end process;
 
-  --Reset synchronisation to 125MHz system clock domain
+  --System reset synchronisation to 125MHz system clock domain
   cmp_sync_rst : gc_sync_ffs
     port map (
       clk_i    => sys_clk_125,
@@ -711,7 +722,7 @@ begin
       synced_o => sys_rst_n
       );
 
-  -- Reset synchronisation to DDR clock domain
+  -- System reset synchronisation to DDR clock domain
   cmp_sync_ddr_rst : gc_sync_ffs
     port map (
       clk_i    => ddr_clk,
@@ -719,6 +730,29 @@ begin
       data_i   => powerup_rst_n,
       synced_o => ddr_rst_n
       );
+
+  -- FMC 0 reset synchronisation to DDR clock domain
+  cmp_sync_fmc0_rst : gc_sync_ffs
+    port map (
+      clk_i    => ddr_clk,
+      rst_n_i  => '1',
+      data_i   => sw_rst_fmc0_n,
+      synced_o => ddr_sw_rst_fmc0_n
+      );
+
+  -- FMC 1 reset synchronisation to DDR clock domain
+  cmp_sync_fmc1_rst : gc_sync_ffs
+    port map (
+      clk_i    => ddr_clk,
+      rst_n_i  => '1',
+      data_i   => sw_rst_fmc1_n,
+      synced_o => ddr_sw_rst_fmc1_n
+      );
+
+  fmc0_rst_n     <= sys_rst_n and sw_rst_fmc0_n;
+  fmc1_rst_n     <= sys_rst_n and sw_rst_fmc1_n;
+  fmc0_ddr_rst_n <= ddr_rst_n and ddr_sw_rst_fmc0_n;
+  fmc1_ddr_rst_n <= ddr_rst_n and ddr_sw_rst_fmc1_n;
 
   ------------------------------------------------------------------------------
   -- VME interface
@@ -906,7 +940,10 @@ begin
       carrier_csr_stat_ddr1_cal_done_i => ddr1_calib_done,
       carrier_csr_stat_reserved_i      => (others => '0'),
       carrier_csr_ctrl_fp_leds_man_o   => led_state_man,
-      carrier_csr_ctrl_reserved_o      => open
+      carrier_csr_ctrl_reserved_o      => open,
+      carrier_csr_rst_fmc0_n_o         => sw_rst_fmc0_n,
+      carrier_csr_rst_fmc1_n_o         => sw_rst_fmc1_n,
+      carrier_csr_rst_reserved_o       => open
       );
 
   -- Unused wishbone signals
@@ -991,7 +1028,7 @@ begin
       )
     port map(
       sys_clk_i   => sys_clk_125,
-      sys_rst_n_i => sys_rst_n,
+      sys_rst_n_i => fmc0_rst_n,
 
       wb_csr_adr_i   => cnx_master_out(c_WB_SLAVE_FMC0_ADC).adr,
       wb_csr_dat_i   => cnx_master_out(c_WB_SLAVE_FMC0_ADC).dat,
@@ -1077,7 +1114,7 @@ begin
       )
     port map(
       sys_clk_i   => sys_clk_125,
-      sys_rst_n_i => sys_rst_n,
+      sys_rst_n_i => fmc1_rst_n,
 
       wb_csr_adr_i   => cnx_master_out(c_WB_SLAVE_FMC1_ADC).adr,
       wb_csr_dat_i   => cnx_master_out(c_WB_SLAVE_FMC1_ADC).dat,
@@ -1165,7 +1202,7 @@ begin
       g_P1_BYTE_ADDR_WIDTH => 30)
     port map (
       clk_i   => ddr_clk,
-      rst_n_i => ddr_rst_n,
+      rst_n_i => fmc0_ddr_rst_n,
 
       status_o => ddr0_status,
 
@@ -1251,7 +1288,7 @@ begin
   p_ddr0_wb_cyc : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if (sys_rst_n = '0') then
+      if (fmc0_rst_n = '0') then
         ddr0_wb_cyc_d <= '0';
       else
         ddr0_wb_cyc_d <= cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).cyc;
@@ -1265,7 +1302,7 @@ begin
   p_ddr0_addr_cnt : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if (sys_rst_n = '0') then
+      if (fmc0_rst_n = '0') then
         ddr0_addr_cnt <= (others => '0');
       elsif (cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).we = '1' and
              cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).stb = '1' and
@@ -1281,7 +1318,7 @@ begin
   p_ddr0_addr_ack : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if (sys_rst_n = '0') then
+      if (fmc0_rst_n = '0') then
         cnx_master_in(c_WB_SLAVE_FMC0_DDR_ADR).ack <= '0';
       elsif (cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).stb = '1' and
              cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).cyc = '1') then
@@ -1318,7 +1355,7 @@ begin
       g_P1_BYTE_ADDR_WIDTH => 30)
     port map (
       clk_i   => ddr_clk,
-      rst_n_i => ddr_rst_n,
+      rst_n_i => fmc1_ddr_rst_n,
 
       status_o => ddr1_status,
 
@@ -1404,7 +1441,7 @@ begin
   p_ddr1_wb_cyc : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if (sys_rst_n = '0') then
+      if (fmc1_rst_n = '0') then
         ddr1_wb_cyc_d <= '0';
       else
         ddr1_wb_cyc_d <= cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).cyc;
@@ -1418,7 +1455,7 @@ begin
   p_ddr1_addr_cnt : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if (sys_rst_n = '0') then
+      if (fmc1_rst_n = '0') then
         ddr1_addr_cnt <= (others => '0');
       elsif (cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).we = '1' and
              cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).stb = '1' and
@@ -1434,7 +1471,7 @@ begin
   p_ddr1_addr_ack : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if (sys_rst_n = '0') then
+      if (fmc1_rst_n = '0') then
         cnx_master_in(c_WB_SLAVE_FMC1_DDR_ADR).ack <= '0';
       elsif (cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).stb = '1' and
              cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).cyc = '1') then
@@ -1460,7 +1497,7 @@ begin
   cmp_fmc0_timetag_core : timetag_core
     port map(
       clk_i   => sys_clk_125,
-      rst_n_i => sys_rst_n,
+      rst_n_i => fmc0_rst_n,
 
       trigger_p_i   => trig_p(0),
       acq_start_p_i => acq_start_p(0),
@@ -1489,7 +1526,7 @@ begin
   cmp_fmc1_timetag_core : timetag_core
     port map(
       clk_i   => sys_clk_125,
-      rst_n_i => sys_rst_n,
+      rst_n_i => fmc1_rst_n,
 
       trigger_p_i   => trig_p(1),
       acq_start_p_i => acq_start_p(1),

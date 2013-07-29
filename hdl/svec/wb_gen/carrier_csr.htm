@@ -37,6 +37,7 @@
 <span style="margin-left: 20px; ">3.1. <A href="#sect_3_1">Carrier type and PCB version</a></span><br/>
 <span style="margin-left: 20px; ">3.2. <A href="#sect_3_2">Status</a></span><br/>
 <span style="margin-left: 20px; ">3.3. <A href="#sect_3_3">Control</a></span><br/>
+<span style="margin-left: 20px; ">3.4. <A href="#sect_3_4">Reset Register</a></span><br/>
 <h3><a name="sect_1_0">1. Memory map summary</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -105,6 +106,23 @@ carrier_csr_ctrl
 </td>
 <td  class="td_code">
 CTRL
+</td>
+</tr>
+<tr class="tr_even">
+<td  class="td_code">
+0x3
+</td>
+<td >
+REG
+</td>
+<td >
+<A href="#RST">Reset Register</a>
+</td>
+<td  class="td_code">
+carrier_csr_rst
+</td>
+<td  class="td_code">
+RST
 </td>
 </tr>
 </table>
@@ -378,6 +396,91 @@ carrier_csr_ctrl_fp_leds_man_o[15:0]
 </td>
 <td  class="td_pblock_right">
 carrier_csr_ctrl_reserved_o[15:0]
+</td>
+<td  class="td_arrow_right">
+&rArr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+&nbsp;
+</td>
+<td  class="td_pblock_right">
+
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>Reset Register:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+carrier_csr_rst_fmc0_n_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+carrier_csr_rst_fmc1_n_o
+</td>
+<td  class="td_arrow_right">
+&rarr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+carrier_csr_rst_reserved_o[29:0]
 </td>
 <td  class="td_arrow_right">
 &rArr;
@@ -1187,6 +1290,275 @@ FP_LEDS_MAN[7:0]
 FP_LEDS_MAN
 </b>[<i>read/write</i>]: Front panel LED manual control
 <br>Height front panel LED, two bits per LED.<br>00 = OFF<br>01 = Green<br>10 = Red<br>11 = Orange
+<li><b>
+RESERVED
+</b>[<i>read/write</i>]: Reserved
+<br>Ignore on read, write with 0's
+</ul>
+<a name="RST"></a>
+<h3><a name="sect_3_4">3.4. Reset Register</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+carrier_csr_rst
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x3
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+RST
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0xc
+</td>
+</tr>
+</table>
+<p>
+Controls software reset of the mezzanines including the ddr interface and the time-tagging core.
+</p>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[29:22]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[21:14]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=8  class="td_field">
+RESERVED[13:6]
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td style="border: solid 1px black;" colspan=6  class="td_field">
+RESERVED[5:0]
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+FMC1_N
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+FMC0_N
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+<td >
+
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+FMC0_N
+</b>[<i>read/write</i>]: State of the FMC 1 reset line
+<br>write 0: FMC is held in reset<br>                     write 1: Normal FMC operation
+<li><b>
+FMC1_N
+</b>[<i>read/write</i>]: State of the FMC 2 reset line
+<br>write 0: FMC is held in reset<br>                     write 1: Normal FMC operation
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
