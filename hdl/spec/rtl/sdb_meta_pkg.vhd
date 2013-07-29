@@ -53,14 +53,14 @@ package sdb_meta_pkg is
     -- Top module name (string, 16 char)
     syn_module_name  => "spec_top_fmc_adc",
     -- Commit ID (hex string, 128-bit = 32 char)
-    -- git log -1 --format="%H" | cut -c1-320
-    syn_commit_id    => "d8644900e0d9b8544a5e20da9d0567dd",
+    -- git log -1 --format="%H" | cut -c1-32
+    syn_commit_id    => "dce448c21e7f9426dd5b39d1ef1d0496",
     -- Synthesis tool name (string, 8 char)
     syn_tool_name    => "ISE     ",
     -- Synthesis tool version (bcd encoded, 32-bit)
     syn_tool_version => x"00000133",
     -- Synthesis date (bcd encoded, 32-bit)
-    syn_date         => x"20130328",
+    syn_date         => x"20130729",
     -- Synthesised by (string, 15 char)
     syn_username     => "mcattin        ");
 
@@ -69,8 +69,8 @@ package sdb_meta_pkg is
     product     => (
       vendor_id => x"000000000000CE42",  -- CERN
       device_id => x"47c786a2",          -- echo "spec_fmc-adc-100m14b4cha" | md5sum | cut -c1-8
-      version   => x"00010001",          -- bcd encoded, [31:16] = major, [15:0] = minor
-      date      => x"20130328",          -- yyyymmdd
+      version   => x"00020000",          -- bcd encoded, [31:16] = major, [15:0] = minor
+      date      => x"20130729",          -- yyyymmdd
       name      => "spec_fmcadc100m14b "));
 
 
