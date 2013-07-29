@@ -196,7 +196,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       carrier_csr_ctrl_led_red_o       : out std_logic;
       carrier_csr_ctrl_dac_clr_n_o     : out std_logic;
       carrier_csr_ctrl_reserved_o      : out std_logic_vector(28 downto 0);
-      carrier_csr_rst_fmc0_o           : out std_logic;
+      carrier_csr_rst_fmc0_n_o         : out std_logic;
       carrier_csr_rst_reserved_o       : out std_logic_vector(19 downto 0)
       );
   end component carrier_csr;
@@ -373,7 +373,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   -- Reset
   signal powerup_reset_cnt : unsigned(7 downto 0) := "00000000";
   signal powerup_rst_n     : std_logic            := '0';
-  signal sw_rst_fmc0       : std_logic;
+  signal sw_rst_fmc0_n     : std_logic;
   signal sys_rst_n         : std_logic;
   signal fmc0_rst_n        : std_logic;
 
@@ -563,8 +563,8 @@ begin
     end if;
   end process;
 
-  sys_rst_n <= powerup_rst_n;
-  fmc0_rst_n <= powerup_rst_n and sw_rst_fmc0;
+  sys_rst_n  <= powerup_rst_n;
+  fmc0_rst_n <= powerup_rst_n and sw_rst_fmc0_n;
 
   ------------------------------------------------------------------------------
   -- GN4124 interface
@@ -735,7 +735,7 @@ begin
       carrier_csr_ctrl_led_red_o       => led_red,
       carrier_csr_ctrl_dac_clr_n_o     => open,
       carrier_csr_ctrl_reserved_o      => open,
-      carrier_csr_rst_fmc0_o           => sw_rst_fmc0,
+      carrier_csr_rst_fmc0_n_o         => sw_rst_fmc0_n,
       carrier_csr_rst_reserved_o       => open
       );
 

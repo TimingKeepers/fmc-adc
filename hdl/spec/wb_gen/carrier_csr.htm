@@ -463,7 +463,7 @@ carrier_csr_ctrl_reserved_o[28:0]
 
 </td>
 <td  class="td_pblock_right">
-carrier_csr_rst_fmc0_o
+carrier_csr_rst_fmc0_n_o
 </td>
 <td  class="td_arrow_right">
 &rarr;
@@ -1532,7 +1532,7 @@ RESERVED[14:7]
 RESERVED[6:0]
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0
+FMC0_N
 </td>
 <td >
 
@@ -1556,9 +1556,9 @@ FMC0
 </table>
 <ul>
 <li><b>
-FMC0
+FMC0_N
 </b>[<i>read/write</i>]: State of the reset line
-<br>write 0: FMC is held in reset<br>                        write 1: Normal FMC operation
+<br>write 0: FMC is held in reset<br>                     write 1: Normal FMC operation
 <li><b>
 RESERVED
 </b>[<i>read/write</i>]: Reserved
