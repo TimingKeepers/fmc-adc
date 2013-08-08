@@ -300,21 +300,15 @@ Trigger address
 @regsection @code{sr} - Sample rate
 @multitable @columnfractions .10 .10 .15 .10 .55
 @headitem Bits @tab Access @tab Prefix @tab Default @tab Name
-@item @code{15...0}
+@item @code{31...0}
 @tab R/W @tab
 @code{DECI}
 @tab @code{0} @tab 
 Sample rate decimation
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{deci} @tab Decimation factor. Takes one sample every N samples and discards the others (N = decimation factor).
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{pre_samples} - Pre-trigger samples
 @multitable @columnfractions .10 .10 .15 .10 .55

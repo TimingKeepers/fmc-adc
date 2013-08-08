@@ -182,8 +182,7 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_shots_nb_o                : out std_logic_vector(15 downto 0);
       fmc_adc_core_shots_reserved_o          : out std_logic_vector(15 downto 0);
       fmc_adc_core_trig_pos_i                : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_sr_deci_o                 : out std_logic_vector(15 downto 0);
-      fmc_adc_core_sr_reserved_o             : out std_logic_vector(15 downto 0);
+      fmc_adc_core_sr_deci_o                 : out std_logic_vector(31 downto 0);
       fmc_adc_core_pre_samples_o             : out std_logic_vector(31 downto 0);
       fmc_adc_core_post_samples_o            : out std_logic_vector(31 downto 0);
       fmc_adc_core_samples_cnt_i             : in  std_logic_vector(31 downto 0);
@@ -335,8 +334,8 @@ architecture rtl of fmc_adc_100Ms_core is
   signal trig_align            : std_logic;
 
   -- Decimation
-  signal decim_factor : std_logic_vector(15 downto 0);
-  signal decim_cnt    : unsigned(15 downto 0);
+  signal decim_factor : std_logic_vector(31 downto 0);
+  signal decim_cnt    : unsigned(31 downto 0);
   signal decim_en     : std_logic;
 
   -- Sync FIFO (from fs_clk to sys_clk_i)
@@ -713,7 +712,6 @@ begin
       fmc_adc_core_shots_reserved_o          => open,
       fmc_adc_core_trig_pos_i                => trig_addr,
       fmc_adc_core_sr_deci_o                 => decim_factor,
-      fmc_adc_core_sr_reserved_o             => open,
       fmc_adc_core_pre_samples_o             => pre_trig_value,
       fmc_adc_core_post_samples_o            => post_trig_value,
       fmc_adc_core_samples_cnt_i             => std_logic_vector(samples_cnt),
@@ -885,7 +883,7 @@ begin
       decim_en  <= '0';
     elsif rising_edge(fs_clk) then
       if decim_cnt = to_unsigned(0, decim_cnt'length) then
-        if decim_factor /= X"0000" then
+        if decim_factor /= X"00000000" then
           decim_cnt <= unsigned(decim_factor) - 1;
         end if;
         decim_en <= '1';

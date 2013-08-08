@@ -1251,24 +1251,7 @@ fmc_adc_core_trig_pos_i[31:0]
 
 </td>
 <td  class="td_pblock_right">
-fmc_adc_core_sr_deci_o[15:0]
-</td>
-<td  class="td_arrow_right">
-&rArr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-fmc_adc_core_sr_reserved_o[15:0]
+fmc_adc_core_sr_deci_o[31:0]
 </td>
 <td  class="td_arrow_right">
 &rArr;
@@ -4456,7 +4439,7 @@ SR
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[15:8]
+DECI[31:24]
 </td>
 <td >
 
@@ -4510,7 +4493,7 @@ RESERVED[15:8]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[7:0]
+DECI[23:16]
 </td>
 <td >
 
@@ -4648,10 +4631,6 @@ DECI[7:0]
 DECI
 </b>[<i>read/write</i>]: Sample rate decimation
 <br>Decimation factor. Takes one sample every N samples and discards the others (N = decimation factor).
-<li><b>
-RESERVED
-</b>[<i>read/write</i>]: Reserved
-<br>Ignore on read, write with 0's
 </ul>
 <a name="PRE_SAMPLES"></a>
 <h3><a name="sect_3_9">3.9. Pre-trigger samples</a></h3>
