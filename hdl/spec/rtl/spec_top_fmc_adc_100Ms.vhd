@@ -197,7 +197,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       carrier_csr_ctrl_dac_clr_n_o     : out std_logic;
       carrier_csr_ctrl_reserved_o      : out std_logic_vector(28 downto 0);
       carrier_csr_rst_fmc0_n_o         : out std_logic;
-      carrier_csr_rst_reserved_o       : out std_logic_vector(19 downto 0)
+      carrier_csr_rst_reserved_o       : out std_logic_vector(30 downto 0)
       );
   end component carrier_csr;
 

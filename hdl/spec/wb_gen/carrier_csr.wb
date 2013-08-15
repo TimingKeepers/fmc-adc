@@ -154,7 +154,7 @@ peripheral {
       description = "Ignore on read, write with 0's";
       prefix = "reserved";
       type = SLV;
-      size = 20;
+      size = 31;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
