@@ -802,8 +802,7 @@ begin
   -- Wishbone bus synchronisation from vme 62.5MHz clock to 125MHz system clock
   cmp_xwb_clock_crossing : xwb_clock_crossing
     generic map(
-      sync_depth => 3,
-      log2fifo   => 4
+      g_size => 16
       )
     port map(
       slave_clk_i    => sys_clk_62_5,

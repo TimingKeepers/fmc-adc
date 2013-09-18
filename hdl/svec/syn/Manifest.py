@@ -20,7 +20,7 @@ files = [
 modules = { "local" : ["../rtl",
                        "../../adc/rtl",
                        "../../ip_cores/timetag_core/rtl"],
-            "git" : ["git://ohwr.org/hdl-core-lib/general-cores.git::sdb_extension",
+            "git" : ["git://ohwr.org/hdl-core-lib/general-cores.git::proposed_master",
                      "git://ohwr.org/hdl-core-lib/ddr3-sp6-core.git::svec_bank4_64b_32b_bank5_64b_32b",
                      "git://ohwr.org/hdl-core-lib/vme64x-core.git::master"]}
 
