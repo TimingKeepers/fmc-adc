@@ -60,7 +60,7 @@ package sdb_meta_pkg is
     -- Synthesis tool version (bcd encoded, 32-bit)
     syn_tool_version => x"00000133",
     -- Synthesis date (bcd encoded, 32-bit)
-    syn_date         => x"20130729",
+    syn_date         => x"20131004",
     -- Synthesised by (string, 15 char)
     syn_username     => "mcattin        ");
 
@@ -69,8 +69,8 @@ package sdb_meta_pkg is
     product     => (
       vendor_id => x"000000000000CE42",  -- CERN
       device_id => x"5c01a632",          -- echo "svec_fmc-adc-100m14b4cha" | md5sum | cut -c1-8
-      version   => x"00010000",          -- bcd encoded, [31:16] = major, [15:0] = minor
-      date      => x"20130729",          -- yyyymmdd
+      version   => x"00010001",          -- bcd encoded, [31:16] = major, [15:0] = minor
+      date      => x"20131004",          -- yyyymmdd
       name      => "svec_fmcadc100m14b "));
 
 
