@@ -250,7 +250,7 @@ The register description for the cores for the carrier control and status, the t
 
 @float Figure,fig:spec_fw_arch
 @center @image{../../figures/spec_fw_arch_module, 15cm,,,pdf}
-@caption{FPGA firmware architecture block diargam.}
+@caption{FPGA firmware architecture block diagram.}
 @end float
 
 @sp 1
@@ -1001,7 +1001,7 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @item Remove mutli-irq register from interrupt controller.@*
       Perhaps add a counter per interrupt source instead.@*
       Or use wbgen2 eic (with level interrupt output).
-@item Remove unused 250MHz clock signals and buffer.
+@c DONE @item Remove unused 250MHz clock signals and buffer.
 @item Unify address inferfaces: put all in bytes (wishbone addr, trig pointer, ...)@*
       - Change GN4142-core WB bus(es) to byte address.@*
       - Change DDR-core WB bus(es) to byte address?
@@ -1009,9 +1009,12 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
       - Instead of overwriting memory for a given acquisition.@*
       - If read during acquisition (or even block read during acq?).
 @item Rename decimation (and "sample rate" register) in under-sampling.
+@item Increase decimation register from 16 to 32 bits.
 @item Use 200MHz clock for WB bus from ddr-ctrl to gn4124-core.
 @item Clean-up adc core WB interface to DDR -> use only one clock (=> sys_clk).
-@item Replace all Xilinx FIFO by generic ones from general-cores lib (! last time I tried, it broke the DMA.).
+@item Replace all Xilinx FIFO by generic ones from general-cores lib (! last time I tried, it broke the DMA.).@*
+      - Seems to work with proposed master (05.08.2013).@*
+      - Still need to replace FIFO in adc core.
 @item Test sampling clocks from 10MHz to 105MHz.
 @item Add sampling clock presence flag. Or better a sampling clock frequency register.
 @item Add over-heat and input over-load interrupts? (from original specification)
