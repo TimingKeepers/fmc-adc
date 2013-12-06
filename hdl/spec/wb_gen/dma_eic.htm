@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>irq_controller</TITLE>
+<TITLE>dma_eic</TITLE>
 <STYLE TYPE="text/css" MEDIA="all">
 
 	<!--
@@ -27,9 +27,9 @@
 </STYLE>
 </HEAD>
 <BODY>
-<h1 class="heading">irq_controller</h1>
-<h3>Interrupt controller</h3>
-<p>Fmc-adc interrrupt controller for SVEC.</p>
+<h1 class="heading">dma_eic</h1>
+<h3>GN4124 DMA enhanced interrupt controller</h3>
+<p>Enhanced interrrupt controller for GN4124 DMA.</p>
 <h3>Contents:</h3>
 <span style="margin-left: 0px; ">1. <A href="#sect_1_0">Memory map summary</a></span><br/>
 <span style="margin-left: 0px; ">2. <A href="#sect_2_0">HDL symbol</a></span><br/>
@@ -39,10 +39,8 @@
 <span style="margin-left: 20px; ">3.3. <A href="#sect_3_3">Interrupt mask register</a></span><br/>
 <span style="margin-left: 20px; ">3.4. <A href="#sect_3_4">Interrupt status register</a></span><br/>
 <span style="margin-left: 0px; ">5. <A href="#sect_5_0">Interrupts</a></span><br/>
-<span style="margin-left: 20px; ">5.1. <A href="#sect_5_1">FMC slot 1 trigger interrupt</a></span><br/>
-<span style="margin-left: 20px; ">5.2. <A href="#sect_5_2">FMC slot 1 end of acquisition interrupt</a></span><br/>
-<span style="margin-left: 20px; ">5.3. <A href="#sect_5_3">FMC slot 2 trigger interrupt</a></span><br/>
-<span style="margin-left: 20px; ">5.4. <A href="#sect_5_4">FMC slot 2 end of acquisition interrupt</a></span><br/>
+<span style="margin-left: 20px; ">5.1. <A href="#sect_5_1">DMA done interrupt</a></span><br/>
+<span style="margin-left: 20px; ">5.2. <A href="#sect_5_2">DMA error interrupt</a></span><br/>
 <h3><a name="sect_1_0">1. Memory map summary</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -73,7 +71,7 @@ REG
 <A href="#EIC_IDR">Interrupt disable register</a>
 </td>
 <td  class="td_code">
-irq_ctrl_eic_idr
+dma_eic_eic_idr
 </td>
 <td  class="td_code">
 EIC_IDR
@@ -90,7 +88,7 @@ REG
 <A href="#EIC_IER">Interrupt enable register</a>
 </td>
 <td  class="td_code">
-irq_ctrl_eic_ier
+dma_eic_eic_ier
 </td>
 <td  class="td_code">
 EIC_IER
@@ -107,7 +105,7 @@ REG
 <A href="#EIC_IMR">Interrupt mask register</a>
 </td>
 <td  class="td_code">
-irq_ctrl_eic_imr
+dma_eic_eic_imr
 </td>
 <td  class="td_code">
 EIC_IMR
@@ -124,7 +122,7 @@ REG
 <A href="#EIC_ISR">Interrupt status register</a>
 </td>
 <td  class="td_code">
-irq_ctrl_eic_isr
+dma_eic_eic_isr
 </td>
 <td  class="td_code">
 EIC_ISR
@@ -145,7 +143,7 @@ rst_n_i
 
 </td>
 <td  class="td_pblock_right">
-<b>FMC slot 1 trigger interrupt:</b>
+<b>DMA done interrupt:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -162,7 +160,7 @@ clk_sys_i
 
 </td>
 <td  class="td_pblock_right">
-irq_fmc0_trig_i
+irq_dma_done_i
 </td>
 <td  class="td_arrow_right">
 &larr;
@@ -196,7 +194,7 @@ wb_dat_i[31:0]
 
 </td>
 <td  class="td_pblock_right">
-<b>FMC slot 1 end of acquisition interrupt:</b>
+<b>DMA error interrupt:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -213,7 +211,7 @@ wb_dat_o[31:0]
 
 </td>
 <td  class="td_pblock_right">
-irq_fmc0_acq_end_i
+irq_dma_error_i
 </td>
 <td  class="td_arrow_right">
 &larr;
@@ -227,7 +225,7 @@ irq_fmc0_acq_end_i
 wb_cyc_i
 </td>
 <td  class="td_sym_center">
-&nbsp;
+
 </td>
 <td  class="td_pblock_right">
 
@@ -247,7 +245,7 @@ wb_sel_i[3:0]
 
 </td>
 <td  class="td_pblock_right">
-<b>FMC slot 2 trigger interrupt:</b>
+
 </td>
 <td  class="td_arrow_right">
 
@@ -264,10 +262,10 @@ wb_stb_i
 
 </td>
 <td  class="td_pblock_right">
-irq_fmc1_trig_i
+
 </td>
 <td  class="td_arrow_right">
-&larr;
+
 </td>
 </tr>
 <tr>
@@ -278,7 +276,7 @@ irq_fmc1_trig_i
 wb_we_i
 </td>
 <td  class="td_sym_center">
-&nbsp;
+
 </td>
 <td  class="td_pblock_right">
 
@@ -298,7 +296,7 @@ wb_ack_o
 
 </td>
 <td  class="td_pblock_right">
-<b>FMC slot 2 end of acquisition interrupt:</b>
+
 </td>
 <td  class="td_arrow_right">
 
@@ -315,10 +313,10 @@ wb_stall_o
 
 </td>
 <td  class="td_pblock_right">
-irq_fmc1_acq_end_i
+
 </td>
 <td  class="td_arrow_right">
-&larr;
+
 </td>
 </tr>
 <tr>
@@ -349,7 +347,7 @@ wb_int_o
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-irq_ctrl_eic_idr
+dma_eic_eic_idr
 </td>
 </tr>
 <tr>
@@ -582,37 +580,29 @@ Writing 1 disables handling of the interrupt associated with corresponding bit. 
 <td  class="td_unused">
 -
 </td>
-<td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC1_ACQ_END
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC1_TRIG
+DMA_ERROR
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0_ACQ_END
-</td>
-<td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0_TRIG
+DMA_DONE
 </td>
 </tr>
 </table>
 <ul>
 <li><b>
-FMC0_TRIG
-</b>[<i>write-only</i>]: FMC slot 1 trigger interrupt
-<br>write 1: disable interrupt 'FMC slot 1 trigger interrupt'<br>write 0: no effect
+DMA_DONE
+</b>[<i>write-only</i>]: DMA done interrupt
+<br>write 1: disable interrupt 'DMA done interrupt'<br>write 0: no effect
 <li><b>
-FMC0_ACQ_END
-</b>[<i>write-only</i>]: FMC slot 1 end of acquisition interrupt
-<br>write 1: disable interrupt 'FMC slot 1 end of acquisition interrupt'<br>write 0: no effect
-<li><b>
-FMC1_TRIG
-</b>[<i>write-only</i>]: FMC slot 2 trigger interrupt
-<br>write 1: disable interrupt 'FMC slot 2 trigger interrupt'<br>write 0: no effect
-<li><b>
-FMC1_ACQ_END
-</b>[<i>write-only</i>]: FMC slot 2 end of acquisition interrupt
-<br>write 1: disable interrupt 'FMC slot 2 end of acquisition interrupt'<br>write 0: no effect
+DMA_ERROR
+</b>[<i>write-only</i>]: DMA error interrupt
+<br>write 1: disable interrupt 'DMA error interrupt'<br>write 0: no effect
 </ul>
 <a name="EIC_IER"></a>
 <h3><a name="sect_3_2">3.2. Interrupt enable register</a></h3>
@@ -622,7 +612,7 @@ FMC1_ACQ_END
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-irq_ctrl_eic_ier
+dma_eic_eic_ier
 </td>
 </tr>
 <tr>
@@ -855,37 +845,29 @@ Writing 1 enables handling of the interrupt associated with corresponding bit. W
 <td  class="td_unused">
 -
 </td>
-<td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC1_ACQ_END
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC1_TRIG
+DMA_ERROR
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0_ACQ_END
-</td>
-<td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0_TRIG
+DMA_DONE
 </td>
 </tr>
 </table>
 <ul>
 <li><b>
-FMC0_TRIG
-</b>[<i>write-only</i>]: FMC slot 1 trigger interrupt
-<br>write 1: enable interrupt 'FMC slot 1 trigger interrupt'<br>write 0: no effect
+DMA_DONE
+</b>[<i>write-only</i>]: DMA done interrupt
+<br>write 1: enable interrupt 'DMA done interrupt'<br>write 0: no effect
 <li><b>
-FMC0_ACQ_END
-</b>[<i>write-only</i>]: FMC slot 1 end of acquisition interrupt
-<br>write 1: enable interrupt 'FMC slot 1 end of acquisition interrupt'<br>write 0: no effect
-<li><b>
-FMC1_TRIG
-</b>[<i>write-only</i>]: FMC slot 2 trigger interrupt
-<br>write 1: enable interrupt 'FMC slot 2 trigger interrupt'<br>write 0: no effect
-<li><b>
-FMC1_ACQ_END
-</b>[<i>write-only</i>]: FMC slot 2 end of acquisition interrupt
-<br>write 1: enable interrupt 'FMC slot 2 end of acquisition interrupt'<br>write 0: no effect
+DMA_ERROR
+</b>[<i>write-only</i>]: DMA error interrupt
+<br>write 1: enable interrupt 'DMA error interrupt'<br>write 0: no effect
 </ul>
 <a name="EIC_IMR"></a>
 <h3><a name="sect_3_3">3.3. Interrupt mask register</a></h3>
@@ -895,7 +877,7 @@ FMC1_ACQ_END
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-irq_ctrl_eic_imr
+dma_eic_eic_imr
 </td>
 </tr>
 <tr>
@@ -1128,37 +1110,29 @@ Shows which interrupts are enabled. 1 means that the interrupt associated with t
 <td  class="td_unused">
 -
 </td>
-<td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC1_ACQ_END
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC1_TRIG
+DMA_ERROR
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0_ACQ_END
-</td>
-<td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0_TRIG
+DMA_DONE
 </td>
 </tr>
 </table>
 <ul>
 <li><b>
-FMC0_TRIG
-</b>[<i>read-only</i>]: FMC slot 1 trigger interrupt
-<br>read 1: interrupt 'FMC slot 1 trigger interrupt' is enabled<br>read 0: interrupt 'FMC slot 1 trigger interrupt' is disabled
+DMA_DONE
+</b>[<i>read-only</i>]: DMA done interrupt
+<br>read 1: interrupt 'DMA done interrupt' is enabled<br>read 0: interrupt 'DMA done interrupt' is disabled
 <li><b>
-FMC0_ACQ_END
-</b>[<i>read-only</i>]: FMC slot 1 end of acquisition interrupt
-<br>read 1: interrupt 'FMC slot 1 end of acquisition interrupt' is enabled<br>read 0: interrupt 'FMC slot 1 end of acquisition interrupt' is disabled
-<li><b>
-FMC1_TRIG
-</b>[<i>read-only</i>]: FMC slot 2 trigger interrupt
-<br>read 1: interrupt 'FMC slot 2 trigger interrupt' is enabled<br>read 0: interrupt 'FMC slot 2 trigger interrupt' is disabled
-<li><b>
-FMC1_ACQ_END
-</b>[<i>read-only</i>]: FMC slot 2 end of acquisition interrupt
-<br>read 1: interrupt 'FMC slot 2 end of acquisition interrupt' is enabled<br>read 0: interrupt 'FMC slot 2 end of acquisition interrupt' is disabled
+DMA_ERROR
+</b>[<i>read-only</i>]: DMA error interrupt
+<br>read 1: interrupt 'DMA error interrupt' is enabled<br>read 0: interrupt 'DMA error interrupt' is disabled
 </ul>
 <a name="EIC_ISR"></a>
 <h3><a name="sect_3_4">3.4. Interrupt status register</a></h3>
@@ -1168,7 +1142,7 @@ FMC1_ACQ_END
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-irq_ctrl_eic_isr
+dma_eic_eic_isr
 </td>
 </tr>
 <tr>
@@ -1401,50 +1375,42 @@ Each bit represents the state of corresponding interrupt. 1 means the interrupt 
 <td  class="td_unused">
 -
 </td>
-<td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC1_ACQ_END
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC1_TRIG
+DMA_ERROR
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0_ACQ_END
-</td>
-<td style="border: solid 1px black;" colspan=1  class="td_field">
-FMC0_TRIG
+DMA_DONE
 </td>
 </tr>
 </table>
 <ul>
 <li><b>
-FMC0_TRIG
-</b>[<i>read/write</i>]: FMC slot 1 trigger interrupt
-<br>read 1: interrupt 'FMC slot 1 trigger interrupt' is pending<br>read 0: interrupt not pending<br>write 1: clear interrupt 'FMC slot 1 trigger interrupt'<br>write 0: no effect
+DMA_DONE
+</b>[<i>read/write</i>]: DMA done interrupt
+<br>read 1: interrupt 'DMA done interrupt' is pending<br>read 0: interrupt not pending<br>write 1: clear interrupt 'DMA done interrupt'<br>write 0: no effect
 <li><b>
-FMC0_ACQ_END
-</b>[<i>read/write</i>]: FMC slot 1 end of acquisition interrupt
-<br>read 1: interrupt 'FMC slot 1 end of acquisition interrupt' is pending<br>read 0: interrupt not pending<br>write 1: clear interrupt 'FMC slot 1 end of acquisition interrupt'<br>write 0: no effect
-<li><b>
-FMC1_TRIG
-</b>[<i>read/write</i>]: FMC slot 2 trigger interrupt
-<br>read 1: interrupt 'FMC slot 2 trigger interrupt' is pending<br>read 0: interrupt not pending<br>write 1: clear interrupt 'FMC slot 2 trigger interrupt'<br>write 0: no effect
-<li><b>
-FMC1_ACQ_END
-</b>[<i>read/write</i>]: FMC slot 2 end of acquisition interrupt
-<br>read 1: interrupt 'FMC slot 2 end of acquisition interrupt' is pending<br>read 0: interrupt not pending<br>write 1: clear interrupt 'FMC slot 2 end of acquisition interrupt'<br>write 0: no effect
+DMA_ERROR
+</b>[<i>read/write</i>]: DMA error interrupt
+<br>read 1: interrupt 'DMA error interrupt' is pending<br>read 0: interrupt not pending<br>write 1: clear interrupt 'DMA error interrupt'<br>write 0: no effect
 </ul>
 
 
 <h3><a name="sect_5_0">5. Interrupts</a></h3>
-<a name="FMC0_TRIG"></a>
-<h3><a name="sect_5_1">5.1. FMC slot 1 trigger interrupt</a></h3>
+<a name="DMA_DONE"></a>
+<h3><a name="sect_5_1">5.1. DMA done interrupt</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td >
-irq_ctrl_fmc0_trig
+dma_eic_dma_done
 </td>
 </tr>
 <tr>
@@ -1452,7 +1418,7 @@ irq_ctrl_fmc0_trig
 <b>C prefix: </b>
 </td>
 <td >
-FMC0_TRIG
+DMA_DONE
 </td>
 </tr>
 <tr>
@@ -1464,16 +1430,16 @@ rising edge
 </td>
 </tr>
 </table>
-<p>FMC slot 1 trigger interrupt line (rising edge sensitive).</p>
-<a name="FMC0_ACQ_END"></a>
-<h3><a name="sect_5_2">5.2. FMC slot 1 end of acquisition interrupt</a></h3>
+<p>DMA done interrupt line (rising edge sensitive).</p>
+<a name="DMA_ERROR"></a>
+<h3><a name="sect_5_2">5.2. DMA error interrupt</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td >
-irq_ctrl_fmc0_acq_end
+dma_eic_dma_error
 </td>
 </tr>
 <tr>
@@ -1481,7 +1447,7 @@ irq_ctrl_fmc0_acq_end
 <b>C prefix: </b>
 </td>
 <td >
-FMC0_ACQ_END
+DMA_ERROR
 </td>
 </tr>
 <tr>
@@ -1493,65 +1459,7 @@ rising edge
 </td>
 </tr>
 </table>
-<p>FMC slot 1 end of acquisition interrupt line (rising edge sensitive).</p>
-<a name="FMC1_TRIG"></a>
-<h3><a name="sect_5_3">5.3. FMC slot 2 trigger interrupt</a></h3>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td >
-<b>HW prefix: </b>
-</td>
-<td >
-irq_ctrl_fmc1_trig
-</td>
-</tr>
-<tr>
-<td >
-<b>C prefix: </b>
-</td>
-<td >
-FMC1_TRIG
-</td>
-</tr>
-<tr>
-<td >
-<b>Trigger: </b>
-</td>
-<td >
-rising edge
-</td>
-</tr>
-</table>
-<p>FMC slot 2 trigger interrupt line (rising edge sensitive).</p>
-<a name="FMC1_ACQ_END"></a>
-<h3><a name="sect_5_4">5.4. FMC slot 2 end of acquisition interrupt</a></h3>
-<table cellpadding=0 cellspacing=0 border=0>
-<tr>
-<td >
-<b>HW prefix: </b>
-</td>
-<td >
-irq_ctrl_fmc1_acq_end
-</td>
-</tr>
-<tr>
-<td >
-<b>C prefix: </b>
-</td>
-<td >
-FMC1_ACQ_END
-</td>
-</tr>
-<tr>
-<td >
-<b>Trigger: </b>
-</td>
-<td >
-rising edge
-</td>
-</tr>
-</table>
-<p>FMC slot 2 end of acquisition interrupt line (rising edge sensitive).</p>
+<p>DMA error interrupt line (rising edge sensitive).</p>
 
 </BODY>
 </HTML>

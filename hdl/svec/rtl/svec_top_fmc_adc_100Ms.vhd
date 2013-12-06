@@ -279,26 +279,24 @@ architecture rtl of svec_top_fmc_adc_100Ms is
       );
   end component carrier_csr;
 
-  component irq_controller
+  component fmc_adc_eic
     port (
-      rst_n_i            : in  std_logic;
-      clk_sys_i          : in  std_logic;
-      wb_adr_i           : in  std_logic_vector(1 downto 0);
-      wb_dat_i           : in  std_logic_vector(31 downto 0);
-      wb_dat_o           : out std_logic_vector(31 downto 0);
-      wb_cyc_i           : in  std_logic;
-      wb_sel_i           : in  std_logic_vector(3 downto 0);
-      wb_stb_i           : in  std_logic;
-      wb_we_i            : in  std_logic;
-      wb_ack_o           : out std_logic;
-      wb_stall_o         : out std_logic;
-      wb_int_o           : out std_logic;
-      irq_fmc0_trig_i    : in  std_logic;
-      irq_fmc0_acq_end_i : in  std_logic;
-      irq_fmc1_trig_i    : in  std_logic;
-      irq_fmc1_acq_end_i : in  std_logic
+      rst_n_i       : in  std_logic;
+      clk_sys_i     : in  std_logic;
+      wb_adr_i      : in  std_logic_vector(1 downto 0);
+      wb_dat_i      : in  std_logic_vector(31 downto 0);
+      wb_dat_o      : out std_logic_vector(31 downto 0);
+      wb_cyc_i      : in  std_logic;
+      wb_sel_i      : in  std_logic_vector(3 downto 0);
+      wb_stb_i      : in  std_logic;
+      wb_we_i       : in  std_logic;
+      wb_ack_o      : out std_logic;
+      wb_stall_o    : out std_logic;
+      wb_int_o      : out std_logic;
+      irq_trig_i    : in  std_logic;
+      irq_acq_end_i : in  std_logic
       );
-  end component irq_controller;
+  end component fmc_adc_eic;
 
 
   ------------------------------------------------------------------------------
@@ -308,7 +306,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   ------------------------------------------------------------------------------
 
   -- Number of master port(s) on the wishbone crossbar
-  constant c_NUM_WB_MASTERS : integer := 12;
+  constant c_NUM_WB_MASTERS : integer := 14;
 
   -- Number of slave port(s) on the wishbone crossbar
   constant c_NUM_WB_SLAVES : integer := 1;
@@ -320,51 +318,21 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   constant c_WB_SLAVE_I2C          : integer := 0;   -- Carrier I2C master
   constant c_WB_SLAVE_ONEWIRE      : integer := 1;   -- Carrier onewire interface
   constant c_WB_SLAVE_SVEC_CSR     : integer := 2;   -- SVEC control and status registers
-  constant c_WB_SLAVE_INT          : integer := 3;   -- Interrupt controller
-  constant c_WB_SLAVE_FMC0_TIMETAG : integer := 4;   -- FMC slot 1 timetag core
-  constant c_WB_SLAVE_FMC0_DDR_DAT : integer := 5;   -- FMC slot 1 DDR data
-  constant c_WB_SLAVE_FMC0_DDR_ADR : integer := 6;   -- FMC slot 1 DDR address
-  constant c_WB_SLAVE_FMC0_ADC     : integer := 7;   -- FMC slot 1 ADC mezzanine
-  constant c_WB_SLAVE_FMC1_TIMETAG : integer := 8;   -- FMC slot 2 timetag core
-  constant c_WB_SLAVE_FMC1_DDR_DAT : integer := 9;   -- FMC slot 2 DDR data
-  constant c_WB_SLAVE_FMC1_DDR_ADR : integer := 10;  -- FMC slot 2 DDR address
-  constant c_WB_SLAVE_FMC1_ADC     : integer := 11;  -- FMC slot 2 ADC mezzanine
+  constant c_WB_SLAVE_VIC          : integer := 3;   -- Vectored interrupt controller
+  constant c_WB_SLAVE_FMC0_EIC     : integer := 4;   -- FMC slot 1 interrupt controller
+  constant c_WB_SLAVE_FMC0_TIMETAG : integer := 5;   -- FMC slot 1 timetag core
+  constant c_WB_SLAVE_FMC0_DDR_DAT : integer := 6;   -- FMC slot 1 DDR data
+  constant c_WB_SLAVE_FMC0_DDR_ADR : integer := 7;   -- FMC slot 1 DDR address
+  constant c_WB_SLAVE_FMC0_ADC     : integer := 8;   -- FMC slot 1 ADC mezzanine
+  constant c_WB_SLAVE_FMC1_EIC     : integer := 9;   -- FMC slot 2 interrupt controller
+  constant c_WB_SLAVE_FMC1_TIMETAG : integer := 10;  -- FMC slot 2 timetag core
+  constant c_WB_SLAVE_FMC1_DDR_DAT : integer := 11;  -- FMC slot 2 DDR data
+  constant c_WB_SLAVE_FMC1_DDR_ADR : integer := 12;  -- FMC slot 2 DDR address
+  constant c_WB_SLAVE_FMC1_ADC     : integer := 13;  -- FMC slot 2 ADC mezzanine
 
 
   -- Devices sdb description
-  constant c_DMA_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000003F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000601",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-DMA.Control     ")));
-
-  constant c_ONEWIRE_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"0000000000000007",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000602",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-Onewire.Control ")));
-
-  constant c_SVEC_CSR_SDB_DEVICE : t_sdb_device := (
+  constant c_wb_svec_csr_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
     abi_ver_major => x"01",
     abi_ver_minor => x"01",
@@ -380,7 +348,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
         date      => x"20121116",
         name      => "WB-SVEC-CSR        ")));
 
-  constant c_TIMETAG_SDB_DEVICE : t_sdb_device := (
+  constant c_wb_timetag_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
     abi_ver_major => x"01",
     abi_ver_minor => x"01",
@@ -396,7 +364,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
         date      => x"20121116",
         name      => "WB-Timetag-Core    ")));
 
-  constant c_INT_SDB_DEVICE : t_sdb_device := (
+  constant c_wb_eic_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
     abi_ver_major => x"01",
     abi_ver_minor => x"01",
@@ -412,7 +380,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
         date      => x"20121116",
         name      => "WB-Int.Control     ")));
 
-  constant c_I2C_SDB_DEVICE : t_sdb_device := (
+  constant c_wb_ddr_dat_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
     abi_ver_major => x"01",
     abi_ver_minor => x"01",
@@ -420,23 +388,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000001F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000606",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-I2C.Control     ")));
-
-  constant c_DDR_DAT_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"0000000000000007",
+      addr_last   => x"0000000000000FFF",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"10006610",
@@ -444,7 +396,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
         date      => x"20130704",
         name      => "WB-DDR-Data-Access ")));
 
-  constant c_DDR_ADR_SDB_DEVICE : t_sdb_device := (
+  constant c_wb_ddr_adr_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
     abi_ver_major => x"01",
     abi_ver_minor => x"01",
@@ -452,7 +404,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"0000000000000007",
+      addr_last   => x"0000000000000003",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"10006611",
@@ -461,31 +413,39 @@ architecture rtl of svec_top_fmc_adc_100Ms is
         name      => "WB-DDR-Addr-Access ")));
 
   -- f_xwb_bridge_manual_sdb(size, sdb_addr)
-  constant c_FMC_ADC0_SDB_BRIDGE : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00003000");
-  constant c_FMC_ADC1_SDB_BRIDGE : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00006000");
+  -- Note: sdb_addr is the sdb records address relative to the parent interconnect
+  constant c_fmc0_bridge_sdb : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00004000");
+  constant c_fmc1_bridge_sdb : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00008000");
 
   -- sdb header address
   constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";
 
   -- Wishbone crossbar layout
-  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(14 downto 0) :=
+  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(16 downto 0) :=
     (
-      0  => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001000"),
-      1  => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001100"),
-      2  => f_sdb_embed_device(c_SVEC_CSR_SDB_DEVICE, x"00001200"),
-      3  => f_sdb_embed_device(c_INT_SDB_DEVICE, x"00001300"),
-      4  => f_sdb_embed_device(c_TIMETAG_SDB_DEVICE, x"00002000"),
-      5  => f_sdb_embed_device(c_DDR_DAT_SDB_DEVICE, x"00002100"),
-      6  => f_sdb_embed_device(c_DDR_ADR_SDB_DEVICE, x"00002200"),
-      7  => f_sdb_embed_bridge(c_FMC_ADC0_SDB_BRIDGE, x"00004000"),
-      8  => f_sdb_embed_device(c_TIMETAG_SDB_DEVICE, x"00006000"),
-      9  => f_sdb_embed_device(c_DDR_DAT_SDB_DEVICE, x"00006100"),
-      10 => f_sdb_embed_device(c_DDR_ADR_SDB_DEVICE, x"00006200"),
-      11 => f_sdb_embed_bridge(c_FMC_ADC1_SDB_BRIDGE, x"00008000"),
-      12 => f_sdb_embed_repo_url(c_SDB_REPO_URL),
-      13 => f_sdb_embed_synthesis(c_SDB_SYNTHESIS),
-      14 => f_sdb_embed_integration(c_SDB_INTEGRATION)
+      0  => f_sdb_embed_device(c_xwb_i2c_master_sdb, x"00001000"),
+      1  => f_sdb_embed_device(c_xwb_onewire_master_sdb, x"00001100"),
+      2  => f_sdb_embed_device(c_wb_svec_csr_sdb, x"00001200"),
+      3  => f_sdb_embed_device(c_xwb_vic_sdb, x"00001300"),
+      4  => f_sdb_embed_device(c_wb_eic_sdb, x"00002000"),
+      5  => f_sdb_embed_device(c_wb_timetag_sdb, x"00002100"),
+      6  => f_sdb_embed_device(c_wb_ddr_adr_sdb, x"00002200"),
+      7  => f_sdb_embed_device(c_wb_ddr_dat_sdb, x"00003000"),
+      8  => f_sdb_embed_bridge(c_fmc0_bridge_sdb, x"00004000"),
+      9  => f_sdb_embed_device(c_wb_eic_sdb, x"00006000"),
+      10 => f_sdb_embed_device(c_wb_timetag_sdb, x"00006100"),
+      11 => f_sdb_embed_device(c_wb_ddr_adr_sdb, x"00006200"),
+      12 => f_sdb_embed_device(c_wb_ddr_dat_sdb, x"00007000"),
+      13 => f_sdb_embed_bridge(c_fmc1_bridge_sdb, x"00008000"),
+      14 => f_sdb_embed_repo_url(c_repo_url_sdb),
+      15 => f_sdb_embed_synthesis(c_synthesis_sdb),
+      16 => f_sdb_embed_integration(c_integration_sdb)
       );
+
+  -- VIC default vector setting
+  constant c_VIC_VECTOR_TABLE : t_wishbone_address_array(0 to 1) :=
+    (0 => x"00002000",
+     1 => x"00006000");
 
   ------------------------------------------------------------------------------
   -- Other constants declaration
@@ -584,6 +544,8 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal irq_to_vme           : std_logic;
   signal irq_to_vme_t         : std_logic;
   signal irq_to_vme_sync      : std_logic;
+  signal fmc0_irq             : std_logic;
+  signal fmc1_irq             : std_logic;
 
   -- Front panel LED control
   signal led_state     : std_logic_vector(15 downto 0);
@@ -952,31 +914,78 @@ begin
   cnx_master_in(c_WB_SLAVE_SVEC_CSR).int   <= '0';
 
   ------------------------------------------------------------------------------
-  -- Interrupt controller
+  -- Vectored interrupt controller (VIC)
   ------------------------------------------------------------------------------
-  cmp_irq_controller : irq_controller
+  cmp_vic : xwb_vic
+    generic map (
+      g_interface_mode      => PIPELINED,
+      g_address_granularity => BYTE,
+      g_num_interrupts      => 2,
+      g_init_vectors        => c_VIC_VECTOR_TABLE)
+    port map (
+      clk_sys_i    => sys_clk_125,
+      rst_n_i      => sys_rst_n,
+      slave_i      => cnx_master_out(c_WB_SLAVE_VIC),
+      slave_o      => cnx_master_in(c_WB_SLAVE_VIC),
+      irqs_i(0)    => fmc0_irq,
+      irqs_i(1)    => fmc1_irq,
+      irq_master_o => irq_to_vme);
+
+  ------------------------------------------------------------------------------
+  -- FMC0 interrupt controller
+  ------------------------------------------------------------------------------
+  cmp_fmc0_eic : fmc_adc_eic
     port map(
-      rst_n_i            => sys_rst_n,
-      clk_sys_i          => sys_clk_125,
-      wb_adr_i           => cnx_master_out(c_WB_SLAVE_INT).adr(3 downto 2),  -- cnx_master_out.adr is byte address
-      wb_dat_i           => cnx_master_out(c_WB_SLAVE_INT).dat,
-      wb_dat_o           => cnx_master_in(c_WB_SLAVE_INT).dat,
-      wb_cyc_i           => cnx_master_out(c_WB_SLAVE_INT).cyc,
-      wb_sel_i           => cnx_master_out(c_WB_SLAVE_INT).sel,
-      wb_stb_i           => cnx_master_out(c_WB_SLAVE_INT).stb,
-      wb_we_i            => cnx_master_out(c_WB_SLAVE_INT).we,
-      wb_ack_o           => cnx_master_in(c_WB_SLAVE_INT).ack,
-      wb_stall_o         => cnx_master_in(c_WB_SLAVE_INT).stall,
-      wb_int_o           => irq_to_vme,
-      irq_fmc0_trig_i    => trig_p(0),
-      irq_fmc0_acq_end_i => acq_end_irq_p(0),
-      irq_fmc1_trig_i    => trig_p(1),
-      irq_fmc1_acq_end_i => acq_end_irq_p(1)
+      rst_n_i       => sys_rst_n,
+      clk_sys_i     => sys_clk_125,
+      wb_adr_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).adr(3 downto 2),  -- cnx_master_out.adr is byte address
+      wb_dat_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).dat,
+      wb_dat_o      => cnx_master_in(c_WB_SLAVE_FMC0_EIC).dat,
+      wb_cyc_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).cyc,
+      wb_sel_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).sel,
+      wb_stb_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).stb,
+      wb_we_i       => cnx_master_out(c_WB_SLAVE_FMC0_EIC).we,
+      wb_ack_o      => cnx_master_in(c_WB_SLAVE_FMC0_EIC).ack,
+      wb_stall_o    => cnx_master_in(c_WB_SLAVE_FMC0_EIC).stall,
+      wb_int_o      => fmc0_irq,
+      irq_trig_i    => trig_p(0),
+      irq_acq_end_i => acq_end_irq_p(0)
       );
 
   -- Unused wishbone signals
-  cnx_master_in(c_WB_SLAVE_INT).err <= '0';
-  cnx_master_in(c_WB_SLAVE_INT).rty <= '0';
+  cnx_master_in(c_WB_SLAVE_FMC0_EIC).err <= '0';
+  cnx_master_in(c_WB_SLAVE_FMC0_EIC).rty <= '0';
+  cnx_master_in(c_WB_SLAVE_FMC0_EIC).int <= '0';
+
+  ------------------------------------------------------------------------------
+  -- FMC1 interrupt controller
+  ------------------------------------------------------------------------------
+  cmp_fmc1_eic : fmc_adc_eic
+    port map(
+      rst_n_i       => sys_rst_n,
+      clk_sys_i     => sys_clk_125,
+      wb_adr_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).adr(3 downto 2),  -- cnx_master_out.adr is byte address
+      wb_dat_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).dat,
+      wb_dat_o      => cnx_master_in(c_WB_SLAVE_FMC1_EIC).dat,
+      wb_cyc_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).cyc,
+      wb_sel_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).sel,
+      wb_stb_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).stb,
+      wb_we_i       => cnx_master_out(c_WB_SLAVE_FMC1_EIC).we,
+      wb_ack_o      => cnx_master_in(c_WB_SLAVE_FMC1_EIC).ack,
+      wb_stall_o    => cnx_master_in(c_WB_SLAVE_FMC1_EIC).stall,
+      wb_int_o      => fmc1_irq,
+      irq_trig_i    => trig_p(1),
+      irq_acq_end_i => acq_end_irq_p(1)
+      );
+
+  -- Unused wishbone signals
+  cnx_master_in(c_WB_SLAVE_FMC1_EIC).err <= '0';
+  cnx_master_in(c_WB_SLAVE_FMC1_EIC).rty <= '0';
+  cnx_master_in(c_WB_SLAVE_FMC1_EIC).int <= '0';
+
+  ------------------------------------------------------------------------------
+  -- End of acquisition interrupt generation
+  ------------------------------------------------------------------------------
 
   -- Detects end of adc core writing to ddr
   l_ddr_wr_fifo_empty : for I in 0 to c_NB_FMC_SLOTS-1 generate
@@ -1621,7 +1630,7 @@ begin
   led_state(11 downto 10) <= fmc0_acq_end_irq_led & '0';
 
   -- LED 7 : 
-  led_state(13 downto 12) <= '0' & cnx_master_in(c_WB_SLAVE_INT).int;
+  led_state(13 downto 12) <= '0' & fmc0_irq;
 
   -- LED 8 : 
   led_state(15 downto 14) <= '0' & irq_to_vme_sync;

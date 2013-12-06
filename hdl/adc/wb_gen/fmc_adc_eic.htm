@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>irq_controller_regs</TITLE>
+<TITLE>fmc_adc_eic</TITLE>
 <STYLE TYPE="text/css" MEDIA="all">
 
 	<!--
@@ -27,16 +27,20 @@
 </STYLE>
 </HEAD>
 <BODY>
-<h1 class="heading">irq_controller_regs</h1>
-<h3>IRQ controller registers</h3>
-<p>Wishbone slave for registers related to IRQ controller</p>
+<h1 class="heading">fmc_adc_eic</h1>
+<h3>Fmc-adc enhanced interrupt controller</h3>
+<p>Enhanced interrrupt controller for one fmc-adc mezzanine.</p>
 <h3>Contents:</h3>
 <span style="margin-left: 0px; ">1. <A href="#sect_1_0">Memory map summary</a></span><br/>
 <span style="margin-left: 0px; ">2. <A href="#sect_2_0">HDL symbol</a></span><br/>
 <span style="margin-left: 0px; ">3. <A href="#sect_3_0">Register description</a></span><br/>
-<span style="margin-left: 20px; ">3.1. <A href="#sect_3_1">Multiple interrupt register</a></span><br/>
-<span style="margin-left: 20px; ">3.2. <A href="#sect_3_2">Interrupt sources register </a></span><br/>
-<span style="margin-left: 20px; ">3.3. <A href="#sect_3_3">Interrupt enable mask register</a></span><br/>
+<span style="margin-left: 20px; ">3.1. <A href="#sect_3_1">Interrupt disable register</a></span><br/>
+<span style="margin-left: 20px; ">3.2. <A href="#sect_3_2">Interrupt enable register</a></span><br/>
+<span style="margin-left: 20px; ">3.3. <A href="#sect_3_3">Interrupt mask register</a></span><br/>
+<span style="margin-left: 20px; ">3.4. <A href="#sect_3_4">Interrupt status register</a></span><br/>
+<span style="margin-left: 0px; ">5. <A href="#sect_5_0">Interrupts</a></span><br/>
+<span style="margin-left: 20px; ">5.1. <A href="#sect_5_1">Trigger interrupt</a></span><br/>
+<span style="margin-left: 20px; ">5.2. <A href="#sect_5_2">End of acquisition interrupt</a></span><br/>
 <h3><a name="sect_1_0">1. Memory map summary</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -64,13 +68,13 @@ C prefix
 REG
 </td>
 <td >
-<A href="#MULTI_IRQ">Multiple interrupt register</a>
+<A href="#EIC_IDR">Interrupt disable register</a>
 </td>
 <td  class="td_code">
-irq_ctrl_multi_irq
+eic_eic_idr
 </td>
 <td  class="td_code">
-MULTI_IRQ
+EIC_IDR
 </td>
 </tr>
 <tr class="tr_even">
@@ -81,13 +85,13 @@ MULTI_IRQ
 REG
 </td>
 <td >
-<A href="#SRC">Interrupt sources register </a>
+<A href="#EIC_IER">Interrupt enable register</a>
 </td>
 <td  class="td_code">
-irq_ctrl_src
+eic_eic_ier
 </td>
 <td  class="td_code">
-SRC
+EIC_IER
 </td>
 </tr>
 <tr class="tr_odd">
@@ -98,13 +102,30 @@ SRC
 REG
 </td>
 <td >
-<A href="#EN_MASK">Interrupt enable mask register</a>
+<A href="#EIC_IMR">Interrupt mask register</a>
 </td>
 <td  class="td_code">
-irq_ctrl_en_mask
+eic_eic_imr
 </td>
 <td  class="td_code">
-EN_MASK
+EIC_IMR
+</td>
+</tr>
+<tr class="tr_even">
+<td  class="td_code">
+0x3
+</td>
+<td >
+REG
+</td>
+<td >
+<A href="#EIC_ISR">Interrupt status register</a>
+</td>
+<td  class="td_code">
+eic_eic_isr
+</td>
+<td  class="td_code">
+EIC_ISR
 </td>
 </tr>
 </table>
@@ -122,7 +143,7 @@ rst_n_i
 
 </td>
 <td  class="td_pblock_right">
-<b>Multiple interrupt register:</b>
+<b>Trigger interrupt:</b>
 </td>
 <td  class="td_arrow_right">
 
@@ -139,10 +160,10 @@ clk_sys_i
 
 </td>
 <td  class="td_pblock_right">
-irq_ctrl_multi_irq_o[31:0]
+irq_trig_i
 </td>
 <td  class="td_arrow_right">
-&rArr;
+&larr;
 </td>
 </tr>
 <tr>
@@ -151,40 +172,6 @@ irq_ctrl_multi_irq_o[31:0]
 </td>
 <td  class="td_pblock_left">
 wb_adr_i[1:0]
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-irq_ctrl_multi_irq_i[31:0]
-</td>
-<td  class="td_arrow_right">
-&lArr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-&rArr;
-</td>
-<td  class="td_pblock_left">
-wb_dat_i[31:0]
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-irq_ctrl_multi_irq_load_o
-</td>
-<td  class="td_arrow_right">
-&rarr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-&lArr;
-</td>
-<td  class="td_pblock_left">
-wb_dat_o[31:0]
 </td>
 <td  class="td_sym_center">
 &nbsp;
@@ -198,6 +185,40 @@ wb_dat_o[31:0]
 </tr>
 <tr>
 <td  class="td_arrow_left">
+&rArr;
+</td>
+<td  class="td_pblock_left">
+wb_dat_i[31:0]
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+<b>End of acquisition interrupt:</b>
+</td>
+<td  class="td_arrow_right">
+
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+&lArr;
+</td>
+<td  class="td_pblock_left">
+wb_dat_o[31:0]
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+irq_acq_end_i
+</td>
+<td  class="td_arrow_right">
+&larr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
 &rarr;
 </td>
 <td  class="td_pblock_left">
@@ -207,7 +228,7 @@ wb_cyc_i
 
 </td>
 <td  class="td_pblock_right">
-<b>Interrupt sources register :</b>
+
 </td>
 <td  class="td_arrow_right">
 
@@ -224,10 +245,10 @@ wb_sel_i[3:0]
 
 </td>
 <td  class="td_pblock_right">
-irq_ctrl_src_o[31:0]
+
 </td>
 <td  class="td_arrow_right">
-&rArr;
+
 </td>
 </tr>
 <tr>
@@ -241,10 +262,10 @@ wb_stb_i
 
 </td>
 <td  class="td_pblock_right">
-irq_ctrl_src_i[31:0]
+
 </td>
 <td  class="td_arrow_right">
-&lArr;
+
 </td>
 </tr>
 <tr>
@@ -258,10 +279,10 @@ wb_we_i
 
 </td>
 <td  class="td_pblock_right">
-irq_ctrl_src_load_o
+
 </td>
 <td  class="td_arrow_right">
-&rarr;
+
 </td>
 </tr>
 <tr>
@@ -272,7 +293,7 @@ irq_ctrl_src_load_o
 wb_ack_o
 </td>
 <td  class="td_sym_center">
-&nbsp;
+
 </td>
 <td  class="td_pblock_right">
 
@@ -292,7 +313,7 @@ wb_stall_o
 
 </td>
 <td  class="td_pblock_right">
-<b>Interrupt enable mask register:</b>
+
 </td>
 <td  class="td_arrow_right">
 
@@ -300,33 +321,33 @@ wb_stall_o
 </tr>
 <tr>
 <td  class="td_arrow_left">
-
+&larr;
 </td>
 <td  class="td_pblock_left">
-
+wb_int_o
 </td>
 <td  class="td_sym_center">
 
 </td>
 <td  class="td_pblock_right">
-irq_ctrl_en_mask_o[31:0]
+
 </td>
 <td  class="td_arrow_right">
-&rArr;
+
 </td>
 </tr>
 </table>
 
 <h3><a name="sect_3_0">3. Register description</a></h3>
-<a name="MULTI_IRQ"></a>
-<h3><a name="sect_3_1">3.1. Multiple interrupt register</a></h3>
+<a name="EIC_IDR"></a>
+<h3><a name="sect_3_1">3.1. Interrupt disable register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-irq_ctrl_multi_irq
+eic_eic_idr
 </td>
 </tr>
 <tr>
@@ -342,7 +363,7 @@ irq_ctrl_multi_irq
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-MULTI_IRQ
+EIC_IDR
 </td>
 </tr>
 <tr>
@@ -355,7 +376,7 @@ MULTI_IRQ
 </tr>
 </table>
 <p>
-Multiple interrupts occurs before irq source is read.<br>Write '1' to clear a bit.<br><br>Bit 0: DMA done.<br>Bit 1: DMA error.<br>Bit 2: Trigger.<br>Bit 3: Acquisition end.
+Writing 1 disables handling of the interrupt associated with corresponding bit. Writin 0 has no effect.
 </p>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -385,29 +406,29 @@ Multiple interrupts occurs before irq source is read.<br>Write '1' to clear a bi
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-MULTI_IRQ[31:24]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -439,29 +460,29 @@ MULTI_IRQ[31:24]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-MULTI_IRQ[23:16]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -493,29 +514,29 @@ MULTI_IRQ[23:16]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-MULTI_IRQ[15:8]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -547,46 +568,51 @@ MULTI_IRQ[15:8]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-MULTI_IRQ[7:0]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+ACQ_END
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+TRIG
 </td>
 </tr>
 </table>
 <ul>
 <li><b>
-MULTI_IRQ
-</b>[<i>read/write</i>]: Multiple interrupt
+TRIG
+</b>[<i>write-only</i>]: Trigger interrupt
+<br>write 1: disable interrupt 'Trigger interrupt'<br>write 0: no effect
+<li><b>
+ACQ_END
+</b>[<i>write-only</i>]: End of acquisition interrupt
+<br>write 1: disable interrupt 'End of acquisition interrupt'<br>write 0: no effect
 </ul>
-<a name="SRC"></a>
-<h3><a name="sect_3_2">3.2. Interrupt sources register </a></h3>
+<a name="EIC_IER"></a>
+<h3><a name="sect_3_2">3.2. Interrupt enable register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-irq_ctrl_src
+eic_eic_ier
 </td>
 </tr>
 <tr>
@@ -602,7 +628,7 @@ irq_ctrl_src
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-SRC
+EIC_IER
 </td>
 </tr>
 <tr>
@@ -615,7 +641,7 @@ SRC
 </tr>
 </table>
 <p>
-Indicates the interrupt source.<br>Write '1' to clear a bit.<br><br>Bit 0: DMA done.<br>Bit 1: DMA error.<br>Bit 2: Trigger.<br>Bit 3: Acquisition end.
+Writing 1 enables handling of the interrupt associated with corresponding bit. Writin 0 has no effect.
 </p>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -645,29 +671,29 @@ Indicates the interrupt source.<br>Write '1' to clear a bit.<br><br>Bit 0: DMA d
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-SRC[31:24]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -699,29 +725,29 @@ SRC[31:24]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-SRC[23:16]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -753,29 +779,29 @@ SRC[23:16]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-SRC[15:8]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -807,46 +833,51 @@ SRC[15:8]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-SRC[7:0]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+ACQ_END
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+TRIG
 </td>
 </tr>
 </table>
 <ul>
 <li><b>
-SRC
-</b>[<i>read/write</i>]: Interrupt sources
+TRIG
+</b>[<i>write-only</i>]: Trigger interrupt
+<br>write 1: enable interrupt 'Trigger interrupt'<br>write 0: no effect
+<li><b>
+ACQ_END
+</b>[<i>write-only</i>]: End of acquisition interrupt
+<br>write 1: enable interrupt 'End of acquisition interrupt'<br>write 0: no effect
 </ul>
-<a name="EN_MASK"></a>
-<h3><a name="sect_3_3">3.3. Interrupt enable mask register</a></h3>
+<a name="EIC_IMR"></a>
+<h3><a name="sect_3_3">3.3. Interrupt mask register</a></h3>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
 <td >
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-irq_ctrl_en_mask
+eic_eic_imr
 </td>
 </tr>
 <tr>
@@ -862,7 +893,7 @@ irq_ctrl_en_mask
 <b>C prefix: </b>
 </td>
 <td  class="td_code">
-EN_MASK
+EIC_IMR
 </td>
 </tr>
 <tr>
@@ -875,7 +906,7 @@ EN_MASK
 </tr>
 </table>
 <p>
-Bit mask to independently enable interrupt sources.<br><br>Bit 0: DMA done.<br>Bit 1: DMA error.<br>Bit 2: Trigger.<br>Bit 3: Acquisition end.
+Shows which interrupts are enabled. 1 means that the interrupt associated with the bitfield is enabled
 </p>
 <table cellpadding=0 cellspacing=0 border=0>
 <tr>
@@ -905,29 +936,29 @@ Bit mask to independently enable interrupt sources.<br><br>Bit 0: DMA done.<br>B
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-EN_MASK[31:24]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -959,29 +990,29 @@ EN_MASK[31:24]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-EN_MASK[23:16]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1013,29 +1044,29 @@ EN_MASK[23:16]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-EN_MASK[15:8]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1067,39 +1098,368 @@ EN_MASK[15:8]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-EN_MASK[7:0]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+ACQ_END
 </td>
-<td >
-
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+TRIG
 </td>
 </tr>
 </table>
 <ul>
 <li><b>
-EN_MASK
-</b>[<i>read/write</i>]: Interrupt enable mask
+TRIG
+</b>[<i>read-only</i>]: Trigger interrupt
+<br>read 1: interrupt 'Trigger interrupt' is enabled<br>read 0: interrupt 'Trigger interrupt' is disabled
+<li><b>
+ACQ_END
+</b>[<i>read-only</i>]: End of acquisition interrupt
+<br>read 1: interrupt 'End of acquisition interrupt' is enabled<br>read 0: interrupt 'End of acquisition interrupt' is disabled
+</ul>
+<a name="EIC_ISR"></a>
+<h3><a name="sect_3_4">3.4. Interrupt status register</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td  class="td_code">
+eic_eic_isr
+</td>
+</tr>
+<tr>
+<td >
+<b>HW address: </b>
+</td>
+<td  class="td_code">
+0x3
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td  class="td_code">
+EIC_ISR
+</td>
+</tr>
+<tr>
+<td >
+<b>C offset: </b>
+</td>
+<td  class="td_code">
+0xc
+</td>
+</tr>
+</table>
+<p>
+Each bit represents the state of corresponding interrupt. 1 means the interrupt is pending. Writing 1 to a bit clears the corresponding interrupt. Writing 0 has no effect.
+</p>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+31
+</td>
+<td  class="td_bit">
+30
+</td>
+<td  class="td_bit">
+29
+</td>
+<td  class="td_bit">
+28
+</td>
+<td  class="td_bit">
+27
+</td>
+<td  class="td_bit">
+26
+</td>
+<td  class="td_bit">
+25
+</td>
+<td  class="td_bit">
+24
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+23
+</td>
+<td  class="td_bit">
+22
+</td>
+<td  class="td_bit">
+21
+</td>
+<td  class="td_bit">
+20
+</td>
+<td  class="td_bit">
+19
+</td>
+<td  class="td_bit">
+18
+</td>
+<td  class="td_bit">
+17
+</td>
+<td  class="td_bit">
+16
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+15
+</td>
+<td  class="td_bit">
+14
+</td>
+<td  class="td_bit">
+13
+</td>
+<td  class="td_bit">
+12
+</td>
+<td  class="td_bit">
+11
+</td>
+<td  class="td_bit">
+10
+</td>
+<td  class="td_bit">
+9
+</td>
+<td  class="td_bit">
+8
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td  class="td_bit">
+7
+</td>
+<td  class="td_bit">
+6
+</td>
+<td  class="td_bit">
+5
+</td>
+<td  class="td_bit">
+4
+</td>
+<td  class="td_bit">
+3
+</td>
+<td  class="td_bit">
+2
+</td>
+<td  class="td_bit">
+1
+</td>
+<td  class="td_bit">
+0
+</td>
+</tr>
+<tr>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+ACQ_END
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+TRIG
+</td>
+</tr>
+</table>
+<ul>
+<li><b>
+TRIG
+</b>[<i>read/write</i>]: Trigger interrupt
+<br>read 1: interrupt 'Trigger interrupt' is pending<br>read 0: interrupt not pending<br>write 1: clear interrupt 'Trigger interrupt'<br>write 0: no effect
+<li><b>
+ACQ_END
+</b>[<i>read/write</i>]: End of acquisition interrupt
+<br>read 1: interrupt 'End of acquisition interrupt' is pending<br>read 0: interrupt not pending<br>write 1: clear interrupt 'End of acquisition interrupt'<br>write 0: no effect
 </ul>
 
 
+<h3><a name="sect_5_0">5. Interrupts</a></h3>
+<a name="TRIG"></a>
+<h3><a name="sect_5_1">5.1. Trigger interrupt</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td >
+eic_trig
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td >
+TRIG
+</td>
+</tr>
+<tr>
+<td >
+<b>Trigger: </b>
+</td>
+<td >
+rising edge
+</td>
+</tr>
+</table>
+<p>Trigger interrupt line (rising edge sensitive).</p>
+<a name="ACQ_END"></a>
+<h3><a name="sect_5_2">5.2. End of acquisition interrupt</a></h3>
+<table cellpadding=0 cellspacing=0 border=0>
+<tr>
+<td >
+<b>HW prefix: </b>
+</td>
+<td >
+eic_acq_end
+</td>
+</tr>
+<tr>
+<td >
+<b>C prefix: </b>
+</td>
+<td >
+ACQ_END
+</td>
+</tr>
+<tr>
+<td >
+<b>Trigger: </b>
+</td>
+<td >
+rising edge
+</td>
+</tr>
+</table>
+<p>End of acquisition interrupt line (rising edge sensitive).</p>
 
 </BODY>
 </HTML>

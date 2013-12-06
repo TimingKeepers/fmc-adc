@@ -1,0 +1,21 @@
+peripheral {
+	name = "GN4124 DMA enhanced interrupt controller";
+	description = "Enhanced interrrupt controller for GN4124 DMA.";
+	hdl_entity = "dma_eic";
+        prefix = "dma_eic";
+
+	irq {
+            name = "DMA done interrupt";
+	    description = "DMA done interrupt line (rising edge sensitive).";
+            prefix = "dma_done";
+	    trigger = EDGE_RISING;
+	};
+
+        irq {
+            name = "DMA error interrupt";
+	    description = "DMA error interrupt line (rising edge sensitive).";
+            prefix = "dma_error";
+	    trigger = EDGE_RISING;
+	};
+
+};

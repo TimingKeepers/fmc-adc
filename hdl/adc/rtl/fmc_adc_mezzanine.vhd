@@ -150,55 +150,7 @@ architecture rtl of fmc_adc_mezzanine is
   constant c_WB_SLAVE_FMC_ONEWIRE : integer := 4;  -- Mezzanine onewire interface
 
   -- Devices sdb description
-  constant c_ONEWIRE_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"0000000000000007",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000602",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-Onewire.Control ")));
-
-  constant c_I2C_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000001F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000606",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-I2C.Control     ")));
-
-  constant c_SPI_SDB_DEVICE : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000001F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000607",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-SPI.Control     ")));
-
-  constant c_ADC_CSR_SDB_DEVICE : t_sdb_device := (
+  constant c_wb_adc_csr_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
     abi_ver_major => x"01",
     abi_ver_minor => x"01",
@@ -220,11 +172,11 @@ architecture rtl of fmc_adc_mezzanine is
   -- Wishbone crossbar layout
   constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(4 downto 0) :=
     (
-      0 => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001000"),
-      1 => f_sdb_embed_device(c_SPI_SDB_DEVICE, x"00001100"),
-      2 => f_sdb_embed_device(c_I2C_SDB_DEVICE, x"00001200"),
-      3 => f_sdb_embed_device(c_ADC_CSR_SDB_DEVICE, x"00001300"),
-      4 => f_sdb_embed_device(c_ONEWIRE_SDB_DEVICE, x"00001400")
+      0 => f_sdb_embed_device(c_xwb_i2c_master_sdb, x"00001000"),
+      1 => f_sdb_embed_device(c_xwb_spi_sdb, x"00001100"),
+      2 => f_sdb_embed_device(c_xwb_i2c_master_sdb, x"00001200"),
+      3 => f_sdb_embed_device(c_wb_adc_csr_sdb, x"00001300"),
+      4 => f_sdb_embed_device(c_xwb_onewire_master_sdb, x"00001400")
       );
 
 
