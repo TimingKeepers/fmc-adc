@@ -43,12 +43,13 @@ use IEEE.NUMERIC_STD.all;
 library work;
 use work.fmc_adc_100Ms_core_pkg.all;
 use work.wishbone_pkg.all;
+use work.timetag_core_pkg.all;
 
 
 entity fmc_adc_mezzanine is
   generic(
     g_multishot_ram_size : natural := 2048;
-    g_carrier_type : string := "SPEC"
+    g_carrier_type       : string  := "SPEC"
     );
   port (
     -- Clock, reset
@@ -82,6 +83,9 @@ entity fmc_adc_mezzanine is
     acq_start_p_o : out std_logic;
     acq_stop_p_o  : out std_logic;
     acq_end_p_o   : out std_logic;
+
+    -- Trigger time-tag input
+    trigger_tag_i : t_timetag;
 
     -- FMC interface
     ext_trigger_p_i : in std_logic;     -- External trigger
@@ -213,8 +217,8 @@ architecture rtl of fmc_adc_mezzanine is
   signal si570_sda_oe_n : std_logic;
 
   -- Mezzanine 1-wire
-  signal mezz_owr_en    : std_logic_vector(0 downto 0);
-  signal mezz_owr_i     : std_logic_vector(0 downto 0);
+  signal mezz_owr_en : std_logic_vector(0 downto 0);
+  signal mezz_owr_i  : std_logic_vector(0 downto 0);
 
 
 begin
@@ -369,7 +373,7 @@ begin
   cmp_fmc_adc_100Ms_core : fmc_adc_100Ms_core
     generic map (
       g_multishot_ram_size => g_multishot_ram_size,
-      g_carrier_type => g_carrier_type
+      g_carrier_type       => g_carrier_type
       )
     port map(
       sys_clk_i   => sys_clk_i,
@@ -398,6 +402,8 @@ begin
       acq_start_p_o => acq_start_p_o,
       acq_stop_p_o  => acq_stop_p_o,
       acq_end_p_o   => acq_end_p_o,
+
+      trigger_tag_i => trigger_tag_i,
 
       ext_trigger_p_i => ext_trigger_p_i,
       ext_trigger_n_i => ext_trigger_n_i,

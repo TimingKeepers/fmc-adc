@@ -489,6 +489,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal acq_start_p : std_logic;
   signal acq_stop_p  : std_logic;
   signal acq_end_p   : std_logic;
+  signal trigger_tag : t_timetag;
 
   -- led pwm
   signal led_pwm_update_cnt : unsigned(9 downto 0);
@@ -795,6 +796,8 @@ begin
       acq_stop_p_i  => acq_stop_p,
       acq_end_p_i   => acq_end_p,
 
+      trig_tag_o => trigger_tag,
+
       wb_adr_i => cnx_master_out(c_WB_SLAVE_TIMETAG).adr(6 downto 2),  -- cnx_master_out.adr is byte address
       wb_dat_i => cnx_master_out(c_WB_SLAVE_TIMETAG).dat,
       wb_dat_o => cnx_master_in(c_WB_SLAVE_TIMETAG).dat,
@@ -948,6 +951,8 @@ begin
       acq_start_p_o => acq_start_p,
       acq_stop_p_o  => acq_stop_p,
       acq_end_p_o   => acq_end_p,
+
+      trigger_tag_i => trigger_tag,
 
       ext_trigger_p_i => adc0_ext_trigger_p_i,
       ext_trigger_n_i => adc0_ext_trigger_n_i,

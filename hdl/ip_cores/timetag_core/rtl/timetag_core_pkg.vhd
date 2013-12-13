@@ -44,6 +44,15 @@ package timetag_core_pkg is
   -- Constants declaration
   ------------------------------------------------------------------------------
 
+  ------------------------------------------------------------------------------
+  -- Types declaration
+  ------------------------------------------------------------------------------
+  type t_timetag is record
+    meta : std_logic_vector(31 downto 0);
+    seconds : std_logic_vector(31 downto 0);
+    coarse : std_logic_vector(31 downto 0);
+    fine : std_logic_vector(31 downto 0);
+  end record t_timetag;
 
   ------------------------------------------------------------------------------
   -- Components declaration
@@ -59,6 +68,9 @@ package timetag_core_pkg is
     acq_start_p_i : in std_logic;
     acq_stop_p_i  : in std_logic;
     acq_end_p_i   : in std_logic;
+
+    -- Trigger time-tag output
+    trig_tag_o : out t_timetag;
 
     -- Wishbone interface
     wb_adr_i : in  std_logic_vector(4 downto 0);

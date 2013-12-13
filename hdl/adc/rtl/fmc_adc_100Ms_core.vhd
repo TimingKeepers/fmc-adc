@@ -39,6 +39,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
+use work.timetag_core_pkg.all;
 
 
 library UNISIM;
@@ -84,6 +85,9 @@ entity fmc_adc_100Ms_core is
     acq_start_p_o : out std_logic;
     acq_stop_p_o  : out std_logic;
     acq_end_p_o   : out std_logic;
+
+    -- Trigger time-tag input
+    trigger_tag_i : t_timetag;
 
     -- FMC interface
     ext_trigger_p_i : in std_logic;     -- External trigger
@@ -276,7 +280,7 @@ architecture rtl of fmc_adc_100Ms_core is
   ------------------------------------------------------------------------------
   -- Types declaration
   ------------------------------------------------------------------------------
-  type t_acq_fsm_state is (IDLE, PRE_TRIG, WAIT_TRIG, POST_TRIG, DECR_SHOT);
+  type t_acq_fsm_state is (IDLE, PRE_TRIG, WAIT_TRIG, POST_TRIG, TRIG_TAG, DECR_SHOT);
 
   ------------------------------------------------------------------------------
   -- Signals declaration
@@ -346,7 +350,6 @@ architecture rtl of fmc_adc_100Ms_core is
   signal sync_fifo_wr    : std_logic;
   signal sync_fifo_rd    : std_logic;
   signal sync_fifo_valid : std_logic;
-  signal sync_fifo_dreq  : std_logic;
 
   -- Gain/offset calibration
   signal gain_calibr       : std_logic_vector(63 downto 0);
@@ -354,7 +357,6 @@ architecture rtl of fmc_adc_100Ms_core is
   signal data_calibr_in    : std_logic_vector(63 downto 0);
   signal data_calibr_out   : std_logic_vector(63 downto 0);
   signal data_calibr_out_d : std_logic_vector(63 downto 0);
-
 
   -- Acquisition FSM
   signal acq_fsm_current_state : t_acq_fsm_state;
@@ -369,7 +371,13 @@ architecture rtl of fmc_adc_100Ms_core is
   signal acq_in_pre_trig       : std_logic;
   signal acq_in_wait_trig      : std_logic;
   signal acq_in_post_trig      : std_logic;
+  signal acq_in_trig_tag       : std_logic;
   signal samples_wr_en         : std_logic;
+
+  -- Trigger tag insertion in data
+  signal trig_tag_done     : std_logic;
+  signal trig_tag_data     : std_logic_vector(63 downto 0);
+  signal trig_tag_progress : std_logic_vector(1 downto 0);
 
   -- pre/post trigger and shots counters
   signal pre_trig_value       : std_logic_vector(31 downto 0);
@@ -970,7 +978,7 @@ begin
   --                 "00000000" & serdes_out_fr;
 
   sync_fifo_wr <= decim_en and serdes_synced and not(sync_fifo_full);
-  sync_fifo_rd <= sync_fifo_dreq and not(sync_fifo_empty);
+  sync_fifo_rd <= not(sync_fifo_empty);  -- read sync fifo as soon as data are available
 
 
   --============================================================================
@@ -1162,6 +1170,13 @@ begin
           if acq_stop = '1' then
             acq_fsm_current_state <= IDLE;
           elsif post_trig_done = '1' then
+            acq_fsm_current_state <= TRIG_TAG;
+          end if;
+
+        when TRIG_TAG =>
+          if acq_stop = '1' then
+            acq_fsm_current_state <= IDLE;
+          elsif trig_tag_done = '1' then
             if single_shot = '1' then
               acq_fsm_current_state <= IDLE;
             else
@@ -1195,55 +1210,64 @@ begin
 
       when IDLE =>
         shots_decr       <= '0';
-        sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '0';
         acq_in_wait_trig <= '0';
         acq_in_post_trig <= '0';
+        acq_in_trig_tag  <= '0';
         samples_wr_en    <= '0';
         acq_fsm_state    <= "001";
 
       when PRE_TRIG =>
         shots_decr       <= '0';
-        sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '1';
         acq_in_wait_trig <= '0';
         acq_in_post_trig <= '0';
+        acq_in_trig_tag  <= '0';
         samples_wr_en    <= '1';
         acq_fsm_state    <= "010";
 
       when WAIT_TRIG =>
         shots_decr       <= '0';
-        sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '0';
         acq_in_wait_trig <= '1';
         acq_in_post_trig <= '0';
+        acq_in_trig_tag  <= '0';
         samples_wr_en    <= '1';
         acq_fsm_state    <= "011";
 
       when POST_TRIG =>
         shots_decr       <= '0';
-        sync_fifo_dreq   <= '1';
         acq_in_pre_trig  <= '0';
         acq_in_wait_trig <= '0';
         acq_in_post_trig <= '1';
+        acq_in_trig_tag  <= '0';
         samples_wr_en    <= '1';
         acq_fsm_state    <= "100";
 
-      when DECR_SHOT =>
-        shots_decr       <= '1';
-        sync_fifo_dreq   <= '1';
+      when TRIG_TAG =>
+        shots_decr       <= '0';
         acq_in_pre_trig  <= '0';
         acq_in_wait_trig <= '0';
         acq_in_post_trig <= '0';
+        acq_in_trig_tag  <= '1';
         samples_wr_en    <= '0';
         acq_fsm_state    <= "101";
 
-      when others =>
-        shots_decr       <= '0';
-        sync_fifo_dreq   <= '1';
+      when DECR_SHOT =>
+        shots_decr       <= '1';
         acq_in_pre_trig  <= '0';
         acq_in_wait_trig <= '0';
         acq_in_post_trig <= '0';
+        acq_in_trig_tag  <= '0';
+        samples_wr_en    <= '0';
+        acq_fsm_state    <= "110";
+
+      when others =>
+        shots_decr       <= '0';
+        acq_in_pre_trig  <= '0';
+        acq_in_wait_trig <= '0';
+        acq_in_post_trig <= '0';
+        acq_in_trig_tag  <= '0';
         samples_wr_en    <= '0';
         acq_fsm_state    <= "111";
 
@@ -1251,256 +1275,281 @@ begin
   end process p_acq_fsm_outputs;
 
   ------------------------------------------------------------------------------
-  -- Dual DPRAM buffers for multi-shots acquisition
-  -----------------------------------------------------------------------------
-
-  -- DPRAM input address counter
-  p_dpram_addra_cnt : process (sys_clk_i, sys_rst_n_i)
-  begin
-    if sys_rst_n_i = '0' then
-      dpram_addra_cnt       <= (others => '0');
-      dpram_addra_trig      <= (others => '0');
-      dpram_addra_post_done <= (others => '0');
-    elsif rising_edge(sys_clk_i) then
-      if shots_decr = '1' then
-        dpram_addra_cnt <= to_unsigned(0, dpram_addra_cnt'length);
-      elsif (samples_wr_en = '1' and sync_fifo_valid = '1') then
-        dpram_addra_cnt <= dpram_addra_cnt + 1;
-      end if;
-      if acq_trig = '1' then
-        dpram_addra_trig <= dpram_addra_cnt;
-      end if;
-      if post_trig_done = '1' then
-        if unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length) then
-          dpram_addra_post_done <= dpram_addra_cnt - 1;
-        else
-          dpram_addra_post_done <= dpram_addra_cnt;
+  -- Inserting trigger time-tag after post_trigger samples
+  ------------------------------------------------------------------------------
+  -- ###
+    p_insert_trig_tag : process (sys_clk_i, sys_rst_n_i)
+    begin
+      if sys_rst_n_i = '0' then
+        trig_tag_data <= (others => '0');
+        trig_tag_progress <= (others => '0');
+      elsif rising_edge(sys_clk_i) then
+        trig_tag_done <= acq_in_trig_tag;
+        if trig_tag_done = '0' then
+          trig_tag_data <= trigger_tag_i.seconds & trigger_tag_i.meta;
+        elsif trig_tag_done = '1' then
+          trig_tag_data <= trigger_tag_i.fine & trigger_tag_i.coarse;
         end if;
       end if;
-    end if;
-  end process p_dpram_addra_cnt;
+    end process p_insert_trig_tag;
+    -- ###
 
-  -- DPRAM inputs
-  dpram0_addra <= std_logic_vector(dpram_addra_cnt);
-  dpram1_addra <= std_logic_vector(dpram_addra_cnt);
-  dpram0_dina  <= sync_fifo_dout(63 downto 0);
-  dpram1_dina  <= sync_fifo_dout(63 downto 0);
-  dpram0_wea   <= (samples_wr_en and sync_fifo_valid) when multishot_buffer_sel = '0' else '0';
-  dpram1_wea   <= (samples_wr_en and sync_fifo_valid) when multishot_buffer_sel = '1' else '0';
+    ------------------------------------------------------------------------------
+    -- Dual DPRAM buffers for multi-shots acquisition
+    ------------------------------------------------------------------------------
 
-  -- DPRAMs
-  cmp_multishot_dpram0 : generic_dpram
-    generic map
-    (
-      g_data_width               => 64,
-      g_size                     => g_multishot_ram_size,
-      g_with_byte_enable         => false,
-      g_addr_conflict_resolution => "read_first",
-      g_dual_clock               => true
-      -- default values for the rest of the generics are okay
-      )
-    port map
-    (
-      rst_n_i => sys_rst_n_i,
-      clka_i  => sys_clk_i,
-      bwea_i  => open,
-      wea_i   => dpram0_wea,
-      aa_i    => dpram0_addra,
-      da_i    => dpram0_dina,
-      qa_o    => open,
-      clkb_i  => sys_clk_i,
-      bweb_i  => open,
-      ab_i    => dpram0_addrb,
-      -- db_i    => (others => '0'),
-      qb_o    => dpram0_doutb
-      );
-
-  cmp_multishot_dpram1 : generic_dpram
-    generic map
-    (
-      g_data_width               => 64,
-      g_size                     => g_multishot_ram_size,
-      g_with_byte_enable         => false,
-      g_addr_conflict_resolution => "read_first",
-      g_dual_clock               => false
-      -- default values for the rest of the generics are okay
-      )
-    port map
-    (
-      rst_n_i => sys_rst_n_i,
-      clka_i  => sys_clk_i,
-      bwea_i  => open,
-      wea_i   => dpram1_wea,
-      aa_i    => dpram1_addra,
-      da_i    => dpram1_dina,
-      qa_o    => open,
-      clkb_i  => sys_clk_i,
-      bweb_i  => open,
-      ab_i    => dpram1_addrb,
-      -- db_i    => (others => '0'),
-      qb_o    => dpram1_doutb
-      );
-
-  -- DPRAM output address counter
-  p_dpram_addrb_cnt : process (sys_clk_i, sys_rst_n_i)
-  begin
-    if sys_rst_n_i = '0' then
-      dpram_addrb_cnt <= (others => '0');
-      dpram_valid_t   <= '0';
-      dpram_valid     <= '0';
-    elsif rising_edge(sys_clk_i) then
-      if post_trig_done = '1' then
-        dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_dpram_depth-1 downto 0));
-        dpram_valid_t   <= '1';
-      elsif (dpram_addrb_cnt = dpram_addra_post_done) then
-        dpram_valid_t <= '0';
-      else
-        dpram_addrb_cnt <= dpram_addrb_cnt + 1;
+    -- DPRAM input address counter
+    p_dpram_addra_cnt : process (sys_clk_i, sys_rst_n_i)
+    begin
+      if sys_rst_n_i = '0' then
+        dpram_addra_cnt       <= (others => '0');
+        dpram_addra_trig      <= (others => '0');
+        dpram_addra_post_done <= (others => '0');
+      elsif rising_edge(sys_clk_i) then
+        if shots_decr = '1' then
+          dpram_addra_cnt <= to_unsigned(0, dpram_addra_cnt'length);
+        elsif (samples_wr_en = '1' and sync_fifo_valid = '1') then
+          dpram_addra_cnt <= dpram_addra_cnt + 1;
+        end if;
+        if acq_trig = '1' then
+          dpram_addra_trig <= dpram_addra_cnt;
+        end if;
+        if post_trig_done = '1' then
+          if unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length) then
+            dpram_addra_post_done <= dpram_addra_cnt - 1;
+          else
+            dpram_addra_post_done <= dpram_addra_cnt;
+          end if;
+        end if;
       end if;
-      dpram_valid <= dpram_valid_t;
-    end if;
-  end process p_dpram_addrb_cnt;
+    end process p_dpram_addra_cnt;
 
-  -- DPRAM output mux
-  dpram_dout   <= dpram0_doutb when multishot_buffer_sel = '1' else dpram1_doutb;
-  dpram0_addrb <= std_logic_vector(dpram_addrb_cnt);
-  dpram1_addrb <= std_logic_vector(dpram_addrb_cnt);
+    -- DPRAM inputs
+    dpram0_addra <= std_logic_vector(dpram_addra_cnt);
+    dpram1_addra <= std_logic_vector(dpram_addra_cnt);
+    dpram0_dina  <= sync_fifo_dout(63 downto 0)                          when acq_in_trig_tag = '0'      else trig_tag_data;  -- ###
+    dpram1_dina  <= sync_fifo_dout(63 downto 0)                          when acq_in_trig_tag = '0'      else trig_tag_data;  -- ###;
+    dpram0_wea   <= (samples_wr_en and sync_fifo_valid) or acq_in_trig_tag when multishot_buffer_sel = '0' else '0';            -- ###
+    dpram1_wea   <= (samples_wr_en and sync_fifo_valid) or acq_in_trig_tag when multishot_buffer_sel = '1' else '0';            -- ###
 
-  ------------------------------------------------------------------------------
-  -- Flow control FIFO for data to DDR
-  ------------------------------------------------------------------------------
-  cmp_wb_ddr_fifo : generic_sync_fifo
-    generic map (
-      g_data_width             => 65,
-      g_size                   => 64,
-      g_show_ahead             => false,
-      g_with_empty             => true,
-      g_with_full              => true,
-      g_with_almost_empty      => false,
-      g_with_almost_full       => false,
-      g_with_count             => false,
-      g_almost_empty_threshold => 0,
-      g_almost_full_threshold  => 0
-      )
-    port map(
-      rst_n_i        => sys_rst_n_i,
-      clk_i          => sys_clk_i,
-      d_i            => wb_ddr_fifo_din,
-      we_i           => wb_ddr_fifo_wr,
-      q_o            => wb_ddr_fifo_dout,
-      rd_i           => wb_ddr_fifo_rd,
-      empty_o        => wb_ddr_fifo_empty,
-      full_o         => wb_ddr_fifo_full,
-      almost_empty_o => open,
-      almost_full_o  => open,
-      count_o        => open
-      );
+    -- DPRAMs
+    cmp_multishot_dpram0 : generic_dpram
+      generic map
+      (
+        g_data_width               => 64,
+        g_size                     => g_multishot_ram_size,
+        g_with_byte_enable         => false,
+        g_addr_conflict_resolution => "read_first",
+        g_dual_clock               => true
+        -- default values for the rest of the generics are okay
+        )
+      port map
+      (
+        rst_n_i => sys_rst_n_i,
+        clka_i  => sys_clk_i,
+        bwea_i  => open,
+        wea_i   => dpram0_wea,
+        aa_i    => dpram0_addra,
+        da_i    => dpram0_dina,
+        qa_o    => open,
+        clkb_i  => sys_clk_i,
+        bweb_i  => open,
+        ab_i    => dpram0_addrb,
+        -- db_i    => (others => '0'),
+        qb_o    => dpram0_doutb
+        );
 
-  -- One clock cycle delay for the FIFO's VALID signal. Since the General Cores
-  -- package does not offer the possibility to use the FWFT feature of the FIFOs,
-  -- we simulate the valid flag here according to Figure 4-7 in ref. [1].
-  p_wb_ddr_fifo_valid : process (sys_clk_i) is
-  begin
-    if rising_edge(sys_clk_i) then
-      wb_ddr_fifo_valid <= wb_ddr_fifo_rd;
-      if (wb_ddr_fifo_empty = '1') then
-        wb_ddr_fifo_valid <= '0';
+    cmp_multishot_dpram1 : generic_dpram
+      generic map
+      (
+        g_data_width               => 64,
+        g_size                     => g_multishot_ram_size,
+        g_with_byte_enable         => false,
+        g_addr_conflict_resolution => "read_first",
+        g_dual_clock               => false
+        -- default values for the rest of the generics are okay
+        )
+      port map
+      (
+        rst_n_i => sys_rst_n_i,
+        clka_i  => sys_clk_i,
+        bwea_i  => open,
+        wea_i   => dpram1_wea,
+        aa_i    => dpram1_addra,
+        da_i    => dpram1_dina,
+        qa_o    => open,
+        clkb_i  => sys_clk_i,
+        bweb_i  => open,
+        ab_i    => dpram1_addrb,
+        -- db_i    => (others => '0'),
+        qb_o    => dpram1_doutb
+        );
+
+    -- DPRAM output address counter
+    p_dpram_addrb_cnt : process (sys_clk_i, sys_rst_n_i)
+    begin
+      if sys_rst_n_i = '0' then
+        dpram_addrb_cnt <= (others => '0');
+        dpram_valid_t   <= '0';
+        dpram_valid     <= '0';
+      elsif rising_edge(sys_clk_i) then
+        if post_trig_done = '1' then
+          dpram_addrb_cnt <= dpram_addra_trig - unsigned(pre_trig_value(c_dpram_depth-1 downto 0));
+          dpram_valid_t   <= '1';
+        elsif (dpram_addrb_cnt = dpram_addra_post_done) then
+          dpram_valid_t <= '0';
+        else
+          dpram_addrb_cnt <= dpram_addrb_cnt + 1;
+        end if;
+        dpram_valid <= dpram_valid_t;
       end if;
-    end if;
-  end process;
+    end process p_dpram_addrb_cnt;
 
-  p_wb_ddr_fifo_input : process (sys_clk_i, sys_rst_n_i)
-  begin
-    if sys_rst_n_i = '0' then
-      wb_ddr_fifo_din   <= (others => '0');
-      wb_ddr_fifo_wr_en <= '0';
-    elsif rising_edge(sys_clk_i) then
-      if single_shot = '1' then
-        wb_ddr_fifo_din   <= acq_trig & sync_fifo_dout(63 downto 0);  -- trigger + data
-        wb_ddr_fifo_wr_en <= samples_wr_en and sync_fifo_valid;
-      else
-        wb_ddr_fifo_din   <= '0' & dpram_dout;
-        wb_ddr_fifo_wr_en <= dpram_valid;
+    -- DPRAM output mux
+    dpram_dout   <= dpram0_doutb when multishot_buffer_sel = '1' else dpram1_doutb;
+    dpram0_addrb <= std_logic_vector(dpram_addrb_cnt);
+    dpram1_addrb <= std_logic_vector(dpram_addrb_cnt);
+
+    ------------------------------------------------------------------------------
+    -- Flow control FIFO for data to DDR
+    ------------------------------------------------------------------------------
+    cmp_wb_ddr_fifo : generic_sync_fifo
+      generic map (
+        g_data_width             => 65,
+        g_size                   => 64,
+        g_show_ahead             => false,
+        g_with_empty             => true,
+        g_with_full              => true,
+        g_with_almost_empty      => false,
+        g_with_almost_full       => false,
+        g_with_count             => false,
+        g_almost_empty_threshold => 0,
+        g_almost_full_threshold  => 0
+        )
+      port map(
+        rst_n_i        => sys_rst_n_i,
+        clk_i          => sys_clk_i,
+        d_i            => wb_ddr_fifo_din,
+        we_i           => wb_ddr_fifo_wr,
+        q_o            => wb_ddr_fifo_dout,
+        rd_i           => wb_ddr_fifo_rd,
+        empty_o        => wb_ddr_fifo_empty,
+        full_o         => wb_ddr_fifo_full,
+        almost_empty_o => open,
+        almost_full_o  => open,
+        count_o        => open
+        );
+
+    -- One clock cycle delay for the FIFO's VALID signal. Since the General Cores
+    -- package does not offer the possibility to use the FWFT feature of the FIFOs,
+    -- we simulate the valid flag here according to Figure 4-7 in ref. [1].
+    p_wb_ddr_fifo_valid : process (sys_clk_i) is
+    begin
+      if rising_edge(sys_clk_i) then
+        wb_ddr_fifo_valid <= wb_ddr_fifo_rd;
+        if (wb_ddr_fifo_empty = '1') then
+          wb_ddr_fifo_valid <= '0';
+        end if;
       end if;
-    end if;
-  end process p_wb_ddr_fifo_input;
-  --wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
-  --wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
-  wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and not(wb_ddr_fifo_full);
+    end process;
 
-  wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
-  wb_ddr_fifo_dreq <= '1';
+    p_wb_ddr_fifo_input : process (sys_clk_i, sys_rst_n_i)
+    begin
+      if sys_rst_n_i = '0' then
+        wb_ddr_fifo_din   <= (others => '0');
+        wb_ddr_fifo_wr_en <= '0';
+      elsif rising_edge(sys_clk_i) then
+        if single_shot = '1' then
+          if acq_in_trig_tag = '1' then
+            wb_ddr_fifo_din   <= trig_tag_data;                           -- ###
+            wb_ddr_fifo_wr_en <= acq_in_trig_tag;                           -- ###
+          else
+            wb_ddr_fifo_din   <= acq_trig & sync_fifo_dout(63 downto 0);  -- trigger + data
+            wb_ddr_fifo_wr_en <= samples_wr_en and sync_fifo_valid;
+          end if;
+        else
+          wb_ddr_fifo_din   <= '0' & dpram_dout;
+          wb_ddr_fifo_wr_en <= dpram_valid;
+        end if;
+      end if;
+    end process p_wb_ddr_fifo_input;
+    --wb_ddr_fifo_din   <= sync_fifo_dout(63 downto 0) when single_shot = '1' else dpram_dout;
+    --wb_ddr_fifo_wr_en <= samples_wr_en               when single_shot = '1' else dpram_valid;
+    wb_ddr_fifo_wr <= wb_ddr_fifo_wr_en and not(wb_ddr_fifo_full);
 
-  ------------------------------------------------------------------------------
-  -- RAM address counter (32-bit word address)
-  ------------------------------------------------------------------------------
-  p_ram_addr_cnt : process (wb_ddr_clk_i, sys_rst_n_i)
-  begin
-    if sys_rst_n_i = '0' then
-      ram_addr_cnt <= (others => '0');
-    elsif rising_edge(wb_ddr_clk_i) then
-      if acq_start = '1' then
+    wb_ddr_fifo_rd   <= wb_ddr_fifo_dreq and not(wb_ddr_fifo_empty) and not(wb_ddr_stall_t);
+    wb_ddr_fifo_dreq <= '1';
+
+    ------------------------------------------------------------------------------
+    -- RAM address counter (32-bit word address)
+    ------------------------------------------------------------------------------
+    p_ram_addr_cnt : process (wb_ddr_clk_i, sys_rst_n_i)
+    begin
+      if sys_rst_n_i = '0' then
         ram_addr_cnt <= (others => '0');
-      elsif wb_ddr_fifo_valid = '1' then
-        ram_addr_cnt <= ram_addr_cnt + 1;
-      end if;
-    end if;
-  end process p_ram_addr_cnt;
-
-  ------------------------------------------------------------------------------
-  -- Store trigger DDR address
-  ------------------------------------------------------------------------------
-  p_trig_addr : process (wb_ddr_clk_i, sys_rst_n_i)
-  begin
-    if sys_rst_n_i = '0' then
-      trig_addr <= (others => '0');
-    elsif rising_edge(wb_ddr_clk_i) then
-      if wb_ddr_fifo_dout(64) = '1' and wb_ddr_fifo_valid = '1' then
-        trig_addr <= "0000000" & std_logic_vector(ram_addr_cnt);
-      end if;
-    end if;
-  end process p_trig_addr;
-
-  ------------------------------------------------------------------------------
-  -- Wishbone master (to DDR)
-  ------------------------------------------------------------------------------
-  p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
-  begin
-    if sys_rst_n_i = '0' then
-      wb_ddr_cyc_o   <= '0';
-      wb_ddr_we_o    <= '0';
-      wb_ddr_stb_o   <= '0';
-      wb_ddr_adr_o   <= (others => '0');
-      wb_ddr_dat_o   <= (others => '0');
-      wb_ddr_stall_t <= '0';
-    elsif rising_edge(wb_ddr_clk_i) then
-
-      if wb_ddr_fifo_valid = '1' then   --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
-        wb_ddr_stb_o <= '1';
-        wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
-        if test_data_en = '1' then
-          wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
-        else
-          wb_ddr_dat_o <= wb_ddr_fifo_dout(63 downto 0);
+      elsif rising_edge(wb_ddr_clk_i) then
+        if acq_start = '1' then
+          ram_addr_cnt <= (others => '0');
+        elsif wb_ddr_fifo_valid = '1' then
+          ram_addr_cnt <= ram_addr_cnt + 1;
         end if;
-      else
-        wb_ddr_stb_o <= '0';
       end if;
+    end process p_ram_addr_cnt;
 
-      if wb_ddr_fifo_valid = '1' then
-        wb_ddr_cyc_o <= '1';
-        wb_ddr_we_o  <= '1';
-        --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
-      elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
-        wb_ddr_cyc_o <= '0';
-        wb_ddr_we_o  <= '0';
+    ------------------------------------------------------------------------------
+    -- Store trigger DDR address
+    ------------------------------------------------------------------------------
+    p_trig_addr : process (wb_ddr_clk_i, sys_rst_n_i)
+    begin
+      if sys_rst_n_i = '0' then
+        trig_addr <= (others => '0');
+      elsif rising_edge(wb_ddr_clk_i) then
+        if wb_ddr_fifo_dout(64) = '1' and wb_ddr_fifo_valid = '1' then
+          trig_addr <= "0000000" & std_logic_vector(ram_addr_cnt);
+        end if;
       end if;
+    end process p_trig_addr;
 
-      wb_ddr_stall_t <= wb_ddr_stall_i;
+    ------------------------------------------------------------------------------
+    -- Wishbone master (to DDR)
+    ------------------------------------------------------------------------------
+    p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
+    begin
+      if sys_rst_n_i = '0' then
+        wb_ddr_cyc_o   <= '0';
+        wb_ddr_we_o    <= '0';
+        wb_ddr_stb_o   <= '0';
+        wb_ddr_adr_o   <= (others => '0');
+        wb_ddr_dat_o   <= (others => '0');
+        wb_ddr_stall_t <= '0';
+      elsif rising_edge(wb_ddr_clk_i) then
 
-    end if;
-  end process p_wb_master;
+        if wb_ddr_fifo_valid = '1' then  --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
+          wb_ddr_stb_o <= '1';
+          wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
+          if test_data_en = '1' then
+            wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
+          else
+            wb_ddr_dat_o <= wb_ddr_fifo_dout(63 downto 0);
+          end if;
+        else
+          wb_ddr_stb_o <= '0';
+        end if;
 
-  wb_ddr_sel_o <= X"FF";
+        if wb_ddr_fifo_valid = '1' then
+          wb_ddr_cyc_o <= '1';
+          wb_ddr_we_o  <= '1';
+          --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
+        elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
+          wb_ddr_cyc_o <= '0';
+          wb_ddr_we_o  <= '0';
+        end if;
 
-end rtl;
+        wb_ddr_stall_t <= wb_ddr_stall_i;
+
+      end if;
+    end process p_wb_master;
+
+    wb_ddr_sel_o <= X"FF";
+
+    end rtl;

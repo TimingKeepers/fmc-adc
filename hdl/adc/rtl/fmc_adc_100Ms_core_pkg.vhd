@@ -37,6 +37,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
+use work.timetag_core_pkg.all;
+
 
 package fmc_adc_100Ms_core_pkg is
 
@@ -51,7 +53,7 @@ package fmc_adc_100Ms_core_pkg is
   component fmc_adc_100Ms_core
     generic(
       g_multishot_ram_size : natural := 2048;
-      g_carrier_type : string := "SPEC"
+      g_carrier_type       : string  := "SPEC"
       );
     port (
       -- Clock, reset
@@ -84,6 +86,9 @@ package fmc_adc_100Ms_core_pkg is
       acq_start_p_o : out std_logic;
       acq_stop_p_o  : out std_logic;
       acq_end_p_o   : out std_logic;
+
+      -- Trigger time-tag input
+      trigger_tag_i : t_timetag;
 
       -- FMC interface
       ext_trigger_p_i : in std_logic;   -- External trigger

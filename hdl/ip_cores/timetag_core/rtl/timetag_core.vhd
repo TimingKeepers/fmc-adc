@@ -38,7 +38,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
-
+use work.timetag_core_pkg.all;
 
 --library UNISIM;
 --use UNISIM.vcomponents.all;
@@ -55,6 +55,9 @@ entity timetag_core is
     acq_start_p_i : in std_logic;
     acq_stop_p_i  : in std_logic;
     acq_end_p_i   : in std_logic;
+
+    -- Trigger time-tag output
+    trig_tag_o : out t_timetag;
 
     -- Wishbone interface
     wb_adr_i : in  std_logic_vector(4 downto 0);
@@ -116,30 +119,18 @@ architecture rtl of timetag_core is
   ------------------------------------------------------------------------------
   -- Signals declaration
   ------------------------------------------------------------------------------
-  signal timetag_seconds               : std_logic_vector(31 downto 0);
-  signal timetag_seconds_cnt           : unsigned(31 downto 0);
-  signal timetag_seconds_load_value    : std_logic_vector(31 downto 0);
-  signal timetag_seconds_load_en       : std_logic;
-  signal timetag_coarse                : std_logic_vector(31 downto 0);
-  signal timetag_coarse_cnt            : unsigned(31 downto 0);
-  signal timetag_coarse_load_value     : std_logic_vector(31 downto 0);
-  signal timetag_coarse_load_en        : std_logic;
-  signal timetag_trig_tag_meta         : std_logic_vector(31 downto 0);
-  signal timetag_trig_tag_seconds      : std_logic_vector(31 downto 0);
-  signal timetag_trig_tag_coarse       : std_logic_vector(31 downto 0);
-  signal timetag_trig_tag_fine         : std_logic_vector(31 downto 0);
-  signal timetag_acq_start_tag_meta    : std_logic_vector(31 downto 0);
-  signal timetag_acq_start_tag_seconds : std_logic_vector(31 downto 0);
-  signal timetag_acq_start_tag_coarse  : std_logic_vector(31 downto 0);
-  signal timetag_acq_start_tag_fine    : std_logic_vector(31 downto 0);
-  signal timetag_acq_stop_tag_meta     : std_logic_vector(31 downto 0);
-  signal timetag_acq_stop_tag_seconds  : std_logic_vector(31 downto 0);
-  signal timetag_acq_stop_tag_coarse   : std_logic_vector(31 downto 0);
-  signal timetag_acq_stop_tag_fine     : std_logic_vector(31 downto 0);
-  signal timetag_acq_end_tag_meta      : std_logic_vector(31 downto 0);
-  signal timetag_acq_end_tag_seconds   : std_logic_vector(31 downto 0);
-  signal timetag_acq_end_tag_coarse    : std_logic_vector(31 downto 0);
-  signal timetag_acq_end_tag_fine      : std_logic_vector(31 downto 0);
+  signal timetag_seconds            : std_logic_vector(31 downto 0);
+  signal timetag_seconds_cnt        : unsigned(31 downto 0);
+  signal timetag_seconds_load_value : std_logic_vector(31 downto 0);
+  signal timetag_seconds_load_en    : std_logic;
+  signal timetag_coarse             : std_logic_vector(31 downto 0);
+  signal timetag_coarse_cnt         : unsigned(31 downto 0);
+  signal timetag_coarse_load_value  : std_logic_vector(31 downto 0);
+  signal timetag_coarse_load_en     : std_logic;
+  signal trig_tag                   : t_timetag;
+  signal acq_start_tag              : t_timetag;
+  signal acq_stop_tag               : t_timetag;
+  signal acq_end_tag                : t_timetag;
 
   signal local_pps : std_logic;
 
@@ -169,22 +160,22 @@ begin
       timetag_core_coarse_o                => timetag_coarse_load_value,
       timetag_core_coarse_i                => timetag_coarse,
       timetag_core_coarse_load_o           => timetag_coarse_load_en,
-      timetag_core_trig_tag_meta_i         => timetag_trig_tag_meta,
-      timetag_core_trig_tag_seconds_i      => timetag_trig_tag_seconds,
-      timetag_core_trig_tag_coarse_i       => timetag_trig_tag_coarse,
-      timetag_core_trig_tag_fine_i         => timetag_trig_tag_fine,
-      timetag_core_acq_start_tag_meta_i    => timetag_acq_start_tag_meta,
-      timetag_core_acq_start_tag_seconds_i => timetag_acq_start_tag_seconds,
-      timetag_core_acq_start_tag_coarse_i  => timetag_acq_start_tag_coarse,
-      timetag_core_acq_start_tag_fine_i    => timetag_acq_start_tag_fine,
-      timetag_core_acq_stop_tag_meta_i     => timetag_acq_stop_tag_meta,
-      timetag_core_acq_stop_tag_seconds_i  => timetag_acq_stop_tag_seconds,
-      timetag_core_acq_stop_tag_coarse_i   => timetag_acq_stop_tag_coarse,
-      timetag_core_acq_stop_tag_fine_i     => timetag_acq_stop_tag_fine,
-      timetag_core_acq_end_tag_meta_i      => timetag_acq_end_tag_meta,
-      timetag_core_acq_end_tag_seconds_i   => timetag_acq_end_tag_seconds,
-      timetag_core_acq_end_tag_coarse_i    => timetag_acq_end_tag_coarse,
-      timetag_core_acq_end_tag_fine_i      => timetag_acq_end_tag_fine
+      timetag_core_trig_tag_meta_i         => trig_tag.meta,
+      timetag_core_trig_tag_seconds_i      => trig_tag.seconds,
+      timetag_core_trig_tag_coarse_i       => trig_tag.coarse,
+      timetag_core_trig_tag_fine_i         => trig_tag.fine,
+      timetag_core_acq_start_tag_meta_i    => acq_start_tag.meta,
+      timetag_core_acq_start_tag_seconds_i => acq_start_tag.seconds,
+      timetag_core_acq_start_tag_coarse_i  => acq_start_tag.coarse,
+      timetag_core_acq_start_tag_fine_i    => acq_start_tag.fine,
+      timetag_core_acq_stop_tag_meta_i     => acq_stop_tag.meta,
+      timetag_core_acq_stop_tag_seconds_i  => acq_stop_tag.seconds,
+      timetag_core_acq_stop_tag_coarse_i   => acq_stop_tag.coarse,
+      timetag_core_acq_stop_tag_fine_i     => acq_stop_tag.fine,
+      timetag_core_acq_end_tag_meta_i      => acq_end_tag.meta,
+      timetag_core_acq_end_tag_seconds_i   => acq_end_tag.seconds,
+      timetag_core_acq_end_tag_coarse_i    => acq_end_tag.coarse,
+      timetag_core_acq_end_tag_fine_i      => acq_end_tag.fine
       );
 
   ------------------------------------------------------------------------------
@@ -236,17 +227,18 @@ begin
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
-        timetag_trig_tag_seconds <= (others => '0');
-        timetag_trig_tag_coarse  <= (others => '0');
-        timetag_trig_tag_fine    <= (others => '0');
+        trig_tag.seconds <= (others => '0');
+        trig_tag.coarse  <= (others => '0');
+        trig_tag.fine    <= (others => '0');
       elsif trigger_p_i = '1' then
-        timetag_trig_tag_seconds <= timetag_seconds;
-        timetag_trig_tag_coarse  <= timetag_coarse;
+        trig_tag.seconds <= timetag_seconds;
+        trig_tag.coarse  <= timetag_coarse;
       end if;
     end if;
   end process p_trig_tag;
 
-  timetag_trig_tag_meta <= X"00000000";
+  trig_tag.meta <= X"00000000";
+  trig_tag_o    <= trig_tag;
 
   ------------------------------------------------------------------------------
   -- Last acquisition start event time-tag
@@ -255,17 +247,17 @@ begin
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
-        timetag_acq_start_tag_seconds <= (others => '0');
-        timetag_acq_start_tag_coarse  <= (others => '0');
-        timetag_acq_start_tag_fine    <= (others => '0');
+        acq_start_tag.seconds <= (others => '0');
+        acq_start_tag.coarse  <= (others => '0');
+        acq_start_tag.fine    <= (others => '0');
       elsif acq_start_p_i = '1' then
-        timetag_acq_start_tag_seconds <= timetag_seconds;
-        timetag_acq_start_tag_coarse  <= timetag_coarse;
+        acq_start_tag.seconds <= timetag_seconds;
+        acq_start_tag.coarse  <= timetag_coarse;
       end if;
     end if;
   end process p_acq_start_tag;
 
-  timetag_acq_start_tag_meta <= X"00000000";
+  acq_start_tag.meta <= X"00000000";
 
   ------------------------------------------------------------------------------
   -- Last acquisition stop event time-tag
@@ -274,17 +266,17 @@ begin
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
-        timetag_acq_stop_tag_seconds <= (others => '0');
-        timetag_acq_stop_tag_coarse  <= (others => '0');
-        timetag_acq_stop_tag_fine    <= (others => '0');
+        acq_stop_tag.seconds <= (others => '0');
+        acq_stop_tag.coarse  <= (others => '0');
+        acq_stop_tag.fine    <= (others => '0');
       elsif acq_stop_p_i = '1' then
-        timetag_acq_stop_tag_seconds <= timetag_seconds;
-        timetag_acq_stop_tag_coarse  <= timetag_coarse;
+        acq_stop_tag.seconds <= timetag_seconds;
+        acq_stop_tag.coarse  <= timetag_coarse;
       end if;
     end if;
   end process p_acq_stop_tag;
 
-  timetag_acq_stop_tag_meta <= X"00000000";
+  acq_stop_tag.meta <= X"00000000";
 
   ------------------------------------------------------------------------------
   -- Last acquisition end event time-tag
@@ -293,17 +285,17 @@ begin
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
-        timetag_acq_end_tag_seconds <= (others => '0');
-        timetag_acq_end_tag_coarse  <= (others => '0');
-        timetag_acq_end_tag_fine    <= (others => '0');
+        acq_end_tag.seconds <= (others => '0');
+        acq_end_tag.coarse  <= (others => '0');
+        acq_end_tag.fine    <= (others => '0');
       elsif acq_end_p_i = '1' then
-        timetag_acq_end_tag_seconds <= timetag_seconds;
-        timetag_acq_end_tag_coarse  <= timetag_coarse;
+        acq_end_tag.seconds <= timetag_seconds;
+        acq_end_tag.coarse  <= timetag_coarse;
       end if;
     end if;
   end process p_acq_end_tag;
 
-  timetag_acq_end_tag_meta <= X"00000000";
+  acq_end_tag.meta <= X"00000000";
 
 
 end rtl;
