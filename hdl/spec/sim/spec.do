@@ -7,8 +7,9 @@ log -r /*
 ##do wave_onewire.do
 ##do wave_adc_core.do
 ##do wave_gnum.do
-do wave_end_acq_irq.do
+##do wave_end_acq_irq.do
 ##do wave_ddr_wb.do
+do wave_trig_tag.do
 
 view wave
 view transcript

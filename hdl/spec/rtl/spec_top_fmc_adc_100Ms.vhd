@@ -347,8 +347,8 @@ architecture rtl of spec_top_fmc_adc_100Ms is
         name      => "WB-FMC-ADC.EIC     ")));
 
   -- f_xwb_bridge_manual_sdb(size, sdb_addr)
-  -- Note: sdb_addr is the sdb records address relative to the parent interconnect
-  constant c_fmc0_bridge_sdb : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00004000");
+  -- Note: sdb_addr is the sdb records address relative to the bridge base address
+  constant c_fmc0_bridge_sdb : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00000000");
 
   -- sdb header address
   constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";

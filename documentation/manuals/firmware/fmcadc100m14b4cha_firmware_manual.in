@@ -421,6 +421,10 @@ To time-tag the events, the ADC core sends pulses to the time-tagging core.
 The following events are time-tagged; trigger, acquisition start, acquisition stop and acquisition end.
 
 @quotation Note
+The trigger time tag corresponds to the moment when the acquisition FSM leaves the @code{WAIT_TRIG} state.
+@end quotation
+
+@quotation Note
 In this release, the meta-data register is NOT used, set to zero.
 @end quotation
 
@@ -876,7 +880,11 @@ The LED labeled @code{ACQ} is turned ON when the acquisition state machine is @b
 The LED labeled @code{TRIG} flashes when a valid trigger is detected @b{and} the acquisition state machine is in the @code{WAIT_TRIG} state.
 
 @quotation Note
-In addition to the requested pre/post-trigger samples, an addition sample, corresponding to the trigger, will be recoded.
+The number of pre-trigger sample can be zero, but there @b{must} be at least one post-trigger sample.
+@end quotation
+
+@quotation Note
+In addition to the requested pre/post-trigger samples, an additional sample, corresponding to the trigger, will be recoded.
 @end quotation
 
 @c --------------------------------------------------------------------------

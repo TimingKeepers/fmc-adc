@@ -112,6 +112,8 @@ module main;
    initial begin
       uint64_t d;
       uint32_t wr_data;
+      uint64_t blt_addr[];
+      uint64_t blt_data[];
 
       int i, result;
 
@@ -121,12 +123,20 @@ module main;
       #20us;
       init_vme64x_core(acc);
 
+      $display("Release FMC0/1 reset\n");
+      acc.write('h120C, 'h3, A32|SINGLE|D32);
+
 
       // Enable all interrupts
-      $display("Enable all interrupts\n");
-      acc.write('h1304, 'hF, A32|SINGLE|D32);
-      acc.read('h1308, d, A32|SINGLE|D32);
-      $display("Interrupt mask = 0x%x\n",d);
+      $display("Enable FMC0 and FMC1 interrupt vectors\n");
+      acc.write('h1308, 'h3, A32|SINGLE|D32);
+      acc.read('h1310, d, A32|SINGLE|D32);
+      $display("VIC interrupt mask = 0x%x\n",d);
+      acc.write('h1300, 'h3, A32|SINGLE|D32);
+
+      $display("Enable TRIGGER and END_ACQ in FMC0/1 EIC\n");
+      acc.write('h2000, 'h3, A32|SINGLE|D32);
+      acc.write('h6000, 'h3, A32|SINGLE|D32);
 
       // Trigger setup (sw trigger)
       $display("Trigger setup\n");
@@ -150,12 +160,35 @@ module main;
       $display("Software trigger\n");
       acc.write('h5310, 'hFF, A32|SINGLE|D32);
 
-
       /*
+      // Data "FIFO" test
+      acc.write('h2200, 'h0, A32|SINGLE|D32);
+      acc.read('h2200, d, A32|SINGLE|D32);
+      $display("Read DDR_ADR: 0x%x\n", d);
+
+      $display("Write data to DDR in BLT\n");
+      blt_addr = {'h3000};
+      blt_data = {'h1, 'h2, 'h3, 'h4, 'h5, 'h6, 'h7, 'h8 ,'h9, 'hA};
+      acc.writem(blt_addr, blt_data, A32|BLT|D32, result);
+
+      acc.write('h2200, 'h0, A32|SINGLE|D32);
+      acc.read('h2200, d, A32|SINGLE|D32);
+      $display("Read DDR_ADR: 0x%x\n", d);
+
+      $display("Read data from DDR in BLT");
+      blt_data = {};
+      acc.readm(blt_addr, blt_data, A32|BLT|D32, result);
+
+      for(i=0; i<10; i++)
+        begin
+           $display("Data %d: 0x%x\n", i, blt_data[i]);
+        end
+      */
+
       acc.write('h2200, 'h0, A32|SINGLE|D32);
       for(i=0; i<5; i++)
         begin
-           acc.read('h2100, d, A32|SINGLE|D32);
+           acc.read('h3000, d, A32|SINGLE|D32);
            $display("Read %d: 0x%x\n", i, d);
         end
 
@@ -163,17 +196,17 @@ module main;
       for(i=0; i<2; i++)
         begin
            wr_data = i;
-           acc.write('h2100, wr_data, A32|SINGLE|D32);
+           acc.write('h3000, wr_data, A32|SINGLE|D32);
            $display("Write %d: 0x%x\n", i, wr_data);
         end
 
       acc.write('h2200, 'h0, A32|SINGLE|D32);
       for(i=0; i<5; i++)
         begin
-           acc.read('h2100, d, A32|SINGLE|D32);
+           acc.read('h3000, d, A32|SINGLE|D32);
            $display("Read %d: 0x%x\n", i, d);
         end
-       */
+
 
    end
 

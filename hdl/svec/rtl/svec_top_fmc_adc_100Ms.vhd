@@ -321,13 +321,13 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   constant c_WB_SLAVE_VIC          : integer := 3;   -- Vectored interrupt controller
   constant c_WB_SLAVE_FMC0_EIC     : integer := 4;   -- FMC slot 1 interrupt controller
   constant c_WB_SLAVE_FMC0_TIMETAG : integer := 5;   -- FMC slot 1 timetag core
-  constant c_WB_SLAVE_FMC0_DDR_DAT : integer := 6;   -- FMC slot 1 DDR data
-  constant c_WB_SLAVE_FMC0_DDR_ADR : integer := 7;   -- FMC slot 1 DDR address
+  constant c_WB_SLAVE_FMC0_DDR_ADR : integer := 6;   -- FMC slot 1 DDR address
+  constant c_WB_SLAVE_FMC0_DDR_DAT : integer := 7;   -- FMC slot 1 DDR data
   constant c_WB_SLAVE_FMC0_ADC     : integer := 8;   -- FMC slot 1 ADC mezzanine
   constant c_WB_SLAVE_FMC1_EIC     : integer := 9;   -- FMC slot 2 interrupt controller
   constant c_WB_SLAVE_FMC1_TIMETAG : integer := 10;  -- FMC slot 2 timetag core
-  constant c_WB_SLAVE_FMC1_DDR_DAT : integer := 11;  -- FMC slot 2 DDR data
-  constant c_WB_SLAVE_FMC1_DDR_ADR : integer := 12;  -- FMC slot 2 DDR address
+  constant c_WB_SLAVE_FMC1_DDR_ADR : integer := 11;  -- FMC slot 2 DDR address
+  constant c_WB_SLAVE_FMC1_DDR_DAT : integer := 12;  -- FMC slot 2 DDR data
   constant c_WB_SLAVE_FMC1_ADC     : integer := 13;  -- FMC slot 2 ADC mezzanine
 
 
@@ -413,9 +413,9 @@ architecture rtl of svec_top_fmc_adc_100Ms is
         name      => "WB-DDR-Addr-Access ")));
 
   -- f_xwb_bridge_manual_sdb(size, sdb_addr)
-  -- Note: sdb_addr is the sdb records address relative to the parent interconnect
-  constant c_fmc0_bridge_sdb : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00004000");
-  constant c_fmc1_bridge_sdb : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00008000");
+  -- Note: sdb_addr is the sdb records address relative to the bridge base address
+  constant c_fmc0_bridge_sdb : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00000000");
+  constant c_fmc1_bridge_sdb : t_sdb_bridge := f_xwb_bridge_manual_sdb(x"00001fff", x"00000000");
 
   -- sdb header address
   constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";
@@ -552,18 +552,18 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal led_state_man : std_logic_vector(15 downto 0);
 
   -- DDR0 (bank 4)
-  signal ddr0_status     : std_logic_vector(31 downto 0);
-  signal ddr0_calib_done : std_logic;
-  signal ddr0_addr_cnt   : unsigned(31 downto 0);
-  signal ddr0_wb_cyc_d   : std_logic;
-  signal ddr0_wb_cyc_fe  : std_logic;
+  signal ddr0_status      : std_logic_vector(31 downto 0);
+  signal ddr0_calib_done  : std_logic;
+  signal ddr0_addr_cnt    : unsigned(31 downto 0);
+  signal ddr0_dat_cyc_d   : std_logic;
+  signal ddr0_addr_cnt_en : std_logic;
 
   -- DDR1 (bank 5)
   signal ddr1_status     : std_logic_vector(31 downto 0);
   signal ddr1_calib_done : std_logic;
   signal ddr1_addr_cnt   : unsigned(31 downto 0);
-  signal ddr1_wb_cyc_d   : std_logic;
-  signal ddr1_wb_cyc_fe  : std_logic;
+  signal ddr1_dat_cyc_d   : std_logic;
+  signal ddr1_addr_cnt_en   : std_logic;
 
   -- Carrier 1-wire
   signal carrier_owr_en : std_logic_vector(0 downto 0);
@@ -582,6 +582,8 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal acq_start_p : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal acq_stop_p  : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal acq_end_p   : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
+  signal fmc0_trigger_tag : t_timetag;
+  signal fmc1_trigger_tag : t_timetag;
 
   -- led pwm
   signal led_pwm_update_cnt : unsigned(9 downto 0);
@@ -936,7 +938,7 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc0_eic : fmc_adc_eic
     port map(
-      rst_n_i       => sys_rst_n,
+      rst_n_i       => fmc0_rst_n,
       clk_sys_i     => sys_clk_125,
       wb_adr_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).adr(3 downto 2),  -- cnx_master_out.adr is byte address
       wb_dat_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).dat,
@@ -962,7 +964,7 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc1_eic : fmc_adc_eic
     port map(
-      rst_n_i       => sys_rst_n,
+      rst_n_i       => fmc1_rst_n,
       clk_sys_i     => sys_clk_125,
       wb_adr_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).adr(3 downto 2),  -- cnx_master_out.adr is byte address
       wb_dat_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).dat,
@@ -992,7 +994,7 @@ begin
     p_ddr_wr_fifo_empty : process (sys_clk_125)
     begin
       if rising_edge(sys_clk_125) then
-        if sys_rst_n = '0' then
+        if fmc0_rst_n = '0' or fmc1_rst_n = '0' then
           ddr_wr_fifo_empty_d(I)  <= '0';
           ddr_wr_fifo_empty_d1(I) <= '0';
         else
@@ -1009,7 +1011,7 @@ begin
     p_acq_end_extend : process (sys_clk_125)
     begin
       if rising_edge(sys_clk_125) then
-        if sys_rst_n = '0' then
+        if fmc0_rst_n = '0' or fmc1_rst_n = '0' then
           acq_end_extend(I) <= '0';
         elsif acq_end_p(I) = '1' then
           acq_end_extend(I) <= '1';
@@ -1062,6 +1064,8 @@ begin
       acq_start_p_o => acq_start_p(0),
       acq_stop_p_o  => acq_stop_p(0),
       acq_end_p_o   => acq_end_p(0),
+
+      trigger_tag_i => fmc0_trigger_tag,
 
       ext_trigger_p_i => adc0_ext_trigger_p_i,
       ext_trigger_n_i => adc0_ext_trigger_n_i,
@@ -1148,6 +1152,8 @@ begin
       acq_start_p_o => acq_start_p(1),
       acq_stop_p_o  => acq_stop_p(1),
       acq_end_p_o   => acq_end_p(1),
+
+      trigger_tag_i => fmc1_trigger_tag,
 
       ext_trigger_p_i => adc1_ext_trigger_p_i,
       ext_trigger_n_i => adc1_ext_trigger_n_i,
@@ -1292,19 +1298,18 @@ begin
   --  The counter is incremented on the falling edge of cyc. This is because the ddr controller
   --  samples the address on (cyc_re and stb)+1
 
-  -- cyc falling edge detection
-  p_ddr0_wb_cyc : process (sys_clk_125)
+  p_ddr0_dat_cyc: process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if (fmc0_rst_n = '0') then
-        ddr0_wb_cyc_d <= '0';
+      if fmc0_rst_n = '0' then
+        ddr0_dat_cyc_d <= '0';
       else
-        ddr0_wb_cyc_d <= cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).cyc;
+        ddr0_dat_cyc_d <= cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).cyc;
       end if;
     end if;
-  end process p_ddr0_wb_cyc;
+  end process p_ddr0_dat_cyc;
 
-  ddr0_wb_cyc_fe <= not(cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).cyc) and ddr0_wb_cyc_d;
+  ddr0_addr_cnt_en <= not(cnx_master_out(c_WB_SLAVE_FMC0_DDR_DAT).cyc) and ddr0_dat_cyc_d;
 
   -- address counter
   p_ddr0_addr_cnt : process (sys_clk_125)
@@ -1316,7 +1321,7 @@ begin
              cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).stb = '1' and
              cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).cyc = '1') then
         ddr0_addr_cnt <= unsigned(cnx_master_out(c_WB_SLAVE_FMC0_DDR_ADR).dat);
-      elsif (ddr0_wb_cyc_fe = '1') then
+      elsif (ddr0_addr_cnt_en = '1') then
         ddr0_addr_cnt <= ddr0_addr_cnt + 1;
       end if;
     end if;
@@ -1445,19 +1450,18 @@ begin
   --  The counter is incremented on the falling edge of cyc. This is because the ddr controller
   --  samples the address on (cyc_re and stb)+1
 
-  -- cyc falling edge detection
-  p_ddr1_wb_cyc : process (sys_clk_125)
+  p_ddr1_dat_cyc: process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
-      if (fmc1_rst_n = '0') then
-        ddr1_wb_cyc_d <= '0';
+      if fmc1_rst_n = '0' then
+        ddr1_dat_cyc_d <= '0';
       else
-        ddr1_wb_cyc_d <= cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).cyc;
+        ddr1_dat_cyc_d <= cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).cyc;
       end if;
     end if;
-  end process p_ddr1_wb_cyc;
+  end process p_ddr1_dat_cyc;
 
-  ddr1_wb_cyc_fe <= not(cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).cyc) and ddr1_wb_cyc_d;
+  ddr1_addr_cnt_en <= not(cnx_master_out(c_WB_SLAVE_FMC1_DDR_DAT).cyc) and ddr1_dat_cyc_d;
 
   -- address counter
   p_ddr1_addr_cnt : process (sys_clk_125)
@@ -1469,7 +1473,7 @@ begin
              cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).stb = '1' and
              cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).cyc = '1') then
         ddr1_addr_cnt <= unsigned(cnx_master_out(c_WB_SLAVE_FMC1_DDR_ADR).dat);
-      elsif (ddr1_wb_cyc_fe = '1') then
+      elsif (ddr1_addr_cnt_en = '1') then
         ddr1_addr_cnt <= ddr1_addr_cnt + 1;
       end if;
     end if;
@@ -1512,6 +1516,8 @@ begin
       acq_stop_p_i  => acq_stop_p(0),
       acq_end_p_i   => acq_end_p(0),
 
+      trig_tag_o => fmc0_trigger_tag,
+
       wb_adr_i => cnx_master_out(c_WB_SLAVE_FMC0_TIMETAG).adr(6 downto 2),  -- cnx_master_out.adr is byte address
       wb_dat_i => cnx_master_out(c_WB_SLAVE_FMC0_TIMETAG).dat,
       wb_dat_o => cnx_master_in(c_WB_SLAVE_FMC0_TIMETAG).dat,
@@ -1540,6 +1546,8 @@ begin
       acq_start_p_i => acq_start_p(1),
       acq_stop_p_i  => acq_stop_p(1),
       acq_end_p_i   => acq_end_p(1),
+
+      trig_tag_o => fmc1_trigger_tag,
 
       wb_adr_i => cnx_master_out(c_WB_SLAVE_FMC1_TIMETAG).adr(6 downto 2),  -- cnx_master_out.adr is byte address
       wb_dat_i => cnx_master_out(c_WB_SLAVE_FMC1_TIMETAG).dat,

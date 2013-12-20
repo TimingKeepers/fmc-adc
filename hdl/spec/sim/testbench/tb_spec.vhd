@@ -227,45 +227,45 @@ architecture TEST of TB_SPEC is
         DDR3_RZQ     : inout std_logic;
 
         -- FMC slot
-        ext_trigger_p_i : in std_logic;  -- External trigger
-        ext_trigger_n_i : in std_logic;
+        adc0_ext_trigger_p_i : in std_logic;  -- External trigger
+        adc0_ext_trigger_n_i : in std_logic;
 
-        adc_dco_p_i  : in std_logic;                     -- ADC data clock
-        adc_dco_n_i  : in std_logic;
-        adc_fr_p_i   : in std_logic;                     -- ADC frame start
-        adc_fr_n_i   : in std_logic;
-        adc_outa_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (odd bits)
-        adc_outa_n_i : in std_logic_vector(3 downto 0);
-        adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
-        adc_outb_n_i : in std_logic_vector(3 downto 0);
+        adc0_dco_p_i  : in std_logic;                     -- ADC data clock
+        adc0_dco_n_i  : in std_logic;
+        adc0_fr_p_i   : in std_logic;                     -- ADC frame start
+        adc0_fr_n_i   : in std_logic;
+        adc0_outa_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (odd bits)
+        adc0_outa_n_i : in std_logic_vector(3 downto 0);
+        adc0_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
+        adc0_outb_n_i : in std_logic_vector(3 downto 0);
 
-        spi_din_i       : in  std_logic;  -- SPI data from FMC
-        spi_dout_o      : out std_logic;  -- SPI data to FMC
-        spi_sck_o       : out std_logic;  -- SPI clock
-        spi_cs_adc_n_o  : out std_logic;  -- SPI ADC chip select (active low)
-        spi_cs_dac1_n_o : out std_logic;  -- SPI channel 1 offset DAC chip select (active low)
-        spi_cs_dac2_n_o : out std_logic;  -- SPI channel 2 offset DAC chip select (active low)
-        spi_cs_dac3_n_o : out std_logic;  -- SPI channel 3 offset DAC chip select (active low)
-        spi_cs_dac4_n_o : out std_logic;  -- SPI channel 4 offset DAC chip select (active low)
+        adc0_spi_din_i       : in  std_logic;  -- SPI data from FMC
+        adc0_spi_dout_o      : out std_logic;  -- SPI data to FMC
+        adc0_spi_sck_o       : out std_logic;  -- SPI clock
+        adc0_spi_cs_adc_n_o  : out std_logic;  -- SPI ADC chip select (active low)
+        adc0_spi_cs_dac1_n_o : out std_logic;  -- SPI channel 1 offset DAC chip select (active low)
+        adc0_spi_cs_dac2_n_o : out std_logic;  -- SPI channel 2 offset DAC chip select (active low)
+        adc0_spi_cs_dac3_n_o : out std_logic;  -- SPI channel 3 offset DAC chip select (active low)
+        adc0_spi_cs_dac4_n_o : out std_logic;  -- SPI channel 4 offset DAC chip select (active low)
 
-        gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
-        gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
-        gpio_led_trig_o  : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
-        gpio_ssr_ch1_o   : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
-        gpio_ssr_ch2_o   : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
-        gpio_ssr_ch3_o   : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
-        gpio_ssr_ch4_o   : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
-        gpio_si570_oe_o  : out std_logic;                     -- Si570 (programmable oscillator) output enable
+        adc0_gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
+        adc0_gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
+        adc0_gpio_led_trig_o  : out std_logic;                     -- Mezzanine front panel trigger LED (TRIG)
+        adc0_gpio_ssr_ch1_o   : out std_logic_vector(6 downto 0);  -- Channel 1 solid state relays control
+        adc0_gpio_ssr_ch2_o   : out std_logic_vector(6 downto 0);  -- Channel 2 solid state relays control
+        adc0_gpio_ssr_ch3_o   : out std_logic_vector(6 downto 0);  -- Channel 3 solid state relays control
+        adc0_gpio_ssr_ch4_o   : out std_logic_vector(6 downto 0);  -- Channel 4 solid state relays control
+        adc0_gpio_si570_oe_o  : out std_logic;                     -- Si570 (programmable oscillator) output enable
 
-        si570_scl_b : inout std_logic;  -- I2C bus clock (Si570)
-        si570_sda_b : inout std_logic;  -- I2C bus data (Si570)
+        adc0_si570_scl_b : inout std_logic;  -- I2C bus clock (Si570)
+        adc0_si570_sda_b : inout std_logic;  -- I2C bus data (Si570)
 
-        mezz_one_wire_b : inout std_logic;  -- 1-wire interface (DS18B20 thermometer + unique ID)
+        adc0_one_wire_b : inout std_logic;  -- 1-wire interface (DS18B20 thermometer + unique ID)
 
-        prsnt_m2c_n_i : in std_logic;   -- Mezzanine present (active low)
+        fmc0_prsnt_m2c_n_i : in std_logic;   -- Mezzanine present (active low)
 
-        sys_scl_b : inout std_logic;    -- Mezzanine system I2C clock (EEPROM)
-        sys_sda_b : inout std_logic     -- Mezzanine system I2C data (EEPROM)
+        fmc0_sys_scl_b : inout std_logic;    -- Mezzanine system I2C clock (EEPROM)
+        fmc0_sys_sda_b : inout std_logic     -- Mezzanine system I2C data (EEPROM)
         );
   end component spec_top_fmc_adc_100Ms;
 
@@ -615,45 +615,45 @@ begin
       gpio       => GPIO(9 downto 8),   -- General Purpose Input/Output
 
       -- FMC slot
-      ext_trigger_p_i => ext_trigger_p_i,
-      ext_trigger_n_i => ext_trigger_n_i,
+      adc0_ext_trigger_p_i => ext_trigger_p_i,
+      adc0_ext_trigger_n_i => ext_trigger_n_i,
 
-      adc_dco_p_i  => adc_dco_p_i,
-      adc_dco_n_i  => adc_dco_n_i,
-      adc_fr_p_i   => adc_fr_p_i,
-      adc_fr_n_i   => adc_fr_n_i,
-      adc_outa_p_i => adc_outa_p_i,
-      adc_outa_n_i => adc_outa_n_i,
-      adc_outb_p_i => adc_outb_p_i,
-      adc_outb_n_i => adc_outb_n_i,
+      adc0_dco_p_i  => adc_dco_p_i,
+      adc0_dco_n_i  => adc_dco_n_i,
+      adc0_fr_p_i   => adc_fr_p_i,
+      adc0_fr_n_i   => adc_fr_n_i,
+      adc0_outa_p_i => adc_outa_p_i,
+      adc0_outa_n_i => adc_outa_n_i,
+      adc0_outb_p_i => adc_outb_p_i,
+      adc0_outb_n_i => adc_outb_n_i,
 
-      spi_din_i       => spi_din_i,
-      spi_dout_o      => spi_dout_o,
-      spi_sck_o       => spi_sck_o,
-      spi_cs_adc_n_o  => spi_cs_adc_n_o ,
-      spi_cs_dac1_n_o => spi_cs_dac1_n_o,
-      spi_cs_dac2_n_o => spi_cs_dac2_n_o,
-      spi_cs_dac3_n_o => spi_cs_dac3_n_o,
-      spi_cs_dac4_n_o => spi_cs_dac4_n_o,
+      adc0_spi_din_i       => spi_din_i,
+      adc0_spi_dout_o      => spi_dout_o,
+      adc0_spi_sck_o       => spi_sck_o,
+      adc0_spi_cs_adc_n_o  => spi_cs_adc_n_o ,
+      adc0_spi_cs_dac1_n_o => spi_cs_dac1_n_o,
+      adc0_spi_cs_dac2_n_o => spi_cs_dac2_n_o,
+      adc0_spi_cs_dac3_n_o => spi_cs_dac3_n_o,
+      adc0_spi_cs_dac4_n_o => spi_cs_dac4_n_o,
 
-      gpio_dac_clr_n_o => gpio_dac_clr_n_o,
-      gpio_led_acq_o   => gpio_led_acq_o,
-      gpio_led_trig_o  => gpio_led_trig_o,
-      gpio_ssr_ch1_o   => gpio_ssr_ch1_o,
-      gpio_ssr_ch2_o   => gpio_ssr_ch2_o,
-      gpio_ssr_ch3_o   => gpio_ssr_ch3_o,
-      gpio_ssr_ch4_o   => gpio_ssr_ch4_o,
-      gpio_si570_oe_o  => gpio_si570_oe_o,
+      adc0_gpio_dac_clr_n_o => gpio_dac_clr_n_o,
+      adc0_gpio_led_acq_o   => gpio_led_acq_o,
+      adc0_gpio_led_trig_o  => gpio_led_trig_o,
+      adc0_gpio_ssr_ch1_o   => gpio_ssr_ch1_o,
+      adc0_gpio_ssr_ch2_o   => gpio_ssr_ch2_o,
+      adc0_gpio_ssr_ch3_o   => gpio_ssr_ch3_o,
+      adc0_gpio_ssr_ch4_o   => gpio_ssr_ch4_o,
+      adc0_gpio_si570_oe_o  => gpio_si570_oe_o,
 
-      si570_scl_b => si570_scl_b,
-      si570_sda_b => si570_sda_b,
+      adc0_si570_scl_b => si570_scl_b,
+      adc0_si570_sda_b => si570_sda_b,
 
-      mezz_one_wire_b => mezz_one_wire_b,
+      adc0_one_wire_b => mezz_one_wire_b,
 
-      prsnt_m2c_n_i => prsnt_m2c_n_i,
+      fmc0_prsnt_m2c_n_i => prsnt_m2c_n_i,
 
-      sys_scl_b => sys_scl_b,
-      sys_sda_b => sys_sda_b,
+      fmc0_sys_scl_b => sys_scl_b,
+      fmc0_sys_sda_b => sys_sda_b,
 
       -- DDR3 interface
       ddr3_a       => ddr3_a_o,

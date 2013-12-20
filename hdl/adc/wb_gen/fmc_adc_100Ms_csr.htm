@@ -809,7 +809,24 @@ fmc_adc_core_sta_serdes_synced_i
 
 </td>
 <td  class="td_pblock_right">
-fmc_adc_core_sta_reserved_i[26:0]
+fmc_adc_core_sta_acq_cfg_i
+</td>
+<td  class="td_arrow_right">
+&larr;
+</td>
+</tr>
+<tr>
+<td  class="td_arrow_left">
+
+</td>
+<td  class="td_pblock_left">
+
+</td>
+<td  class="td_sym_center">
+
+</td>
+<td  class="td_pblock_right">
+fmc_adc_core_sta_reserved_i[25:0]
 </td>
 <td  class="td_arrow_right">
 &lArr;
@@ -2849,7 +2866,7 @@ STA
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[26:19]
+RESERVED[25:18]
 </td>
 <td >
 
@@ -2903,7 +2920,7 @@ RESERVED[26:19]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[18:11]
+RESERVED[17:10]
 </td>
 <td >
 
@@ -2957,7 +2974,7 @@ RESERVED[18:11]
 </tr>
 <tr>
 <td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[10:3]
+RESERVED[9:2]
 </td>
 <td >
 
@@ -3010,8 +3027,11 @@ RESERVED[10:3]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=3  class="td_field">
-RESERVED[2:0]
+<td style="border: solid 1px black;" colspan=2  class="td_field">
+RESERVED[1:0]
+</td>
+<td style="border: solid 1px black;" colspan=1  class="td_field">
+ACQ_CFG
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 SERDES_SYNCED
@@ -3031,16 +3051,13 @@ FSM[2:0]
 <td >
 
 </td>
-<td >
-
-</td>
 </tr>
 </table>
 <ul>
 <li><b>
 FSM
 </b>[<i>read-only</i>]: State machine status
-<br>States:<br>0: illegal<br>1: IDLE<br>2: PRE_TRIG<br>3: WAIT_TRIG<br>4: POST_TRIG<br>5: DECR_SHOT<br>6: illegal<br>7: illegal
+<br>States:<br>0: illegal<br>1: IDLE<br>2: PRE_TRIG<br>3: WAIT_TRIG<br>4: POST_TRIG<br>5: TRIG_TAG<br>6: DECR_SHOT<br>7: illegal
 <li><b>
 SERDES_PLL
 </b>[<i>read-only</i>]: SerDes PLL status
@@ -3049,6 +3066,10 @@ SERDES_PLL
 SERDES_SYNCED
 </b>[<i>read-only</i>]: SerDes synchronization status
 <br>0: bitslip in progress<br>1: serdes synchronized
+<li><b>
+ACQ_CFG
+</b>[<i>read-only</i>]: Acquisition configuration status
+<br>0: Unauthorised acquisition configuration (will prevent acquisition to start)<br>1: Valid acquisition configuration<br>- Shot number > 0<br>- Post-trigger sample > 0
 <li><b>
 RESERVED
 </b>[<i>read-only</i>]: Reserved
@@ -3334,7 +3355,7 @@ RESERVED
 <li><b>
 INT_TRIG_THRES
 </b>[<i>read/write</i>]: Threshold for internal trigger
-<br>Treated as binary two's complement and compared to raw ADC data
+<br>Treated as binary two's complement and compared to raw ADC data.
 </ul>
 <a name="TRIG_DLY"></a>
 <h3><a name="sect_3_4">3.4. Trigger delay</a></h3>
@@ -4888,7 +4909,7 @@ PRE_SAMPLES[7:0]
 <li><b>
 PRE_SAMPLES
 </b>[<i>read/write</i>]: Pre-trigger samples
-<br>Number of requested pre-trigger samples
+<br>Number of requested pre-trigger samples (>1).
 </ul>
 <a name="POST_SAMPLES"></a>
 <h3><a name="sect_3_10">3.10. Post-trigger samples</a></h3>
@@ -5146,7 +5167,7 @@ POST_SAMPLES[7:0]
 <li><b>
 POST_SAMPLES
 </b>[<i>read/write</i>]: Post-trigger samples
-<br>Number of requested post-trigger samples
+<br>Number of requested post-trigger samples (>1).
 </ul>
 <a name="SAMPLES_CNT"></a>
 <h3><a name="sect_3_11">3.11. Samples counter</a></h3>

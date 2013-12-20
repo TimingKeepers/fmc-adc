@@ -22,9 +22,7 @@ VERILOG_SRC := main.sv \
 ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/jtag_cores.v \
 ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_adder.v \
 ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_addsub.v \
-../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_dp_ram.v \
 ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_logic_op.v \
-../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_ram.v \
 ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_shifter.v \
 ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/platform/generic/lm32_multiplier.v \
 ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/platform/generic/jtag_tap.v \
@@ -40,9 +38,7 @@ work/lm32_mc_arithmetic/.lm32_mc_arithmetic_v \
 work/jtag_cores/.jtag_cores_v \
 work/lm32_adder/.lm32_adder_v \
 work/lm32_addsub/.lm32_addsub_v \
-work/lm32_dp_ram/.lm32_dp_ram_v \
 work/lm32_logic_op/.lm32_logic_op_v \
-work/lm32_ram/.lm32_ram_v \
 work/lm32_shifter/.lm32_shifter_v \
 work/lm32_multiplier/.lm32_multiplier_v \
 work/jtag_tap/.jtag_tap_v \
@@ -56,15 +52,15 @@ VHDL_SRC := ../../../ip_cores/adc_sync_fifo.vhd \
 ../../../ip_cores/ext_pulse_sync/ext_pulse_sync_rtl.vhd \
 ../../rtl/bicolor_led_ctrl_pkg.vhd \
 ../../rtl/carrier_csr.vhd \
-../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd \
 ../../rtl/bicolor_led_ctrl.vhd \
 ../../../ip_cores/general-cores/modules/genrams/genram_pkg.vhd \
-../../../adc/rtl/fmc_adc_mezzanine_pkg.vhd \
-../../../adc/rtl/fmc_adc_100Ms_core_pkg.vhd \
 ../../../ip_cores/timetag_core/rtl/timetag_core_pkg.vhd \
+../../../adc/rtl/fmc_adc_100Ms_core_pkg.vhd \
+../../../adc/rtl/fmc_adc_mezzanine_pkg.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wishbone_pkg.vhd \
 ../../rtl/sdb_meta_pkg.vhd \
 ../../../adc/rtl/fmc_adc_100Ms_csr.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd \
 ../../../adc/rtl/offset_gain_s.vhd \
 ../../../ip_cores/timetag_core/rtl/timetag_core_regs.vhd \
 ../../../ip_cores/timetag_core/rtl/timetag_core.vhd \
@@ -80,20 +76,26 @@ VHDL_SRC := ../../../ip_cores/adc_sync_fifo.vhd \
 ../../../ip_cores/general-cores/modules/common/gc_sync_ffs.vhd \
 ../../../ip_cores/general-cores/modules/common/gc_arbitrated_mux.vhd \
 ../../../ip_cores/general-cores/modules/common/gc_pulse_synchronizer.vhd \
+../../../ip_cores/general-cores/modules/common/gc_pulse_synchronizer2.vhd \
 ../../../ip_cores/general-cores/modules/common/gc_frequency_meter.vhd \
-../../../ip_cores/general-cores/modules/common/gc_dual_clock_ram.vhd \
-../../../ip_cores/general-cores/modules/common/gc_wfifo.vhd \
+../../../ip_cores/general-cores/modules/common/gc_rr_arbiter.vhd \
+../../../ip_cores/general-cores/modules/common/gc_prio_encoder.vhd \
+../../../ip_cores/general-cores/modules/common/gc_word_packer.vhd \
+../../../ip_cores/general-cores/modules/common/gc_big_adder.vhd \
 ../../../adc/rtl/fmc_adc_100Ms_core.vhd \
 ../../../ip_cores/general-cores/modules/genrams/memory_loader_pkg.vhd \
 ../../../ip_cores/general-cores/modules/genrams/generic_shiftreg_fifo.vhd \
+../../../ip_cores/general-cores/modules/genrams/inferred_sync_fifo.vhd \
+../../../ip_cores/general-cores/modules/genrams/inferred_async_fifo.vhd \
 ../../../adc/rtl/fmc_adc_mezzanine.vhd \
 ../../../ip_cores/general-cores/modules/genrams/xilinx/generic_dpram.vhd \
 ../../../ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_sameclock.vhd \
 ../../../ip_cores/general-cores/modules/genrams/xilinx/generic_dpram_dualclock.vhd \
+../../../ip_cores/general-cores/modules/genrams/xilinx/generic_simple_dpram.vhd \
 ../../../ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd \
-../../../ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd \
-../../../ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_sync_fifo.vhd \
-../../../ip_cores/general-cores/modules/genrams/xilinx/sim_stub/dummy.vhd \
+../../../ip_cores/general-cores/modules/genrams/xilinx/gc_shiftreg.vhd \
+../../../ip_cores/general-cores/modules/genrams/generic/generic_async_fifo.vhd \
+../../../ip_cores/general-cores/modules/genrams/generic/generic_sync_fifo.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_async_bridge/wb_async_bridge.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_async_bridge/xwb_async_bridge.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_onewire_master/wb_onewire_master.vhd \
@@ -125,20 +127,34 @@ VHDL_SRC := ../../../ip_cores/adc_sync_fifo.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_crossbar/sdb_rom.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_crossbar/xwb_crossbar.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_crossbar/xwb_sdb_crossbar.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_pkg.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_irq/irqm_core.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_lm32.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_slave.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_master.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_timer.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/generated/xwb_lm32.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_dp_ram.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_ram.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_slave_adapter/wb_slave_adapter.vhd \
-../../../ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xloader_registers_pkg.vhd \
-../../../ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xwb_xilinx_fpga_loader.vhd \
-../../../ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/wb_xilinx_fpga_loader.vhd \
-../../../ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xloader_wb.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_clock_crossing/xwb_clock_crossing.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_dma/xwb_dma.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_dma/xwb_streamer.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wb_serial_lcd/wb_serial_lcd.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_spi_flash/wb_spi_flash.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_simple_pwm/simple_pwm_wbgen2_pkg.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_simple_pwm/simple_pwm_wb.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_simple_pwm/wb_simple_pwm.vhd \
+../../../ip_cores/general-cores/modules/wishbone/wb_simple_pwm/xwb_simple_pwm.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_dpssram.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_eic.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_fifo_async.vhd \
 ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_fifo_sync.vhd \
-../../rtl/irq_controller.vhd \
+../../../adc/rtl/fmc_adc_eic.vhd \
+../../../ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xloader_registers_pkg.vhd \
+../../../ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xwb_xilinx_fpga_loader.vhd \
+../../../ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/wb_xilinx_fpga_loader.vhd \
+../../../ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xloader_wb.vhd \
 ../../../ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl.vhd \
 ../../../ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wb.vhd \
 ../../../ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl_wrapper_pkg.vhd \
@@ -187,15 +203,15 @@ work/utils_pkg/.utils_pkg_vhd \
 work/ext_pulse_sync_rtl/.ext_pulse_sync_rtl_vhd \
 work/bicolor_led_ctrl_pkg/.bicolor_led_ctrl_pkg_vhd \
 work/carrier_csr/.carrier_csr_vhd \
-work/wbgen2_pkg/.wbgen2_pkg_vhd \
 work/bicolor_led_ctrl/.bicolor_led_ctrl_vhd \
 work/genram_pkg/.genram_pkg_vhd \
-work/fmc_adc_mezzanine_pkg/.fmc_adc_mezzanine_pkg_vhd \
-work/fmc_adc_100Ms_core_pkg/.fmc_adc_100Ms_core_pkg_vhd \
 work/timetag_core_pkg/.timetag_core_pkg_vhd \
+work/fmc_adc_100Ms_core_pkg/.fmc_adc_100Ms_core_pkg_vhd \
+work/fmc_adc_mezzanine_pkg/.fmc_adc_mezzanine_pkg_vhd \
 work/wishbone_pkg/.wishbone_pkg_vhd \
 work/sdb_meta_pkg/.sdb_meta_pkg_vhd \
 work/fmc_adc_100Ms_csr/.fmc_adc_100Ms_csr_vhd \
+work/wbgen2_pkg/.wbgen2_pkg_vhd \
 work/offset_gain_s/.offset_gain_s_vhd \
 work/timetag_core_regs/.timetag_core_regs_vhd \
 work/timetag_core/.timetag_core_vhd \
@@ -211,20 +227,26 @@ work/gc_serial_dac/.gc_serial_dac_vhd \
 work/gc_sync_ffs/.gc_sync_ffs_vhd \
 work/gc_arbitrated_mux/.gc_arbitrated_mux_vhd \
 work/gc_pulse_synchronizer/.gc_pulse_synchronizer_vhd \
+work/gc_pulse_synchronizer2/.gc_pulse_synchronizer2_vhd \
 work/gc_frequency_meter/.gc_frequency_meter_vhd \
-work/gc_dual_clock_ram/.gc_dual_clock_ram_vhd \
-work/gc_wfifo/.gc_wfifo_vhd \
+work/gc_rr_arbiter/.gc_rr_arbiter_vhd \
+work/gc_prio_encoder/.gc_prio_encoder_vhd \
+work/gc_word_packer/.gc_word_packer_vhd \
+work/gc_big_adder/.gc_big_adder_vhd \
 work/fmc_adc_100Ms_core/.fmc_adc_100Ms_core_vhd \
 work/memory_loader_pkg/.memory_loader_pkg_vhd \
 work/generic_shiftreg_fifo/.generic_shiftreg_fifo_vhd \
+work/inferred_sync_fifo/.inferred_sync_fifo_vhd \
+work/inferred_async_fifo/.inferred_async_fifo_vhd \
 work/fmc_adc_mezzanine/.fmc_adc_mezzanine_vhd \
 work/generic_dpram/.generic_dpram_vhd \
 work/generic_dpram_sameclock/.generic_dpram_sameclock_vhd \
 work/generic_dpram_dualclock/.generic_dpram_dualclock_vhd \
+work/generic_simple_dpram/.generic_simple_dpram_vhd \
 work/generic_spram/.generic_spram_vhd \
+work/gc_shiftreg/.gc_shiftreg_vhd \
 work/generic_async_fifo/.generic_async_fifo_vhd \
 work/generic_sync_fifo/.generic_sync_fifo_vhd \
-fifo_generator_v6_1/dummy/.dummy_vhd \
 work/wb_async_bridge/.wb_async_bridge_vhd \
 work/xwb_async_bridge/.xwb_async_bridge_vhd \
 work/wb_onewire_master/.wb_onewire_master_vhd \
@@ -256,20 +278,34 @@ work/xwb_spi/.xwb_spi_vhd \
 work/sdb_rom/.sdb_rom_vhd \
 work/xwb_crossbar/.xwb_crossbar_vhd \
 work/xwb_sdb_crossbar/.xwb_sdb_crossbar_vhd \
+work/wb_irq_pkg/.wb_irq_pkg_vhd \
+work/irqm_core/.irqm_core_vhd \
+work/wb_irq_lm32/.wb_irq_lm32_vhd \
+work/wb_irq_slave/.wb_irq_slave_vhd \
+work/wb_irq_master/.wb_irq_master_vhd \
+work/wb_irq_timer/.wb_irq_timer_vhd \
 work/xwb_lm32/.xwb_lm32_vhd \
+work/lm32_dp_ram/.lm32_dp_ram_vhd \
+work/lm32_ram/.lm32_ram_vhd \
 work/wb_slave_adapter/.wb_slave_adapter_vhd \
-work/xloader_registers_pkg/.xloader_registers_pkg_vhd \
-work/xwb_xilinx_fpga_loader/.xwb_xilinx_fpga_loader_vhd \
-work/wb_xilinx_fpga_loader/.wb_xilinx_fpga_loader_vhd \
-work/xloader_wb/.xloader_wb_vhd \
 work/xwb_clock_crossing/.xwb_clock_crossing_vhd \
 work/xwb_dma/.xwb_dma_vhd \
+work/xwb_streamer/.xwb_streamer_vhd \
 work/wb_serial_lcd/.wb_serial_lcd_vhd \
+work/wb_spi_flash/.wb_spi_flash_vhd \
+work/simple_pwm_wbgen2_pkg/.simple_pwm_wbgen2_pkg_vhd \
+work/simple_pwm_wb/.simple_pwm_wb_vhd \
+work/wb_simple_pwm/.wb_simple_pwm_vhd \
+work/xwb_simple_pwm/.xwb_simple_pwm_vhd \
 work/wbgen2_dpssram/.wbgen2_dpssram_vhd \
 work/wbgen2_eic/.wbgen2_eic_vhd \
 work/wbgen2_fifo_async/.wbgen2_fifo_async_vhd \
 work/wbgen2_fifo_sync/.wbgen2_fifo_sync_vhd \
-work/irq_controller/.irq_controller_vhd \
+work/fmc_adc_eic/.fmc_adc_eic_vhd \
+work/xloader_registers_pkg/.xloader_registers_pkg_vhd \
+work/xwb_xilinx_fpga_loader/.xwb_xilinx_fpga_loader_vhd \
+work/wb_xilinx_fpga_loader/.wb_xilinx_fpga_loader_vhd \
+work/xloader_wb/.xloader_wb_vhd \
 work/ddr3_ctrl/.ddr3_ctrl_vhd \
 work/ddr3_ctrl_wb/.ddr3_ctrl_wb_vhd \
 work/ddr3_ctrl_wrapper_pkg/.ddr3_ctrl_wrapper_pkg_vhd \
@@ -309,8 +345,8 @@ work/VME_SharedComps/.VME_SharedComps_vhd \
 work/VME_swapper/.VME_swapper_vhd \
 work/VME_Wb_master/.VME_Wb_master_vhd \
 
-LIBS := work fifo_generator_v6_1
-LIB_IND := work/.work fifo_generator_v6_1/.fifo_generator_v6_1
+LIBS := work
+LIB_IND := work/.work
 ## rules #################################
 sim: modelsim.ini $(LIB_IND) $(VERILOG_OBJ) $(VHDL_OBJ)
 $(VERILOG_OBJ): $(VHDL_OBJ) 
@@ -324,9 +360,6 @@ clean:
 
 work/.work:
 	(vlib work && vmap -modelsimini modelsim.ini work && touch work/.work )|| rm -rf work 
-
-fifo_generator_v6_1/.fifo_generator_v6_1:
-	(vlib fifo_generator_v6_1 && vmap -modelsimini modelsim.ini fifo_generator_v6_1 && touch fifo_generator_v6_1/.fifo_generator_v6_1 )|| rm -rf fifo_generator_v6_1 
 
 work/main/.main_sv: main.sv 
 		vlog -work work $(VLOG_FLAGS)  -sv +incdir+. +incdir+../vme64x_bfm +incdir+../2048Mb_ddr3 $<
@@ -383,17 +416,7 @@ work/lm32_addsub/.lm32_addsub_v: ../../../ip_cores/general-cores/modules/wishbon
 		@mkdir -p $(dir $@) && touch $@ 
 
 
-work/lm32_dp_ram/.lm32_dp_ram_v: ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_dp_ram.v 
-		vlog -work work $(VLOG_FLAGS) +incdir+../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src  $<
-		@mkdir -p $(dir $@) && touch $@ 
-
-
 work/lm32_logic_op/.lm32_logic_op_v: ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_logic_op.v ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v
-		vlog -work work $(VLOG_FLAGS) +incdir+../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src  $<
-		@mkdir -p $(dir $@) && touch $@ 
-
-
-work/lm32_ram/.lm32_ram_v: ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_ram.v ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_include.v
 		vlog -work work $(VLOG_FLAGS) +incdir+../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src  $<
 		@mkdir -p $(dir $@) && touch $@ 
 
@@ -462,11 +485,6 @@ work/carrier_csr/.carrier_csr_vhd: ../../rtl/carrier_csr.vhd
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/wbgen2_pkg/.wbgen2_pkg_vhd: ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd
-		vcom $(VCOM_FLAGS)  -work work $< 
-		@mkdir -p $(dir $@) && touch $@
-
-
 work/bicolor_led_ctrl/.bicolor_led_ctrl_vhd: ../../rtl/bicolor_led_ctrl.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
@@ -480,7 +498,7 @@ work/genram_pkg/.genram_pkg_vhd: ../../../ip_cores/general-cores/modules/genrams
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/fmc_adc_mezzanine_pkg/.fmc_adc_mezzanine_pkg_vhd: ../../../adc/rtl/fmc_adc_mezzanine_pkg.vhd
+work/timetag_core_pkg/.timetag_core_pkg_vhd: ../../../ip_cores/timetag_core/rtl/timetag_core_pkg.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
@@ -490,10 +508,16 @@ work/fmc_adc_100Ms_core_pkg/.fmc_adc_100Ms_core_pkg_vhd: ../../../adc/rtl/fmc_ad
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/timetag_core_pkg/.timetag_core_pkg_vhd: ../../../ip_cores/timetag_core/rtl/timetag_core_pkg.vhd
+work/fmc_adc_100Ms_core_pkg/.fmc_adc_100Ms_core_pkg: \
+work/timetag_core_pkg/.timetag_core_pkg
+
+work/fmc_adc_mezzanine_pkg/.fmc_adc_mezzanine_pkg_vhd: ../../../adc/rtl/fmc_adc_mezzanine_pkg.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
+
+work/fmc_adc_mezzanine_pkg/.fmc_adc_mezzanine_pkg: \
+work/timetag_core_pkg/.timetag_core_pkg
 
 work/wishbone_pkg/.wishbone_pkg_vhd: ../../../ip_cores/general-cores/modules/wishbone/wishbone_pkg.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
@@ -516,6 +540,11 @@ work/fmc_adc_100Ms_csr/.fmc_adc_100Ms_csr_vhd: ../../../adc/rtl/fmc_adc_100Ms_cs
 		@mkdir -p $(dir $@) && touch $@
 
 
+work/wbgen2_pkg/.wbgen2_pkg_vhd: ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_pkg.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
 work/offset_gain_s/.offset_gain_s_vhd: ../../../adc/rtl/offset_gain_s.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
@@ -530,6 +559,9 @@ work/timetag_core/.timetag_core_vhd: ../../../ip_cores/timetag_core/rtl/timetag_
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
+
+work/timetag_core/.timetag_core: \
+work/timetag_core_pkg/.timetag_core_pkg
 
 work/gencores_pkg/.gencores_pkg_vhd: ../../../ip_cores/general-cores/modules/common/gencores_pkg.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
@@ -566,6 +598,7 @@ work/gc_extend_pulse/.gc_extend_pulse_vhd: ../../../ip_cores/general-cores/modul
 
 
 work/gc_extend_pulse/.gc_extend_pulse: \
+work/genram_pkg/.genram_pkg \
 work/gencores_pkg/.gencores_pkg
 
 work/gc_delay_gen/.gc_delay_gen_vhd: ../../../ip_cores/general-cores/modules/common/gc_delay_gen.vhd
@@ -616,6 +649,14 @@ work/gc_pulse_synchronizer/.gc_pulse_synchronizer_vhd: ../../../ip_cores/general
 work/gc_pulse_synchronizer/.gc_pulse_synchronizer: \
 work/gencores_pkg/.gencores_pkg
 
+work/gc_pulse_synchronizer2/.gc_pulse_synchronizer2_vhd: ../../../ip_cores/general-cores/modules/common/gc_pulse_synchronizer2.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/gc_pulse_synchronizer2/.gc_pulse_synchronizer2: \
+work/gencores_pkg/.gencores_pkg
+
 work/gc_frequency_meter/.gc_frequency_meter_vhd: ../../../ip_cores/general-cores/modules/common/gc_frequency_meter.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
@@ -624,17 +665,31 @@ work/gc_frequency_meter/.gc_frequency_meter_vhd: ../../../ip_cores/general-cores
 work/gc_frequency_meter/.gc_frequency_meter: \
 work/gencores_pkg/.gencores_pkg
 
-work/gc_dual_clock_ram/.gc_dual_clock_ram_vhd: ../../../ip_cores/general-cores/modules/common/gc_dual_clock_ram.vhd
+work/gc_rr_arbiter/.gc_rr_arbiter_vhd: ../../../ip_cores/general-cores/modules/common/gc_rr_arbiter.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/gc_wfifo/.gc_wfifo_vhd: ../../../ip_cores/general-cores/modules/common/gc_wfifo.vhd
+work/gc_prio_encoder/.gc_prio_encoder_vhd: ../../../ip_cores/general-cores/modules/common/gc_prio_encoder.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/gc_wfifo/.gc_wfifo: \
+work/gc_word_packer/.gc_word_packer_vhd: ../../../ip_cores/general-cores/modules/common/gc_word_packer.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/gc_word_packer/.gc_word_packer: \
+work/genram_pkg/.genram_pkg
+
+work/gc_big_adder/.gc_big_adder_vhd: ../../../ip_cores/general-cores/modules/common/gc_big_adder.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/gc_big_adder/.gc_big_adder: \
+work/wishbone_pkg/.wishbone_pkg \
 work/gencores_pkg/.gencores_pkg
 
 work/fmc_adc_100Ms_core/.fmc_adc_100Ms_core_vhd: ../../../adc/rtl/fmc_adc_100Ms_core.vhd
@@ -643,7 +698,8 @@ work/fmc_adc_100Ms_core/.fmc_adc_100Ms_core_vhd: ../../../adc/rtl/fmc_adc_100Ms_
 
 
 work/fmc_adc_100Ms_core/.fmc_adc_100Ms_core: \
-work/genram_pkg/.genram_pkg
+work/genram_pkg/.genram_pkg \
+work/timetag_core_pkg/.timetag_core_pkg
 
 work/memory_loader_pkg/.memory_loader_pkg_vhd: ../../../ip_cores/general-cores/modules/genrams/memory_loader_pkg.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
@@ -661,6 +717,22 @@ work/generic_shiftreg_fifo/.generic_shiftreg_fifo_vhd: ../../../ip_cores/general
 work/generic_shiftreg_fifo/.generic_shiftreg_fifo: \
 work/genram_pkg/.genram_pkg
 
+work/inferred_sync_fifo/.inferred_sync_fifo_vhd: ../../../ip_cores/general-cores/modules/genrams/inferred_sync_fifo.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/inferred_sync_fifo/.inferred_sync_fifo: \
+work/genram_pkg/.genram_pkg
+
+work/inferred_async_fifo/.inferred_async_fifo_vhd: ../../../ip_cores/general-cores/modules/genrams/inferred_async_fifo.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/inferred_async_fifo/.inferred_async_fifo: \
+work/genram_pkg/.genram_pkg
+
 work/fmc_adc_mezzanine/.fmc_adc_mezzanine_vhd: ../../../adc/rtl/fmc_adc_mezzanine.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
@@ -668,6 +740,7 @@ work/fmc_adc_mezzanine/.fmc_adc_mezzanine_vhd: ../../../adc/rtl/fmc_adc_mezzanin
 
 work/fmc_adc_mezzanine/.fmc_adc_mezzanine: \
 work/wishbone_pkg/.wishbone_pkg \
+work/timetag_core_pkg/.timetag_core_pkg \
 work/fmc_adc_100Ms_core_pkg/.fmc_adc_100Ms_core_pkg
 
 work/generic_dpram/.generic_dpram_vhd: ../../../ip_cores/general-cores/modules/genrams/xilinx/generic_dpram.vhd
@@ -697,6 +770,15 @@ work/generic_dpram_dualclock/.generic_dpram_dualclock: \
 work/genram_pkg/.genram_pkg \
 work/memory_loader_pkg/.memory_loader_pkg
 
+work/generic_simple_dpram/.generic_simple_dpram_vhd: ../../../ip_cores/general-cores/modules/genrams/xilinx/generic_simple_dpram.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/generic_simple_dpram/.generic_simple_dpram: \
+work/genram_pkg/.genram_pkg \
+work/memory_loader_pkg/.memory_loader_pkg
+
 work/generic_spram/.generic_spram_vhd: ../../../ip_cores/general-cores/modules/genrams/xilinx/generic_spram.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
@@ -705,7 +787,15 @@ work/generic_spram/.generic_spram_vhd: ../../../ip_cores/general-cores/modules/g
 work/generic_spram/.generic_spram: \
 work/genram_pkg/.genram_pkg
 
-work/generic_async_fifo/.generic_async_fifo_vhd: ../../../ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_async_fifo.vhd
+work/gc_shiftreg/.gc_shiftreg_vhd: ../../../ip_cores/general-cores/modules/genrams/xilinx/gc_shiftreg.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/gc_shiftreg/.gc_shiftreg: \
+work/genram_pkg/.genram_pkg
+
+work/generic_async_fifo/.generic_async_fifo_vhd: ../../../ip_cores/general-cores/modules/genrams/generic/generic_async_fifo.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
@@ -713,18 +803,13 @@ work/generic_async_fifo/.generic_async_fifo_vhd: ../../../ip_cores/general-cores
 work/generic_async_fifo/.generic_async_fifo: \
 work/genram_pkg/.genram_pkg
 
-work/generic_sync_fifo/.generic_sync_fifo_vhd: ../../../ip_cores/general-cores/modules/genrams/xilinx/spartan6/generic_sync_fifo.vhd
+work/generic_sync_fifo/.generic_sync_fifo_vhd: ../../../ip_cores/general-cores/modules/genrams/generic/generic_sync_fifo.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
 
 work/generic_sync_fifo/.generic_sync_fifo: \
 work/genram_pkg/.genram_pkg
-
-fifo_generator_v6_1/dummy/.dummy_vhd: ../../../ip_cores/general-cores/modules/genrams/xilinx/sim_stub/dummy.vhd
-		vcom $(VCOM_FLAGS)  -work fifo_generator_v6_1 $< 
-		@mkdir -p $(dir $@) && touch $@
-
 
 work/wb_async_bridge/.wb_async_bridge_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_async_bridge/wb_async_bridge.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
@@ -906,6 +991,7 @@ work/wb_vic/.wb_vic_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_vic
 
 
 work/wb_vic/.wb_vic: \
+work/genram_pkg/.genram_pkg \
 work/wishbone_pkg/.wishbone_pkg
 
 work/xwb_vic/.xwb_vic_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_vic/xwb_vic.vhd
@@ -956,6 +1042,64 @@ work/xwb_sdb_crossbar/.xwb_sdb_crossbar_vhd: ../../../ip_cores/general-cores/mod
 work/xwb_sdb_crossbar/.xwb_sdb_crossbar: \
 work/wishbone_pkg/.wishbone_pkg
 
+work/wb_irq_pkg/.wb_irq_pkg_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_pkg.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/wb_irq_pkg/.wb_irq_pkg: \
+work/wishbone_pkg/.wishbone_pkg
+
+work/irqm_core/.irqm_core_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_irq/irqm_core.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/irqm_core/.irqm_core: \
+work/wb_irq_pkg/.wb_irq_pkg \
+work/genram_pkg/.genram_pkg \
+work/wishbone_pkg/.wishbone_pkg
+
+work/wb_irq_lm32/.wb_irq_lm32_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_lm32.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/wb_irq_lm32/.wb_irq_lm32: \
+work/wb_irq_pkg/.wb_irq_pkg \
+work/wishbone_pkg/.wishbone_pkg
+
+work/wb_irq_slave/.wb_irq_slave_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_slave.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/wb_irq_slave/.wb_irq_slave: \
+work/wb_irq_pkg/.wb_irq_pkg \
+work/genram_pkg/.genram_pkg \
+work/wishbone_pkg/.wishbone_pkg
+
+work/wb_irq_master/.wb_irq_master_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_master.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/wb_irq_master/.wb_irq_master: \
+work/wb_irq_pkg/.wb_irq_pkg \
+work/genram_pkg/.genram_pkg \
+work/wishbone_pkg/.wishbone_pkg
+
+work/wb_irq_timer/.wb_irq_timer_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_irq/wb_irq_timer.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/wb_irq_timer/.wb_irq_timer: \
+work/wb_irq_pkg/.wb_irq_pkg \
+work/genram_pkg/.genram_pkg \
+work/wishbone_pkg/.wishbone_pkg \
+work/gencores_pkg/.gencores_pkg
+
 work/xwb_lm32/.xwb_lm32_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/generated/xwb_lm32.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
@@ -963,6 +1107,22 @@ work/xwb_lm32/.xwb_lm32_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb
 
 work/xwb_lm32/.xwb_lm32: \
 work/wishbone_pkg/.wishbone_pkg
+
+work/lm32_dp_ram/.lm32_dp_ram_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_dp_ram.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/lm32_dp_ram/.lm32_dp_ram: \
+work/genram_pkg/.genram_pkg
+
+work/lm32_ram/.lm32_ram_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_lm32/src/lm32_ram.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/lm32_ram/.lm32_ram: \
+work/genram_pkg/.genram_pkg
 
 work/wb_slave_adapter/.wb_slave_adapter_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_slave_adapter/wb_slave_adapter.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
@@ -972,49 +1132,14 @@ work/wb_slave_adapter/.wb_slave_adapter_vhd: ../../../ip_cores/general-cores/mod
 work/wb_slave_adapter/.wb_slave_adapter: \
 work/wishbone_pkg/.wishbone_pkg
 
-work/xloader_registers_pkg/.xloader_registers_pkg_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xloader_registers_pkg.vhd
-		vcom $(VCOM_FLAGS)  -work work $< 
-		@mkdir -p $(dir $@) && touch $@
-
-
-work/xloader_registers_pkg/.xloader_registers_pkg: \
-work/wbgen2_pkg/.wbgen2_pkg
-
-work/xwb_xilinx_fpga_loader/.xwb_xilinx_fpga_loader_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xwb_xilinx_fpga_loader.vhd
-		vcom $(VCOM_FLAGS)  -work work $< 
-		@mkdir -p $(dir $@) && touch $@
-
-
-work/xwb_xilinx_fpga_loader/.xwb_xilinx_fpga_loader: \
-work/wishbone_pkg/.wishbone_pkg
-
-work/wb_xilinx_fpga_loader/.wb_xilinx_fpga_loader_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/wb_xilinx_fpga_loader.vhd
-		vcom $(VCOM_FLAGS)  -work work $< 
-		@mkdir -p $(dir $@) && touch $@
-
-
-work/wb_xilinx_fpga_loader/.wb_xilinx_fpga_loader: \
-work/wishbone_pkg/.wishbone_pkg \
-work/gencores_pkg/.gencores_pkg \
-work/xloader_registers_pkg/.xloader_registers_pkg
-
-work/xloader_wb/.xloader_wb_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_xilinx_fpga_loader/xloader_wb.vhd
-		vcom $(VCOM_FLAGS)  -work work $< 
-		@mkdir -p $(dir $@) && touch $@
-
-
-work/xloader_wb/.xloader_wb: \
-work/wbgen2_pkg/.wbgen2_pkg \
-work/xloader_registers_pkg/.xloader_registers_pkg
-
 work/xwb_clock_crossing/.xwb_clock_crossing_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_clock_crossing/xwb_clock_crossing.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
 
 work/xwb_clock_crossing/.xwb_clock_crossing: \
-work/wishbone_pkg/.wishbone_pkg \
-work/gencores_pkg/.gencores_pkg
+work/genram_pkg/.genram_pkg \
+work/wishbone_pkg/.wishbone_pkg
 
 work/xwb_dma/.xwb_dma_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_dma/xwb_dma.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
@@ -1022,6 +1147,15 @@ work/xwb_dma/.xwb_dma_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_d
 
 
 work/xwb_dma/.xwb_dma: \
+work/genram_pkg/.genram_pkg \
+work/wishbone_pkg/.wishbone_pkg
+
+work/xwb_streamer/.xwb_streamer_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_dma/xwb_streamer.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/xwb_streamer/.xwb_streamer: \
 work/wishbone_pkg/.wishbone_pkg
 
 work/wb_serial_lcd/.wb_serial_lcd_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_serial_lcd/wb_serial_lcd.vhd
@@ -1031,6 +1165,46 @@ work/wb_serial_lcd/.wb_serial_lcd_vhd: ../../../ip_cores/general-cores/modules/w
 
 work/wb_serial_lcd/.wb_serial_lcd: \
 work/genram_pkg/.genram_pkg \
+work/wishbone_pkg/.wishbone_pkg
+
+work/wb_spi_flash/.wb_spi_flash_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_spi_flash/wb_spi_flash.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/wb_spi_flash/.wb_spi_flash: \
+work/genram_pkg/.genram_pkg \
+work/wishbone_pkg/.wishbone_pkg \
+work/gencores_pkg/.gencores_pkg
+
+work/simple_pwm_wbgen2_pkg/.simple_pwm_wbgen2_pkg_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_simple_pwm/simple_pwm_wbgen2_pkg.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/simple_pwm_wb/.simple_pwm_wb_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_simple_pwm/simple_pwm_wb.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/simple_pwm_wb/.simple_pwm_wb: \
+work/simple_pwm_wbgen2_pkg/.simple_pwm_wbgen2_pkg
+
+work/wb_simple_pwm/.wb_simple_pwm_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_simple_pwm/wb_simple_pwm.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/wb_simple_pwm/.wb_simple_pwm: \
+work/simple_pwm_wbgen2_pkg/.simple_pwm_wbgen2_pkg \
+work/wishbone_pkg/.wishbone_pkg
+
+work/xwb_simple_pwm/.xwb_simple_pwm_vhd: ../../../ip_cores/general-cores/modules/wishbone/wb_simple_pwm/xwb_simple_pwm.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/xwb_simple_pwm/.xwb_simple_pwm: \
 work/wishbone_pkg/.wishbone_pkg
 
 work/wbgen2_dpssram/.wbgen2_dpssram_vhd: ../../../ip_cores/general-cores/modules/wishbone/wbgen2/wbgen2_dpssram.vhd
@@ -1066,13 +1240,48 @@ work/wbgen2_fifo_sync/.wbgen2_fifo_sync_vhd: ../../../ip_cores/general-cores/mod
 work/wbgen2_fifo_sync/.wbgen2_fifo_sync: \
 work/wbgen2_pkg/.wbgen2_pkg
 
-work/irq_controller/.irq_controller_vhd: ../../rtl/irq_controller.vhd
+work/fmc_adc_eic/.fmc_adc_eic_vhd: ../../../adc/rtl/fmc_adc_eic.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 
 		@mkdir -p $(dir $@) && touch $@
 
 
-work/irq_controller/.irq_controller: \
+work/fmc_adc_eic/.fmc_adc_eic: \
 work/wbgen2_pkg/.wbgen2_pkg
+
+work/xloader_registers_pkg/.xloader_registers_pkg_vhd: ../../../ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xloader_registers_pkg.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/xloader_registers_pkg/.xloader_registers_pkg: \
+work/wbgen2_pkg/.wbgen2_pkg
+
+work/xwb_xilinx_fpga_loader/.xwb_xilinx_fpga_loader_vhd: ../../../ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xwb_xilinx_fpga_loader.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/xwb_xilinx_fpga_loader/.xwb_xilinx_fpga_loader: \
+work/wishbone_pkg/.wishbone_pkg
+
+work/wb_xilinx_fpga_loader/.wb_xilinx_fpga_loader_vhd: ../../../ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/wb_xilinx_fpga_loader.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/wb_xilinx_fpga_loader/.wb_xilinx_fpga_loader: \
+work/wishbone_pkg/.wishbone_pkg \
+work/gencores_pkg/.gencores_pkg \
+work/xloader_registers_pkg/.xloader_registers_pkg
+
+work/xloader_wb/.xloader_wb_vhd: ../../../ip_cores/general-cores/platform/xilinx/wb_xilinx_fpga_loader/xloader_wb.vhd
+		vcom $(VCOM_FLAGS)  -work work $< 
+		@mkdir -p $(dir $@) && touch $@
+
+
+work/xloader_wb/.xloader_wb: \
+work/wbgen2_pkg/.wbgen2_pkg \
+work/xloader_registers_pkg/.xloader_registers_pkg
 
 work/ddr3_ctrl/.ddr3_ctrl_vhd: ../../../ip_cores/ddr3-sp6-core/hdl/rtl/ddr3_ctrl.vhd
 		vcom $(VCOM_FLAGS)  -work work $< 

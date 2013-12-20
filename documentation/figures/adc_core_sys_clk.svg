@@ -371,6 +371,121 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3014"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5105-3"
+       id="linearGradient5157-2"
+       gradientUnits="userSpaceOnUse"
+       x1="195"
+       y1="352.36218"
+       x2="210"
+       y2="347.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5105-3">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop5107-4" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop5109-3" />
+    </linearGradient>
+    <inkscape:perspective
+       id="perspective3060"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="TriangleOutS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutS-3"
+       style="overflow:visible">
+      <path
+         id="path3356-9"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.2,0.2)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective3088"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="TriangleOutS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutS-2"
+       style="overflow:visible">
+      <path
+         id="path3356-7"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.2,0.2)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective3131"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="TriangleOutS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutS-0"
+       style="overflow:visible">
+      <path
+         id="path3356-8"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.2,0.2)" />
+    </marker>
+    <inkscape:perspective
+       id="perspective3159"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3188"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <marker
+       inkscape:stockid="TriangleOutS"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutS-4"
+       style="overflow:visible">
+      <path
+         id="path3356-5"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.2,0.2)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -379,16 +494,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="48.437241"
-     inkscape:cy="184.45691"
+     inkscape:zoom="1.979899"
+     inkscape:cx="323.17009"
+     inkscape:cy="101.46611"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1123"
+     inkscape:window-height="1173"
      inkscape:window-x="0"
-     inkscape:window-y="25"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:snap-global="true">
     <inkscape:grid
@@ -657,10 +772,6 @@
        d="m 440,262.36218 -11,0"
        id="path3202" />
     <path
-       id="path5776"
-       d="m 175,152.36218 76,0"
-       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutS)" />
-    <path
        style="fill:#291b1b;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutS)"
        d="m 496,142.36218 10.39398,0"
        id="path5841" />
@@ -782,13 +893,13 @@
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="190"
-       y="147.36218"
+       x="187.97969"
+       y="161.14673"
        id="text6598"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="190"
-         y="147.36218"
+         x="187.97969"
+         y="161.14673"
          id="tspan6600">Data</tspan></text>
     <text
        xml:space="preserve"
@@ -1090,5 +1201,52 @@
          id="tspan20140"
          x="184.6825"
          y="86.008003">}</tspan></text>
+    <g
+       id="g5147-6"
+       transform="translate(26.79514,-180)">
+      <path
+         style="fill:url(#linearGradient5157-2);fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 195,312.36218 0,40"
+         id="path5149-1" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 210,317.36218 0,30"
+         id="path5151-9" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 195,352.36218 15,-5"
+         id="path5153-3" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 195,312.36218 15,5"
+         id="path5155-7" />
+    </g>
+    <path
+       id="path6588-5"
+       d="m 236.758,152.36218 15,0"
+       style="fill:none;stroke:#000000;stroke-width:2.92571998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutS)" />
+    <path
+       id="path5875-5"
+       d="m 175.18439,165.14418 42.30223,0"
+       style="fill:none;stroke:#000000;stroke-width:2.92571998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#TriangleOutS)" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
+       x="200.9281"
+       y="119.51977"
+       id="text6598-2"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="200.9281"
+         y="119.51977"
+         id="tspan6600-6">Trigger</tspan><tspan
+         sodipodi:role="line"
+         x="200.9281"
+         y="129.51976"
+         id="tspan3176">time-tag</tspan></text>
+    <path
+       style="color:#000000;fill:none;stroke:#000000;stroke-width:2.92571998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#TriangleOutS);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 199.94643,132.41575 0,6.60715 17.41071,0"
+       id="path3178" />
   </g>
 </svg>

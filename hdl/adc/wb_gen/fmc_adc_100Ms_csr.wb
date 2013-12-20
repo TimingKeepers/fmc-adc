@@ -86,7 +86,7 @@ peripheral {
 
     field {
       name = "State machine status";
-      description = "States:\n0: illegal\n1: IDLE\n2: PRE_TRIG\n3: WAIT_TRIG\n4: POST_TRIG\n5: DECR_SHOT\n6: illegal\n7: illegal";
+      description = "States:\n0: illegal\n1: IDLE\n2: PRE_TRIG\n3: WAIT_TRIG\n4: POST_TRIG\n5: TRIG_TAG\n6: DECR_SHOT\n7: illegal";
       prefix = "fsm";
       type = SLV;
       size = 3;
@@ -113,11 +113,20 @@ peripheral {
     };
 
     field {
+      name = "Acquisition configuration status";
+      description = "0: Unauthorised acquisition configuration (will prevent acquisition to start)\n1: Valid acquisition configuration\n- Shot number > 0\n- Post-trigger sample > 0";
+      prefix = "acq_cfg";
+      type = BIT;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
       prefix = "reserved";
       type = SLV;
-      size = 27;
+      size = 26;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
@@ -190,7 +199,7 @@ peripheral {
 
     field {
       name = "Threshold for internal trigger";
-      description = "Treated as binary two's complement and compared to raw ADC data";
+      description = "Treated as binary two's complement and compared to raw ADC data.";
       prefix = "int_trig_thres";
       type = SLV;
       size = 16;
@@ -288,7 +297,7 @@ peripheral {
 
     field {
       name = "Pre-trigger samples";
-      description = "Number of requested pre-trigger samples";
+      description = "Number of requested pre-trigger samples (>1).";
       type = SLV;
       size = 32;
       access_bus = READ_WRITE;
@@ -302,7 +311,7 @@ peripheral {
 
     field {
       name = "Post-trigger samples";
-      description = "Number of requested post-trigger samples";
+      description = "Number of requested post-trigger samples (>1).";
       type = SLV;
       size = 32;
       access_bus = READ_WRITE;

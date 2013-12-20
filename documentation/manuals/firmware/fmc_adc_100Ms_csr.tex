@@ -180,7 +180,12 @@ SerDes PLL status
 @code{SERDES_SYNCED}
 @tab @code{X} @tab 
 SerDes synchronization status
-@item @code{31...5}
+@item @code{5}
+@tab R/O @tab
+@code{ACQ_CFG}
+@tab @code{X} @tab 
+Acquisition configuration status
+@item @code{31...6}
 @tab R/O @tab
 @code{RESERVED}
 @tab @code{X} @tab 
@@ -188,9 +193,10 @@ Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
-@item @code{fsm} @tab States:@*0: illegal@*1: IDLE@*2: PRE_TRIG@*3: WAIT_TRIG@*4: POST_TRIG@*5: DECR_SHOT@*6: illegal@*7: illegal
+@item @code{fsm} @tab States:@*0: illegal@*1: IDLE@*2: PRE_TRIG@*3: WAIT_TRIG@*4: POST_TRIG@*5: TRIG_TAG@*6: DECR_SHOT@*7: illegal
 @item @code{serdes_pll} @tab Sampling clock recovery PLL.@*0: not locked@*1: locked
 @item @code{serdes_synced} @tab 0: bitslip in progress@*1: serdes synchronized
+@item @code{acq_cfg} @tab 0: Unauthorised acquisition configuration (will prevent acquisition to start)@*1: Valid acquisition configuration@*@bullet{}  Shot number > 0@*@bullet{}  Post-trigger sample > 0
 @item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{trig_cfg} - Trigger configuration
@@ -240,7 +246,7 @@ Threshold for internal trigger
 @item @code{sw_trig_en} @tab 0: disable@*1: enable
 @item @code{int_trig_sel} @tab 00: channel 1@*01: channel 2@*10: channel 3@*11: channel 4
 @item @code{reserved} @tab Ignore on read, write with 0's
-@item @code{int_trig_thres} @tab Treated as binary two's complement and compared to raw ADC data
+@item @code{int_trig_thres} @tab Treated as binary two's complement and compared to raw ADC data.
 @end multitable
 @regsection @code{trig_dly} - Trigger delay
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -321,7 +327,7 @@ Pre-trigger samples
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
-@item @code{pre_samples} @tab Number of requested pre-trigger samples
+@item @code{pre_samples} @tab Number of requested pre-trigger samples (>1).
 @end multitable
 @regsection @code{post_samples} - Post-trigger samples
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -334,7 +340,7 @@ Post-trigger samples
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
-@item @code{post_samples} @tab Number of requested post-trigger samples
+@item @code{post_samples} @tab Number of requested post-trigger samples (>1).
 @end multitable
 @regsection @code{samples_cnt} - Samples counter
 @multitable @columnfractions .10 .10 .15 .10 .55
