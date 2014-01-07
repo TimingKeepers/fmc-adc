@@ -1460,7 +1460,7 @@ begin
   end process p_ram_addr_cnt;
 
   ------------------------------------------------------------------------------
-  -- Store trigger DDR address
+  -- Store trigger DDR address (byte address)
   ------------------------------------------------------------------------------
   p_trig_addr : process (wb_ddr_clk_i, sys_rst_n_i)
   begin
@@ -1468,7 +1468,7 @@ begin
       trig_addr <= (others => '0');
     elsif rising_edge(wb_ddr_clk_i) then
       if wb_ddr_fifo_dout(64) = '1' and wb_ddr_fifo_valid = '1' then
-        trig_addr <= "0000000" & std_logic_vector(ram_addr_cnt);
+        trig_addr <= "0000" & std_logic_vector(ram_addr_cnt) & "000";
       end if;
     end if;
   end process p_trig_addr;
