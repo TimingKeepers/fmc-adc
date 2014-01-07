@@ -117,6 +117,14 @@ architecture rtl of timetag_core is
   end component timetag_core_regs;
 
   ------------------------------------------------------------------------------
+  -- Constants declaration
+  ------------------------------------------------------------------------------
+  constant c_TRIG_TAG_META      : std_logic_vector(31 downto 0) := x"6fc8ad2d";
+  constant c_ACQ_START_TAG_META : std_logic_vector(31 downto 0) := x"0d7c7c76";
+  constant c_ACQ_STOP_TAG_META  : std_logic_vector(31 downto 0) := x"2b4e09ff";
+  constant c_ACQ_END_TAG_META   : std_logic_vector(31 downto 0) := x"7f644cd2";
+
+  ------------------------------------------------------------------------------
   -- Signals declaration
   ------------------------------------------------------------------------------
   signal timetag_seconds            : std_logic_vector(31 downto 0);
@@ -237,7 +245,7 @@ begin
     end if;
   end process p_trig_tag;
 
-  trig_tag.meta <= X"00000000";
+  trig_tag.meta <= c_TRIG_TAG_META;
   trig_tag_o    <= trig_tag;
 
   ------------------------------------------------------------------------------
@@ -257,7 +265,7 @@ begin
     end if;
   end process p_acq_start_tag;
 
-  acq_start_tag.meta <= X"00000000";
+  acq_start_tag.meta <= c_ACQ_START_TAG_META;
 
   ------------------------------------------------------------------------------
   -- Last acquisition stop event time-tag
@@ -276,7 +284,7 @@ begin
     end if;
   end process p_acq_stop_tag;
 
-  acq_stop_tag.meta <= X"00000000";
+  acq_stop_tag.meta <= c_ACQ_STOP_TAG_META;
 
   ------------------------------------------------------------------------------
   -- Last acquisition end event time-tag
@@ -295,7 +303,7 @@ begin
     end if;
   end process p_acq_end_tag;
 
-  acq_end_tag.meta <= X"00000000";
+  acq_end_tag.meta <= c_ACQ_END_TAG_META;
 
 
 end rtl;
