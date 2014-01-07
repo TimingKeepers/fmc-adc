@@ -364,7 +364,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
         date      => x"20121116",
         name      => "WB-Timetag-Core    ")));
 
-  constant c_wb_eic_sdb : t_sdb_device := (
+  constant c_wb_fmc_adc_eic_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
     abi_ver_major => x"01",
     abi_ver_minor => x"01",
@@ -375,10 +375,10 @@ architecture rtl of svec_top_fmc_adc_100Ms is
       addr_last   => x"000000000000000F",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000605",
+        device_id => x"26ec6086",          -- "WB-FMC-ADC.EIC     " | md5sum | cut -c1-8
         version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-Int.Control     ")));
+        date      => x"20131204",
+        name      => "WB-FMC-ADC.EIC     ")));
 
   constant c_wb_ddr_dat_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
@@ -427,12 +427,12 @@ architecture rtl of svec_top_fmc_adc_100Ms is
       1  => f_sdb_embed_device(c_xwb_onewire_master_sdb, x"00001100"),
       2  => f_sdb_embed_device(c_wb_svec_csr_sdb, x"00001200"),
       3  => f_sdb_embed_device(c_xwb_vic_sdb, x"00001300"),
-      4  => f_sdb_embed_device(c_wb_eic_sdb, x"00002000"),
+      4  => f_sdb_embed_device(c_wb_fmc_adc_eic_sdb, x"00002000"),
       5  => f_sdb_embed_device(c_wb_timetag_sdb, x"00002100"),
       6  => f_sdb_embed_device(c_wb_ddr_adr_sdb, x"00002200"),
       7  => f_sdb_embed_device(c_wb_ddr_dat_sdb, x"00003000"),
       8  => f_sdb_embed_bridge(c_fmc0_bridge_sdb, x"00004000"),
-      9  => f_sdb_embed_device(c_wb_eic_sdb, x"00006000"),
+      9  => f_sdb_embed_device(c_wb_fmc_adc_eic_sdb, x"00006000"),
       10 => f_sdb_embed_device(c_wb_timetag_sdb, x"00006100"),
       11 => f_sdb_embed_device(c_wb_ddr_adr_sdb, x"00006200"),
       12 => f_sdb_embed_device(c_wb_ddr_dat_sdb, x"00007000"),
@@ -559,11 +559,11 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal ddr0_addr_cnt_en : std_logic;
 
   -- DDR1 (bank 5)
-  signal ddr1_status     : std_logic_vector(31 downto 0);
-  signal ddr1_calib_done : std_logic;
-  signal ddr1_addr_cnt   : unsigned(31 downto 0);
+  signal ddr1_status      : std_logic_vector(31 downto 0);
+  signal ddr1_calib_done  : std_logic;
+  signal ddr1_addr_cnt    : unsigned(31 downto 0);
   signal ddr1_dat_cyc_d   : std_logic;
-  signal ddr1_addr_cnt_en   : std_logic;
+  signal ddr1_addr_cnt_en : std_logic;
 
   -- Carrier 1-wire
   signal carrier_owr_en : std_logic_vector(0 downto 0);
@@ -578,10 +578,10 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal carrier_sda_oe_n : std_logic;
 
   -- Time-tagging core
-  signal trig_p      : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal acq_start_p : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal acq_stop_p  : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal acq_end_p   : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
+  signal trig_p           : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
+  signal acq_start_p      : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
+  signal acq_stop_p       : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
+  signal acq_end_p        : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal fmc0_trigger_tag : t_timetag;
   signal fmc1_trigger_tag : t_timetag;
 
@@ -1298,7 +1298,7 @@ begin
   --  The counter is incremented on the falling edge of cyc. This is because the ddr controller
   --  samples the address on (cyc_re and stb)+1
 
-  p_ddr0_dat_cyc: process (sys_clk_125)
+  p_ddr0_dat_cyc : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
       if fmc0_rst_n = '0' then
@@ -1450,7 +1450,7 @@ begin
   --  The counter is incremented on the falling edge of cyc. This is because the ddr controller
   --  samples the address on (cyc_re and stb)+1
 
-  p_ddr1_dat_cyc: process (sys_clk_125)
+  p_ddr1_dat_cyc : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
       if fmc1_rst_n = '0' then
