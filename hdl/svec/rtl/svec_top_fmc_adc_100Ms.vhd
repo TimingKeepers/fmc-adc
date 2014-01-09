@@ -306,7 +306,7 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   ------------------------------------------------------------------------------
 
   -- Number of master port(s) on the wishbone crossbar
-  constant c_NUM_WB_MASTERS : integer := 14;
+  constant c_NUM_WB_MASTERS : integer := 10;
 
   -- Number of slave port(s) on the wishbone crossbar
   constant c_NUM_WB_SLAVES : integer := 1;
@@ -315,20 +315,16 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   constant c_WB_MASTER_VME : integer := 0;
 
   -- Wishbone slave(s)
-  constant c_WB_SLAVE_I2C          : integer := 0;   -- Carrier I2C master
-  constant c_WB_SLAVE_ONEWIRE      : integer := 1;   -- Carrier onewire interface
-  constant c_WB_SLAVE_SVEC_CSR     : integer := 2;   -- SVEC control and status registers
-  constant c_WB_SLAVE_VIC          : integer := 3;   -- Vectored interrupt controller
-  constant c_WB_SLAVE_FMC0_EIC     : integer := 4;   -- FMC slot 1 interrupt controller
-  constant c_WB_SLAVE_FMC0_TIMETAG : integer := 5;   -- FMC slot 1 timetag core
-  constant c_WB_SLAVE_FMC0_DDR_ADR : integer := 6;   -- FMC slot 1 DDR address
-  constant c_WB_SLAVE_FMC0_DDR_DAT : integer := 7;   -- FMC slot 1 DDR data
-  constant c_WB_SLAVE_FMC0_ADC     : integer := 8;   -- FMC slot 1 ADC mezzanine
-  constant c_WB_SLAVE_FMC1_EIC     : integer := 9;   -- FMC slot 2 interrupt controller
-  constant c_WB_SLAVE_FMC1_TIMETAG : integer := 10;  -- FMC slot 2 timetag core
-  constant c_WB_SLAVE_FMC1_DDR_ADR : integer := 11;  -- FMC slot 2 DDR address
-  constant c_WB_SLAVE_FMC1_DDR_DAT : integer := 12;  -- FMC slot 2 DDR data
-  constant c_WB_SLAVE_FMC1_ADC     : integer := 13;  -- FMC slot 2 ADC mezzanine
+  constant c_WB_SLAVE_I2C          : integer := 0;  -- Carrier I2C master
+  constant c_WB_SLAVE_ONEWIRE      : integer := 1;  -- Carrier onewire interface
+  constant c_WB_SLAVE_SVEC_CSR     : integer := 2;  -- SVEC control and status registers
+  constant c_WB_SLAVE_VIC          : integer := 3;  -- Vectored interrupt controller
+  constant c_WB_SLAVE_FMC0_ADC     : integer := 4;  -- FMC slot 1 ADC mezzanine
+  constant c_WB_SLAVE_FMC0_DDR_ADR : integer := 5;  -- FMC slot 1 DDR address
+  constant c_WB_SLAVE_FMC0_DDR_DAT : integer := 6;  -- FMC slot 1 DDR data
+  constant c_WB_SLAVE_FMC1_ADC     : integer := 7;  -- FMC slot 2 ADC mezzanine
+  constant c_WB_SLAVE_FMC1_DDR_ADR : integer := 8;  -- FMC slot 2 DDR address
+  constant c_WB_SLAVE_FMC1_DDR_DAT : integer := 9;  -- FMC slot 2 DDR data
 
 
   -- Devices sdb description
@@ -347,38 +343,6 @@ architecture rtl of svec_top_fmc_adc_100Ms is
         version   => x"00000001",
         date      => x"20121116",
         name      => "WB-SVEC-CSR        ")));
-
-  constant c_wb_timetag_sdb : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000007F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000604",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-Timetag-Core    ")));
-
-  constant c_wb_fmc_adc_eic_sdb : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000000F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"26ec6086",          -- "WB-FMC-ADC.EIC     " | md5sum | cut -c1-8
-        version   => x"00000001",
-        date      => x"20131204",
-        name      => "WB-FMC-ADC.EIC     ")));
 
   constant c_wb_ddr_dat_sdb : t_sdb_device := (
     abi_class     => x"0000",              -- undocumented device
@@ -421,31 +385,27 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";
 
   -- Wishbone crossbar layout
-  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(16 downto 0) :=
+  constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(12 downto 0) :=
     (
       0  => f_sdb_embed_device(c_xwb_i2c_master_sdb, x"00001000"),
       1  => f_sdb_embed_device(c_xwb_onewire_master_sdb, x"00001100"),
       2  => f_sdb_embed_device(c_wb_svec_csr_sdb, x"00001200"),
       3  => f_sdb_embed_device(c_xwb_vic_sdb, x"00001300"),
-      4  => f_sdb_embed_device(c_wb_fmc_adc_eic_sdb, x"00002000"),
-      5  => f_sdb_embed_device(c_wb_timetag_sdb, x"00002100"),
-      6  => f_sdb_embed_device(c_wb_ddr_adr_sdb, x"00002200"),
-      7  => f_sdb_embed_device(c_wb_ddr_dat_sdb, x"00003000"),
-      8  => f_sdb_embed_bridge(c_fmc0_bridge_sdb, x"00004000"),
-      9  => f_sdb_embed_device(c_wb_fmc_adc_eic_sdb, x"00006000"),
-      10 => f_sdb_embed_device(c_wb_timetag_sdb, x"00006100"),
-      11 => f_sdb_embed_device(c_wb_ddr_adr_sdb, x"00006200"),
-      12 => f_sdb_embed_device(c_wb_ddr_dat_sdb, x"00007000"),
-      13 => f_sdb_embed_bridge(c_fmc1_bridge_sdb, x"00008000"),
-      14 => f_sdb_embed_repo_url(c_repo_url_sdb),
-      15 => f_sdb_embed_synthesis(c_synthesis_sdb),
-      16 => f_sdb_embed_integration(c_integration_sdb)
+      4  => f_sdb_embed_bridge(c_fmc0_bridge_sdb, x"00002000"),
+      5  => f_sdb_embed_device(c_wb_ddr_adr_sdb, x"00004000"),
+      6  => f_sdb_embed_device(c_wb_ddr_dat_sdb, x"00005000"),
+      7  => f_sdb_embed_bridge(c_fmc1_bridge_sdb, x"00006000"),
+      8  => f_sdb_embed_device(c_wb_ddr_adr_sdb, x"00008000"),
+      9  => f_sdb_embed_device(c_wb_ddr_dat_sdb, x"00009000"),
+      10 => f_sdb_embed_repo_url(c_repo_url_sdb),
+      11 => f_sdb_embed_synthesis(c_synthesis_sdb),
+      12 => f_sdb_embed_integration(c_integration_sdb)
       );
 
   -- VIC default vector setting
   constant c_VIC_VECTOR_TABLE : t_wishbone_address_array(0 to 1) :=
-    (0 => x"00002000",
-     1 => x"00006000");
+    (0 => x"00003500",
+     1 => x"00007500");
 
   ------------------------------------------------------------------------------
   -- Other constants declaration
@@ -534,18 +494,14 @@ architecture rtl of svec_top_fmc_adc_100Ms is
 
   -- Interrupts stuff
   signal ddr_wr_fifo_empty    : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal ddr_wr_fifo_empty_d  : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal ddr_wr_fifo_empty_d1 : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal ddr_wr_fifo_empty_p  : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal acq_end_irq_p        : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal acq_end_extend       : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
+  signal trig_irq_p           : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
   signal fmc0_trig_irq_led    : std_logic;
   signal fmc0_acq_end_irq_led : std_logic;
   signal irq_to_vme           : std_logic;
   signal irq_to_vme_t         : std_logic;
   signal irq_to_vme_sync      : std_logic;
-  signal fmc0_irq             : std_logic;
-  signal fmc1_irq             : std_logic;
+  signal fmc_irq              : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
 
   -- Front panel LED control
   signal led_state     : std_logic_vector(15 downto 0);
@@ -576,14 +532,6 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal carrier_sda_in   : std_logic;
   signal carrier_sda_out  : std_logic;
   signal carrier_sda_oe_n : std_logic;
-
-  -- Time-tagging core
-  signal trig_p           : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal acq_start_p      : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal acq_stop_p       : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal acq_end_p        : std_logic_vector(c_NB_FMC_SLOTS-1 downto 0);
-  signal fmc0_trigger_tag : t_timetag;
-  signal fmc1_trigger_tag : t_timetag;
 
   -- led pwm
   signal led_pwm_update_cnt : unsigned(9 downto 0);
@@ -783,7 +731,7 @@ begin
   vme_sync_master_in            <= cnx_slave_out(c_WB_MASTER_VME);
 
   -- Interrupt line synchronisation to vme 62.5MHz
-  p_irq_to_vme_sync : process (sys_clk_62_5)
+  p_irq_to_vme_sync : process (sys_clk_62_5, powerup_rst_n)
   begin
     if powerup_rst_n = '0' then
       irq_to_vme_t    <= '0';
@@ -929,99 +877,9 @@ begin
       rst_n_i      => sys_rst_n,
       slave_i      => cnx_master_out(c_WB_SLAVE_VIC),
       slave_o      => cnx_master_in(c_WB_SLAVE_VIC),
-      irqs_i(0)    => fmc0_irq,
-      irqs_i(1)    => fmc1_irq,
+      irqs_i(0)    => fmc_irq(0),
+      irqs_i(1)    => fmc_irq(1),
       irq_master_o => irq_to_vme);
-
-  ------------------------------------------------------------------------------
-  -- FMC0 interrupt controller
-  ------------------------------------------------------------------------------
-  cmp_fmc0_eic : fmc_adc_eic
-    port map(
-      rst_n_i       => fmc0_rst_n,
-      clk_sys_i     => sys_clk_125,
-      wb_adr_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).adr(3 downto 2),  -- cnx_master_out.adr is byte address
-      wb_dat_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).dat,
-      wb_dat_o      => cnx_master_in(c_WB_SLAVE_FMC0_EIC).dat,
-      wb_cyc_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).cyc,
-      wb_sel_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).sel,
-      wb_stb_i      => cnx_master_out(c_WB_SLAVE_FMC0_EIC).stb,
-      wb_we_i       => cnx_master_out(c_WB_SLAVE_FMC0_EIC).we,
-      wb_ack_o      => cnx_master_in(c_WB_SLAVE_FMC0_EIC).ack,
-      wb_stall_o    => cnx_master_in(c_WB_SLAVE_FMC0_EIC).stall,
-      wb_int_o      => fmc0_irq,
-      irq_trig_i    => trig_p(0),
-      irq_acq_end_i => acq_end_irq_p(0)
-      );
-
-  -- Unused wishbone signals
-  cnx_master_in(c_WB_SLAVE_FMC0_EIC).err <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC0_EIC).rty <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC0_EIC).int <= '0';
-
-  ------------------------------------------------------------------------------
-  -- FMC1 interrupt controller
-  ------------------------------------------------------------------------------
-  cmp_fmc1_eic : fmc_adc_eic
-    port map(
-      rst_n_i       => fmc1_rst_n,
-      clk_sys_i     => sys_clk_125,
-      wb_adr_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).adr(3 downto 2),  -- cnx_master_out.adr is byte address
-      wb_dat_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).dat,
-      wb_dat_o      => cnx_master_in(c_WB_SLAVE_FMC1_EIC).dat,
-      wb_cyc_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).cyc,
-      wb_sel_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).sel,
-      wb_stb_i      => cnx_master_out(c_WB_SLAVE_FMC1_EIC).stb,
-      wb_we_i       => cnx_master_out(c_WB_SLAVE_FMC1_EIC).we,
-      wb_ack_o      => cnx_master_in(c_WB_SLAVE_FMC1_EIC).ack,
-      wb_stall_o    => cnx_master_in(c_WB_SLAVE_FMC1_EIC).stall,
-      wb_int_o      => fmc1_irq,
-      irq_trig_i    => trig_p(1),
-      irq_acq_end_i => acq_end_irq_p(1)
-      );
-
-  -- Unused wishbone signals
-  cnx_master_in(c_WB_SLAVE_FMC1_EIC).err <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC1_EIC).rty <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC1_EIC).int <= '0';
-
-  ------------------------------------------------------------------------------
-  -- End of acquisition interrupt generation
-  ------------------------------------------------------------------------------
-
-  -- Detects end of adc core writing to ddr
-  l_ddr_wr_fifo_empty : for I in 0 to c_NB_FMC_SLOTS-1 generate
-    p_ddr_wr_fifo_empty : process (sys_clk_125)
-    begin
-      if rising_edge(sys_clk_125) then
-        if fmc0_rst_n = '0' or fmc1_rst_n = '0' then
-          ddr_wr_fifo_empty_d(I)  <= '0';
-          ddr_wr_fifo_empty_d1(I) <= '0';
-        else
-          ddr_wr_fifo_empty_d(I)  <= ddr_wr_fifo_empty(I);
-          ddr_wr_fifo_empty_d1(I) <= ddr_wr_fifo_empty_d(I);
-        end if;
-      end if;
-    end process p_ddr_wr_fifo_empty;
-    ddr_wr_fifo_empty_p(I) <= ddr_wr_fifo_empty_d(I) and not(ddr_wr_fifo_empty_d1(I));
-  end generate l_ddr_wr_fifo_empty;
-
-  -- End of acquisition interrupt generation
-  l_acq_end_irq : for I in 0 to c_NB_FMC_SLOTS-1 generate
-    p_acq_end_extend : process (sys_clk_125)
-    begin
-      if rising_edge(sys_clk_125) then
-        if fmc0_rst_n = '0' or fmc1_rst_n = '0' then
-          acq_end_extend(I) <= '0';
-        elsif acq_end_p(I) = '1' then
-          acq_end_extend(I) <= '1';
-        elsif ddr_wr_fifo_empty_p(I) = '1' then
-          acq_end_extend(I) <= '0';
-        end if;
-      end if;
-    end process p_acq_end_extend;
-    acq_end_irq_p(I) <= ddr_wr_fifo_empty_p(I) and acq_end_extend(I);
-  end generate l_acq_end_irq;
 
   ------------------------------------------------------------------------------
   -- Slot 1 : FMC ADC mezzanine (wb bridge)
@@ -1060,12 +918,10 @@ begin
       wb_ddr_ack_i   => wb_ddr0_adc_ack,
       wb_ddr_stall_i => wb_ddr0_adc_stall,
 
-      trigger_p_o   => trig_p(0),
-      acq_start_p_o => acq_start_p(0),
-      acq_stop_p_o  => acq_stop_p(0),
-      acq_end_p_o   => acq_end_p(0),
-
-      trigger_tag_i => fmc0_trigger_tag,
+      ddr_wr_fifo_empty_i => ddr_wr_fifo_empty(0),
+      trig_irq_o          => trig_irq_p(0),
+      acq_end_irq_o       => acq_end_irq_p(0),
+      eic_irq_o           => fmc_irq(0),
 
       ext_trigger_p_i => adc0_ext_trigger_p_i,
       ext_trigger_n_i => adc0_ext_trigger_n_i,
@@ -1148,12 +1004,10 @@ begin
       wb_ddr_ack_i   => wb_ddr1_adc_ack,
       wb_ddr_stall_i => wb_ddr1_adc_stall,
 
-      trigger_p_o   => trig_p(1),
-      acq_start_p_o => acq_start_p(1),
-      acq_stop_p_o  => acq_stop_p(1),
-      acq_end_p_o   => acq_end_p(1),
-
-      trigger_tag_i => fmc1_trigger_tag,
+      ddr_wr_fifo_empty_i => ddr_wr_fifo_empty(1),
+      trig_irq_o          => trig_irq_p(1),
+      acq_end_irq_o       => acq_end_irq_p(1),
+      eic_irq_o           => fmc_irq(1),
 
       ext_trigger_p_i => adc1_ext_trigger_p_i,
       ext_trigger_n_i => adc1_ext_trigger_n_i,
@@ -1504,68 +1358,6 @@ begin
   cnx_master_in(c_WB_SLAVE_FMC1_DDR_ADR).int   <= '0';
 
   ------------------------------------------------------------------------------
-  -- FMC slot 1 : Time-tagging core
-  ------------------------------------------------------------------------------
-  cmp_fmc0_timetag_core : timetag_core
-    port map(
-      clk_i   => sys_clk_125,
-      rst_n_i => fmc0_rst_n,
-
-      trigger_p_i   => trig_p(0),
-      acq_start_p_i => acq_start_p(0),
-      acq_stop_p_i  => acq_stop_p(0),
-      acq_end_p_i   => acq_end_p(0),
-
-      trig_tag_o => fmc0_trigger_tag,
-
-      wb_adr_i => cnx_master_out(c_WB_SLAVE_FMC0_TIMETAG).adr(6 downto 2),  -- cnx_master_out.adr is byte address
-      wb_dat_i => cnx_master_out(c_WB_SLAVE_FMC0_TIMETAG).dat,
-      wb_dat_o => cnx_master_in(c_WB_SLAVE_FMC0_TIMETAG).dat,
-      wb_cyc_i => cnx_master_out(c_WB_SLAVE_FMC0_TIMETAG).cyc,
-      wb_sel_i => cnx_master_out(c_WB_SLAVE_FMC0_TIMETAG).sel,
-      wb_stb_i => cnx_master_out(c_WB_SLAVE_FMC0_TIMETAG).stb,
-      wb_we_i  => cnx_master_out(c_WB_SLAVE_FMC0_TIMETAG).we,
-      wb_ack_o => cnx_master_in(c_WB_SLAVE_FMC0_TIMETAG).ack
-      );
-
-  -- Unused wishbone signals
-  cnx_master_in(c_WB_SLAVE_FMC0_TIMETAG).err   <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC0_TIMETAG).rty   <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC0_TIMETAG).stall <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC0_TIMETAG).int   <= '0';
-
-  ------------------------------------------------------------------------------
-  -- FMC slot 2 : Time-tagging core
-  ------------------------------------------------------------------------------
-  cmp_fmc1_timetag_core : timetag_core
-    port map(
-      clk_i   => sys_clk_125,
-      rst_n_i => fmc1_rst_n,
-
-      trigger_p_i   => trig_p(1),
-      acq_start_p_i => acq_start_p(1),
-      acq_stop_p_i  => acq_stop_p(1),
-      acq_end_p_i   => acq_end_p(1),
-
-      trig_tag_o => fmc1_trigger_tag,
-
-      wb_adr_i => cnx_master_out(c_WB_SLAVE_FMC1_TIMETAG).adr(6 downto 2),  -- cnx_master_out.adr is byte address
-      wb_dat_i => cnx_master_out(c_WB_SLAVE_FMC1_TIMETAG).dat,
-      wb_dat_o => cnx_master_in(c_WB_SLAVE_FMC1_TIMETAG).dat,
-      wb_cyc_i => cnx_master_out(c_WB_SLAVE_FMC1_TIMETAG).cyc,
-      wb_sel_i => cnx_master_out(c_WB_SLAVE_FMC1_TIMETAG).sel,
-      wb_stb_i => cnx_master_out(c_WB_SLAVE_FMC1_TIMETAG).stb,
-      wb_we_i  => cnx_master_out(c_WB_SLAVE_FMC1_TIMETAG).we,
-      wb_ack_o => cnx_master_in(c_WB_SLAVE_FMC1_TIMETAG).ack
-      );
-
-  -- Unused wishbone signals
-  cnx_master_in(c_WB_SLAVE_FMC1_TIMETAG).err   <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC1_TIMETAG).rty   <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC1_TIMETAG).stall <= '0';
-  cnx_master_in(c_WB_SLAVE_FMC1_TIMETAG).int   <= '0';
-
-  ------------------------------------------------------------------------------
   -- Front panel LED control
   --  
   ------------------------------------------------------------------------------
@@ -1605,7 +1397,7 @@ begin
     port map (
       clk_i      => sys_clk_125,
       rst_n_i    => sys_rst_n,
-      pulse_i    => trig_p(0),
+      pulse_i    => trig_irq_p(0),
       extended_o => fmc0_trig_irq_led
       );
 
@@ -1638,7 +1430,7 @@ begin
   led_state(11 downto 10) <= fmc0_acq_end_irq_led & '0';
 
   -- LED 7 : 
-  led_state(13 downto 12) <= '0' & fmc0_irq;
+  led_state(13 downto 12) <= '0' & fmc_irq(0);
 
   -- LED 8 : 
   led_state(15 downto 14) <= '0' & irq_to_vme_sync;

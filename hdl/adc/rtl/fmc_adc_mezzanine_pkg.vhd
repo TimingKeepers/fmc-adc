@@ -53,7 +53,7 @@ package fmc_adc_mezzanine_pkg is
   component fmc_adc_mezzanine
     generic(
       g_multishot_ram_size : natural := 2048;
-      g_carrier_type : string := "SPEC"
+      g_carrier_type       : string  := "SPEC"
       );
     port (
       -- Clock, reset
@@ -82,14 +82,11 @@ package fmc_adc_mezzanine_pkg is
       wb_ddr_ack_i   : in  std_logic;
       wb_ddr_stall_i : in  std_logic;
 
-      -- Events output pulses (for interrupt and time-stamping)
-      trigger_p_o   : out std_logic;
-      acq_start_p_o : out std_logic;
-      acq_stop_p_o  : out std_logic;
-      acq_end_p_o   : out std_logic;
-
-      -- Trigger time-tag input
-      trigger_tag_i : t_timetag;
+      -- Interrupt
+      ddr_wr_fifo_empty_i : in  std_logic;
+      trig_irq_o          : out std_logic;
+      acq_end_irq_o       : out std_logic;
+      eic_irq_o           : out std_logic;
 
       -- FMC interface
       ext_trigger_p_i : in std_logic;   -- External trigger
