@@ -274,7 +274,11 @@ architecture rtl of svec_top_fmc_adc_100Ms is
       carrier_csr_ctrl_fp_leds_man_o   : out std_logic_vector(15 downto 0);
       carrier_csr_ctrl_reserved_o      : out std_logic_vector(15 downto 0);
       carrier_csr_rst_fmc0_n_o         : out std_logic;
+      carrier_csr_rst_fmc0_n_i         : in  std_logic;
+      carrier_csr_rst_fmc0_n_load_o    : out std_logic;
       carrier_csr_rst_fmc1_n_o         : out std_logic;
+      carrier_csr_rst_fmc1_n_i         : in  std_logic;
+      carrier_csr_rst_fmc1_n_load_o    : out std_logic;
       carrier_csr_rst_reserved_o       : out std_logic_vector(29 downto 0)
       );
   end component carrier_csr;
@@ -435,18 +439,24 @@ architecture rtl of svec_top_fmc_adc_100Ms is
   signal ddr_clk_buf : std_logic;
 
   -- Reset
-  signal powerup_reset_cnt : unsigned(7 downto 0) := "00000000";
-  signal powerup_rst_n     : std_logic            := '0';
-  signal sys_rst_n         : std_logic;
-  signal ddr_rst_n         : std_logic;
-  signal sw_rst_fmc0_n     : std_logic;
-  signal sw_rst_fmc1_n     : std_logic;
-  signal ddr_sw_rst_fmc0_n : std_logic;
-  signal ddr_sw_rst_fmc1_n : std_logic;
-  signal fmc0_rst_n        : std_logic;
-  signal fmc1_rst_n        : std_logic;
-  signal fmc0_ddr_rst_n    : std_logic;
-  signal fmc1_ddr_rst_n    : std_logic;
+  signal powerup_reset_cnt  : unsigned(7 downto 0) := "00000000";
+  signal powerup_rst_n      : std_logic            := '0';
+  signal sys_rst_n          : std_logic;
+  signal ddr_rst_n          : std_logic;
+  signal sw_rst_fmc0_n      : std_logic            := '1';
+  signal sw_rst_fmc0_n_o    : std_logic;
+  signal sw_rst_fmc0_n_i    : std_logic;
+  signal sw_rst_fmc0_n_load : std_logic;
+  signal sw_rst_fmc1_n      : std_logic            := '1';
+  signal sw_rst_fmc1_n_o    : std_logic;
+  signal sw_rst_fmc1_n_i    : std_logic;
+  signal sw_rst_fmc1_n_load : std_logic;
+  signal ddr_sw_rst_fmc0_n  : std_logic;
+  signal ddr_sw_rst_fmc1_n  : std_logic;
+  signal fmc0_rst_n         : std_logic;
+  signal fmc1_rst_n         : std_logic;
+  signal fmc0_ddr_rst_n     : std_logic;
+  signal fmc1_ddr_rst_n     : std_logic;
 
   -- VME
   signal vme_data_b_out    : std_logic_vector(31 downto 0);
@@ -852,8 +862,12 @@ begin
       carrier_csr_stat_reserved_i      => (others => '0'),
       carrier_csr_ctrl_fp_leds_man_o   => led_state_man,
       carrier_csr_ctrl_reserved_o      => open,
-      carrier_csr_rst_fmc0_n_o         => sw_rst_fmc0_n,
-      carrier_csr_rst_fmc1_n_o         => sw_rst_fmc1_n,
+      carrier_csr_rst_fmc0_n_o         => sw_rst_fmc0_n_o,
+      carrier_csr_rst_fmc0_n_i         => sw_rst_fmc0_n_i,
+      carrier_csr_rst_fmc0_n_load_o    => sw_rst_fmc0_n_load,
+      carrier_csr_rst_fmc1_n_o         => sw_rst_fmc1_n_o,
+      carrier_csr_rst_fmc1_n_i         => sw_rst_fmc1_n_i,
+      carrier_csr_rst_fmc1_n_load_o    => sw_rst_fmc1_n_load,
       carrier_csr_rst_reserved_o       => open
       );
 
@@ -862,6 +876,33 @@ begin
   cnx_master_in(c_WB_SLAVE_SVEC_CSR).rty   <= '0';
   cnx_master_in(c_WB_SLAVE_SVEC_CSR).stall <= '0';
   cnx_master_in(c_WB_SLAVE_SVEC_CSR).int   <= '0';
+
+  -- external software reset registers (to assign a non-zero default value)
+  p_sw_rst_fmc0: process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if sys_rst_n = '0' then
+        sw_rst_fmc0_n <= '1';
+      elsif sw_rst_fmc0_n_load = '1' then
+        sw_rst_fmc0_n <= sw_rst_fmc0_n_o;
+      end if;
+    end if;
+  end process p_sw_rst_fmc0;
+
+  sw_rst_fmc0_n_i <= sw_rst_fmc0_n;
+
+  p_sw_rst_fmc1: process (sys_clk_125)
+  begin
+    if rising_edge(sys_clk_125) then
+      if sys_rst_n = '0' then
+        sw_rst_fmc1_n <= '1';
+      elsif sw_rst_fmc1_n_load = '1' then
+        sw_rst_fmc1_n <= sw_rst_fmc1_n_o;
+      end if;
+    end if;
+  end process p_sw_rst_fmc1;
+
+  sw_rst_fmc1_n_i <= sw_rst_fmc1_n;
 
   ------------------------------------------------------------------------------
   -- Vectored interrupt controller (VIC)

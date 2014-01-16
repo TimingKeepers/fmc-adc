@@ -952,8 +952,9 @@ NET "cmp_sync_ddr_rst/sync2" TIG;
 NET "cmp_sync_fmc0_rst/sync2" TIG;
 NET "cmp_sync_fmc1_rst/sync2" TIG;
 NET "powerup_rst_n" TIG;
-NET "cmp_carrier_csr/carrier_csr_rst_fmc0_n_int" TIG;
-NET "cmp_carrier_csr/carrier_csr_rst_fmc1_n_int" TIG;
+NET "sw_rst_fmc0_n" TIG;
+NET "sw_rst_fmc1_n" TIG;
+
 
 
 # DDR3

@@ -133,23 +133,25 @@ peripheral {
     field {
       name = "State of the FMC 1 reset line";
       description = "write 0: FMC is held in reset\
-                     write 1: Normal FMC operation";
+                     write 1: Normal FMC operation (default)";
       type = BIT;
+      load = LOAD_EXT;
       size = 1;
       prefix = "fmc0_n";
       access_bus = READ_WRITE;
-      access_dev = READ_ONLY;
+      access_dev = READ_WRITE;
       };
 
     field {
       name = "State of the FMC 2 reset line";
       description = "write 0: FMC is held in reset\
-                     write 1: Normal FMC operation";
+                     write 1: Normal FMC operation (default)";
       type = BIT;
+      load = LOAD_EXT;
       size = 1;
       prefix = "fmc1_n";
       access_bus = READ_WRITE;
-      access_dev = READ_ONLY;
+      access_dev = READ_WRITE;
       };
 
     field {
