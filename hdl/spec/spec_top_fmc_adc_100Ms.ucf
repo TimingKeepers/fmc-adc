@@ -656,5 +656,5 @@ NET "cmp_ddr_ctrl/cmp_ddr3_ctrl_wrapper/gen_spec_bank3_64b_32b.cmp_ddr3_ctrl/mem
 
 # Reset
 NET "powerup_rst_n" TIG;
-NET "cmp_carrier_csr/carrier_csr_rst_fmc0_n_int" TIG;
+NET "sw_rst_fmc0_n" TIG;
 
