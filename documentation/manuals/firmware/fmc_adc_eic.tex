@@ -1,0 +1,100 @@
+@regsection Memory map summary
+@multitable  @columnfractions .10 .15 .15 .55
+@headitem Address @tab Type @tab Prefix @tab Name
+@item @code{0x0} @tab
+REG @tab
+@code{EIC_IDR} @tab
+Interrupt disable register
+@item @code{0x4} @tab
+REG @tab
+@code{EIC_IER} @tab
+Interrupt enable register
+@item @code{0x8} @tab
+REG @tab
+@code{EIC_IMR} @tab
+Interrupt mask register
+@item @code{0xc} @tab
+REG @tab
+@code{EIC_ISR} @tab
+Interrupt status register
+@end multitable 
+@regsection @code{EIC_IDR} - Interrupt disable register
+Writing 1 disables handling of the interrupt associated with corresponding bit. Writin 0 has no effect.
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{0}
+@tab W/O @tab
+@code{TRIG}
+@tab @code{0} @tab 
+Trigger interrupt
+@item @code{1}
+@tab W/O @tab
+@code{ACQ_END}
+@tab @code{0} @tab 
+End of acquisition interrupt
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig} @tab write 1: disable interrupt 'Trigger interrupt'@*write 0: no effect
+@item @code{acq_end} @tab write 1: disable interrupt 'End of acquisition interrupt'@*write 0: no effect
+@end multitable
+@regsection @code{EIC_IER} - Interrupt enable register
+Writing 1 enables handling of the interrupt associated with corresponding bit. Writin 0 has no effect.
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{0}
+@tab W/O @tab
+@code{TRIG}
+@tab @code{0} @tab 
+Trigger interrupt
+@item @code{1}
+@tab W/O @tab
+@code{ACQ_END}
+@tab @code{0} @tab 
+End of acquisition interrupt
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig} @tab write 1: enable interrupt 'Trigger interrupt'@*write 0: no effect
+@item @code{acq_end} @tab write 1: enable interrupt 'End of acquisition interrupt'@*write 0: no effect
+@end multitable
+@regsection @code{EIC_IMR} - Interrupt mask register
+Shows which interrupts are enabled. 1 means that the interrupt associated with the bitfield is enabled
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{0}
+@tab R/O @tab
+@code{TRIG}
+@tab @code{X} @tab 
+Trigger interrupt
+@item @code{1}
+@tab R/O @tab
+@code{ACQ_END}
+@tab @code{X} @tab 
+End of acquisition interrupt
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig} @tab read 1: interrupt 'Trigger interrupt' is enabled@*read 0: interrupt 'Trigger interrupt' is disabled
+@item @code{acq_end} @tab read 1: interrupt 'End of acquisition interrupt' is enabled@*read 0: interrupt 'End of acquisition interrupt' is disabled
+@end multitable
+@regsection @code{EIC_ISR} - Interrupt status register
+Each bit represents the state of corresponding interrupt. 1 means the interrupt is pending. Writing 1 to a bit clears the corresponding interrupt. Writing 0 has no effect.
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{0}
+@tab R/W @tab
+@code{TRIG}
+@tab @code{X} @tab 
+Trigger interrupt
+@item @code{1}
+@tab R/W @tab
+@code{ACQ_END}
+@tab @code{X} @tab 
+End of acquisition interrupt
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{trig} @tab read 1: interrupt 'Trigger interrupt' is pending@*read 0: interrupt not pending@*write 1: clear interrupt 'Trigger interrupt'@*write 0: no effect
+@item @code{acq_end} @tab read 1: interrupt 'End of acquisition interrupt' is pending@*read 0: interrupt not pending@*write 1: clear interrupt 'End of acquisition interrupt'@*write 0: no effect
+@end multitable

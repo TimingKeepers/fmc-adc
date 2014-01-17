@@ -1,0 +1,27 @@
+@verbatim
+0x0000 crossbar (sdb records)
+0x1000 |-- i2c
+0x1100 |-- onewire
+0x1200 |-- svec csr
+0x1300 |-- vic
+0x2000 |-- bridge (fmc slot 1) -> crossbar (sdb records)
+0x3000 |                          |-- i2c
+0x3100 |                          |-- spi
+0x3200 |                          |-- i2c
+0x3300 |                          |-- adc csr
+0x3400 |                          |-- onewire
+0x3500 |                          |-- fmc_eic
+0x3600 |                          |-- timetag
+0x4000 |-- ddr_addr (fmc slot 1)
+0x5000 |-- ddr_data (fmc slot 1)
+0x6000 |-- bridge (fmc slot 2) -> crossbar (sdb records)
+0x7000 |                          |-- i2c
+0x7100 |                          |-- spi
+0x7200 |                          |-- i2c
+0x7300 |                          |-- adc csr
+0x7400 |                          |-- onewire
+0x7500 |                          |-- fmc_eic
+0x7600 |                          |-- timetag
+0x8000 |-- ddr_addr (fmc slot 2)
+0x9000 |-- ddr_data (fmc slot 2)
+@end verbatim

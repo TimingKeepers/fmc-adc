@@ -1,0 +1,18 @@
+@verbatim
+integration: vid=0xCE42, did=0x47c786a2
+wb crossbar: vid=0x0651, did=0xe6a542c9
+wb bridge  : vid=0x0651, did=0xeef0b198
+vic        : vid=0xCE42, did=0x00000013
+onewire    : vid=0xCE42, did=0x779c5443
+spec_csr   : vid=0xCE42, did=0x00000603
+svec_csr   : vid=0xCE42, did=0x00006603
+timetag    : vid=0xCE42, did=0x00000604
+fmc_eic    : vid=0xCE42, did=0x26ec6086
+i2c        : vid=0xCE42, did=0x123c5443
+spi        : vid=0xCE42, did=0xe503947e
+adc_csr    : vid=0xCE42, did=0x00000608
+dma_eic    : vid=0xCE42, did=0xd5735ab4
+dma_ctrl   : vid=0xCE42, did=0x00000601
+ddr_addr   : vid=0xCE42, did=0x10006611
+ddr_data   : vid=0xCE42, did=0x10006610
+@end verbatim
