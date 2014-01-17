@@ -1161,7 +1161,6 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 @c DONE @item Add a software reset feature?
 
 @item Remove huge files from git repo. @b{!!! This will change all commits sha !!!}
-@item Add a reference section (bibliography).
 @end itemize
 
 @c ==========================================================================
@@ -1337,13 +1336,6 @@ The registers documentation have been generated using @command{wbgen2}@footnote{
 
 @c --------------------------------------------------------------------------
 @page
-@appendix References
-@section References
-
-@c TODO Add reference table, biblio -> how to automate that?
-
-
-@c --------------------------------------------------------------------------
 @appendix Glossary
 @section Glossary
 
