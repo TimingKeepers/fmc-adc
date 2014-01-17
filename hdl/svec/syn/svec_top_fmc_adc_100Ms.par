@@ -1,7 +1,7 @@
 Release 13.3 par O.76xd (lin)
 Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
 
-pcbe15575::  Mon Jul 29 12:34:43 2013
+pcbe15575::  Thu Jan 16 18:43:33 2014
 
 par -w -intstyle ise -ol high -mt off svec_top_fmc_adc_100Ms_map.ncd
 svec_top_fmc_adc_100Ms.ncd svec_top_fmc_adc_100Ms.pcf 
@@ -22,36 +22,36 @@ Device speed data version:  "PRODUCTION 1.20 2011-10-03".
 Device Utilization Summary:
 
 Slice Logic Utilization:
-  Number of Slice Registers:                 8,946 out of 184,304    4%
-    Number used as Flip Flops:               8,946
+  Number of Slice Registers:                 9,051 out of 184,304    4%
+    Number used as Flip Flops:               9,051
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                     10,792 out of  92,152   11%
-    Number used as logic:                   10,331 out of  92,152   11%
-      Number using O6 output only:           7,741
+  Number of Slice LUTs:                     11,186 out of  92,152   12%
+    Number used as logic:                   10,781 out of  92,152   11%
+      Number using O6 output only:           8,189
       Number using O5 output only:             317
-      Number using O5 and O6:                2,273
+      Number using O5 and O6:                2,275
       Number used as ROM:                        0
-    Number used as Memory:                      27 out of  21,680    1%
+    Number used as Memory:                      13 out of  21,680    1%
       Number used as Dual Port RAM:              0
       Number used as Single Port RAM:            0
-      Number used as Shift Register:            27
-        Number using O6 output only:             9
+      Number used as Shift Register:            13
+        Number using O6 output only:             5
         Number using O5 output only:             0
-        Number using O5 and O6:                 18
-    Number used exclusively as route-thrus:    434
-      Number with same-slice register load:    417
-      Number with same-slice carry load:        17
+        Number using O5 and O6:                  8
+    Number used exclusively as route-thrus:    392
+      Number with same-slice register load:    373
+      Number with same-slice carry load:        19
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                 4,077 out of  23,038   17%
-  Nummber of MUXCYs used:                    2,192 out of  46,076    4%
-  Number of LUT Flip Flop pairs used:       12,538
-    Number with an unused Flip Flop:         4,665 out of  12,538   37%
-    Number with an unused LUT:               1,746 out of  12,538   13%
-    Number of fully used LUT-FF pairs:       6,127 out of  12,538   48%
+  Number of occupied Slices:                 4,219 out of  23,038   18%
+  Nummber of MUXCYs used:                    2,224 out of  46,076    4%
+  Number of LUT Flip Flop pairs used:       13,002
+    Number with an unused Flip Flop:         4,961 out of  13,002   38%
+    Number with an unused LUT:               1,816 out of  13,002   13%
+    Number of fully used LUT-FF pairs:       6,225 out of  13,002   47%
     Number of slice register sites lost
       to control set restrictions:               0 out of 184,304    0%
 
@@ -66,8 +66,8 @@ IO Utilization:
     Number of LOCed IOBs:                      350 out of     350  100%
 
 Specific Feature Utilization:
-  Number of RAMB16BWERs:                        41 out of     268   15%
-  Number of RAMB8BWERs:                          8 out of     536    1%
+  Number of RAMB16BWERs:                        38 out of     268   14%
+  Number of RAMB8BWERs:                         12 out of     536    2%
   Number of BUFIO2/BUFIO2_2CLKs:                 3 out of      32    9%
     Number used as BUFIO2s:                      3
     Number used as BUFIO2_2CLKs:                 0
@@ -107,37 +107,35 @@ Specific Feature Utilization:
 Overall effort level (-ol):   High 
 Router effort level (-rl):    High 
 
-Starting initial Timing Analysis.  REAL time: 22 secs 
+Starting initial Timing Analysis.  REAL time: 23 secs 
 Finished initial Timing Analysis.  REAL time: 23 secs 
 
 Starting Router
 
 
-Phase  1  : 69454 unrouted;      REAL time: 27 secs 
+Phase  1  : 72061 unrouted;      REAL time: 27 secs 
 
-Phase  2  : 60393 unrouted;      REAL time: 1 mins 
+Phase  2  : 63190 unrouted;      REAL time: 1 mins 1 secs 
 
-Phase  3  : 23648 unrouted;      REAL time: 1 mins 52 secs 
+Phase  3  : 25274 unrouted;      REAL time: 1 mins 51 secs 
 
-Phase  4  : 23989 unrouted; (Setup:2409, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 11 secs 
-
-Updating file: svec_top_fmc_adc_100Ms.ncd with current fully routed design.
-
-Phase  5  : 0 unrouted; (Setup:2775, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 35 secs 
-
-Phase  6  : 0 unrouted; (Setup:2273, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 43 secs 
+Phase  4  : 25540 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 2 mins 9 secs 
 
 Updating file: svec_top_fmc_adc_100Ms.ncd with current fully routed design.
 
-Phase  7  : 0 unrouted; (Setup:363, Hold:0, Component Switching Limit:0)     REAL time: 6 mins 36 secs 
+Phase  5  : 0 unrouted; (Setup:413, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 45 secs 
 
-Phase  8  : 0 unrouted; (Setup:363, Hold:0, Component Switching Limit:0)     REAL time: 6 mins 36 secs 
+Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 57 secs 
 
-Phase  9  : 0 unrouted; (Setup:363, Hold:0, Component Switching Limit:0)     REAL time: 6 mins 36 secs 
+Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 57 secs 
 
-Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 6 mins 41 secs 
-Total REAL time to Router completion: 6 mins 41 secs 
-Total CPU time to Router completion: 7 mins 1 secs 
+Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 57 secs 
+
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 3 mins 57 secs 
+
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 mins 3 secs 
+Total REAL time to Router completion: 4 mins 3 secs 
+Total CPU time to Router completion: 4 mins 10 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -155,36 +153,36 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|cmp_fmc_adc_mezzanin |              |      |      |            |             |
-|e_1/cmp_fmc_adc_100M |              |      |      |            |             |
-|       s_core/fs_clk | BUFGMUX_X2Y10| No   |  153 |  0.377     |  1.463      |
-+---------------------+--------------+------+------+------------+-------------+
-|         sys_clk_125 |  BUFGMUX_X2Y1| No   | 1820 |  0.352     |  1.436      |
-+---------------------+--------------+------+------+------------+-------------+
-|cmp_fmc_adc_mezzanin |              |      |      |            |             |
-|e_0/cmp_fmc_adc_100M |              |      |      |            |             |
-|       s_core/fs_clk | BUFGMUX_X2Y12| No   |  165 |  0.375     |  1.463      |
-+---------------------+--------------+------+------+------------+-------------+
-|        sys_clk_62_5 |  BUFGMUX_X2Y2| No   |  563 |  0.214     |  1.436      |
-+---------------------+--------------+------+------+------------+-------------+
-|cmp_ddr_ctrl_bank5/c |              |      |      |            |             |
-|mp_ddr3_ctrl_wrapper |              |      |      |            |             |
-|/gen_svec_bank5_64b_ |              |      |      |            |             |
-|32b.cmp_ddr3_ctrl/c5 |              |      |      |            |             |
-|        _mcb_drp_clk | BUFGMUX_X3Y13| No   |   77 |  0.196     |  1.289      |
-+---------------------+--------------+------+------+------------+-------------+
-|cmp_ddr_ctrl_bank4/c |              |      |      |            |             |
-|mp_ddr3_ctrl_wrapper |              |      |      |            |             |
-|/gen_svec_bank4_64b_ |              |      |      |            |             |
-|32b.cmp_ddr3_ctrl/c4 |              |      |      |            |             |
-|        _mcb_drp_clk |  BUFGMUX_X2Y3| No   |   77 |  0.163     |  1.438      |
+|         sys_clk_125 |  BUFGMUX_X2Y1| No   | 1908 |  0.350     |  1.436      |
 +---------------------+--------------+------+------+------------+-------------+
 |cmp_ddr_ctrl_bank4/c |              |      |      |            |             |
 |mp_ddr3_ctrl_wrapper |              |      |      |            |             |
 |/gen_svec_bank4_64b_ |              |      |      |            |             |
 |32b.cmp_ddr3_ctrl/me |              |      |      |            |             |
 |mc4_infrastructure_i |              |      |      |            |             |
-|   nst/sys_clk_ibufg |  BUFGMUX_X2Y9| No   |    3 |  0.000     |  1.281      |
+|   nst/sys_clk_ibufg |  BUFGMUX_X2Y9| No   |    5 |  0.179     |  1.277      |
++---------------------+--------------+------+------+------------+-------------+
+|        sys_clk_62_5 |  BUFGMUX_X2Y2| No   |  572 |  0.341     |  1.436      |
++---------------------+--------------+------+------+------------+-------------+
+|cmp_ddr_ctrl_bank4/c |              |      |      |            |             |
+|mp_ddr3_ctrl_wrapper |              |      |      |            |             |
+|/gen_svec_bank4_64b_ |              |      |      |            |             |
+|32b.cmp_ddr3_ctrl/c4 |              |      |      |            |             |
+|        _mcb_drp_clk |  BUFGMUX_X2Y3| No   |   78 |  0.163     |  1.438      |
++---------------------+--------------+------+------+------------+-------------+
+|cmp_ddr_ctrl_bank5/c |              |      |      |            |             |
+|mp_ddr3_ctrl_wrapper |              |      |      |            |             |
+|/gen_svec_bank5_64b_ |              |      |      |            |             |
+|32b.cmp_ddr3_ctrl/c5 |              |      |      |            |             |
+|        _mcb_drp_clk | BUFGMUX_X3Y13| No   |   76 |  0.187     |  1.289      |
++---------------------+--------------+------+------+------------+-------------+
+|cmp_fmc_adc_mezzanin |              |      |      |            |             |
+|e_1/cmp_fmc_adc_100M |              |      |      |            |             |
+|       s_core/fs_clk | BUFGMUX_X2Y10| No   |  163 |  0.373     |  1.463      |
++---------------------+--------------+------+------+------------+-------------+
+|cmp_fmc_adc_mezzanin |              |      |      |            |             |
+|e_0/cmp_fmc_adc_100M |              |      |      |            |             |
+|       s_core/fs_clk | BUFGMUX_X2Y12| No   |  165 |  0.377     |  1.463      |
 +---------------------+--------------+------+------+------------+-------------+
 |cmp_fmc_adc_mezzanin |              |      |      |            |             |
 |e_1/cmp_fmc_adc_100M |              |      |      |            |             |
@@ -317,7 +315,7 @@ for example SLICE loads not FF loads.
 
 Timing Score: 0 (Setup: 0, Hold: 0, Component Switching Limit: 0)
 
-Number of Timing Constraints that were not applied: 12
+Number of Timing Constraints that were not applied: 11
 
 Asterisk (*) preceding a constraint indicates it was not met.
    This may be due to a setup or hold violation.
@@ -374,31 +372,31 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Ms_core_dco_clk"         TS_adc1_dco_n_i  |             |            |            |        |            
   HIGH 50%                                  |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_sys_clk_125_buf = PERIOD TIMEGRP "sys_ | SETUP       |     0.157ns|     7.843ns|       0|           0
-  clk_125_buf" TS_clk_20m_vcxo_i / 6.25     | HOLD        |     0.352ns|            |       0|           0
+  TS_sys_clk_125_buf = PERIOD TIMEGRP "sys_ | SETUP       |     0.237ns|     7.763ns|       0|           0
+  clk_125_buf" TS_clk_20m_vcxo_i / 6.25     | HOLD        |     0.077ns|            |       0|           0
        HIGH 50%                             |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_cmp_fmc_adc_mezzanine_1_cmp_fmc_adc_10 | SETUP       |     0.242ns|     7.758ns|       0|           0
-  0Ms_core_fs_clk_buf = PERIOD TIMEGRP      | HOLD        |     0.399ns|            |       0|           0
+  TS_cmp_fmc_adc_mezzanine_1_cmp_fmc_adc_10 | SETUP       |     0.290ns|     7.710ns|       0|           0
+  0Ms_core_fs_clk_buf = PERIOD TIMEGRP      | HOLD        |     0.435ns|            |       0|           0
       "cmp_fmc_adc_mezzanine_1_cmp_fmc_adc_ |             |            |            |        |            
   100Ms_core_fs_clk_buf"         TS_cmp_fmc |             |            |            |        |            
   _adc_mezzanine_1_cmp_fmc_adc_100Ms_core_d |             |            |            |        |            
   co_clk / 0.25 HIGH         50%            |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_cmp_fmc_adc_mezzanine_0_cmp_fmc_adc_10 | SETUP       |     0.283ns|     7.717ns|       0|           0
-  0Ms_core_fs_clk_buf = PERIOD TIMEGRP      | HOLD        |     0.381ns|            |       0|           0
+  TS_cmp_fmc_adc_mezzanine_0_cmp_fmc_adc_10 | SETUP       |     0.370ns|     7.630ns|       0|           0
+  0Ms_core_fs_clk_buf = PERIOD TIMEGRP      | HOLD        |     0.353ns|            |       0|           0
       "cmp_fmc_adc_mezzanine_0_cmp_fmc_adc_ |             |            |            |        |            
   100Ms_core_fs_clk_buf"         TS_cmp_fmc |             |            |            |        |            
   _adc_mezzanine_0_cmp_fmc_adc_100Ms_core_d |             |            |            |        |            
   co_clk / 0.25 HIGH         50%            |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_sys_clk_62_5_buf = PERIOD TIMEGRP "sys | SETUP       |     0.366ns|    15.634ns|       0|           0
-  _clk_62_5_buf" TS_clk_20m_vcxo_i /        | HOLD        |     0.265ns|            |       0|           0
-    3.125 HIGH 50%                          |             |            |            |        |            
+  TS_ddr_clk_buf = PERIOD TIMEGRP "ddr_clk_ | SETUP       |     1.241ns|     1.758ns|       0|           0
+  buf" TS_clk_20m_vcxo_i / 16.6666667       | HOLD        |     0.393ns|            |       0|           0
+     HIGH 50%                               | MINLOWPULSE |     0.428ns|     2.572ns|       0|           0
 ----------------------------------------------------------------------------------------------------------
-  TS_ddr_clk_buf = PERIOD TIMEGRP "ddr_clk_ | MINLOWPULSE |     0.428ns|     2.572ns|       0|           0
-  buf" TS_clk_20m_vcxo_i / 16.6666667       |             |            |            |        |            
-     HIGH 50%                               |             |            |            |        |            
+  TS_sys_clk_62_5_buf = PERIOD TIMEGRP "sys | SETUP       |     0.495ns|    15.505ns|       0|           0
+  _clk_62_5_buf" TS_clk_20m_vcxo_i /        | HOLD        |     0.042ns|            |       0|           0
+    3.125 HIGH 50%                          |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
   TS_adc0_dco_n_i = PERIOD TIMEGRP "adc0_dc | MINPERIOD   |     1.075ns|     0.925ns|       0|           0
   o_n_i" 2 ns HIGH 50%                      |             |            |            |        |            
@@ -409,8 +407,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   TS_clk_20m_vcxo_i = PERIOD TIMEGRP "clk_2 | MINLOWPULSE |    30.000ns|    20.000ns|       0|           0
   0m_vcxo_i" 50 ns HIGH 50%                 |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_cmp_ddr_ctrl_bank5_cmp_ddr3_ctrl_wrapp | SETUP       |     4.665ns|     7.334ns|       0|           0
-  er_gen_svec_bank5_64b_32b_cmp_ddr3_ctrl_m | HOLD        |     0.425ns|            |       0|           0
+  TS_cmp_ddr_ctrl_bank5_cmp_ddr3_ctrl_wrapp | SETUP       |     4.915ns|     7.084ns|       0|           0
+  er_gen_svec_bank5_64b_32b_cmp_ddr3_ctrl_m | HOLD        |     0.393ns|            |       0|           0
   emc5_infrastructure_inst_mcb_drp_clk_bufg |             |            |            |        |            
   _in         = PERIOD TIMEGRP         "cmp |             |            |            |        |            
   _ddr_ctrl_bank5_cmp_ddr3_ctrl_wrapper_gen |             |            |            |        |            
@@ -418,8 +416,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   nfrastructure_inst_mcb_drp_clk_bufg_in"   |             |            |            |        |            
          TS_ddr_clk_buf / 0.25 HIGH 50%     |             |            |            |        |            
 ----------------------------------------------------------------------------------------------------------
-  TS_cmp_ddr_ctrl_bank4_cmp_ddr3_ctrl_wrapp | SETUP       |     4.967ns|     7.032ns|       0|           0
-  er_gen_svec_bank4_64b_32b_cmp_ddr3_ctrl_m | HOLD        |     0.410ns|            |       0|           0
+  TS_cmp_ddr_ctrl_bank4_cmp_ddr3_ctrl_wrapp | SETUP       |     5.025ns|     6.974ns|       0|           0
+  er_gen_svec_bank4_64b_32b_cmp_ddr3_ctrl_m | HOLD        |     0.260ns|            |       0|           0
   emc4_infrastructure_inst_mcb_drp_clk_bufg |             |            |            |        |            
   _in         = PERIOD TIMEGRP         "cmp |             |            |            |        |            
   _ddr_ctrl_bank4_cmp_ddr3_ctrl_wrapper_gen |             |            |            |        |            
@@ -453,11 +451,11 @@ Derived Constraints for TS_clk_20m_vcxo_i
 |           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
 |                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
-|TS_clk_20m_vcxo_i              |     50.000ns|     20.000ns|     49.967ns|            0|            0|            0|      2572497|
-| TS_sys_clk_62_5_buf           |     16.000ns|     15.634ns|          N/A|            0|            0|      1754810|            0|
-| TS_sys_clk_125_buf            |      8.000ns|      7.843ns|          N/A|            0|            0|       796755|            0|
-| TS_ddr_clk_buf                |      3.000ns|      2.572ns|      2.998ns|            0|            0|            0|        20932|
-|  TS_cmp_ddr_ctrl_bank4_cmp_ddr|     12.000ns|      7.032ns|          N/A|            0|            0|        10471|            0|
+|TS_clk_20m_vcxo_i              |     50.000ns|     20.000ns|     49.967ns|            0|            0|            0|      2559513|
+| TS_sys_clk_62_5_buf           |     16.000ns|     15.505ns|          N/A|            0|            0|      1754511|            0|
+| TS_sys_clk_125_buf            |      8.000ns|      7.763ns|          N/A|            0|            0|       784064|            0|
+| TS_ddr_clk_buf                |      3.000ns|      2.572ns|      2.998ns|            0|            0|            6|        20932|
+|  TS_cmp_ddr_ctrl_bank4_cmp_ddr|     12.000ns|      6.974ns|          N/A|            0|            0|        10471|            0|
 |  3_ctrl_wrapper_gen_svec_bank4|             |             |             |             |             |             |             |
 |  _64b_32b_cmp_ddr3_ctrl_memc4_|             |             |             |             |             |             |             |
 |  infrastructure_inst_mcb_drp_c|             |             |             |             |             |             |             |
@@ -471,7 +469,7 @@ Derived Constraints for TS_clk_20m_vcxo_i
 |  3_ctrl_wrapper_gen_svec_bank4|             |             |             |             |             |             |             |
 |  _64b_32b_cmp_ddr3_ctrl_memc4_|             |             |             |             |             |             |             |
 |  infrastructure_inst_clk_2x_0 |             |             |             |             |             |             |             |
-|  TS_cmp_ddr_ctrl_bank5_cmp_ddr|     12.000ns|      7.334ns|          N/A|            0|            0|        10461|            0|
+|  TS_cmp_ddr_ctrl_bank5_cmp_ddr|     12.000ns|      7.084ns|          N/A|            0|            0|        10461|            0|
 |  3_ctrl_wrapper_gen_svec_bank5|             |             |             |             |             |             |             |
 |  _64b_32b_cmp_ddr3_ctrl_memc5_|             |             |             |             |             |             |             |
 |  infrastructure_inst_mcb_drp_c|             |             |             |             |             |             |             |
@@ -493,10 +491,10 @@ Derived Constraints for TS_adc0_dco_n_i
 |           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
 |                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
-|TS_adc0_dco_n_i                |      2.000ns|      0.925ns|      1.929ns|            0|            0|            0|        16183|
-| TS_cmp_fmc_adc_mezzanine_0_cmp|      2.000ns|      1.636ns|      1.929ns|            0|            0|            0|        16183|
+|TS_adc0_dco_n_i                |      2.000ns|      0.925ns|      1.907ns|            0|            0|            0|        47910|
+| TS_cmp_fmc_adc_mezzanine_0_cmp|      2.000ns|      1.636ns|      1.907ns|            0|            0|            0|        47910|
 | _fmc_adc_100Ms_core_dco_clk   |             |             |             |             |             |             |             |
-|  TS_cmp_fmc_adc_mezzanine_0_cm|      8.000ns|      7.717ns|          N/A|            0|            0|        16183|            0|
+|  TS_cmp_fmc_adc_mezzanine_0_cm|      8.000ns|      7.630ns|          N/A|            0|            0|        47910|            0|
 |  p_fmc_adc_100Ms_core_fs_clk_b|             |             |             |             |             |             |             |
 |  uf                           |             |             |             |             |             |             |             |
 |  TS_cmp_fmc_adc_mezzanine_0_cm|      1.000ns|          N/A|          N/A|            0|            0|            0|            0|
@@ -510,10 +508,10 @@ Derived Constraints for TS_adc1_dco_n_i
 |           Constraint          | Requirement |-------------+-------------|-------------+-------------|-------------+-------------|
 |                               |             |   Direct    | Derivative  |   Direct    | Derivative  |   Direct    | Derivative  |
 +-------------------------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+
-|TS_adc1_dco_n_i                |      2.000ns|      0.925ns|      1.940ns|            0|            0|            0|        16183|
-| TS_cmp_fmc_adc_mezzanine_1_cmp|      2.000ns|      1.636ns|      1.940ns|            0|            0|            0|        16183|
+|TS_adc1_dco_n_i                |      2.000ns|      0.925ns|      1.927ns|            0|            0|            0|        47928|
+| TS_cmp_fmc_adc_mezzanine_1_cmp|      2.000ns|      1.636ns|      1.927ns|            0|            0|            0|        47928|
 | _fmc_adc_100Ms_core_dco_clk   |             |             |             |             |             |             |             |
-|  TS_cmp_fmc_adc_mezzanine_1_cm|      8.000ns|      7.758ns|          N/A|            0|            0|        16183|            0|
+|  TS_cmp_fmc_adc_mezzanine_1_cm|      8.000ns|      7.710ns|          N/A|            0|            0|        47928|            0|
 |  p_fmc_adc_100Ms_core_fs_clk_b|             |             |             |             |             |             |             |
 |  uf                           |             |             |             |             |             |             |             |
 |  TS_cmp_fmc_adc_mezzanine_1_cm|      1.000ns|          N/A|          N/A|            0|            0|            0|            0|
@@ -533,10 +531,10 @@ Generating Pad Report.
 
 All signals are completely routed.
 
-Total REAL time to PAR completion: 6 mins 49 secs 
-Total CPU time to PAR completion: 7 mins 9 secs 
+Total REAL time to PAR completion: 4 mins 11 secs 
+Total CPU time to PAR completion: 4 mins 18 secs 
 
-Peak Memory Usage:  605 MB
+Peak Memory Usage:  606 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.

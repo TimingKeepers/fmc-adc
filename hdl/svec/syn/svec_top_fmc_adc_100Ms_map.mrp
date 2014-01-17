@@ -11,46 +11,46 @@ Target Device  : xc6slx150t
 Target Package : fgg900
 Target Speed   : -3
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Mon Jul 29 12:27:12 2013
+Mapped Date    : Thu Jan 16 18:35:40 2014
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    7
 Slice Logic Utilization:
-  Number of Slice Registers:                 8,946 out of 184,304    4%
-    Number used as Flip Flops:               8,946
+  Number of Slice Registers:                 9,051 out of 184,304    4%
+    Number used as Flip Flops:               9,051
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                     10,792 out of  92,152   11%
-    Number used as logic:                   10,331 out of  92,152   11%
-      Number using O6 output only:           7,741
+  Number of Slice LUTs:                     11,186 out of  92,152   12%
+    Number used as logic:                   10,781 out of  92,152   11%
+      Number using O6 output only:           8,189
       Number using O5 output only:             317
-      Number using O5 and O6:                2,273
+      Number using O5 and O6:                2,275
       Number used as ROM:                        0
-    Number used as Memory:                      27 out of  21,680    1%
+    Number used as Memory:                      13 out of  21,680    1%
       Number used as Dual Port RAM:              0
       Number used as Single Port RAM:            0
-      Number used as Shift Register:            27
-        Number using O6 output only:             9
+      Number used as Shift Register:            13
+        Number using O6 output only:             5
         Number using O5 output only:             0
-        Number using O5 and O6:                 18
-    Number used exclusively as route-thrus:    434
-      Number with same-slice register load:    417
-      Number with same-slice carry load:        17
+        Number using O5 and O6:                  8
+    Number used exclusively as route-thrus:    392
+      Number with same-slice register load:    373
+      Number with same-slice carry load:        19
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                 4,077 out of  23,038   17%
-  Nummber of MUXCYs used:                    2,192 out of  46,076    4%
-  Number of LUT Flip Flop pairs used:       12,538
-    Number with an unused Flip Flop:         4,665 out of  12,538   37%
-    Number with an unused LUT:               1,746 out of  12,538   13%
-    Number of fully used LUT-FF pairs:       6,127 out of  12,538   48%
-    Number of unique control sets:             347
+  Number of occupied Slices:                 4,219 out of  23,038   18%
+  Nummber of MUXCYs used:                    2,224 out of  46,076    4%
+  Number of LUT Flip Flop pairs used:       13,002
+    Number with an unused Flip Flop:         4,961 out of  13,002   38%
+    Number with an unused LUT:               1,816 out of  13,002   13%
+    Number of fully used LUT-FF pairs:       6,225 out of  13,002   47%
+    Number of unique control sets:             342
     Number of slice register sites lost
-      to control set restrictions:             777 out of 184,304    1%
+      to control set restrictions:             744 out of 184,304    1%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -63,8 +63,8 @@ IO Utilization:
     Number of LOCed IOBs:                      350 out of     350  100%
 
 Specific Feature Utilization:
-  Number of RAMB16BWERs:                        41 out of     268   15%
-  Number of RAMB8BWERs:                          8 out of     536    1%
+  Number of RAMB16BWERs:                        38 out of     268   14%
+  Number of RAMB8BWERs:                         12 out of     536    2%
   Number of BUFIO2/BUFIO2_2CLKs:                 3 out of      32    9%
     Number used as BUFIO2s:                      3
     Number used as BUFIO2_2CLKs:                 0
@@ -100,11 +100,11 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                4.02
+Average Fanout of Non-Clock Nets:                4.06
 
-Peak Memory Usage:  622 MB
-Total REAL time to MAP completion:  7 mins 24 secs 
-Total CPU time to MAP completion (all processors):   7 mins 40 secs 
+Peak Memory Usage:  631 MB
+Total REAL time to MAP completion:  7 mins 47 secs 
+Total CPU time to MAP completion (all processors):   8 mins 4 secs 
 
 Table of Contents
 -----------------
@@ -168,10 +168,10 @@ INFO:LIT:395 - The above info message is repeated 6 more times for the following
    (max. 5 shown):
    cmp_ddr_ctrl_bank5/cmp_ddr3_ctrl_wrapper/gen_svec_bank5_64b_32b.cmp_ddr3_ctrl
    /memc5_infrastructure_inst/rst0_sync_r<24>,
-   N1685,
-   N1687,
-   N1691,
-   N1693
+   N1821,
+   N1823,
+   N1827,
+   N1829
    To see the details of these info messages, please use the -detail switch.
 INFO:MapLib:562 - No environment variables are currently set.
 INFO:LIT:244 - All of the single ended outputs in this design are using slew
