@@ -118,7 +118,7 @@ Controls software reset of the mezzanine including the ddr interface and the tim
 @item @code{0}
 @tab R/W @tab
 @code{FMC0_N}
-@tab @code{0} @tab 
+@tab @code{X} @tab 
 State of the reset line
 @item @code{31...1}
 @tab R/W @tab
@@ -128,6 +128,6 @@ Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
-@item @code{fmc0_n} @tab write 0: FMC is held in reset@* write 1: Normal FMC operation
+@item @code{fmc0_n} @tab write 0: FMC is held in reset@* write 1: Normal FMC operation (default)
 @item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable

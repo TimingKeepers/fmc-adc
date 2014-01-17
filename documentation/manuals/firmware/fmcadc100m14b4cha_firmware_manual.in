@@ -40,7 +40,7 @@
 @finalout
 
 @titlepage
-@title FmcAdc100m14b4cha Firmware Guide
+@title FmcAdc100m14b4cha Gateware Guide
 @subtitle @value{update-month} - Release 1.1
 @subtitle For Simple PCIe FMC Carrier (SPEC) only
 @sp 10
@@ -57,26 +57,27 @@
 @node Top
 @top Introduction
 
-This document describes the hdl (firmware or gateware) developed to support the FmcAdc100m14b4cha (later refered to as fmc-adc) mezzanine card on the SPEC@footnote{@uref{http://www.ohwr.org/projects/spec}} carrier card.
-The firmware architecture is describled in detail.
-The configuration and operation of the firmware is also explained.
-On the other hand, this manual is not intended to provide information about the software used to control the fmc-adc board.
+This document describes the gateware developed to support the FmcAdc100m14b4cha (later refered to as fmc-adc) mezzanine card on the SPEC@footnote{@uref{http://www.ohwr.org/projects/spec}} and SVEC@footnote{@uref{http://www.ohwr.org/projects/svec}} carrier cards.
+The gateware is the HDL code used to generate the bitstream that configures the FPGA on the carrier.
+The gateware architecture is describled in detail.
+The configuration and operation of the fmc-adc is also explained.
+On the other hand, this manual is not intended to provide information about the software used to control the fmc-adc board, nor details about it's hardware design.
 
 @c ##########################################################################
 @node Repositories and Releases
 @chapter Repositories and Releases
 
-This project is hosted on the Open Hardware repository at the following link:
+This project is hosted on the Open Hardware Repository at the following link:
 @uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha}
 
 Here a list of resources that you can find on the project page.
 @table @code
 
-@item Document@footnote{@uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha/documents}}
-contains the @t{.pdf} documentation for every official release.
+@c @item Document@footnote{@uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha/documents}}
+@c contains the @t{.pdf} documentation for every official release.
 
 @item File@footnote{@uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha/files}}
-contains the @t{.bin} FPGA binary file for every official release.
+contains the @t{.bin} FPGA binary file and the @t{.pdf} documentation for every official release.
 
 @item Repository@footnote{@uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha/repository}}
 contains the git repository of the project.
@@ -84,8 +85,8 @@ contains the git repository of the project.
 @end table
 
 On the repository the official releases have a tag named
-@code{spec-fmc-adc-v#maj.#min} where @code{#maj} represent the major release
-version of the firmware and @code{#min} the minor one (e.g @code{spec-fmc-adc-v1.2}).
+@code{spec-fmc-adc-v#maj.#min} (or @code{svec-fmc-adc-v#maj.#min}) where @code{#maj} represent the major release
+version of the gateware and @code{#min} the minor one (e.g @code{spec-fmc-adc-v1.2}).
 The released FPGA binary files follow the same naming convention.
 
 @b{Note:} If you got this from the repository (as opposed to a named
@@ -95,23 +96,24 @@ It is a fact of life that developers forget to re-read and fix documentation
 while updating the code. In that case, please run ``@code{git describe HEAD}''
 to ensure where you are.
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Software Support
 
 For information on the fmc-adc Linux software support, please refer to the following project:@*
 @uref{http://www.ohwr.org/projects/fmc-adc-100m14b4cha-sw}
 
-As a general rule, a new minor version of the firmware, for a given major version, should be backward compatible.
+As a general rule, a new minor version of the gateware, for a given major version, should be backward compatible.
 If the interface with the driver changes, the major version should be incremented.
-It means that driver versions 1.x should work with any firmware version 1.x.
-But the driver version 2.0 might not work with the firmware version 1.1.
+It means that driver versions 1.x should work with any gateware version 1.x.
+But the driver version 2.0 might not work with the gateware version 1.1.
+
 
 @c ##########################################################################
 @page
 @node About source code
 @chapter About Source Code
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Build from Sources
 
 The fmc-adc hdl design make use of the @command{hdlmake}@footnote{@uref{http://www.ohwr.org/projects/hdl-make}} tool.
@@ -141,7 +143,7 @@ Here is the procedure to build the FPGA binary image from the hdl source.
 
 @c TODO specify the hdlmake release (once they have stable version release).
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Source Code Organisation
 
 @table @file
@@ -164,25 +166,25 @@ Here is the procedure to build the FPGA binary image from the hdl source.
       Carrier related Chipscope projects used for debug purpose.
 @end table
 
-It could happen that a hdl source directory contains extra source files that are not used in the current firmware release.
+It could happen that a hdl source directory contains extra source files that are not used in the current gateware release.
 In order to identify the source files used in a given release, refer to the @file{Manifest.py} files.
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Dependencies
 
-The fmc-adc firmware depends on the following hdl cores and libraries:
+The fmc-adc gateware depends on the following hdl cores and libraries:
 @table @b
-@item gn4124-core
-      @code{repo  : git://ohwr.org/hdl-core-lib/gn4124-core.git}@*
-      @code{branch: master}
-@item ddr3-sp6-core
-      @code{repo  : git://ohwr.org/hdl-core-lib/ddr3-sp6-core}@*
-      @code{branch: spec_bank3_64b_32b (for spec carrier)}
-      @code{branch: svec_bank4_64b_32b_bank5_64b_32b (for svec carrier)}
 @item general-cores
       @code{repo  : git://ohwr.org/hdl-core-lib/general-cores.git}@*
-      @code{branch: sdb_extension}
-@item vme64x-core
+      @code{branch: proposed_master}
+@item ddr3-sp6-core
+      @code{repo  : git://ohwr.org/hdl-core-lib/ddr3-sp6-core}@*
+      @code{branch: spec_bank3_64b_32b (for spec carrier)}@*
+      @code{branch: svec_bank4_64b_32b_bank5_64b_32b (for svec carrier)}
+@item gn4124-core (spec carrier only)
+      @code{repo  : git://ohwr.org/hdl-core-lib/gn4124-core.git}@*
+      @code{branch: master}
+@item vme64x-core (svec carrier only)
       @code{repo  : git://ohwr.org/hdl-core-lib/vme64x-core.git}@*
       @code{branch: master}
 @end table
@@ -192,11 +194,49 @@ The fmc-adc firmware depends on the following hdl cores and libraries:
 @node Architecture
 @chapter Architecture
 
-This chapter describes the internal blocks of the FPGA.
-All blocks (except the memory controller) are connected to the PCIe bridge interface using a Wishbone bus. The DDR memory can only be access through DMA.
-The @ref{fig:spec_fw_arch} illustrates the FPGA architecture. The peripherals connected to each block are also shown.
-A crossbar from the general-cores@footnote{@uref{http://www.ohwr.org/projects/general-cores}} library is used to map the Wishbone slaves in the BAR 0 address space.
-The @ref{tab:memory_map} shows the Wishbone slaves mapping.
+This chapter describes the internal blocks of the FPGA for both SPEC (PCIe) and SVEC (VME64x) carriers.
+The gateware is designed around one or several Wishbone@footnote{@uref{http://opencores.org/opencores@comma{}wishbone}} buses.
+@c FIXME  broken @comma{} to generate url link (prints 'comma{}' instead of ',')
+
+@c ==========================================================================
+@section SPEC (PCIe carrier)
+
+In the PCIe version of the gateware, all blocks (except the memory controller) are connected to the PCIe bridge interface using the same Wishbone bus (@i{main} bus).
+The ADC samples are written and read to/from the DDR memory using separated Wishbone buses.
+Due to its size, the DDR memory is not mapped on the @i{main} Wishbone bus and can only be access through DMA.
+The @ref{fig:spec_fw_arch} illustrates the fmc-adc gateware architecture on the SPEC carrier.
+A crossbar from the general-cores@footnote{@uref{http://www.ohwr.org/projects/general-cores}} library is used to map the slaves in the Wishbone address space.
+
+@float Figure,fig:spec_fw_arch
+@center @image{../../figures/spec_fw_arch, 15cm,,,pdf}
+@caption{FMC-ADC gateware architecture on SPEC carrier.}
+@end float
+
+@sp 1
+
+There are three different Wishbone bus in the design.
+@table @b
+@item Mapped WB bus (blue)
+      This bus connects all the peripheral to the GN4142 core.@*
+      Data: 32-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
+@item ADC core to memory controller (orange)
+      This bus is used to write samples from the ADC core to the DDR memory.@*
+      Data: 64-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
+@item Memory controller to GN4124 core (red)
+      This bus is used to read samples from the DDR memory.@*
+      Data: 32-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
+@end table
+
+
+The @ref{tab:spec_memory_map} shows the Wishbone slaves mapping and hierarchy.
+The first column represents the byte address offset from the start of the Wishbone address space (BAR 0).
+
+@float Table,tab:spec_memory_map
+@include spec_wb_tree.txt
+@caption{Wishbone bus memory mapping (BAR 0).}
+@end float
+
+@ignore
 
 @float Table,tab:memory_map
 @multitable {Byte offset}{xwb_onewire_master}{fmc-adc-100m14b4cha}{Mezzanine system I2C master}
@@ -217,12 +257,15 @@ The @ref{tab:memory_map} shows the Wishbone slaves mapping.
 @caption{Wishbone bus memory mapping (BAR 0).}
 @end float
 
+@end ignore
+
 @sp 1
 
 The Wishbone crossbar also implements SDB@footnote{@uref{http://www.ohwr.org/projects/fpga-config-space}} records. Those records describe the Wishbone slaves and their mapping on the bus.
 The SDB records ROM must be located at offset @code{0x0}.
-In order to identify the firmware, SDB meta-information records are used.
-The 'Integration', 'Top module repository url' and 'Synthesis tool information'  meta-information records are used in the design. Below is a description of the fields and their content in the fmc-adc design.
+In order to identify the gateware, SDB meta-information records are used.
+The 'Integration', 'Top module repository url' and 'Synthesis tool information'  meta-information records are used in the design.
+Below is a description of the fields and their content in the fmc-adc design on SPEC carrier.
 
 @table @b
 @item Integration
@@ -246,33 +289,11 @@ The 'Integration', 'Top module repository url' and 'Synthesis tool information' 
 Note that some of the cores from the general-cores library are based on cores from
 OpenCores@footnote{@uref{http://opencores.org/}}. Therefore, the documentation for those cores is hosted on the OpenCores website.
 
-The register description for the cores for the carrier control and status, the time-tagging core, the interrupt controller and the ADC core can be found in annexe (@xref{ADC Core Registers}, @ref{Interrupt Controller Registers}, @ref{Time-tagging Core Registers} and @ref{Carrier Registers}). The registers for those cores have been generated using @command{wbgen2}@footnote{@uref{http://www.ohwr.org/projects/wishbone-gen}}.
-
-@float Figure,fig:spec_fw_arch
-@center @image{../../figures/spec_fw_arch_module, 15cm,,,pdf}
-@caption{FPGA firmware architecture block diagram.}
-@end float
-
-@sp 1
-
-There are three different Wishbone bus in the design.
-@table @b
-@item Mapped WB bus (blue)
-      This bus connects all the peripheral to the GN4142 core.@*
-      Data: 32-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
-@item ADC core to memory controller (orange)
-      This bus is used to write samples from the ADC core to the DDR memory.@*
-      Data: 64-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
-@item Memory controller to GN4124 core (red)
-      This bus is used to read samples from the DDR memory.@*
-      Data: 32-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
-@end table
-
 @c --------------------------------------------------------------------------
 @page
-@section Clock Domains
+@subsection Clock Domains
 
-The fmc-adc design has four different clock domains. They are listed in the followig table.
+The SPEC version of the fmc-adc design has four different clock domains. They are listed in the followig table.
 
 @float
 @multitable {@code{sys_clk_125}}{ADC data de-serialiser clock}{125.00 MHz}{400MHz LTC2174 (mezzanine)}
@@ -287,22 +308,8 @@ The fmc-adc design has four different clock domains. They are listed in the foll
 
 @sp 1
 
-@quotation Note
-By default, the sampling clock is 100MHz.
-But it can be changed to any frequency from 10MHz to 105MHz.
-The lower bound is defined by the Si570 programmable oscillator.
-While the upper bound is limited by the LTC2174 ADC.
-@end quotation
-
-@quotation Note
-The Si570 clock output is connected to the LTC2174 ADC.
-Then the data clock (DCO) output of the LTC2174 is connected to the FPGA.
-The data clock is four times the sampling clock.
-The sampling clock (@code{fs_clk}) and the ADC data de-serialiser clock (@code{serdes_clk}) are derived from the data clock using a PLL (internal to the FPGA).
-@end quotation
-
 @c --------------------------------------------------------------------------
-@section GN4124 Core
+@subsection GN4124 Core
 
 This block is the interface between the GN4124@footnote{PCI Express bridge from Semtech (formerly Gennum)} local bus and the other blocks in the FPGA.
 The GN4124 is a four lane PCI Express Generation 1.1 bridge. In addition to th PHY, it also contains the data link and transaction layers.
@@ -310,28 +317,169 @@ The GN4124 bridge is used to access the FPGA registers, but also to generate MSI
 The BAR 4 (Base Address Register) allows access to the GN4124 internal registers.
 The BAR 0 is connected to the local bus and therefore allows access to the FPGA.
 
-The GN4124 core is made of a local bus interface with the GN4124 chip, a Wishbone bus master mapped to BAR0 and a DMA controller. The DMA controller has two Wishbone ports, a Wishbone slave to configure the DMA controller and a Wishbone master to access the DDR memory.
+The GN4124 core is made of a local bus interface with the GN4124 chip, a Wishbone bus master mapped to BAR0 and a DMA controller. The DMA controller has two Wishbone ports, a Wishbone slave to configure the DMA controller and a Wishbone master.
+In the fmc-adc ghateware, the master port is connected to the DDR memory controller.
 The GN4124 Wishbone interfaces (masters and slave) are 32-bit data width and 32-bit word aligned addresses.
 
 @quotation Note
-It is not possible to insert an address converter (for non-interleaved data read) between the GN4124 core and the memory controller.
+It would not be beneficial to insert an address converter (for non-interleaved data read) between the GN4124 core and the memory controller.
 Because the DDR memory access is not efficiant when reading non-consecutive addresses.
 @end quotation
 
 @c --------------------------------------------------------------------------
-@section Carrier Control and Status
+@subsection DMA Embedded Interrupt Controller (EIC)
+The DMA EIC gathers the interrupts from the GN4124 DMA controller.
+There are two inputs to the DMA EIC:
+@itemize @textdegree
+@item @b{DMA done}: This interrupt signals the end of a DMA transfer.
+@item @b{DMA error}: This interrupt signals an error in a DMA transfer.
+@end itemize
+The two inputs are multiplexed and the result is forwarded to the VIC (@ref{Vectored Interrupt Controller (VIC)}).
+Interrupt sources can be masked using the enable and disable registers.
+An interrupt is cleared by writing a one to the corresponding bit of the status register.
 
-This block contains control and status registers related to the carrier board.
+The registers description can be found in annexe @ref{DMA Embedded Interrupt Controller Registers}).
+
+@c --------------------------------------------------------------------------
+@subsection SPEC Carrier Control and Status Registers
+
+This block contains control and status registers related to the SPEC carrier board.
 A first register allows to readout the carrier PCB revision and carrier type.
 Another register signals the presence of a mezzanine in the FMC slot, gives the status of the local bus and system PLLs and indicates the DDR memory controller calibration state.
-The last register of this block allows to control the carrier's LEDs on the front panel. There is on red and one green LED.
+The last register of this block allows to control the two carrier's LEDs on the front panel.
 
 @quotation Note
 The ``Carrier Type'' field is used only for test purpose. The carrier board identification is done through the PCI Express vendor and device ID.
 @end quotation
 
+The registers description can be found in annexe @ref{SPEC Carrier Registers}.
+
+
+@c ==========================================================================
+@page
+@section SVEC (VME64x carrier)
+
+In the VME64x version of the gateware, all blocks are connected to the VME64x core using a single Wishbone bus. Here the DDR memory is not accessed through DMA, but using a indirect addressing scheme explained later in the chapter.
+A crossbar from the general-cores@footnote{@uref{http://www.ohwr.org/projects/general-cores}} library is used to map the slaves in the Wishbone address space.
+
+@float Figure,fig:svec_fw_arch
+@center @image{../../figures/svec_fw_arch, 15cm,,,pdf}
+@caption{FMC-ADC gateware architecture on SVEC carrier.}
+@end float
+
+@sp 1
+
+There are three different Wishbone bus in the design.
+@table @b
+@item Mapped WB bus (blue)
+      This bus connects all the peripheral to the VME64x core.@*
+      Data: 32-bit, address: 32-bit (word aligned),@*
+      Clock: system clock (125MHz) and system clock / 2 (62.5MHz), see note below.
+@item ADC cores to memory controllers (2x, orange)
+      Those buses are used to write samples from the ADC cores to the DDR memories.@*
+      Data: 64-bit, address: 32-bit (word aligned), clock: system clock (125MHz).
+@end table
+
+@quotation Note
+The VME64x core cannot work with a clock frequency as high as 125MHz, therefore it is clocked with half the system clock frequency.
+As the fmc-adc core needs 125MHz to work properly, a Wishbone clock crossing component is inserted between the VME64x core and the first Wishbone crossbar component.
+With this topology, only the VME64x core runs at a lower frequency.
+@end quotation
+
+
+The @ref{tab:svec_memory_map} shows the Wishbone slaves mapping and hierarchy.
+The first column represents the byte address offset from the start of the Wishbone address space.
+
+@float Table,tab:svec_memory_map
+@include svec_wb_tree.txt
+@caption{Wishbone bus memory mapping.}
+@end float
+
+@sp 1
+
+As for the SPEC version, SDB meta-information records are used to identify the gateware.
+Below is a description of the fields and their content in the fmc-adc design on SVEC carrier.
+
+@table @b
+@item Integration
+      vendor_id = 0x0000CE42 (CERN vendor ID)@*
+      device_id = 0x47C786A2 (echo "svec_fmc-adc-100m14b4cha"|md5sum|cut -c1-8) @*
+      version   = [31:16]=major, [15:0]=minor, bcd encoded@*
+      date      = release date, format yyyymmdd@*
+      name      = "svec_fmcadc100m14b"
+@item Top module repository url
+      repo_url = "git://ohwr.org/fmc-projects/fmc-adc-100m14b4cha.git"
+@item Synthesis tool information
+      syn_module_name  = "svec_top_fmc_adc"@*
+      syn_commit_id    = git log -1 --format="%H" | cut -c1-32 @*
+      syn_tool_name    = "ISE"@*
+      syn_tool_version = bcd encoded synthesis tool version@*
+      syn_date         = synthesis date, format yyyymmdd@*
+      syn_username     = "mcattin" (synthesised by)
+@end table
+
 @c --------------------------------------------------------------------------
-@section Carrier 1-wire Master
+@subsection Clock Domains
+The SPEC version of the fmc-adc design has four different clock domains. They are listed in the followig table.
+
+@float
+@multitable {@code{sys_clk_62_5}}{ADC data de-serialiser clock}{125.00 MHz}{400MHz LTC2174 (mezzanine)}
+@headitem Name @tab Description @tab Frequency @tab Source
+@item @code{sys_clk_125} @tab Main system clock @tab 125.00 MHz @tab 20MHz TCXO (carrier)
+@item @code{sys_clk_62_5} @tab System clock / 2@tab 62.50 MHz @tab 20MHz TCXO (carrier)
+@item @code{ddr_clk} @tab DDR interface clock @tab 333.33 MHz @tab 20MHz TCXO (carrier)
+@item @code{fs_clk} @tab Sampling clock @tab 100.00 MHz @tab 400MHz LTC2174 (mezzanine)
+@item @code{serdes_clk} @tab ADC data de-serialiser clock @tab 800.00 MHz @tab 400MHz LTC2174 (mezzanine)
+@end multitable
+@end float
+
+@sp 1
+
+@c --------------------------------------------------------------------------
+@subsection VME64x Core
+The VME64x core implements a VME slave on one side and a Wishbone pipelined master on the other side.
+For more information about the VME64x core, visit the OHWR page@footnote{@uref{http://www.ohwr.org/projects/vme64x-core}}.
+
+@c --------------------------------------------------------------------------
+@subsection SVEC Carrier Control and Status
+This block contains control and status registers related to the SVEC carrier board.
+The registers description can be found in annexe (@ref{SVEC Carrier Registers}).
+
+@c --------------------------------------------------------------------------
+@subsection SVEC Carrier I2C Master
+
+The I2C master accesses the 24AA64 64Kb EEPROM memory chip located on the SVEC board.
+This memory is useful to store board specific data (e.g. MAC address, White Rabbit calibration data).
+This block is based on an OpenCores design.
+
+@float
+@multitable @columnfractions .20 .50
+@headitem I2C slave address @tab Peripheral
+@item @code{0x51} @tab 24AA64 64Kb EEPROM memory
+@end multitable
+@sp 1
+@end float
+
+This block is clocked by the system clock (125 MHz).
+Therefore for a SCL clock of 100 kHz, the prescaler configuration is @code{PRESCALER=249}.
+
+@example
+@group
+PRESCALER = f_sys / (5 * f_scl) - 1
+@end group
+@end example
+
+@uref{http://opencores.org/project@comma{}i2c}
+@c FIXME broken @comma{} to generate url link (prints 'comma{}' instead of ',')
+
+@uref{http://ww1.microchip.com/downloads/en/devicedoc/21189f.pdf}
+
+
+@c ==========================================================================
+@section Common Cores
+
+@c --------------------------------------------------------------------------
+@subsection Carrier 1-wire Master
 
 This 1-wire master controls the DS18B20 thermometer chip located on the carrier board.
 This chip also contains a unique 64-bit identifier.
@@ -348,17 +496,10 @@ CDR_O = f_sys * 1E-6 - 1
 @end example
 
 @uref{http://opencores.org/project@comma{}sockit_owm}
-
-@c TODO  broken @comma{} to generate url link (prints 'comma{}' instead of ',')
-
-@c --------------------------------------------------------------------------
-@section Carrier SPI Master
-
-The carrier SPI master is not implemented. It is meant to control DACs connected to VCXO for
-White Rabbit@footnote{@uref{http://www.ohwr.org/projects/white-rabbit}} applications.
+@c FIXME broken @comma{} to generate url link (prints 'comma{}' instead of ',')
 
 @c --------------------------------------------------------------------------
-@section Memory Controller
+@subsection Memory Controller
 
 The memory controller block is the interface between the 256MB DDR memory located on the SPEC board and the other blocks in the FPGA.
 It is basically a MCB core (Memory Controller Block) generated with Xilinx CoreGen and an additional wrapper implementing two Wishbone slave interfaces.
@@ -387,69 +528,104 @@ Therefore, the samples stored in the DDR memory cannot be read during an acquisi
 @uref{http://www.xilinx.com/support/documentation/user_guides/ug388.pdf}
 
 @c --------------------------------------------------------------------------
-@section Interrupt Controller
+@node Vectored Interrupt Controller (VIC)
+@subsection Vectored Interrupt Controller (VIC)
 
-The interrupt controller purpose is to concentrate several interrupt source into one interrupt request line. It has four interrupt inputs and one interrupt request output.
-It also have one interrupt enable mask register and one interrupt source register.
-Each time a valid rising edge is detected on one of the inputs, a pulse is generated on the interrupt request output.
-The interrupt request output is connected to the GPIO 8 of the GN4124 chip.
-Note that the GN4124 must be configured to generate a MSI when a rising edge is detected on GPIO 8.
-A rising edge is valid if the corresponding bit in the interrupt enable mask register is set.
-When a valid rising edge is detected, the corresponding bit in the interrupt source register is set as well. This indicates to the host which source caused the interrput.
-To clear a bit in the interrupt source register, a '1' must be written to it.
+In order to to redirect interrupts from different cores to corresponding driver in the Linux kernel in a generic way, a two layers scheme is used.
+The first layer is the Embedded Interrupt Controllers (EIC) in each core multiplexing interrupt sources to a single line.
+The second layer is the Vectored Interrupt Controller (VIC) multiplexing the interrupt lines from the EICs into a single line to the host.
+The VIC keeps a table, initialized with the base addresses of the EICs connected to each of the input.
 
-@noindent There are four interrupt sources in the design. They are listed below.
+Note that the VIC configuration is different between the SPEC and SVEC carriers.
+The SPEC uses an edge sensitive scheme while the SVEC uses a level sensitive scheme.
 
 @table @b
-@item DMA done
-      This interrupt signals the end of a DMA transfer.
-@item DMA error
-      This interrupt signals an error in a DMA transfer.
-@item Trigger
-      This interrupt signals that a valid trigger arrived while the acquisition state machine was in the @code{WAIT_TRIG} state.
-@item Acquisition end
-      This interrupt signals the end of an acquisition. In case of multi-shot acquisition, it occurs at the end of the last shot.
+@item SPEC, VIC control register:
+      enable = 1@*
+      polarity = 1@*
+      emulate edge sensitive = 1@*
+      edge emulation pulse = 750
+@item SVEC, VIC control register:
+      enable = 1@*
+      polarity = 1@*
 @end table
 
-@c --------------------------------------------------------------------------
-@section Time-tagging Core
-
-This block allows time-tagging of important events in the ADC core.
-It is based on a seconds counter and a 125MHz system clock ticks counter.
-Those two counters are accessible in read/write mode via registers.
-To time-tag the events, the ADC core sends pulses to the time-tagging core.
-The following events are time-tagged; trigger, acquisition start, acquisition stop and acquisition end.
-
 @quotation Note
-The trigger time tag corresponds to the moment when the acquisition FSM leaves the @code{WAIT_TRIG} state.
+On the SPEC carrier, the VIC interrupt request output is connected to the GPIO 8 of the GN4124 chip.
+Therefore, the GN4124 must be configured to generate a MSI when a rising edge is detected on GPIO 8.
 @end quotation
 
-@quotation Note
-In this release, the meta-data register is NOT used, set to zero.
-@end quotation
-
-@quotation Note
-If during an acqusition no stop command is issued (normal case), the acquisition time-tag is not updated.
-@end quotation
-
-@c --------------------------------------------------------------------------
-@section ADC Core
-
+@c ==========================================================================
+@section FMC-ADC Core
 The ADC core is the main block of the design.
 On the mezzanine interface side, it takes a data flow from the LTC2174 ADC chip, an external trigger and controls the analogue switches to select the input range or calibration mode.
 On the internal interface side, it has a Wishbone master to write data to the DDR memory controller.
-It also has a Wishbone slave to access the core's control and status regiters.
-In addition, it outputs the following event as pulses:
+It also has a Wishbone slave to access the internal components.
+
+The internal detailed functionning of this block is described further in the document(@xref{Configuration}, @ref{Acquisition} and @ref{Calibration}).
+
+@c --------------------------------------------------------------------------
+@subsection Sampling clock
+
+The sampling frequency is determined by a Si570 programmable oscillator located on the fmc-adc mezzanine.
+By default, the sampling clock is 100MHz (oscillator factor default value).
+But it can be changed to any frequency from 10MHz to 105MHz.
+The lower bound is defined by the Si570 oscillator.
+While the upper bound is limited by the LTC2174 ADC.
+
+The Si570 clock output is connected to the LTC2174 ADC.
+Then the data clock (DCO) output of the LTC2174 is connected to the FPGA.
+The data clock is four times the sampling clock.
+The sampling clock (@code{fs_clk}) and the ADC data de-serialiser clock (@code{serdes_clk}) are derived from the data clock using a PLL (internal to the FPGA).
+
+@c TODO : possibility to control the Si570 via I2C
+
+@c --------------------------------------------------------------------------
+@subsection Time-tagging Core
+
+This block allows time-tagging of important events in the ADC core.
+It is based on two free-running counters;
+a seconds counter and a 125MHz system clock ticks counter.
+The system clock ticks counter is also called coarse counter.
+Those two counters are accessible in read/write via a Wishbone interface.
+
+For example, the host computer can use the OS time to set the seconds counter and simply reset the coarse counter.
+It is planned, in a later release, to set the time-tagging core counters using the White Rabbit core, for more details @pxref{Missing Features and Improvements}.
+
+A time-tag is made of four 32-bit words; meta-data, seconds, coarse, fine.
+The fine field is always set to zero.
+And the meta-data register does not contain useful information, only random data for debugging purposes.
+
+The following events are time-tagged:
 @itemize @textdegree
 @item Trigger
 @item Acquisition start
 @item Acquisition stop
 @item Acquisition end
 @end itemize
-The internal detailed functionning of this block is described further in the document(@xref{Configuration}, @ref{Acquisition} and @ref{Calibration}).
+
+@quotation Note
+The trigger time tag corresponds to the moment when the acquisition FSM leaves the @code{WAIT_TRIG} state.
+@end quotation
+
+@quotation Note
+The trigger time-tag is also stored in the data memory, after the post-trigger samples.
+This allows to always have trigger time-tag, even in multi-shot mode (retreiving the time-tag using the trigger interrupt was not fast enough in certain cases).
+@end quotation
+
+@quotation Note
+If during an acqusition no stop command is issued (normal case), the acquisition time-tag is not updated.
+@end quotation
+
+The register description can be found in annexe @ref{Time-tagging Core Registers}.
 
 @c --------------------------------------------------------------------------
-@section Mezzanine SPI Master
+@subsection FMC-ADC Control and Status Registers
+This block contains control and status registers related to the FMC-ADC core.
+The registers description can be found in annexe (@ref{ADC Core Registers}).
+
+@c --------------------------------------------------------------------------
+@subsection Mezzanine SPI Master
 
 This SPI master controls the LTC2174 ADC and the four MAX5442 offset DACs.
 The following table shows how the peripherals are wired to the core.
@@ -477,13 +653,14 @@ f_sclk = f_sys / ((DIVIDER+1) * 2)
 @end example
 
 @uref{http://opencores.org/project@comma{}spi}
+@c FIXME broken @comma{} to generate url link (prints 'comma{}' instead of ',')
 
 @uref{http://cds.linear.com/docs/en/datasheet/21754314fa.pdf}
 
 @uref{http://datasheets.maximintegrated.com/en/ds/MAX5441-MAX5444.pdf}
 
 @c --------------------------------------------------------------------------
-@section Mezzanine 1-wire Master
+@subsection Mezzanine 1-wire Master
 
 This 1-wire master controls the DS18B20 thermometer chip located on the mezzanine board.
 This chip also contains a unique 64-bit identifier.
@@ -493,11 +670,12 @@ This block is clocked by the system clock (125 MHz).
 Therefore the dividers configuration are @code{CDR_N=624} and @code{CDR_O=124}.
 
 @uref{http://opencores.org/project@comma{}sockit_owm}
+@c FIXME broken @comma{} to generate url link (prints 'comma{}' instead of ',')
 
 @uref{http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf}
 
 @c --------------------------------------------------------------------------
-@section Mezzanine I2C Master
+@subsection Mezzanine I2C Master
 
 This I2C master controls the Si570 programmable oscillator chip located on the mezzanine board.
 This chip is used to produce the ADC sampling clock.
@@ -521,11 +699,12 @@ PRESCALER = f_sys / (5 * f_scl) - 1
 @end example
 
 @uref{http://opencores.org/project@comma{}i2c}
+@c FIXME broken @comma{} to generate url link (prints 'comma{}' instead of ',')
 
 @uref{https://www.silabs.com/Support%20Documents/TechnicalDocs/si570.pdf}
 
 @c --------------------------------------------------------------------------
-@section Mezzanine System Management I2C Master
+@subsection Mezzanine System Management I2C Master
 
 This I2C master access the 24AA64 64Kb EEPROM memory chip located on the mezzanine board.
 This memory is mandatory as specified in the FMC standard (VITA 57.1). It is connected to the system management I2C bus, also specified in the FMC standard.
@@ -549,8 +728,24 @@ PRESCALER = f_sys / (5 * f_scl) - 1
 @end example
 
 @uref{http://opencores.org/project@comma{}i2c}
+@c FIXME broken @comma{} to generate url link (prints 'comma{}' instead of ',')
 
 @uref{http://ww1.microchip.com/downloads/en/devicedoc/21189f.pdf}
+
+@c --------------------------------------------------------------------------
+@subsection FMC-ADC Embedded Interrupt Controller (EIC)
+The FMC-ADC EIC gathers the interrupts from the ADC core.
+There are two inputs to the FMC-ADC EIC:
+@itemize @textdegree
+@item @b{Trigger}: This interrupt signals that a valid trigger arrived while the acquisition state machine was in the @code{WAIT_TRIG} state.
+@item @b{Acquisition end}: This interrupt signals the end of an acquisition. In case of multi-shot acquisition, it occurs at the end of the last shot.
+@end itemize
+The two inputs are multiplexed and the result is forwarded to the VIC (@ref{Vectored Interrupt Controller (VIC)}).
+Interrupt sources can be masked using the enable and disable registers.
+An interrupt is cleared by writing a one to the corresponding bit of the status register.
+
+The registers description can be found in annexe @ref{FMC-ADC Embedded Interrupt Controller Registers}).
+
 
 @c ##########################################################################
 @page
@@ -581,10 +776,10 @@ The frame rate signal is used to align the de-serialiser to data words.
 The four channel data (16-bit) are concatenated together to form a 64-bit vector.
 As show in @ref{fig:ltc2174_mode}, the two LSB bits of a data word are set to zero.
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Control and Status Registers
 
-Writing one to to the @code{FMC_CLK_OE} field of the ADC core control register enable the sampling clock (Si570 chip).
+Writing one to to the @code{FMC_CLK_OE} field of the ADC core control register enables the sampling clock (Si570 chip).
 Also, in order to use the input offset DACs, the @code{OFFSET_DAC_CLR_N} field must be set to one.
 
 The field @code{MAN_BITSLIP} allows to 'manually' control the ADC data alignment in the de-serialiser.
@@ -594,7 +789,7 @@ Those four fields are for test purpose only and must stay zero in normal operati
 
 When the sampling clock is enabled, the @code{SERDES_PLL} and @code{SERDES_SYNCED} field from the ADC core status register must be set to one.
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Input Ranges
 
 The @ref{fig:analogue_input} shows a simplified schematics of the analogue input used for each channel.
@@ -629,7 +824,8 @@ For all others switch configurations, the behaviour is not defined and therefore
 @caption{Analogue input switches configurations.}
 @end float
 
-@c --------------------------------------------------------------------------
+
+@c ==========================================================================
 @section Input Offset
 
 Each channel has a 16-bit DAC allowing to apply a dc offset to the input signal.
@@ -664,7 +860,7 @@ v_out = Output voltage (to filter and ADC)
 @end group
 @end example
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Trigger
 
 The trigger unit is made of a hardware and a software source.
@@ -693,30 +889,19 @@ For futher information on the trigger configuration registers @pxref{ADC Core Re
 @caption{Internal hardware trigger trheshold.}
 @end float
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Undersampling
 
 The undersampling block is simply validating one in N samples and forwarding it to the acquisition logic.
 The number (N) is configured in the @i{Sample rate} register.
 If N > 1, then the trigger pulse is aligned to the next valid sample.
 If N = 1 all the samples are valid and therefore the trigger is always aligned.
-A value of N = 0 is treated as N = 1 in the firmware.
+A value of N = 0 is treated as N = 1 in the gateware.
 
 @quotation Note
 Undersampling might be unaccurately called decimation in the documentation or source code.
 @end quotation
 
-@c --------------------------------------------------------------------------
-@section Time-taging
-
-The time-tagging core contains two free running counters.
-The first one counts seconds and the second one counts system clock ticks (8ns resolution).
-The system clock ticks counter is alos called coarse counter.
-Those two counters can be set via the cores's Wishbone interface.
-
-For example, the host computer can use the OS time to set the seconds counter and simply reset the coarse counter.
-
-It is planned, in a later release, to set the time-tagging core counters using the White Rabbit core, for more details @pxref{Missing Features and Improvements}.
 
 @c ##########################################################################
 @page
@@ -736,7 +921,7 @@ The calibration process gives the following four values per channel and per inpu
 Note that the temperature during the calibration process is also measured.
 This could be used for later temperature compensated calibration value computing.
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Calibration data storage
 All the calibration values are stored in the FmcAdc100m14b4cha EEPROM.
 The EEPROM holds a sdbfs@footnote{@uref{http://www.ohwr.org/attachments/download/1594/sdbfs-2012-09-19.pdf}} file system.
@@ -745,9 +930,11 @@ In addition to the calibration values, the EEPROM also contains mandatory IPMI@f
 @float Table,tab:eeprom_sdbfs
 @multitable @columnfractions .12 .18 .15 .30
 @headitem Byte offset @tab File name @tab File Type @tab Description
-@item @code{0x0}    @tab ipmi.sdb        @tab binary @tab IPMI records
-@item @code{0x100}  @tab calibration.sdb @tab binary @tab Calibration values
-@item @code{0x1000} @tab .               @tab binary @tab Directory
+@item @code{0x0}    @tab IPMI-FRU        @tab binary @tab IPMI records
+@item @code{0x100}  @tab calib           @tab binary @tab Calibration values
+@item @code{auto}   @tab name            @tab ascii  @tab Contains "adc_100m"
+@item @code{0x800}  @tab data            @tab binary @tab Empty directory
+@item @code{0x200}  @tab .               @tab binary @tab Root directory
 @item               @tab                 @tab        @tab vendor = 0xCE42
 @item               @tab                 @tab        @tab device = 0xC5BE045E
 @end multitable
@@ -756,7 +943,7 @@ In addition to the calibration values, the EEPROM also contains mandatory IPMI@f
 
 Note that the vendor value 0xCE42 corresponds to CERN. While the device value 0xC5BE045E corresponds to the first 32-bit of the md5 sum of "fmc-adc-100m14b4cha".
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Calibration Data Usage
 
 @subsection ADC Calibration
@@ -815,6 +1002,8 @@ gain   = DAC gain calibration value from EEPROM (16-bit fixed point)
 @node Acquisition
 @chapter Acquisition
 
+@c TODO : Add description of trigger time-tag insertion
+
 This chapter describes the two modes of acquisition, single-shot and multi-shot.
 It also explains how the software is expected to control the fmc-adc acquisitions.
 
@@ -850,8 +1039,10 @@ When a start command is received, the state machine goes to @code{PRE_TRIG} and 
 After that, it goes in @code{WAIT_TRIG} state and continue recording sample to memory.
 When a valid trigger is detected, the state machine moves to @code{POST_TRIG}.
 It will stays in this state until the programmed number of post-trigger samples is reached.
-Then, depending on the mode, the state machine either goes back to @code{IDLE} (single-shot mode) or to @code{PRE_TRIG} (multi-shot mode).
-When the acquisition is terminated (state machine back to @code{IDLE}) and all samples have been written to the DDR memory, only then the software can retrieve the samples using DMA transfer.
+The next state is @code{TRIG_TAG} were the trigger time-tag (4x 32-bit word) is pushed after the last post-trigger sample (to be stored in DDR memory).
+Then, depending on the mode, the state machine either goes back to @code{IDLE} (single-shot mode) or to @code{DECR_SHOT} (multi-shot mode).
+From @code{DECR_SHOT} it either goes back to @code{IDLE} if the number of shots is reached or goes to @code{PRE_TRIG} for the next shot.
+When the acquisition is finished (state machine back to @code{IDLE}) and all samples have been written to the DDR memory, only then the software can retrieve the samples using DMA transfer.
 An interrupt is generated when the acquisition ends.
 
 @quotation Note
@@ -887,7 +1078,12 @@ The number of pre-trigger sample can be zero, but there @b{must} be at least one
 In addition to the requested pre/post-trigger samples, an additional sample, corresponding to the trigger, will be recoded.
 @end quotation
 
-@c --------------------------------------------------------------------------
+@quotation Note
+The start of an acquisition is prohibited if either the number of shot or the number of post-trigger samples is equal to zero.
+@end quotation
+
+
+@c ==========================================================================
 @node Single-shot Mode
 @section Single-shot Mode
 
@@ -895,12 +1091,12 @@ The procedure below lists the different step of a single-shot acquisition proces
 
 @enumerate
 @item Configure acquisition (trigger, number of samples, interrupts, etc...).
-@item Issue a start acquisition command (the acquisition state machine must be IDLE).
-@item When a valid trigger is detected, an interrupt is generated.
+@item Issue a start acquisition command (the acquisition state machine must be @code{IDLE}).
+@item When a valid trigger is detected, an interrupt is generated (if enabled).
 @item At the end of the acquisition, another interrupt is generated.
 @item Read trigger position register.
 @item Configure the DMA to retreive data.
-@item Start the DMA transfer (the acquisition state machine must be IDLE).
+@item Start the DMA transfer (the acquisition state machine must be @code{IDLE}).
 @item When the DMA transfer is done, an interrupt is generated.
 @item The board is ready for a new acquisition start command.
 @end enumerate
@@ -910,11 +1106,10 @@ When the acquisition starts, samples are direcly written to the DDR memory (via 
 The acquisition logic stops writing to the memory when the configured number of pre/post-trigger samples is reached.
 It could happen that the write pointer reaches the top of the memory before the end of the acquisition.
 In this case, the write pointer is reset to address zero and overwrite previous samples.
-In order to allow the software to retreive the requested samples (around the trigger), the @i{Trigger address} register s
-tores the write pointer address at the trigger moment.
+In order to allow the software to retreive the requested samples (around the trigger), the @i{Trigger address} register stores the write pointer address at the trigger moment.
 
 @quotation Note
-The value stored in the @i{Trigger address} register is a sample address (64-bit word address).
+The value stored in the @i{Trigger address} register is a byte address.
 @end quotation
 
 @quotation Note
@@ -941,25 +1136,27 @@ The acquisition state machine is also represented.
 @end quotation
 
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @node Multi-shot Mode
 @section Multi-shot Mode
 
 The multi-shot acquisition process is almost identical to the single-shot one, except that once the acquisition is started it will go around the state machine as many time as the number of configured shots.
-It means that if the board is configured for N shots, it will generate N trigger interrupts and then another interrupt at the end of the acquisition.
+It means that if the board is configured for N shots, it will generate N trigger interrupts (if enabled) and then another interrupt at the end of the acquisition.
 
 Unlike the single-mode acquisition, in multi-shot, the DDR memory is not used as a circular buffer.
 Instead, two dual port RAM (dpram) are implemented inside the FPGA.
 Those dprams are alternatively used as circular buffer for each shot.
 Even shots uses dpram0 and odd shots dpram1.
 @quotation Note
-The dprams are 2048 samples deep. It means that the total number of samples (pre-trigger + post-trigger) for a shot cannot exceed 2048.
+The dprams are 2048 samples deep (sample = 4x16 = 64 bits).
+The trigger time-tag requires two 64-bit word to be stored at the end of the samples.
+It means that the total number of samples (pre-trigger + trigger + post-trigger) for a shot cannot exceed 2048-2=2046.
 @end quotation
 
 When a shot is finished, the correcponding dpram samples are written to the DDR memory.
-Only the pre-trigger and post-trigger samples are written.
+Only the pre-trigger samples, the post-trigger samples and the trigger time-tag are written.
 The first shot is written starting at address @code{0x0}.
-Then the second shot is written right after the last post-trigger sample of the first shot.
+Then the second shot is written right after the trigger time-tag of the first shot.
 The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 
 @float Figure,fig:mem_multi_shot
@@ -976,7 +1173,7 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @node Missing Features and Improvements
 @chapter Missing Features and Improvements
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section To be done before next release
 
 @itemize @textdegree
@@ -998,7 +1195,7 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @item Add a reference section (bibliography).
 @end itemize
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section For a later release
 
 @itemize @textdegree
@@ -1006,9 +1203,9 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
       - Define behaviour when WR is desconnected.@*
       - Assign signals to SPEC front panel LEDs.
 @item Add Etherbone support.
-@item Remove mutli-irq register from interrupt controller.@*
-      Perhaps add a counter per interrupt source instead.@*
-      Or use wbgen2 eic (with level interrupt output).
+@c DONE @item Remove mutli-irq register from interrupt controller.@*
+@c      Perhaps add a counter per interrupt source instead.@*
+@c      Or use wbgen2 eic (with level interrupt output).
 @c DONE @item Remove unused 250MHz clock signals and buffer.
 @item Unify address inferfaces: put all in bytes (wishbone addr, trig pointer, ...)@*
       - Change GN4142-core WB bus(es) to byte address.@*
@@ -1017,7 +1214,7 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
       - Instead of overwriting memory for a given acquisition.@*
       - If read during acquisition (or even block read during acq?).
 @item Rename decimation (and "sample rate" register) in under-sampling.
-@item Increase decimation register from 16 to 32 bits.
+@c DONE @item Increase decimation register from 16 to 32 bits.
 @item Use 200MHz clock for WB bus from ddr-ctrl to gn4124-core.
 @item Clean-up adc core WB interface to DDR -> use only one clock (=> sys_clk).
 @item Replace all Xilinx FIFO by generic ones from general-cores lib (! last time I tried, it broke the DMA.).@*
@@ -1026,12 +1223,13 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @item Test sampling clocks from 10MHz to 105MHz.
 @item Add sampling clock presence flag. Or better a sampling clock frequency register.
 @item Add over-heat and input over-load interrupts? (from original specification)
-@item Time-tag for every trigger in multi-shot. -> trigger time-tag array
+@c DONE @item Time-tag for every trigger in multi-shot. -> trigger time-tag array
 @item Review reset logic.
 @item Generate an end of acquisition interrupt after an acquisition stop command?
-@item Remove meta-info field in time-tags?
-@item Move sdb device descriptions from top to the wishbone_pkg.vhd (general-cores lib).
+@c NO @item Remove meta-info field in time-tags?
+@c DONE @item Move sdb device descriptions from top to the wishbone_pkg.vhd (general-cores lib).
 @item Include the git tree in a .tar.gz along with the .bin file (in the files section) for each release. -> modify the Release chapter accordingly.
+@item Use git submodules for dependencies (allows to work without hdlmake).
 @end itemize
 
 
@@ -1040,7 +1238,7 @@ The number of samples per shot stored in memory is equal to: number of pre-trigg
 @node Appendix
 @appendix
 
-@c --------------------------------------------------------------------------
+@c ==========================================================================
 @section Calibration Data Storage in EEPROM
 Tables @ref{tab:adc_calibr_data_eeprom} and @ref{tab:dac_calibr_data_eeprom} shows the calibration data types and the arrangement in the binary file.
 The first column "Byte offset" represents the offset within the binary file.
@@ -1076,7 +1274,7 @@ The first column "Byte offset" represents the offset within the binary file.
 @item @code{0x32} @tab @tab Gain correction channel 4 @tab 16-bit unsigned
 @item @code{0x34} @tab @tab Temperature @tab 16-bit unsigned * 0.01@textdegree{}
 @end multitable
-@caption{ADC calibration data stored in EEPROM (calibration.sdb file).}
+@caption{ADC calibration data stored in EEPROM (calib file).}
 @end float
 
 @float Table,tab:dac_calibr_data_eeprom
@@ -1110,7 +1308,7 @@ The first column "Byte offset" represents the offset within the binary file.
 @item @code{0x68} @tab @tab Gain correction channel 4 @tab 16-bit unsigned
 @item @code{0x6A} @tab @tab Temperature @tab 16-bit unsigned * 0.01@textdegree{}
 @end multitable
-@caption{DAC calibration data stored in EEPROM (calibration.sdb file).}
+@caption{DAC calibration data stored in EEPROM (calib file).}
 @end float
 
 @c --------------------------------------------------------------------------
@@ -1119,15 +1317,22 @@ The first column "Byte offset" represents the offset within the binary file.
 @section \name\
 @end macro
 
+The registers documentation have been generated using @command{wbgen2}@footnote{@uref{http://www.ohwr.org/projects/wishbone-gen}}.
+
 @c --------------------------------------------------------------------------
 @appendix ADC Core Registers
 @anchor{ADC Core Registers}
    @include fmc_adc_100Ms_csr.tex
 
 @c --------------------------------------------------------------------------
-@appendix Interrupt Controller Registers
-@anchor{Interrupt Controller Registers}
-   @include spec/irq_controller_regs.tex
+@appendix FMC-ADC Embedded Interrupt Controller Registers
+@anchor{FMC-ADC Embedded Interrupt Controller Registers}
+   @include fmc_adc_eic.tex
+
+@c --------------------------------------------------------------------------
+@appendix DMA Embedded Interrupt Controller Registers
+@anchor{DMA Embedded Interrupt Controller Registers}
+   @include spec/dma_eic.tex
 
 @c --------------------------------------------------------------------------
 @appendix Time-tagging Core Registers
@@ -1135,9 +1340,14 @@ The first column "Byte offset" represents the offset within the binary file.
    @include timetag_core_regs.tex
 
 @c --------------------------------------------------------------------------
-@appendix Carrier Registers
-@anchor{Carrier Registers}
+@appendix SPEC Carrier Registers
+@anchor{SPEC Carrier Registers}
    @include spec/carrier_csr.tex
+
+@c --------------------------------------------------------------------------
+@appendix SVEC Carrier Registers
+@anchor{SVEC Carrier Registers}
+   @include svec/carrier_csr.tex
 
 @c --------------------------------------------------------------------------
 @appendix References
@@ -1157,6 +1367,12 @@ The first column "Byte offset" represents the offset within the binary file.
       In this document, a @b{pulse} refers to a one clock tick wide pulse.
 @item Tick
       A clock @b{tick} corresponds to a period of the clock.
+@item SDB
+      Self-Describing Bus
+@item VIC
+      Vectored Interrupt Controller
+@item EIC
+      Embedded Interrupt Controller
 @end table
 
 
