@@ -1,6 +1,6 @@
 peripheral {
-	name = "Fmc-adc enhanced interrupt controller";
-	description = "Enhanced interrrupt controller for one fmc-adc mezzanine.";
+	name = "Fmc-adc embedded interrupt controller";
+	description = "Embedded interrrupt controller for one fmc-adc mezzanine.";
 	hdl_entity = "fmc_adc_eic";
         prefix = "fmc_adc_eic";
 

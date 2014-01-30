@@ -28,8 +28,8 @@
 </HEAD>
 <BODY>
 <h1 class="heading">fmc_adc_eic</h1>
-<h3>Fmc-adc enhanced interrupt controller</h3>
-<p>Enhanced interrrupt controller for one fmc-adc mezzanine.</p>
+<h3>Fmc-adc embedded interrupt controller</h3>
+<p>Embedded interrrupt controller for one fmc-adc mezzanine.</p>
 <h3>Contents:</h3>
 <span style="margin-left: 0px; ">1. <A href="#sect_1_0">Memory map summary</a></span><br/>
 <span style="margin-left: 0px; ">2. <A href="#sect_2_0">HDL symbol</a></span><br/>
@@ -71,7 +71,7 @@ REG
 <A href="#EIC_IDR">Interrupt disable register</a>
 </td>
 <td  class="td_code">
-eic_eic_idr
+fmc_adc_eic_eic_idr
 </td>
 <td  class="td_code">
 EIC_IDR
@@ -88,7 +88,7 @@ REG
 <A href="#EIC_IER">Interrupt enable register</a>
 </td>
 <td  class="td_code">
-eic_eic_ier
+fmc_adc_eic_eic_ier
 </td>
 <td  class="td_code">
 EIC_IER
@@ -105,7 +105,7 @@ REG
 <A href="#EIC_IMR">Interrupt mask register</a>
 </td>
 <td  class="td_code">
-eic_eic_imr
+fmc_adc_eic_eic_imr
 </td>
 <td  class="td_code">
 EIC_IMR
@@ -122,7 +122,7 @@ REG
 <A href="#EIC_ISR">Interrupt status register</a>
 </td>
 <td  class="td_code">
-eic_eic_isr
+fmc_adc_eic_eic_isr
 </td>
 <td  class="td_code">
 EIC_ISR
@@ -347,7 +347,7 @@ wb_int_o
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-eic_eic_idr
+fmc_adc_eic_eic_idr
 </td>
 </tr>
 <tr>
@@ -612,7 +612,7 @@ ACQ_END
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-eic_eic_ier
+fmc_adc_eic_eic_ier
 </td>
 </tr>
 <tr>
@@ -877,7 +877,7 @@ ACQ_END
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-eic_eic_imr
+fmc_adc_eic_eic_imr
 </td>
 </tr>
 <tr>
@@ -1142,7 +1142,7 @@ ACQ_END
 <b>HW prefix: </b>
 </td>
 <td  class="td_code">
-eic_eic_isr
+fmc_adc_eic_eic_isr
 </td>
 </tr>
 <tr>
@@ -1410,7 +1410,7 @@ ACQ_END
 <b>HW prefix: </b>
 </td>
 <td >
-eic_trig
+fmc_adc_eic_trig
 </td>
 </tr>
 <tr>
@@ -1439,7 +1439,7 @@ rising edge
 <b>HW prefix: </b>
 </td>
 <td >
-eic_acq_end
+fmc_adc_eic_acq_end
 </td>
 </tr>
 <tr>
