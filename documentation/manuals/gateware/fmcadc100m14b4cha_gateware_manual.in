@@ -1178,6 +1178,7 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 @item Unify address inferfaces: put all in bytes (wishbone addr, trig pointer, ...)@*
       - Change GN4142-core WB bus(es) to byte address.@*
       - Change DDR-core WB bus(es) to byte address?
+      - Change SVEC DDR access fifo (DDR address register) to byte address.
 @item Add error flags (interrupt?):@*
       - Instead of overwriting memory for a given acquisition.@*
       - If read during acquisition (or even block read during acq?).
@@ -1198,6 +1199,8 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 @c DONE @item Move sdb device descriptions from top to the wishbone_pkg.vhd (general-cores lib).
 @item Include the git tree in a .tar.gz along with the .bin file (in the files section) for each release. -> modify the Release chapter accordingly.
 @item Use git submodules for dependencies (allows to work without hdlmake).
+@item Add a shot counter register.
+@item Add a check of the sample number in multishot and prevent starting acq with more than 2048 samples (-> acq config ok flag).
 @end itemize
 
 
