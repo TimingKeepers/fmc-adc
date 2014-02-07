@@ -351,7 +351,7 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   -- Reset
   signal powerup_reset_cnt  : unsigned(7 downto 0) := "00000000";
   signal powerup_rst_n      : std_logic            := '0';
-  signal sw_rst_fmc0_n      : std_logic := '1';
+  signal sw_rst_fmc0_n      : std_logic            := '1';
   signal sw_rst_fmc0_n_o    : std_logic;
   signal sw_rst_fmc0_n_i    : std_logic;
   signal sw_rst_fmc0_n_load : std_logic;
@@ -382,6 +382,9 @@ architecture rtl of spec_top_fmc_adc_100Ms is
   signal wb_dma_we    : std_logic;
   signal wb_dma_ack   : std_logic;
   signal wb_dma_stall : std_logic;
+  signal wb_dma_err   : std_logic;
+  signal wb_dma_rty   : std_logic;
+  signal wb_dma_int   : std_logic;
 
   -- FMC ADC core to DDR wishbone bus
   signal wb_ddr_adr   : std_logic_vector(31 downto 0);
@@ -598,6 +601,9 @@ begin
       csr_dat_i       => cnx_slave_out(c_MASTER_GENNUM).dat,
       csr_ack_i       => cnx_slave_out(c_MASTER_GENNUM).ack,
       csr_stall_i     => cnx_slave_out(c_MASTER_GENNUM).stall,
+      csr_err_i       => cnx_slave_out(c_MASTER_GENNUM).err,
+      csr_rty_i       => cnx_slave_out(c_MASTER_GENNUM).rty,
+      csr_int_i       => cnx_slave_out(c_MASTER_GENNUM).int,
       -- DMA wishbone interface (pipelined)
       dma_clk_i       => sys_clk_125,
       dma_adr_o       => wb_dma_adr,
@@ -608,7 +614,10 @@ begin
       dma_cyc_o       => wb_dma_cyc,
       dma_dat_i       => wb_dma_dat_i,
       dma_ack_i       => wb_dma_ack,
-      dma_stall_i     => wb_dma_stall
+      dma_stall_i     => wb_dma_stall,
+      dma_err_i       => wb_dma_err,
+      dma_rty_i       => wb_dma_rty,
+      dma_int_i       => wb_dma_int
       );
 
   p2l_pll_locked <= gn4124_status(0);
@@ -727,7 +736,7 @@ begin
   led_green_o <= led_green;
 
   -- external software reset register (to assign a non-zero default value)
-  p_sw_rst_fmc0: process (sys_clk_125)
+  p_sw_rst_fmc0 : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
       if sys_rst_n = '0' then
@@ -965,6 +974,11 @@ begin
       );
 
   ddr3_calib_done <= ddr3_status(0);
+
+  -- unused Wishbone signals
+  wb_dma_err <= '0';
+  wb_dma_rty <= '0';
+  wb_dma_int <= '0';
 
   ------------------------------------------------------------------------------
   -- Assign unused outputs
