@@ -1,0 +1,262 @@
+peripheral {
+  name = "UTC core registers";
+  description = "Wishbone slave for registers related to UTC core";
+  hdl_entity = "utc_core_regs";
+
+  prefix = "utc_core";
+
+  reg {
+    name = "UTC seconds register";
+    description = "UTC seconds counter. Incremented everytime the UTC coarse counter overflows.";
+    prefix = "seconds";
+
+    field {
+      name = "UTC seconds";
+      type = SLV;
+      load = LOAD_EXT;
+      size = 32;
+      access_bus = READ_WRITE;
+      access_dev = READ_WRITE;
+    };
+  };
+
+  reg {
+    name = "UTC coarse time register, system clock ticks (125MHz)";
+    description = "UTC coarse time counter clocked by 125MHz system clock.\nCounts from 0 to 125000000.";
+    prefix = "coarse";
+
+    field {
+      name = "UTC coarse time";
+      type = SLV;
+      load = LOAD_EXT;
+      size = 32;
+      access_bus = READ_WRITE;
+      access_dev = READ_WRITE;
+    };
+  };
+
+  reg {
+    name = "Trigger time-tag metadata register";
+    prefix = "trig_tag_meta";
+
+    field {
+      name = "Trigger time-tag metadata";
+      description = "Holds time-tag metadata of the last trigger event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Trigger time-tag UTC seconds register";
+    prefix = "trig_tag_seconds";
+
+    field {
+      name = "Trigger time-tag UTC seconds";
+      description = "Holds time-tag UTC seconds of the last trigger event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Trigger time-tag coarse time (system clock ticks 125MHz) register";
+    prefix = "trig_tag_coarse";
+
+    field {
+      name = "Trigger time-tag coarse time";
+      description = "Holds time-tag coarse time of the last trigger event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Trigger time-tag fine time register, always 0 (used for time-tag format compatibility)";
+    prefix = "trig_tag_fine";
+
+    field {
+      name = "Trigger time-tag fine time";
+      description = "Holds time-tag fine time of the last trigger event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition start time-tag metadata register";
+    prefix = "acq_start_tag_meta";
+
+    field {
+      name = "Acquisition start time-tag metadata";
+      description = "Holds time-tag metadata of the last acquisition start event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition start time-tag UTC seconds register";
+    prefix = "acq_start_tag_seconds";
+
+    field {
+      name = "Acquisition start time-tag UTC seconds";
+      description = "Holds time-tag UTC seconds of the last acquisition start event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition start time-tag coarse time (system clock ticks 125MHz) register";
+    prefix = "acq_start_tag_coarse";
+
+    field {
+      name = "Acquisition start time-tag coarse time";
+      description = "Holds time-tag coarse time of the last acquisition start event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition start time-tag fine time register, always 0 (used for time-tag format compatibility)";
+    prefix = "acq_start_tag_fine";
+
+    field {
+      name = "Acquisition start time-tag fine time";
+      description = "Holds time-tag fine time of the last acquisition start event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition stop time-tag metadata register";
+    prefix = "acq_stop_tag_meta";
+
+    field {
+      name = "Acquisition stop time-tag metadata";
+      description = "Holds time-tag metadata of the last acquisition stop event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition stop time-tag UTC seconds register";
+    prefix = "acq_stop_tag_seconds";
+
+    field {
+      name = "Acquisition stop time-tag UTC seconds";
+      description = "Holds time-tag UTC seconds of the last acquisition stop event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition stop time-tag coarse time (system clock ticks 125MHz) register";
+    prefix = "acq_stop_tag_coarse";
+
+    field {
+      name = "Acquisition stop time-tag coarse time";
+      description = "Holds time-tag coarse time of the last acquisition stop event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition stop time-tag fine time register, always 0 (used for time-tag format compatibility)";
+    prefix = "acq_stop_tag_fine";
+
+    field {
+      name = "Acquisition stop time-tag fine time";
+      description = "Holds time-tag fine time of the last acquisition stop event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition end time-tag metadata register";
+    prefix = "acq_end_tag_meta";
+
+    field {
+      name = "Acquisition end time-tag metadata";
+      description = "Holds time-tag metadata of the last acquisition end event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition end time-tag UTC seconds register";
+    prefix = "acq_end_tag_seconds";
+
+    field {
+      name = "Acquisition end time-tag UTC seconds";
+      description = "Holds time-tag UTC seconds of the last acquisition end event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition end time-tag coarse time (system clock ticks 125MHz) register";
+    prefix = "acq_end_tag_coarse";
+
+    field {
+      name = "Acquisition end time-tag coarse time";
+      description = "Holds time-tag coarse time of the last acquisition end event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Acquisition end time-tag fine time register, always 0 (used for time-tag format compatibility)";
+    prefix = "acq_end_tag_fine";
+
+    field {
+      name = "Acquisition end time-tag fine time";
+      description = "Holds time-tag fine time of the last acquisition end event";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+  };
+
+};
