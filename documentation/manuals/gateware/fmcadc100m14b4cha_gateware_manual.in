@@ -1201,6 +1201,7 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 @item Use git submodules for dependencies (allows to work without hdlmake).
 @item Add a shot counter register.
 @item Add a check of the sample number in multishot and prevent starting acq with more than 2048 samples (-> acq config ok flag).
+@item Add hysteresis on internal trigger slope detection (-> non-monotonic signals, noisy).
 @end itemize
 
 
