@@ -27,88 +27,112 @@ REG @tab
 Number of shots
 @item @code{0x18} @tab
 REG @tab
+@code{shots_cnt} @tab
+Remaining shots counter
+@item @code{0x1c} @tab
+REG @tab
 @code{trig_pos} @tab
 Trigger address register
-@item @code{0x1c} @tab
+@item @code{0x20} @tab
+REG @tab
+@code{fs_freq} @tab
+Sampling clock frequency
+@item @code{0x24} @tab
 REG @tab
 @code{sr} @tab
 Sample rate
-@item @code{0x20} @tab
+@item @code{0x28} @tab
 REG @tab
 @code{pre_samples} @tab
 Pre-trigger samples
-@item @code{0x24} @tab
+@item @code{0x2c} @tab
 REG @tab
 @code{post_samples} @tab
 Post-trigger samples
-@item @code{0x28} @tab
+@item @code{0x30} @tab
 REG @tab
 @code{samples_cnt} @tab
 Samples counter
-@item @code{0x2c} @tab
+@item @code{0x34} @tab
 REG @tab
 @code{ch1_ctl} @tab
 Channel 1 control register
-@item @code{0x30} @tab
+@item @code{0x38} @tab
 REG @tab
 @code{ch1_sta} @tab
 Channel 1 status register
-@item @code{0x34} @tab
+@item @code{0x3c} @tab
 REG @tab
 @code{ch1_gain} @tab
 Channel 1 gain calibration register
-@item @code{0x38} @tab
+@item @code{0x40} @tab
 REG @tab
 @code{ch1_offset} @tab
 Channel 1 offset calibration register
-@item @code{0x3c} @tab
+@item @code{0x44} @tab
+REG @tab
+@code{ch1_sat} @tab
+Channel 1 saturation register
+@item @code{0x48} @tab
 REG @tab
 @code{ch2_ctl} @tab
 Channel 2 control register
-@item @code{0x40} @tab
+@item @code{0x4c} @tab
 REG @tab
 @code{ch2_sta} @tab
 Channel 2 status register
-@item @code{0x44} @tab
+@item @code{0x50} @tab
 REG @tab
 @code{ch2_gain} @tab
 Channel 2 gain calibration register
-@item @code{0x48} @tab
+@item @code{0x54} @tab
 REG @tab
 @code{ch2_offset} @tab
 Channel 2 offset calibration register
-@item @code{0x4c} @tab
+@item @code{0x58} @tab
+REG @tab
+@code{ch2_sat} @tab
+Channel 2 saturation register
+@item @code{0x5c} @tab
 REG @tab
 @code{ch3_ctl} @tab
 Channel 3 control register
-@item @code{0x50} @tab
+@item @code{0x60} @tab
 REG @tab
 @code{ch3_sta} @tab
 Channel 3 status register
-@item @code{0x54} @tab
+@item @code{0x64} @tab
 REG @tab
 @code{ch3_gain} @tab
 Channel 3 gain calibration register
-@item @code{0x58} @tab
+@item @code{0x68} @tab
 REG @tab
 @code{ch3_offset} @tab
 Channel 3 offset calibration register
-@item @code{0x5c} @tab
+@item @code{0x6c} @tab
+REG @tab
+@code{ch3_sat} @tab
+Channel 3 saturation register
+@item @code{0x70} @tab
 REG @tab
 @code{ch4_ctl} @tab
 Channel 4 control register
-@item @code{0x60} @tab
+@item @code{0x74} @tab
 REG @tab
 @code{ch4_sta} @tab
 Channel 4 status register
-@item @code{0x64} @tab
+@item @code{0x78} @tab
 REG @tab
 @code{ch4_gain} @tab
 Channel 4 gain calibration register
-@item @code{0x68} @tab
+@item @code{0x7c} @tab
 REG @tab
 @code{ch4_offset} @tab
 Channel 4 offset calibration register
+@item @code{0x80} @tab
+REG @tab
+@code{ch4_sat} @tab
+Channel 4 saturation register
 @end multitable 
 @regsection @code{ctl} - Control register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -227,11 +251,21 @@ Software trigger enable
 @code{INT_TRIG_SEL}
 @tab @code{0} @tab 
 Channel selection for internal trigger
-@item @code{15...6}
+@item @code{6}
+@tab R/W @tab
+@code{INT_TRIG_TEST_EN}
+@tab @code{0} @tab 
+Enable internal trigger test mode
+@item @code{7}
 @tab R/W @tab
 @code{RESERVED}
 @tab @code{0} @tab 
 Reserved
+@item @code{15...8}
+@tab R/W @tab
+@code{INT_TRIG_THRES_FILT}
+@tab @code{0} @tab 
+Internal trigger threshold glitch filter
 @item @code{31...16}
 @tab R/W @tab
 @code{INT_TRIG_THRES}
@@ -245,7 +279,9 @@ Threshold for internal trigger
 @item @code{hw_trig_en} @tab 0: disable@*1: enable
 @item @code{sw_trig_en} @tab 0: disable@*1: enable
 @item @code{int_trig_sel} @tab 00: channel 1@*01: channel 2@*10: channel 3@*11: channel 4
+@item @code{int_trig_test_en} @tab Test mode:@* ch1 = Channel 1 input(analogue)@* ch2 = Channel input over threshold (digital)@* ch3 = Channel input over threshold filtered (digital)@* ch4 = Trigger (digital)
 @item @code{reserved} @tab Ignore on read, write with 0's
+@item @code{int_trig_thres_filt} @tab Configures the internal trigger threshold glitch filter length.
 @item @code{int_trig_thres} @tab Treated as binary two's complement and compared to raw ADC data.
 @end multitable
 @regsection @code{trig_dly} - Trigger delay
@@ -290,6 +326,25 @@ Reserved
 @item @code{nb} @tab Number of shots required in multi-shot mode, set to one for single-shot mode.
 @item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
+@regsection @code{shots_cnt} - Remaining shots counter
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{15...0}
+@tab R/O @tab
+@code{VAL}
+@tab @code{X} @tab 
+Remaining shots counter
+@item @code{31...16}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{0} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Counts the number of remaining shots to acquire.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
 @regsection @code{trig_pos} - Trigger address register
 @multitable @columnfractions .10 .10 .15 .10 .55
 @headitem Bits @tab Access @tab Prefix @tab Default @tab Name
@@ -302,6 +357,19 @@ Trigger address
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{trig_pos} @tab Trigger address in DDR memory.@*Only used in single-shot mode.
+@end multitable
+@regsection @code{fs_freq} - Sampling clock frequency
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{31...0}
+@tab R/O @tab
+@code{FS_FREQ}
+@tab @code{X} @tab 
+Sampling clock frequency
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{fs_freq} @tab ADC sampling clock frequency in Hz
 @end multitable
 @regsection @code{sr} - Sample rate
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -431,6 +499,25 @@ Reserved
 @item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
 @item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
+@regsection @code{ch1_sat} - Channel 1 saturation register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{14...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{0} @tab 
+Saturation value for channel 1
+@item @code{31...15}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{0} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
 @regsection @code{ch2_ctl} - Channel 2 control register
 @multitable @columnfractions .10 .10 .15 .10 .55
 @headitem Bits @tab Access @tab Prefix @tab Default @tab Name
@@ -505,6 +592,25 @@ Reserved
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch2_sat} - Channel 2 saturation register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{14...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{0} @tab 
+Saturation value for channel 2
+@item @code{31...15}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{0} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.
 @item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch3_ctl} - Channel 3 control register
@@ -583,6 +689,25 @@ Reserved
 @item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
 @item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
+@regsection @code{ch3_sat} - Channel 3 saturation register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{14...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{0} @tab 
+Saturation value for channel 3
+@item @code{31...15}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{0} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
 @regsection @code{ch4_ctl} - Channel 4 control register
 @multitable @columnfractions .10 .10 .15 .10 .55
 @headitem Bits @tab Access @tab Prefix @tab Default @tab Name
@@ -657,5 +782,24 @@ Reserved
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
+@item @code{reserved} @tab Ignore on read, write with 0's
+@end multitable
+@regsection @code{ch4_sat} - Channel 4 saturation register
+@multitable @columnfractions .10 .10 .15 .10 .55
+@headitem Bits @tab Access @tab Prefix @tab Default @tab Name
+@item @code{14...0}
+@tab R/W @tab
+@code{VAL}
+@tab @code{0} @tab 
+Saturation value for channel 4
+@item @code{31...15}
+@tab R/W @tab
+@code{RESERVED}
+@tab @code{0} @tab 
+Reserved
+@end multitable
+@multitable @columnfractions 0.15 0.85
+@headitem Field @tab Description
+@item @code{val} @tab Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.
 @item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable

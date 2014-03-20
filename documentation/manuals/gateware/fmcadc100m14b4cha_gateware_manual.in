@@ -35,13 +35,13 @@
 
 @setchapternewpage off
 
-@set update-month January 2014
+@set update-month March 2014
 
 @finalout
 
 @titlepage
 @title FmcAdc100m14b4cha Gateware Guide
-@subtitle @value{update-month} - Release 3.0
+@subtitle @value{update-month} - Release 4.0
 @subtitle For PCIe (SPEC) and VME64x (SVEC) FMC Carriers
 @sp 10
 @center @image{../../figures/cern_logo,3cm,,,pdf} @hfill @image{../../figures/ohr_logo,3cm,,,pdf}
@@ -585,6 +585,9 @@ The sampling clock (@code{fs_clk}) and the ADC data de-serialiser clock (@code{s
 
 @c TODO : possibility to control the Si570 via I2C
 
+The ADC core implements a sampling clock frequency meter.
+The measured frequency (in Hz) can be read via a register (@pxref{ADC Core Registers}).
+
 @c --------------------------------------------------------------------------
 @subsection Time-tagging Core
 
@@ -757,7 +760,7 @@ The four channels data and the trigger signal are synchronised to the system clo
 The configuration signals coming from registers in the system clock domain are synchronised to the sampling clock within the Wishbone slave (@command{wbgen2} feature).
 
 @float Figure,fig:adc_core_fs_clk
-@center @image{../../figures/adc_core_fs_clk, 12cm,,,pdf}
+@center @image{../../figures/adc_core_fs_clk, 14cm,,,pdf}
 @caption{ADC core diagram (sampling clock domain).}
 @end float
 
@@ -766,7 +769,7 @@ In the fmc-adc application, the default configuration is kept.
 The figure @ref{fig:ltc2174_mode} is an extract from the LTC2174 datasheet illustrating the @i{2-Lane Output Mode, 16-Bit Serialization} waveforms.
 
 @float Figure,fig:ltc2174_mode
-@center @image{../../figures/ltc2174_mode, 10cm,,,pdf}
+@center @image{../../figures/ltc2174_mode, 12cm,,,pdf}
 @caption{LTC2174 data output mode waveforms.}
 @end float
 
@@ -824,7 +827,6 @@ For all others switch configurations, the behaviour is not defined and therefore
 @caption{Analogue input switches configurations.}
 @end float
 
-
 @c ==========================================================================
 @section Input Offset
 
@@ -863,30 +865,50 @@ v_out = Output voltage (to filter and ADC)
 @c ==========================================================================
 @section Trigger
 
-The trigger unit is made of a hardware and a software source.
-Each hardware and software sources can be enabled independantly.
-The two sources are then or'ed together to drive a delay generator.
+The trigger unit is made of two hardware and one software sources.
+The hardware and software path can be enabled independantly.
+The two paths are then or'ed together to drive a delay generator.
 The delay generator allows to insert an defined number of sampling clock period before the trigger goes to the acquisition state machine.
+The @ref{fig:trig_unit} shows a simplified digram of trigger unit.
 
 @float Figure,fig:trig_unit
-@center @image{../../figures/trigger_unit, 10cm,,,pdf}
+@center @image{../../figures/trigger_unit, 12cm,,,pdf}
 @caption{Trigger unit diagram.}
 @end float
 
 The hardware trigger source can be either internal (based on an adc input channel) or external (dedicated trigger input).
-For both internal and external hardware triggers, the polarity can be selected between positive and negative slope (resp. rising and falling edge). By default the polatity is set to positive slope.
-The external trigger input is synchronised to the sampling clock. The external trigger pulse must be at least one sampling clock cycle wide.
-For the internal trigger source, the adc input channel and the threshold should be configured.
+For both internal and external hardware triggers, the polarity can be selected between positive and negative slope (resp. rising and falling edge).
+By default the polatity is set to positive slope.
+
+The external trigger input is synchronised to the sampling clock.
+The external trigger pulse must be at least one sampling clock cycle wide.
+
+To use the internal trigger source, the adc input channel and the threshold should be configured.
 By default, the channel 1 is selected and the threshold is set to 0.
 Note that the threshold is 16-bit signed (two's complement).
 The @ref{fig:trig_hw_int} sketches the internal hardware trigger threshold behaviour.
+In addition, a glitch filter can be applied to the threshold detection.
+The glitch filter is useful to trigger on noisy signal.
+In order to help setting the glitch filter, an internal trigger test mode can be activated.
+When the test mode is enabled, the data from channels 2 to 4 are replaced as follow:
+
+@float
+@multitable @columnfractions .12 .50
+@item Channel 2 @tab Input signal over threshold
+@item Channel 3 @tab Input signal over threshold filtered
+@item Channel 4 @tab Trigger
+@end multitable
+@sp 1
+@end float
+
+
 The software trigger source concists in a pulse generated when a write cycle is detected on the @i{Software trigger} register.
-The @ref{fig:trig_unit} shows the different trigger configurations.
+
 For futher information on the trigger configuration registers @pxref{ADC Core Registers}.
 
 @float Figure,fig:trig_hw_int
 @center @image{../../figures/trig_hw_int, 8cm,,,pdf}
-@caption{Internal hardware trigger trheshold.}
+@caption{Internal hardware trigger threshold.}
 @end float
 
 @c ==========================================================================
@@ -949,7 +971,7 @@ Two registers per channel are implemented in the FPGA for ADC gain and offset co
 When an input range is selected, the corresponding gain/offset correction values must be loaded from the EEPROM to those registers.
 
 @float Figure,fig:off_gain_corr
-@center @image{../../figures/offset_gain_corr, 10cm,,,pdf}
+@center @image{../../figures/offset_gain_corr, 12cm,,,pdf}
 @caption{ADC offset and gain correction block.}
 @end float
 
@@ -962,8 +984,13 @@ The fixed point format is as follow:
 @caption{ADC gain register format.}
 @end float
 
-@b{Note:} On FPGA start-up, the gain registers are set to 0x8000 (1.000) and the offset registers to 0x0000.
-This means a unit gain and no offset.
+After the offset and gain corrections are applied, the signal is saturated to 16-bit signed values (min=-32678, max=32767).
+
+Also an additional block allows the user to set a programmable saturation value.
+The saturation register takes a 15-bit unsigned value, or in other words a positive 16-bit signed value.
+
+@b{Note:} On FPGA start-up, the gain, offset and saturation registers are set to 0x0.
+Therefore, the driver has to initialise those registers.
 
 @b{Note:} After gain and offset correction, the two LSB of the data words can be different from zero.
 
@@ -993,8 +1020,6 @@ gain   = DAC gain calibration value from EEPROM (16-bit fixed point)
 @page
 @node Acquisition
 @chapter Acquisition
-
-@c TODO : Add description of trigger time-tag insertion
 
 This chapter describes the two modes of acquisition, single-shot and multi-shot.
 It also explains how the software is expected to control the fmc-adc acquisitions.
@@ -1114,6 +1139,7 @@ The acquisition state machine is also represented.
 
 The multi-shot acquisition process is almost identical to the single-shot one, except that once the acquisition is started it will go around the state machine as many time as the number of configured shots.
 It means that if the board is configured for N shots, it will generate N trigger interrupts (if enabled) and then another interrupt at the end of the acquisition.
+A counter, accessible via a register, shows the remaining number of shots (@pxref{ADC Core Registers}).
 
 Unlike the single-mode acquisition, in multi-shot, the DDR memory is not used as a circular buffer.
 Instead, two dual port RAM (dpram) are implemented inside the FPGA.
@@ -1124,7 +1150,7 @@ Even shots uses dpram0 and odd shots dpram1.
 The trigger time-tag requires two 64-bit word to be stored at the end of the samples.
 It means that the total number of samples (pre-trigger + trigger + post-trigger) for a shot cannot exceed 2048-2=2046.
 
-When a shot is finished, the correcponding dpram samples are written to the DDR memory.
+When a shot is finished, the corresponding dpram samples are written to the DDR memory.
 Only the pre-trigger samples, the post-trigger samples and the trigger time-tag are written.
 The first shot is written starting at address @code{0x0}.
 Then the second shot is written right after the trigger time-tag of the first shot.
@@ -1135,15 +1161,14 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 @caption{DDR memory usage in multi-shot mode acquisition.}
 @end float
 
-@b{Note:} The number of samples per shot stored in memory is equal to: number of pre-trigger samples + number of post-trigger samples + 1 (trigger sample).
+@b{Note:} The number of samples per shot stored in memory is equal to: number of pre-trigger samples + number of post-trigger samples + 1 (trigger sample) + 2 (time-tag).
+
+@b{Note:} In multi-shot mode, the start of an acquisition is prohibited if the number of sample per shot is bigger or equal to the dpram size.
 
 @c ##########################################################################
 @page
 @node Missing Features and Improvements
 @chapter Missing Features and Improvements
-
-@c ==========================================================================
-@section To be done before next release
 
 @itemize @textdegree
 @c DONE Take data for threshold trigger after offset/gain correction.
@@ -1159,14 +1184,7 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 @c        - Put all mezzanine related cores in a wrapper (fmc adc mezzanine).
 @c        - Add a crossbar inside the fmc adc block -> check impact on sdb.
 @c DONE @item Add a software reset feature?
-
 @item Remove huge files from git repo. @b{!!! This will change all commits sha !!!}
-@end itemize
-
-@c ==========================================================================
-@section For a later release
-
-@itemize @textdegree
 @item Add WR core; 1)for time-tags, 2)for sampling clock control@*
       - Define behaviour when WR is desconnected.@*
       - Assign signals to SPEC front panel LEDs.
@@ -1179,7 +1197,7 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
       - Change GN4142-core WB bus(es) to byte address.@*
       - Change DDR-core WB bus(es) to byte address?
       - Change SVEC DDR access fifo (DDR address register) to byte address.
-@item Add error flags (interrupt?):@*
+@item Add error flags to status reg (+interrupt?):@*
       - Instead of overwriting memory for a given acquisition.@*
       - If read during acquisition (or even block read during acq?).
 @item Rename decimation (and "sample rate" register) in under-sampling.
@@ -1190,18 +1208,20 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
       - Seems to work with proposed master (05.08.2013).@*
       - Still need to replace FIFO in adc core.
 @item Test sampling clocks from 10MHz to 105MHz.
-@item Add sampling clock presence flag. Or better a sampling clock frequency register.
+@c DONE @item Add sampling clock presence flag. Or better a sampling clock frequency register.
 @item Add over-heat and input over-load interrupts? (from original specification)
 @c DONE @item Time-tag for every trigger in multi-shot. -> trigger time-tag array
 @item Review reset logic.
-@item Generate an end of acquisition interrupt after an acquisition stop command?
+@c @item Generate an end of acquisition interrupt after an acquisition stop command? => NOT USEFUL!
 @c NO @item Remove meta-info field in time-tags?
 @c DONE @item Move sdb device descriptions from top to the wishbone_pkg.vhd (general-cores lib).
 @item Include the git tree in a .tar.gz along with the .bin file (in the files section) for each release. -> modify the Release chapter accordingly.
 @item Use git submodules for dependencies (allows to work without hdlmake).
-@item Add a shot counter register.
-@item Add a check of the sample number in multishot and prevent starting acq with more than 2048 samples (-> acq config ok flag).
-@item Add hysteresis on internal trigger slope detection (-> non-monotonic signals, noisy).
+@c DONE @item Add a shot counter register.
+@c DONE @item Add a check of the sample number in multishot and prevent starting acq with more than 2048 samples (-> acq config ok flag).
+@c DONE @item Add hysteresis on internal trigger slope detection (-> non-monotonic signals, noisy).
+@c DONE @item Add debug mode: ch1=analog input, ch2=int_trig_over_thres, ch3=int_trig, ch4=trig
+@c DONE @item Make data saturation programmable.
 @end itemize
 
 
