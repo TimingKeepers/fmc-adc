@@ -61,7 +61,7 @@ package fmc_adc_100Ms_core_pkg is
       sys_rst_n_i : in std_logic;
 
       -- CSR wishbone interface
-      wb_csr_adr_i : in  std_logic_vector(4 downto 0);
+      wb_csr_adr_i : in  std_logic_vector(5 downto 0);
       wb_csr_dat_i : in  std_logic_vector(31 downto 0);
       wb_csr_dat_o : out std_logic_vector(31 downto 0);
       wb_csr_cyc_i : in  std_logic;

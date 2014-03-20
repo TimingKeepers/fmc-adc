@@ -60,6 +60,12 @@ entity spec_top_fmc_adc_100Ms is
       -- Local oscillator
       clk20_vcxo_i : in std_logic;      -- 20MHz VCXO clock
 
+      -- DAC interface (20MHz and 25MHz VCXO)
+      pll25dac_sync_n_o : out std_logic;  -- 25MHz VCXO
+      pll20dac_sync_n_o : out std_logic;  -- 20MHz VCXO
+      plldac_din_o      : out std_logic;
+      plldac_sclk_o     : out std_logic;
+
       -- Carrier font panel LEDs
       led_red_o   : out std_logic;
       led_green_o : out std_logic;
@@ -453,6 +459,15 @@ begin
   -- 250.000 MHz fast system clock
   -- 333.333 MHz DDR3 clock
   ------------------------------------------------------------------------------
+
+  -- AD5662BRMZ-1 DAC output powers up to 0V. The output remains valid until a
+  -- write sequence arrives to the DAC.
+  -- To avoid spurious writes, the DAC interface outputs are fixed to safe values.
+  pll25dac_sync_n_o <= '1';
+  pll20dac_sync_n_o <= '1';
+  plldac_din_o      <= '0';
+  plldac_sclk_o     <= '0';
+
   cmp_sys_clk_buf : IBUFG
     port map (
       I => clk20_vcxo_i,

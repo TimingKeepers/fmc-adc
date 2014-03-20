@@ -62,6 +62,14 @@ entity svec_top_fmc_adc_100Ms is
       -- Local 20MHz VCXO oscillator
       clk_20m_vcxo_i : in std_logic;
 
+      -- DAC interface (20MHz and 25MHz VCXO)
+      pll20dac_din_o    : out std_logic;
+      pll20dac_sclk_o   : out std_logic;
+      pll20dac_sync_n_o : out std_logic;
+      pll25dac_din_o    : out std_logic;
+      pll25dac_sclk_o   : out std_logic;
+      pll25dac_sync_n_o : out std_logic;
+
       -- Reset from system fpga
       rst_n_i : in std_logic;
 
@@ -561,6 +569,17 @@ begin
   -- 125.000 MHz system clock
   -- 333.333 MHz DDR3 clock
   ------------------------------------------------------------------------------
+
+  -- AD5662BRMZ-1 DAC output powers up to 0V. The output remains valid until a
+  -- write sequence arrives to the DAC.
+  -- To avoid spurious writes, the DAC interface outputs are fixed to safe values.
+  pll20dac_din_o    <= '0';
+  pll20dac_sclk_o   <= '0';
+  pll20dac_sync_n_o <= '1';
+  pll25dac_din_o    <= '0';
+  pll25dac_sclk_o   <= '0';
+  pll25dac_sync_n_o <= '1';
+
   cmp_sys_clk_buf : IBUFG
     port map (
       I => clk_20m_vcxo_i,
@@ -878,7 +897,7 @@ begin
   cnx_master_in(c_WB_SLAVE_SVEC_CSR).int   <= '0';
 
   -- external software reset registers (to assign a non-zero default value)
-  p_sw_rst_fmc0: process (sys_clk_125)
+  p_sw_rst_fmc0 : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
       if sys_rst_n = '0' then
@@ -891,7 +910,7 @@ begin
 
   sw_rst_fmc0_n_i <= sw_rst_fmc0_n;
 
-  p_sw_rst_fmc1: process (sys_clk_125)
+  p_sw_rst_fmc1 : process (sys_clk_125)
   begin
     if rising_edge(sys_clk_125) then
       if sys_rst_n = '0' then

@@ -183,7 +183,7 @@ architecture rtl of fmc_adc_mezzanine is
     wbd_width     => x"4",                 -- 32-bit port granularity
     sdb_component => (
       addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000007F",
+      addr_last   => x"00000000000000FF",
       product     => (
         vendor_id => x"000000000000CE42",  -- CERN
         device_id => x"00000608",
@@ -447,7 +447,7 @@ begin
       sys_clk_i   => sys_clk_i,
       sys_rst_n_i => sys_rst_n_i,
 
-      wb_csr_adr_i => cnx_master_out(c_WB_SLAVE_FMC_ADC).adr(6 downto 2),  -- cnx_master_out.adr is byte address
+      wb_csr_adr_i => cnx_master_out(c_WB_SLAVE_FMC_ADC).adr(7 downto 2),  -- cnx_master_out.adr is byte address
       wb_csr_dat_i => cnx_master_out(c_WB_SLAVE_FMC_ADC).dat,
       wb_csr_dat_o => cnx_master_in(c_WB_SLAVE_FMC_ADC).dat,
       wb_csr_cyc_i => cnx_master_out(c_WB_SLAVE_FMC_ADC).cyc,

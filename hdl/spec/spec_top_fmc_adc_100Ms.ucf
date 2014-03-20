@@ -43,14 +43,14 @@ NET "clk20_vcxo_i" IOSTANDARD = "LVCMOS25";
 #----------------------------------------
 # DAC interface (for VCXO)
 #----------------------------------------
-#NET "PLL25DAC1_SYNC_N" LOC = A3;
-#NET "PLL25DAC1_SYNC_N" IOSTANDARD = "LVCMOS25";
-#NET "PLL25DAC2_SYNC_N" LOC = B3;
-#NET "PLL25DAC2_SYNC_N" IOSTANDARD = "LVCMOS25";
-#NET "PLL25DAC_DIN" LOC = C4;
-#NET "PLL25DAC_DIN" IOSTANDARD = "LVCMOS25";
-#NET "PLL25DAC_SCLK" LOC = A4;
-#NET "PLL25DAC_SCLK" IOSTANDARD = "LVCMOS25";
+NET "pll25dac_sync_n_o" LOC = A3;
+NET "pll25dac_sync_n_o" IOSTANDARD = "LVCMOS25";
+NET "pll20dac_sync_n_o" LOC = B3;
+NET "pll20dac_sync_n_o" IOSTANDARD = "LVCMOS25";
+NET "plldac_din_o" LOC = C4;
+NET "plldac_din_o" IOSTANDARD = "LVCMOS25";
+NET "plldac_sclk_o" LOC = A4;
+NET "plldac_sclk_o" IOSTANDARD = "LVCMOS25";
 
 #----------------------------------------
 # 1-wire thermometer w/ ID

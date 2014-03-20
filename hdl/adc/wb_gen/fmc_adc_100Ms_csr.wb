@@ -188,13 +188,33 @@ peripheral {
     };
 
     field {
+      name = "Enable internal trigger test mode";
+      description = "Test mode:\n  ch1 = Channel 1 input(analogue)\n ch2 = Channel input over threshold (digital)\n  ch3 = Channel input over threshold filtered (digital)\n  ch4 = Trigger (digital)";
+      prefix = "int_trig_test_en";
+      type = BIT;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk_i";
+    };
+
+    field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
       prefix = "reserved";
-      type = SLV;
-      size = 10;
+      type = BIT;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Internal trigger threshold glitch filter";
+      description = "Configures the internal trigger threshold glitch filter length.";
+      prefix = "int_trig_thres_filt";
+      type = SLV;
+      size = 8;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+      clock = "fs_clk_i";
     };
 
     field {
@@ -262,6 +282,31 @@ peripheral {
   };
 
   reg {
+    name = "Remaining shots counter";
+    prefix = "shots_cnt";
+
+    field {
+      name = "Remaining shots counter";
+      description = "Counts the number of remaining shots to acquire.";
+      prefix = "val";
+      type = SLV;
+      size = 16;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
     name = "Trigger address register";
     prefix = "trig_pos";
 
@@ -272,6 +317,21 @@ peripheral {
       size = 32;
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
+    };
+  };
+
+  reg {
+    name = "Sampling clock frequency";
+    prefix = "fs_freq";
+
+    field {
+      name = "Sampling clock frequency";
+      description = "ADC sampling clock frequency in Hz";
+      type = SLV;
+      size = 32;
+      access_bus = READ_ONLY;
+      access_dev = WRITE_ONLY;
+      clock = "fs_clk_i";
     };
   };
 
@@ -435,6 +495,31 @@ peripheral {
   };
 
   reg {
+    name = "Channel 1 saturation register";
+    prefix = "ch1_sat";
+
+    field {
+      name = "Saturation value for channel 1";
+      description = "Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.";
+      prefix = "val";
+      type = SLV;
+      size = 15;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 17;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
     name = "Channel 2 control register";
     prefix = "ch2_ctl";
 
@@ -530,6 +615,31 @@ peripheral {
       prefix = "reserved";
       type = SLV;
       size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 2 saturation register";
+    prefix = "ch2_sat";
+
+    field {
+      name = "Saturation value for channel 2";
+      description = "Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.";
+      prefix = "val";
+      type = SLV;
+      size = 15;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 17;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
@@ -637,6 +747,31 @@ peripheral {
   };
 
   reg {
+    name = "Channel 3 saturation register";
+    prefix = "ch3_sat";
+
+    field {
+      name = "Saturation value for channel 3";
+      description = "Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.";
+      prefix = "val";
+      type = SLV;
+      size = 15;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 17;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
     name = "Channel 4 control register";
     prefix = "ch4_ctl";
 
@@ -732,6 +867,31 @@ peripheral {
       prefix = "reserved";
       type = SLV;
       size = 16;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+  };
+
+  reg {
+    name = "Channel 4 saturation register";
+    prefix = "ch4_sat";
+
+    field {
+      name = "Saturation value for channel 4";
+      description = "Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.";
+      prefix = "val";
+      type = SLV;
+      size = 15;
+      access_bus = READ_WRITE;
+      access_dev = READ_ONLY;
+    };
+
+    field {
+      name = "Reserved";
+      description = "Ignore on read, write with 0's";
+      prefix = "reserved";
+      type = SLV;
+      size = 17;
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };

@@ -457,18 +457,18 @@ NET "clk_20m_vcxo_i" IOSTANDARD = "LVCMOS33";
 #----------------------------------------
 # Clock controls
 #----------------------------------------
-#NET "pll20dac_din_o" LOC = U28;
-#NET "pll20dac_sclk_o" LOC = AA28;
-#NET "pll20dac_sync_n_o" LOC = N28;
-#NET "pll25dac_din_o" LOC = P25;
-#NET "pll25dac_sclk_o" LOC = N27;
-#NET "pll25dac_sync_n_o" LOC = P26;
-#NET "pll20dac_din_o" IOSTANDARD = "LVCMOS33";
-#NET "pll20dac_sclk_o" IOSTANDARD = "LVCMOS33";
-#NET "pll20dac_sync_n_o" IOSTANDARD = "LVCMOS33";
-#NET "pll25dac_din_o" IOSTANDARD = "LVCMOS33";
-#NET "pll25dac_sclk_o" IOSTANDARD = "LVCMOS33";
-#NET "pll25dac_sync_n_o" IOSTANDARD = "LVCMOS33";
+NET "pll20dac_din_o" LOC = U28;
+NET "pll20dac_sclk_o" LOC = AA28;
+NET "pll20dac_sync_n_o" LOC = N28;
+NET "pll25dac_din_o" LOC = P25;
+NET "pll25dac_sclk_o" LOC = N27;
+NET "pll25dac_sync_n_o" LOC = P26;
+NET "pll20dac_din_o" IOSTANDARD = "LVCMOS33";
+NET "pll20dac_sclk_o" IOSTANDARD = "LVCMOS33";
+NET "pll20dac_sync_n_o" IOSTANDARD = "LVCMOS33";
+NET "pll25dac_din_o" IOSTANDARD = "LVCMOS33";
+NET "pll25dac_sclk_o" IOSTANDARD = "LVCMOS33";
+NET "pll25dac_sync_n_o" IOSTANDARD = "LVCMOS33";
 
 #----------------------------------------
 # UART

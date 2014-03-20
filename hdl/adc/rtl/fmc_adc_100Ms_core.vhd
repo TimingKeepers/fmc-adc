@@ -39,14 +39,14 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.NUMERIC_STD.all;
-use work.timetag_core_pkg.all;
-
 
 library UNISIM;
 use UNISIM.vcomponents.all;
 
 library work;
+use work.timetag_core_pkg.all;
 use work.genram_pkg.all;
+use work.gencores_pkg.all;
 
 
 entity fmc_adc_100Ms_core is
@@ -60,7 +60,7 @@ entity fmc_adc_100Ms_core is
     sys_rst_n_i : in std_logic;
 
     -- CSR wishbone interface
-    wb_csr_adr_i : in  std_logic_vector(4 downto 0);
+    wb_csr_adr_i : in  std_logic_vector(5 downto 0);
     wb_csr_dat_i : in  std_logic_vector(31 downto 0);
     wb_csr_dat_o : out std_logic_vector(31 downto 0);
     wb_csr_cyc_i : in  std_logic;
@@ -148,81 +148,94 @@ architecture rtl of fmc_adc_100Ms_core is
 
   component fmc_adc_100Ms_csr
     port (
-      rst_n_i                                : in  std_logic;
-      clk_sys_i                              : in  std_logic;
-      wb_adr_i                               : in  std_logic_vector(4 downto 0);
-      wb_dat_i                               : in  std_logic_vector(31 downto 0);
-      wb_dat_o                               : out std_logic_vector(31 downto 0);
-      wb_cyc_i                               : in  std_logic;
-      wb_sel_i                               : in  std_logic_vector(3 downto 0);
-      wb_stb_i                               : in  std_logic;
-      wb_we_i                                : in  std_logic;
-      wb_ack_o                               : out std_logic;
-      wb_stall_o                             : out std_logic;
-      fs_clk_i                               : in  std_logic;
-      fmc_adc_core_ctl_fsm_cmd_o             : out std_logic_vector(1 downto 0);
-      fmc_adc_core_ctl_fsm_cmd_wr_o          : out std_logic;
-      fmc_adc_core_ctl_fmc_clk_oe_o          : out std_logic;
-      fmc_adc_core_ctl_offset_dac_clr_n_o    : out std_logic;
-      fmc_adc_core_ctl_man_bitslip_o         : out std_logic;
-      fmc_adc_core_ctl_test_data_en_o        : out std_logic;
-      fmc_adc_core_ctl_trig_led_o            : out std_logic;
-      fmc_adc_core_ctl_acq_led_o             : out std_logic;
-      fmc_adc_core_ctl_reserved_o            : out std_logic_vector(23 downto 0);
-      fmc_adc_core_sta_fsm_i                 : in  std_logic_vector(2 downto 0);
-      fmc_adc_core_sta_serdes_pll_i          : in  std_logic;
-      fmc_adc_core_sta_serdes_synced_i       : in  std_logic;
-      fmc_adc_core_sta_acq_cfg_i             : in  std_logic;
-      fmc_adc_core_sta_reserved_i            : in  std_logic_vector(25 downto 0);
-      fmc_adc_core_trig_cfg_hw_trig_sel_o    : out std_logic;
-      fmc_adc_core_trig_cfg_hw_trig_pol_o    : out std_logic;
-      fmc_adc_core_trig_cfg_hw_trig_en_o     : out std_logic;
-      fmc_adc_core_trig_cfg_sw_trig_en_o     : out std_logic;
-      fmc_adc_core_trig_cfg_int_trig_sel_o   : out std_logic_vector(1 downto 0);
-      fmc_adc_core_trig_cfg_reserved_o       : out std_logic_vector(9 downto 0);
-      fmc_adc_core_trig_cfg_int_trig_thres_o : out std_logic_vector(15 downto 0);
-      fmc_adc_core_trig_dly_o                : out std_logic_vector(31 downto 0);
-      fmc_adc_core_sw_trig_o                 : out std_logic_vector(31 downto 0);
-      fmc_adc_core_sw_trig_wr_o              : out std_logic;
-      fmc_adc_core_shots_nb_o                : out std_logic_vector(15 downto 0);
-      fmc_adc_core_shots_reserved_o          : out std_logic_vector(15 downto 0);
-      fmc_adc_core_trig_pos_i                : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_sr_deci_o                 : out std_logic_vector(31 downto 0);
-      fmc_adc_core_pre_samples_o             : out std_logic_vector(31 downto 0);
-      fmc_adc_core_post_samples_o            : out std_logic_vector(31 downto 0);
-      fmc_adc_core_samples_cnt_i             : in  std_logic_vector(31 downto 0);
-      fmc_adc_core_ch1_ctl_ssr_o             : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch1_ctl_reserved_o        : out std_logic_vector(24 downto 0);
-      fmc_adc_core_ch1_sta_val_i             : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_sta_reserved_i        : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_gain_val_o            : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_gain_reserved_o       : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_offset_val_o          : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_offset_reserved_o     : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_ctl_ssr_o             : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch2_ctl_reserved_o        : out std_logic_vector(24 downto 0);
-      fmc_adc_core_ch2_sta_val_i             : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_sta_reserved_i        : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_gain_val_o            : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_gain_reserved_o       : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_offset_val_o          : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_offset_reserved_o     : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_ctl_ssr_o             : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch3_ctl_reserved_o        : out std_logic_vector(24 downto 0);
-      fmc_adc_core_ch3_sta_val_i             : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_sta_reserved_i        : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_gain_val_o            : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_gain_reserved_o       : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_offset_val_o          : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_offset_reserved_o     : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_ctl_ssr_o             : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch4_ctl_reserved_o        : out std_logic_vector(24 downto 0);
-      fmc_adc_core_ch4_sta_val_i             : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_sta_reserved_i        : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_gain_val_o            : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_gain_reserved_o       : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_offset_val_o          : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_offset_reserved_o     : out std_logic_vector(15 downto 0)
+      rst_n_i                                     : in  std_logic;
+      clk_sys_i                                   : in  std_logic;
+      wb_adr_i                                    : in  std_logic_vector(5 downto 0);
+      wb_dat_i                                    : in  std_logic_vector(31 downto 0);
+      wb_dat_o                                    : out std_logic_vector(31 downto 0);
+      wb_cyc_i                                    : in  std_logic;
+      wb_sel_i                                    : in  std_logic_vector(3 downto 0);
+      wb_stb_i                                    : in  std_logic;
+      wb_we_i                                     : in  std_logic;
+      wb_ack_o                                    : out std_logic;
+      wb_stall_o                                  : out std_logic;
+      fs_clk_i                                    : in  std_logic;
+      fmc_adc_core_ctl_fsm_cmd_o                  : out std_logic_vector(1 downto 0);
+      fmc_adc_core_ctl_fsm_cmd_wr_o               : out std_logic;
+      fmc_adc_core_ctl_fmc_clk_oe_o               : out std_logic;
+      fmc_adc_core_ctl_offset_dac_clr_n_o         : out std_logic;
+      fmc_adc_core_ctl_man_bitslip_o              : out std_logic;
+      fmc_adc_core_ctl_test_data_en_o             : out std_logic;
+      fmc_adc_core_ctl_trig_led_o                 : out std_logic;
+      fmc_adc_core_ctl_acq_led_o                  : out std_logic;
+      fmc_adc_core_ctl_reserved_o                 : out std_logic_vector(23 downto 0);
+      fmc_adc_core_sta_fsm_i                      : in  std_logic_vector(2 downto 0);
+      fmc_adc_core_sta_serdes_pll_i               : in  std_logic;
+      fmc_adc_core_sta_serdes_synced_i            : in  std_logic;
+      fmc_adc_core_sta_acq_cfg_i                  : in  std_logic;
+      fmc_adc_core_sta_reserved_i                 : in  std_logic_vector(25 downto 0);
+      fmc_adc_core_trig_cfg_hw_trig_sel_o         : out std_logic;
+      fmc_adc_core_trig_cfg_hw_trig_pol_o         : out std_logic;
+      fmc_adc_core_trig_cfg_hw_trig_en_o          : out std_logic;
+      fmc_adc_core_trig_cfg_sw_trig_en_o          : out std_logic;
+      fmc_adc_core_trig_cfg_int_trig_sel_o        : out std_logic_vector(1 downto 0);
+      fmc_adc_core_trig_cfg_int_trig_test_en_o    : out std_logic;
+      fmc_adc_core_trig_cfg_reserved_o            : out std_logic;
+      fmc_adc_core_trig_cfg_int_trig_thres_filt_o : out std_logic_vector(7 downto 0);
+      fmc_adc_core_trig_cfg_int_trig_thres_o      : out std_logic_vector(15 downto 0);
+      fmc_adc_core_trig_dly_o                     : out std_logic_vector(31 downto 0);
+      fmc_adc_core_sw_trig_o                      : out std_logic_vector(31 downto 0);
+      fmc_adc_core_sw_trig_wr_o                   : out std_logic;
+      fmc_adc_core_shots_nb_o                     : out std_logic_vector(15 downto 0);
+      fmc_adc_core_shots_reserved_o               : out std_logic_vector(15 downto 0);
+      fmc_adc_core_shots_cnt_val_i                : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_shots_cnt_reserved_o           : out std_logic_vector(15 downto 0);
+      fmc_adc_core_trig_pos_i                     : in  std_logic_vector(31 downto 0);
+      fmc_adc_core_fs_freq_i                      : in  std_logic_vector(31 downto 0);
+      fmc_adc_core_sr_deci_o                      : out std_logic_vector(31 downto 0);
+      fmc_adc_core_pre_samples_o                  : out std_logic_vector(31 downto 0);
+      fmc_adc_core_post_samples_o                 : out std_logic_vector(31 downto 0);
+      fmc_adc_core_samples_cnt_i                  : in  std_logic_vector(31 downto 0);
+      fmc_adc_core_ch1_ctl_ssr_o                  : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch1_ctl_reserved_o             : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch1_sta_val_i                  : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_sta_reserved_i             : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_gain_val_o                 : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_gain_reserved_o            : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_offset_val_o               : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_offset_reserved_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch1_sat_val_o                  : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch1_sat_reserved_o             : out std_logic_vector(16 downto 0);
+      fmc_adc_core_ch2_ctl_ssr_o                  : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch2_ctl_reserved_o             : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch2_sta_val_i                  : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_sta_reserved_i             : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_gain_val_o                 : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_gain_reserved_o            : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_offset_val_o               : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_offset_reserved_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch2_sat_val_o                  : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch2_sat_reserved_o             : out std_logic_vector(16 downto 0);
+      fmc_adc_core_ch3_ctl_ssr_o                  : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch3_ctl_reserved_o             : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch3_sta_val_i                  : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_sta_reserved_i             : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_gain_val_o                 : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_gain_reserved_o            : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_offset_val_o               : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_offset_reserved_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch3_sat_val_o                  : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch3_sat_reserved_o             : out std_logic_vector(16 downto 0);
+      fmc_adc_core_ch4_ctl_ssr_o                  : out std_logic_vector(6 downto 0);
+      fmc_adc_core_ch4_ctl_reserved_o             : out std_logic_vector(24 downto 0);
+      fmc_adc_core_ch4_sta_val_i                  : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_sta_reserved_i             : in  std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_gain_val_o                 : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_gain_reserved_o            : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_offset_val_o               : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_offset_reserved_o          : out std_logic_vector(15 downto 0);
+      fmc_adc_core_ch4_sat_val_o                  : out std_logic_vector(14 downto 0);
+      fmc_adc_core_ch4_sat_reserved_o             : out std_logic_vector(16 downto 0)
       );
   end component fmc_adc_100Ms_csr;
 
@@ -256,6 +269,16 @@ architecture rtl of fmc_adc_100Ms_core is
       );
   end component offset_gain_s;
 
+  component var_sat_s
+    port (
+      rst_n_i : in  std_logic;                      --! Reset (active low)
+      clk_i   : in  std_logic;                      --! Clock
+      sat_i   : in  std_logic_vector(14 downto 0);  --! Unsigned saturation value input
+      data_i  : in  std_logic_vector(15 downto 0);  --! Signed data input (two's complement)
+      data_o  : out std_logic_vector(15 downto 0)   --! Signed data output (two's complement)
+      );
+  end component var_sat_s;
+
   component monostable
     generic(
       g_INPUT_POLARITY  : std_logic := '1';    --! trigger_i polarity
@@ -282,6 +305,7 @@ architecture rtl of fmc_adc_100Ms_core is
   -- Types declaration
   ------------------------------------------------------------------------------
   type t_acq_fsm_state is (IDLE, PRE_TRIG, WAIT_TRIG, POST_TRIG, TRIG_TAG, DECR_SHOT);
+  type t_data_pipe is array (natural range<>) of std_logic_vector(63 downto 0);
 
   ------------------------------------------------------------------------------
   -- Signals declaration
@@ -293,15 +317,18 @@ architecture rtl of fmc_adc_100Ms_core is
   signal fs_rst_n : std_logic;
 
   -- Clocks and PLL
-  signal dco_clk     : std_logic;
-  signal dco_clk_buf : std_logic;
-  signal clk_fb      : std_logic;
-  signal clk_fb_buf  : std_logic;
-  signal locked_in   : std_logic;
-  signal locked_out  : std_logic;
-  signal serdes_clk  : std_logic;
-  signal fs_clk      : std_logic;
-  signal fs_clk_buf  : std_logic;
+  signal dco_clk       : std_logic;
+  signal dco_clk_buf   : std_logic;
+  signal clk_fb        : std_logic;
+  signal clk_fb_buf    : std_logic;
+  signal locked_in     : std_logic;
+  signal locked_out    : std_logic;
+  signal serdes_clk    : std_logic;
+  signal fs_clk        : std_logic;
+  signal fs_clk_buf    : std_logic;
+  signal fs_freq       : std_logic_vector(31 downto 0);
+  signal fs_freq_t     : std_logic_vector(31 downto 0);
+  signal fs_freq_valid : std_logic;
 
   -- SerDes
   signal serdes_in_p         : std_logic_vector(8 downto 0);
@@ -316,27 +343,36 @@ architecture rtl of fmc_adc_100Ms_core is
   signal bitslip_sreg        : std_logic_vector(7 downto 0);
 
   -- Trigger
-  signal ext_trig_a            : std_logic;
-  signal ext_trig              : std_logic;
-  signal int_trig              : std_logic;
-  signal int_trig_over_thres   : std_logic;
-  signal int_trig_over_thres_d : std_logic;
-  signal int_trig_sel          : std_logic_vector(1 downto 0);
-  signal int_trig_data         : std_logic_vector(15 downto 0);
-  signal int_trig_thres        : std_logic_vector(15 downto 0);
-  signal hw_trig_pol           : std_logic;
-  signal hw_trig               : std_logic;
-  signal hw_trig_t             : std_logic;
-  signal hw_trig_sel           : std_logic;
-  signal hw_trig_en            : std_logic;
-  signal sw_trig               : std_logic;
-  signal sw_trig_t             : std_logic;
-  signal sw_trig_en            : std_logic;
-  signal trig                  : std_logic;
-  signal trig_delay            : std_logic_vector(31 downto 0);
-  signal trig_delay_cnt        : unsigned(31 downto 0);
-  signal trig_d                : std_logic;
-  signal trig_align            : std_logic;
+  signal ext_trig_a                 : std_logic;
+  signal ext_trig                   : std_logic;
+  signal int_trig                   : std_logic;
+  signal int_trig_over_thres        : std_logic;
+  signal int_trig_over_thres_d      : std_logic;
+  signal int_trig_over_thres_filt   : std_logic;
+  signal int_trig_over_thres_filt_d : std_logic;
+  signal int_trig_sel               : std_logic_vector(1 downto 0);
+  signal int_trig_data              : std_logic_vector(15 downto 0);
+  signal int_trig_thres             : std_logic_vector(15 downto 0);
+  signal int_trig_test_en           : std_logic;
+  signal int_trig_thres_filt        : std_logic_vector(7 downto 0);
+  signal hw_trig_pol                : std_logic;
+  signal hw_trig                    : std_logic;
+  signal hw_trig_t                  : std_logic;
+  signal hw_trig_sel                : std_logic;
+  signal hw_trig_en                 : std_logic;
+  signal sw_trig                    : std_logic;
+  signal sw_trig_t                  : std_logic;
+  signal sw_trig_en                 : std_logic;
+  signal trig                       : std_logic;
+  signal trig_delay                 : std_logic_vector(31 downto 0);
+  signal trig_delay_cnt             : unsigned(31 downto 0);
+  signal trig_d                     : std_logic;
+  signal trig_align                 : std_logic;
+
+  -- Internal trigger test mode
+  signal int_trig_over_thres_tst      : std_logic_vector(15 downto 0);
+  signal int_trig_over_thres_filt_tst : std_logic_vector(15 downto 0);
+  signal trig_tst                     : std_logic_vector(15 downto 0);
 
   -- Decimation
   signal decim_factor : std_logic_vector(31 downto 0);
@@ -352,12 +388,14 @@ architecture rtl of fmc_adc_100Ms_core is
   signal sync_fifo_rd    : std_logic;
   signal sync_fifo_valid : std_logic;
 
-  -- Gain/offset calibration
+  -- Gain/offset calibration and saturation value
   signal gain_calibr       : std_logic_vector(63 downto 0);
   signal offset_calibr     : std_logic_vector(63 downto 0);
   signal data_calibr_in    : std_logic_vector(63 downto 0);
   signal data_calibr_out   : std_logic_vector(63 downto 0);
-  signal data_calibr_out_d : std_logic_vector(63 downto 0);
+  signal data_calibr_out_t : std_logic_vector(63 downto 0);
+  signal data_calibr_out_d : t_data_pipe(3 downto 0);
+  signal sat_val           : std_logic_vector(59 downto 0);
 
   -- Acquisition FSM
   signal acq_fsm_current_state : t_acq_fsm_state;
@@ -391,6 +429,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal samples_cnt          : unsigned(31 downto 0);
   signal shots_value          : std_logic_vector(15 downto 0);
   signal shots_cnt            : unsigned(15 downto 0);
+  signal remaining_shots      : std_logic_vector(15 downto 0);
   signal shots_done           : std_logic;
   signal shots_decr           : std_logic;
   signal single_shot          : std_logic;
@@ -432,6 +471,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal ram_addr_cnt : unsigned(24 downto 0);
   signal test_data_en : std_logic;
   signal trig_addr    : std_logic_vector(31 downto 0);
+  signal mem_ovr      : std_logic;
 
   -- Wishbone interface to DDR
   signal wb_ddr_stall_t : std_logic;
@@ -564,6 +604,33 @@ begin
       O => clk_fb
       );
 
+  -- Sampinling clock frequency meter
+  cmp_fs_freq : gc_frequency_meter
+    generic map(
+      g_with_internal_timebase => true,
+      g_clk_sys_freq           => 125000000,
+      g_counter_bits           => 32
+      )
+    port map(
+      clk_sys_i    => sys_clk_i,
+      clk_in_i     => fs_clk,
+      rst_n_i      => sys_rst_n_i,
+      pps_p1_i     => '0',
+      freq_o       => fs_freq_t,
+      freq_valid_o => fs_freq_valid
+      );
+
+  p_fs_freq : process (fs_clk, fs_rst_n)
+  begin
+    if fs_rst_n = '0' then
+      fs_freq <= (others => '0');
+    elsif rising_edge(fs_clk) then
+      if fs_freq_valid = '1' then
+        fs_freq <= fs_freq_t;
+      end if;
+    end if;
+  end process p_fs_freq;
+
   --gen_fb_clk_check : if (g_carrier_type /= "SPEC" and
   --                      g_carrier_type /= "SVEC") generate
   --  assert false report "[fmc_adc_100Ms_core] Selected carrier type not supported. Must be SPEC or SVEC." severity failure;
@@ -683,81 +750,94 @@ begin
   ------------------------------------------------------------------------------
   cmp_fmc_adc_100Ms_csr : fmc_adc_100Ms_csr
     port map(
-      rst_n_i                                => sys_rst_n_i,
-      clk_sys_i                              => sys_clk_i,
-      wb_adr_i                               => wb_csr_adr_i,
-      wb_dat_i                               => wb_csr_dat_i,
-      wb_dat_o                               => wb_csr_dat_o,
-      wb_cyc_i                               => wb_csr_cyc_i,
-      wb_sel_i                               => wb_csr_sel_i,
-      wb_stb_i                               => wb_csr_stb_i,
-      wb_we_i                                => wb_csr_we_i,
-      wb_ack_o                               => wb_csr_ack_o,
-      wb_stall_o                             => open,
-      fs_clk_i                               => fs_clk,
-      fmc_adc_core_ctl_fsm_cmd_o             => fsm_cmd,
-      fmc_adc_core_ctl_fsm_cmd_wr_o          => fsm_cmd_wr,
-      fmc_adc_core_ctl_fmc_clk_oe_o          => gpio_si570_oe_o,
-      fmc_adc_core_ctl_offset_dac_clr_n_o    => gpio_dac_clr_n_o,
-      fmc_adc_core_ctl_man_bitslip_o         => serdes_man_bitslip,
-      fmc_adc_core_ctl_test_data_en_o        => test_data_en,
-      fmc_adc_core_ctl_trig_led_o            => trig_led_man,
-      fmc_adc_core_ctl_acq_led_o             => acq_led_man,
-      fmc_adc_core_ctl_reserved_o            => open,
-      fmc_adc_core_sta_fsm_i                 => acq_fsm_state,
-      fmc_adc_core_sta_serdes_pll_i          => locked_out,
-      fmc_adc_core_sta_serdes_synced_i       => serdes_synced,
-      fmc_adc_core_sta_acq_cfg_i             => acq_config_ok,
-      fmc_adc_core_sta_reserved_i            => (others => '0'),
-      fmc_adc_core_trig_cfg_hw_trig_sel_o    => hw_trig_sel,
-      fmc_adc_core_trig_cfg_hw_trig_pol_o    => hw_trig_pol,
-      fmc_adc_core_trig_cfg_hw_trig_en_o     => hw_trig_en,
-      fmc_adc_core_trig_cfg_sw_trig_en_o     => sw_trig_en,
-      fmc_adc_core_trig_cfg_int_trig_sel_o   => int_trig_sel,
-      fmc_adc_core_trig_cfg_reserved_o       => open,
-      fmc_adc_core_trig_cfg_int_trig_thres_o => int_trig_thres,
-      fmc_adc_core_trig_dly_o                => trig_delay,
-      fmc_adc_core_sw_trig_o                 => open,
-      fmc_adc_core_sw_trig_wr_o              => sw_trig_t,
-      fmc_adc_core_shots_nb_o                => shots_value,
-      fmc_adc_core_shots_reserved_o          => open,
-      fmc_adc_core_trig_pos_i                => trig_addr,
-      fmc_adc_core_sr_deci_o                 => decim_factor,
-      fmc_adc_core_pre_samples_o             => pre_trig_value,
-      fmc_adc_core_post_samples_o            => post_trig_value,
-      fmc_adc_core_samples_cnt_i             => std_logic_vector(samples_cnt),
-      fmc_adc_core_ch1_ctl_ssr_o             => gpio_ssr_ch1_o,
-      fmc_adc_core_ch1_ctl_reserved_o        => open,
-      fmc_adc_core_ch1_sta_val_i             => serdes_out_data(15 downto 0),
-      fmc_adc_core_ch1_sta_reserved_i        => (others => '0'),
-      fmc_adc_core_ch1_gain_val_o            => gain_calibr(15 downto 0),
-      fmc_adc_core_ch1_gain_reserved_o       => open,
-      fmc_adc_core_ch1_offset_val_o          => offset_calibr(15 downto 0),
-      fmc_adc_core_ch1_offset_reserved_o     => open,
-      fmc_adc_core_ch2_ctl_ssr_o             => gpio_ssr_ch2_o,
-      fmc_adc_core_ch2_ctl_reserved_o        => open,
-      fmc_adc_core_ch2_sta_val_i             => serdes_out_data(31 downto 16),
-      fmc_adc_core_ch2_sta_reserved_i        => (others => '0'),
-      fmc_adc_core_ch2_gain_val_o            => gain_calibr(31 downto 16),
-      fmc_adc_core_ch2_gain_reserved_o       => open,
-      fmc_adc_core_ch2_offset_val_o          => offset_calibr(31 downto 16),
-      fmc_adc_core_ch2_offset_reserved_o     => open,
-      fmc_adc_core_ch3_ctl_ssr_o             => gpio_ssr_ch3_o,
-      fmc_adc_core_ch3_ctl_reserved_o        => open,
-      fmc_adc_core_ch3_sta_val_i             => serdes_out_data(47 downto 32),
-      fmc_adc_core_ch3_sta_reserved_i        => (others => '0'),
-      fmc_adc_core_ch3_gain_val_o            => gain_calibr(47 downto 32),
-      fmc_adc_core_ch3_gain_reserved_o       => open,
-      fmc_adc_core_ch3_offset_val_o          => offset_calibr(47 downto 32),
-      fmc_adc_core_ch3_offset_reserved_o     => open,
-      fmc_adc_core_ch4_ctl_ssr_o             => gpio_ssr_ch4_o,
-      fmc_adc_core_ch4_ctl_reserved_o        => open,
-      fmc_adc_core_ch4_sta_val_i             => serdes_out_data(63 downto 48),
-      fmc_adc_core_ch4_sta_reserved_i        => (others => '0'),
-      fmc_adc_core_ch4_gain_val_o            => gain_calibr(63 downto 48),
-      fmc_adc_core_ch4_gain_reserved_o       => open,
-      fmc_adc_core_ch4_offset_val_o          => offset_calibr(63 downto 48),
-      fmc_adc_core_ch4_offset_reserved_o     => open
+      rst_n_i                                     => sys_rst_n_i,
+      clk_sys_i                                   => sys_clk_i,
+      wb_adr_i                                    => wb_csr_adr_i,
+      wb_dat_i                                    => wb_csr_dat_i,
+      wb_dat_o                                    => wb_csr_dat_o,
+      wb_cyc_i                                    => wb_csr_cyc_i,
+      wb_sel_i                                    => wb_csr_sel_i,
+      wb_stb_i                                    => wb_csr_stb_i,
+      wb_we_i                                     => wb_csr_we_i,
+      wb_ack_o                                    => wb_csr_ack_o,
+      wb_stall_o                                  => open,
+      fs_clk_i                                    => fs_clk,
+      fmc_adc_core_ctl_fsm_cmd_o                  => fsm_cmd,
+      fmc_adc_core_ctl_fsm_cmd_wr_o               => fsm_cmd_wr,
+      fmc_adc_core_ctl_fmc_clk_oe_o               => gpio_si570_oe_o,
+      fmc_adc_core_ctl_offset_dac_clr_n_o         => gpio_dac_clr_n_o,
+      fmc_adc_core_ctl_man_bitslip_o              => serdes_man_bitslip,
+      fmc_adc_core_ctl_test_data_en_o             => test_data_en,
+      fmc_adc_core_ctl_trig_led_o                 => trig_led_man,
+      fmc_adc_core_ctl_acq_led_o                  => acq_led_man,
+      fmc_adc_core_ctl_reserved_o                 => open,
+      fmc_adc_core_sta_fsm_i                      => acq_fsm_state,
+      fmc_adc_core_sta_serdes_pll_i               => locked_out,
+      fmc_adc_core_sta_serdes_synced_i            => serdes_synced,
+      fmc_adc_core_sta_acq_cfg_i                  => acq_config_ok,
+      fmc_adc_core_sta_reserved_i                 => (others => '0'),
+      fmc_adc_core_trig_cfg_hw_trig_sel_o         => hw_trig_sel,
+      fmc_adc_core_trig_cfg_hw_trig_pol_o         => hw_trig_pol,
+      fmc_adc_core_trig_cfg_hw_trig_en_o          => hw_trig_en,
+      fmc_adc_core_trig_cfg_sw_trig_en_o          => sw_trig_en,
+      fmc_adc_core_trig_cfg_int_trig_sel_o        => int_trig_sel,
+      fmc_adc_core_trig_cfg_int_trig_test_en_o    => int_trig_test_en,
+      fmc_adc_core_trig_cfg_reserved_o            => open,
+      fmc_adc_core_trig_cfg_int_trig_thres_filt_o => int_trig_thres_filt,
+      fmc_adc_core_trig_cfg_int_trig_thres_o      => int_trig_thres,
+      fmc_adc_core_trig_dly_o                     => trig_delay,
+      fmc_adc_core_sw_trig_o                      => open,
+      fmc_adc_core_sw_trig_wr_o                   => sw_trig_t,
+      fmc_adc_core_shots_nb_o                     => shots_value,
+      fmc_adc_core_shots_reserved_o               => open,
+      fmc_adc_core_shots_cnt_val_i                => remaining_shots,
+      fmc_adc_core_shots_cnt_reserved_o           => open,
+      fmc_adc_core_trig_pos_i                     => trig_addr,
+      fmc_adc_core_fs_freq_i                      => fs_freq,
+      fmc_adc_core_sr_deci_o                      => decim_factor,
+      fmc_adc_core_pre_samples_o                  => pre_trig_value,
+      fmc_adc_core_post_samples_o                 => post_trig_value,
+      fmc_adc_core_samples_cnt_i                  => std_logic_vector(samples_cnt),
+      fmc_adc_core_ch1_ctl_ssr_o                  => gpio_ssr_ch1_o,
+      fmc_adc_core_ch1_ctl_reserved_o             => open,
+      fmc_adc_core_ch1_sta_val_i                  => serdes_out_data(15 downto 0),
+      fmc_adc_core_ch1_sta_reserved_i             => (others => '0'),
+      fmc_adc_core_ch1_gain_val_o                 => gain_calibr(15 downto 0),
+      fmc_adc_core_ch1_gain_reserved_o            => open,
+      fmc_adc_core_ch1_offset_val_o               => offset_calibr(15 downto 0),
+      fmc_adc_core_ch1_offset_reserved_o          => open,
+      fmc_adc_core_ch1_sat_val_o                  => sat_val(14 downto 0),
+      fmc_adc_core_ch1_sat_reserved_o             => open,
+      fmc_adc_core_ch2_ctl_ssr_o                  => gpio_ssr_ch2_o,
+      fmc_adc_core_ch2_ctl_reserved_o             => open,
+      fmc_adc_core_ch2_sta_val_i                  => serdes_out_data(31 downto 16),
+      fmc_adc_core_ch2_sta_reserved_i             => (others => '0'),
+      fmc_adc_core_ch2_gain_val_o                 => gain_calibr(31 downto 16),
+      fmc_adc_core_ch2_gain_reserved_o            => open,
+      fmc_adc_core_ch2_offset_val_o               => offset_calibr(31 downto 16),
+      fmc_adc_core_ch2_offset_reserved_o          => open,
+      fmc_adc_core_ch2_sat_val_o                  => sat_val(29 downto 15),
+      fmc_adc_core_ch2_sat_reserved_o             => open,
+      fmc_adc_core_ch3_ctl_ssr_o                  => gpio_ssr_ch3_o,
+      fmc_adc_core_ch3_ctl_reserved_o             => open,
+      fmc_adc_core_ch3_sta_val_i                  => serdes_out_data(47 downto 32),
+      fmc_adc_core_ch3_sta_reserved_i             => (others => '0'),
+      fmc_adc_core_ch3_gain_val_o                 => gain_calibr(47 downto 32),
+      fmc_adc_core_ch3_gain_reserved_o            => open,
+      fmc_adc_core_ch3_offset_val_o               => offset_calibr(47 downto 32),
+      fmc_adc_core_ch3_offset_reserved_o          => open,
+      fmc_adc_core_ch3_sat_val_o                  => sat_val(44 downto 30),
+      fmc_adc_core_ch3_sat_reserved_o             => open,
+      fmc_adc_core_ch4_ctl_ssr_o                  => gpio_ssr_ch4_o,
+      fmc_adc_core_ch4_ctl_reserved_o             => open,
+      fmc_adc_core_ch4_sta_val_i                  => serdes_out_data(63 downto 48),
+      fmc_adc_core_ch4_sta_reserved_i             => (others => '0'),
+      fmc_adc_core_ch4_gain_val_o                 => gain_calibr(63 downto 48),
+      fmc_adc_core_ch4_gain_reserved_o            => open,
+      fmc_adc_core_ch4_offset_val_o               => offset_calibr(63 downto 48),
+      fmc_adc_core_ch4_offset_reserved_o          => open,
+      fmc_adc_core_ch4_sat_val_o                  => sat_val(59 downto 45),
+      fmc_adc_core_ch4_sat_reserved_o             => open
       );
 
   ------------------------------------------------------------------------------
@@ -771,7 +851,16 @@ begin
         offset_i => offset_calibr((I+1)*16-1 downto I*16),
         gain_i   => gain_calibr((I+1)*16-1 downto I*16),
         data_i   => data_calibr_in((I+1)*16-1 downto I*16),
-        data_o   => data_calibr_out((I+1)*16-1 downto I*16)
+        data_o   => data_calibr_out_t((I+1)*16-1 downto I*16)
+        );
+
+    cmp_var_sat : var_sat_s
+      port map (
+        rst_n_i => fs_rst_n,
+        clk_i   => fs_clk,
+        sat_i   => sat_val((I+1)*15-1 downto I*15),
+        data_i  => data_calibr_out_t((I+1)*16-1 downto I*16),
+        data_o  => data_calibr_out((I+1)*16-1 downto I*16)
         );
   end generate l_offset_gain_calibr;
 
@@ -813,25 +902,45 @@ begin
                    data_calibr_out(63 downto 48) when int_trig_sel = "11" else  -- CH4 selected
                    (others => '0');
 
+  -- Detects input data going over the internal trigger threshold
   p_int_trig : process (fs_clk, fs_rst_n)
   begin
     if fs_rst_n = '0' then
-      int_trig_over_thres   <= '0';
-      int_trig_over_thres_d <= '0';
-      data_calibr_out_d     <= (others => '0');
+      int_trig_over_thres <= '0';
     elsif rising_edge(fs_clk) then
       if signed(int_trig_data) > signed(int_trig_thres) then
         int_trig_over_thres <= '1';
       else
         int_trig_over_thres <= '0';
       end if;
-      int_trig_over_thres_d <= int_trig_over_thres;
-      data_calibr_out_d     <= data_calibr_out;  -- delay data to compensate for threshold detection delay
     end if;
   end process p_int_trig;
 
-  int_trig <= int_trig_over_thres and not(int_trig_over_thres_d) when hw_trig_pol = '0' else  -- positive slope
-              not(int_trig_over_thres) and int_trig_over_thres_d;                             -- negative slope
+  -- Filters out glitches from over threshold signal (rejects noise around the threshold -> hysteresis)
+  cmp_dyn_glitch_filt : gc_dyn_glitch_filt
+    generic map(
+      g_len_width => 8
+      )
+    port map(
+      clk_i   => fs_clk,
+      rst_n_i => fs_rst_n,
+      len_i   => int_trig_thres_filt(7 downto 0),
+      dat_i   => int_trig_over_thres,
+      dat_o   => int_trig_over_thres_filt
+      );
+
+  -- Detects whether it's a positive or negative slope
+  p_int_trig_slope : process (fs_clk, fs_rst_n)
+  begin
+    if fs_rst_n = '0' then
+      int_trig_over_thres_filt_d <= '0';
+    elsif rising_edge(fs_clk) then
+      int_trig_over_thres_filt_d <= int_trig_over_thres_filt;
+    end if;
+  end process;
+
+  int_trig <= int_trig_over_thres_filt and not(int_trig_over_thres_filt_d) when hw_trig_pol = '0' else  -- positive slope
+              not(int_trig_over_thres_filt) and int_trig_over_thres_filt_d;                             -- negative slope
 
   -- Hardware trigger selection
   --    internal = adc data threshold
@@ -972,8 +1081,28 @@ begin
     end if;
   end process;
 
+  -- Internal trigger test mode
+  int_trig_over_thres_tst      <= X"1000" when int_trig_over_thres = '1'      else X"0000";
+  int_trig_over_thres_filt_tst <= X"1000" when int_trig_over_thres_filt = '1' else X"0000";
+  trig_tst                     <= X"1000" when trig_align = '1'               else X"0000";
+
+  -- Delay data to compoensate for internal trigger detection
+  p_data_delay : process (fs_clk, fs_rst_n)
+  begin
+    if fs_rst_n = '0' then
+      data_calibr_out_d <= (others => (others => '0'));
+    elsif rising_edge(fs_clk) then
+      data_calibr_out_d <= data_calibr_out_d(data_calibr_out_d'left-1 downto 0) & data_calibr_out;
+    end if;
+  end process p_data_delay;
+
   -- An additional 1 fs_clk period delay is added when internal hw trigger is selected
-  sync_fifo_din <= trig_align & data_calibr_out_d when hw_trig_sel = '0' else trig_align & data_calibr_out;
+  sync_fifo_din <= (trig_align &
+                    trig_tst & int_trig_over_thres_filt_tst &
+                    int_trig_over_thres_tst &
+                    data_calibr_out_d(3)(15 downto 0)) when int_trig_test_en = '1' else
+                   (trig_align & data_calibr_out_d(3)) when hw_trig_sel = '0' else
+                   (trig_align & data_calibr_out);
 
   -- FOR DEBUG: FR instead of CH1 and SerDes Synced instead of CH2
   --sync_fifo_din <= trig_align & serdes_out_data(63 downto 32) &
@@ -1012,6 +1141,7 @@ begin
 
   multishot_buffer_sel <= std_logic(shots_cnt(0));
   shots_done           <= '1' when shots_cnt = to_unsigned(1, shots_cnt'length) else '0';
+  remaining_shots      <= std_logic_vector(shots_cnt);
 
   ------------------------------------------------------------------------------
   -- Pre-trigger counter
@@ -1104,10 +1234,11 @@ begin
   -- Check acquisition configuration
   --   Post-trigger sample must be > 0
   --   Shot number must be > 0
-  acq_config_ok <= '0' when
-                   unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length) and
-                   unsigned(shots_value) = to_unsigned(0, shots_value'length)
-                   else '1';
+  --   Number of sample (+time-tag) in multi-shot must be < multi-shot ram size
+  acq_config_ok <= '0' when (unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length)) else
+                   '0' when (unsigned(shots_value) = to_unsigned(0, shots_value'length))                                                                            else
+                   '0' when (unsigned(pre_trig_value)+unsigned(post_trig_value)+4 > to_unsigned(g_multishot_ram_size, pre_trig_value'length) and single_shot = '0') else
+                   '1';
 
   -- FSM transitions
   p_acq_fsm_transitions : process(sys_clk_i, sys_rst_n_i)
