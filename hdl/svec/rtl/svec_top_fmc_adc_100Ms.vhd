@@ -50,7 +50,6 @@ use work.fmc_adc_mezzanine_pkg.all;
 use work.sdb_meta_pkg.all;
 use work.xvme64x_core_pkg.all;
 use work.timetag_core_pkg.all;
-use work.bicolor_led_ctrl_pkg.all;
 
 
 entity svec_top_fmc_adc_100Ms is
@@ -1421,12 +1420,12 @@ begin
   -- Front panel LED control
   --  
   ------------------------------------------------------------------------------
-  cmp_led_controller : bicolor_led_ctrl
+  cmp_led_controller : gc_bicolor_led_ctrl
     generic map(
-      g_NB_COLUMN    => 4,
-      g_NB_LINE      => 2,
-      g_CLK_FREQ     => 125000000,      -- in Hz
-      g_REFRESH_RATE => 250             -- in Hz
+      g_nb_column    => 4,
+      g_nb_line      => 2,
+      g_clk_freq     => 125000000,      -- in Hz
+      g_refresh_rate => 250             -- in Hz
       )
     port map(
       rst_n_i => sys_rst_n,
@@ -1472,13 +1471,13 @@ begin
       );
 
   -- LED 1 : VME access
-  led_state(1 downto 0) <= c_LED_GREEN when vme_access = '1' else c_LED_OFF;
+  led_state(1 downto 0) <= c_led_green when vme_access = '1' else c_led_off;
 
   -- LED 2 : 
-  led_state(3 downto 2) <= c_LED_RED;
+  led_state(3 downto 2) <= c_led_red;
 
   -- LED 3 : 
-  led_state(5 downto 4) <= c_LED_RED_GREEN;
+  led_state(5 downto 4) <= c_led_red_green;
 
   -- LED 4 : 
   led_state(7 downto 6) <= '0' & led_pwm;
