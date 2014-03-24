@@ -168,12 +168,10 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_ctl_test_data_en_o             : out std_logic;
       fmc_adc_core_ctl_trig_led_o                 : out std_logic;
       fmc_adc_core_ctl_acq_led_o                  : out std_logic;
-      fmc_adc_core_ctl_reserved_o                 : out std_logic_vector(23 downto 0);
       fmc_adc_core_sta_fsm_i                      : in  std_logic_vector(2 downto 0);
       fmc_adc_core_sta_serdes_pll_i               : in  std_logic;
       fmc_adc_core_sta_serdes_synced_i            : in  std_logic;
       fmc_adc_core_sta_acq_cfg_i                  : in  std_logic;
-      fmc_adc_core_sta_reserved_i                 : in  std_logic_vector(25 downto 0);
       fmc_adc_core_trig_cfg_hw_trig_sel_o         : out std_logic;
       fmc_adc_core_trig_cfg_hw_trig_pol_o         : out std_logic;
       fmc_adc_core_trig_cfg_hw_trig_en_o          : out std_logic;
@@ -187,9 +185,7 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_sw_trig_o                      : out std_logic_vector(31 downto 0);
       fmc_adc_core_sw_trig_wr_o                   : out std_logic;
       fmc_adc_core_shots_nb_o                     : out std_logic_vector(15 downto 0);
-      fmc_adc_core_shots_reserved_o               : out std_logic_vector(15 downto 0);
       fmc_adc_core_shots_cnt_val_i                : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_shots_cnt_reserved_o           : out std_logic_vector(15 downto 0);
       fmc_adc_core_trig_pos_i                     : in  std_logic_vector(31 downto 0);
       fmc_adc_core_fs_freq_i                      : in  std_logic_vector(31 downto 0);
       fmc_adc_core_sr_deci_o                      : out std_logic_vector(31 downto 0);
@@ -197,45 +193,25 @@ architecture rtl of fmc_adc_100Ms_core is
       fmc_adc_core_post_samples_o                 : out std_logic_vector(31 downto 0);
       fmc_adc_core_samples_cnt_i                  : in  std_logic_vector(31 downto 0);
       fmc_adc_core_ch1_ctl_ssr_o                  : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch1_ctl_reserved_o             : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch1_sta_val_i                  : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_sta_reserved_i             : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch1_gain_val_o                 : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_gain_reserved_o            : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch1_offset_val_o               : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch1_offset_reserved_o          : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch1_sat_val_o                  : out std_logic_vector(14 downto 0);
-      fmc_adc_core_ch1_sat_reserved_o             : out std_logic_vector(16 downto 0);
       fmc_adc_core_ch2_ctl_ssr_o                  : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch2_ctl_reserved_o             : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch2_sta_val_i                  : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_sta_reserved_i             : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch2_gain_val_o                 : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_gain_reserved_o            : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch2_offset_val_o               : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch2_offset_reserved_o          : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch2_sat_val_o                  : out std_logic_vector(14 downto 0);
-      fmc_adc_core_ch2_sat_reserved_o             : out std_logic_vector(16 downto 0);
       fmc_adc_core_ch3_ctl_ssr_o                  : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch3_ctl_reserved_o             : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch3_sta_val_i                  : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_sta_reserved_i             : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch3_gain_val_o                 : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_gain_reserved_o            : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch3_offset_val_o               : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch3_offset_reserved_o          : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch3_sat_val_o                  : out std_logic_vector(14 downto 0);
-      fmc_adc_core_ch3_sat_reserved_o             : out std_logic_vector(16 downto 0);
       fmc_adc_core_ch4_ctl_ssr_o                  : out std_logic_vector(6 downto 0);
-      fmc_adc_core_ch4_ctl_reserved_o             : out std_logic_vector(24 downto 0);
       fmc_adc_core_ch4_sta_val_i                  : in  std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_sta_reserved_i             : in  std_logic_vector(15 downto 0);
       fmc_adc_core_ch4_gain_val_o                 : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_gain_reserved_o            : out std_logic_vector(15 downto 0);
       fmc_adc_core_ch4_offset_val_o               : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_offset_reserved_o          : out std_logic_vector(15 downto 0);
-      fmc_adc_core_ch4_sat_val_o                  : out std_logic_vector(14 downto 0);
-      fmc_adc_core_ch4_sat_reserved_o             : out std_logic_vector(16 downto 0)
+      fmc_adc_core_ch4_sat_val_o                  : out std_logic_vector(14 downto 0)
       );
   end component fmc_adc_100Ms_csr;
 
@@ -770,12 +746,10 @@ begin
       fmc_adc_core_ctl_test_data_en_o             => test_data_en,
       fmc_adc_core_ctl_trig_led_o                 => trig_led_man,
       fmc_adc_core_ctl_acq_led_o                  => acq_led_man,
-      fmc_adc_core_ctl_reserved_o                 => open,
       fmc_adc_core_sta_fsm_i                      => acq_fsm_state,
       fmc_adc_core_sta_serdes_pll_i               => locked_out,
       fmc_adc_core_sta_serdes_synced_i            => serdes_synced,
       fmc_adc_core_sta_acq_cfg_i                  => acq_config_ok,
-      fmc_adc_core_sta_reserved_i                 => (others => '0'),
       fmc_adc_core_trig_cfg_hw_trig_sel_o         => hw_trig_sel,
       fmc_adc_core_trig_cfg_hw_trig_pol_o         => hw_trig_pol,
       fmc_adc_core_trig_cfg_hw_trig_en_o          => hw_trig_en,
@@ -789,9 +763,7 @@ begin
       fmc_adc_core_sw_trig_o                      => open,
       fmc_adc_core_sw_trig_wr_o                   => sw_trig_t,
       fmc_adc_core_shots_nb_o                     => shots_value,
-      fmc_adc_core_shots_reserved_o               => open,
       fmc_adc_core_shots_cnt_val_i                => remaining_shots,
-      fmc_adc_core_shots_cnt_reserved_o           => open,
       fmc_adc_core_trig_pos_i                     => trig_addr,
       fmc_adc_core_fs_freq_i                      => fs_freq,
       fmc_adc_core_sr_deci_o                      => decim_factor,
@@ -799,45 +771,25 @@ begin
       fmc_adc_core_post_samples_o                 => post_trig_value,
       fmc_adc_core_samples_cnt_i                  => std_logic_vector(samples_cnt),
       fmc_adc_core_ch1_ctl_ssr_o                  => gpio_ssr_ch1_o,
-      fmc_adc_core_ch1_ctl_reserved_o             => open,
       fmc_adc_core_ch1_sta_val_i                  => serdes_out_data(15 downto 0),
-      fmc_adc_core_ch1_sta_reserved_i             => (others => '0'),
       fmc_adc_core_ch1_gain_val_o                 => gain_calibr(15 downto 0),
-      fmc_adc_core_ch1_gain_reserved_o            => open,
       fmc_adc_core_ch1_offset_val_o               => offset_calibr(15 downto 0),
-      fmc_adc_core_ch1_offset_reserved_o          => open,
       fmc_adc_core_ch1_sat_val_o                  => sat_val(14 downto 0),
-      fmc_adc_core_ch1_sat_reserved_o             => open,
       fmc_adc_core_ch2_ctl_ssr_o                  => gpio_ssr_ch2_o,
-      fmc_adc_core_ch2_ctl_reserved_o             => open,
       fmc_adc_core_ch2_sta_val_i                  => serdes_out_data(31 downto 16),
-      fmc_adc_core_ch2_sta_reserved_i             => (others => '0'),
       fmc_adc_core_ch2_gain_val_o                 => gain_calibr(31 downto 16),
-      fmc_adc_core_ch2_gain_reserved_o            => open,
       fmc_adc_core_ch2_offset_val_o               => offset_calibr(31 downto 16),
-      fmc_adc_core_ch2_offset_reserved_o          => open,
       fmc_adc_core_ch2_sat_val_o                  => sat_val(29 downto 15),
-      fmc_adc_core_ch2_sat_reserved_o             => open,
       fmc_adc_core_ch3_ctl_ssr_o                  => gpio_ssr_ch3_o,
-      fmc_adc_core_ch3_ctl_reserved_o             => open,
       fmc_adc_core_ch3_sta_val_i                  => serdes_out_data(47 downto 32),
-      fmc_adc_core_ch3_sta_reserved_i             => (others => '0'),
       fmc_adc_core_ch3_gain_val_o                 => gain_calibr(47 downto 32),
-      fmc_adc_core_ch3_gain_reserved_o            => open,
       fmc_adc_core_ch3_offset_val_o               => offset_calibr(47 downto 32),
-      fmc_adc_core_ch3_offset_reserved_o          => open,
       fmc_adc_core_ch3_sat_val_o                  => sat_val(44 downto 30),
-      fmc_adc_core_ch3_sat_reserved_o             => open,
       fmc_adc_core_ch4_ctl_ssr_o                  => gpio_ssr_ch4_o,
-      fmc_adc_core_ch4_ctl_reserved_o             => open,
       fmc_adc_core_ch4_sta_val_i                  => serdes_out_data(63 downto 48),
-      fmc_adc_core_ch4_sta_reserved_i             => (others => '0'),
       fmc_adc_core_ch4_gain_val_o                 => gain_calibr(63 downto 48),
-      fmc_adc_core_ch4_gain_reserved_o            => open,
       fmc_adc_core_ch4_offset_val_o               => offset_calibr(63 downto 48),
-      fmc_adc_core_ch4_offset_reserved_o          => open,
-      fmc_adc_core_ch4_sat_val_o                  => sat_val(59 downto 45),
-      fmc_adc_core_ch4_sat_reserved_o             => open
+      fmc_adc_core_ch4_sat_val_o                  => sat_val(59 downto 45)
       );
 
   ------------------------------------------------------------------------------

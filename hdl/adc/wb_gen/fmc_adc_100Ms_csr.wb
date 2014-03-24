@@ -69,6 +69,7 @@ peripheral {
       access_dev = READ_ONLY;
     };
 
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -78,6 +79,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -120,7 +122,7 @@ peripheral {
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -130,6 +132,7 @@ peripheral {
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
+]]
   };
 
   reg {
@@ -269,7 +272,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -279,6 +282,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -294,7 +298,7 @@ peripheral {
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -304,6 +308,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -406,7 +411,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -416,6 +421,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -432,7 +438,7 @@ peripheral {
       access_dev = WRITE_ONLY;
       clock = "fs_clk_i";
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -442,6 +448,7 @@ peripheral {
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
+]]
   };
 
   reg {
@@ -457,7 +464,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -467,6 +474,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -482,7 +490,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -492,6 +500,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -507,7 +516,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -517,6 +526,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -532,7 +542,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -542,6 +552,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -558,7 +569,7 @@ peripheral {
       access_dev = WRITE_ONLY;
       clock = "fs_clk_i";
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -568,6 +579,7 @@ peripheral {
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
+]]
   };
 
   reg {
@@ -583,7 +595,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -593,6 +605,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -608,7 +621,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -618,6 +631,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -633,7 +647,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -643,6 +657,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -658,7 +673,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -668,6 +683,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -684,7 +700,7 @@ peripheral {
       access_dev = WRITE_ONLY;
       clock = "fs_clk_i";
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -694,6 +710,7 @@ peripheral {
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
+]]
   };
 
   reg {
@@ -709,7 +726,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -719,6 +736,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -734,7 +752,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -744,6 +762,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -759,7 +778,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -769,6 +788,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -784,7 +804,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -794,6 +814,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -810,7 +831,7 @@ peripheral {
       access_dev = WRITE_ONLY;
       clock = "fs_clk_i";
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -820,6 +841,7 @@ peripheral {
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
+]]
   };
 
   reg {
@@ -835,7 +857,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -845,6 +867,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -860,7 +883,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -870,6 +893,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
   reg {
@@ -885,7 +909,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
-
+--[[
     field {
       name = "Reserved";
       description = "Ignore on read, write with 0's";
@@ -895,6 +919,7 @@ peripheral {
       access_bus = READ_WRITE;
       access_dev = READ_ONLY;
     };
+]]
   };
 
 };

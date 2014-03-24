@@ -172,11 +172,6 @@ Manual TRIG LED
 @code{ACQ_LED}
 @tab @code{0} @tab 
 Manual ACQ LED
-@item @code{31...8}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
@@ -184,7 +179,6 @@ Reserved
 @item @code{test_data_en} @tab Write the address counter value instead of ADC data to DDR
 @item @code{trig_led} @tab Manual control of the front panel TRIG LED
 @item @code{acq_led} @tab Manual control of the front panel ACQ LED
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{sta} - Status register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -209,11 +203,6 @@ SerDes synchronization status
 @code{ACQ_CFG}
 @tab @code{X} @tab 
 Acquisition configuration status
-@item @code{31...6}
-@tab R/O @tab
-@code{RESERVED}
-@tab @code{X} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
@@ -221,7 +210,6 @@ Reserved
 @item @code{serdes_pll} @tab Sampling clock recovery PLL.@*0: not locked@*1: locked
 @item @code{serdes_synced} @tab 0: bitslip in progress@*1: serdes synchronized
 @item @code{acq_cfg} @tab 0: Unauthorised acquisition configuration (will prevent acquisition to start)@*1: Valid acquisition configuration@*@bullet{}  Shot number > 0@*@bullet{}  Post-trigger sample > 0
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{trig_cfg} - Trigger configuration
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -315,16 +303,10 @@ Software trigger (ignore on read)
 @code{NB}
 @tab @code{0} @tab 
 Number of shots
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{nb} @tab Number of shots required in multi-shot mode, set to one for single-shot mode.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{shots_cnt} - Remaining shots counter
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -334,16 +316,10 @@ Reserved
 @code{VAL}
 @tab @code{X} @tab 
 Remaining shots counter
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Counts the number of remaining shots to acquire.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{trig_pos} - Trigger address register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -431,16 +407,10 @@ Samples counter
 @code{SSR}
 @tab @code{0} @tab 
 Solid state relays control for channel 1
-@item @code{31...7}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{ssr} @tab Controls input voltage range, termination and DC offset error calibration@*0x23: 100mV range@*0x11: 1V range@*0x45: 10V range@*0x00: Open input@*0x42: 100mV range calibration@*0x40: 1V range calibration@*0x44: 10V range calibration@*Bit3 is indepandant of the others and enables the 50ohms termination.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch1_sta} - Channel 1 status register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -450,16 +420,10 @@ Reserved
 @code{VAL}
 @tab @code{X} @tab 
 Channel 1 current ADC value
-@item @code{31...16}
-@tab R/O @tab
-@code{RESERVED}
-@tab @code{X} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Current ADC raw value. The format is binary two's complement.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch1_gain} - Channel 1 gain calibration register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -469,16 +433,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Gain calibration for channel 1
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Gain applied to all data coming from the ADC.@*Fixed point format:@*Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch1_offset} - Channel 1 offset calibration register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -488,16 +446,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Offset calibration for channel 1
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch1_sat} - Channel 1 saturation register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -507,16 +459,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Saturation value for channel 1
-@item @code{31...15}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch2_ctl} - Channel 2 control register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -526,16 +472,10 @@ Reserved
 @code{SSR}
 @tab @code{0} @tab 
 Solid state relays control for channel 2
-@item @code{31...7}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{ssr} @tab Controls input voltage range, termination and DC offset error calibration@*0x23: 100mV range@*0x11: 1V range@*0x45: 10V range@*0x00: Open input@*0x42: 100mV range calibration@*0x40: 1V range calibration@*0x44: 10V range calibration@*Bit3 is indepandant of the others and enables the 50ohms termination.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch2_sta} - Channel 2 status register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -545,16 +485,10 @@ Reserved
 @code{VAL}
 @tab @code{X} @tab 
 Channel 2 current ACD value
-@item @code{31...16}
-@tab R/O @tab
-@code{RESERVED}
-@tab @code{X} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Current ADC raw value. The format is binary two's complement.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch2_gain} - Channel 2 gain calibration register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -564,16 +498,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Gain calibration for channel 2
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Gain applied to all data coming from the ADC.@*Fixed point format:@*Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch2_offset} - Channel 2 offset calibration register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -583,16 +511,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Offset calibration for channel 2
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch2_sat} - Channel 2 saturation register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -602,16 +524,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Saturation value for channel 2
-@item @code{31...15}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch3_ctl} - Channel 3 control register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -621,16 +537,10 @@ Reserved
 @code{SSR}
 @tab @code{0} @tab 
 Solid state relays control for channel 3
-@item @code{31...7}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{ssr} @tab Controls input voltage range, termination and DC offset error calibration@*0x23: 100mV range@*0x11: 1V range@*0x45: 10V range@*0x00: Open input@*0x42: 100mV range calibration@*0x40: 1V range calibration@*0x44: 10V range calibration@*Bit3 is indepandant of the others and enables the 50ohms termination.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch3_sta} - Channel 3 status register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -640,16 +550,10 @@ Reserved
 @code{VAL}
 @tab @code{X} @tab 
 Channel 3 current ADC value
-@item @code{31...16}
-@tab R/O @tab
-@code{RESERVED}
-@tab @code{X} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Current ADC raw value. The format is binary two's complement.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch3_gain} - Channel 3 gain calibration register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -659,16 +563,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Gain calibration for channel 3
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Gain applied to all data coming from the ADC.@*Fixed point format:@*Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch3_offset} - Channel 3 offset calibration register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -678,16 +576,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Offset calibration for channel 3
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch3_sat} - Channel 3 saturation register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -697,16 +589,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Saturation value for channel 3
-@item @code{31...15}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch4_ctl} - Channel 4 control register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -716,16 +602,10 @@ Reserved
 @code{SSR}
 @tab @code{0} @tab 
 Solid state relays control for channel 4
-@item @code{31...7}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{ssr} @tab Controls input voltage range, termination and DC offset error calibration@*0x23: 100mV range@*0x11: 1V range@*0x45: 10V range@*0x00: Open input@*0x42: 100mV range calibration@*0x40: 1V range calibration@*0x44: 10V range calibration@*Bit3 is indepandant of the others and enables the 50ohms termination.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch4_sta} - Channel 4 status register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -735,16 +615,10 @@ Reserved
 @code{VAL}
 @tab @code{X} @tab 
 Channel 4 current ADC value
-@item @code{31...16}
-@tab R/O @tab
-@code{RESERVED}
-@tab @code{X} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Current ADC raw value. The format is binary two's complement.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch4_gain} - Channel 4 gain calibration register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -754,16 +628,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Gain calibration for channel 4
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Gain applied to all data coming from the ADC.@*Fixed point format:@*Bit 15 = 2^0, bit 14 = 2^(-1), bit 13 = 2^(-2), ... , bit 1 = 2^(-14), bit 0 = 2^(-15)
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch4_offset} - Channel 4 offset calibration register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -773,16 +641,10 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Offset calibration for channel 4
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Offset applied to all data coming from the ADC. The format is binary two's complement.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{ch4_sat} - Channel 4 saturation register
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -792,14 +654,8 @@ Reserved
 @code{VAL}
 @tab @code{0} @tab 
 Saturation value for channel 4
-@item @code{31...15}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{val} @tab Saturation applied to all data coming from the offset/gain correction block. The format is 15-bit unsigned.
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
