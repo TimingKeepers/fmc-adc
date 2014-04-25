@@ -88,16 +88,6 @@ peripheral {
       access_bus = READ_ONLY;
       access_dev = WRITE_ONLY;
     };
-
-    field {
-      name = "Reserved";
-      description = "Ignore on read, write with 0's.";
-      prefix = "reserved";
-      type = SLV;
-      size = 27;
-      access_bus = READ_ONLY;
-      access_dev = WRITE_ONLY;
-    };
   };
 
   reg {
@@ -108,16 +98,6 @@ peripheral {
       name = "Front panel LED manual control";
       description = "Height front panel LED, two bits per LED.\n00 = OFF\n01 = Green\n10 = Red\n11 = Orange";
       prefix = "fp_leds_man";
-      type = SLV;
-      size = 16;
-      access_bus = READ_WRITE;
-      access_dev = READ_ONLY;
-    };
-
-    field {
-      name = "Reserved";
-      description = "Ignore on read, write with 0's";
-      prefix = "reserved";
       type = SLV;
       size = 16;
       access_bus = READ_WRITE;
@@ -152,16 +132,6 @@ peripheral {
       prefix = "fmc1_n";
       access_bus = READ_WRITE;
       access_dev = READ_WRITE;
-      };
-
-    field {
-      name = "Reserved";
-      description = "Ignore on read, write with 0's";
-      prefix = "reserved";
-      type = SLV;
-      size = 30;
-      access_bus = READ_WRITE;
-      access_dev = READ_ONLY;
     };
   };
 

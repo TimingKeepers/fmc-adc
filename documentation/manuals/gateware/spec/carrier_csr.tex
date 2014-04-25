@@ -66,11 +66,6 @@ System clock PLL status
 @code{DDR3_CAL_DONE}
 @tab @code{X} @tab 
 DDR3 calibration status
-@item @code{31...4}
-@tab R/O @tab
-@code{RESERVED}
-@tab @code{X} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
@@ -78,7 +73,6 @@ Reserved
 @item @code{p2l_pll_lck} @tab 0: not locked@*1: locked.
 @item @code{sys_pll_lck} @tab 0: not locked@*1: locked.
 @item @code{ddr3_cal_done} @tab 0: not done@*1: done.
-@item @code{reserved} @tab Ignore on read, write with 0's.
 @end multitable
 @regsection @code{ctrl} - Control
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -98,18 +92,12 @@ Red LED
 @code{DAC_CLR_N}
 @tab @code{0} @tab 
 DAC clear
-@item @code{31...3}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{led_green} @tab Manual control of the front panel green LED (unused in the fmc-adc application)
 @item @code{led_red} @tab Manual control of the front panel red LED (unused in the fmc-adc application)
 @item @code{dac_clr_n} @tab Active low clear signal for VCXO DACs
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{rst} - Reset Register
 Controls software reset of the mezzanine including the ddr interface and the time-tagging core.
@@ -120,14 +108,8 @@ Controls software reset of the mezzanine including the ddr interface and the tim
 @code{FMC0_N}
 @tab @code{X} @tab 
 State of the reset line
-@item @code{31...1}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{fmc0_n} @tab write 0: FMC is held in reset@* write 1: Normal FMC operation (default)
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable

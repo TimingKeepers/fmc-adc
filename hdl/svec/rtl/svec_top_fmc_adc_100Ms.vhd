@@ -277,16 +277,13 @@ architecture rtl of svec_top_fmc_adc_100Ms is
       carrier_csr_stat_sys_pll_lck_i   : in  std_logic;
       carrier_csr_stat_ddr0_cal_done_i : in  std_logic;
       carrier_csr_stat_ddr1_cal_done_i : in  std_logic;
-      carrier_csr_stat_reserved_i      : in  std_logic_vector(26 downto 0);
       carrier_csr_ctrl_fp_leds_man_o   : out std_logic_vector(15 downto 0);
-      carrier_csr_ctrl_reserved_o      : out std_logic_vector(15 downto 0);
       carrier_csr_rst_fmc0_n_o         : out std_logic;
       carrier_csr_rst_fmc0_n_i         : in  std_logic;
       carrier_csr_rst_fmc0_n_load_o    : out std_logic;
       carrier_csr_rst_fmc1_n_o         : out std_logic;
       carrier_csr_rst_fmc1_n_i         : in  std_logic;
-      carrier_csr_rst_fmc1_n_load_o    : out std_logic;
-      carrier_csr_rst_reserved_o       : out std_logic_vector(29 downto 0)
+      carrier_csr_rst_fmc1_n_load_o    : out std_logic
       );
   end component carrier_csr;
 
@@ -877,16 +874,13 @@ begin
       carrier_csr_stat_sys_pll_lck_i   => sys_clk_pll_locked,
       carrier_csr_stat_ddr0_cal_done_i => ddr0_calib_done,
       carrier_csr_stat_ddr1_cal_done_i => ddr1_calib_done,
-      carrier_csr_stat_reserved_i      => (others => '0'),
       carrier_csr_ctrl_fp_leds_man_o   => led_state_man,
-      carrier_csr_ctrl_reserved_o      => open,
       carrier_csr_rst_fmc0_n_o         => sw_rst_fmc0_n_o,
       carrier_csr_rst_fmc0_n_i         => sw_rst_fmc0_n_i,
       carrier_csr_rst_fmc0_n_load_o    => sw_rst_fmc0_n_load,
       carrier_csr_rst_fmc1_n_o         => sw_rst_fmc1_n_o,
       carrier_csr_rst_fmc1_n_i         => sw_rst_fmc1_n_i,
-      carrier_csr_rst_fmc1_n_load_o    => sw_rst_fmc1_n_load,
-      carrier_csr_rst_reserved_o       => open
+      carrier_csr_rst_fmc1_n_load_o    => sw_rst_fmc1_n_load
       );
 
   -- Unused wishbone signals

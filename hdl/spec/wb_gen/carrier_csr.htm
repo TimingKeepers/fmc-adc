@@ -307,23 +307,6 @@ carrier_csr_stat_ddr3_cal_done_i
 wb_stall_o
 </td>
 <td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-carrier_csr_stat_reserved_i[27:0]
-</td>
-<td  class="td_arrow_right">
-&lArr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -409,23 +392,6 @@ carrier_csr_ctrl_dac_clr_n_o
 
 </td>
 <td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-carrier_csr_ctrl_reserved_o[28:0]
-</td>
-<td  class="td_arrow_right">
-&rArr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
 &nbsp;
 </td>
 <td  class="td_pblock_right">
@@ -501,23 +467,6 @@ carrier_csr_rst_fmc0_n_load_o
 </td>
 <td  class="td_arrow_right">
 &rarr;
-</td>
-</tr>
-<tr>
-<td  class="td_arrow_left">
-
-</td>
-<td  class="td_pblock_left">
-
-</td>
-<td  class="td_sym_center">
-
-</td>
-<td  class="td_pblock_right">
-carrier_csr_rst_reserved_o[30:0]
-</td>
-<td  class="td_arrow_right">
-&rArr;
 </td>
 </tr>
 </table>
@@ -853,29 +802,29 @@ STAT
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[27:20]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -907,29 +856,29 @@ RESERVED[27:20]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[19:12]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -961,29 +910,29 @@ RESERVED[19:12]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[11:4]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1015,8 +964,17 @@ RESERVED[11:4]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=4  class="td_field">
-RESERVED[3:0]
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 DDR3_CAL_DONE
@@ -1029,15 +987,6 @@ P2L_PLL_LCK
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 FMC_PRES
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
 </td>
 </tr>
 </table>
@@ -1058,10 +1007,6 @@ SYS_PLL_LCK
 DDR3_CAL_DONE
 </b>[<i>read-only</i>]: DDR3 calibration status
 <br>0: not done<br>1: done.
-<li><b>
-RESERVED
-</b>[<i>read-only</i>]: Reserved
-<br>Ignore on read, write with 0's.
 </ul>
 <a name="CTRL"></a>
 <h3><a name="sect_3_3">3.3. Control</a></h3>
@@ -1127,29 +1072,29 @@ CTRL
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[28:21]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1181,29 +1126,29 @@ RESERVED[28:21]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[20:13]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1235,29 +1180,29 @@ RESERVED[20:13]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[12:5]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1289,8 +1234,20 @@ RESERVED[12:5]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=5  class="td_field">
-RESERVED[4:0]
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 DAC_CLR_N
@@ -1300,18 +1257,6 @@ LED_RED
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 LED_GREEN
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
 </td>
 </tr>
 </table>
@@ -1328,10 +1273,6 @@ LED_RED
 DAC_CLR_N
 </b>[<i>read/write</i>]: DAC clear
 <br>Active low clear signal for VCXO DACs
-<li><b>
-RESERVED
-</b>[<i>read/write</i>]: Reserved
-<br>Ignore on read, write with 0's
 </ul>
 <a name="RST"></a>
 <h3><a name="sect_3_4">3.4. Reset Register</a></h3>
@@ -1400,29 +1341,29 @@ Controls software reset of the mezzanine including the ddr interface and the tim
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[30:23]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1454,29 +1395,29 @@ RESERVED[30:23]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[22:15]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1508,29 +1449,29 @@ RESERVED[22:15]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=8  class="td_field">
-RESERVED[14:7]
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
-<td >
-
+<td  class="td_unused">
+-
 </td>
 </tr>
 </table>
@@ -1562,29 +1503,29 @@ RESERVED[14:7]
 </td>
 </tr>
 <tr>
-<td style="border: solid 1px black;" colspan=7  class="td_field">
-RESERVED[6:0]
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
+</td>
+<td  class="td_unused">
+-
 </td>
 <td style="border: solid 1px black;" colspan=1  class="td_field">
 FMC0_N
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
-</td>
-<td >
-
 </td>
 </tr>
 </table>
@@ -1593,10 +1534,6 @@ FMC0_N
 FMC0_N
 </b>[<i>read/write</i>]: State of the reset line
 <br>write 0: FMC is held in reset<br>                     write 1: Normal FMC operation (default)
-<li><b>
-RESERVED
-</b>[<i>read/write</i>]: Reserved
-<br>Ignore on read, write with 0's
 </ul>
 
 

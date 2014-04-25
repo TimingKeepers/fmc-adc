@@ -197,15 +197,12 @@ architecture rtl of spec_top_fmc_adc_100Ms is
       carrier_csr_stat_p2l_pll_lck_i   : in  std_logic;
       carrier_csr_stat_sys_pll_lck_i   : in  std_logic;
       carrier_csr_stat_ddr3_cal_done_i : in  std_logic;
-      carrier_csr_stat_reserved_i      : in  std_logic_vector(27 downto 0);
       carrier_csr_ctrl_led_green_o     : out std_logic;
       carrier_csr_ctrl_led_red_o       : out std_logic;
       carrier_csr_ctrl_dac_clr_n_o     : out std_logic;
-      carrier_csr_ctrl_reserved_o      : out std_logic_vector(28 downto 0);
       carrier_csr_rst_fmc0_n_o         : out std_logic;
       carrier_csr_rst_fmc0_n_i         : in  std_logic;
-      carrier_csr_rst_fmc0_n_load_o    : out std_logic;
-      carrier_csr_rst_reserved_o       : out std_logic_vector(30 downto 0)
+      carrier_csr_rst_fmc0_n_load_o    : out std_logic
       );
   end component carrier_csr;
 
@@ -729,15 +726,12 @@ begin
       carrier_csr_stat_p2l_pll_lck_i   => p2l_pll_locked,
       carrier_csr_stat_sys_pll_lck_i   => sys_clk_pll_locked,
       carrier_csr_stat_ddr3_cal_done_i => ddr3_calib_done,
-      carrier_csr_stat_reserved_i      => (others => '0'),
       carrier_csr_ctrl_led_green_o     => led_green,
       carrier_csr_ctrl_led_red_o       => led_red,
       carrier_csr_ctrl_dac_clr_n_o     => open,
-      carrier_csr_ctrl_reserved_o      => open,
       carrier_csr_rst_fmc0_n_o         => sw_rst_fmc0_n_o,
       carrier_csr_rst_fmc0_n_i         => sw_rst_fmc0_n_i,
-      carrier_csr_rst_fmc0_n_load_o    => sw_rst_fmc0_n_load,
-      carrier_csr_rst_reserved_o       => open
+      carrier_csr_rst_fmc0_n_load_o    => sw_rst_fmc0_n_load
       );
 
   -- Unused wishbone signals

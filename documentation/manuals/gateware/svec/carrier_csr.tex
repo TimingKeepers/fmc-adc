@@ -71,11 +71,6 @@ DDR3 bank 4 calibration status
 @code{DDR1_CAL_DONE}
 @tab @code{X} @tab 
 DDR3 bank 5 calibration status
-@item @code{31...5}
-@tab R/O @tab
-@code{RESERVED}
-@tab @code{X} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
@@ -84,7 +79,6 @@ Reserved
 @item @code{sys_pll_lck} @tab 0: not locked@*1: locked.
 @item @code{ddr0_cal_done} @tab 0: not done@*1: done.
 @item @code{ddr1_cal_done} @tab 0: not done@*1: done.
-@item @code{reserved} @tab Ignore on read, write with 0's.
 @end multitable
 @regsection @code{ctrl} - Control
 @multitable @columnfractions .10 .10 .15 .10 .55
@@ -94,16 +88,10 @@ Reserved
 @code{FP_LEDS_MAN}
 @tab @code{0} @tab 
 Front panel LED manual control
-@item @code{31...16}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{fp_leds_man} @tab Height front panel LED, two bits per LED.@*00 = OFF@*01 = Green@*10 = Red@*11 = Orange
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
 @regsection @code{rst} - Reset Register
 Controls software reset of the mezzanines including the ddr interface and the time-tagging core.
@@ -119,15 +107,9 @@ State of the FMC 1 reset line
 @code{FMC1_N}
 @tab @code{X} @tab 
 State of the FMC 2 reset line
-@item @code{31...2}
-@tab R/W @tab
-@code{RESERVED}
-@tab @code{0} @tab 
-Reserved
 @end multitable
 @multitable @columnfractions 0.15 0.85
 @headitem Field @tab Description
 @item @code{fmc0_n} @tab write 0: FMC is held in reset@* write 1: Normal FMC operation (default)
 @item @code{fmc1_n} @tab write 0: FMC is held in reset@* write 1: Normal FMC operation (default)
-@item @code{reserved} @tab Ignore on read, write with 0's
 @end multitable
