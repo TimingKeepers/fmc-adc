@@ -240,20 +240,11 @@ architecture rtl of fmc_adc_100Ms_core is
       clk_i    : in  std_logic;                      --! Clock
       offset_i : in  std_logic_vector(15 downto 0);  --! Signed offset input (two's complement)
       gain_i   : in  std_logic_vector(15 downto 0);  --! Unsigned gain input
+      sat_i    : in  std_logic_vector(14 downto 0);  --! Unsigned saturation value input
       data_i   : in  std_logic_vector(15 downto 0);  --! Signed data input (two's complement)
       data_o   : out std_logic_vector(15 downto 0)   --! Signed data output (two's complement)
       );
   end component offset_gain_s;
-
-  component var_sat_s
-    port (
-      rst_n_i : in  std_logic;                      --! Reset (active low)
-      clk_i   : in  std_logic;                      --! Clock
-      sat_i   : in  std_logic_vector(14 downto 0);  --! Unsigned saturation value input
-      data_i  : in  std_logic_vector(15 downto 0);  --! Signed data input (two's complement)
-      data_o  : out std_logic_vector(15 downto 0)   --! Signed data output (two's complement)
-      );
-  end component var_sat_s;
 
   component monostable
     generic(
@@ -802,17 +793,9 @@ begin
         clk_i    => fs_clk,
         offset_i => offset_calibr((I+1)*16-1 downto I*16),
         gain_i   => gain_calibr((I+1)*16-1 downto I*16),
+        sat_i    => sat_val((I+1)*15-1 downto I*15),
         data_i   => data_calibr_in((I+1)*16-1 downto I*16),
-        data_o   => data_calibr_out_t((I+1)*16-1 downto I*16)
-        );
-
-    cmp_var_sat : var_sat_s
-      port map (
-        rst_n_i => fs_rst_n,
-        clk_i   => fs_clk,
-        sat_i   => sat_val((I+1)*15-1 downto I*15),
-        data_i  => data_calibr_out_t((I+1)*16-1 downto I*16),
-        data_o  => data_calibr_out((I+1)*16-1 downto I*16)
+        data_o   => data_calibr_out((I+1)*16-1 downto I*16)
         );
   end generate l_offset_gain_calibr;
 
@@ -1187,10 +1170,27 @@ begin
   --   Post-trigger sample must be > 0
   --   Shot number must be > 0
   --   Number of sample (+time-tag) in multi-shot must be < multi-shot ram size
-  acq_config_ok <= '0' when (unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length)) else
-                   '0' when (unsigned(shots_value) = to_unsigned(0, shots_value'length))                                                                            else
-                   '0' when (unsigned(pre_trig_value)+unsigned(post_trig_value)+4 > to_unsigned(g_multishot_ram_size, pre_trig_value'length) and single_shot = '0') else
-                   '1';
+  p_acq_cfg_ok: process (sys_clk_i)
+  begin
+    if rising_edge(sys_clk_i) then
+      if sys_rst_n_i = '0' then
+        acq_config_ok <= '0';
+      elsif unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length) then
+         acq_config_ok <= '0';
+      elsif unsigned(shots_value) = to_unsigned(0, shots_value'length) then
+        acq_config_ok <= '0';
+      elsif unsigned(pre_trig_value)+unsigned(post_trig_value)+4 > to_unsigned(g_multishot_ram_size, pre_trig_value'length) and single_shot = '0' then
+        acq_config_ok <= '0';
+      else
+        acq_config_ok <= '1';
+      end if;
+    end if;
+  end process p_acq_cfg_ok;
+
+  --acq_config_ok <= '0' when (unsigned(post_trig_value) = to_unsigned(0, post_trig_value'length)) else
+  --                 '0' when (unsigned(shots_value) = to_unsigned(0, shots_value'length))                                                                            else
+  --                 '0' when (unsigned(pre_trig_value)+unsigned(post_trig_value)+4 > to_unsigned(g_multishot_ram_size, pre_trig_value'length) and single_shot = '0') else
+  --                 '1';
 
   -- FSM transitions
   p_acq_fsm_transitions : process(sys_clk_i, sys_rst_n_i)

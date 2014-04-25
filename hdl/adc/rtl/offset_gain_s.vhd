@@ -12,16 +12,17 @@
 --
 -- version: 1.0
 --
--- description: Offset and gain correction with saturation.
+-- description: Offset and gain correction with configurable saturation.
+--              Input and output are signed.
 --              Latency = 2
 --
 --                           ___               ___           ________
 --                          |   | offset_data |   | product |        |
 --              data_i ---->| + |------------>| X |-------->|saturate|--> data_o
 --                          |___|             |___|         |________|
---                            ^                 ^
---                            |                 |
---                         offset_i           gain_i
+--                            ^                 ^               ^
+--                            |                 |               |
+--                         offset_i           gain_i          sat_i
 --
 --
 -- dependencies:
@@ -65,6 +66,7 @@ entity offset_gain_s is
     clk_i    : in  std_logic;                      --! Clock
     offset_i : in  std_logic_vector(15 downto 0);  --! Signed offset input (two's complement)
     gain_i   : in  std_logic_vector(15 downto 0);  --! Unsigned gain input
+    sat_i    : in  std_logic_vector(14 downto 0);  --! Unsigned saturation value input
     data_i   : in  std_logic_vector(15 downto 0);  --! Signed data input (two's complement)
     data_o   : out std_logic_vector(15 downto 0)   --! Signed data output (two's complement)
     );
@@ -77,13 +79,21 @@ end entity offset_gain_s;
 architecture rtl of offset_gain_s is
 
   ------------------------------------------------------------------------------
+  -- Constants declaration
+  ------------------------------------------------------------------------------
+  constant c_one : signed(16 downto 0) := to_signed(1, 17);
+
+  ------------------------------------------------------------------------------
   -- Signals declaration
   ------------------------------------------------------------------------------
   signal rst         : std_logic                     := '0';
   signal data_in_d   : std_logic_vector(15 downto 0) := (others => '0');
   signal data_offset : std_logic_vector(17 downto 0) := (others => '0');
   signal gain        : std_logic_vector(17 downto 0) := (others => '0');
-  signal product     : std_logic_vector(35 downto 0) := (others => '0');
+  signal product_t   : std_logic_vector(35 downto 0) := (others => '0');
+  signal product     : std_logic_vector(16 downto 0);
+  signal pos_sat     : signed(16 downto 0);
+  signal neg_sat     : signed(16 downto 0);
 
 
 begin
@@ -128,7 +138,7 @@ begin
       WIDTH_A => 18,                    -- Multiplier A-input bus width, 1-25
       WIDTH_B => 18)                    -- Multiplier B-input bus width, 1-18
     port map (
-      P   => product,                   -- Multiplier ouput, WIDTH_A+WIDTH_B
+      P   => product_t,                 -- Multiplier ouput, WIDTH_A+WIDTH_B
       A   => gain,                      -- Multiplier input A, WIDTH_A
       B   => data_offset,               -- Multiplier input B, WIDTH_B
       CE  => '1',                       -- 1-bit active high input clock enable
@@ -136,23 +146,35 @@ begin
       RST => rst                        -- 1-bit input active high reset
       );
 
+  -- Additional register stage to solve timing issues
+  p_pipeline : process (clk_i)
+  begin
+    if rising_edge(clk_i) then
+      if rst_n_i = '0' then
+        product <= (others => '0');
+      else
+        product <= product_t(31 downto 15);
+      end if;
+    end if;
+  end process p_pipeline;
 
   ------------------------------------------------------------------------------
   -- Saturate addition and multiplication result
   ------------------------------------------------------------------------------
+  pos_sat <= signed("00" & sat_i);
+  neg_sat <= signed(not(pos_sat))+c_one;
+
   p_saturate : process (clk_i)
   begin
     if rising_edge(clk_i) then
       if rst_n_i = '0' then
         data_o <= (others => '0');
+      elsif signed(product) >= pos_sat then
+        data_o <= std_logic_vector(pos_sat(15 downto 0));  -- saturate positive
+      elsif signed(product) <= neg_sat then
+        data_o <= std_logic_vector(neg_sat(15 downto 0));  -- saturate negative
       else
-        if (data_offset(15) = '1' and data_offset(16) = '0') then
-          data_o <= X"7FFF";            -- saturate positive
-        elsif (data_offset(15) = '0' and data_offset(16) = '1') then
-          data_o <= X"8000";            -- saturate negative
-        else
-          data_o <= product(30 downto 15);
-        end if;
+        data_o <= product(15 downto 0);
       end if;
     end if;
   end process p_saturate;

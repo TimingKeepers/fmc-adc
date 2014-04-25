@@ -251,6 +251,10 @@ architecture rtl of fmc_adc_mezzanine is
   signal cnx_slave_out : t_wishbone_slave_out_array(c_NUM_WB_SLAVES-1 downto 0);
   signal cnx_slave_in  : t_wishbone_slave_in_array(c_NUM_WB_SLAVES-1 downto 0);
 
+  -- Wishbone bus from additional registers
+  signal xreg_slave_out : t_wishbone_slave_out;
+  signal xreg_slave_in  : t_wishbone_slave_in;
+
   -- Mezzanine system I2C for EEPROM
   signal sys_scl_in   : std_logic;
   signal sys_scl_out  : std_logic;
@@ -294,6 +298,17 @@ begin
   ------------------------------------------------------------------------------
   -- CSR wishbone crossbar
   ------------------------------------------------------------------------------
+
+  -- Additional register to help timing
+  cmp_xwb_reg : xwb_register_link
+    port map(
+      clk_sys_i => sys_clk_i,
+      rst_n_i   => sys_rst_n_i,
+      slave_i   => xreg_slave_in,
+      slave_o   => xreg_slave_out,
+      master_i  => cnx_slave_out(c_WB_MASTER),
+      master_o  => cnx_slave_in(c_WB_MASTER));
+
   cmp_sdb_crossbar : xwb_sdb_crossbar
     generic map (
       g_num_masters => c_NUM_WB_SLAVES,
@@ -311,16 +326,16 @@ begin
       master_o  => cnx_master_out);
 
   -- Connect crossbar slave port to entity port
-  cnx_slave_in(c_WB_MASTER).adr <= wb_csr_adr_i;
-  cnx_slave_in(c_WB_MASTER).dat <= wb_csr_dat_i;
-  cnx_slave_in(c_WB_MASTER).sel <= wb_csr_sel_i;
-  cnx_slave_in(c_WB_MASTER).stb <= wb_csr_stb_i;
-  cnx_slave_in(c_WB_MASTER).we  <= wb_csr_we_i;
-  cnx_slave_in(c_WB_MASTER).cyc <= wb_csr_cyc_i;
+  xreg_slave_in.adr <= wb_csr_adr_i;
+  xreg_slave_in.dat <= wb_csr_dat_i;
+  xreg_slave_in.sel <= wb_csr_sel_i;
+  xreg_slave_in.stb <= wb_csr_stb_i;
+  xreg_slave_in.we  <= wb_csr_we_i;
+  xreg_slave_in.cyc <= wb_csr_cyc_i;
 
-  wb_csr_dat_o   <= cnx_slave_out(c_WB_MASTER).dat;
-  wb_csr_ack_o   <= cnx_slave_out(c_WB_MASTER).ack;
-  wb_csr_stall_o <= cnx_slave_out(c_WB_MASTER).stall;
+  wb_csr_dat_o   <= xreg_slave_out.dat;
+  wb_csr_ack_o   <= xreg_slave_out.ack;
+  wb_csr_stall_o <= xreg_slave_out.stall;
 
   ------------------------------------------------------------------------------
   -- Mezzanine system managment I2C master
