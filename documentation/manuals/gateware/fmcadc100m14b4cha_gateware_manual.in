@@ -35,7 +35,7 @@
 
 @setchapternewpage off
 
-@set update-month March 2014
+@set update-month April 2014
 
 @finalout
 
@@ -59,7 +59,7 @@
 
 This document describes the gateware developed to support the FmcAdc100m14b4cha (later refered to as fmc-adc) mezzanine card on the SPEC@footnote{@uref{http://www.ohwr.org/projects/spec}} and SVEC@footnote{@uref{http://www.ohwr.org/projects/svec}} carrier cards.
 The gateware is the HDL code used to generate the bitstream that configures the FPGA on the carrier (sometimes also called firmware).
-The gateware architecture is describled in detail.
+The gateware architecture is described in detail.
 The configuration and operation of the fmc-adc is also explained.
 On the other hand, this manual is not intended to provide information about the software used to control the fmc-adc board, nor details about it's hardware design.
 
@@ -296,7 +296,7 @@ OpenCores@footnote{@uref{http://opencores.org/}}. Therefore, the documentation f
 @c --------------------------------------------------------------------------
 @subsection Clock Domains
 
-The SPEC version of the fmc-adc design has four different clock domains. They are listed in the followig table.
+The SPEC version of the fmc-adc design has four different clock domains. They are listed in the following table.
 
 @float
 @multitable {@code{sys_clk_125}}{ADC data de-serialiser clock}{125.00 MHz}{400MHz LTC2174 (mezzanine)}
@@ -321,11 +321,11 @@ The BAR 4 (Base Address Register) allows access to the GN4124 internal registers
 The BAR 0 is connected to the local bus and therefore allows access to the FPGA.
 
 The GN4124 core is made of a local bus interface with the GN4124 chip, a Wishbone bus master mapped to BAR0 and a DMA controller. The DMA controller has two Wishbone ports, a Wishbone slave to configure the DMA controller and a Wishbone master.
-In the fmc-adc ghateware, the master port is connected to the DDR memory controller.
+In the fmc-adc gateware, the master port is connected to the DDR memory controller.
 The GN4124 Wishbone interfaces (masters and slave) are 32-bit data width and 32-bit word aligned addresses.
 
 @b{Note:} It would not be beneficial to insert an address converter (for non-interleaved data read) between the GN4124 core and the memory controller.
-Because the DDR memory access is not efficiant when reading non-consecutive addresses.
+Because the DDR memory access is not efficient when reading non-consecutive addresses.
 
 @c --------------------------------------------------------------------------
 @subsection DMA Embedded Interrupt Controller (EIC)
@@ -418,7 +418,7 @@ Below is a description of the fields and their content in the fmc-adc design on 
 @c --------------------------------------------------------------------------
 @page
 @subsection Clock Domains
-The SPEC version of the fmc-adc design has four different clock domains. They are listed in the followig table.
+The SPEC version of the fmc-adc design has four different clock domains. They are listed in the following table.
 
 @float
 @multitable {@code{sys_clk_62_5}}{ADC data de-serialiser clock}{125.00 MHz}{400MHz LTC2174 (mezzanine)}
@@ -567,7 +567,7 @@ On the mezzanine interface side, it takes a data flow from the LTC2174 ADC chip,
 On the internal interface side, it has a Wishbone master to write data to the DDR memory controller.
 It also has a Wishbone slave to access the internal components.
 
-The internal detailed functionning of this block is described further in the document(@xref{Configuration}, @ref{Acquisition} and @ref{Calibration}).
+The internal detailed functioning of this block is described further in the document(@xref{Configuration}, @ref{Acquisition} and @ref{Calibration}).
 
 @c --------------------------------------------------------------------------
 @subsection Sampling clock
@@ -615,9 +615,9 @@ The following events are time-tagged:
 @b{Note:} The trigger time tag corresponds to the moment when the acquisition state machine leaves the @code{WAIT_TRIG} state.
 
 @b{Note:} The trigger time-tag is also stored in the data memory, after the post-trigger samples.
-This allows to always have trigger time-tag, even in multi-shot mode (retreiving the time-tag using the trigger interrupt was not fast enough in certain cases).
+This allows to always have trigger time-tag, even in multi-shot mode (retrieving the time-tag using the trigger interrupt was not fast enough in certain cases).
 
-@b{Note:} If during an acqusition no stop command is issued (normal case), the acquisition time-tag is not updated.
+@b{Note:} If during an acquisition no stop command is issued (normal case), the acquisition time-tag is not updated.
 
 The register description can be found in annexe @ref{Time-tagging Core Registers}.
 
@@ -796,9 +796,9 @@ When the sampling clock is enabled, the @code{SERDES_PLL} and @code{SERDES_SYNCE
 @section Input Ranges
 
 The @ref{fig:analogue_input} shows a simplified schematics of the analogue input used for each channel.
-Each input can be independantly configured with one of the three available ranges; 100mV, 1V, 10V.
+Each input can be independently configured with one of the three available ranges; 100mV, 1V, 10V.
 Each range is defined as the maximum peak-to-peak input voltage.
-Independantly to the selected range, a 50ohms termination can be added to each input.
+Independently to the selected range, a 50ohms termination can be added to each input.
 
 In addition to the three ranges for normal operation, there are three more configurations used for offset calibration of each range.
 
@@ -810,7 +810,7 @@ Opto-isolated analogue switches allow the different configurations. They are rep
 @end float
 
 Only the following input switch configurations are valid.
-For all others switch configurations, the behaviour is not defined and therefore shouldn't be used.
+For all others switch configurations, the behavior is not defined and therefore shouldn't be used.
 
 @float Table,tab:switch_config
 @multitable {SW[7..1]}{SW7}{SW6}{SW5}{SW4}{SW3}{SW2}{SW1}{100mV range offset calibration}
@@ -866,7 +866,7 @@ v_out = Output voltage (to filter and ADC)
 @section Trigger
 
 The trigger unit is made of two hardware and one software sources.
-The hardware and software path can be enabled independantly.
+The hardware and software path can be enabled independently.
 The two paths are then or'ed together to drive a delay generator.
 The delay generator allows to insert an defined number of sampling clock period before the trigger goes to the acquisition state machine.
 The @ref{fig:trig_unit} shows a simplified digram of trigger unit.
@@ -878,7 +878,7 @@ The @ref{fig:trig_unit} shows a simplified digram of trigger unit.
 
 The hardware trigger source can be either internal (based on an adc input channel) or external (dedicated trigger input).
 For both internal and external hardware triggers, the polarity can be selected between positive and negative slope (resp. rising and falling edge).
-By default the polatity is set to positive slope.
+By default the polarity is set to positive slope.
 
 The external trigger input is synchronised to the sampling clock.
 The external trigger pulse must be at least one sampling clock cycle wide.
@@ -886,7 +886,7 @@ The external trigger pulse must be at least one sampling clock cycle wide.
 To use the internal trigger source, the adc input channel and the threshold should be configured.
 By default, the channel 1 is selected and the threshold is set to 0.
 Note that the threshold is 16-bit signed (two's complement).
-The @ref{fig:trig_hw_int} sketches the internal hardware trigger threshold behaviour.
+The @ref{fig:trig_hw_int} sketches the internal hardware trigger threshold behavior.
 In addition, a glitch filter can be applied to the threshold detection.
 The glitch filter is useful to trigger on noisy signal.
 In order to help setting the glitch filter, an internal trigger test mode can be activated.
@@ -902,9 +902,9 @@ When the test mode is enabled, the data from channels 2 to 4 are replaced as fol
 @end float
 
 
-The software trigger source concists in a pulse generated when a write cycle is detected on the @i{Software trigger} register.
+The software trigger source consists in a pulse generated when a write cycle is detected on the @i{Software trigger} register.
 
-For futher information on the trigger configuration registers @pxref{ADC Core Registers}.
+For further information on the trigger configuration registers @pxref{ADC Core Registers}.
 
 @float Figure,fig:trig_hw_int
 @center @image{../../figures/trig_hw_int, 8cm,,,pdf}
@@ -920,7 +920,7 @@ If N > 1, then the trigger pulse is aligned to the next valid sample.
 If N = 1 all the samples are valid and therefore the trigger is always aligned.
 A value of N = 0 is treated as N = 1 in the gateware.
 
-@b{Note:} Undersampling might be unaccurately called decimation in the documentation or source code.
+@b{Note:} Undersampling might be inaccurately called decimation in the documentation or source code.
 
 
 @c ##########################################################################
@@ -984,12 +984,12 @@ The fixed point format is as follow:
 @caption{ADC gain register format.}
 @end float
 
-After the offset and gain corrections are applied, the signal is saturated to 16-bit signed values (min=-32678, max=32767).
+After the offset and gain corrections are applied, the signal is saturated to a user programmable value.
+One register per channel allows to set the saturation value.
+The saturation register takes a 15-bit unsigned value.
+From this value, two 'symmetrical' 16-bit signed numbers are derived and taken as the saturation boundaries.
 
-Also an additional block allows the user to set a programmable saturation value.
-The saturation register takes a 15-bit unsigned value, or in other words a positive 16-bit signed value.
-
-@b{Note:} On FPGA start-up, the gain, offset and saturation registers are set to 0x0.
+@b{Note:} Because the default value (on FPGA start-up) is not configurable in wbgen2, the gain, offset and saturation registers are set to 0x0 at start-up.
 Therefore, the driver has to initialise those registers.
 
 @b{Note:} After gain and offset correction, the two LSB of the data words can be different from zero.
@@ -1045,12 +1045,12 @@ The DDR memory size is 2Gb or 256MB.
 
 @float Figure,fig:mem_samples
 @center @image{../../figures/memory_samples, 15cm,,,pdf}
-@caption{Illustation of samples storage in DDR memory.}
+@caption{Illustration of samples storage in DDR memory.}
 @end float
 
 The acquisition process is driven by a state machine.
 The @ref{fig:acq_fsm} represents its states and transitions.
-At start-up, the state machine is @code{IDLE}, waiting for an acquisistion start command (@code{ACQ_START}).
+At start-up, the state machine is @code{IDLE}, waiting for an acquisition start command (@code{ACQ_START}).
 Commands are sent to the state machine by writing in the @code{FSM_CMD} field of the control register (@pxref{ADC Core Registers}).
 When a start command is received, the state machine goes to @code{PRE_TRIG} and stays in this state until the programmed number of pre-trigger samples are recorded.
 After that, it goes in @code{WAIT_TRIG} state and continue recording sample to memory.
@@ -1098,24 +1098,24 @@ The procedure below lists the different step of a single-shot acquisition proces
 @item When a valid trigger is detected, an interrupt is generated (if enabled).
 @item At the end of the acquisition, another interrupt is generated.
 @item Read trigger position register.
-@item Configure the DMA to retreive data.
+@item Configure the DMA to retrieve data.
 @item Start the DMA transfer (the acquisition state machine must be @code{IDLE}).
 @item When the DMA transfer is done, an interrupt is generated.
 @item The board is ready for a new acquisition start command.
 @end enumerate
 
 In single-shot mode, the DDR memory is used as a circular buffer.
-When the acquisition starts, samples are direcly written to the DDR memory (via FIFOs).
+When the acquisition starts, samples are directly written to the DDR memory (via FIFOs).
 The acquisition logic stops writing to the memory when the configured number of pre/post-trigger samples is reached.
 It could happen that the write pointer reaches the top of the memory before the end of the acquisition.
 In this case, the write pointer is reset to address zero and overwrite previous samples.
-In order to allow the software to retreive the requested samples (around the trigger), the @i{Trigger address} register stores the write pointer address at the trigger moment.
+In order to allow the software to retrieve the requested samples (around the trigger), the @i{Trigger address} register stores the write pointer address at the trigger moment.
 
 @b{Note:} The value stored in the @i{Trigger address} register is a byte address.
 
 @b{Note:} Every new acquisition starts writing at address @code{0x0}.
 
-The @ref{fig:mem_single_shot} and @ref{fig:mem_single_shot_overlap} illustrate the use of the DDR memory as a cicular buffer.
+The @ref{fig:mem_single_shot} and @ref{fig:mem_single_shot_overlap} illustrate the use of the DDR memory as a circular buffer.
 The acquisition state machine is also represented.
 
 @float Figure,fig:mem_single_shot
@@ -1176,7 +1176,7 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 @c      -> Taking the threshold trigger data after offset/gain correction solved the problem.
 @c DONE Update interface of wbgen2 generated cores (name change).
 @c DONE License header in every file -> check
-@c DONE Rename UTC core in time-tagging core or something like that (stricly speaking, it is not UTC).
+@c DONE Rename UTC core in time-tagging core or something like that (strictly speaking, it is not UTC).
 @c DONE check Atos comments.
 
 @c DONE Remove carrier SPI master from mapping -> shift other slaves base addresses.
@@ -1186,14 +1186,14 @@ The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 @c DONE @item Add a software reset feature?
 @item Remove huge files from git repo. @b{!!! This will change all commits sha !!!}
 @item Add WR core; 1)for time-tags, 2)for sampling clock control@*
-      - Define behaviour when WR is desconnected.@*
+      - Define behavior when WR is disconnected.@*
       - Assign signals to SPEC front panel LEDs.
 @item Add Etherbone support.
-@c DONE @item Remove mutli-irq register from interrupt controller.@*
+@c DONE @item Remove multi-irq register from interrupt controller.@*
 @c      Perhaps add a counter per interrupt source instead.@*
 @c      Or use wbgen2 eic (with level interrupt output).
 @c DONE @item Remove unused 250MHz clock signals and buffer.
-@item Unify address inferfaces: put all in bytes (wishbone addr, trig pointer, ...)@*
+@item Unify address interfaces: put all in bytes (wishbone addr, trig pointer, ...)@*
       - Change GN4142-core WB bus(es) to byte address.@*
       - Change DDR-core WB bus(es) to byte address?
       - Change SVEC DDR access fifo (DDR address register) to byte address.

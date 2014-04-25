@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="522.79785"
-   height="90.06543"
+   width="458.79785"
+   height="90.929688"
    id="svg18660"
    version="1.1"
    inkscape:version="0.47 r22583"
@@ -276,9 +276,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="222.48035"
-     inkscape:cy="35.167165"
+     inkscape:zoom="2.8"
+     inkscape:cx="235.57414"
+     inkscape:cy="42.447675"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -322,45 +322,6 @@
        sodipodi:ry="5"
        d="m 140,47.362183 c 0,2.761423 -2.23858,5 -5,5 -2.76142,0 -5,-2.238577 -5,-5 0,-2.761424 2.23858,-5 5,-5 2.76142,0 5,2.238576 5,5 z"
        transform="matrix(4,0,0,4,-354.01855,-57.506472)" />
-    <text
-       xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="264.32129"
-       y="161.94226"
-       id="text3237-3-4-5-9-32-8"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="264.32129"
-         y="161.94226"
-         style="font-size:10px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter"
-         id="tspan15939-0-8">Saturate to</tspan><tspan
-         sodipodi:role="line"
-         x="264.32129"
-         y="174.44226"
-         style="font-size:10px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter"
-         id="tspan3010">16-bit signed</tspan></text>
-    <g
-       id="g2903">
-      <rect
-         y="111.94226"
-         x="230.98145"
-         height="40"
-         width="70"
-         id="rect19214"
-         style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
-      <path
-         id="path19277"
-         d="m 265.98145,116.94226 0,30"
-         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <path
-         id="path19279"
-         d="m 235.98145,131.94226 60,0"
-         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <path
-         id="path19287"
-         d="m 240.98145,141.94226 10,0 30,-20 10,0"
-         style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-    </g>
     <path
        sodipodi:type="arc"
        style="fill:none;stroke:#000000;stroke-width:0.25;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -393,16 +354,12 @@
        id="path3202" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM)"
-       d="m 205.98145,131.94226 20,0"
+       d="m 205.98145,131.94226 50.97655,0"
        id="path3202-9" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM)"
        d="m 45.981445,131.94226 20,0"
        id="path3202-8" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM)"
-       d="m 300.98145,131.94226 20,0"
-       id="path3202-4" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM)"
        d="m 90.98145,176.94226 0,-20"
@@ -465,22 +422,22 @@
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="420.98145"
+       x="356.98145"
        y="128.45837"
        id="text3237-3-4-5-9-32-8-9"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="420.98145"
+         x="356.98145"
          y="128.45837"
          style="font-size:10px;font-weight:normal;text-align:start;text-anchor:start;-inkscape-font-specification:Bitstream Charter"
          id="tspan15939-0-8-83">Corrected data</tspan><tspan
          sodipodi:role="line"
-         x="420.98145"
+         x="356.98145"
          y="140.95837"
          style="font-size:10px;font-weight:normal;text-align:start;text-anchor:start;-inkscape-font-specification:Bitstream Charter"
          id="tspan19583">16-bit signed</tspan></text>
     <g
-       transform="translate(94.999995,-1.875e-6)"
+       transform="translate(30.999995,-1.875e-6)"
        id="g2903-6">
       <rect
          y="111.94226"
@@ -504,26 +461,26 @@
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM)"
-       d="m 395.98145,131.94226 20,0"
+       d="m 331.98145,131.94226 20,0"
        id="path3202-4-8" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutM)"
-       d="m 360.98145,176.94226 0,-20"
+       d="m 296.98145,176.94226 0,-20"
        id="path3202-3-2-9" />
     <text
        xml:space="preserve"
        style="font-size:8px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Verdana;-inkscape-font-specification:Verdana"
-       x="361.16211"
+       x="297.16211"
        y="187.80652"
        id="text3237-3-4-5-9-32-8-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="361.16211"
+         x="297.16211"
          y="187.80652"
          style="font-size:10px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter"
          id="tspan3014">User prog. saturation</tspan><tspan
          sodipodi:role="line"
-         x="361.16211"
+         x="297.16211"
          y="200.30652"
          style="font-size:10px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Bitstream Charter"
          id="tspan3020">15-bit unsigned</tspan></text>
