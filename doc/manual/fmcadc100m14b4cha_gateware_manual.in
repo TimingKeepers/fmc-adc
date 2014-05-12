@@ -44,7 +44,7 @@
 @subtitle @value{update-month} - Release 4.0
 @subtitle For PCIe (SPEC) and VME64x (SVEC) FMC Carriers
 @sp 10
-@center @image{../../figures/cern_logo,3cm,,,pdf} @hfill @image{../../figures/ohr_logo,3cm,,,pdf}
+@center @image{../fig/cern_logo,3cm,,,pdf} @hfill @image{../fig/ohr_logo,3cm,,,pdf}
 @author Matthieu Cattin (CERN)
 @end titlepage
 @headings single
@@ -212,7 +212,7 @@ The @ref{fig:spec_fw_arch} illustrates the fmc-adc gateware architecture on the 
 A crossbar from the general-cores@footnote{@uref{http://www.ohwr.org/projects/general-cores}} library is used to map the slaves in the Wishbone address space.
 
 @float Figure,fig:spec_fw_arch
-@center @image{../../figures/spec_fw_arch, 15cm,,,pdf}
+@center @image{../fig/spec_fw_arch, 15cm,,,pdf}
 @caption{FMC-ADC gateware architecture on SPEC carrier.}
 @end float
 
@@ -362,7 +362,7 @@ In the VME64x version of the gateware, all blocks are connected to the VME64x co
 A crossbar from the general-cores@footnote{@uref{http://www.ohwr.org/projects/general-cores}} library is used to map the slaves in the Wishbone address space.
 
 @float Figure,fig:svec_fw_arch
-@center @image{../../figures/svec_fw_arch, 15cm,,,pdf}
+@center @image{../fig/svec_fw_arch, 15cm,,,pdf}
 @caption{FMC-ADC gateware architecture on SVEC carrier.}
 @end float
 
@@ -760,7 +760,7 @@ The four channels data and the trigger signal are synchronised to the system clo
 The configuration signals coming from registers in the system clock domain are synchronised to the sampling clock within the Wishbone slave (@command{wbgen2} feature).
 
 @float Figure,fig:adc_core_fs_clk
-@center @image{../../figures/adc_core_fs_clk, 14cm,,,pdf}
+@center @image{../fig/adc_core_fs_clk, 14cm,,,pdf}
 @caption{ADC core diagram (sampling clock domain).}
 @end float
 
@@ -769,7 +769,7 @@ In the fmc-adc application, the default configuration is kept.
 The figure @ref{fig:ltc2174_mode} is an extract from the LTC2174 datasheet illustrating the @i{2-Lane Output Mode, 16-Bit Serialization} waveforms.
 
 @float Figure,fig:ltc2174_mode
-@center @image{../../figures/ltc2174_mode, 12cm,,,pdf}
+@center @image{../fig/ltc2174_mode, 12cm,,,pdf}
 @caption{LTC2174 data output mode waveforms.}
 @end float
 
@@ -805,7 +805,7 @@ In addition to the three ranges for normal operation, there are three more confi
 Opto-isolated analogue switches allow the different configurations. They are represented by normal switched in the simplified schematics.
 
 @float Figure,fig:analogue_input
-@center @image{../../figures/analogue_input, 10cm,,,pdf}
+@center @image{../fig/analogue_input, 10cm,,,pdf}
 @caption{Simplified schematics of the analogue input.}
 @end float
 
@@ -872,7 +872,7 @@ The delay generator allows to insert an defined number of sampling clock period 
 The @ref{fig:trig_unit} shows a simplified digram of trigger unit.
 
 @float Figure,fig:trig_unit
-@center @image{../../figures/trigger_unit, 12cm,,,pdf}
+@center @image{../fig/trigger_unit, 12cm,,,pdf}
 @caption{Trigger unit diagram.}
 @end float
 
@@ -907,7 +907,7 @@ The software trigger source consists in a pulse generated when a write cycle is 
 For further information on the trigger configuration registers @pxref{ADC Core Registers}.
 
 @float Figure,fig:trig_hw_int
-@center @image{../../figures/trig_hw_int, 8cm,,,pdf}
+@center @image{../fig/trig_hw_int, 8cm,,,pdf}
 @caption{Internal hardware trigger threshold.}
 @end float
 
@@ -971,7 +971,7 @@ Two registers per channel are implemented in the FPGA for ADC gain and offset co
 When an input range is selected, the corresponding gain/offset correction values must be loaded from the EEPROM to those registers.
 
 @float Figure,fig:off_gain_corr
-@center @image{../../figures/offset_gain_corr, 12cm,,,pdf}
+@center @image{../fig/offset_gain_corr, 12cm,,,pdf}
 @caption{ADC offset and gain correction block.}
 @end float
 
@@ -980,7 +980,7 @@ The gain register takes a 16-bit fixed point value.
 The fixed point format is as follow:
 
 @float Figure,fig:adc_gain_format
-@center @image{../../figures/adc_gain_format, 13cm,,,pdf}
+@center @image{../fig/adc_gain_format, 13cm,,,pdf}
 @caption{ADC gain register format.}
 @end float
 
@@ -1034,7 +1034,7 @@ Along the datapath, we call @i{sample} a 64-bit vector containing a sample for e
 At the output of the ADC core, a flow control FIFO allows to cope with the memory controller temporary unavailabilities (due to DDR refresh cycles).
 
 @float Figure,fig:adc_core_sys_clk
-@center @image{../../figures/adc_core_sys_clk, 15cm,,,pdf}
+@center @image{../fig/adc_core_sys_clk, 15cm,,,pdf}
 @caption{Acquisition logic diagram (system clock domain).}
 @end float
 
@@ -1044,7 +1044,7 @@ The DDR memory size is 2Gb or 256MB.
 @w{It means that the maximum number of samples that can be stored is 128M samples (@math{2^{27}*16}).}
 
 @float Figure,fig:mem_samples
-@center @image{../../figures/memory_samples, 15cm,,,pdf}
+@center @image{../fig/memory_samples, 15cm,,,pdf}
 @caption{Illustration of samples storage in DDR memory.}
 @end float
 
@@ -1071,7 +1071,7 @@ An interrupt is generated when the acquisition ends.
 @b{Note:} After a stop command, no end of acquisition interrupt is generated.
 
 @float Figure,fig:acq_fsm
-@center @image{../../figures/acq_fsm, 10cm,,,pdf}
+@center @image{../fig/acq_fsm, 10cm,,,pdf}
 @caption{Acquisition state machine.}
 @end float
 
@@ -1119,12 +1119,12 @@ The @ref{fig:mem_single_shot} and @ref{fig:mem_single_shot_overlap} illustrate t
 The acquisition state machine is also represented.
 
 @float Figure,fig:mem_single_shot
-@center @image{../../figures/memory_single-shot, 15cm,,,pdf}
+@center @image{../fig/memory_single-shot, 15cm,,,pdf}
 @caption{Single-shot mode acquisition example.}
 @end float
 
 @float Figure,fig:mem_single_shot_overlap
-@center @image{../../figures/memory_single-shot_overlap, 15cm,,,pdf}
+@center @image{../fig/memory_single-shot_overlap, 15cm,,,pdf}
 @caption{Single-shot mode acquisition example (overlapping DDR memory).}
 @end float
 
@@ -1157,7 +1157,7 @@ Then the second shot is written right after the trigger time-tag of the first sh
 The @ref{fig:mem_multi_shot} shows the shots organisation in the DDR memory.
 
 @float Figure,fig:mem_multi_shot
-@center @image{../../figures/memory_multi-shot, 15cm,,,pdf}
+@center @image{../fig/memory_multi-shot, 15cm,,,pdf}
 @caption{DDR memory usage in multi-shot mode acquisition.}
 @end float
 

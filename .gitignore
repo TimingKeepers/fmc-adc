@@ -65,7 +65,7 @@ hdl/svec/sim/testbench/transcript
 hdl/svec/sim/testbench/vsim.wlf
 hdl/svec/sim/testbench/vsim_stacktrace.vstf
 hdl/svec/sim/testbench/work/
-documentation/manuals/*/*.html
+doc/manual/*.html
 *.texi
 *.aux
 *.log
