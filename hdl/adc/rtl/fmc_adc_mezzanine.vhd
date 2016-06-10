@@ -44,6 +44,8 @@ library work;
 use work.fmc_adc_100Ms_core_pkg.all;
 use work.wishbone_pkg.all;
 use work.timetag_core_pkg.all;
+use work.fmc_adc_mezzanine_pkg.all;
+
 
 
 entity fmc_adc_mezzanine is
@@ -83,6 +85,7 @@ entity fmc_adc_mezzanine is
     trig_irq_o          : out std_logic;
     acq_end_irq_o       : out std_logic;
     eic_irq_o           : out std_logic;
+    ext_acq_end_i       : in  std_logic;
 
     -- FMC interface
     ext_trigger_p_i : in std_logic;     -- External trigger
@@ -96,6 +99,8 @@ entity fmc_adc_mezzanine is
     adc_outa_n_i : in std_logic_vector(3 downto 0);
     adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
     adc_outb_n_i : in std_logic_vector(3 downto 0);
+    
+    adc_acq_count_o : out std_logic_vector( 31 downto 0 );
 
     gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
     gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
@@ -120,8 +125,17 @@ entity fmc_adc_mezzanine is
 
     mezz_one_wire_b : inout std_logic;  -- Mezzanine 1-wire interface (DS18B20 thermometer + unique ID)
 
-    sys_scl_b : inout std_logic;        -- Mezzanine system I2C clock (EEPROM)
-    sys_sda_b : inout std_logic         -- Mezzanine system I2C data (EEPROM)
+   
+    sys_scl_i      : in    std_logic;  
+    sys_scl_o     : out   std_logic;
+    sys_scl_oe_n_o    : out   std_logic;
+    sys_sda_i      : in    std_logic;  
+    sys_sda_o     : out   std_logic;
+    sys_sda_oe_n_o    : out   std_logic;
+    
+    tm_tai_i        : in    std_logic_vector(39 downto 0);
+    tm_cycles_i     : in    std_logic_vector(27 downto 0)
+    
     );
 end fmc_adc_mezzanine;
 
@@ -174,68 +188,21 @@ architecture rtl of fmc_adc_mezzanine is
   constant c_WB_SLAVE_FMC_EIC     : integer := 5;  -- Mezzanine interrupt controller
   constant c_WB_SLAVE_TIMETAG     : integer := 6;  -- Mezzanine timetag core
 
-  -- Devices sdb description
-  constant c_wb_adc_csr_sdb : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"00000000000000FF",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000608",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-FMC-ADC-Core    ")));
 
-  constant c_wb_timetag_sdb : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000007F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"00000604",
-        version   => x"00000001",
-        date      => x"20121116",
-        name      => "WB-Timetag-Core    ")));
-
-  constant c_wb_fmc_adc_eic_sdb : t_sdb_device := (
-    abi_class     => x"0000",              -- undocumented device
-    abi_ver_major => x"01",
-    abi_ver_minor => x"01",
-    wbd_endian    => c_sdb_endian_big,
-    wbd_width     => x"4",                 -- 32-bit port granularity
-    sdb_component => (
-      addr_first  => x"0000000000000000",
-      addr_last   => x"000000000000000F",
-      product     => (
-        vendor_id => x"000000000000CE42",  -- CERN
-        device_id => x"26ec6086",          -- "WB-FMC-ADC.EIC     " | md5sum | cut -c1-8
-        version   => x"00000001",
-        date      => x"20131204",
-        name      => "WB-FMC-ADC.EIC     ")));
 
   -- sdb header address
-  constant c_SDB_ADDRESS : t_wishbone_address := x"00000000";
+  constant c_SDB_ADDRESS : t_wishbone_address := x"00001000";
 
   -- Wishbone crossbar layout
   constant c_INTERCONNECT_LAYOUT : t_sdb_record_array(6 downto 0) :=
     (
-      0 => f_sdb_embed_device(c_xwb_i2c_master_sdb, x"00001000"),
-      1 => f_sdb_embed_device(c_xwb_spi_sdb, x"00001100"),
-      2 => f_sdb_embed_device(c_xwb_i2c_master_sdb, x"00001200"),
-      3 => f_sdb_embed_device(c_wb_adc_csr_sdb, x"00001300"),
-      4 => f_sdb_embed_device(c_xwb_onewire_master_sdb, x"00001400"),
-      5 => f_sdb_embed_device(c_wb_fmc_adc_eic_sdb, x"00001500"),
-      6 => f_sdb_embed_device(c_wb_timetag_sdb, x"00001600")
+      0 => f_sdb_embed_device(c_xwb_i2c_master_sdb, x"00000000"),
+      1 => f_sdb_embed_device(c_xwb_spi_sdb, x"00000100"),
+      2 => f_sdb_embed_device(c_xwb_i2c_master_sdb, x"00000200"),
+      3 => f_sdb_embed_device(c_wb_adc_csr_sdb, x"00000300"),
+      4 => f_sdb_embed_device(c_xwb_onewire_master_sdb, x"00000400"),
+      5 => f_sdb_embed_device(c_wb_fmc_adc_eic_sdb, x"00000500"),
+      6 => f_sdb_embed_device(c_wb_timetag_sdb, x"00000600")
       );
 
 
@@ -362,12 +329,12 @@ begin
       sda_padoen_o => sys_sda_oe_n
       );
 
-  -- Tri-state buffer for SDA and SCL
-  sys_scl_b  <= sys_scl_out when sys_scl_oe_n = '0' else 'Z';
-  sys_scl_in <= sys_scl_b;
-
-  sys_sda_b  <= sys_sda_out when sys_sda_oe_n = '0' else 'Z';
-  sys_sda_in <= sys_sda_b;
+    sys_scl_in      <= sys_scl_i;
+    sys_scl_o       <= sys_scl_out;
+    sys_scl_oe_n_o  <= sys_scl_oe_n;
+    sys_sda_in      <= sys_sda_i;
+    sys_sda_o       <= sys_sda_out;
+    sys_sda_oe_n_o  <= sys_sda_oe_n; 
 
   ------------------------------------------------------------------------------
   -- Mezzanine SPI master
@@ -485,6 +452,8 @@ begin
       acq_start_p_o => acq_start_p,
       acq_stop_p_o  => acq_stop_p,
       acq_end_p_o   => acq_end_p,
+      irq_endacq_o  => acq_end_irq_p,
+      ext_acq_end_i => ext_acq_end_i,
 
       trigger_tag_i => trigger_tag,
 
@@ -499,6 +468,8 @@ begin
       adc_outa_n_i => adc_outa_n_i,
       adc_outb_p_i => adc_outb_p_i,
       adc_outb_n_i => adc_outb_n_i,
+      
+      adc_acq_count_o => adc_acq_count_o,
 
       gpio_dac_clr_n_o => gpio_dac_clr_n_o,
       gpio_led_acq_o   => gpio_led_acq_o,
@@ -594,7 +565,7 @@ begin
     end if;
   end process p_acq_end_extend;
 
-  acq_end_irq_p <= ddr_wr_fifo_empty_p and acq_end_extend;
+  -- acq_end_irq_p <= ddr_wr_fifo_empty_p and acq_end_extend; -- joselj, 20160505
 
   trig_irq_o    <= trigger_p;
   acq_end_irq_o <= acq_end_irq_p;
@@ -621,7 +592,10 @@ begin
       wb_sel_i => cnx_master_out(c_WB_SLAVE_TIMETAG).sel,
       wb_stb_i => cnx_master_out(c_WB_SLAVE_TIMETAG).stb,
       wb_we_i  => cnx_master_out(c_WB_SLAVE_TIMETAG).we,
-      wb_ack_o => cnx_master_in(c_WB_SLAVE_TIMETAG).ack
+      wb_ack_o => cnx_master_in(c_WB_SLAVE_TIMETAG).ack,
+      
+      tm_tai_i    => tm_tai_i,
+      tm_cycles_i => tm_cycles_i
       );
 
   -- Unused wishbone signals
