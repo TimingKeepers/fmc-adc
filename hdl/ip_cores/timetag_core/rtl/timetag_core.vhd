@@ -67,7 +67,10 @@ entity timetag_core is
     wb_sel_i : in  std_logic_vector(3 downto 0);
     wb_stb_i : in  std_logic;
     wb_we_i  : in  std_logic;
-    wb_ack_o : out std_logic
+    wb_ack_o : out std_logic;
+    
+    tm_tai_i    :   in  std_logic_vector(39 downto 0);
+    tm_cycles_i :   in  std_logic_vector(27 downto 0)
     );
 end timetag_core;
 
@@ -202,10 +205,10 @@ begin
     end if;
   end process p_timetag_seconds_cnt;
 
-  timetag_seconds <= std_logic_vector(timetag_seconds_cnt);
+  timetag_seconds <= tm_tai_i(31 downto 0); --std_logic_vector(timetag_seconds_cnt);
 
   ------------------------------------------------------------------------------
-  -- UTC 125MHz clock ticks counter
+  -- UTC 62.5MHz clock ticks counter
   ------------------------------------------------------------------------------
   p_timetag_coarse_cnt : process (clk_i)
   begin
@@ -216,7 +219,7 @@ begin
       elsif timetag_coarse_load_en = '1' then
         timetag_coarse_cnt <= unsigned(timetag_coarse_load_value);
         local_pps          <= '0';
-      elsif timetag_coarse_cnt = to_unsigned(124999999, timetag_coarse_cnt'length) then
+      elsif timetag_coarse_cnt = to_unsigned(62499999, timetag_coarse_cnt'length) then
         timetag_coarse_cnt <= (others => '0');
         local_pps          <= '1';
       else
@@ -226,7 +229,7 @@ begin
     end if;
   end process p_timetag_coarse_cnt;
 
-  timetag_coarse <= std_logic_vector(timetag_coarse_cnt);
+  timetag_coarse <= "0000" & tm_cycles_i; --std_logic_vector(timetag_coarse_cnt);
 
   ------------------------------------------------------------------------------
   -- Last trigger event time-tag

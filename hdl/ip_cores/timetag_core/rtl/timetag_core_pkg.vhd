@@ -80,7 +80,10 @@ package timetag_core_pkg is
     wb_sel_i : in  std_logic_vector(3 downto 0);
     wb_stb_i : in  std_logic;
     wb_we_i  : in  std_logic;
-    wb_ack_o : out std_logic
+    wb_ack_o : out std_logic;
+    
+    tm_tai_i     : in  std_logic_vector(39 downto 0);
+    tm_cycles_i  : in  std_logic_vector(27 downto 0)   
     );
 end component timetag_core;
 
