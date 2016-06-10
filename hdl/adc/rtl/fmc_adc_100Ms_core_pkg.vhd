@@ -86,6 +86,9 @@ package fmc_adc_100Ms_core_pkg is
       acq_start_p_o : out std_logic;
       acq_stop_p_o  : out std_logic;
       acq_end_p_o   : out std_logic;
+      irq_endacq_o  : out std_logic;
+      ext_acq_end_i : in  std_logic;
+
 
       -- Trigger time-tag input
       trigger_tag_i : t_timetag;
@@ -102,6 +105,8 @@ package fmc_adc_100Ms_core_pkg is
       adc_outa_n_i : in std_logic_vector(3 downto 0);
       adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
       adc_outb_n_i : in std_logic_vector(3 downto 0);
+      
+      adc_acq_count_o : out std_logic_vector(31 downto 0);
 
       gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
       gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)

@@ -133,7 +133,7 @@ begin
   ------------------------------------------------------------------------------
   cmp_multiplier : MULT_MACRO
     generic map (
-      DEVICE  => "SPARTAN6",            -- Target Device: "VIRTEX5", "VIRTEX6", "SPARTAN6"
+      DEVICE  => "7SERIES",            -- Target Device: "VIRTEX5", "VIRTEX6", "SPARTAN6"
       LATENCY => 0,                     -- Desired clock cycle latency, 0-4
       WIDTH_A => 18,                    -- Multiplier A-input bus width, 1-25
       WIDTH_B => 18)                    -- Multiplier B-input bus width, 1-18

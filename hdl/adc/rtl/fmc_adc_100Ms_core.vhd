@@ -85,6 +85,9 @@ entity fmc_adc_100Ms_core is
     acq_start_p_o : out std_logic;
     acq_stop_p_o  : out std_logic;
     acq_end_p_o   : out std_logic;
+    irq_endacq_o  : out std_logic;
+    ext_acq_end_i : in  std_logic;
+    
 
     -- Trigger time-tag input
     trigger_tag_i : t_timetag;
@@ -101,6 +104,8 @@ entity fmc_adc_100Ms_core is
     adc_outa_n_i : in std_logic_vector(3 downto 0);
     adc_outb_p_i : in std_logic_vector(3 downto 0);  -- ADC serial data (even bits)
     adc_outb_n_i : in std_logic_vector(3 downto 0);
+    
+    adc_acq_count_o : out std_logic_vector(31 downto 0);
 
     gpio_dac_clr_n_o : out std_logic;                     -- offset DACs clear (active low)
     gpio_led_acq_o   : out std_logic;                     -- Mezzanine front panel power LED (PWR)
@@ -137,8 +142,10 @@ architecture rtl of fmc_adc_100Ms_core is
         BITSLIP             : in  std_logic;
         -- Clock and reset signals
         CLK_IN              : in  std_logic;  -- Fast clock from PLL/MMCM
+        CLK_INB             : in  std_logic;
         CLK_OUT             : out std_logic;
         CLK_DIV_IN          : in  std_logic;  -- Slow clock from PLL/MMCM
+        CLK_REF             : in  std_logic;
         LOCKED_IN           : in  std_logic;
         LOCKED_OUT          : out std_logic;
         CLK_RESET           : in  std_logic;  -- Reset signal for Clock circuit
@@ -291,6 +298,11 @@ architecture rtl of fmc_adc_100Ms_core is
   signal locked_in     : std_logic;
   signal locked_out    : std_logic;
   signal serdes_clk    : std_logic;
+  signal serdes_clkb   : std_logic;
+  signal serdes_clk_buf : std_logic;
+  signal serdes_clk_bufb : std_logic;
+  signal idelay_clkref_buf : std_logic;
+  signal idelay_clkref : std_logic;
   signal fs_clk        : std_logic;
   signal fs_clk_buf    : std_logic;
   signal fs_freq       : std_logic_vector(31 downto 0);
@@ -301,6 +313,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal serdes_in_p         : std_logic_vector(8 downto 0);
   signal serdes_in_n         : std_logic_vector(8 downto 0);
   signal serdes_out_raw      : std_logic_vector(71 downto 0);
+  signal serdes_out_int      : std_logic_vector(63 downto 0);
   signal serdes_out_data     : std_logic_vector(63 downto 0);
   signal serdes_out_fr       : std_logic_vector(7 downto 0);
   signal serdes_auto_bitslip : std_logic;
@@ -398,6 +411,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal shots_cnt            : unsigned(15 downto 0);
   signal remaining_shots      : std_logic_vector(15 downto 0);
   signal shots_done           : std_logic;
+  signal shots_done_d0        : std_logic;  
   signal shots_decr           : std_logic;
   signal single_shot          : std_logic;
   signal multishot_buffer_sel : std_logic;
@@ -427,7 +441,9 @@ architecture rtl of fmc_adc_100Ms_core is
   signal wb_ddr_fifo_din   : std_logic_vector(64 downto 0);
   signal wb_ddr_fifo_dout  : std_logic_vector(64 downto 0);
   signal wb_ddr_fifo_empty : std_logic;
+  signal wb_ddr_fifo_empty_d0 : std_logic;
   signal wb_ddr_fifo_full  : std_logic;
+  signal wb_ddr_fifo_count : std_logic_vector(7 downto 0);
   signal wb_ddr_fifo_wr    : std_logic;
   signal wb_ddr_fifo_rd    : std_logic;
   signal wb_ddr_fifo_valid : std_logic;
@@ -439,6 +455,11 @@ architecture rtl of fmc_adc_100Ms_core is
   signal test_data_en : std_logic;
   signal trig_addr    : std_logic_vector(31 downto 0);
   signal mem_ovr      : std_logic;
+  signal waiting_ack  : std_logic;
+  signal wb_ddr_ack_d0 : std_logic;
+  signal wb_ddr_ack_d1 : std_logic;
+  signal wb_ddr_cyc   : std_logic;
+  signal wb_ddr_stb   : std_logic;
 
   -- Wishbone interface to DDR
   signal wb_ddr_stall_t : std_logic;
@@ -448,6 +469,30 @@ architecture rtl of fmc_adc_100Ms_core is
   signal trig_led_man : std_logic;
   signal acq_led      : std_logic;
   signal acq_led_man  : std_logic;
+  
+  signal irq_endacq   : std_logic;
+  signal irq_endacq_int : std_logic;
+  
+  attribute mark_debug : string;
+  attribute mark_debug of serdes_out_data : signal is "true";
+  attribute mark_debug of serdes_out_fr : signal is "true";
+  attribute mark_debug of serdes_synced : signal is "true";
+  attribute mark_debug of serdes_bitslip : signal is "true";
+  attribute mark_debug of wb_ddr_fifo_dreq : signal is "true";
+  attribute mark_debug of wb_ddr_fifo_valid : signal is "true";
+  attribute mark_debug of wb_ddr_fifo_empty : signal is "true";
+  attribute mark_debug of wb_ddr_fifo_rd : signal is "true";
+  attribute mark_debug of wb_ddr_fifo_count : signal is "true";
+  attribute mark_debug of wb_ddr_fifo_full  : signal is "true";
+  attribute mark_debug of wb_ddr_stall_t : signal is "true";  
+  attribute mark_debug of acq_start : signal is "true";
+--  attribute mark_debug of irq_endacq        : signal is "true";
+--  attribute mark_debug of irq_endacq_int    : signal is "true";
+--  attribute mark_debug of single_shot       : signal is "true";
+--  attribute mark_debug of shots_done        : signal is "true";
+--  attribute mark_debug of shots_done_d0     : signal is "true";
+--  attribute mark_debug of wb_ddr_fifo_empty : signal is "true";
+--  attribute mark_debug of acq_fsm_state     : signal is "true";
 
 begin
 
@@ -491,7 +536,7 @@ begin
   -- Resets
   ------------------------------------------------------------------------------
   sys_rst  <= not(sys_rst_n_i);
-  fs_rst_n <= sys_rst_n_i and locked_out;
+  fs_rst_n <= sys_rst_n_i and locked_in; --joselj 20160513
   fs_rst   <= not(fs_rst_n);
 
   ------------------------------------------------------------------------------
@@ -507,46 +552,49 @@ begin
       O  => dco_clk_buf
       );
 
-  cmp_dco_bufio : BUFIO2
-    generic map (
-      DIVIDE        => 1,
-      DIVIDE_BYPASS => true,
-      I_INVERT      => false,
-      USE_DOUBLER   => false)
-    port map (
-      I            => dco_clk_buf,
-      IOCLK        => open,
-      DIVCLK       => dco_clk,
-      SERDESSTROBE => open
-      );
+--  cmp_dco_bufio : BUFIO-- BUFIO2
+--    --generic map (
+----      DIVIDE        => 1,
+----      DIVIDE_BYPASS => true,
+----      I_INVERT      => false,
+----      USE_DOUBLER   => false)
+--    port map (
+--      I            => dco_clk_buf,
+--      O            => dco_clk
+--      --IOCLK        => open,
+--      --DIVCLK       => dco_clk,
+--      --SERDESSTROBE => open
+--      );
 
   ------------------------------------------------------------------------------
   -- Clock PLL for SerDes
   -- LTC2174-14 must be configured in 16-bit serialization
   --    dco_clk = 4*fs_clk = 400MHz
   ------------------------------------------------------------------------------
-  cmp_serdes_clk_pll : PLL_BASE
+  cmp_serdes_clk_pll : MMCME2_ADV
     generic map (
       BANDWIDTH          => "OPTIMIZED",
-      CLK_FEEDBACK       => "CLKOUT0",
-      COMPENSATION       => "SYSTEM_SYNCHRONOUS",
+      COMPENSATION       => "BUF_IN",
       DIVCLK_DIVIDE      => 1,
-      CLKFBOUT_MULT      => 2,
+      CLKFBOUT_MULT_F    => 4.0,
       CLKFBOUT_PHASE     => 0.000,
-      CLKOUT0_DIVIDE     => 1,
+      CLKOUT0_DIVIDE_F   => 2.0,
       CLKOUT0_PHASE      => 0.000,
       CLKOUT0_DUTY_CYCLE => 0.500,
-      CLKOUT1_DIVIDE     => 8,
+      CLKOUT1_DIVIDE     => 16,
       CLKOUT1_PHASE      => 0.000,
       CLKOUT1_DUTY_CYCLE => 0.500,
-      CLKIN_PERIOD       => 2.5,
-      REF_JITTER         => 0.010)
+      CLKOUT2_DIVIDE     => 5,
+      CLKOUT2_PHASE      => 0.000,
+      CLKOUT2_DUTY_CYCLE => 0.500,
+      CLKIN1_PERIOD       => 4.0,
+      REF_JITTER1         => 0.010)
     port map (
       -- Output clocks
-      CLKFBOUT => open,
-      CLKOUT0  => serdes_clk,
-      CLKOUT1  => fs_clk_buf,
-      CLKOUT2  => open,
+      CLKFBOUT => clk_fb_buf,--clk_fb_buf,
+      CLKOUT0  => serdes_clk_buf,
+      CLKOUT1  => fs_clk,
+      CLKOUT2  => open,--idelay_clkref_buf,
       CLKOUT3  => open,
       CLKOUT4  => open,
       CLKOUT5  => open,
@@ -555,48 +603,88 @@ begin
       RST      => sys_rst,
       -- Input clock control
       CLKFBIN  => clk_fb,
-      CLKIN    => dco_clk);
+      CLKIN1    => dco_clk_buf,
+      CLKIN2    => '0',
+      CLKINSEL  => '1',
+      DADDR     => (others => '0'),
+      DI        => (others => '0'),
+      DCLK      => '0',
+      DEN       => '0',
+      DWE       => '0',
+      PWRDWN    => '0',
+      
+      PSCLK     => '0',
+      PSINCDEC  => '0',
+      PSDONE    => open,
+      PSEN      => '0');
 
-  cmp_fs_clk_buf : BUFG
+  cmp_fs_clk_buf : BUFR
+      generic map(
+        BUFR_DIVIDE => "8")
     port map (
-      O => fs_clk,
-      I => fs_clk_buf
+      O => fs_clk_buf,
+      I => serdes_clk_buf,
+      CE => '1',
+      CLR => '0'
       );
 
-  cmp_fb_clk_bufio : BUFIO2FB
-    generic map (
-      DIVIDE_BYPASS => true)
+  cmp_fb_clk_buf : BUFG
+--    generic map (
+--      BUFR_DIVIDE => "1")
     port map (
       I => clk_fb_buf,
       O => clk_fb
+--      CE => '1',
+--      CLR => '0'      
       );
+ 
+  cmp_serdes_clk_bufio : BUFIO
+    --    generic map (
+    --      DIVIDE_BYPASS => true)
+        port map (
+          I => serdes_clk_buf,
+          O => serdes_clk
+          );
+          
+--  cmp_idelay_refclk_bufg : BUFG
+--    port map(
+--        I => idelay_clkref_buf,
+--        O => idelay_clkref);        
+
+--  cmp_serdes_clkb_bufio : BUFG
+--    --    generic map (
+--    --      DIVIDE_BYPASS => true)
+--        port map (
+--          I => serdes_clk_bufb,
+--          O => serdes_clkb
+--          );             
 
   -- Sampinling clock frequency meter
-  cmp_fs_freq : gc_frequency_meter
-    generic map(
-      g_with_internal_timebase => true,
-      g_clk_sys_freq           => 125000000,
-      g_counter_bits           => 32
-      )
-    port map(
-      clk_sys_i    => sys_clk_i,
-      clk_in_i     => fs_clk,
-      rst_n_i      => sys_rst_n_i,
-      pps_p1_i     => '0',
-      freq_o       => fs_freq_t,
-      freq_valid_o => fs_freq_valid
-      );
+--  cmp_fs_freq : gc_frequency_meter
+--    generic map(
+--      g_with_internal_timebase => true,
+--      g_clk_sys_freq           => 250000000,
+--      g_counter_bits           => 32
+--      )
+--    port map(
+--      clk_sys_i    => dco_clk,
+--      clk_in_i     => fs_clk,
+--      rst_n_i      => sys_rst_n_i,
+--      pps_p1_i     => '0',
+--      freq_o       => fs_freq_t,
+--      freq_valid_o => fs_freq_valid
+--      );
 
-  p_fs_freq : process (fs_clk, fs_rst_n)
-  begin
-    if fs_rst_n = '0' then
-      fs_freq <= (others => '0');
-    elsif rising_edge(fs_clk) then
-      if fs_freq_valid = '1' then
-        fs_freq <= fs_freq_t;
-      end if;
-    end if;
-  end process p_fs_freq;
+--  p_fs_freq : process (fs_clk, fs_rst_n)
+--  begin
+--    if fs_rst_n = '0' then
+--      fs_freq <= (others => '0');
+--    elsif rising_edge(fs_clk) then
+--      if fs_freq_valid = '1' then
+--        fs_freq <= fs_freq_t;
+--      end if;
+--    end if;
+--  end process p_fs_freq;
 
   --gen_fb_clk_check : if (g_carrier_type /= "SPEC" and
   --                      g_carrier_type /= "SVEC") generate
@@ -625,8 +713,10 @@ begin
       DATA_IN_TO_DEVICE   => serdes_out_raw,
       BITSLIP             => serdes_bitslip,
       CLK_IN              => serdes_clk,
-      CLK_OUT             => clk_fb_buf,
-      CLK_DIV_IN          => fs_clk,
+      CLK_INB             => serdes_clkb,
+      CLK_OUT             => open,
+      CLK_REF             => '0',--serdes_clkb,
+      CLK_DIV_IN          => fs_clk_buf,
       LOCKED_IN           => locked_in,
       LOCKED_OUT          => locked_out,
       CLK_RESET           => '0',       -- unused
@@ -670,26 +760,55 @@ begin
   --    out_data(63:48) = CH4
   --    Note: The two LSBs of each channel are always '0' => 14-bit ADC
   gen_serdes_dout_reorder : for I in 0 to 7 generate
-    serdes_out_data(0*16 + 2*i)   <= serdes_out_raw(0 + i*9);  -- CH1 even bits
-    serdes_out_data(0*16 + 2*i+1) <= serdes_out_raw(1 + i*9);  -- CH1 odd bits
-    serdes_out_data(1*16 + 2*i)   <= serdes_out_raw(2 + i*9);  -- CH2 even bits
-    serdes_out_data(1*16 + 2*i+1) <= serdes_out_raw(3 + i*9);  -- CH2 odd bits
-    serdes_out_data(2*16 + 2*i)   <= serdes_out_raw(4 + i*9);  -- CH3 even bits
-    serdes_out_data(2*16 + 2*i+1) <= serdes_out_raw(5 + i*9);  -- CH3 odd bits
-    serdes_out_data(3*16 + 2*i)   <= serdes_out_raw(6 + i*9);  -- CH4 even bits
-    serdes_out_data(3*16 + 2*i+1) <= serdes_out_raw(7 + i*9);  -- CH4 odd bits
+    serdes_out_int(0*16 + 2*i)   <= serdes_out_raw(0 + i*9);  -- CH1 even bits
+    serdes_out_int(0*16 + 2*i+1) <= serdes_out_raw(1 + i*9);  -- CH1 odd bits
+    serdes_out_int(1*16 + 2*i)   <= serdes_out_raw(2 + i*9);  -- CH2 even bits
+    serdes_out_int(1*16 + 2*i+1) <= serdes_out_raw(3 + i*9);  -- CH2 odd bits
+    serdes_out_int(2*16 + 2*i)   <= serdes_out_raw(4 + i*9);  -- CH3 even bits
+    serdes_out_int(2*16 + 2*i+1) <= serdes_out_raw(5 + i*9);  -- CH3 odd bits
+    serdes_out_int(3*16 + 2*i)   <= serdes_out_raw(6 + i*9);  -- CH4 even bits
+    serdes_out_int(3*16 + 2*i+1) <= serdes_out_raw(7 + i*9);  -- CH4 odd bits
     serdes_out_fr(i)              <= serdes_out_raw(8 + i*9);  -- FR
   end generate gen_serdes_dout_reorder;
+  
+  gen_serdes_dout_reorder2 : for I in 0 to 3 generate
+--    serdes_out_data(0*16 + 2*i)    <= serdes_out_int(0*16 + 14 - 2*i);
+--    serdes_out_data(0*16 + 2*i +1) <= serdes_out_int(0*16 + 15 - 2*i);
+--    serdes_out_data(1*16 + 2*i)    <= serdes_out_int(1*16 + 14 - 2*i);
+--    serdes_out_data(1*16 + 2*i +1) <= serdes_out_int(1*16 + 15 - 2*i);
+--    serdes_out_data(2*16 + 2*i)    <= serdes_out_int(2*16 + 14 - 2*i);
+--    serdes_out_data(2*16 + 2*i +1) <= serdes_out_int(2*16 + 15 - 2*i);
+--    serdes_out_data(3*16 + 2*i)    <= serdes_out_int(3*16 + 14 - 2*i);
+--    serdes_out_data(3*16 + 2*i +1) <= serdes_out_int(3*16 + 15 - 2*i);
+    serdes_out_data(i*16 + 15) <= serdes_out_int(i*16 + 9);
+    serdes_out_data(i*16 + 14) <= serdes_out_int(i*16 + 8);
+    serdes_out_data(i*16 + 13) <= serdes_out_int(i*16 + 11);
+    serdes_out_data(i*16 + 12) <= serdes_out_int(i*16 + 10);
+    serdes_out_data(i*16 + 11) <= serdes_out_int(i*16 + 13);
+    serdes_out_data(i*16 + 10) <= serdes_out_int(i*16 + 12);
+    serdes_out_data(i*16 + 9) <= serdes_out_int(i*16 + 15);
+    serdes_out_data(i*16 + 8) <= serdes_out_int(i*16 + 14);
+    serdes_out_data(i*16 + 7) <= serdes_out_int(i*16 + 1);
+    serdes_out_data(i*16 + 6) <= serdes_out_int(i*16 + 0);
+    serdes_out_data(i*16 + 5) <= serdes_out_int(i*16 + 3);
+    serdes_out_data(i*16 + 4) <= serdes_out_int(i*16 + 2);
+    serdes_out_data(i*16 + 3) <= serdes_out_int(i*16 + 5);
+    serdes_out_data(i*16 + 2) <= serdes_out_int(i*16 + 4);
+    serdes_out_data(i*16 + 1) <= serdes_out_int(i*16 + 7);
+    serdes_out_data(i*16 + 0) <= serdes_out_int(i*16 + 6);
+    
+  end generate gen_serdes_dout_reorder2;
+  
 
 
   -- serdes bitslip generation
-  p_auto_bitslip : process (fs_clk, sys_rst_n_i)
+  p_auto_bitslip : process (fs_clk_buf, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
       bitslip_sreg        <= std_logic_vector(to_unsigned(1, bitslip_sreg'length));
       serdes_auto_bitslip <= '0';
       serdes_synced       <= '0';
-    elsif rising_edge(fs_clk) then
+    elsif rising_edge(fs_clk_buf) then
 
       -- Shift register to generate bitslip enable (serdes_clk/8)
       bitslip_sreg <= bitslip_sreg(0) & bitslip_sreg(bitslip_sreg'length-1 downto 1);
@@ -738,7 +857,7 @@ begin
       fmc_adc_core_ctl_trig_led_o                 => trig_led_man,
       fmc_adc_core_ctl_acq_led_o                  => acq_led_man,
       fmc_adc_core_sta_fsm_i                      => acq_fsm_state,
-      fmc_adc_core_sta_serdes_pll_i               => locked_out,
+      fmc_adc_core_sta_serdes_pll_i               => locked_in,--locked_out, joselj 20160511
       fmc_adc_core_sta_serdes_synced_i            => serdes_synced,
       fmc_adc_core_sta_acq_cfg_i                  => acq_config_ok,
       fmc_adc_core_trig_cfg_hw_trig_sel_o         => hw_trig_sel,
@@ -1463,13 +1582,13 @@ begin
   cmp_wb_ddr_fifo : generic_sync_fifo
     generic map (
       g_data_width             => 65,
-      g_size                   => 64,
+      g_size                   => 256,--64
       g_show_ahead             => false,
       g_with_empty             => true,
       g_with_full              => true,
       g_with_almost_empty      => false,
       g_with_almost_full       => false,
-      g_with_count             => false,
+      g_with_count             => true,
       g_almost_empty_threshold => 0,
       g_almost_full_threshold  => 0
       )
@@ -1484,7 +1603,7 @@ begin
       full_o         => wb_ddr_fifo_full,
       almost_empty_o => open,
       almost_full_o  => open,
-      count_o        => open
+      count_o        => wb_ddr_fifo_count
       );
 
   -- One clock cycle delay for the FIFO's VALID signal. Since the General Cores
@@ -1562,40 +1681,107 @@ begin
   p_wb_master : process (wb_ddr_clk_i, sys_rst_n_i)
   begin
     if sys_rst_n_i = '0' then
-      wb_ddr_cyc_o   <= '0';
+      wb_ddr_cyc     <= '0';
       wb_ddr_we_o    <= '0';
-      wb_ddr_stb_o   <= '0';
+      wb_ddr_stb   <= '0';
       wb_ddr_adr_o   <= (others => '0');
       wb_ddr_dat_o   <= (others => '0');
       wb_ddr_stall_t <= '0';
+      waiting_ack    <= '0';
     elsif rising_edge(wb_ddr_clk_i) then
+    
+      wb_ddr_ack_d0 <= wb_ddr_ack_i;
+      wb_ddr_ack_d1 <= wb_ddr_ack_d0;
+    
+--      if wb_ddr_ack_i = '1' then
+--        waiting_ack <= '0';
+--      end if;
 
-      if wb_ddr_fifo_valid = '1' then   --if (wb_ddr_fifo_valid = '1') and (wb_ddr_stall_i = '0') then
-        wb_ddr_stb_o <= '1';
-        wb_ddr_adr_o <= "0000000" & std_logic_vector(ram_addr_cnt);
+      if wb_ddr_fifo_valid = '1' and (wb_ddr_stall_i = '0') then --and waiting_ack = '0' then
+        wb_ddr_stb <= '1';
+        -- waiting_ack <= '1';
+        wb_ddr_adr_o <= "0001" & std_logic_vector(ram_addr_cnt) & "000";
         if test_data_en = '1' then
           wb_ddr_dat_o <= x"00000000" & "0000000" & std_logic_vector(ram_addr_cnt);
         else
           wb_ddr_dat_o <= wb_ddr_fifo_dout(63 downto 0);
         end if;
       else
-        wb_ddr_stb_o <= '0';
+        wb_ddr_stb <= '0';
       end if;
 
       if wb_ddr_fifo_valid = '1' then
-        wb_ddr_cyc_o <= '1';
+        wb_ddr_cyc   <= '1';
         wb_ddr_we_o  <= '1';
         --elsif (wb_ddr_fifo_empty = '1') and (acq_end = '1') then
       elsif (wb_ddr_fifo_empty = '1') and (acq_fsm_state = "001") then
-        wb_ddr_cyc_o <= '0';
+        wb_ddr_cyc   <= '0';
         wb_ddr_we_o  <= '0';
       end if;
 
       wb_ddr_stall_t <= wb_ddr_stall_i;
+      wb_ddr_cyc_o   <= wb_ddr_cyc;
+      wb_ddr_stb_o   <= wb_ddr_stb;
 
     end if;
   end process p_wb_master;
+  
+--  p_fifo_dreq : process (wb_ddr_clk_i)
+--  begin
+--    if(sys_rst_n_i = '0') then
+--        wb_ddr_fifo_dreq <= '0';
+--    elsif(rising_edge(wb_ddr_clk_i)) then
+--        wb_ddr_fifo_empty_d0 <= wb_ddr_fifo_empty;
+--        if wb_ddr_fifo_empty = '0' and wb_ddr_fifo_empty_d0 = '1' then
+--            wb_ddr_fifo_dreq <= '1';
+--        else
+--            wb_ddr_fifo_dreq <= '0';
+--            if wb_ddr_ack_i = '1' then
+--                wb_ddr_fifo_dreq <= '1';
+--            end if;
+--        end if;        
+--    end if;
+--  end process p_fifo_dreq;  
+  
+ --p_irq_endacq_gen : process (wb_ddr_clk_i) -- joselj
+   --variable end_acq : std_logic := '0';
+   --begin
+     --if rising_edge(wb_ddr_clk_i) then
+         --if sys_rst_n_i = '0' then
+             --irq_endacq_int <= '0';
+         --else
+             ----shots_done_d0 <= shots_done;
+             --if (acq_end = '1' and acq_end_d = '0') then
+                 --end_acq        := '1';
+             --end if;
+             --if end_acq = '1' and wb_ddr_fifo_empty = '1' then
+                 --irq_endacq_int <= '1';
+                 --end_acq        := '0';
+             --else
+                 --irq_endacq_int <= '0';
+             --end if;
+         --end if;
+     --end if;  
+   --end process p_irq_endacq_gen;
+   
+   cmp_endacq_monostable : monostable -- joselj
+     generic map(
+       g_INPUT_POLARITY  => '1',
+       g_OUTPUT_POLARITY => '1',
+       g_OUTPUT_RETRIG   => true,
+       g_OUTPUT_LENGTH   => 12
+       )
+     port map(
+       rst_n_i   => sys_rst_n_i,
+       clk_i     => wb_ddr_clk_i,
+       trigger_i => ext_acq_end_i,
+       pulse_o   => irq_endacq
+       );  
+ 
+   irq_endacq_o <= irq_endacq;-- acq_end and not(acq_end_d); -- joselj
 
   wb_ddr_sel_o <= X"FF";
+  
+  adc_acq_count_o <= std_logic_vector(unsigned(pre_trig_value) + unsigned(post_trig_value) + 2);
 
 end rtl;
