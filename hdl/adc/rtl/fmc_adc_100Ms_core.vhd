@@ -383,6 +383,9 @@ architecture rtl of fmc_adc_100Ms_core is
   signal fsm_cmd               : std_logic_vector(1 downto 0);
   signal fsm_cmd_wr            : std_logic;
   signal acq_start             : std_logic;
+  signal acq_start_fix         : std_logic;
+  signal acq_start_d           : std_logic_vector(7 downto 0);
+  signal acq_start_en          : std_logic;
   signal acq_stop              : std_logic;
   signal acq_trig              : std_logic;
   signal acq_end               : std_logic;
@@ -443,7 +446,7 @@ architecture rtl of fmc_adc_100Ms_core is
   signal wb_ddr_fifo_empty : std_logic;
   signal wb_ddr_fifo_empty_d0 : std_logic;
   signal wb_ddr_fifo_full  : std_logic;
-  signal wb_ddr_fifo_count : std_logic_vector(7 downto 0);
+  signal wb_ddr_fifo_count : std_logic_vector(5 downto 0);
   signal wb_ddr_fifo_wr    : std_logic;
   signal wb_ddr_fifo_rd    : std_logic;
   signal wb_ddr_fifo_valid : std_logic;
@@ -485,6 +488,7 @@ architecture rtl of fmc_adc_100Ms_core is
   attribute mark_debug of wb_ddr_fifo_count : signal is "true";
   attribute mark_debug of wb_ddr_fifo_full  : signal is "true";
   attribute mark_debug of wb_ddr_stall_t : signal is "true";  
+  attribute mark_debug of acq_start_fix : signal is "true";
   attribute mark_debug of acq_start : signal is "true";
 --  attribute mark_debug of irq_endacq        : signal is "true";
 --  attribute mark_debug of irq_endacq_int    : signal is "true";
@@ -1180,7 +1184,7 @@ begin
       shots_cnt   <= to_unsigned(0, shots_cnt'length);
       single_shot <= '0';
     elsif rising_edge(sys_clk_i) then
-      if acq_start = '1' then
+      if acq_start_fix = '1' then
         shots_cnt <= unsigned(shots_value);
       elsif shots_decr = '1' then
         shots_cnt <= shots_cnt - 1;
@@ -1205,7 +1209,7 @@ begin
     if sys_rst_n_i = '0' then
       pre_trig_cnt <= to_unsigned(1, pre_trig_cnt'length);
     elsif rising_edge(sys_clk_i) then
-      if (acq_start = '1' or pre_trig_done = '1') then
+      if (acq_start_fix = '1' or pre_trig_done = '1') then
         if unsigned(pre_trig_value) = to_unsigned(0, pre_trig_value'length) then
           pre_trig_cnt <= (others => '0');
         else
@@ -1229,7 +1233,7 @@ begin
     if sys_rst_n_i = '0' then
       post_trig_cnt <= to_unsigned(1, post_trig_cnt'length);
     elsif rising_edge(sys_clk_i) then
-      if (acq_start = '1' or post_trig_done = '1') then
+      if (acq_start_fix = '1' or post_trig_done = '1') then
         post_trig_cnt <= unsigned(post_trig_value) - 1;
       elsif (acq_in_post_trig = '1' and sync_fifo_valid = '1') then
         post_trig_cnt <= post_trig_cnt - 1;
@@ -1248,7 +1252,7 @@ begin
     if sys_rst_n_i = '0' then
       samples_cnt <= (others => '0');
     elsif rising_edge(sys_clk_i) then
-      if (acq_start = '1') then
+      if (acq_start_fix = '1') then
         samples_cnt <= (others => '0');
       elsif ((acq_in_pre_trig = '1' or acq_in_post_trig = '1') and sync_fifo_valid = '1') then
         samples_cnt <= samples_cnt + 1;
@@ -1262,7 +1266,7 @@ begin
 
   -- Event pulses to time-tag
   trigger_p_o   <= acq_trig;
-  acq_start_p_o <= acq_start;
+  acq_start_p_o <= acq_start_fix;
   acq_stop_p_o  <= acq_stop;
 
   -- End of acquisition pulse generation
@@ -1284,6 +1288,27 @@ begin
   acq_stop  <= '1' when fsm_cmd_wr = '1' and fsm_cmd = "10" else '0';
   acq_trig  <= sync_fifo_valid and sync_fifo_dout(64) and acq_in_wait_trig;
   acq_end   <= trig_tag_done and shots_done;
+  acq_start_fix <= acq_start and acq_start_en;
+  
+  -- Fix acq start signal:
+  -- Acquisition software makes the fsm start twice for some reason.
+  -- With this process we pretend to make a temporary fix until the
+  -- real problem is fixed.
+  p_acq_start_fix : process (sys_clk_i)
+  begin
+    if rising_edge (sys_clk_i) then
+    
+      acq_start_d(7 downto 1) <= acq_start_d(6 downto 0);
+      acq_start_d(0) <= acq_start;
+      
+      if(acq_start_d = "00000000") then
+        acq_start_en <= '1';
+      else
+        acq_start_en <= '0';
+      end if;
+    
+    end if;
+  end process;
 
   -- Check acquisition configuration
   --   Post-trigger sample must be > 0
@@ -1321,7 +1346,7 @@ begin
       case acq_fsm_current_state is
 
         when IDLE =>
-          if acq_start = '1' and acq_config_ok = '1' then
+          if acq_start_fix = '1' and acq_config_ok = '1' then
             acq_fsm_current_state <= PRE_TRIG;
           end if;
 
@@ -1582,7 +1607,7 @@ begin
   cmp_wb_ddr_fifo : generic_sync_fifo
     generic map (
       g_data_width             => 65,
-      g_size                   => 256,--64
+      g_size                   => 64,
       g_show_ahead             => false,
       g_with_empty             => true,
       g_with_full              => true,
@@ -1653,7 +1678,7 @@ begin
     if sys_rst_n_i = '0' then
       ram_addr_cnt <= (others => '0');
     elsif rising_edge(wb_ddr_clk_i) then
-      if acq_start = '1' then
+      if acq_start_fix = '1' then
         ram_addr_cnt <= (others => '0');
       elsif wb_ddr_fifo_valid = '1' then
         ram_addr_cnt <= ram_addr_cnt + 1;
